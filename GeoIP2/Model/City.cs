@@ -1,9 +1,17 @@
-﻿using System.Collections.Generic;
-
-namespace MaxMind.GeoIP2.Model
+﻿namespace MaxMind.GeoIP2.Model
 {
+    /// <summary>
+    /// City-level data associated with an IP address.
+    ///
+    /// This record is returned by all the end points except the Country end point.
+    /// </summary>
     public class City : NamedEntity
     {
-        public int Confidence { get; set; }
+        /// <summary>
+        // A value from 0-100 indicating MaxMind's confidence that the city
+        // is correct. This attribute is only available from the Omni end
+        // point.        
+        /// </summary>
+        public int Confidence { get; internal set; }
     }
 }

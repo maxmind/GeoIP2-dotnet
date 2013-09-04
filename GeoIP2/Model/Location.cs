@@ -1,11 +1,48 @@
 ﻿namespace MaxMind.GeoIP2.Model
 {
+    /// <summary>
+    /// Contains data for the location record associated with an IP address.
+    /// 
+    /// This record is returned by all the end points except the Country end point.
+    /// </summary>
     public class Location
     {
-        public int AccuracyRadius { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public int MetroCode { get; set; }
-        public string TimeZone { get; set; }
+        /// <summary>
+        /// The radius in kilometers around the specified location where the
+        /// IP address is likely to be. This attribute is only available from
+        /// the Omni end point.
+        /// </summary>
+        public int AccuracyRadius { get; internal set; }
+
+        /// <summary>
+        /// The latitude of the location as a floating point number. This
+        /// attribute is returned by all end points except the Country end
+        /// point.
+        /// </summary>
+        public double Latitude { get; internal set; }
+
+        /// <summary>
+        /// The longitude of the location as a floating point number. This
+        /// attribute is returned by all end points except the Country end
+        /// point.
+        /// </summary>
+        public double Longitude { get; internal set; }
+
+        /// <summary>
+        /// The metro code of the location if the location is in the US.
+        /// MaxMind returns the same metro codes as the <a href=
+        /// "https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions"
+        /// >Google AdWords API</a>. This attribute is returned by all end
+        /// points except the Country end point.
+        /// </summary>
+        public int MetroCode { get; internal set; }
+
+        /// <summary>
+        /// The time zone associated with location, as specified by the <a
+        /// href="http://www.iana.org/time-zones">IANA Time Zone
+        /// Database</a>, e.g., "America/New_York". This attribute is
+        /// returned by all end points except the Country end point
+        /// </summary>
+        public string TimeZone { get; internal set; }
     }
 }
