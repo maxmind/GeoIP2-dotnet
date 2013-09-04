@@ -1,7 +1,22 @@
 ﻿namespace MaxMind.GeoIP2.Model
 {
+    /// <summary>
+    /// Contains data for the represented country associated with an IP address.
+    /// 
+    /// This class contains the country-level data associated with an IP address for
+    /// the IP's represented country. The represented country is the country
+    /// represented by something like a military base or embassy.
+    /// 
+    /// This record is returned by all the end points.
+    /// </summary>
     public class RepresentedCountry : Country
     {
-        public string Type { get; set; }
+        /// <summary>
+        /// A string indicating the type of entity that is representing the
+        /// country. Currently we only return <c>military</c> but this could
+        /// expand to include other types such as <c>embassy</c> in the
+        /// future. Returned by all end points.
+        /// </summary>
+        public string Type { get; internal set; }
     }
 }
