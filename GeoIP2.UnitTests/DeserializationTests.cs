@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using MaxMind.GeoIP2.Model;
+﻿using System.Collections.Generic;
+using MaxMind.GeoIP2.Responses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -10,7 +8,8 @@ namespace GeoIP2.UnitTests
 {
     [TestClass]
     public class DeserializationTests
-    {        private string _omniBody = "{" + "\"city\":{"
+    {
+        private string _omniBody = "{" + "\"city\":{"
             + "\"confidence\":76," + "\"geoname_id\":9876," + "\"names\":{"
             + "\"en\":\"Minneapolis\"" + "}" + "}," + "\"continent\":{"
             + "\"code\":\"NA\"," + "\"geoname_id\":42," + "\"names\":{"
@@ -39,12 +38,12 @@ namespace GeoIP2.UnitTests
             + "}," + "\"maxmind\":{\"queries_remaining\":11}" + "}";
 
         [TestMethod]
-        public void CanDeserializeOmni()
+        public void CanDeserializeOmniResponse()
         {
             var d = new JsonDeserializer();
             var r = new RestResponse();
             r.Content = _omniBody;
-            var omni = d.Deserialize<Omni>(r);
+            var omni = d.Deserialize<OmniResponse>(r);
             omni.City.Languages = new List<string>{"en"};
             omni.Continent.Languages = new List<string>{"en"};
             omni.Country.Languages = new List<string>{"en"};

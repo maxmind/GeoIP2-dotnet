@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices.ComTypes;
 using MaxMind.GeoIP2.Model;
+using MaxMind.GeoIP2.Responses;
 using RestSharp;
 using RestSharp.Deserializers;
 
@@ -78,15 +79,15 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="MaxMind.GeoIP2.Model.Omni"/> model for the specified ip address.
+        /// Returns an <see cref="MaxMind.GeoIP2.Model.OmniResult"/> model for the specified ip address.
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
-        /// <returns>An <see cref="MaxMind.GeoIP2.Model.Omni"/> model</returns>
-        public Omni Omni(string ipAddress)
+        /// <returns>An <see cref="MaxMind.GeoIP2.Model.OmniResult"/> model</returns>
+        public OmniResponse Omni(string ipAddress)
         {
             var req = new RestRequest("omni/{ip}");
             req.AddUrlSegment("ip", ipAddress);
-            return Execute<Omni>(req);
+            return Execute<OmniResponse>(req);
         }
 
         private T Execute<T>(RestRequest request) where T : new()
