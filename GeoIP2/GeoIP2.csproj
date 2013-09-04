@@ -51,12 +51,12 @@
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\MaxMind.cs" />
     <Compile Include="Model\NamedEntity.cs" />
-    <Compile Include="Model\Omni.cs" />
     <Compile Include="Model\Postal.cs" />
     <Compile Include="Model\RepresentedCountry.cs" />
     <Compile Include="Model\Subdivision.cs" />
     <Compile Include="Model\Traits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responses\OmniResponse.cs" />
     <Compile Include="WebServiceClient.cs" />
   </ItemGroup>
   <ItemGroup>
