@@ -56,6 +56,9 @@
     <Compile Include="Model\Subdivision.cs" />
     <Compile Include="Model\Traits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responses\CityIspOrgResponse.cs" />
+    <Compile Include="Responses\CityResponse.cs" />
+    <Compile Include="Responses\CountryResponse.cs" />
     <Compile Include="Responses\OmniResponse.cs" />
     <Compile Include="WebServiceClient.cs" />
   </ItemGroup>
