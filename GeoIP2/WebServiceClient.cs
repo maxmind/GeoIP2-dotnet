@@ -79,10 +79,10 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="MaxMind.GeoIP2.Model.OmniResult"/> model for the specified ip address.
+        /// Returns an <see cref="OmniResponse"/> model for the specified ip address.
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
-        /// <returns>An <see cref="MaxMind.GeoIP2.Model.OmniResult"/> model</returns>
+        /// <returns>An <see cref="OmniResponse"/> model</returns>
         public OmniResponse Omni(string ipAddress)
         {
             var req = new RestRequest("omni/{ip}");
