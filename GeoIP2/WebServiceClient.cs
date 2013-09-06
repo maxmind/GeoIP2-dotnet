@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
-using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -64,28 +62,49 @@ namespace MaxMind.GeoIP2
     /// </summary>
     public class WebServiceClient
     {
-        private readonly int _userId;
-        private readonly string _licenseKey;
         private const string BASE_URL = "https://geoip.maxmind.com/geoip/v2.0";
         private List<string> _languages;
+        private IRestClient _restClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebServiceClient"/> class.
         /// </summary>
         /// <param name="userId">Your MaxMind user ID.</param>
         /// <param name="licenseKey">Your MaxMind license key.</param>
-        public WebServiceClient(int userId, string licenseKey)
+        public WebServiceClient(int userId, string licenseKey) : this(userId, licenseKey, new List<string>{"en"})
         {
-            _userId = userId;
-            _licenseKey = licenseKey;
-            _languages = new List<string>{"en"};
         }
 
-        public WebServiceClient(int userId, string licenseKey, List<string> languages)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebServiceClient"/> class.
+        /// </summary>
+        /// <param name="userId">The user unique identifier.</param>
+        /// <param name="licenseKey">The license key.</param>
+        /// <param name="languages">List of language codes to use in name property from most preferred to least preferred.</param>
+        public WebServiceClient(int userId, string licenseKey, List<string> languages) : this(userId, licenseKey, languages, new RestClient(BASE_URL))
         {
-            _userId = userId;
-            _licenseKey = licenseKey;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebServiceClient"/> class.
+        /// </summary>
+        /// <param name="userId">The user unique identifier.</param>
+        /// <param name="licenseKey">The license key.</param>
+        /// <param name="languages">The languages.</param>
+        /// <param name="restClient">The rest client to use. For unit testing.</param>
+        internal WebServiceClient(int userId, string licenseKey, List<string> languages, IRestClient restClient)
+        {
             _languages = languages;
+            _restClient = restClient;
+            _restClient.Authenticator = new HttpBasicAuthenticator(userId.ToString(), licenseKey);
+            if (_restClient is RestClient)
+            {
+                var impl = (RestClient) _restClient;
+                impl.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());
+                impl.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
+                impl.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
+                impl.AddHandler("application/vnd.maxmind.com-city-isp-org+json", new JsonDeserializer());
+            }
         }
 
 
@@ -133,11 +152,8 @@ namespace MaxMind.GeoIP2
         {
             var request = new RestRequest(urlPattern);
             request.AddUrlSegment("ip", ipAddress);
-            var client = new RestClient(BASE_URL);
-            client.Authenticator = new HttpBasicAuthenticator(_userId.ToString(), _licenseKey);
-            client.AddHandler("application/vnd.maxmind.com-" + contentTypeSuffix + "+json", new JsonDeserializer());;
 
-            var response = client.Execute<T>(request);
+            var response = _restClient.Execute<T>(request);
 
             if (response.ErrorException != null)
             {
