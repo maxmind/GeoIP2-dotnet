@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using MaxMind.GeoIP2.Responses;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using RestSharp;
 using RestSharp.Deserializers;
 
-namespace GeoIP2.UnitTests
+namespace MaxMind.GeoIP2.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class DeserializationTests
     {
         private string _omniBody = "{" + "\"city\":{"
@@ -37,7 +37,7 @@ namespace GeoIP2.UnitTests
             + "\"organization\":\"Blorg\"," + "\"user_type\":\"college\""
             + "}," + "\"maxmind\":{\"queries_remaining\":11}" + "}";
 
-        [TestMethod]
+        [Test]
         public void CanDeserializeOmniResponse()
         {
             var d = new JsonDeserializer();

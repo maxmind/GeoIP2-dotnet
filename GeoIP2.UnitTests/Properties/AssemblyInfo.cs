@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GeoIP2.UnitTests")]
+[assembly: AssemblyTitle("MaxMind.GeoIP2.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GeoIP2.UnitTests")]
+[assembly: AssemblyProduct("MaxMind.GeoIP2.UnitTests")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("78df3368-9c98-4d81-a19b-0fadf2820e8f")]
+[assembly: Guid("0f2242ee-c9a6-40d5-8f5f-5274054c5d30")]
 
 // Version information for an assembly consists of the following four values:
 //

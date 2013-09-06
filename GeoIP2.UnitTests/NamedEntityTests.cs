@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using MaxMind.GeoIP2.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
-namespace GeoIP2.UnitTests
+namespace MaxMind.GeoIP2.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class NamedEntityTests
     {
 
-        [TestMethod]
+        [Test]
         public void CanGetSingleName()
         {
             var c = new City();
@@ -18,7 +18,7 @@ namespace GeoIP2.UnitTests
             Assert.AreEqual("Foo", c.Name);
         }
 
-        [TestMethod]
+        [Test]
         public void NameReturnsCorrectLanguage()
         {
             var c = new City();
