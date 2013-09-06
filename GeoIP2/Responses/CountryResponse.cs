@@ -54,5 +54,24 @@ namespace MaxMind.GeoIP2.Responses
         /// Gets the traits for the requested IP address.
         /// </summary>
         public Traits Traits { get; internal set; }
+
+        /// <summary>
+        /// Sets the languages on all the NamedEntity properties.
+        /// </summary>
+        /// <param name="languages">The languages specified by the user.</param>
+        internal virtual void SetLanguages(List<string> languages)
+        {
+            if(Continent != null)
+                Continent.Languages = languages;
+
+            if(Country != null)
+                Country.Languages = languages;
+
+            if(RegisteredCountry != null)
+                RegisteredCountry.Languages = languages;
+
+            if(RepresentedCountry != null)
+                RepresentedCountry.Languages = languages;
+        }
     }
 }

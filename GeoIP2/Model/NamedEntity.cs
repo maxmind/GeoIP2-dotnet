@@ -19,11 +19,14 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         public int GeonameId { get; internal set; }
 
-        internal List<string> Languages = new List<string>();
+        /// <summary>
+        /// Gets or sets the languages specified by the user.
+        /// </summary>
+        internal List<string> Languages { get; set; }
 
         /// <summary>
         /// The name of the city based on the languages list passed to the
-        /// <see cref="MaxMind.GeoIP2.WebServiceClient"/> constructor. This
+        /// <see cref="WebServiceClient"/> constructor. This
         /// attribute is returned by all endpoints.
         /// </summary>
         public string Name

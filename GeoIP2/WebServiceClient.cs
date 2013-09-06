@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices.ComTypes;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
 using RestSharp;
@@ -66,6 +67,7 @@ namespace MaxMind.GeoIP2
         private readonly int _userId;
         private readonly string _licenseKey;
         private const string BASE_URL = "https://geoip.maxmind.com/geoip/v2.0";
+        private List<string> _languages;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebServiceClient"/> class.
@@ -76,25 +78,64 @@ namespace MaxMind.GeoIP2
         {
             _userId = userId;
             _licenseKey = licenseKey;
+            _languages = new List<string>{"en"};
+        }
+
+        public WebServiceClient(int userId, string licenseKey, List<string> languages)
+        {
+            _userId = userId;
+            _licenseKey = licenseKey;
+            _languages = languages;
+        }
+
+
+        /// <summary>
+        /// Returns an <see cref="OmniResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <returns>An <see cref="OmniResponse"/></returns>
+        public OmniResponse Omni(string ipAddress)
+        {
+            return Execute<OmniResponse>("omni/{ip}", ipAddress, "omni");
         }
 
         /// <summary>
-        /// Returns an <see cref="OmniResponse"/> model for the specified ip address.
+        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
-        /// <returns>An <see cref="OmniResponse"/> model</returns>
-        public OmniResponse Omni(string ipAddress)
+        /// <returns>An <see cref="CountryResponse"/></returns>
+        public CountryResponse Country(string ipAddress)
         {
-            var req = new RestRequest("omni/{ip}");
-            req.AddUrlSegment("ip", ipAddress);
-            return Execute<OmniResponse>(req);
+            return Execute<CountryResponse>("country/{ip}", ipAddress, "country");
         }
 
-        private T Execute<T>(RestRequest request) where T : new()
+        /// <summary>
+        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <returns>An <see cref="CityResponse"/></returns>
+        public CityResponse City(string ipAddress)
         {
+            return Execute<CityResponse>("city/{ip}", ipAddress, "city");
+        }
+
+        /// <summary>
+        /// Returns an <see cref="CityIspOrgResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <returns>An <see cref="CityIspOrgResponse"/></returns>
+        public CityIspOrgResponse CityIspOrg(string ipAddress)
+        {
+            return Execute<CityIspOrgResponse>("city_isp_org/{ip}", ipAddress, "city-isp-org");
+        }
+
+        private T Execute<T>(string urlPattern, string ipAddress, string contentTypeSuffix) where T : CountryResponse, new()
+        {
+            var request = new RestRequest(urlPattern);
+            request.AddUrlSegment("ip", ipAddress);
             var client = new RestClient(BASE_URL);
             client.Authenticator = new HttpBasicAuthenticator(_userId.ToString(), _licenseKey);
-            client.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());;
+            client.AddHandler("application/vnd.maxmind.com-" + contentTypeSuffix + "+json", new JsonDeserializer());;
 
             var response = client.Execute<T>(request);
 
@@ -102,6 +143,8 @@ namespace MaxMind.GeoIP2
             {
                 throw new GeoIP2Exception("An error occurred while executing your request. See the inner exception for details.", response.ErrorException);
             }
+
+            response.Data.SetLanguages(_languages);
 
             return response.Data;
         }

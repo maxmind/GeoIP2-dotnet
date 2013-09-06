@@ -44,5 +44,21 @@ namespace MaxMind.GeoIP2.Responses
         /// returns an empty array.
         /// </summary>
         public List<Subdivision> Subdivisions { get; internal set; }
+
+        /// <summary>
+        /// Sets the languages on all the NamedEntity properties.
+        /// </summary>
+        /// <param name="languages">The languages specified by the user.</param>
+        internal override void SetLanguages(List<string> languages)
+        {
+            base.SetLanguages(languages);
+
+            if(City != null)
+                City.Languages = languages;
+
+            if(Subdivisions != null && Subdivisions.Count > 0)
+                foreach (var subdivision in Subdivisions)
+                    subdivision.Languages = languages;
+        }
     }
 }
