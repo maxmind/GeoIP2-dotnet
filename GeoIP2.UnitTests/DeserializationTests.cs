@@ -37,6 +37,49 @@ namespace MaxMind.GeoIP2.UnitTests
             + "\"organization\":\"Blorg\"," + "\"user_type\":\"college\""
             + "}," + "\"maxmind\":{\"queries_remaining\":11}" + "}";
 
+
+        private static string _countryBody = "{\"continent\":{"
+            + "\"code\":\"NA\"," + "\"geoname_id\":42,"
+            + "\"names\":{\"en\":\"North America\"}" + "}," + "\"country\":{"
+            + "\"geoname_id\":1," + "\"iso_code\":\"US\","
+            + "\"confidence\":56," + "\"names\":{\"en\":\"United States\"}"
+            + "}," + "\"registered_country\":{" + "\"geoname_id\":2,"
+            + "\"iso_code\":\"CA\"," + "\"names\":{\"en\":\"Canada\"}},"
+            + "\"represented_country\":{" + "\"geoname_id\":4,"
+            + "\"iso_code\":\"GB\"," + "\"names\":{\"en\":\"United Kingdom\"},"
+            + "\"type\":\"military\"}," + "\"traits\":{"
+            + "\"ip_address\":\"1.2.3.4\"" + "}}";
+
+        [Test]
+        public void CanDeserializeCountryResponse()
+        {
+            var d = new JsonDeserializer();
+            var r = new RestResponse();
+            r.Content = _countryBody;
+            var resp = d.Deserialize<CountryResponse>(r);
+            resp.SetLanguages(new List<string>{"en"});
+
+            Assert.That(resp.Continent.Code, Is.EqualTo("NA"));
+            Assert.That(resp.Continent.GeonameId, Is.EqualTo(42));
+            Assert.That(resp.Continent.Name, Is.EqualTo("North America"));
+
+            Assert.That(resp.Country.GeonameId, Is.EqualTo(1));
+            Assert.That(resp.Country.IsoCode, Is.EqualTo("US"));
+            Assert.That(resp.Country.Confidence, Is.EqualTo(56));
+            Assert.That(resp.Country.Name, Is.EqualTo("United States"));
+
+            Assert.That(resp.RegisteredCountry.GeonameId, Is.EqualTo(2));
+            Assert.That(resp.RegisteredCountry.IsoCode, Is.EqualTo("CA"));
+            Assert.That(resp.RegisteredCountry.Name, Is.EqualTo("Canada"));
+
+            Assert.That(resp.RepresentedCountry.GeonameId, Is.EqualTo(4));
+            Assert.That(resp.RepresentedCountry.IsoCode, Is.EqualTo("GB"));
+            Assert.That(resp.RepresentedCountry.Name, Is.EqualTo("United Kingdom"));
+            Assert.That(resp.RepresentedCountry.Type, Is.EqualTo("military"));
+
+            Assert.That(resp.Traits.IpAddress, Is.EqualTo("1.2.3.4"));
+        }
+
         [Test]
         public void CanDeserializeOmniResponse()
         {
@@ -44,11 +87,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var r = new RestResponse();
             r.Content = _omniBody;
             var omni = d.Deserialize<OmniResponse>(r);
-            omni.City.Languages = new List<string>{"en"};
-            omni.Continent.Languages = new List<string>{"en"};
-            omni.Country.Languages = new List<string>{"en"};
-            omni.RegisteredCountry.Languages = new List<string>{"en"};
-            omni.RepresentedCountry.Languages = new List<string>{"en"};
+            omni.SetLanguages(new List<string>{"en"});
 
             Assert.AreEqual(76, omni.City.Confidence);
             Assert.AreEqual(9876, omni.City.GeonameId);
