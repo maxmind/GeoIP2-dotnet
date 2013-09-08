@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -115,7 +116,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="OmniResponse"/></returns>
         public OmniResponse Omni(string ipAddress)
         {
-            return Execute<OmniResponse>("omni/{ip}", ipAddress, "omni");
+            return Execute<OmniResponse>("omni/{ip}", ipAddress);
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CountryResponse"/></returns>
         public CountryResponse Country(string ipAddress)
         {
-            return Execute<CountryResponse>("country/{ip}", ipAddress, "country");
+            return Execute<CountryResponse>("country/{ip}", ipAddress);
         }
 
         /// <summary>
@@ -135,7 +136,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CityResponse"/></returns>
         public CityResponse City(string ipAddress)
         {
-            return Execute<CityResponse>("city/{ip}", ipAddress, "city");
+            return Execute<CityResponse>("city/{ip}", ipAddress);
         }
 
         /// <summary>
@@ -145,15 +146,18 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CityIspOrgResponse"/></returns>
         public CityIspOrgResponse CityIspOrg(string ipAddress)
         {
-            return Execute<CityIspOrgResponse>("city_isp_org/{ip}", ipAddress, "city-isp-org");
+            return Execute<CityIspOrgResponse>("city_isp_org/{ip}", ipAddress);
         }
 
-        private T Execute<T>(string urlPattern, string ipAddress, string contentTypeSuffix) where T : CountryResponse, new()
+        private T Execute<T>(string urlPattern, string ipAddress) where T : CountryResponse, new()
         {
             var request = new RestRequest(urlPattern);
             request.AddUrlSegment("ip", ipAddress);
 
             var response = _restClient.Execute<T>(request);
+
+            if(response.ContentLength <= 0)
+                throw new GeoIP2HttpException("Received a 200 response for " + response.ResponseUri + " but there was no message body.", response.StatusCode, response.ResponseUri.ToString());
 
             if (response.ErrorException != null)
             {
