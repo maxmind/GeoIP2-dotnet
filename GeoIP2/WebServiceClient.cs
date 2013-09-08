@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
@@ -180,13 +181,22 @@ namespace MaxMind.GeoIP2
             {
                 throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} with no body", response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
             }
-            var d = new JsonDeserializer();
-            var webServiceError = d.Deserialize<WebServiceError>(response);
 
-            if(webServiceError.Code == null || webServiceError.Error == null)
-                throw new GeoIP2HttpException("Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode, response.ResponseUri);
+            try
+            {
+                var d = new JsonDeserializer();
+                var webServiceError = d.Deserialize<WebServiceError>(response);
 
-            throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
+                if(webServiceError.Code == null || webServiceError.Error == null)
+                    throw new GeoIP2HttpException("Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode, response.ResponseUri);
+
+                throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
+            }
+            catch (SerializationException ex)
+            {
+                throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} but it did not include the expected JSON body: {2}", response.StatusCode, response.ResponseUri, response.Content), response.StatusCode, response.ResponseUri);
+            }
+
         }
     }
 }
