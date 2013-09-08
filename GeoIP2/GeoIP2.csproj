@@ -46,9 +46,11 @@
   <ItemGroup>
     <Compile Include="Exceptions\GeoIP2Exception.cs" />
     <Compile Include="Exceptions\GeoIP2HttpException.cs" />
+    <Compile Include="Exceptions\GeoIP2InvalidRequestException.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Continent.cs" />
     <Compile Include="Model\Country.cs" />
+    <Compile Include="Model\WebServiceError.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\MaxMind.cs" />
     <Compile Include="Model\NamedEntity.cs" />
