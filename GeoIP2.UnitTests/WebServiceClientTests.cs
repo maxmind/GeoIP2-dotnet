@@ -19,7 +19,12 @@ namespace MaxMind.GeoIP2.UnitTests
         public void EmptyBodyShouldThrowException()
         {
             var restClient = MockRepository.GenerateStub<IRestClient>();
-            var restResponse = new RestResponse<OmniResponse> {Content = null, ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), StatusCode = (HttpStatusCode)200};
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = null, 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)200
+            };
             restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
             var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
@@ -34,7 +39,12 @@ namespace MaxMind.GeoIP2.UnitTests
             var restClient = MockRepository.GenerateStub<IRestClient>();
             var content = "{\"code\":\"IP_ADDRESS_INVALID\","
                             + "\"error\":\"The value 1.2.3 is not a valid ip address\"}";
-            var restResponse = new RestResponse<OmniResponse> {Content = content, ResponseUri = new Uri("http://foo.com/omni/1.2.3"), StatusCode = (HttpStatusCode)400};
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = content,
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3"),
+                StatusCode = (HttpStatusCode)400
+            };
             restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
             var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
@@ -47,7 +57,30 @@ namespace MaxMind.GeoIP2.UnitTests
         public void NoErrorBodyShouldThrowException()
         {
             var restClient = MockRepository.GenerateStub<IRestClient>();
-            var restResponse = new RestResponse<OmniResponse> {Content = null, ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), StatusCode = (HttpStatusCode)400};
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = null, 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)400
+            };
+            restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
+
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
+            var result = wsc.Omni("1.2.3.4");
+        }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "does not specify code or error keys",
+            MatchType = MessageMatch.Contains)]
+        public void WeirdErrorBodyShouldThrowException()
+        {
+            var restClient = MockRepository.GenerateStub<IRestClient>();
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{\"weird\": 42}", 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)400
+            };
             restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
             var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
