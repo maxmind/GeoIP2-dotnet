@@ -19,7 +19,7 @@ namespace MaxMind.GeoIP2.UnitTests
         public void EmptyBodyShouldThrowException()
         {
             var restClient = MockRepository.GenerateStub<IRestClient>();
-            var restResponse = new RestResponse<OmniResponse> {Content = null, ResponseUri = new Uri("http://foo.com/omni/1.2.3.4")};
+            var restResponse = new RestResponse<OmniResponse> {Content = null, ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), StatusCode = (HttpStatusCode)200};
             restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
             var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
@@ -39,6 +39,19 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
             var result = wsc.Omni("1.2.3");
+        }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "with no body",
+            MatchType = MessageMatch.Contains)]
+        public void NoErrorBodyShouldThrowException()
+        {
+            var restClient = MockRepository.GenerateStub<IRestClient>();
+            var restResponse = new RestResponse<OmniResponse> {Content = null, ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), StatusCode = (HttpStatusCode)400};
+            restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
+
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
+            var result = wsc.Omni("1.2.3.4");
         }
     }
 }

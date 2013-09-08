@@ -176,6 +176,10 @@ namespace MaxMind.GeoIP2
 
         private void Handle4xxStatus(IRestResponse response)
         {
+            if (string.IsNullOrEmpty(response.Content))
+            {
+                throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} with no body", response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri.ToString());
+            }
             var d = new JsonDeserializer();
             var webServiceError = d.Deserialize<WebServiceError>(response);
 
