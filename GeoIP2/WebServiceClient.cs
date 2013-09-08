@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MaxMind.GeoIP2.Exceptions;
+using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -156,6 +157,10 @@ namespace MaxMind.GeoIP2
 
             var response = _restClient.Execute<T>(request);
 
+            var status = (int) response.StatusCode;
+            if (status >= 400 && status < 500)
+                Handle4xxStatus(response);
+
             if(response.ContentLength <= 0)
                 throw new GeoIP2HttpException("Received a 200 response for " + response.ResponseUri + " but there was no message body.", response.StatusCode, response.ResponseUri.ToString());
 
@@ -167,6 +172,14 @@ namespace MaxMind.GeoIP2
             response.Data.SetLanguages(_languages);
 
             return response.Data;
+        }
+
+        private void Handle4xxStatus(IRestResponse response)
+        {
+            var d = new JsonDeserializer();
+            var webServiceError = d.Deserialize<WebServiceError>(response);
+
+            throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
         }
     }
 }

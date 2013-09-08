@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -8,9 +9,10 @@ namespace MaxMind.GeoIP2.Exceptions
 {
     /// <summary>
     /// This class represents an HTTP transport error. This is not an error returned
-    /// by the web service itself.
+    /// by the web service itself. As such, it is a IOException instead of a
+    /// GeoIp2Exception.
     /// </summary>
-    public class GeoIP2HttpException : ApplicationException
+    public class GeoIP2HttpException : IOException
     {
         public HttpStatusCode HttpStatus { get; private set; }
         public string Url { get; private set; }
