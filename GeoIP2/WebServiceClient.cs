@@ -162,7 +162,7 @@ namespace MaxMind.GeoIP2
                 Handle4xxStatus(response);
 
             if(response.ContentLength <= 0)
-                throw new GeoIP2HttpException("Received a 200 response for " + response.ResponseUri + " but there was no message body.", response.StatusCode, response.ResponseUri.ToString());
+                throw new GeoIP2HttpException("Received a 200 response for " + response.ResponseUri + " but there was no message body.", response.StatusCode, response.ResponseUri);
 
             if (response.ErrorException != null)
             {
@@ -178,10 +178,13 @@ namespace MaxMind.GeoIP2
         {
             if (string.IsNullOrEmpty(response.Content))
             {
-                throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} with no body", response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri.ToString());
+                throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} with no body", response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
             }
             var d = new JsonDeserializer();
             var webServiceError = d.Deserialize<WebServiceError>(response);
+
+            if(webServiceError.Code == null || webServiceError.Error == null)
+                throw new GeoIP2HttpException("Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode, response.ResponseUri);
 
             throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
         }
