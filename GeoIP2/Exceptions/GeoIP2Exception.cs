@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MaxMind.GeoIP2
+namespace MaxMind.GeoIP2.Exceptions
 {
     public class GeoIP2Exception : ApplicationException
     {
