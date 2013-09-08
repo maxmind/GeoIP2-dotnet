@@ -163,7 +163,7 @@ namespace MaxMind.GeoIP2
                 Handle4xxStatus(response);
 
             if(response.ContentLength <= 0)
-                throw new GeoIP2HttpException("Received a 200 response for " + response.ResponseUri + " but there was no message body.", response.StatusCode, response.ResponseUri);
+                throw new GeoIP2HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
 
             if (response.ErrorException != null)
             {
