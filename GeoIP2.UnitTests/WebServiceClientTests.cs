@@ -86,5 +86,23 @@ namespace MaxMind.GeoIP2.UnitTests
             var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
             var result = wsc.Omni("1.2.3.4");
         }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "it did not include the expected JSON body",
+            MatchType = MessageMatch.Contains)]
+        public void UnexpectedErrorBodyShouldThrowException()
+        {
+            var restClient = MockRepository.GenerateStub<IRestClient>();
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{\"invalid\": }", 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)400
+            };
+            restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
+
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
+            var result = wsc.Omni("1.2.3.4");
+        }
     }
 }
