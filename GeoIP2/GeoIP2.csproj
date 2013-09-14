@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\GeoIP2AddressNotFoundException.cs" />
+    <Compile Include="Exceptions\GeoIP2AuthenticationException.cs" />
     <Compile Include="Exceptions\GeoIP2Exception.cs" />
     <Compile Include="Exceptions\GeoIP2HttpException.cs" />
     <Compile Include="Exceptions\GeoIP2InvalidRequestException.cs" />
