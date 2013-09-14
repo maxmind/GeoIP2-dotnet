@@ -218,7 +218,7 @@ namespace MaxMind.GeoIP2
                     "Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode,
                     response.ResponseUri);
 
-            if(webServiceError.Code == "IP_ADDRESS_NOT_FOUND")
+            if(webServiceError.Code == "IP_ADDRESS_NOT_FOUND" || webServiceError.Code == "IP_ADDRESS_RESERVED")
                 throw new GeoIP2AddressNotFoundException(webServiceError.Error);
 
             throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
