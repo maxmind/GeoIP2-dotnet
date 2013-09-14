@@ -74,7 +74,8 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="userId">Your MaxMind user ID.</param>
         /// <param name="licenseKey">Your MaxMind license key.</param>
-        public WebServiceClient(int userId, string licenseKey) : this(userId, licenseKey, new List<string>{"en"})
+        public WebServiceClient(int userId, string licenseKey)
+            : this(userId, licenseKey, new List<string> { "en" })
         {
         }
 
@@ -84,7 +85,8 @@ namespace MaxMind.GeoIP2
         /// <param name="userId">The user unique identifier.</param>
         /// <param name="licenseKey">The license key.</param>
         /// <param name="languages">List of language codes to use in name property from most preferred to least preferred.</param>
-        public WebServiceClient(int userId, string licenseKey, List<string> languages) : this(userId, licenseKey, languages, new RestClient(BASE_URL))
+        public WebServiceClient(int userId, string licenseKey, List<string> languages)
+            : this(userId, licenseKey, languages, new RestClient(BASE_URL))
         {
         }
 
@@ -102,7 +104,7 @@ namespace MaxMind.GeoIP2
             _restClient.Authenticator = new HttpBasicAuthenticator(userId.ToString(), licenseKey);
             if (_restClient is RestClient)
             {
-                var impl = (RestClient) _restClient;
+                var impl = (RestClient)_restClient;
                 impl.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());
                 impl.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
                 impl.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
@@ -158,8 +160,16 @@ namespace MaxMind.GeoIP2
 
             var response = _restClient.Execute<T>(request);
 
-            var status = (int) response.StatusCode;
-            if (status >= 400 && status < 500)
+            var status = (int)response.StatusCode;
+            if (status == 200)
+            {
+                if (response.ContentLength <= 0)
+                    throw new GeoIP2HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
+
+                response.Data.SetLanguages(_languages);                
+                return response.Data;
+            }
+            else if (status >= 400 && status < 500)
             {
                 Handle4xxStatus(response);
             }
@@ -168,17 +178,9 @@ namespace MaxMind.GeoIP2
                 throw new GeoIP2HttpException(string.Format("Received a server ({0}) error for {1}", (int)response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
             }
 
-            if(response.ContentLength <= 0)
-                throw new GeoIP2HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
-
-            if (response.ErrorException != null)
-            {
-                throw new GeoIP2Exception("An error occurred while executing your request. See the inner exception for details.", response.ErrorException);
-            }
-
-            response.Data.SetLanguages(_languages);
-
-            return response.Data;
+            throw new GeoIP2HttpException(
+                string.Format("Received a very surprising HTTP status ({0}) for {1}", (int)response.StatusCode,
+                    response.ResponseUri), response.StatusCode, response.ResponseUri);
         }
 
         private void Handle4xxStatus(IRestResponse response)
@@ -193,7 +195,7 @@ namespace MaxMind.GeoIP2
                 var d = new JsonDeserializer();
                 var webServiceError = d.Deserialize<WebServiceError>(response);
 
-                if(webServiceError.Code == null || webServiceError.Error == null)
+                if (webServiceError.Code == null || webServiceError.Error == null)
                     throw new GeoIP2HttpException("Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode, response.ResponseUri);
 
                 throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);

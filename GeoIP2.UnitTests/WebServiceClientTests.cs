@@ -111,5 +111,19 @@ namespace MaxMind.GeoIP2.UnitTests
 
             RunClientGivenResponse(restResponse);
         }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "Received a very surprising HTTP status (300) for", MatchType = MessageMatch.Contains),]
+        public void SurprisingStatusShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)300
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
+
     }
 }
