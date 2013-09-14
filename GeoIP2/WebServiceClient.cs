@@ -201,17 +201,27 @@ namespace MaxMind.GeoIP2
             {
                 var d = new JsonDeserializer();
                 var webServiceError = d.Deserialize<WebServiceError>(response);
-
-                if (webServiceError.Code == null || webServiceError.Error == null)
-                    throw new GeoIP2HttpException("Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode, response.ResponseUri);
-
-                throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
+                HandleErrorWithJSONBody(webServiceError, response);
             }
             catch (SerializationException ex)
             {
                 throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} but it did not include the expected JSON body: {2}", response.StatusCode, response.ResponseUri, response.Content), response.StatusCode, response.ResponseUri);
             }
 
+        }
+
+        private static void HandleErrorWithJSONBody(WebServiceError webServiceError, IRestResponse response)
+        {
+
+            if (webServiceError.Code == null || webServiceError.Error == null)
+                throw new GeoIP2HttpException(
+                    "Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode,
+                    response.ResponseUri);
+
+            if(webServiceError.Code == "IP_ADDRESS_NOT_FOUND")
+                throw new GeoIP2AddressNotFoundException(webServiceError.Error);
+
+            throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
         }
     }
 }

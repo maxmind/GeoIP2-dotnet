@@ -183,5 +183,20 @@ namespace MaxMind.GeoIP2.UnitTests
 
             RunClientGivenResponse(restResponse);
         }
+
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2AddressNotFoundException), ExpectedMessage = "The value 1.2.3.16 is not in the database", MatchType = MessageMatch.Contains),]
+        public void AddressNotFoundShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{\"code\":\"IP_ADDRESS_NOT_FOUND\", \"error\":\"The value 1.2.3.16 is not in the database.\"}",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)404
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
     }
 }
