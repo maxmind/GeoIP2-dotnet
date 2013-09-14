@@ -2,10 +2,23 @@
 
 namespace MaxMind.GeoIP2.Exceptions
 {
+    /// <summary>
+    /// This class represents a generic GeoIP2 error. All other exceptions thrown by
+    /// the GeoIP2 API subclass this exception
+    /// </summary>
     public class GeoIP2Exception : ApplicationException
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeoIP2Exception"/> class.
+        /// </summary>
+        /// <param name="message">A message that describes the error.</param>
         public GeoIP2Exception(string message) : base(message) {}
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeoIP2Exception"/> class.
+        /// </summary>
+        /// <param name="message">The error message that explains the reason for the exception.</param>
+        /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public GeoIP2Exception(string message, Exception innerException) : base(message, innerException){}
     }
 }
