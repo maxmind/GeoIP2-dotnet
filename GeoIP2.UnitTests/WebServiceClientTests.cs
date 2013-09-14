@@ -198,5 +198,19 @@ namespace MaxMind.GeoIP2.UnitTests
 
             RunClientGivenResponse(restResponse);
         }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2AddressNotFoundException), ExpectedMessage = "The value 1.2.3.17 belongs to a reserved or private range", MatchType = MessageMatch.Contains),]
+        public void AddressReservedShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{\"code\":\"IP_ADDRESS_RESERVED\",\"error\":\"The value 1.2.3.17 belongs to a reserved or private range.\"}",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)400
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
     }
 }
