@@ -222,6 +222,8 @@ namespace MaxMind.GeoIP2
                 throw new GeoIP2AddressNotFoundException(webServiceError.Error);
             else if(webServiceError.Code == "AUTHORIZATION_INVALID" || webServiceError.Code == "LICENSE_KEY_REQUIRED" || webServiceError.Code == "USER_ID_REQUIRED")
                 throw new GeoIP2AuthenticationException(webServiceError.Error);
+            else if(webServiceError.Code == "OUT_OF_QUERIES")
+                throw new GeoIP2OutOfQueriesException(webServiceError.Error);
 
             throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
         }

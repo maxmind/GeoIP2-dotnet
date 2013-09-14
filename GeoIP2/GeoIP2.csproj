@@ -49,6 +49,7 @@
     <Compile Include="Exceptions\GeoIP2Exception.cs" />
     <Compile Include="Exceptions\GeoIP2HttpException.cs" />
     <Compile Include="Exceptions\GeoIP2InvalidRequestException.cs" />
+    <Compile Include="Exceptions\GeoIP2OutOfQueriesException.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Continent.cs" />
     <Compile Include="Model\Country.cs" />

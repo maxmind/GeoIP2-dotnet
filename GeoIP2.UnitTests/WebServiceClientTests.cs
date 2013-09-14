@@ -254,5 +254,19 @@ namespace MaxMind.GeoIP2.UnitTests
 
             RunClientGivenResponse(restResponse);
         }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2OutOfQueriesException), ExpectedMessage = "The license key you have provided is out of queries", MatchType = MessageMatch.Contains),]
+        public void OutOfQueriesShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{\"code\":\"OUT_OF_QUERIES\",\"error\":\"The license key you have provided is out of queries. Please purchase more queries to use this service.\"}",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)402
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
     }
 }
