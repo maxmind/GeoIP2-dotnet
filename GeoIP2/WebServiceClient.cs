@@ -64,7 +64,7 @@ namespace MaxMind.GeoIP2
     /// </para>
     /// 
     /// </summary>
-    public class WebServiceClient
+    public class WebServiceClient : IGeoIP2Provider
     {
         private const string BASE_URL = "https://geoip.maxmind.com/geoip/v2.0";
         private List<string> _languages;
