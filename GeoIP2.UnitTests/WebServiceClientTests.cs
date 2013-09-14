@@ -125,5 +125,19 @@ namespace MaxMind.GeoIP2.UnitTests
             RunClientGivenResponse(restResponse);
         }
 
+        [Test]
+        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "Cannot satisfy your Accept-Charset requirements", MatchType = MessageMatch.Contains),]
+        public void BadCharsetRequirementShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "Cannot satisfy your Accept-Charset requirements",
+                ContentType = "text/plain",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)406
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
     }
 }
