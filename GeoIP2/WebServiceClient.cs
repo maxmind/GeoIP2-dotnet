@@ -220,6 +220,8 @@ namespace MaxMind.GeoIP2
 
             if(webServiceError.Code == "IP_ADDRESS_NOT_FOUND" || webServiceError.Code == "IP_ADDRESS_RESERVED")
                 throw new GeoIP2AddressNotFoundException(webServiceError.Error);
+            else if(webServiceError.Code == "AUTHORIZATION_INVALID" || webServiceError.Code == "LICENSE_KEY_REQUIRED" || webServiceError.Code == "USER_ID_REQUIRED")
+                throw new GeoIP2AuthenticationException(webServiceError.Error);
 
             throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
         }

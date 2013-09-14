@@ -212,5 +212,47 @@ namespace MaxMind.GeoIP2.UnitTests
 
             RunClientGivenResponse(restResponse);
         }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2AuthenticationException), ExpectedMessage = "You have supplied an invalid MaxMind user ID and/or license key", MatchType = MessageMatch.Contains),]
+        public void InvalidAuthShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{\"code\":\"AUTHORIZATION_INVALID\",\"error\":\"You have supplied an invalid MaxMind user ID and/or license key in the Authorization header.\"}",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)401
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind license key in the Authorization header", MatchType = MessageMatch.Contains),]
+        public void MissingLicenseShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{\"code\":\"LICENSE_KEY_REQUIRED\",\"error\":\"You have not supplied a MaxMind license key in the Authorization header.\"}",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)401
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind user ID in the Authorization header", MatchType = MessageMatch.Contains),]
+        public void MissingUserIDShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{\"code\":\"USER_ID_REQUIRED\",\"error\":\"You have not supplied a MaxMind user ID in the Authorization header.\"}",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)401
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
     }
 }
