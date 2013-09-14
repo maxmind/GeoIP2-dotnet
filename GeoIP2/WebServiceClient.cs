@@ -160,7 +160,13 @@ namespace MaxMind.GeoIP2
 
             var status = (int) response.StatusCode;
             if (status >= 400 && status < 500)
+            {
                 Handle4xxStatus(response);
+            }
+            else if (status >= 500 && status < 600)
+            {
+                throw new GeoIP2HttpException(string.Format("Received a server ({0}) error for {1}", (int)response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
+            }
 
             if(response.ContentLength <= 0)
                 throw new GeoIP2HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
