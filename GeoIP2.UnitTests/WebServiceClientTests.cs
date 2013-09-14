@@ -26,7 +26,35 @@ namespace MaxMind.GeoIP2.UnitTests
             + "\"type\":\"military\"}," + "\"traits\":{"
             + "\"ip_address\":\"1.2.3.4\"" + "}}";
 
-        public void RunClientGivenResponse(RestResponse<OmniResponse> response)
+        private const string OMNI_BODY = "{" + "\"city\":{"
+            + "\"confidence\":76," + "\"geoname_id\":9876," + "\"names\":{"
+            + "\"en\":\"Minneapolis\"" + "}" + "}," + "\"continent\":{"
+            + "\"code\":\"NA\"," + "\"geoname_id\":42," + "\"names\":{"
+            + "\"en\":\"North America\"" + "}" + "}," + "\"country\":{"
+            + "\"confidence\":99," + "\"iso_code\":\"US\","
+            + "\"geoname_id\":1," + "\"names\":{"
+            + "\"en\":\"United States of America\"" + "}" + "},"
+            + "\"location\":{" + "\"accuracy_radius\":1500,"
+            + "\"latitude\":44.98," + "\"longitude\":93.2636,"
+            + "\"metro_code\":765," + "\"time_zone\":\"America/Chicago\""
+            + "}," + "\"postal\":{\"confidence\": 33, \"code\":\"55401\"},"
+            + "\"registered_country\":{" + "\"geoname_id\":2,"
+            + "\"iso_code\":\"CA\"," + "\"names\":{" + "\"en\":\"Canada\""
+            + "}" + "}," + "\"represented_country\":{" + "\"geoname_id\":3,"
+            + "\"iso_code\":\"GB\"," + "\"names\":{"
+            + "\"en\":\"United Kingdom\"" + "}," + "\"type\":\"C<military>\""
+            + "}," + "\"subdivisions\":[{" + "\"confidence\":88,"
+            + "\"geoname_id\":574635," + "\"iso_code\":\"MN\"," + "\"names\":{"
+            + "\"en\":\"Minnesota\"" + "}" + "}," + "{\"iso_code\":\"TT\"}],"
+            + "\"traits\":{" + "\"autonomous_system_number\":1234,"
+            + "\"autonomous_system_organization\":\"AS Organization\","
+            + "\"domain\":\"example.com\"," + "\"ip_address\":\"1.2.3.4\","
+            + "\"is_anonymous_proxy\":true,"
+            + "\"is_satellite_provider\":true," + "\"isp\":\"Comcast\","
+            + "\"organization\":\"Blorg\"," + "\"user_type\":\"college\""
+            + "}," + "\"maxmind\":{\"queries_remaining\":11}" + "}";
+
+        public OmniResponse RunClientGivenResponse(RestResponse<OmniResponse> response)
         {
             response.ContentLength = response.Content.Length;
 
@@ -35,7 +63,105 @@ namespace MaxMind.GeoIP2.UnitTests
             restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(response);
 
             var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
-            var result = wsc.Omni("1.2.3.4");
+            return wsc.Omni("1.2.3.4");
+        }
+
+
+        [Test]
+        public void CorrectlyFormattedCountryResponseShouldDeserializeIntoResponseObject()
+        {
+
+            var restResponse = new RestResponse<CountryResponse>
+            {
+                Content = OMNI_BODY, 
+                ContentType = "application/json",
+                Data = new CountryResponse(),
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)200
+            };
+
+            restResponse.ContentLength = restResponse.Content.Length;
+
+            var restClient = MockRepository.GenerateStub<IRestClient>();
+
+            restClient.Stub(r => r.Execute<CountryResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
+
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
+            var result = wsc.Country("1.2.3.4");
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<CountryResponse>());
+        }
+
+        [Test]
+        public void CorrectlyFormattedCityResponseShouldDeserializeIntoResponseObject()
+        {
+
+            var restResponse = new RestResponse<CityResponse>
+            {
+                Content = OMNI_BODY, 
+                ContentType = "application/json",
+                Data = new CityResponse(),
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)200
+            };
+
+            restResponse.ContentLength = restResponse.Content.Length;
+
+            var restClient = MockRepository.GenerateStub<IRestClient>();
+
+            restClient.Stub(r => r.Execute<CityResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
+
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
+            var result = wsc.City("1.2.3.4");
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<CityResponse>());
+        }
+
+        [Test]
+        public void CorrectlyFormattedCityIspOrgResponseShouldDeserializeIntoResponseObject()
+        {
+
+            var restResponse = new RestResponse<CityIspOrgResponse>
+            {
+                Content = OMNI_BODY, 
+                ContentType = "application/json",
+                Data = new CityIspOrgResponse(),
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)200
+            };
+
+            restResponse.ContentLength = restResponse.Content.Length;
+
+            var restClient = MockRepository.GenerateStub<IRestClient>();
+
+            restClient.Stub(r => r.Execute<CityIspOrgResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
+
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
+            var result = wsc.CityIspOrg("1.2.3.4");
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<CityIspOrgResponse>());
+        }
+
+        [Test]
+        public void CorrectlyFormattedOmniResponseShouldDeserializeIntoResponseObject()
+        {
+
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = OMNI_BODY, 
+                ContentType = "application/json",
+                Data = new OmniResponse(),
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)200
+            };
+
+            var result = RunClientGivenResponse(restResponse);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<OmniResponse>());
         }
 
         [Test]
