@@ -166,6 +166,9 @@ namespace MaxMind.GeoIP2
                 if (response.ContentLength <= 0)
                     throw new GeoIP2HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
 
+                if(response.ContentType == null || !response.ContentType.Contains("json"))
+                    throw new GeoIP2Exception(string.Format("Received a 200 response for {0} but it does not appear to be JSON:\n", response.ContentType));
+
                 response.Data.SetLanguages(_languages);                
                 return response.Data;
             }

@@ -14,8 +14,22 @@ namespace MaxMind.GeoIP2.UnitTests
     [TestFixture]
     public class WebServiceClientTests
     {
+        private const string COUNTRY_BODY = "{\"continent\":{"
+            + "\"code\":\"NA\"," + "\"geoname_id\":42,"
+            + "\"names\":{\"en\":\"North America\"}" + "}," + "\"country\":{"
+            + "\"geoname_id\":1," + "\"iso_code\":\"US\","
+            + "\"confidence\":56," + "\"names\":{\"en\":\"United States\"}"
+            + "}," + "\"registered_country\":{" + "\"geoname_id\":2,"
+            + "\"iso_code\":\"CA\"," + "\"names\":{\"en\":\"Canada\"}},"
+            + "\"represented_country\":{" + "\"geoname_id\":4,"
+            + "\"iso_code\":\"GB\"," + "\"names\":{\"en\":\"United Kingdom\"},"
+            + "\"type\":\"military\"}," + "\"traits\":{"
+            + "\"ip_address\":\"1.2.3.4\"" + "}}";
+
         public void RunClientGivenResponse(RestResponse<OmniResponse> response)
         {
+            response.ContentLength = response.Content.Length;
+
             var restClient = MockRepository.GenerateStub<IRestClient>();
 
             restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(response);
@@ -139,5 +153,21 @@ namespace MaxMind.GeoIP2.UnitTests
 
             RunClientGivenResponse(restResponse);
         }
+
+        [Test]
+        [ExpectedException(typeof (GeoIP2Exception), ExpectedMessage = "but it does not appear to be JSON", MatchType = MessageMatch.Contains),]
+        public void BadContentTypeShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = COUNTRY_BODY,
+                ContentType = "bad/content-type",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)200
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
+
     }
 }
