@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Model;
@@ -168,6 +169,9 @@ namespace MaxMind.GeoIP2
 
                 if(response.ContentType == null || !response.ContentType.Contains("json"))
                     throw new GeoIP2Exception(string.Format("Received a 200 response for {0} but it does not appear to be JSON:\n", response.ContentType));
+
+                if(response.Data == null)
+                    throw new GeoIP2Exception(string.Format("Received a 200 response but not decode it as JSON: {0}", response.Content));
 
                 response.Data.SetLanguages(_languages);                
                 return response.Data;

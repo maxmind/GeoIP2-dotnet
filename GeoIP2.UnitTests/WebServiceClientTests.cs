@@ -169,5 +169,19 @@ namespace MaxMind.GeoIP2.UnitTests
             RunClientGivenResponse(restResponse);
         }
 
+        [Test]
+        [ExpectedException(typeof (GeoIP2Exception), ExpectedMessage = "Received a 200 response but not decode it as JSON", MatchType = MessageMatch.Contains),]
+        public void UndeserializableJSONShouldThrowException()
+        {
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{\"invalid\":yes}",
+                ContentType = "application/json",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                StatusCode = (HttpStatusCode)200
+            };
+
+            RunClientGivenResponse(restResponse);
+        }
     }
 }
