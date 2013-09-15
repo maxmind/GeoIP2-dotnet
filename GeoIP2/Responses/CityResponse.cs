@@ -73,7 +73,7 @@ namespace MaxMind.GeoIP2.Responses
                 + (City != null ? "City=" + City + ", " : "")
                 + (Location != null ? "Location=" + Location + ", " : "")
                 + (Postal != null ? "Postal=" + Postal + ", " : "")
-                + (Subdivisions != null ? "Subdivisions=" + Subdivisions + ", " : "")
+                + (Subdivisions != null ? "Subdivisions={" + string.Join(",", Subdivisions.Select(s => s.ToString()).ToArray()) + "}, " : "")
                 + (Continent != null ? "Continent=" + Continent + ", " : "")
                 + (Country != null ? "Country=" + Country + ", " : "")
                 + (RegisteredCountry != null ? "RegisteredCountry=" + RegisteredCountry + ", " : "") 
