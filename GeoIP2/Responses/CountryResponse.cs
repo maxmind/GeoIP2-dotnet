@@ -56,6 +56,23 @@ namespace MaxMind.GeoIP2.Responses
         public Traits Traits { get; internal set; }
 
         /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return "Country ["
+                + (Continent != null ? "Continent="+ Continent + ", " : "")
+                + (Country != null ? "Country="+ Country + ", " : "")
+                + (RegisteredCountry != null ? "RegisteredCountry="+ RegisteredCountry + ", ": "")
+                + (RepresentedCountry != null ? "RepresentedCountry="+ RepresentedCountry + ", ": "")
+                + (Traits != null ? "Traits=" + Traits : "") 
+                + "]";
+        }
+
+        /// <summary>
         /// Sets the languages on all the NamedEntity properties.
         /// </summary>
         /// <param name="languages">The languages specified by the user.</param>

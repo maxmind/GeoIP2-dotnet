@@ -19,6 +19,17 @@
         /// postal code is correct. This attribute is only available from the
         /// Omni end point.
         /// </summary>
-        public int Confidence { get; internal set; }
+        public int? Confidence { get; internal set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return Code ?? string.Empty;
+        }
     }
 }

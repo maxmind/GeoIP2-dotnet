@@ -13,7 +13,7 @@
         /// This attribute is only available from the City/ISP/Org and Omni
         /// end points.
         /// </summary>
-        public int AutonomousSystemNumber { get; internal set; }
+        public int? AutonomousSystemNumber { get; internal set; }
 
         /// <summary>
         /// The organization associated with the registered <a
@@ -90,5 +90,27 @@
         /// This attribute is only available from the Omni end point.
         /// </summary>
         public string UserType { get; internal set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return "Traits ["
+                + (AutonomousSystemNumber != null ? "AutonomousSystemNumber=" + AutonomousSystemNumber + ", " : "")
+                + (AutonomousSystemOrganization != null ? "AutonomousSystemOrganization=" + AutonomousSystemOrganization + ", " : "")
+                + (Domain != null ? "Domain=" + Domain + ", " : "")
+                + (IpAddress != null ? "IpAddress=" + IpAddress + ", " : "")
+                + "IsAnonymousProxy=" + IsAnonymousProxy
+                + ", IsSatelliteProvider=" + IsSatelliteProvider + ", "
+                + (Isp != null ? "Isp=" + Isp + ", " : "")
+                + (Organization != null ? "Organization=" + Organization + ", " : "")
+                + (UserType != null ? "UserType=" + UserType : "")
+                + "]";
+            
+        }
     }
 }

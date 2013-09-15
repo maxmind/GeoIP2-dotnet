@@ -46,6 +46,43 @@ namespace MaxMind.GeoIP2.Responses
         public List<Subdivision> Subdivisions { get; internal set; }
 
         /// <summary>
+        /// An object representing the most specific subdivision returned. If
+        /// the response did not contain any subdivisions, this method
+        /// returns an empty <see cref="Subdivision"/> object.
+        /// </summary>
+        public Subdivision MostSpecificSubdivision
+        {
+            get
+            {
+                if(Subdivisions == null || Subdivisions.Count == 0)
+                    return new Subdivision();
+
+                return Subdivisions.Last();
+            }
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.GetType().Name + " [" 
+                + (City != null ? "City=" + City + ", " : "")
+                + (Location != null ? "Location=" + Location + ", " : "")
+                + (Postal != null ? "Postal=" + Postal + ", " : "")
+                + (Subdivisions != null ? "Subdivisions=" + Subdivisions + ", " : "")
+                + (Continent != null ? "Continent=" + Continent + ", " : "")
+                + (Country != null ? "Country=" + Country + ", " : "")
+                + (RegisteredCountry != null ? "RegisteredCountry=" + RegisteredCountry + ", " : "") 
+                + (RepresentedCountry != null ? "RepresentedCountry=" + RepresentedCountry + ", " : "")
+                + (Traits != null ? "Traits=" + Traits : "") 
+                + "]";
+        }
+
+        /// <summary>
         /// Sets the languages on all the NamedEntity properties.
         /// </summary>
         /// <param name="languages">The languages specified by the user.</param>

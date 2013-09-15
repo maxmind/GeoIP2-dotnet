@@ -12,7 +12,7 @@
         /// the subdivision is correct. This attribute is only available from
         /// the Omni end point.
         /// </summary>
-        public int Confidence { get; set; }
+        public int? Confidence { get; set; }
 
         /// <summary>
         /// This is a string up to three characters long contain the
