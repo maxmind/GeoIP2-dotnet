@@ -12,6 +12,6 @@
         // is correct. This attribute is only available from the Omni end
         // point.        
         /// </summary>
-        public int Confidence { get; internal set; }
+        public int? Confidence { get; internal set; }
     }
 }

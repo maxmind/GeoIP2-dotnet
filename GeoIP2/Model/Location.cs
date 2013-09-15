@@ -12,21 +12,21 @@
         /// IP address is likely to be. This attribute is only available from
         /// the Omni end point.
         /// </summary>
-        public int AccuracyRadius { get; internal set; }
+        public int? AccuracyRadius { get; internal set; }
 
         /// <summary>
         /// The latitude of the location as a floating point number. This
         /// attribute is returned by all end points except the Country end
         /// point.
         /// </summary>
-        public double Latitude { get; internal set; }
+        public double? Latitude { get; internal set; }
 
         /// <summary>
         /// The longitude of the location as a floating point number. This
         /// attribute is returned by all end points except the Country end
         /// point.
         /// </summary>
-        public double Longitude { get; internal set; }
+        public double? Longitude { get; internal set; }
 
         /// <summary>
         /// The metro code of the location if the location is in the US.
@@ -35,7 +35,7 @@
         /// >Google AdWords API</a>. This attribute is returned by all end
         /// points except the Country end point.
         /// </summary>
-        public int MetroCode { get; internal set; }
+        public int? MetroCode { get; internal set; }
 
         /// <summary>
         /// The time zone associated with location, as specified by the <a
@@ -44,5 +44,21 @@
         /// returned by all end points except the Country end point
         /// </summary>
         public string TimeZone { get; internal set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return "Location [ "
+                + (AccuracyRadius.HasValue ? "AccuracyRadius=" + AccuracyRadius + ", " : string.Empty)
+                + (Latitude.HasValue ? "Latitude=" + Latitude + ", " : string.Empty)
+                + (Longitude.HasValue ? "Longitude=" + Longitude + ", " : string.Empty)
+                + (MetroCode.HasValue ? "MetroCode=" + MetroCode + ", " : string.Empty)
+                + (TimeZone != null ? "TimeZone=" + TimeZone : "") + "]";
+        }
     }
 }
