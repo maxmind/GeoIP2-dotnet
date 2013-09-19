@@ -67,8 +67,12 @@ namespace MaxMind.GeoIP2
     public class WebServiceClient : IGeoIP2Provider
     {
         private const string BASE_URL = "https://geoip.maxmind.com/geoip/v2.0";
+
+        private readonly int _userId;
+
+        private readonly string _licenseKey;
+
         private List<string> _languages;
-        private IRestClient _restClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebServiceClient"/> class.
@@ -87,30 +91,22 @@ namespace MaxMind.GeoIP2
         /// <param name="licenseKey">The license key.</param>
         /// <param name="languages">List of language codes to use in name property from most preferred to least preferred.</param>
         public WebServiceClient(int userId, string licenseKey, List<string> languages)
-            : this(userId, licenseKey, languages, new RestClient(BASE_URL))
         {
+            _userId = userId;
+            _licenseKey = licenseKey;
+            _languages = languages;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WebServiceClient"/> class.
-        /// </summary>
-        /// <param name="userId">The user unique identifier.</param>
-        /// <param name="licenseKey">The license key.</param>
-        /// <param name="languages">The languages.</param>
-        /// <param name="restClient">The rest client to use. For unit testing.</param>
-        internal WebServiceClient(int userId, string licenseKey, List<string> languages, IRestClient restClient)
+        private IRestClient CreateClient()
         {
-            _languages = languages;
-            _restClient = restClient;
-            _restClient.Authenticator = new HttpBasicAuthenticator(userId.ToString(), licenseKey);
-            if (_restClient is RestClient)
-            {
-                var impl = (RestClient)_restClient;
-                impl.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());
-                impl.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
-                impl.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
-                impl.AddHandler("application/vnd.maxmind.com-city-isp-org+json", new JsonDeserializer());
-            }
+            var restClient = new RestClient(BASE_URL);
+            restClient.Authenticator = new HttpBasicAuthenticator(_userId.ToString(), _licenseKey);
+            restClient.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());
+            restClient.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
+            restClient.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
+            restClient.AddHandler("application/vnd.maxmind.com-city-isp-org+json", new JsonDeserializer());
+
+            return restClient;
         }
 
 
@@ -121,7 +117,18 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="OmniResponse"/></returns>
         public OmniResponse Omni(string ipAddress)
         {
-            return Execute<OmniResponse>("omni/{ip}", ipAddress);
+            return Omni(ipAddress, CreateClient());
+        }
+
+        /// <summary>
+        /// Returns an <see cref="OmniResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="restClient">The RestClient to use</param>
+        /// <returns>An <see cref="OmniResponse"/></returns>
+        internal OmniResponse Omni(string ipAddress, IRestClient restClient)
+        {
+            return Execute<OmniResponse>("omni/{ip}", ipAddress, restClient);
         }
 
         /// <summary>
@@ -131,7 +138,18 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CountryResponse"/></returns>
         public CountryResponse Country(string ipAddress)
         {
-            return Execute<CountryResponse>("country/{ip}", ipAddress);
+            return Country(ipAddress, CreateClient());
+        }
+
+        /// <summary>
+        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="restClient">The RestClient to use</param>
+        /// <returns>An <see cref="CountryResponse"/></returns>
+        internal CountryResponse Country(string ipAddress, IRestClient restClient)
+        {
+            return Execute<CountryResponse>("country/{ip}", ipAddress, restClient);
         }
 
         /// <summary>
@@ -141,7 +159,18 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CityResponse"/></returns>
         public CityResponse City(string ipAddress)
         {
-            return Execute<CityResponse>("city/{ip}", ipAddress);
+            return City(ipAddress, CreateClient());
+        }
+
+        /// <summary>
+        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="restClient">The RestClient to use</param>
+        /// <returns>An <see cref="CityResponse"/></returns>
+        internal CityResponse City(string ipAddress, IRestClient restClient)
+        {
+            return Execute<CityResponse>("city/{ip}", ipAddress, restClient);
         }
 
         /// <summary>
@@ -151,15 +180,26 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CityIspOrgResponse"/></returns>
         public CityIspOrgResponse CityIspOrg(string ipAddress)
         {
-            return Execute<CityIspOrgResponse>("city_isp_org/{ip}", ipAddress);
+            return CityIspOrg(ipAddress, CreateClient());
         }
 
-        private T Execute<T>(string urlPattern, string ipAddress) where T : CountryResponse, new()
+        /// <summary>
+        /// Returns an <see cref="CityIspOrgResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="restClient">The RestClient to use</param>
+        /// <returns>An <see cref="CityIspOrgResponse"/></returns>
+        internal CityIspOrgResponse CityIspOrg(string ipAddress, IRestClient restClient)
+        {
+            return Execute<CityIspOrgResponse>("city_isp_org/{ip}", ipAddress, restClient);
+        }
+
+        private T Execute<T>(string urlPattern, string ipAddress, IRestClient restClient) where T : CountryResponse, new()
         {
             var request = new RestRequest(urlPattern);
             request.AddUrlSegment("ip", ipAddress);
 
-            var response = _restClient.Execute<T>(request);
+            var response = restClient.Execute<T>(request);
 
             var status = (int)response.StatusCode;
             if (status == 200)

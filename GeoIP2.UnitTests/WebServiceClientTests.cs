@@ -62,8 +62,8 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(response);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
-            return wsc.Omni("1.2.3.4");
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            return wsc.Omni("1.2.3.4", restClient);
         }
 
 
@@ -86,8 +86,8 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute<CountryResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
-            var result = wsc.Country("1.2.3.4");
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var result = wsc.Country("1.2.3.4", restClient);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.InstanceOf<CountryResponse>());
@@ -112,8 +112,8 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute<CityResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
-            var result = wsc.City("1.2.3.4");
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var result = wsc.City("1.2.3.4", restClient);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.InstanceOf<CityResponse>());
@@ -138,8 +138,8 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute<CityIspOrgResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"}, restClient);
-            var result = wsc.CityIspOrg("1.2.3.4");
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var result = wsc.CityIspOrg("1.2.3.4", restClient);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.InstanceOf<CityIspOrgResponse>());
