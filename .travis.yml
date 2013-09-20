@@ -4,8 +4,6 @@ install:
   - sudo apt-get install mono-devel mono-gmcs nunit-console
   - mozroots --import --sync
   - export EnableNuGetPackageRestore="true"
-  - mono --runtime=v4.0 .nuget/NuGet.exe install GeoIP2/packages.config
-  - mono --runtime=v4.0 .nuget/NuGet.exe install GeoIP2.UnitTests/packages.config
 
 script:
   - xbuild
