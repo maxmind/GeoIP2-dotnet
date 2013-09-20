@@ -1,0 +1,15 @@
+language: c
+
+install:
+  - sudo apt-get install mono-devel mono-gmcs nunit-console
+
+script:
+  - xbuild
+  - nunit-console -framework=4.0.30319.1 ./GeoIP2.UnitTests/bin/Debug/MaxMind.GeoIP2.UnitTests.dll
+
+notifications:
+  email:
+    recipients:
+      - dev@maxmind.com
+    on_success: change
+    on_failure: always
