@@ -8,6 +8,12 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public abstract class NamedEntity
     {
+        public NamedEntity()
+        {
+            Names = new Dictionary<string, string>();
+            Languages = new List<string>();
+        }
+
         /// <summary>
         /// A <see cref="System.Collections.Generic.Dictionary{T,U}"/> from language codes to the name in that language.
         /// This attribute is returned by all end points.

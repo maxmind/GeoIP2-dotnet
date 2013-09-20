@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
@@ -66,7 +68,9 @@ namespace MaxMind.GeoIP2
     /// </summary>
     public class WebServiceClient : IGeoIP2Provider
     {
-        private const string BASE_URL = "https://geoip.maxmind.com/geoip/v2.0";
+        private readonly string _baseUrl;
+
+        private readonly int _timeout;
 
         private readonly int _userId;
 
@@ -79,8 +83,10 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="userId">Your MaxMind user ID.</param>
         /// <param name="licenseKey">Your MaxMind license key.</param>
-        public WebServiceClient(int userId, string licenseKey)
-            : this(userId, licenseKey, new List<string> { "en" })
+        /// <param name="baseUrl">The base url to use when accessing the service</param>
+        /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
+        public WebServiceClient(int userId, string licenseKey, string baseUrl = "https://geoip.maxmind.com/geoip/v2.0", int timeout = 3000)
+            : this(userId, licenseKey, new List<string> { "en" }, baseUrl, timeout)
         {
         }
 
@@ -90,21 +96,26 @@ namespace MaxMind.GeoIP2
         /// <param name="userId">The user unique identifier.</param>
         /// <param name="licenseKey">The license key.</param>
         /// <param name="languages">List of language codes to use in name property from most preferred to least preferred.</param>
-        public WebServiceClient(int userId, string licenseKey, List<string> languages)
+        /// <param name="baseUrl">The base url to use when accessing the service</param>
+        /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
+        public WebServiceClient(int userId, string licenseKey, List<string> languages, string baseUrl = "https://geoip.maxmind.com/geoip/v2.0", int timeout = 3000)
         {
             _userId = userId;
             _licenseKey = licenseKey;
             _languages = languages;
+            _baseUrl = baseUrl;
+            _timeout = timeout;
         }
 
         private IRestClient CreateClient()
         {
-            var restClient = new RestClient(BASE_URL);
+            var restClient = new RestClient(_baseUrl);
             restClient.Authenticator = new HttpBasicAuthenticator(_userId.ToString(), _licenseKey);
             restClient.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-city-isp-org+json", new JsonDeserializer());
+            restClient.Timeout = _timeout;
 
             return restClient;
         }
@@ -194,10 +205,15 @@ namespace MaxMind.GeoIP2
             return Execute<CityIspOrgResponse>("city_isp_org/{ip}", ipAddress, restClient);
         }
 
-        private T Execute<T>(string urlPattern, string ipAddress, IRestClient restClient) where T : CountryResponse, new()
+        private T Execute<T>(string urlPattern, string ipAddress, IRestClient restClient) where T : AbstractCountryResponse, new()
         {
+            IPAddress ip;
+            if(ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
+                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
+
             var request = new RestRequest(urlPattern);
-            request.AddUrlSegment("ip", ipAddress);
+
+            request.AddUrlSegment("ip", ipAddress ?? "me");
 
             var response = restClient.Execute<T>(request);
 
@@ -241,7 +257,7 @@ namespace MaxMind.GeoIP2
             {
                 var d = new JsonDeserializer();
                 var webServiceError = d.Deserialize<WebServiceError>(response);
-                HandleErrorWithJSONBody(webServiceError, response);
+                HandleErrorWithJsonBody(webServiceError, response);
             }
             catch (SerializationException ex)
             {
@@ -250,7 +266,7 @@ namespace MaxMind.GeoIP2
 
         }
 
-        private static void HandleErrorWithJSONBody(WebServiceError webServiceError, IRestResponse response)
+        private static void HandleErrorWithJsonBody(WebServiceError webServiceError, IRestResponse response)
         {
 
             if (webServiceError.Code == null || webServiceError.Error == null)

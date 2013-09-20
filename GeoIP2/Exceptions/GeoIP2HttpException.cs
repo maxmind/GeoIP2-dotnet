@@ -10,7 +10,7 @@ namespace MaxMind.GeoIP2.Exceptions
     /// <summary>
     /// This class represents an HTTP transport error. This is not an error returned
     /// by the web service itself. As such, it is a IOException instead of a
-    /// GeoIp2Exception.
+    /// GeoIP2Exception.
     /// </summary>
     public class GeoIP2HttpException : IOException
     {
