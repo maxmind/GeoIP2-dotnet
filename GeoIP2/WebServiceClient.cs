@@ -41,7 +41,7 @@ namespace MaxMind.GeoIP2
     /// <para>
     /// The basic API for this class is the same for all of the web service end
     /// points. First you create a web service object with your MaxMind
-    /// userId and licenseKey, then you call the method corresponding
+    /// userID and licenseKey, then you call the method corresponding
     /// to a specific end point, passing it the IP address you want to look up.
     /// </para>
     /// 
@@ -72,7 +72,7 @@ namespace MaxMind.GeoIP2
 
         private readonly int _timeout;
 
-        private readonly int _userId;
+        private readonly int _userID;
 
         private readonly string _licenseKey;
 
@@ -81,26 +81,26 @@ namespace MaxMind.GeoIP2
         /// <summary>
         /// Initializes a new instance of the <see cref="WebServiceClient"/> class.
         /// </summary>
-        /// <param name="userId">Your MaxMind user ID.</param>
+        /// <param name="userID">Your MaxMind user ID.</param>
         /// <param name="licenseKey">Your MaxMind license key.</param>
         /// <param name="baseUrl">The base url to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userId, string licenseKey, string baseUrl = "https://geoip.maxmind.com/geoip/v2.0", int timeout = 3000)
-            : this(userId, licenseKey, new List<string> { "en" }, baseUrl, timeout)
+        public WebServiceClient(int userID, string licenseKey, string baseUrl = "https://geoip.maxmind.com/geoip/v2.0", int timeout = 3000)
+            : this(userID, licenseKey, new List<string> { "en" }, baseUrl, timeout)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebServiceClient"/> class.
         /// </summary>
-        /// <param name="userId">The user unique identifier.</param>
+        /// <param name="userID">The user unique identifier.</param>
         /// <param name="licenseKey">The license key.</param>
         /// <param name="languages">List of language codes to use in name property from most preferred to least preferred.</param>
         /// <param name="baseUrl">The base url to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userId, string licenseKey, List<string> languages, string baseUrl = "https://geoip.maxmind.com/geoip/v2.0", int timeout = 3000)
+        public WebServiceClient(int userID, string licenseKey, List<string> languages, string baseUrl = "https://geoip.maxmind.com/geoip/v2.0", int timeout = 3000)
         {
-            _userId = userId;
+            _userID = userID;
             _licenseKey = licenseKey;
             _languages = languages;
             _baseUrl = baseUrl;
@@ -110,7 +110,7 @@ namespace MaxMind.GeoIP2
         private IRestClient CreateClient()
         {
             var restClient = new RestClient(_baseUrl);
-            restClient.Authenticator = new HttpBasicAuthenticator(_userId.ToString(), _licenseKey);
+            restClient.Authenticator = new HttpBasicAuthenticator(_userID.ToString(), _licenseKey);
             restClient.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
