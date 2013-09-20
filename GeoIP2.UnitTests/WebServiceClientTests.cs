@@ -165,6 +165,14 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
+        [ExpectedException(typeof (GeoIP2Exception), ExpectedMessage = "The specified IP address was incorrectly formatted", MatchType = MessageMatch.Contains)]
+        public void IncorrectlyFormattedIPAddressShouldThrowException()
+        {
+            var client = new WebServiceClient(0, "abcde", new List<string> {"en"});
+            client.Omni("foo");
+        }
+
+        [Test]
         [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "message body", MatchType = MessageMatch.Contains)]
         public void EmptyBodyShouldThrowException()
         {
@@ -297,7 +305,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         [Test]
         [ExpectedException(typeof (GeoIP2Exception), ExpectedMessage = "Received a 200 response but not decode it as JSON", MatchType = MessageMatch.Contains),]
-        public void UndeserializableJSONShouldThrowException()
+        public void UndeserializableJsonShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
@@ -394,5 +402,6 @@ namespace MaxMind.GeoIP2.UnitTests
 
             RunClientGivenResponse(restResponse);
         }
+
     }
 }

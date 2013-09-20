@@ -10,7 +10,7 @@
     /// <a href="http://dev.maxmind.com/geoip/geoip2/web-services">GeoIP2 Web
     ///      Services</a>
     /// </summary>
-    public class CityIspOrgResponse : CityResponse
+    public class CityIspOrgResponse : AbstractCityResponse
     {
          
     }
