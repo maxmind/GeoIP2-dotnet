@@ -23,7 +23,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         /// The GeoName ID for the city. This attribute is returned by all endpoints
         /// </summary>
-        public int GeonameId { get; internal set; }
+        public int GeonameID { get; internal set; }
 
         /// <summary>
         /// Gets or sets the languages specified by the user.
