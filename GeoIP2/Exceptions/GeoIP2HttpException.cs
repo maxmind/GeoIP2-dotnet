@@ -28,5 +28,18 @@ namespace MaxMind.GeoIP2.Exceptions
             HttpStatus = httpStatus;
             Uri = uri;
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeoIP2HttpException"/> class.
+        /// </summary>
+        /// <param name="message">A message describing the reason why the exception was thrown.</param>
+        /// <param name="httpStatus">The HTTP status of the response that caused the exception.</param>
+        /// <param name="uri">The URL queried.</param>
+        /// <param name="innerException">The underlying exception that caused this one.</param>
+        public GeoIP2HttpException(string message, HttpStatusCode httpStatus, Uri uri, Exception innerException) : base(message, innerException)
+        {
+            HttpStatus = httpStatus;
+            Uri = uri;
+        }
     }
 }
