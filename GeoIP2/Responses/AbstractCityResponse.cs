@@ -6,6 +6,8 @@ namespace MaxMind.GeoIP2.Responses
 {
     public abstract class AbstractCityResponse : AbstractCountryResponse
     {
+        private List<Subdivision> _subdivisions;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AbstractCityResponse"/> class.
         /// </summary>
@@ -41,7 +43,11 @@ namespace MaxMind.GeoIP2.Responses
         /// If the response did not contain any subdivisions, this method
         /// returns an empty array.
         /// </summary>
-        public List<Subdivision> Subdivisions { get; internal set; }
+        public List<Subdivision> Subdivisions
+        {
+            get { return new List<Subdivision>(_subdivisions); }
+            internal set { _subdivisions = value; }
+        }
 
         /// <summary>
         /// An object representing the most specific subdivision returned. If

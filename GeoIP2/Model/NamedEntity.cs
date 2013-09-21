@@ -8,6 +8,8 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public abstract class NamedEntity
     {
+        private Dictionary<string, string> _names;
+
         public NamedEntity()
         {
             Names = new Dictionary<string, string>();
@@ -18,7 +20,11 @@ namespace MaxMind.GeoIP2.Model
         /// A <see cref="System.Collections.Generic.Dictionary{T,U}"/> from language codes to the name in that language.
         /// This attribute is returned by all end points.
         /// </summary>
-        public Dictionary<string, string> Names { get; internal set; }
+        public Dictionary<string, string> Names
+        {
+            get { return new Dictionary<string, string>(_names); }
+            internal set { _names = value; }
+        }
 
         /// <summary>
         /// The GeoName ID for the city. This attribute is returned by all endpoints
