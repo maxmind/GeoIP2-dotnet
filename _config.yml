@@ -1,4 +1,3 @@
-auto:        true
 pygments:    false
 lsi:         true
 markdown: redcarpet
