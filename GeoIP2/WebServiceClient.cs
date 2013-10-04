@@ -68,7 +68,7 @@ namespace MaxMind.GeoIP2
     /// </summary>
     public class WebServiceClient : IGeoIP2Provider
     {
-        private readonly string _baseUrl;
+        private readonly string _host;
 
         private readonly int _timeout;
 
@@ -85,7 +85,7 @@ namespace MaxMind.GeoIP2
         /// <param name="licenseKey">Your MaxMind license key.</param>
         /// <param name="baseUrl">The base url to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userID, string licenseKey, string baseUrl = "https://geoip.maxmind.com/geoip/v2.0", int timeout = 3000)
+        public WebServiceClient(int userID, string licenseKey, string baseUrl = "geoip.maxmind.com", int timeout = 3000)
             : this(userID, licenseKey, new List<string> { "en" }, baseUrl, timeout)
         {
         }
@@ -96,20 +96,20 @@ namespace MaxMind.GeoIP2
         /// <param name="userID">The user unique identifier.</param>
         /// <param name="licenseKey">The license key.</param>
         /// <param name="languages">List of language codes to use in name property from most preferred to least preferred.</param>
-        /// <param name="baseUrl">The base url to use when accessing the service</param>
+        /// <param name="host">The base url to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userID, string licenseKey, List<string> languages, string baseUrl = "https://geoip.maxmind.com/geoip/v2.0", int timeout = 3000)
+        public WebServiceClient(int userID, string licenseKey, List<string> languages, string host = "geoip.maxmind.com", int timeout = 3000)
         {
             _userID = userID;
             _licenseKey = licenseKey;
             _languages = languages;
-            _baseUrl = baseUrl;
+            _host = host;
             _timeout = timeout;
         }
 
         private IRestClient CreateClient()
         {
-            var restClient = new RestClient(_baseUrl);
+            var restClient = new RestClient("https://" + _host + "/geoip/v2.0");
             restClient.Authenticator = new HttpBasicAuthenticator(_userID.ToString(), _licenseKey);
             restClient.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
@@ -261,7 +261,7 @@ namespace MaxMind.GeoIP2
             }
             catch (SerializationException ex)
             {
-                throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} but it did not include the expected JSON body: {2}", response.StatusCode, response.ResponseUri, response.Content), response.StatusCode, response.ResponseUri);
+                throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} but it did not include the expected JSON body: {2}", response.StatusCode, response.ResponseUri, response.Content), response.StatusCode, response.ResponseUri, ex);
             }
 
         }
