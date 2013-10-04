@@ -1,0 +1,128 @@
+<Type Name="AbstractCityResponse" FullName="MaxMind.GeoIP2.Responses.AbstractCityResponse">
+  <TypeSignature Language="C#" Value="public abstract class AbstractCityResponse : MaxMind.GeoIP2.Responses.AbstractCountryResponse" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit AbstractCityResponse extends MaxMind.GeoIP2.Responses.AbstractCountryResponse" />
+  <AssemblyInfo>
+    <AssemblyName>MaxMind.GeoIP2</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>MaxMind.GeoIP2.Responses.AbstractCountryResponse</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AbstractCityResponse ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="City">
+      <MemberSignature Language="C#" Value="public MaxMind.GeoIP2.Model.City City { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class MaxMind.GeoIP2.Model.City City" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MaxMind.GeoIP2.Model.City</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Location">
+      <MemberSignature Language="C#" Value="public MaxMind.GeoIP2.Model.Location Location { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class MaxMind.GeoIP2.Model.Location Location" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MaxMind.GeoIP2.Model.Location</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MostSpecificSubdivision">
+      <MemberSignature Language="C#" Value="public MaxMind.GeoIP2.Model.Subdivision MostSpecificSubdivision { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class MaxMind.GeoIP2.Model.Subdivision MostSpecificSubdivision" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MaxMind.GeoIP2.Model.Subdivision</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Postal">
+      <MemberSignature Language="C#" Value="public MaxMind.GeoIP2.Model.Postal Postal { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class MaxMind.GeoIP2.Model.Postal Postal" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>MaxMind.GeoIP2.Model.Postal</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Subdivisions">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;MaxMind.GeoIP2.Model.Subdivision&gt; Subdivisions { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.List`1&lt;class MaxMind.GeoIP2.Model.Subdivision&gt; Subdivisions" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;MaxMind.GeoIP2.Model.Subdivision&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
