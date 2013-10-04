@@ -55,7 +55,7 @@ See the API documentation for more details.
 
 ## Web Service Example ##
 
-```CSharp
+```C#
 var client = new WebServiceClient(42, "abcdef12345");
 var omni = client.Omni("128.101.101.101");
 
