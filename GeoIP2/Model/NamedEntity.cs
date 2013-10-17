@@ -13,11 +13,11 @@ namespace MaxMind.GeoIP2.Model
         public NamedEntity()
         {
             Names = new Dictionary<string, string>();
-            Languages = new List<string>();
+            Locales = new List<string>();
         }
 
         /// <summary>
-        /// A <see cref="System.Collections.Generic.Dictionary{T,U}"/> from locale codes to the name in that language.
+        /// A <see cref="System.Collections.Generic.Dictionary{T,U}"/> from locale codes to the name in that locale.
         /// This attribute is returned by all end points.
         /// </summary>
         public Dictionary<string, string> Names
@@ -32,12 +32,12 @@ namespace MaxMind.GeoIP2.Model
         public int GeonameID { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the languages specified by the user.
+        /// Gets or sets the locales specified by the user.
         /// </summary>
-        internal List<string> Languages { get; set; }
+        internal List<string> Locales { get; set; }
 
         /// <summary>
-        /// The name of the city based on the languages list passed to the
+        /// The name of the city based on the locales list passed to the
         /// <see cref="WebServiceClient"/> constructor. This
         /// attribute is returned by all endpoints.
         /// </summary>
@@ -45,8 +45,8 @@ namespace MaxMind.GeoIP2.Model
         {
             get
             {
-                var lang = Languages.FirstOrDefault(l => Names.ContainsKey(l));
-                return lang == null ? null : Names[lang];
+                var locale = Locales.FirstOrDefault(l => Names.ContainsKey(l));
+                return locale == null ? null : Names[locale];
             }
         }
 

@@ -12,17 +12,17 @@ namespace MaxMind.GeoIP2.UnitTests
         public void CanGetSingleName()
         {
             var c = new City();
-            c.Languages = new List<string>{"en"};
+            c.Locales = new List<string>{"en"};
             c.Names = new Dictionary<string, string>{{"en", "Foo"}};
 
             Assert.AreEqual("Foo", c.Name);
         }
 
         [Test]
-        public void NameReturnsCorrectLanguage()
+        public void NameReturnsCorrectLocale()
         {
             var c = new City();
-            c.Languages = new List<string>{"es"};
+            c.Locales = new List<string>{"es"};
             c.Names = new Dictionary<string, string>{{"en", "Mexico City"}, {"es", "Ciudad de México"}};
 
             Assert.AreEqual("Ciudad de México", c.Name);

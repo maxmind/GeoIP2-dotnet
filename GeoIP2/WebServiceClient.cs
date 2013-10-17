@@ -76,7 +76,7 @@ namespace MaxMind.GeoIP2
 
         private readonly string _licenseKey;
 
-        private List<string> _languages;
+        private List<string> _locales;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebServiceClient"/> class.
@@ -95,14 +95,14 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="userID">The user unique identifier.</param>
         /// <param name="licenseKey">The license key.</param>
-        /// <param name="languages">List of locale codes to use in name property from most preferred to least preferred.</param>
+        /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
         /// <param name="host">The base url to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userID, string licenseKey, List<string> languages, string host = "geoip.maxmind.com", int timeout = 3000)
+        public WebServiceClient(int userID, string licenseKey, List<string> locales, string host = "geoip.maxmind.com", int timeout = 3000)
         {
             _userID = userID;
             _licenseKey = licenseKey;
-            _languages = languages;
+            _locales = locales;
             _host = host;
             _timeout = timeout;
         }
@@ -229,7 +229,7 @@ namespace MaxMind.GeoIP2
                 if(response.Data == null)
                     throw new GeoIP2Exception(string.Format("Received a 200 response but not decode it as JSON: {0}", response.Content));
 
-                response.Data.SetLanguages(_languages);
+                response.Data.SetLocales(_locales);
                 return response.Data;
             }
             else if (status >= 400 && status < 500)
