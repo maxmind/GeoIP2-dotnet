@@ -87,19 +87,19 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        /// Sets the languages on all the NamedEntity properties.
+        /// Sets the locales on all the NamedEntity properties.
         /// </summary>
-        /// <param name="languages">The languages specified by the user.</param>
-        internal override void SetLanguages(List<string> languages)
+        /// <param name="locales">The locales specified by the user.</param>
+        internal override void SetLocales(List<string> locales)
         {
-            base.SetLanguages(languages);
+            base.SetLocales(locales);
 
             if(City != null)
-                City.Languages = languages;
+                City.Locales = locales;
 
             if(Subdivisions != null && Subdivisions.Count > 0)
                 foreach (var subdivision in Subdivisions)
-                    subdivision.Languages = languages;
+                    subdivision.Locales = locales;
         }
     }
 }

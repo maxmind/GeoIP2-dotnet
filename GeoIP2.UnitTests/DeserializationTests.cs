@@ -57,7 +57,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var r = new RestResponse();
             r.Content = _countryBody;
             var resp = d.Deserialize<CountryResponse>(r);
-            resp.SetLanguages(new List<string>{"en"});
+            resp.SetLocales(new List<string>{"en"});
 
             Assert.That(resp.Continent.Code, Is.EqualTo("NA"));
             Assert.That(resp.Continent.GeonameID, Is.EqualTo(42));
@@ -87,7 +87,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var r = new RestResponse();
             r.Content = _omniBody;
             var omni = d.Deserialize<OmniResponse>(r);
-            omni.SetLanguages(new List<string>{"en"});
+            omni.SetLocales(new List<string>{"en"});
 
             Assert.AreEqual(76, omni.City.Confidence);
             Assert.AreEqual(9876, omni.City.GeonameID);
@@ -123,7 +123,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual("C<military>", omni.RepresentedCountry.Type);
 
             Assert.AreEqual(2, omni.Subdivisions.Count);
-            omni.Subdivisions[0].Languages = new List<string>{"en"};
+            omni.Subdivisions[0].Locales = new List<string>{"en"};
             Assert.AreEqual(88, omni.Subdivisions[0].Confidence);
             Assert.AreEqual(574635, omni.Subdivisions[0].GeonameID);
             Assert.AreEqual("MN", omni.Subdivisions[0].IsoCode);
