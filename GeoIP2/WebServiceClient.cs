@@ -18,53 +18,53 @@ namespace MaxMind.GeoIP2
     /// returns a different set of data about an IP address, with Country returning
     /// the least data and Omni the most.
     /// </para>
-    /// 
+    ///
     /// <para>
-    /// Each web service end point is represented by a different model class 
+    /// Each web service end point is represented by a different model class
     /// which contains data about the IP address.
     /// </para>
-    /// 
+    ///
     /// <para>
     /// If the web service does not return a particular piece of data for an IP
     /// address, the associated property is not populated.
     /// </para>
-    /// 
+    ///
     /// <para>
     /// The web service may not return any information for an entire record, in which
     /// case all of the properties for that model class will be empty.
     /// </para>
-    /// 
+    ///
     /// <para>
     /// Usage
     /// </para>
-    /// 
+    ///
     /// <para>
     /// The basic API for this class is the same for all of the web service end
     /// points. First you create a web service object with your MaxMind
     /// userID and licenseKey, then you call the method corresponding
     /// to a specific end point, passing it the IP address you want to look up.
     /// </para>
-    /// 
+    ///
     /// <para>
     /// If the request succeeds, the method call will return a model class for the
     /// end point you called. This model in turn contains multiple record classes,
     /// each of which represents part of the data returned by the web service.
     /// </para>
-    /// 
+    ///
     /// <para>
     /// If the request fails, the client class throws an exception.
     /// </para>
-    /// 
+    ///
     /// <para>
     /// Exceptions
     /// </para>
-    /// 
+    ///
     /// <para>
     /// For details on the possible errors returned by the web service itself, see <a
     /// href="http://dev.maxmind.com/geoip2/geoip/web-services">the GeoIP2 web
     /// service documentation</a>.
     /// </para>
-    /// 
+    ///
     /// </summary>
     public class WebServiceClient : IGeoIP2Provider
     {
@@ -95,7 +95,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="userID">The user unique identifier.</param>
         /// <param name="licenseKey">The license key.</param>
-        /// <param name="languages">List of language codes to use in name property from most preferred to least preferred.</param>
+        /// <param name="languages">List of locale codes to use in name property from most preferred to least preferred.</param>
         /// <param name="host">The base url to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
         public WebServiceClient(int userID, string licenseKey, List<string> languages, string host = "geoip.maxmind.com", int timeout = 3000)
@@ -229,7 +229,7 @@ namespace MaxMind.GeoIP2
                 if(response.Data == null)
                     throw new GeoIP2Exception(string.Format("Received a 200 response but not decode it as JSON: {0}", response.Content));
 
-                response.Data.SetLanguages(_languages);                
+                response.Data.SetLanguages(_languages);
                 return response.Data;
             }
             else if (status >= 400 && status < 500)
