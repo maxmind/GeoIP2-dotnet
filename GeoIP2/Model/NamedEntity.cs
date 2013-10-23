@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace MaxMind.GeoIP2.Model
 {
@@ -8,6 +10,7 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public abstract class NamedEntity
     {
+        [JsonProperty("names")]
         private Dictionary<string, string> _names;
 
         public NamedEntity()
@@ -29,6 +32,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         /// The GeoName ID for the city. This attribute is returned by all endpoints
         /// </summary>
+        [JsonProperty("geoname_id")]
         public int GeonameID { get; internal set; }
 
         /// <summary>

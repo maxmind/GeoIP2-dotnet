@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MaxMind.GeoIP2.Model;
+using Newtonsoft.Json;
 using MaxMind = MaxMind.GeoIP2.Model.MaxMind;
 
 namespace MaxMind.GeoIP2.Responses
@@ -41,6 +42,7 @@ namespace MaxMind.GeoIP2.Responses
         /// record represents the country where the ISP has registered a
         /// given IP block and may differ from the user's country.
         /// </summary>
+        [JsonProperty("registered_country")]
         public Country RegisteredCountry { get; internal set; }
 
         /// <summary>
@@ -49,6 +51,7 @@ namespace MaxMind.GeoIP2.Responses
         /// embassies. It is only present when the represented country
         /// differs from the country.
         /// </summary>
+        [JsonProperty("represented_country")]
         public RepresentedCountry RepresentedCountry { get; internal set; }
 
         /// <summary>

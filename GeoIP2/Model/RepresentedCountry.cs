@@ -1,4 +1,6 @@
-﻿namespace MaxMind.GeoIP2.Model
+﻿using Newtonsoft.Json;
+
+namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     /// Contains data for the represented country associated with an IP address.
@@ -17,6 +19,7 @@
         /// expand to include other types such as <c>embassy</c> in the
         /// future. Returned by all end points.
         /// </summary>
+        [JsonProperty("type")]
         public string Type { get; internal set; }
     }
 }

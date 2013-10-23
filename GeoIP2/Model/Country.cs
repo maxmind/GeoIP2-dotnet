@@ -1,4 +1,6 @@
-﻿namespace MaxMind.GeoIP2.Model
+﻿using Newtonsoft.Json;
+
+namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     /// Contains data for the country record associated with an IP address.
@@ -12,6 +14,7 @@
         // is correct. This attribute is only available from the Omni end
         // point.        
         /// </summary>
+        [JsonProperty("confidence")]
         public int? Confidence { get; internal set; }
         
         /// <summary>
@@ -20,6 +23,7 @@
         /// 3166-1 alpha code</a> for the country. This attribute is returned
         /// by all end points.
         /// </summary>
+        [JsonProperty("iso_code")]
         public string IsoCode { get; internal set; }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MaxMind.GeoIP2.Model;
+using Newtonsoft.Json;
 
 namespace MaxMind.GeoIP2.Responses
 {
     public abstract class AbstractCityResponse : AbstractCountryResponse
     {
+        [JsonProperty("subdivisions")]
         private List<Subdivision> _subdivisions;
 
         /// <summary>
@@ -22,16 +24,19 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Gets the city for the requested IP address.
         /// </summary>
+        [JsonProperty("city")]
         public City City { get; internal set; }
 
         /// <summary>
         /// Gets the location for the requested IP address.
         /// </summary>
+        [JsonProperty("location")]
         public Location Location { get; internal set; }
 
         /// <summary>
         /// Gets the postal object for the requested IP address.
         /// </summary>
+        [JsonProperty("postal")]
         public Postal Postal { get; internal set; }
 
         /// <summary>

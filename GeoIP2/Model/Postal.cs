@@ -1,4 +1,6 @@
-﻿namespace MaxMind.GeoIP2.Model
+﻿using Newtonsoft.Json;
+
+namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     /// Contains data for the postal record associated with an IP address.
@@ -12,6 +14,7 @@
         /// of the postal code. This attribute is returned by all end points
         /// except the Country end point.
         /// </summary>
+        [JsonProperty("code")]
         public string Code { get; internal set; }
 
         /// <summary>
@@ -19,6 +22,7 @@
         /// postal code is correct. This attribute is only available from the
         /// Omni end point.
         /// </summary>
+        [JsonProperty("confidence")]
         public int? Confidence { get; internal set; }
 
         /// <summary>

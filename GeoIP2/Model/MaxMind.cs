@@ -1,4 +1,6 @@
-﻿namespace MaxMind.GeoIP2.Model
+﻿using Newtonsoft.Json;
+
+namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     /// Contains data related to your MaxMind account.
@@ -11,6 +13,7 @@
         /// The number of remaining queried in your account for the current
         /// end point.
         /// </summary>
+        [JsonProperty("queries_remaining")]
         public int? QueriesRemaining { get; internal set; }
 
         /// <summary>

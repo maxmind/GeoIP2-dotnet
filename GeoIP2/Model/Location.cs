@@ -1,4 +1,6 @@
-﻿namespace MaxMind.GeoIP2.Model
+﻿using Newtonsoft.Json;
+
+namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     /// Contains data for the location record associated with an IP address.
@@ -12,6 +14,7 @@
         /// IP address is likely to be. This attribute is only available from
         /// the Omni end point.
         /// </summary>
+        [JsonProperty("accuracy_radius")]
         public int? AccuracyRadius { get; internal set; }
 
         /// <summary>
@@ -19,6 +22,7 @@
         /// attribute is returned by all end points except the Country end
         /// point.
         /// </summary>
+        [JsonProperty("latitude")]
         public double? Latitude { get; internal set; }
 
         /// <summary>
@@ -26,6 +30,7 @@
         /// attribute is returned by all end points except the Country end
         /// point.
         /// </summary>
+        [JsonProperty("longitude")]
         public double? Longitude { get; internal set; }
 
         /// <summary>
@@ -35,6 +40,7 @@
         /// >Google AdWords API</a>. This attribute is returned by all end
         /// points except the Country end point.
         /// </summary>
+        [JsonProperty("metro_code")]
         public int? MetroCode { get; internal set; }
 
         /// <summary>
@@ -43,6 +49,7 @@
         /// Database</a>, e.g., "America/New_York". This attribute is
         /// returned by all end points except the Country end point
         /// </summary>
+        [JsonProperty("time_zone")]
         public string TimeZone { get; internal set; }
 
         /// <summary>
