@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using MaxMind.DB;
 using MaxMind.GeoIP2.Responses;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -51,12 +55,37 @@ namespace MaxMind.GeoIP2.UnitTests
             + "\"ip_address\":\"1.2.3.4\"" + "}}";
 
         [Test]
-        public void CanDeserializeCountryResponse()
+        public void CanDeserializeCountryResponseRestSharp()
         {
             var d = new JsonDeserializer();
             var r = new RestResponse();
             r.Content = _countryBody;
-            var resp = d.Deserialize<CountryResponse>(r);
+            CanDeserializeCountryResponse(d.Deserialize<CountryResponse>(r));
+        }
+
+        [Test]
+        public void CanDeserializeOmniResponseRestSharp()
+        {
+            var d = new JsonDeserializer();
+            var r = new RestResponse();
+            r.Content = _omniBody;
+            CanDeserializeOmniResponse(d.Deserialize<OmniResponse>(r));
+        }
+
+        [Test]
+        public void CanDeserializeCountryResponseNewtonsoftJson()
+        {
+            CanDeserializeCountryResponse(JsonConvert.DeserializeObject<CountryResponse>(_countryBody));
+        }
+
+        [Test]
+        public void CanDeserializeOmniResponseNewtonsoftJson()
+        {
+            CanDeserializeOmniResponse(JsonConvert.DeserializeObject<OmniResponse>(_omniBody));
+        }
+
+        public void CanDeserializeCountryResponse(CountryResponse resp)
+        {
             resp.SetLocales(new List<string>{"en"});
 
             Assert.That(resp.Continent.Code, Is.EqualTo("NA"));
@@ -80,13 +109,8 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.That(resp.Traits.IpAddress, Is.EqualTo("1.2.3.4"));
         }
 
-        [Test]
-        public void CanDeserializeOmniResponse()
+        public void CanDeserializeOmniResponse(OmniResponse omni)
         {
-            var d = new JsonDeserializer();
-            var r = new RestResponse();
-            r.Content = _omniBody;
-            var omni = d.Deserialize<OmniResponse>(r);
             omni.SetLocales(new List<string>{"en"});
 
             Assert.AreEqual(76, omni.City.Confidence);
@@ -139,6 +163,42 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual("Comcast", omni.Traits.Isp);
             Assert.AreEqual("Blorg", omni.Traits.Organization);
             Assert.AreEqual("college", omni.Traits.UserType);
+        }
+
+        [Test]
+        public void CanDeserializeFromDatabaseJToken()
+        {
+            var reader = new Reader(Path.Combine("..", "..", "GeoLite2-City.mmdb"));
+
+            var obj = reader.Find("74.125.227.161");
+            var response = obj.ToObject<OmniResponse>();
+            response.SetLocales(new List<string>{"en"});
+
+            Assert.That(response.City.GeonameID, Is.EqualTo(5375480));
+            Assert.That(response.City.Name, Is.EqualTo("Mountain View"));
+
+            Assert.That(response.Continent.Code, Is.EqualTo("NA"));
+            Assert.That(response.Continent.GeonameID, Is.EqualTo(6255149));
+            Assert.That(response.Continent.Name, Is.EqualTo("North America"));
+
+            Assert.That(response.Country.GeonameID, Is.EqualTo(6252001));
+            Assert.That(response.Country.IsoCode, Is.EqualTo("US"));
+            Assert.That(response.Country.Name, Is.EqualTo("United States"));
+
+            Assert.That(response.Location.Latitude, Is.EqualTo(37.419200000000004));
+            Assert.That(response.Location.Longitude, Is.EqualTo(-122.0574));
+            Assert.That(response.Location.MetroCode, Is.EqualTo(807));
+            Assert.That(response.Location.TimeZone, Is.EqualTo("America/Los_Angeles"));
+
+            Assert.That(response.Postal.Code, Is.EqualTo("94043"));
+
+            Assert.That(response.RegisteredCountry.GeonameID, Is.EqualTo(6252001));
+            Assert.That(response.RegisteredCountry.IsoCode, Is.EqualTo("US"));
+            Assert.That(response.RegisteredCountry.Name, Is.EqualTo("United States"));
+
+            Assert.That(response.Subdivisions[0].GeonameID, Is.EqualTo(5332921));
+            Assert.That(response.Subdivisions[0].IsoCode, Is.EqualTo("CA"));
+            Assert.That(response.Subdivisions[0].Name, Is.EqualTo("California"));
         }
     }
 }

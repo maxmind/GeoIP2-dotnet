@@ -1,4 +1,6 @@
-﻿namespace MaxMind.GeoIP2.Model
+﻿using Newtonsoft.Json;
+
+namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     /// Contains data for the subdivisions associated with an IP address.
@@ -12,6 +14,7 @@
         /// the subdivision is correct. This attribute is only available from
         /// the Omni end point.
         /// </summary>
+        [JsonProperty("confidence")]
         public int? Confidence { get; set; }
 
         /// <summary>
@@ -21,6 +24,7 @@
         /// >code</a>. This attribute is returned by all end points except
         /// Country.
         /// </summary>
+        [JsonProperty("iso_code")]
         public string IsoCode { get; set; }
     }
 }

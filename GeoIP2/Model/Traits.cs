@@ -1,4 +1,6 @@
-﻿namespace MaxMind.GeoIP2.Model
+﻿using Newtonsoft.Json;
+
+namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     /// Contains data for the traits record associated with an IP address.
@@ -13,6 +15,7 @@
         /// This attribute is only available from the City/ISP/Org and Omni
         /// end points.
         /// </summary>
+        [JsonProperty("autonomous_system_number")]
         public int? AutonomousSystemNumber { get; internal set; }
 
         /// <summary>
@@ -21,6 +24,7 @@
         /// >autonomous system number</a> for the IP address. This attribute
         /// is only available from the City/ISP/Org and Omni end points.
         /// </summary>
+        [JsonProperty("autonomous_system_organization")]
         public string AutonomousSystemOrganization { get; internal set; }
 
         /// <summary>
@@ -29,6 +33,7 @@
         /// "foo.example.com". This attribute is only available from the
         /// City/ISP/Org and Omni end points.
         /// </summary>
+        [JsonProperty("domain")]
         public string Domain { get; internal set; }
 
         /// <summary>
@@ -39,6 +44,7 @@
         /// address locally assigned to it. This attribute is returned by all
         /// end points.
         /// </summary>
+        [JsonProperty("ip_address")]
         public string IpAddress { get; internal set; }
 
         /// <summary>
@@ -47,12 +53,14 @@
         /// <a href="http://dev.maxmind.com/faq/geoip#anonproxy">MaxMind's GeoIP
         /// FAQ</a>
         /// </summary>
+        [JsonProperty("is_anonymous_proxy")]
         public bool IsAnonymousProxy { get; internal set; }
 
         /// <summary>
         /// This is true if the IP belong to a satellite internet provider.
         /// This attribute is returned by all end points.
         /// </summary>
+        [JsonProperty("is_satellite_provider")]
         public bool IsSatelliteProvider { get; internal set; }
 
         /// <summary>
@@ -60,6 +68,7 @@
         /// attribute is only available from the City/ISP/Org and Omni end
         /// points.
         /// </summary>
+        [JsonProperty("isp")]
         public string Isp { get; internal set; }
 
         /// <summary>
@@ -67,6 +76,7 @@
         /// attribute is only available from the City/ISP/Org and Omni end
         /// points.
         /// </summary>
+        [JsonProperty("organization")]
         public string Organization { get; internal set; }
 
         /// <summary>
@@ -89,6 +99,7 @@
         /// traveler
         /// This attribute is only available from the Omni end point.
         /// </summary>
+        [JsonProperty("user_type")]
         public string UserType { get; internal set; }
 
         /// <summary>
