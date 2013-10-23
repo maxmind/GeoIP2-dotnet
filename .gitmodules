@@ -1,0 +1,3 @@
+[submodule "GeoIP2.UnitTests/TestData/MaxMind-DB"]
+	path = GeoIP2.UnitTests/TestData/MaxMind-DB
+	url = https://github.com/maxmind/MaxMind-DB.git
