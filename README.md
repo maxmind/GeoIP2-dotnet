@@ -17,10 +17,13 @@ GeoIP2 databases have not yet been released as a downloadable product.
 
 ## Requirements ##
 
-This library works with .NET Framework version 3.5 and above. It has been
-tested with Mono 2.8, but should work with any version 1.9 and above.
+This library works with .NET Framework version 4.0 and above. If you are
+using Mono, 3.2 or greater is required.
 
-This library also uses [RestSharp](http://restsharp.org/).
+This library depends on:
+
+* [MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet)
+* [RestSharp](http://restsharp.org/).
 
 ## Installation ##
 
