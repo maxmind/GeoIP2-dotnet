@@ -8,6 +8,7 @@ using MaxMind.GeoIP2.Responses;
 using NUnit.Framework;
 using RestSharp;
 using Rhino.Mocks;
+using MaxMind.GeoIP2.Model;
 
 namespace MaxMind.GeoIP2.UnitTests
 {
@@ -403,5 +404,92 @@ namespace MaxMind.GeoIP2.UnitTests
             RunClientGivenResponse(restResponse);
         }
 
+        [Test]
+        public void MissingKeys()
+        {
+
+            var restResponse = new RestResponse<OmniResponse>
+            {
+                Content = "{}",
+                ContentType = "application/json",
+                Data = new OmniResponse(),
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                StatusCode = (HttpStatusCode)200
+            };
+
+            var omni = RunClientGivenResponse(restResponse);
+
+
+            var city = omni.City;
+            Assert.IsNotNull(city);
+            Assert.IsNull(city.Confidence);
+
+            var continent = omni.Continent;
+            Assert.IsNotNull(continent);
+            Assert.IsNull(continent.Code);
+
+            var country = omni.Country;
+            Assert.IsNotNull(country);
+
+            var location = omni.Location;
+            Assert.IsNotNull(location);
+            Assert.IsNull(location.AccuracyRadius);
+            Assert.IsNull(location.Latitude);
+            Assert.IsNull(location.Longitude);
+            Assert.IsNull(location.MetroCode);
+            Assert.IsNull(location.TimeZone);
+
+            var maxmind = omni.MaxMind;
+            Assert.IsNotNull(maxmind);
+            Assert.IsNull(maxmind.QueriesRemaining);
+
+            Assert.IsNotNull(omni.Postal);
+
+            var registeredCountry = omni.RegisteredCountry;
+            Assert.IsNotNull(registeredCountry);
+
+            var representedCountry = omni.RepresentedCountry;
+            Assert.IsNotNull(representedCountry);
+            Assert.IsNull(representedCountry.Type);
+
+            var subdivisions = omni.Subdivisions;
+            Assert.IsNotNull(subdivisions);
+            Assert.AreEqual(0, subdivisions.Count);
+
+            var subdiv = omni.MostSpecificSubdivision;
+            Assert.IsNotNull(subdiv);
+            Assert.IsNull(subdiv.IsoCode);
+            Assert.IsNull(subdiv.Confidence);
+
+            var traits = omni.Traits;
+            Assert.IsNotNull(traits);
+            Assert.IsNull(traits.AutonomousSystemNumber);
+            Assert.IsNull(traits.AutonomousSystemOrganization);
+            Assert.IsNull(traits.Domain);
+            Assert.IsNull(traits.IpAddress);
+            Assert.IsNull(traits.Isp);
+            Assert.IsNull(traits.Organization);
+            Assert.IsNull(traits.UserType);
+            Assert.IsFalse(traits.IsAnonymousProxy);
+            Assert.IsFalse(traits.IsSatelliteProvider);
+            Assert.AreEqual(
+                    "Traits [IsAnonymousProxy=False, IsSatelliteProvider=False, ]",
+                    traits.ToString());
+
+            foreach (Country c in new Country[] { country, registeredCountry,
+                    representedCountry }) {
+                Assert.IsNull(c.Confidence);
+                Assert.IsNull(c.IsoCode);
+            }
+
+            foreach (NamedEntity r in new NamedEntity[] { city,
+                    continent, country, registeredCountry, representedCountry,
+                    subdiv }) {
+                Assert.IsNull(r.GeoNameID);
+                Assert.IsNull(r.Name);
+                Assert.AreEqual(0, r.Names.Count);
+                Assert.AreEqual("", r.ToString());
+            }
+        }
     }
 }
