@@ -487,7 +487,7 @@ namespace MaxMind.GeoIP2.UnitTests
                     continent, country, registeredCountry, representedCountry,
                     subdiv })
             {
-                Assert.IsNull(r.GeonameID);
+                Assert.IsNull(r.GeoNameID);
                 Assert.IsNull(r.Name);
                 Assert.AreEqual(0, r.Names.Count);
                 Assert.AreEqual("", r.ToString());
