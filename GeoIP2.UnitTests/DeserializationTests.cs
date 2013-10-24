@@ -89,19 +89,19 @@ namespace MaxMind.GeoIP2.UnitTests
             resp.SetLocales(new List<string> { "en" });
 
             Assert.That(resp.Continent.Code, Is.EqualTo("NA"));
-            Assert.That(resp.Continent.GeoNameID, Is.EqualTo(42));
+            Assert.That(resp.Continent.GeonameID, Is.EqualTo(42));
             Assert.That(resp.Continent.Name, Is.EqualTo("North America"));
 
-            Assert.That(resp.Country.GeoNameID, Is.EqualTo(1));
+            Assert.That(resp.Country.GeonameID, Is.EqualTo(1));
             Assert.That(resp.Country.IsoCode, Is.EqualTo("US"));
             Assert.That(resp.Country.Confidence, Is.EqualTo(56));
             Assert.That(resp.Country.Name, Is.EqualTo("United States"));
 
-            Assert.That(resp.RegisteredCountry.GeoNameID, Is.EqualTo(2));
+            Assert.That(resp.RegisteredCountry.GeonameID, Is.EqualTo(2));
             Assert.That(resp.RegisteredCountry.IsoCode, Is.EqualTo("CA"));
             Assert.That(resp.RegisteredCountry.Name, Is.EqualTo("Canada"));
 
-            Assert.That(resp.RepresentedCountry.GeoNameID, Is.EqualTo(4));
+            Assert.That(resp.RepresentedCountry.GeonameID, Is.EqualTo(4));
             Assert.That(resp.RepresentedCountry.IsoCode, Is.EqualTo("GB"));
             Assert.That(resp.RepresentedCountry.Name, Is.EqualTo("United Kingdom"));
             Assert.That(resp.RepresentedCountry.Type, Is.EqualTo("military"));
@@ -114,15 +114,15 @@ namespace MaxMind.GeoIP2.UnitTests
             omni.SetLocales(new List<string> { "en" });
 
             Assert.AreEqual(76, omni.City.Confidence);
-            Assert.AreEqual(9876, omni.City.GeoNameID);
+            Assert.AreEqual(9876, omni.City.GeonameID);
             Assert.AreEqual("Minneapolis", omni.City.Name);
 
             Assert.AreEqual("NA", omni.Continent.Code);
-            Assert.AreEqual(42, omni.Continent.GeoNameID);
+            Assert.AreEqual(42, omni.Continent.GeonameID);
             Assert.AreEqual("North America", omni.Continent.Name);
 
             Assert.AreEqual(99, omni.Country.Confidence);
-            Assert.AreEqual(1, omni.Country.GeoNameID);
+            Assert.AreEqual(1, omni.Country.GeonameID);
             Assert.AreEqual("US", omni.Country.IsoCode);
             Assert.AreEqual("United States of America", omni.Country.Name);
 
@@ -137,11 +137,11 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual("55401", omni.Postal.Code);
             Assert.AreEqual(33, omni.Postal.Confidence);
 
-            Assert.AreEqual(2, omni.RegisteredCountry.GeoNameID);
+            Assert.AreEqual(2, omni.RegisteredCountry.GeonameID);
             Assert.AreEqual("CA", omni.RegisteredCountry.IsoCode);
             Assert.AreEqual("Canada", omni.RegisteredCountry.Name);
 
-            Assert.AreEqual(3, omni.RepresentedCountry.GeoNameID);
+            Assert.AreEqual(3, omni.RepresentedCountry.GeonameID);
             Assert.AreEqual("GB", omni.RepresentedCountry.IsoCode);
             Assert.AreEqual("United Kingdom", omni.RepresentedCountry.Name);
             Assert.AreEqual("C<military>", omni.RepresentedCountry.Type);
@@ -149,7 +149,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual(2, omni.Subdivisions.Count);
             omni.Subdivisions[0].Locales = new List<string> { "en" };
             Assert.AreEqual(88, omni.Subdivisions[0].Confidence);
-            Assert.AreEqual(574635, omni.Subdivisions[0].GeoNameID);
+            Assert.AreEqual(574635, omni.Subdivisions[0].GeonameID);
             Assert.AreEqual("MN", omni.Subdivisions[0].IsoCode);
             Assert.AreEqual("Minnesota", omni.Subdivisions[0].Name);
             Assert.AreEqual("TT", omni.Subdivisions[1].IsoCode);
@@ -174,14 +174,14 @@ namespace MaxMind.GeoIP2.UnitTests
             var response = obj.ToObject<OmniResponse>();
             response.SetLocales(new List<string> { "en" });
 
-            Assert.That(response.City.GeoNameID, Is.EqualTo(5375480));
+            Assert.That(response.City.GeonameID, Is.EqualTo(5375480));
             Assert.That(response.City.Name, Is.EqualTo("Mountain View"));
 
             Assert.That(response.Continent.Code, Is.EqualTo("NA"));
-            Assert.That(response.Continent.GeoNameID, Is.EqualTo(6255149));
+            Assert.That(response.Continent.GeonameID, Is.EqualTo(6255149));
             Assert.That(response.Continent.Name, Is.EqualTo("North America"));
 
-            Assert.That(response.Country.GeoNameID, Is.EqualTo(6252001));
+            Assert.That(response.Country.GeonameID, Is.EqualTo(6252001));
             Assert.That(response.Country.IsoCode, Is.EqualTo("US"));
             Assert.That(response.Country.Name, Is.EqualTo("United States"));
 
@@ -192,11 +192,11 @@ namespace MaxMind.GeoIP2.UnitTests
 
             Assert.That(response.Postal.Code, Is.EqualTo("94043"));
 
-            Assert.That(response.RegisteredCountry.GeoNameID, Is.EqualTo(6252001));
+            Assert.That(response.RegisteredCountry.GeonameID, Is.EqualTo(6252001));
             Assert.That(response.RegisteredCountry.IsoCode, Is.EqualTo("US"));
             Assert.That(response.RegisteredCountry.Name, Is.EqualTo("United States"));
 
-            Assert.That(response.Subdivisions[0].GeoNameID, Is.EqualTo(5332921));
+            Assert.That(response.Subdivisions[0].GeonameID, Is.EqualTo(5332921));
             Assert.That(response.Subdivisions[0].IsoCode, Is.EqualTo("CA"));
             Assert.That(response.Subdivisions[0].Name, Is.EqualTo("California"));
         }
