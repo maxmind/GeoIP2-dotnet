@@ -208,7 +208,7 @@ namespace MaxMind.GeoIP2
         private T Execute<T>(string urlPattern, string ipAddress, IRestClient restClient) where T : AbstractCountryResponse, new()
         {
             IPAddress ip;
-            if(ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
+            if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
                 throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
 
             var request = new RestRequest(urlPattern);
@@ -223,10 +223,10 @@ namespace MaxMind.GeoIP2
                 if (response.ContentLength <= 0)
                     throw new GeoIP2HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
 
-                if(response.ContentType == null || !response.ContentType.Contains("json"))
+                if (response.ContentType == null || !response.ContentType.Contains("json"))
                     throw new GeoIP2Exception(string.Format("Received a 200 response for {0} but it does not appear to be JSON:\n", response.ContentType));
 
-                if(response.Data == null)
+                if (response.Data == null)
                     throw new GeoIP2Exception(string.Format("Received a 200 response but not decode it as JSON: {0}", response.Content));
 
                 response.Data.SetLocales(_locales);
@@ -274,11 +274,11 @@ namespace MaxMind.GeoIP2
                     "Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode,
                     response.ResponseUri);
 
-            if(webServiceError.Code == "IP_ADDRESS_NOT_FOUND" || webServiceError.Code == "IP_ADDRESS_RESERVED")
+            if (webServiceError.Code == "IP_ADDRESS_NOT_FOUND" || webServiceError.Code == "IP_ADDRESS_RESERVED")
                 throw new GeoIP2AddressNotFoundException(webServiceError.Error);
-            else if(webServiceError.Code == "AUTHORIZATION_INVALID" || webServiceError.Code == "LICENSE_KEY_REQUIRED" || webServiceError.Code == "USER_ID_REQUIRED")
+            else if (webServiceError.Code == "AUTHORIZATION_INVALID" || webServiceError.Code == "LICENSE_KEY_REQUIRED" || webServiceError.Code == "USER_ID_REQUIRED")
                 throw new GeoIP2AuthenticationException(webServiceError.Error);
-            else if(webServiceError.Code == "OUT_OF_QUERIES")
+            else if (webServiceError.Code == "OUT_OF_QUERIES")
                 throw new GeoIP2OutOfQueriesException(webServiceError.Error);
 
             throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);

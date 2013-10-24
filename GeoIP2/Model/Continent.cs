@@ -14,6 +14,6 @@ namespace MaxMind.GeoIP2.Model
         /// (Oceania). This attribute is returned by all end points.        
         /// </summary>
         [JsonProperty("code")]
-        public string Code { get; internal set; } 
+        public string Code { get; internal set; }
     }
 }

@@ -16,9 +16,10 @@ namespace MaxMind.GeoIP2.Exceptions
         /// Initializes a new instance of the <see cref="GeoIP2AddressNotFoundException"/> class.
         /// </summary>
         /// <param name="message">A message explaining the cause of the error.</param>
-        public GeoIP2AddressNotFoundException(string message) : base(message)
+        public GeoIP2AddressNotFoundException(string message)
+            : base(message)
         {
-            
+
         }
     }
 }

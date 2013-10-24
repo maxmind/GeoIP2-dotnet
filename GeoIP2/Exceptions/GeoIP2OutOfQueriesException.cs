@@ -14,9 +14,10 @@ namespace MaxMind.GeoIP2.Exceptions
         /// Initializes a new instance of the <see cref="GeoIP2OutOfQueriesException"/> class.
         /// </summary>
         /// <param name="message">A message that describes the error.</param>
-        public GeoIP2OutOfQueriesException(string message) : base(message)
+        public GeoIP2OutOfQueriesException(string message)
+            : base(message)
         {
-            
+
         }
     }
 }

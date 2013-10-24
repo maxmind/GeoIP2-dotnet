@@ -121,7 +121,7 @@ namespace MaxMind.GeoIP2.Model
                 + (Organization != null ? "Organization=" + Organization + ", " : "")
                 + (UserType != null ? "UserType=" + UserType : "")
                 + "]";
-            
+
         }
     }
 }

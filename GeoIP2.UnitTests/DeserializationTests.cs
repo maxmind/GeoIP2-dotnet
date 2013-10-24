@@ -86,7 +86,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public void CanDeserializeCountryResponse(CountryResponse resp)
         {
-            resp.SetLocales(new List<string>{"en"});
+            resp.SetLocales(new List<string> { "en" });
 
             Assert.That(resp.Continent.Code, Is.EqualTo("NA"));
             Assert.That(resp.Continent.GeonameID, Is.EqualTo(42));
@@ -111,7 +111,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public void CanDeserializeOmniResponse(OmniResponse omni)
         {
-            omni.SetLocales(new List<string>{"en"});
+            omni.SetLocales(new List<string> { "en" });
 
             Assert.AreEqual(76, omni.City.Confidence);
             Assert.AreEqual(9876, omni.City.GeonameID);
@@ -147,7 +147,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual("C<military>", omni.RepresentedCountry.Type);
 
             Assert.AreEqual(2, omni.Subdivisions.Count);
-            omni.Subdivisions[0].Locales = new List<string>{"en"};
+            omni.Subdivisions[0].Locales = new List<string> { "en" };
             Assert.AreEqual(88, omni.Subdivisions[0].Confidence);
             Assert.AreEqual(574635, omni.Subdivisions[0].GeonameID);
             Assert.AreEqual("MN", omni.Subdivisions[0].IsoCode);
@@ -172,7 +172,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var obj = reader.Find("74.125.227.161");
             var response = obj.ToObject<OmniResponse>();
-            response.SetLocales(new List<string>{"en"});
+            response.SetLocales(new List<string> { "en" });
 
             Assert.That(response.City.GeonameID, Is.EqualTo(5375480));
             Assert.That(response.City.Name, Is.EqualTo("Mountain View"));
