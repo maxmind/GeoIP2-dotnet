@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Runtime.InteropServices.ComTypes;
 using MaxMind.DB;
@@ -11,7 +12,7 @@ namespace MaxMind.GeoIP2
     /// <summary>
     /// Instances of this class provide a reader for the GeoIP2 database format
     /// </summary>
-    public class DatabaseReader : IGeoIP2Provider
+    public class DatabaseReader : IGeoIP2Provider, IDisposable
     {
         private readonly List<string> _locales;
         private readonly Reader _reader;
@@ -101,6 +102,15 @@ namespace MaxMind.GeoIP2
         public CityIspOrgResponse CityIspOrg(string ipAddress)
         {
             return Execute<CityIspOrgResponse>(ipAddress);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            if(_reader != null)
+                _reader.Dispose();
         }
     }
 }
