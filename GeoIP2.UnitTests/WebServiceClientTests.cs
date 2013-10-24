@@ -477,14 +477,16 @@ namespace MaxMind.GeoIP2.UnitTests
                     traits.ToString());
 
             foreach (Country c in new Country[] { country, registeredCountry,
-                    representedCountry }) {
+                    representedCountry })
+            {
                 Assert.IsNull(c.Confidence);
                 Assert.IsNull(c.IsoCode);
             }
 
             foreach (NamedEntity r in new NamedEntity[] { city,
                     continent, country, registeredCountry, representedCountry,
-                    subdiv }) {
+                    subdiv })
+            {
                 Assert.IsNull(r.GeoNameID);
                 Assert.IsNull(r.Name);
                 Assert.AreEqual(0, r.Names.Count);
