@@ -168,7 +168,7 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void CanDeserializeFromDatabaseJToken()
         {
-            var reader = new Reader(Path.Combine("..", "..", "GeoLite2-City.mmdb"));
+            var reader = new Reader(Path.Combine("..", "..", "TestData", "GeoLite2-City.mmdb"));
 
             var obj = reader.Find("74.125.227.161");
             var response = obj.ToObject<OmniResponse>();
