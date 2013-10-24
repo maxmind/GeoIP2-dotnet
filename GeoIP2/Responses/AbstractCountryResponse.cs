@@ -68,11 +68,11 @@ namespace MaxMind.GeoIP2.Responses
         public override string ToString()
         {
             return "Country ["
-                   + (Continent != null ? "Continent="+ Continent + ", " : "")
-                   + (Country != null ? "Country="+ Country + ", " : "")
-                   + (RegisteredCountry != null ? "RegisteredCountry="+ RegisteredCountry + ", ": "")
-                   + (RepresentedCountry != null ? "RepresentedCountry="+ RepresentedCountry + ", ": "")
-                   + (Traits != null ? "Traits=" + Traits : "") 
+                   + (Continent != null ? "Continent=" + Continent + ", " : "")
+                   + (Country != null ? "Country=" + Country + ", " : "")
+                   + (RegisteredCountry != null ? "RegisteredCountry=" + RegisteredCountry + ", " : "")
+                   + (RepresentedCountry != null ? "RepresentedCountry=" + RepresentedCountry + ", " : "")
+                   + (Traits != null ? "Traits=" + Traits : "")
                    + "]";
         }
 
@@ -82,16 +82,16 @@ namespace MaxMind.GeoIP2.Responses
         /// <param name="locales">The locales specified by the user.</param>
         internal virtual void SetLocales(List<string> locales)
         {
-            if(Continent != null)
+            if (Continent != null)
                 Continent.Locales = locales;
 
-            if(Country != null)
+            if (Country != null)
                 Country.Locales = locales;
 
-            if(RegisteredCountry != null)
+            if (RegisteredCountry != null)
                 RegisteredCountry.Locales = locales;
 
-            if(RepresentedCountry != null)
+            if (RepresentedCountry != null)
                 RepresentedCountry.Locales = locales;
         }
     }

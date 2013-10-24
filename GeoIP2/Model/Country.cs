@@ -16,7 +16,7 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonProperty("confidence")]
         public int? Confidence { get; internal set; }
-        
+
         /// <summary>
         /// The <a
         /// href="http://en.wikipedia.org/wiki/ISO_3166-1">two-character ISO

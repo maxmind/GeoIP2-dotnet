@@ -22,9 +22,10 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="file">The MaxMind DB file.</param>
         /// <param name="mode">The mode by which to access the DB file.</param>
-        public DatabaseReader(string file, FileAccessMode mode = FileAccessMode.MemoryMapped) : this(file, new List<string>{"en"}, mode)
+        public DatabaseReader(string file, FileAccessMode mode = FileAccessMode.MemoryMapped)
+            : this(file, new List<string> { "en" }, mode)
         {
-            
+
         }
 
         /// <summary>
@@ -42,12 +43,12 @@ namespace MaxMind.GeoIP2
         private T Execute<T>(string ipAddress) where T : AbstractCountryResponse
         {
             IPAddress ip;
-            if(ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
+            if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
                 throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
 
             var token = _reader.Find(ipAddress);
 
-            if(token == null)
+            if (token == null)
                 throw new GeoIP2AddressNotFoundException("The address " + ipAddress + " is not in the database.");
 
             if (token["traits"] == null)
@@ -109,7 +110,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         public void Dispose()
         {
-            if(_reader != null)
+            if (_reader != null)
                 _reader.Dispose();
         }
     }

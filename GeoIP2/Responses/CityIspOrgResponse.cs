@@ -12,6 +12,6 @@
     /// </summary>
     public class CityIspOrgResponse : AbstractCityResponse
     {
-         
+
     }
 }

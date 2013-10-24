@@ -22,7 +22,8 @@ namespace MaxMind.GeoIP2.Exceptions
         /// <param name="message">A message explaining the cause of the error.</param>
         /// <param name="code">The error code returned by the web service.</param>
         /// <param name="uri">The URL queried.</param>
-        public GeoIP2InvalidRequestException(string message, string code, Uri uri) : base(message)
+        public GeoIP2InvalidRequestException(string message, string code, Uri uri)
+            : base(message)
         {
             Code = code;
             Uri = uri;

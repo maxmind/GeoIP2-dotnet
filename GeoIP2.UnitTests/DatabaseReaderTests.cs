@@ -29,7 +29,7 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void TestLocaleList()
         {
-            using (var reader = new DatabaseReader(_databaseFile, new List<string> {"xx", "ru", "pt-BR", "es", "en"}))
+            using (var reader = new DatabaseReader(_databaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
             {
                 var resp = reader.Omni("81.2.69.160");
                 Assert.That(resp.City.Name, Is.EqualTo("Лондон"));

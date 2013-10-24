@@ -62,7 +62,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute<OmniResponse>(Arg<IRestRequest>.Is.Anything)).Return(response);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
             return wsc.Omni("1.2.3.4", restClient);
         }
 
@@ -73,10 +73,10 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var restResponse = new RestResponse<CountryResponse>
             {
-                Content = OMNI_BODY, 
+                Content = OMNI_BODY,
                 ContentType = "application/json",
                 Data = new CountryResponse(),
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -86,7 +86,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute<CountryResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
             var result = wsc.Country("1.2.3.4", restClient);
 
             Assert.That(result, Is.Not.Null);
@@ -99,10 +99,10 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var restResponse = new RestResponse<CityResponse>
             {
-                Content = OMNI_BODY, 
+                Content = OMNI_BODY,
                 ContentType = "application/json",
                 Data = new CityResponse(),
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -112,7 +112,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute<CityResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
             var result = wsc.City("1.2.3.4", restClient);
 
             Assert.That(result, Is.Not.Null);
@@ -125,10 +125,10 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var restResponse = new RestResponse<CityIspOrgResponse>
             {
-                Content = OMNI_BODY, 
+                Content = OMNI_BODY,
                 ContentType = "application/json",
                 Data = new CityIspOrgResponse(),
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -138,7 +138,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute<CityIspOrgResponse>(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
             var result = wsc.CityIspOrg("1.2.3.4", restClient);
 
             Assert.That(result, Is.Not.Null);
@@ -151,10 +151,10 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var restResponse = new RestResponse<OmniResponse>
             {
-                Content = OMNI_BODY, 
+                Content = OMNI_BODY,
                 ContentType = "application/json",
                 Data = new OmniResponse(),
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -165,10 +165,10 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2Exception), ExpectedMessage = "The specified IP address was incorrectly formatted", MatchType = MessageMatch.Contains)]
+        [ExpectedException(typeof(GeoIP2Exception), ExpectedMessage = "The specified IP address was incorrectly formatted", MatchType = MessageMatch.Contains)]
         public void IncorrectlyFormattedIPAddressShouldThrowException()
         {
-            var client = new WebServiceClient(0, "abcde", new List<string> {"en"});
+            var client = new WebServiceClient(0, "abcde", new List<string> { "en" });
             client.Omni("foo");
         }
 
@@ -178,8 +178,8 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             var restResponse = new RestResponse<OmniResponse>
             {
-                Content = null, 
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                Content = null,
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -187,7 +187,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2InvalidRequestException), ExpectedMessage = "not a valid ip address",
+        [ExpectedException(typeof(GeoIP2InvalidRequestException), ExpectedMessage = "not a valid ip address",
             MatchType = MessageMatch.Contains)]
         public void WebServiceErrorShouldThrowException()
         {
@@ -203,14 +203,14 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "with no body",
+        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "with no body",
             MatchType = MessageMatch.Contains)]
         public void NoErrorBodyShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
-                Content = null, 
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                Content = null,
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)400
             };
 
@@ -218,14 +218,14 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "does not specify code or error keys",
+        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "does not specify code or error keys",
             MatchType = MessageMatch.Contains)]
         public void WeirdErrorBodyShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
-                Content = "{\"weird\": 42}", 
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                Content = "{\"weird\": 42}",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)400
             };
 
@@ -233,14 +233,14 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "it did not include the expected JSON body",
+        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "it did not include the expected JSON body",
             MatchType = MessageMatch.Contains)]
         public void UnexpectedErrorBodyShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
-                Content = "{\"invalid\": }", 
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                Content = "{\"invalid\": }",
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)400
             };
 
@@ -248,12 +248,12 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "Received a server (500) error", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "Received a server (500) error", MatchType = MessageMatch.Contains),]
         public void InternalServerErrorShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)500
             };
 
@@ -261,12 +261,12 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "Received a very surprising HTTP status (300) for", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "Received a very surprising HTTP status (300) for", MatchType = MessageMatch.Contains),]
         public void SurprisingStatusShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)300
             };
 
@@ -274,14 +274,14 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2HttpException), ExpectedMessage = "Cannot satisfy your Accept-Charset requirements", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "Cannot satisfy your Accept-Charset requirements", MatchType = MessageMatch.Contains),]
         public void BadCharsetRequirementShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
                 Content = "Cannot satisfy your Accept-Charset requirements",
                 ContentType = "text/plain",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)406
             };
 
@@ -289,14 +289,14 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2Exception), ExpectedMessage = "but it does not appear to be JSON", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2Exception), ExpectedMessage = "but it does not appear to be JSON", MatchType = MessageMatch.Contains),]
         public void BadContentTypeShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
                 Content = COUNTRY_BODY,
                 ContentType = "bad/content-type",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -304,14 +304,14 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2Exception), ExpectedMessage = "Received a 200 response but not decode it as JSON", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2Exception), ExpectedMessage = "Received a 200 response but not decode it as JSON", MatchType = MessageMatch.Contains),]
         public void UndeserializableJsonShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
                 Content = "{\"invalid\":yes}",
                 ContentType = "application/json",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -320,13 +320,13 @@ namespace MaxMind.GeoIP2.UnitTests
 
 
         [Test]
-        [ExpectedException(typeof (GeoIP2AddressNotFoundException), ExpectedMessage = "The value 1.2.3.16 is not in the database", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2AddressNotFoundException), ExpectedMessage = "The value 1.2.3.16 is not in the database", MatchType = MessageMatch.Contains),]
         public void AddressNotFoundShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
                 Content = "{\"code\":\"IP_ADDRESS_NOT_FOUND\", \"error\":\"The value 1.2.3.16 is not in the database.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)404
             };
 
@@ -334,13 +334,13 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2AddressNotFoundException), ExpectedMessage = "The value 1.2.3.17 belongs to a reserved or private range", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2AddressNotFoundException), ExpectedMessage = "The value 1.2.3.17 belongs to a reserved or private range", MatchType = MessageMatch.Contains),]
         public void AddressReservedShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
                 Content = "{\"code\":\"IP_ADDRESS_RESERVED\",\"error\":\"The value 1.2.3.17 belongs to a reserved or private range.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)400
             };
 
@@ -348,13 +348,13 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2AuthenticationException), ExpectedMessage = "You have supplied an invalid MaxMind user ID and/or license key", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2AuthenticationException), ExpectedMessage = "You have supplied an invalid MaxMind user ID and/or license key", MatchType = MessageMatch.Contains),]
         public void InvalidAuthShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
                 Content = "{\"code\":\"AUTHORIZATION_INVALID\",\"error\":\"You have supplied an invalid MaxMind user ID and/or license key in the Authorization header.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)401
             };
 
@@ -362,13 +362,13 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind license key in the Authorization header", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind license key in the Authorization header", MatchType = MessageMatch.Contains),]
         public void MissingLicenseShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
                 Content = "{\"code\":\"LICENSE_KEY_REQUIRED\",\"error\":\"You have not supplied a MaxMind license key in the Authorization header.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)401
             };
 
@@ -376,13 +376,13 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind user ID in the Authorization header", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind user ID in the Authorization header", MatchType = MessageMatch.Contains),]
         public void MissingUserIDShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
                 Content = "{\"code\":\"USER_ID_REQUIRED\",\"error\":\"You have not supplied a MaxMind user ID in the Authorization header.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)401
             };
 
@@ -390,13 +390,13 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2OutOfQueriesException), ExpectedMessage = "The license key you have provided is out of queries", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(GeoIP2OutOfQueriesException), ExpectedMessage = "The license key you have provided is out of queries", MatchType = MessageMatch.Contains),]
         public void OutOfQueriesShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
             {
                 Content = "{\"code\":\"OUT_OF_QUERIES\",\"error\":\"The license key you have provided is out of queries. Please purchase more queries to use this service.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"), 
+                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)402
             };
 

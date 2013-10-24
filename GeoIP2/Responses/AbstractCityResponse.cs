@@ -63,7 +63,7 @@ namespace MaxMind.GeoIP2.Responses
         {
             get
             {
-                if(Subdivisions == null || Subdivisions.Count == 0)
+                if (Subdivisions == null || Subdivisions.Count == 0)
                     return new Subdivision();
 
                 return Subdivisions.Last();
@@ -78,16 +78,16 @@ namespace MaxMind.GeoIP2.Responses
         /// </returns>
         public override string ToString()
         {
-            return this.GetType().Name + " [" 
+            return this.GetType().Name + " ["
                    + (City != null ? "City=" + City + ", " : "")
                    + (Location != null ? "Location=" + Location + ", " : "")
                    + (Postal != null ? "Postal=" + Postal + ", " : "")
                    + (Subdivisions != null ? "Subdivisions={" + string.Join(",", Subdivisions.Select(s => s.ToString()).ToArray()) + "}, " : "")
                    + (Continent != null ? "Continent=" + Continent + ", " : "")
                    + (Country != null ? "Country=" + Country + ", " : "")
-                   + (RegisteredCountry != null ? "RegisteredCountry=" + RegisteredCountry + ", " : "") 
+                   + (RegisteredCountry != null ? "RegisteredCountry=" + RegisteredCountry + ", " : "")
                    + (RepresentedCountry != null ? "RepresentedCountry=" + RepresentedCountry + ", " : "")
-                   + (Traits != null ? "Traits=" + Traits : "") 
+                   + (Traits != null ? "Traits=" + Traits : "")
                    + "]";
         }
 
@@ -99,10 +99,10 @@ namespace MaxMind.GeoIP2.Responses
         {
             base.SetLocales(locales);
 
-            if(City != null)
+            if (City != null)
                 City.Locales = locales;
 
-            if(Subdivisions != null && Subdivisions.Count > 0)
+            if (Subdivisions != null && Subdivisions.Count > 0)
                 foreach (var subdivision in Subdivisions)
                     subdivision.Locales = locales;
         }
