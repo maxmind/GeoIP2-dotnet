@@ -14,6 +14,9 @@ namespace MaxMind.GeoIP2.Model
         [JsonProperty("names")]
         private Dictionary<string, string> _names;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public NamedEntity()
         {
             Names = new Dictionary<string, string>();

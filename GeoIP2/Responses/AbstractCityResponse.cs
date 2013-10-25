@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace MaxMind.GeoIP2.Responses
 {
+    /// <summary>
+    /// Abstract class that responses with city-level data subclass.
+    /// </summary>
     public abstract class AbstractCityResponse : AbstractCountryResponse
     {
         [JsonProperty("subdivisions")]

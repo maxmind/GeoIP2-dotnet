@@ -2,6 +2,10 @@
 
 namespace MaxMind.GeoIP2
 {
+    /// <summary>
+    /// This class provides the interface implemented by both <see cref="DatabaseReader"/>
+    /// and <see cref="WebServiceClient"/>.
+    /// </summary>
     public interface IGeoIP2Provider
     {
         /// <summary>

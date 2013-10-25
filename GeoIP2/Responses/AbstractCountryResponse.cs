@@ -5,6 +5,9 @@ using MaxMind = MaxMind.GeoIP2.Model.MaxMind;
 
 namespace MaxMind.GeoIP2.Responses
 {
+    /// <summary>
+    /// Abstract class that responses with country-level data subclass.
+    /// </summary>
     public abstract class AbstractCountryResponse
     {
         /// <summary>
