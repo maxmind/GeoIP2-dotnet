@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using MaxMind.DB;
+using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
 using NUnit.Framework;
 
@@ -52,7 +52,7 @@ namespace MaxMind.GeoIP2.UnitTests
             using (var reader = new DatabaseReader(_databaseFile))
             {
                 var resp = reader.CityIspOrg("81.2.69.160");
-                Assert.That(resp.Traits.IpAddress, Is.EqualTo("81.2.69.160"));
+                Assert.That(resp.Traits.IPAddress, Is.EqualTo("81.2.69.160"));
             }
         }
 

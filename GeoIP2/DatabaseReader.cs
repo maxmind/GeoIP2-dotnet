@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Runtime.InteropServices.ComTypes;
-using MaxMind.DB;
+using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json.Linq;
