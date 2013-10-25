@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v0.1.1
+version: v0.2.0
 ---
 
 # GeoIP2 .NET API #
@@ -24,10 +24,13 @@ GeoIP2 databases have not yet been released as a downloadable product.
 
 ## Requirements ##
 
-This library works with .NET Framework version 3.5 and above. It has been
-tested with Mono 2.8, but should work with any version 1.9 and above.
+This library works with .NET Framework version 4.0 and above. If you are
+using Mono, 3.2 or greater is required.
 
-This library also uses [RestSharp](http://restsharp.org/).
+This library depends on:
+
+* [MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet)
+* [RestSharp](http://restsharp.org/).
 
 ## Installation ##
 
@@ -75,11 +78,43 @@ Console.WriteLine(omni.Location.Longitude); // -93.2323
 
 ```
 
+## Database Example ##
+
+```csharp
+var reader = new DatabaseReader("GeoIP2-City.mmdb");
+var omni = reader.Omni("128.101.101.101");
+
+Console.WriteLine(omni.Country.IsoCode); // 'US'
+Console.WriteLine(omni.Country.Name); // 'United States'
+Console.WriteLine(omni.Country.Names["zh-CN"]); // '美国'
+
+Console.WriteLine(omni.MostSpecificSubdivision.Name); // 'Minnesota'
+Console.WriteLine(omni.MostSpecificSubdivision.IsoCode); // 'MN'
+
+Console.WriteLine(omni.City.Name); // 'Minneapolis'
+
+Console.WriteLine(omni.Postal.Code); // '55455'
+
+Console.WriteLine(omni.Location.Latitude); // 44.9733
+Console.WriteLine(omni.Location.Longitude); // -93.2323
+
+```
+
 ## Exceptions ##
 
 For details on the possible errors returned by the web service itself, [see
 the GeoIP2 web service documentation
 ](http://dev.maxmind.com/geoip2/geoip/web-services).
+
+### Database ###
+
+If the database is corrupt or otherwise invalid, a
+`MaxMind.Db.InvalidDatabaseException` will be thrown.
+
+If an address is not available in the database, a
+`GeoIP2AddressNotFoundException` will be thrown.
+
+### Web Service ###
 
 If the web service returns an explicit error document, this is thrown as a
 `GeoIP2AddressNotFoundException`, a `GeoIP2AuthenticationException`, a
