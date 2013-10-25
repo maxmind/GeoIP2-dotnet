@@ -466,7 +466,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.IsNull(traits.AutonomousSystemNumber);
             Assert.IsNull(traits.AutonomousSystemOrganization);
             Assert.IsNull(traits.Domain);
-            Assert.IsNull(traits.IpAddress);
+            Assert.IsNull(traits.IPAddress);
             Assert.IsNull(traits.Isp);
             Assert.IsNull(traits.Organization);
             Assert.IsNull(traits.UserType);
@@ -487,7 +487,7 @@ namespace MaxMind.GeoIP2.UnitTests
                     continent, country, registeredCountry, representedCountry,
                     subdiv })
             {
-                Assert.IsNull(r.GeoNameID);
+                Assert.IsNull(r.GeoNameId);
                 Assert.IsNull(r.Name);
                 Assert.AreEqual(0, r.Names.Count);
                 Assert.AreEqual("", r.ToString());

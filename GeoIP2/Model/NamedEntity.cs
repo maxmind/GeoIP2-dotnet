@@ -35,7 +35,7 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonProperty("geoname_id")]
         [DeserializeAs(Name = "geoname_id")]
-        public int? GeoNameID { get; internal set; }
+        public int? GeoNameId { get; internal set; }
 
         /// <summary>
         /// Gets or sets the locales specified by the user.

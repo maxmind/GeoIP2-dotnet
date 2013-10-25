@@ -45,7 +45,7 @@ namespace MaxMind.GeoIP2.Model
         /// end points.
         /// </summary>
         [JsonProperty("ip_address")]
-        public string IpAddress { get; internal set; }
+        public string IPAddress { get; internal set; }
 
         /// <summary>
         /// This is true if the IP is an anonymous proxy. This attribute is
@@ -114,7 +114,7 @@ namespace MaxMind.GeoIP2.Model
                 + (AutonomousSystemNumber != null ? "AutonomousSystemNumber=" + AutonomousSystemNumber + ", " : "")
                 + (AutonomousSystemOrganization != null ? "AutonomousSystemOrganization=" + AutonomousSystemOrganization + ", " : "")
                 + (Domain != null ? "Domain=" + Domain + ", " : "")
-                + (IpAddress != null ? "IpAddress=" + IpAddress + ", " : "")
+                + (IPAddress != null ? "IpAddress=" + IPAddress + ", " : "")
                 + "IsAnonymousProxy=" + IsAnonymousProxy
                 + ", IsSatelliteProvider=" + IsSatelliteProvider + ", "
                 + (Isp != null ? "Isp=" + Isp + ", " : "")
