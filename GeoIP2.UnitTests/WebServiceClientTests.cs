@@ -174,7 +174,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "message body", MatchType = MessageMatch.Contains)]
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "message body", MatchType = MessageMatch.Contains)]
         public void EmptyBodyShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -188,7 +188,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2InvalidRequestException), ExpectedMessage = "not a valid ip address",
+        [ExpectedException(typeof(InvalidRequestException), ExpectedMessage = "not a valid ip address",
             MatchType = MessageMatch.Contains)]
         public void WebServiceErrorShouldThrowException()
         {
@@ -204,7 +204,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "with no body",
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "with no body",
             MatchType = MessageMatch.Contains)]
         public void NoErrorBodyShouldThrowException()
         {
@@ -219,7 +219,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "does not specify code or error keys",
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "does not specify code or error keys",
             MatchType = MessageMatch.Contains)]
         public void WeirdErrorBodyShouldThrowException()
         {
@@ -234,7 +234,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "it did not include the expected JSON body",
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "it did not include the expected JSON body",
             MatchType = MessageMatch.Contains)]
         public void UnexpectedErrorBodyShouldThrowException()
         {
@@ -249,7 +249,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "Received a server (500) error", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "Received a server (500) error", MatchType = MessageMatch.Contains),]
         public void InternalServerErrorShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -262,7 +262,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "Received a very surprising HTTP status (300) for", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "Received a very surprising HTTP status (300) for", MatchType = MessageMatch.Contains),]
         public void SurprisingStatusShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -275,7 +275,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2HttpException), ExpectedMessage = "Cannot satisfy your Accept-Charset requirements", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "Cannot satisfy your Accept-Charset requirements", MatchType = MessageMatch.Contains),]
         public void BadCharsetRequirementShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -321,7 +321,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
 
         [Test]
-        [ExpectedException(typeof(GeoIP2AddressNotFoundException), ExpectedMessage = "The value 1.2.3.16 is not in the database", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(AddressNotFoundException), ExpectedMessage = "The value 1.2.3.16 is not in the database", MatchType = MessageMatch.Contains),]
         public void AddressNotFoundShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -335,7 +335,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2AddressNotFoundException), ExpectedMessage = "The value 1.2.3.17 belongs to a reserved or private range", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(AddressNotFoundException), ExpectedMessage = "The value 1.2.3.17 belongs to a reserved or private range", MatchType = MessageMatch.Contains),]
         public void AddressReservedShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -349,7 +349,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2AuthenticationException), ExpectedMessage = "You have supplied an invalid MaxMind user ID and/or license key", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(AuthenticationException), ExpectedMessage = "You have supplied an invalid MaxMind user ID and/or license key", MatchType = MessageMatch.Contains),]
         public void InvalidAuthShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -363,7 +363,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind license key in the Authorization header", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind license key in the Authorization header", MatchType = MessageMatch.Contains),]
         public void MissingLicenseShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -377,7 +377,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind user ID in the Authorization header", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(AuthenticationException), ExpectedMessage = "You have not supplied a MaxMind user ID in the Authorization header", MatchType = MessageMatch.Contains),]
         public void MissingUserIDShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -391,7 +391,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2OutOfQueriesException), ExpectedMessage = "The license key you have provided is out of queries", MatchType = MessageMatch.Contains),]
+        [ExpectedException(typeof(OutOfQueriesException), ExpectedMessage = "The license key you have provided is out of queries", MatchType = MessageMatch.Contains),]
         public void OutOfQueriesShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>

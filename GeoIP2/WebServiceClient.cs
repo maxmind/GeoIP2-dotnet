@@ -221,7 +221,7 @@ namespace MaxMind.GeoIP2
             if (status == 200)
             {
                 if (response.ContentLength <= 0)
-                    throw new GeoIP2HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
+                    throw new HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
 
                 if (response.ContentType == null || !response.ContentType.Contains("json"))
                     throw new GeoIP2Exception(string.Format("Received a 200 response for {0} but it does not appear to be JSON:\n", response.ContentType));
@@ -238,10 +238,10 @@ namespace MaxMind.GeoIP2
             }
             else if (status >= 500 && status < 600)
             {
-                throw new GeoIP2HttpException(string.Format("Received a server ({0}) error for {1}", (int)response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
+                throw new HttpException(string.Format("Received a server ({0}) error for {1}", (int)response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
             }
 
-            throw new GeoIP2HttpException(
+            throw new HttpException(
                 string.Format("Received a very surprising HTTP status ({0}) for {1}", (int)response.StatusCode,
                     response.ResponseUri), response.StatusCode, response.ResponseUri);
         }
@@ -250,7 +250,7 @@ namespace MaxMind.GeoIP2
         {
             if (string.IsNullOrEmpty(response.Content))
             {
-                throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} with no body", response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
+                throw new HttpException(string.Format("Received a {0} error for {1} with no body", response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
             }
 
             try
@@ -261,7 +261,7 @@ namespace MaxMind.GeoIP2
             }
             catch (SerializationException ex)
             {
-                throw new GeoIP2HttpException(string.Format("Received a {0} error for {1} but it did not include the expected JSON body: {2}", response.StatusCode, response.ResponseUri, response.Content), response.StatusCode, response.ResponseUri, ex);
+                throw new HttpException(string.Format("Received a {0} error for {1} but it did not include the expected JSON body: {2}", response.StatusCode, response.ResponseUri, response.Content), response.StatusCode, response.ResponseUri, ex);
             }
 
         }
@@ -270,18 +270,18 @@ namespace MaxMind.GeoIP2
         {
 
             if (webServiceError.Code == null || webServiceError.Error == null)
-                throw new GeoIP2HttpException(
+                throw new HttpException(
                     "Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode,
                     response.ResponseUri);
 
             if (webServiceError.Code == "IP_ADDRESS_NOT_FOUND" || webServiceError.Code == "IP_ADDRESS_RESERVED")
-                throw new GeoIP2AddressNotFoundException(webServiceError.Error);
+                throw new AddressNotFoundException(webServiceError.Error);
             else if (webServiceError.Code == "AUTHORIZATION_INVALID" || webServiceError.Code == "LICENSE_KEY_REQUIRED" || webServiceError.Code == "USER_ID_REQUIRED")
-                throw new GeoIP2AuthenticationException(webServiceError.Error);
+                throw new AuthenticationException(webServiceError.Error);
             else if (webServiceError.Code == "OUT_OF_QUERIES")
-                throw new GeoIP2OutOfQueriesException(webServiceError.Error);
+                throw new OutOfQueriesException(webServiceError.Error);
 
-            throw new GeoIP2InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
+            throw new InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
         }
     }
 }

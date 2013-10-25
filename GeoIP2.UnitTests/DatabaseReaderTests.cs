@@ -57,7 +57,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(GeoIP2AddressNotFoundException), ExpectedMessage = "10.10.10.10 is not in the database", MatchType = MessageMatch.Contains)]
+        [ExpectedException(typeof(AddressNotFoundException), ExpectedMessage = "10.10.10.10 is not in the database", MatchType = MessageMatch.Contains)]
         public void UnknownAddress()
         {
             using (var reader = new DatabaseReader(_databaseFile))

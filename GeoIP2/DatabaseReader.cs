@@ -49,7 +49,7 @@ namespace MaxMind.GeoIP2
             var token = _reader.Find(ipAddress);
 
             if (token == null)
-                throw new GeoIP2AddressNotFoundException("The address " + ipAddress + " is not in the database.");
+                throw new AddressNotFoundException("The address " + ipAddress + " is not in the database.");
 
             if (token["traits"] == null)
             {

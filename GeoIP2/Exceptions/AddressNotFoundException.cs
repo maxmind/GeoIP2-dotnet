@@ -10,13 +10,13 @@ namespace MaxMind.GeoIP2.Exceptions
     /// This exception is thrown when the IP address is not found in the database.
     /// This generally means that the address was a private or reserved address.
     /// </summary>
-    public class GeoIP2AddressNotFoundException : GeoIP2Exception
+    public class AddressNotFoundException : GeoIP2Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GeoIP2AddressNotFoundException"/> class.
+        /// Initializes a new instance of the <see cref="AddressNotFoundException"/> class.
         /// </summary>
         /// <param name="message">A message explaining the cause of the error.</param>
-        public GeoIP2AddressNotFoundException(string message)
+        public AddressNotFoundException(string message)
             : base(message)
         {
 

@@ -95,29 +95,28 @@ Console.WriteLine(omni.Location.Longitude); // -93.2323
 
 ## Exceptions ##
 
-For details on the possible errors returned by the web service itself, [see
-the GeoIP2 web service documentation
-](http://dev.maxmind.com/geoip2/geoip/web-services).
-
 ### Database ###
 
 If the database is corrupt or otherwise invalid, a
 `MaxMind.Db.InvalidDatabaseException` will be thrown.
 
 If an address is not available in the database, a
-`GeoIP2AddressNotFoundException` will be thrown.
+`AddressNotFoundException` will be thrown.
 
 ### Web Service ###
 
-If the web service returns an explicit error document, this is thrown as a
-`GeoIP2AddressNotFoundException`, a `GeoIP2AuthenticationException`, a
-`GeoIP2InvalidRequestException`, or a `GeoIP2OutOfQueriesException`.
+For details on the possible errors returned by the web service itself, [see
+the GeoIP2 web service documentation](http://dev.maxmind.com/geoip2/geoip/web-services).
 
-If some sort of transport error occurs, an `GeoIP2HttpException` is thrown.
-This is thrown when some sort of unanticipated error occurs, such as the web
-service returning a 500 or an invalid error document. If the web service
-request returns any status code besides 200, 4xx, or 5xx, this also becomes a
-`GeoIP2HttpException`.
+If the web service returns an explicit error document, this is thrown as a
+`AddressNotFoundException`, a `AuthenticationException`, a
+`InvalidRequestException`, or a `OutOfQueriesException`.
+
+If some sort of transport error occurs, an `HttpException` is thrown. This is
+thrown when some sort of unanticipated error occurs, such as the web service
+returning a 500 or an invalid error document. If the web service request
+returns any status code besides 200, 4xx, or 5xx, this also becomes a
+`HttpException`.
 
 Finally, if the web service returns a 200 but the body is invalid, the client
 throws a `GeoIP2Exception`. This exception also is the parent exception to the
