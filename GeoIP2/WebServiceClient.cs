@@ -241,9 +241,12 @@ namespace MaxMind.GeoIP2
                 throw new HttpException(string.Format("Received a server ({0}) error for {1}", (int)response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
             }
 
-            throw new HttpException(
+            var errorMessage = response.ResponseStatus == ResponseStatus.Error ?
+                response.ErrorMessage :
                 string.Format("Received a very surprising HTTP status ({0}) for {1}", (int)response.StatusCode,
-                    response.ResponseUri), response.StatusCode, response.ResponseUri);
+                    response.ResponseUri);
+
+            throw new HttpException(errorMessage, response.StatusCode, response.ResponseUri);
         }
 
         private void Handle4xxStatus(IRestResponse response)
