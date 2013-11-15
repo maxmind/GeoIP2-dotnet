@@ -1,6 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+0.3.0 (2013-11-15)
+------------------
+
+* API CHANGE: Renamed exceptions to remove GeoIP2 prefixes.
+* Improved error messages when RestSharp does not return an HTTP status code.
+
 0.2.0 (2013-10-25)
 ------------------
 
