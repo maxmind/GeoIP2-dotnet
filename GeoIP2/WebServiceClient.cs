@@ -217,8 +217,9 @@ namespace MaxMind.GeoIP2
 
             var response = restClient.Execute<T>(request);
 
+            var exception = response.ErrorException;
             var status = (int)response.StatusCode;
-            if (status == 200)
+            if (exception == null && status == 200)
             {
                 if (response.ContentLength <= 0)
                     throw new HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
@@ -238,15 +239,14 @@ namespace MaxMind.GeoIP2
             }
             else if (status >= 500 && status < 600)
             {
-                throw new HttpException(string.Format("Received a server ({0}) error for {1}", (int)response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
+                throw new HttpException(string.Format("Received a server ({0}) error for {1}", (int)response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri, exception);
             }
 
             var errorMessage = response.ResponseStatus == ResponseStatus.Error ?
                 response.ErrorMessage :
-                string.Format("Received a very surprising HTTP status ({0}) for {1}", (int)response.StatusCode,
-                    response.ResponseUri);
+                string.Format("Received an unexpected response for {0} (status code: {1})", response.ResponseUri, (int)response.StatusCode);
 
-            throw new HttpException(errorMessage, response.StatusCode, response.ResponseUri);
+            throw new HttpException(errorMessage, response.StatusCode, response.ResponseUri, exception);
         }
 
         private void Handle4xxStatus(IRestResponse response)
