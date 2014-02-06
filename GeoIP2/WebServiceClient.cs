@@ -215,7 +215,7 @@ namespace MaxMind.GeoIP2
 
             request.AddUrlSegment("ip", ipAddress ?? "me");
 
-            var response = restClient.Execute<T>(request);
+            var response = restClient.Execute(request);
 
             if (response.ResponseStatus == ResponseStatus.Error)
             {
@@ -231,11 +231,19 @@ namespace MaxMind.GeoIP2
                 if (response.ContentType == null || !response.ContentType.Contains("json"))
                     throw new GeoIP2Exception(string.Format("Received a 200 response for {0} but it does not appear to be JSON:\n", response.ContentType));
 
-                if (response.Data == null)
-                    throw new GeoIP2Exception(string.Format("Received a 200 response but not decode it as JSON: {0}", response.Content));
+                T model;
+                try
+                {
+                    var d = new JsonDeserializer();
+                    model = d.Deserialize<T>(response);
+                }
+                catch (SerializationException ex)
+                {
+                    throw new GeoIP2Exception(string.Format("Received a 200 response but not decode it as JSON: {0}", response.Content), ex);
+                }
 
-                response.Data.SetLocales(_locales);
-                return response.Data;
+                model.SetLocales(_locales);
+                return model;
             }
             else if (status >= 400 && status < 500)
             {
