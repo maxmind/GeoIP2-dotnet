@@ -275,7 +275,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(HttpException), ExpectedMessage = "Custom error message", MatchType = MessageMatch.Exact),]
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "Error received while making request: Internal error message", MatchType = MessageMatch.Exact),]
         public void ErrorExceptionSetShouldThrowException()
         {
             var restResponse = new RestResponse<OmniResponse>
@@ -283,7 +283,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200,
                 ErrorException = new Exception("fake exception"),
-                ErrorMessage = "Custom error message",
+                ErrorMessage = "Internal error message",
                 ResponseStatus = ResponseStatus.Error
             };
 
