@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v0.3.0
+version: v0.3.1
 ---
 
 # GeoIP2 .NET API #
@@ -43,18 +43,21 @@ following into the Visual Studio Package Manager Console:
 install-package MaxMind.GeoIP2
 ```
 
-## Usage ##
+## Web Service Usage ##
 
-To use this API, you must create a new `MaxMind.GeoIP2.WebServiceClient`
-object with your `userID` and `licenseKey`. You may then call the method
-corresponding to a specific end point, passing it the IP address you want to
-look up.
+To use the web service API, you must create a new
+`MaxMind.GeoIP2.WebServiceClient` object with your `userID` and `licenseKey`.
+You may also specify the fall-back locales, the host, timeout, or the request
+timeout. You may then call the method corresponding to a specific end point,
+passing it the IP address you want to look up. the IP address you want to look
+up.
 
 If the request succeeds, the method call will return a response class for the
 endpoint you called. This response in turn contains multiple model classes,
 each of which represents part of the data returned by the web service.
 
 See the API documentation for more details.
+
 
 ## Web Service Example ##
 
@@ -77,6 +80,23 @@ Console.WriteLine(omni.Location.Latitude); // 44.9733
 Console.WriteLine(omni.Location.Longitude); // -93.2323
 
 ```
+
+## Database Usage ##
+
+To use the database API, you must create a new `DatabaseReader` with a string
+representation of the path to your GeoIP2 database. You may also specify the
+file access mode. You may then call the appropriate method (e.g., `city`) for
+your database, passing it the IP address you want to look up.
+
+If the lookup succeeds, the method call will return a response class for the
+GeoIP lookup. This class in turn contains multiple model classes, each of
+which represents part of the data returned by the database.
+
+We recommend reusing the `DatabaseReader` object rather than creating a new
+one for each lookup. The creation of this object is relatively expensive as it
+must read in metadata for the file.
+
+See the API documentation for more details.
 
 ## Database Example ##
 
@@ -129,7 +149,14 @@ Finally, if the web service returns a 200 but the body is invalid, the client
 throws a `GeoIP2Exception`. This exception also is the parent exception to the
 above exceptions.
 
-### What data is returned? ###
+
+## Multi-Threaded Use ##
+
+This API fully supports use in multi-threaded applications. When using the
+`DatabaseReader` in a multi-threaded application, we suggest creating one
+object and sharing that among threads.
+
+## What data is returned? ##
 
 While many of the end points return the same basic records, the attributes
 which can be populated vary between end points. In addition, while an end
