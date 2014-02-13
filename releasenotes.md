@@ -1,6 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+0.3.1 (2014-02-13)
+------------------
+
+* Fixed broken error handling. Previously the wrong exceptions and error
+  messages were returned for some web service errors.
+
 0.3.0 (2013-11-15)
 ------------------
 
