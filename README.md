@@ -204,7 +204,7 @@ correction, please [contact MaxMind support
 ## Other Support ##
 
 Please report all issues with this code using the
-[GitHub issue tracker](https://github.com/maxmind/GeoIP2-php/issues).
+[GitHub issue tracker](https://github.com/maxmind/GeoIP2-dotnet/issues).
 
 If you are having an issue with a MaxMind service that is not specific to the
 client API, please see [our support page](http://www.maxmind.com/en/support).
