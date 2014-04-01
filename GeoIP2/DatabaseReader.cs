@@ -6,6 +6,7 @@ using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace MaxMind.GeoIP2
 {
@@ -38,6 +39,27 @@ namespace MaxMind.GeoIP2
         {
             _locales = locales;
             _reader = new Reader(file, mode);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DatabaseReader"/> class.
+        /// </summary>
+        /// <param name="stream">A stream of the MaxMind DB file.</param>
+        public DatabaseReader(Stream stream)
+            : this(stream, new List<string> { "en" })
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DatabaseReader"/> class.
+        /// </summary>
+        /// <param name="stream">A stream of the MaxMind DB file.</param>
+        /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
+        public DatabaseReader(Stream stream, List<string> locales)
+        {
+            _locales = locales;
+            _reader = new Reader(stream);
         }
 
         private T Execute<T>(string ipAddress) where T : AbstractCountryResponse

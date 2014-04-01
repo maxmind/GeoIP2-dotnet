@@ -47,6 +47,19 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
+        public void TestStreamConstructor()
+        {
+            using (StreamReader streamReader = new StreamReader(_databaseFile))
+            {
+                using (var reader = new DatabaseReader(streamReader.BaseStream))
+                {
+                    var resp = reader.City("81.2.69.160");
+                    Assert.That(resp.City.Name, Is.EqualTo("London"));
+                }
+            }
+        }
+
+        [Test]
         public void HasIPAddress()
         {
             using (var reader = new DatabaseReader(_databaseFile))
