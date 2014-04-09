@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v0.3.1
+version: v0.3.2
 ---
 
 # GeoIP2 .NET API #
@@ -211,7 +211,7 @@ correction, please [contact MaxMind support
 ## Other Support ##
 
 Please report all issues with this code using the
-[GitHub issue tracker](https://github.com/maxmind/GeoIP2-php/issues).
+[GitHub issue tracker](https://github.com/maxmind/GeoIP2-dotnet/issues).
 
 If you are having an issue with a MaxMind service that is not specific to the
 client API, please see [our support page](http://www.maxmind.com/en/support).
