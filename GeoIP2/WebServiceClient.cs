@@ -8,6 +8,7 @@ using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
 using RestSharp;
 using RestSharp.Deserializers;
+using System.Reflection;
 
 namespace MaxMind.GeoIP2
 {
@@ -116,6 +117,9 @@ namespace MaxMind.GeoIP2
             restClient.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-city-isp-org+json", new JsonDeserializer());
             restClient.Timeout = _timeout;
+
+            restClient.UserAgent = String.Format("GeoIP2 .NET Client {0} ({1})",
+                Assembly.GetExecutingAssembly().GetName().Version, restClient.UserAgent);
 
             return restClient;
         }

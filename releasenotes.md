@@ -1,6 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+0.3.2 (2014-04-09)
+------------------
+
+* A constructor taking a `Stream` was added to `DatabaseReader`.
+* Fixed dependency on wrong version of `Newtonsoft.Json`.
+
 0.3.1 (2014-02-13)
 ------------------
 
