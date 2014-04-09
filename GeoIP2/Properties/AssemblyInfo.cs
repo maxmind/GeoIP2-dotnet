@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MaxMind.GeoIP2")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("MaxMind GeoIP2 Database Reader and Web Service Client")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MaxMind, Inc.")]
 [assembly: AssemblyProduct("MaxMind.GeoIP2")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
