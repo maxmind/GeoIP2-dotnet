@@ -69,6 +69,8 @@ namespace MaxMind.GeoIP2
     /// </summary>
     public class WebServiceClient : IGeoIP2Provider
     {
+        private static readonly Version version = Assembly.GetExecutingAssembly().GetName().Version;
+
         private readonly string _host;
 
         private readonly int _timeout;
@@ -118,8 +120,7 @@ namespace MaxMind.GeoIP2
             restClient.AddHandler("application/vnd.maxmind.com-city-isp-org+json", new JsonDeserializer());
             restClient.Timeout = _timeout;
 
-            restClient.UserAgent = String.Format("GeoIP2 .NET Client {0} ({1})",
-                Assembly.GetExecutingAssembly().GetName().Version, restClient.UserAgent);
+            restClient.UserAgent = String.Format("GeoIP2 .NET Client {0}", version);
 
             return restClient;
         }
