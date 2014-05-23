@@ -62,7 +62,13 @@ See the API documentation for more details.
 ## Web Service Example ##
 
 ```csharp
-var client = new WebServiceClient(42, "abcdef12345");
+// This creates a WebServiceClient object that can be reused across requests.
+// Replace "42" with your user ID and "license_key" with your license
+// key.
+var client = new WebServiceClient(42, "license_key");
+
+// Replace "Omni" with the method corresponding to the web service that
+// you are using, e.g., "Country", "City", "CityIspOrg".
 var omni = client.Omni("128.101.101.101");
 
 Console.WriteLine(omni.Country.IsoCode); // 'US'
@@ -101,22 +107,27 @@ See the API documentation for more details.
 ## Database Example ##
 
 ```csharp
+// This creates the DatabaseReader object, which should be reused across
+// lookups.
 var reader = new DatabaseReader("GeoIP2-City.mmdb");
-var omni = reader.Omni("128.101.101.101");
 
-Console.WriteLine(omni.Country.IsoCode); // 'US'
-Console.WriteLine(omni.Country.Name); // 'United States'
-Console.WriteLine(omni.Country.Names["zh-CN"]); // '美国'
+// Replace "City" with the appropriate method for your database, e.g.,
+// "Country".
+var city = reader.City("128.101.101.101");
 
-Console.WriteLine(omni.MostSpecificSubdivision.Name); // 'Minnesota'
-Console.WriteLine(omni.MostSpecificSubdivision.IsoCode); // 'MN'
+Console.WriteLine(city.Country.IsoCode); // 'US'
+Console.WriteLine(city.Country.Name); // 'United States'
+Console.WriteLine(city.Country.Names["zh-CN"]); // '美国'
 
-Console.WriteLine(omni.City.Name); // 'Minneapolis'
+Console.WriteLine(city.MostSpecificSubdivision.Name); // 'Minnesota'
+Console.WriteLine(city.MostSpecificSubdivision.IsoCode); // 'MN'
 
-Console.WriteLine(omni.Postal.Code); // '55455'
+Console.WriteLine(city.City.Name); // 'Minneapolis'
 
-Console.WriteLine(omni.Location.Latitude); // 44.9733
-Console.WriteLine(omni.Location.Longitude); // -93.2323
+Console.WriteLine(city.Postal.Code); // '55455'
+
+Console.WriteLine(city.Location.Latitude); // 44.9733
+Console.WriteLine(city.Location.Longitude); // -93.2323
 
 ```
 
@@ -228,5 +239,5 @@ The API uses [Semantic Versioning](http://semver.org/).
 ## Copyright and License ##
 
 This software is Copyright (c) 2013 by MaxMind, Inc.
- 
+
 This is free software, licensed under the Apache License, Version 2.0.
