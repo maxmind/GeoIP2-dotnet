@@ -14,11 +14,11 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class RepresentedCountry : Country
     {
-		public RepresentedCountry() { }
-	    public RepresentedCountry(string type = null, int? confidence = null, string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null) : base(confidence, isoCode, names, locales)
-	    {
-		    Type = type;
-	    }
+        public RepresentedCountry() { }
+        public RepresentedCountry(string type = null, int? confidence = null, string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null) : base(confidence, isoCode, names, locales)
+        {
+            Type = type;
+        }
         /// <summary>
         /// A string indicating the type of entity that is representing the
         /// country. Currently we only return <c>military</c> but this could

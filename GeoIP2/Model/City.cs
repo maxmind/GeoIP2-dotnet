@@ -10,15 +10,15 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class City : NamedEntity
     {
-	    public City()
-	    {
-	    }
-	    public City(int? confidence = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
-	    {
-		    Confidence = confidence;
-	    }
+        public City()
+        {
+        }
+        public City(int? confidence = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
+        {
+            Confidence = confidence;
+        }
 
-	    /// <summary>
+        /// <summary>
         /// A value from 0-100 indicating MaxMind's confidence that the city
         /// is correct. This attribute is only available from the Omni end
         /// point.        

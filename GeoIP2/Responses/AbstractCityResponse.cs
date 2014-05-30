@@ -23,12 +23,12 @@ namespace MaxMind.GeoIP2.Responses
             Postal = new Postal();
             Subdivisions = new List<Subdivision>();
         }
-		/// <summary>
+        /// <summary>
         /// Initializes a new instance of the <see cref="AbstractCityResponse"/> class.
         /// </summary>
         public AbstractCityResponse(City city = null, Location location = null, Postal postal = null, List<Subdivision> subdivisions = null,
-			Continent continent = null, Country country = null, Model.MaxMind maxMind = null, Country registeredCountry = null, RepresentedCountry representedCountry = null, Traits traits = null)
-				: base(continent, country, maxMind, registeredCountry, representedCountry, traits)
+            Continent continent = null, Country country = null, Model.MaxMind maxMind = null, Country registeredCountry = null, RepresentedCountry representedCountry = null, Traits traits = null)
+                : base(continent, country, maxMind, registeredCountry, representedCountry, traits)
         {
             City = city ?? new City();
             Location = location ?? new Location();
