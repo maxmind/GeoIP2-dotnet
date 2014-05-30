@@ -13,7 +13,7 @@ namespace MaxMind.GeoIP2.Model
         public City()
         {
         }
-        public City(int? confidence = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
+        public City(int? confidence = null, Dictionary<string, string> names = null, int? geoNameId = null, List<string> locales = null) : base(names, geoNameId, locales)
         {
             Confidence = confidence;
         }

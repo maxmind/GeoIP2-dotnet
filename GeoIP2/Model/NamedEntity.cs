@@ -25,9 +25,10 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         /// Constructor
         /// </summary>
-        public NamedEntity(Dictionary<string, string> names = null, List<string> locales = null)
+        public NamedEntity(Dictionary<string, string> names = null, int? geoNameId = null, List<string> locales = null)
         {
             Names = names ?? new Dictionary<string, string>();
+            GeoNameId = geoNameId;
             Locales = locales ?? new List<string>();
         }
 

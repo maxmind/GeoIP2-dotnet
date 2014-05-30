@@ -11,7 +11,7 @@ namespace MaxMind.GeoIP2.Model
     public class Subdivision : NamedEntity
     {
         public Subdivision() { }
-        public Subdivision(int? confidence = null, string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
+        public Subdivision(int? confidence = null, string isoCode = null, Dictionary<string, string> names = null, int? geoNameId = null, List<string> locales = null) : base(names, geoNameId, locales)
         {
             Confidence = confidence;
             IsoCode = isoCode;

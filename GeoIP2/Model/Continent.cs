@@ -11,7 +11,7 @@ namespace MaxMind.GeoIP2.Model
     public class Continent : NamedEntity
     {
         public Continent() { }
-        public Continent(string code = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
+        public Continent(string code = null, Dictionary<string, string> names = null, int? geoNameId = null, List<string> locales = null) : base(names, geoNameId, locales)
         {
             Code = code;
         }
