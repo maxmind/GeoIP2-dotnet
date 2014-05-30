@@ -22,6 +22,14 @@ namespace MaxMind.GeoIP2.Model
             Names = new Dictionary<string, string>();
             Locales = new List<string>();
         }
+		/// <summary>
+        /// Constructor
+        /// </summary>
+        public NamedEntity(Dictionary<string, string> names = null, List<string> locales = null)
+        {
+            Names = names ?? new Dictionary<string, string>();
+            Locales = locales ?? new List<string>();
+        }
 
         /// <summary>
         /// A <see cref="System.Collections.Generic.Dictionary{T,U}"/> from locale codes to the name in that locale.
