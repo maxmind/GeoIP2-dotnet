@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace MaxMind.GeoIP2.Model
 {
@@ -9,7 +10,14 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Subdivision : NamedEntity
     {
-        /// <summary>
+		public Subdivision() { }
+	    public Subdivision(int? confidence = null, string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
+	    {
+		    Confidence = confidence;
+		    IsoCode = isoCode;
+	    }
+
+	    /// <summary>
         /// This is a value from 0-100 indicating MaxMind's confidence that
         /// the subdivision is correct. This attribute is only available from
         /// the Omni end point.

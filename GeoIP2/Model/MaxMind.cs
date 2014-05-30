@@ -9,7 +9,13 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class MaxMind
     {
-        /// <summary>
+		public MaxMind() { }
+	    public MaxMind(int? queriesRemaining = null)
+	    {
+		    QueriesRemaining = queriesRemaining;
+	    }
+
+	    /// <summary>
         /// The number of remaining queried in your account for the current
         /// end point.
         /// </summary>
