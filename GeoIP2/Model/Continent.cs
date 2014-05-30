@@ -10,13 +10,13 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Continent : NamedEntity
     {
-	    public Continent() { }
-	    public Continent(string code = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
-	    {
-		    Code = code;
-	    }
+        public Continent() { }
+        public Continent(string code = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
+        {
+            Code = code;
+        }
 
-	    /// <summary>
+        /// <summary>
         /// A two character continent code like "NA" (North America) or "OC"
         /// (Oceania). This attribute is returned by all end points.        
         /// </summary>

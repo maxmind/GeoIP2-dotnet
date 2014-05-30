@@ -10,14 +10,14 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Country : NamedEntity
     {
-		public Country() { }
-	    public Country(int? confidence = null, string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
-	    {
-		    Confidence = confidence;
-		    IsoCode = isoCode;
-	    }
+        public Country() { }
+        public Country(int? confidence = null, string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null) : base(names, locales)
+        {
+            Confidence = confidence;
+            IsoCode = isoCode;
+        }
 
-	    /// <summary>
+        /// <summary>
         /// A value from 0-100 indicating MaxMind's confidence that the country
         /// is correct. This attribute is only available from the Omni end
         /// point.        
