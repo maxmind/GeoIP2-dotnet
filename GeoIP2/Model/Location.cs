@@ -9,6 +9,16 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Location
     {
+        public Location() { }
+        public Location(int? accuracyRadius = null, double? latitude = null, double? longitude = null, int? metroCode = null, string timeZone = null)
+        {
+            AccuracyRadius = accuracyRadius;
+            Latitude = latitude;
+            Longitude = longitude;
+            MetroCode = metroCode;
+            TimeZone = timeZone;
+        }
+
         /// <summary>
         /// The radius in kilometers around the specified location where the
         /// IP address is likely to be. This attribute is only available from

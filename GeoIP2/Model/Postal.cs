@@ -8,6 +8,13 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Postal
     {
+        public Postal() { }
+        public Postal(string code = null, int? confidence = null)
+        {
+            Code = code;
+            Confidence = confidence;
+        }
+
         /// <summary>
         /// The postal code of the location. Postal codes are not available
         /// for all countries. In some countries, this will only contain part
