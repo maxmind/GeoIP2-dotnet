@@ -22,6 +22,18 @@ namespace MaxMind.GeoIP2.Responses
             RepresentedCountry = new RepresentedCountry();
             Traits = new Traits();
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AbstractCountryResponse"/> class.
+        /// </summary>
+        public AbstractCountryResponse(Continent continent = null, Country country = null, Model.MaxMind maxMind = null, Country registeredCountry = null, RepresentedCountry representedCountry = null, Traits traits = null)
+        {
+            Continent = continent ?? new Continent();
+            Country = country ?? new Country();
+            MaxMind = maxMind ?? new Model.MaxMind();
+            RegisteredCountry = registeredCountry ?? new Country();
+            RepresentedCountry = representedCountry ?? new RepresentedCountry();
+            Traits = traits ?? new Traits();
+        }
 
         /// <summary>
         /// Gets the continent for the requested IP address.

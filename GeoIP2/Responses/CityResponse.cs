@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using MaxMind.GeoIP2.Model;
 
 namespace MaxMind.GeoIP2.Responses
@@ -19,5 +16,15 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public class CityResponse : AbstractCityResponse
     {
+        public CityResponse() { }
+
+        public CityResponse(City city = null, Location location = null, Postal postal = null,
+            List<Subdivision> subdivisions = null,
+            Continent continent = null, Country country = null, Model.MaxMind maxMind = null, Country registeredCountry = null,
+            RepresentedCountry representedCountry = null, Traits traits = null)
+            : base(
+                city, location, postal, subdivisions, continent, country, maxMind, registeredCountry, representedCountry, traits)
+        {
+        }
     }
 }

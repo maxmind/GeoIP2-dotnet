@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
+﻿using MaxMind.GeoIP2.Model;
 
 namespace MaxMind.GeoIP2.Responses
 {
@@ -16,5 +14,12 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public class CountryResponse : AbstractCountryResponse
     {
+        public CountryResponse() { }
+
+        public CountryResponse(Continent continent = null, Country country = null, Model.MaxMind maxMind = null,
+            Country registeredCountry = null, RepresentedCountry representedCountry = null, Traits traits = null)
+            : base(continent, country, maxMind, registeredCountry, representedCountry, traits)
+        {
+        }
     }
 }

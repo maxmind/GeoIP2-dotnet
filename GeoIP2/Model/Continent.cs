@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace MaxMind.GeoIP2.Model
 {
@@ -9,6 +10,12 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Continent : NamedEntity
     {
+        public Continent() { }
+        public Continent(string code = null, Dictionary<string, string> names = null, int? geoNameId = null, List<string> locales = null) : base(names, geoNameId, locales)
+        {
+            Code = code;
+        }
+
         /// <summary>
         /// A two character continent code like "NA" (North America) or "OC"
         /// (Oceania). This attribute is returned by all end points.        

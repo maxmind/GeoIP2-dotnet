@@ -8,6 +8,22 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Traits
     {
+        public Traits() { }
+        public Traits(int? autonomousSystemNumber = null, string autonomousSystemOrganization = null, string domain = null,
+            string ipAddress = null, bool isAnonymousProxy = false, bool isSatelliteProvider = false,
+            string isp = null, string organization = null, string userType = null)
+        {
+            AutonomousSystemNumber = autonomousSystemNumber;
+            AutonomousSystemOrganization = autonomousSystemOrganization;
+            Domain = domain;
+            IPAddress = ipAddress;
+            IsAnonymousProxy = isAnonymousProxy;
+            IsSatelliteProvider = isSatelliteProvider;
+            Isp = isp;
+            Organization = organization;
+            UserType = userType;
+        }
+
         /// <summary>
         /// The <a
         /// href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)"
