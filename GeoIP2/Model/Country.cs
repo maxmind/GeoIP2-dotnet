@@ -10,8 +10,16 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Country : NamedEntity
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Country() { }
-        public Country(int? confidence = null, string isoCode = null, Dictionary<string, string> names = null, int? geoNameId = null, List<string> locales = null) : base(names, geoNameId, locales)
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public Country(int? confidence = null, int? geoNameId = null, string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null)
+            : base(geoNameId, names, locales)
         {
             Confidence = confidence;
             IsoCode = isoCode;

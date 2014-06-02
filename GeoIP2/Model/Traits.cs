@@ -8,10 +8,24 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Traits
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Traits() { }
-        public Traits(int? autonomousSystemNumber = null, string autonomousSystemOrganization = null, string domain = null,
-            string ipAddress = null, bool isAnonymousProxy = false, bool isSatelliteProvider = false,
-            string isp = null, string organization = null, string userType = null)
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public Traits(
+            int? autonomousSystemNumber = null, 
+            string autonomousSystemOrganization = null, 
+            string domain = null,
+            string ipAddress = null, 
+            bool isAnonymousProxy = false, 
+            bool isSatelliteProvider = false,
+            string isp = null,
+            string organization = null, 
+            string userType = null)
         {
             AutonomousSystemNumber = autonomousSystemNumber;
             AutonomousSystemOrganization = autonomousSystemOrganization;

@@ -14,8 +14,16 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class RepresentedCountry : Country
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public RepresentedCountry() { }
-        public RepresentedCountry(string type = null, int? confidence = null, string isoCode = null, Dictionary<string, string> names = null, int? geoNameId = null, List<string> locales = null) : base(confidence, isoCode, names, geoNameId, locales)
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public RepresentedCountry(string type = null, int? confidence = null, int? geoNameId = null, string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null)
+            : base(confidence, geoNameId, isoCode, names, locales)
         {
             Type = type;
         }

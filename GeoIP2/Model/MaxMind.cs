@@ -9,7 +9,14 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class MaxMind
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public MaxMind() { }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public MaxMind(int? queriesRemaining = null)
         {
             QueriesRemaining = queriesRemaining;

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using MaxMind.GeoIP2.Model;
 using Newtonsoft.Json;
-using MaxMind = MaxMind.GeoIP2.Model.MaxMind;
 
 namespace MaxMind.GeoIP2.Responses
 {

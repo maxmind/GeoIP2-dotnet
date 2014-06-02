@@ -8,7 +8,14 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Postal
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Postal() { }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Postal(string code = null, int? confidence = null)
         {
             Code = code;
