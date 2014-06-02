@@ -15,14 +15,27 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public class OmniResponse : AbstractCityResponse
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public OmniResponse() { }
 
-        public OmniResponse(City city = null, Location location = null, Postal postal = null,
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public OmniResponse(
+            City city = null,
+            Continent continent = null,
+            Country country = null,
+            Location location = null,
+            Model.MaxMind maxMind = null,
+            Postal postal = null,
+            Country registeredCountry = null,
+            RepresentedCountry representedCountry = null,
             List<Subdivision> subdivisions = null,
-            Continent continent = null, Country country = null, Model.MaxMind maxMind = null, Country registeredCountry = null,
-            RepresentedCountry representedCountry = null, Traits traits = null)
+            Traits traits = null)
             : base(
-                city, location, postal, subdivisions, continent, country, maxMind, registeredCountry, representedCountry, traits)
+                city, continent, country, location, maxMind, postal, registeredCountry, representedCountry, subdivisions, traits)
         {
         }
     }

@@ -10,10 +10,18 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class City : NamedEntity
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public City()
         {
         }
-        public City(int? confidence = null, Dictionary<string, string> names = null, int? geoNameId = null, List<string> locales = null) : base(names, geoNameId, locales)
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public City(int? confidence = null, int? geoNameId = null, Dictionary<string, string> names = null, List<string> locales = null)
+            : base(geoNameId, names, locales)
         {
             Confidence = confidence;
         }

@@ -9,7 +9,14 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Location
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Location() { }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Location(int? accuracyRadius = null, double? latitude = null, double? longitude = null, int? metroCode = null, string timeZone = null)
         {
             AccuracyRadius = accuracyRadius;

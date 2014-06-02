@@ -1,6 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+0.3.3 (2014-06-02)
+------------------
+
+* Constructors with named parameters were added to the model and response
+  classes. (Jon Wynveen)
+
 0.3.2 (2014-04-09)
 ------------------
 

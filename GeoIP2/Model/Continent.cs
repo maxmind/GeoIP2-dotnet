@@ -10,8 +10,16 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public class Continent : NamedEntity
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Continent() { }
-        public Continent(string code = null, Dictionary<string, string> names = null, int? geoNameId = null, List<string> locales = null) : base(names, geoNameId, locales)
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public Continent(string code = null, int? geoNameId = null, Dictionary<string, string> names = null, List<string> locales = null)
+            : base(geoNameId, names, locales)
         {
             Code = code;
         }
