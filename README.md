@@ -97,7 +97,9 @@ must read in metadata for the file.
 
 See the API documentation for more details.
 
-## Database Example ##
+## Database Examples ##
+
+### City Database ###
 
 ```csharp
 // This creates the DatabaseReader object, which should be reused across
@@ -122,6 +124,46 @@ Console.WriteLine(city.Postal.Code); // '55455'
 Console.WriteLine(city.Location.Latitude); // 44.9733
 Console.WriteLine(city.Location.Longitude); // -93.2323
 
+reader.Dispose();
+```
+
+### Connection-Type Database ###
+
+```csharp
+
+using (var reader = new DatabaseReader("GeoIP2-Connection-Type.mmdb"))
+{
+    var response = reader.ConnectionType("128.101.101.101");
+    Console.WriteLine(response.ConnectionType); // 'Corporate'
+    Console.WriteLine(response.IPAddress); // '128.101.101.101'
+}
+```
+
+### Domain Database ###
+
+```csharp
+
+using (var reader = new DatabaseReader("GeoIP2-Domain.mmdb"))
+{
+    var response = reader.Domain("128.101.101.101");
+    Console.WriteLine(response.Domain); // 'umn.edu'
+    Console.WriteLine(response.IPAddress); // '128.101.101.101'
+}
+```
+
+### ISP Database ###
+
+```csharp
+
+using (var reader = new DatabaseReader("GeoIP2-ISP.mmdb"))
+{
+    var response = reader.Isp("128.101.101.101");
+    Console.WriteLine(response.AutonomousSystemNumber); // 217
+    Console.WriteLine(response.AutonomousSystemOrganization); // 'University of Minnesota'
+    Console.WriteLine(response.Isp); // 'University of Minnesota'
+    Console.WriteLine(response.Organization); // 'University of Minnesota'
+    Console.WriteLine(response.IPAddress); // '128.101.101.101'
+}
 ```
 
 ## Exceptions ##
