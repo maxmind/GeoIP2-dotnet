@@ -111,14 +111,14 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void Isp()
         {
-            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-ISP-Org-Test.mmdb")))
+            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-ISP-Test.mmdb")))
             {
-                var ipAddress = "2001:1700::";
+                var ipAddress = "1.128.0.0";
                 var response = reader.Isp(ipAddress);
-                Assert.That(response.AutonomousSystemNumber, Is.EqualTo(6730));
-                Assert.That(response.AutonomousSystemOrganization, Is.EqualTo("Sunrise Communications AG"));
-
-                // XXX - Add org/isp when available
+                Assert.That(response.AutonomousSystemNumber, Is.EqualTo(1221));
+                Assert.That(response.AutonomousSystemOrganization, Is.EqualTo("Telstra Pty Ltd"));
+                Assert.That(response.Isp, Is.EqualTo("Telstra Internet"));
+                Assert.That(response.Organization, Is.EqualTo("Telstra Internet"));
 
                 Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
 
