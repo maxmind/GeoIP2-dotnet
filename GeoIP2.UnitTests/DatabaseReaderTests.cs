@@ -89,7 +89,6 @@ namespace MaxMind.GeoIP2.UnitTests
                 var ipAddress = "1.0.1.0";
 
                 var response = reader.ConnectionType(ipAddress);
-                // XXX -enum?
                 Assert.That(response.ConnectionType, Is.EqualTo("Cable/DSL"));
                 Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
 
