@@ -62,7 +62,7 @@ namespace MaxMind.GeoIP2
             _reader = new Reader(stream);
         }
 
-        private T Execute<T>(string ipAddress) where T : AbstractCountryResponse
+        private T Execute<T>(string ipAddress, bool hasTraits = true) where T : AbstractResponse
         {
             IPAddress ip;
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
@@ -73,13 +73,21 @@ namespace MaxMind.GeoIP2
             if (token == null)
                 throw new AddressNotFoundException("The address " + ipAddress + " is not in the database.");
 
-            if (token["traits"] == null)
+            JObject ipObject;
+            if (hasTraits)
             {
-                ((JObject)token).Add("traits", new JObject());
-            }
+                if (token["traits"] == null)
+                {
+                    ((JObject)token).Add("traits", new JObject());
+                }
 
-            var traits = (JObject)token["traits"];
-            traits.Add("ip_address", ipAddress);
+                ipObject = (JObject)token["traits"];
+            }
+            else
+            {
+                ipObject = (JObject)token;
+            }
+            ipObject.Add("ip_address", ipAddress);
 
             var response = token.ToObject<T>();
             response.SetLocales(_locales);
@@ -125,6 +133,36 @@ namespace MaxMind.GeoIP2
         public CityIspOrgResponse CityIspOrg(string ipAddress)
         {
             return Execute<CityIspOrgResponse>(ipAddress);
+        }
+
+        /// <summary>
+        /// Returns an <see cref="ConnectionTypeResponse"/> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="ConnectionTypeResponse"/></returns>
+        public ConnectionTypeResponse ConnectionType(string ipAddress)
+        {
+            return Execute<ConnectionTypeResponse>(ipAddress, false);
+        }
+
+        /// <summary>
+        /// Returns an <see cref="DomainResponse"/> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="DomainResponse"/></returns>
+        public DomainResponse Domain(string ipAddress)
+        {
+            return Execute<DomainResponse>(ipAddress, false);
+        }
+
+        /// <summary>
+        /// Returns an <see cref="IspResponse"/> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="IspResponse"/></returns>
+        public IspResponse Isp(string ipAddress)
+        {
+            return Execute<IspResponse>(ipAddress, false);
         }
 
         /// <summary>
