@@ -9,11 +9,13 @@ namespace MaxMind.GeoIP2.UnitTests
     [TestFixture]
     public class DatabaseReaderTests
     {
+        private readonly string _databaseDir;
         private readonly string _databaseFile;
 
         public DatabaseReaderTests()
         {
-            _databaseFile = Path.Combine("..", "..", "TestData", "MaxMind-DB", "test-data", "GeoIP2-City-Test.mmdb");
+            _databaseDir = Path.Combine("..", "..", "TestData", "MaxMind-DB", "test-data");
+            _databaseFile = Path.Combine(_databaseDir, "GeoIP2-City-Test.mmdb");
         }
 
         [Test]
@@ -76,6 +78,49 @@ namespace MaxMind.GeoIP2.UnitTests
             using (var reader = new DatabaseReader(_databaseFile))
             {
                 reader.City("10.10.10.10");
+            }
+        }
+
+        [Test]
+        public void ConnectionType()
+        {
+            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Connection-Type-Test.mmdb")))
+            {
+                var ipAddress = "1.0.1.0";
+
+                var response = reader.ConnectionType(ipAddress);
+                Assert.That(response.ConnectionType, Is.EqualTo("Cable/DSL"));
+                Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
+
+            }
+        }
+
+        [Test]
+        public void Domain()
+        {
+            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Domain-Test.mmdb")))
+            {
+                var ipAddress = "1.2.0.0";
+                var response = reader.Domain(ipAddress);
+                Assert.That(response.Domain, Is.EqualTo("maxmind.com"));
+                Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
+            }
+        }
+
+        [Test]
+        public void Isp()
+        {
+            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-ISP-Test.mmdb")))
+            {
+                var ipAddress = "1.128.0.0";
+                var response = reader.Isp(ipAddress);
+                Assert.That(response.AutonomousSystemNumber, Is.EqualTo(1221));
+                Assert.That(response.AutonomousSystemOrganization, Is.EqualTo("Telstra Pty Ltd"));
+                Assert.That(response.Isp, Is.EqualTo("Telstra Internet"));
+                Assert.That(response.Organization, Is.EqualTo("Telstra Internet"));
+
+                Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
+
             }
         }
     }
