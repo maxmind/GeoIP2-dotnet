@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    /// Abstract class that responses with country-level data subclass.
+    /// Abstract class for country-level response.
     /// </summary>
-    public abstract class AbstractCountryResponse
+    public abstract class AbstractCountryResponse : AbstractResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AbstractCountryResponse"/> class.
@@ -94,7 +94,7 @@ namespace MaxMind.GeoIP2.Responses
         /// Sets the locales on all the NamedEntity properties.
         /// </summary>
         /// <param name="locales">The locales specified by the user.</param>
-        internal virtual void SetLocales(List<string> locales)
+        internal override void SetLocales(List<string> locales)
         {
             if (Continent != null)
                 Continent.Locales = locales;
