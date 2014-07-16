@@ -13,7 +13,7 @@ namespace MaxMind.GeoIP2.UnitTests
     [TestFixture]
     public class DeserializationTests
     {
-        private string _omniBody = "{" + "\"city\":{"
+        private string _insightsBody = "{" + "\"city\":{"
             + "\"confidence\":76," + "\"geoname_id\":9876," + "\"names\":{"
             + "\"en\":\"Minneapolis\"" + "}" + "}," + "\"continent\":{"
             + "\"code\":\"NA\"," + "\"geoname_id\":42," + "\"names\":{"
@@ -64,12 +64,12 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        public void CanDeserializeOmniResponseRestSharp()
+        public void CanDeserializeInsightsResponseRestSharp()
         {
             var d = new JsonDeserializer();
             var r = new RestResponse();
-            r.Content = _omniBody;
-            CanDeserializeOmniResponse(d.Deserialize<OmniResponse>(r));
+            r.Content = _insightsBody;
+            CanDeserializeInsightsResponse(d.Deserialize<InsightsResponse>(r));
         }
 
         [Test]
@@ -79,9 +79,9 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        public void CanDeserializeOmniResponseNewtonsoftJson()
+        public void CanDeserializeInsightsResponseNewtonsoftJson()
         {
-            CanDeserializeOmniResponse(JsonConvert.DeserializeObject<OmniResponse>(_omniBody));
+            CanDeserializeInsightsResponse(JsonConvert.DeserializeObject<InsightsResponse>(_insightsBody));
         }
 
         public void CanDeserializeCountryResponse(CountryResponse resp)
@@ -109,60 +109,60 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.That(resp.Traits.IPAddress, Is.EqualTo("1.2.3.4"));
         }
 
-        public void CanDeserializeOmniResponse(OmniResponse omni)
+        public void CanDeserializeInsightsResponse(InsightsResponse insights)
         {
-            omni.SetLocales(new List<string> { "en" });
+            insights.SetLocales(new List<string> { "en" });
 
-            Assert.AreEqual(76, omni.City.Confidence);
-            Assert.AreEqual(9876, omni.City.GeoNameId);
-            Assert.AreEqual("Minneapolis", omni.City.Name);
+            Assert.AreEqual(76, insights.City.Confidence);
+            Assert.AreEqual(9876, insights.City.GeoNameId);
+            Assert.AreEqual("Minneapolis", insights.City.Name);
 
-            Assert.AreEqual("NA", omni.Continent.Code);
-            Assert.AreEqual(42, omni.Continent.GeoNameId);
-            Assert.AreEqual("North America", omni.Continent.Name);
+            Assert.AreEqual("NA", insights.Continent.Code);
+            Assert.AreEqual(42, insights.Continent.GeoNameId);
+            Assert.AreEqual("North America", insights.Continent.Name);
 
-            Assert.AreEqual(99, omni.Country.Confidence);
-            Assert.AreEqual(1, omni.Country.GeoNameId);
-            Assert.AreEqual("US", omni.Country.IsoCode);
-            Assert.AreEqual("United States of America", omni.Country.Name);
+            Assert.AreEqual(99, insights.Country.Confidence);
+            Assert.AreEqual(1, insights.Country.GeoNameId);
+            Assert.AreEqual("US", insights.Country.IsoCode);
+            Assert.AreEqual("United States of America", insights.Country.Name);
 
-            Assert.AreEqual(1500, omni.Location.AccuracyRadius);
-            Assert.AreEqual(44.979999999999997, omni.Location.Latitude);
-            Assert.AreEqual(93.263599999999997, omni.Location.Longitude);
-            Assert.AreEqual(765, omni.Location.MetroCode);
-            Assert.AreEqual("America/Chicago", omni.Location.TimeZone);
+            Assert.AreEqual(1500, insights.Location.AccuracyRadius);
+            Assert.AreEqual(44.979999999999997, insights.Location.Latitude);
+            Assert.AreEqual(93.263599999999997, insights.Location.Longitude);
+            Assert.AreEqual(765, insights.Location.MetroCode);
+            Assert.AreEqual("America/Chicago", insights.Location.TimeZone);
 
-            Assert.AreEqual(11, omni.MaxMind.QueriesRemaining);
+            Assert.AreEqual(11, insights.MaxMind.QueriesRemaining);
 
-            Assert.AreEqual("55401", omni.Postal.Code);
-            Assert.AreEqual(33, omni.Postal.Confidence);
+            Assert.AreEqual("55401", insights.Postal.Code);
+            Assert.AreEqual(33, insights.Postal.Confidence);
 
-            Assert.AreEqual(2, omni.RegisteredCountry.GeoNameId);
-            Assert.AreEqual("CA", omni.RegisteredCountry.IsoCode);
-            Assert.AreEqual("Canada", omni.RegisteredCountry.Name);
+            Assert.AreEqual(2, insights.RegisteredCountry.GeoNameId);
+            Assert.AreEqual("CA", insights.RegisteredCountry.IsoCode);
+            Assert.AreEqual("Canada", insights.RegisteredCountry.Name);
 
-            Assert.AreEqual(3, omni.RepresentedCountry.GeoNameId);
-            Assert.AreEqual("GB", omni.RepresentedCountry.IsoCode);
-            Assert.AreEqual("United Kingdom", omni.RepresentedCountry.Name);
-            Assert.AreEqual("C<military>", omni.RepresentedCountry.Type);
+            Assert.AreEqual(3, insights.RepresentedCountry.GeoNameId);
+            Assert.AreEqual("GB", insights.RepresentedCountry.IsoCode);
+            Assert.AreEqual("United Kingdom", insights.RepresentedCountry.Name);
+            Assert.AreEqual("C<military>", insights.RepresentedCountry.Type);
 
-            Assert.AreEqual(2, omni.Subdivisions.Count);
-            omni.Subdivisions[0].Locales = new List<string> { "en" };
-            Assert.AreEqual(88, omni.Subdivisions[0].Confidence);
-            Assert.AreEqual(574635, omni.Subdivisions[0].GeoNameId);
-            Assert.AreEqual("MN", omni.Subdivisions[0].IsoCode);
-            Assert.AreEqual("Minnesota", omni.Subdivisions[0].Name);
-            Assert.AreEqual("TT", omni.Subdivisions[1].IsoCode);
+            Assert.AreEqual(2, insights.Subdivisions.Count);
+            insights.Subdivisions[0].Locales = new List<string> { "en" };
+            Assert.AreEqual(88, insights.Subdivisions[0].Confidence);
+            Assert.AreEqual(574635, insights.Subdivisions[0].GeoNameId);
+            Assert.AreEqual("MN", insights.Subdivisions[0].IsoCode);
+            Assert.AreEqual("Minnesota", insights.Subdivisions[0].Name);
+            Assert.AreEqual("TT", insights.Subdivisions[1].IsoCode);
 
-            Assert.AreEqual(1234, omni.Traits.AutonomousSystemNumber);
-            Assert.AreEqual("AS Organization", omni.Traits.AutonomousSystemOrganization);
-            Assert.AreEqual("example.com", omni.Traits.Domain);
-            Assert.AreEqual("1.2.3.4", omni.Traits.IPAddress);
-            Assert.AreEqual(true, omni.Traits.IsAnonymousProxy);
-            Assert.AreEqual(true, omni.Traits.IsSatelliteProvider);
-            Assert.AreEqual("Comcast", omni.Traits.Isp);
-            Assert.AreEqual("Blorg", omni.Traits.Organization);
-            Assert.AreEqual("college", omni.Traits.UserType);
+            Assert.AreEqual(1234, insights.Traits.AutonomousSystemNumber);
+            Assert.AreEqual("AS Organization", insights.Traits.AutonomousSystemOrganization);
+            Assert.AreEqual("example.com", insights.Traits.Domain);
+            Assert.AreEqual("1.2.3.4", insights.Traits.IPAddress);
+            Assert.AreEqual(true, insights.Traits.IsAnonymousProxy);
+            Assert.AreEqual(true, insights.Traits.IsSatelliteProvider);
+            Assert.AreEqual("Comcast", insights.Traits.Isp);
+            Assert.AreEqual("Blorg", insights.Traits.Organization);
+            Assert.AreEqual("college", insights.Traits.UserType);
         }
 
         [Test]
@@ -171,7 +171,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var reader = new Reader(Path.Combine("..", "..", "TestData", "MaxMind-DB", "test-data", "GeoIP2-City-Test.mmdb"));
 
             var obj = reader.Find("216.160.83.56");
-            var response = obj.ToObject<OmniResponse>();
+            var response = obj.ToObject<InsightsResponse>();
             response.SetLocales(new List<string> { "en" });
 
             Assert.That(response.City.GeoNameId, Is.EqualTo(5803556));

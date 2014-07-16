@@ -23,8 +23,7 @@ namespace MaxMind.GeoIP2.Responses
         /// performed a "me" lookup against the web service, this will be the
         /// externally routable IP address for the system the code is running
         /// on. If the system is behind a NAT, this may differ from the IP
-        /// address locally assigned to it. This attribute is returned by all
-        /// end points.
+        /// address locally assigned to it.
         /// </summary>
         [JsonProperty("ip_address")]
         public string IPAddress { get; internal set; }
