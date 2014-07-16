@@ -16,8 +16,6 @@ namespace MaxMind.GeoIP2.Responses
         /// The <a
         /// href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)"
         /// >autonomous system number</a> associated with the IP address.
-        /// This attribute is only available from the City/ISP/Org and Omni
-        /// end points.
         /// </summary>
         [JsonProperty("autonomous_system_number")]
         public int? AutonomousSystemNumber { get; internal set; }
@@ -25,24 +23,19 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// The organization associated with the registered <a
         /// href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)"
-        /// >autonomous system number</a> for the IP address. This attribute
-        /// is only available from the City/ISP/Org and Omni end points.
+        /// >autonomous system number</a> for the IP address.
         /// </summary>
         [JsonProperty("autonomous_system_organization")]
         public string AutonomousSystemOrganization { get; internal set; }
 
         /// <summary>
-        /// The name of the ISP associated with the IP address. This
-        /// attribute is only available from the City/ISP/Org and Omni end
-        /// points.
+        /// The name of the ISP associated with the IP address.
         /// </summary>
         [JsonProperty("isp")]
         public string Isp { get; internal set; }
 
         /// <summary>
-        /// The name of the organization associated with the IP address. This
-        /// attribute is only available from the City/ISP/Org and Omni end
-        /// points.
+        /// The name of the organization associated with the IP address.
         /// </summary>
         [JsonProperty("organization")]
         public string Organization { get; internal set; }
@@ -52,8 +45,7 @@ namespace MaxMind.GeoIP2.Responses
         /// performed a "me" lookup against the web service, this will be the
         /// externally routable IP address for the system the code is running
         /// on. If the system is behind a NAT, this may differ from the IP
-        /// address locally assigned to it. This attribute is returned by all
-        /// end points.
+        /// address locally assigned to it.
         /// </summary>
         [JsonProperty("ip_address")]
         public string IPAddress { get; internal set; }

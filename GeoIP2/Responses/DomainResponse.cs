@@ -15,8 +15,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// The second level domain associated with the IP address. This will
         /// be something like "example.com" or "example.co.uk", not
-        /// "foo.example.com". This attribute is only available from the
-        /// City/ISP/Org and Omni end points.
+        /// "foo.example.com".
         /// </summary>
         [JsonProperty("domain")]
         public string Domain { get; internal set; }
@@ -26,8 +25,7 @@ namespace MaxMind.GeoIP2.Responses
         /// performed a "me" lookup against the web service, this will be the
         /// externally routable IP address for the system the code is running
         /// on. If the system is behind a NAT, this may differ from the IP
-        /// address locally assigned to it. This attribute is returned by all
-        /// end points.
+        /// address locally assigned to it.
         /// </summary>
         [JsonProperty("ip_address")]
         public string IPAddress { get; internal set; }

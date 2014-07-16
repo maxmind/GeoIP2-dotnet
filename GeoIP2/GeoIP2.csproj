@@ -86,6 +86,7 @@
     <Compile Include="Responses\ConnectionTypeResponse.cs" />
     <Compile Include="Responses\DomainResponse.cs" />
     <Compile Include="Responses\CountryResponse.cs" />
+    <Compile Include="Responses\InsightsResponse.cs" />
     <Compile Include="Responses\OmniResponse.cs" />
     <Compile Include="WebServiceClient.cs" />
   </ItemGroup>
