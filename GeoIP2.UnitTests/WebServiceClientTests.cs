@@ -27,7 +27,7 @@ namespace MaxMind.GeoIP2.UnitTests
             + "\"type\":\"military\"}," + "\"traits\":{"
             + "\"ip_address\":\"1.2.3.4\"" + "}}";
 
-        private const string OMNI_BODY = "{" + "\"city\":{"
+        private const string INSIGHTS_BODY = "{" + "\"city\":{"
             + "\"confidence\":76," + "\"geoname_id\":9876," + "\"names\":{"
             + "\"en\":\"Minneapolis\"" + "}" + "}," + "\"continent\":{"
             + "\"code\":\"NA\"," + "\"geoname_id\":42," + "\"names\":{"
@@ -55,7 +55,7 @@ namespace MaxMind.GeoIP2.UnitTests
             + "\"organization\":\"Blorg\"," + "\"user_type\":\"college\""
             + "}," + "\"maxmind\":{\"queries_remaining\":11}" + "}";
 
-        public OmniResponse RunClientGivenResponse(RestResponse response)
+        public InsightsResponse RunClientGivenResponse(RestResponse response)
         {
             response.ContentLength = response.Content.Length;
 
@@ -64,7 +64,7 @@ namespace MaxMind.GeoIP2.UnitTests
             restClient.Stub(r => r.Execute(Arg<IRestRequest>.Is.Anything)).Return(response);
 
             var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
-            return wsc.Omni("1.2.3.4", restClient);
+            return wsc.Insights("1.2.3.4", restClient);
         }
 
 
@@ -74,9 +74,9 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var restResponse = new RestResponse
             {
-                Content = OMNI_BODY,
+                Content = INSIGHTS_BODY,
                 ContentType = "application/json",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -99,9 +99,9 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var restResponse = new RestResponse
             {
-                Content = OMNI_BODY,
+                Content = INSIGHTS_BODY,
                 ContentType = "application/json",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -124,9 +124,9 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var restResponse = new RestResponse
             {
-                Content = OMNI_BODY,
+                Content = INSIGHTS_BODY,
                 ContentType = "application/json",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -144,21 +144,21 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        public void CorrectlyFormattedOmniResponseShouldDeserializeIntoResponseObject()
+        public void CorrectlyFormattedInsightsResponseShouldDeserializeIntoResponseObject()
         {
 
             var restResponse = new RestResponse
             {
-                Content = OMNI_BODY,
+                Content = INSIGHTS_BODY,
                 ContentType = "application/json",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
             var result = RunClientGivenResponse(restResponse);
 
             Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.InstanceOf<OmniResponse>());
+            Assert.That(result, Is.InstanceOf<InsightsResponse>());
         }
 
         [Test]
@@ -166,7 +166,7 @@ namespace MaxMind.GeoIP2.UnitTests
         public void IncorrectlyFormattedIPAddressShouldThrowException()
         {
             var client = new WebServiceClient(0, "abcde", new List<string> { "en" });
-            client.Omni("foo");
+            client.Insights("foo");
         }
 
         [Test]
@@ -176,7 +176,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = null,
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -192,7 +192,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 Content = "{\"code\":\"IP_ADDRESS_INVALID\","
                           + "\"error\":\"The value 1.2.3 is not a valid ip address\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3"),
                 StatusCode = (HttpStatusCode)400
             };
 
@@ -207,7 +207,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = null,
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)400
             };
 
@@ -222,7 +222,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = "{\"weird\": 42}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)400
             };
 
@@ -237,7 +237,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = "{\"invalid\": }",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)400
             };
 
@@ -250,7 +250,7 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             var restResponse = new RestResponse
             {
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)500
             };
 
@@ -258,12 +258,12 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(HttpException), ExpectedMessage = "Received an unexpected response for http://foo.com/omni/1.2.3.4 (status code: 300)", MatchType = MessageMatch.Exact),]
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "Received an unexpected response for http://foo.com/insights/1.2.3.4 (status code: 300)", MatchType = MessageMatch.Exact),]
         public void SurprisingStatusShouldThrowException()
         {
             var restResponse = new RestResponse
             {
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)300
             };
 
@@ -276,7 +276,7 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             var restResponse = new RestResponse
             {
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200,
                 ErrorException = new Exception("fake exception"),
                 ErrorMessage = "Internal error message",
@@ -294,7 +294,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 Content = "Cannot satisfy your Accept-Charset requirements",
                 ContentType = "text/plain",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)406
             };
 
@@ -309,7 +309,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 Content = COUNTRY_BODY,
                 ContentType = "bad/content-type",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -324,7 +324,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 Content = "{\"invalid\":yes}",
                 ContentType = "application/json",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
@@ -339,7 +339,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = "{\"code\":\"IP_ADDRESS_NOT_FOUND\", \"error\":\"The value 1.2.3.16 is not in the database.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)404
             };
 
@@ -353,7 +353,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = "{\"code\":\"IP_ADDRESS_RESERVED\",\"error\":\"The value 1.2.3.17 belongs to a reserved or private range.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)400
             };
 
@@ -367,7 +367,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = "{\"code\":\"AUTHORIZATION_INVALID\",\"error\":\"You have supplied an invalid MaxMind user ID and/or license key in the Authorization header.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)401
             };
 
@@ -381,7 +381,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = "{\"code\":\"LICENSE_KEY_REQUIRED\",\"error\":\"You have not supplied a MaxMind license key in the Authorization header.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)401
             };
 
@@ -395,7 +395,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = "{\"code\":\"USER_ID_REQUIRED\",\"error\":\"You have not supplied a MaxMind user ID in the Authorization header.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)401
             };
 
@@ -409,7 +409,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 Content = "{\"code\":\"OUT_OF_QUERIES\",\"error\":\"The license key you have provided is out of queries. Please purchase more queries to use this service.\"}",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)402
             };
 
@@ -424,25 +424,25 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 Content = "{}",
                 ContentType = "application/json",
-                ResponseUri = new Uri("http://foo.com/omni/1.2.3.4"),
+                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
                 StatusCode = (HttpStatusCode)200
             };
 
-            var omni = RunClientGivenResponse(restResponse);
+            var insights = RunClientGivenResponse(restResponse);
 
 
-            var city = omni.City;
+            var city = insights.City;
             Assert.IsNotNull(city);
             Assert.IsNull(city.Confidence);
 
-            var continent = omni.Continent;
+            var continent = insights.Continent;
             Assert.IsNotNull(continent);
             Assert.IsNull(continent.Code);
 
-            var country = omni.Country;
+            var country = insights.Country;
             Assert.IsNotNull(country);
 
-            var location = omni.Location;
+            var location = insights.Location;
             Assert.IsNotNull(location);
             Assert.IsNull(location.AccuracyRadius);
             Assert.IsNull(location.Latitude);
@@ -450,29 +450,29 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.IsNull(location.MetroCode);
             Assert.IsNull(location.TimeZone);
 
-            var maxmind = omni.MaxMind;
+            var maxmind = insights.MaxMind;
             Assert.IsNotNull(maxmind);
             Assert.IsNull(maxmind.QueriesRemaining);
 
-            Assert.IsNotNull(omni.Postal);
+            Assert.IsNotNull(insights.Postal);
 
-            var registeredCountry = omni.RegisteredCountry;
+            var registeredCountry = insights.RegisteredCountry;
             Assert.IsNotNull(registeredCountry);
 
-            var representedCountry = omni.RepresentedCountry;
+            var representedCountry = insights.RepresentedCountry;
             Assert.IsNotNull(representedCountry);
             Assert.IsNull(representedCountry.Type);
 
-            var subdivisions = omni.Subdivisions;
+            var subdivisions = insights.Subdivisions;
             Assert.IsNotNull(subdivisions);
             Assert.AreEqual(0, subdivisions.Count);
 
-            var subdiv = omni.MostSpecificSubdivision;
+            var subdiv = insights.MostSpecificSubdivision;
             Assert.IsNotNull(subdiv);
             Assert.IsNull(subdiv.IsoCode);
             Assert.IsNull(subdiv.Confidence);
 
-            var traits = omni.Traits;
+            var traits = insights.Traits;
             Assert.IsNotNull(traits);
             Assert.IsNull(traits.AutonomousSystemNumber);
             Assert.IsNull(traits.AutonomousSystemOrganization);

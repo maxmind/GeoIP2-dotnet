@@ -1,4 +1,5 @@
 ﻿using MaxMind.GeoIP2.Responses;
+using System;
 
 namespace MaxMind.GeoIP2
 {
@@ -13,6 +14,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="OmniResponse"/></returns>
+        [Obsolete]
         OmniResponse Omni(string ipAddress);
 
         /// <summary>
@@ -34,6 +36,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="CityIspOrgResponse"/></returns>
+        [Obsolete("CityIspOrg is deprecated. Please use City instead.")]
         CityIspOrgResponse CityIspOrg(string ipAddress);
     }
 }

@@ -35,7 +35,6 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         /// A <see cref="System.Collections.Generic.Dictionary{T,U}"/> from locale codes to the name in that locale.
-        /// This attribute is returned by all end points.
         /// </summary>
         public Dictionary<string, string> Names
         {
@@ -44,7 +43,7 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        /// The GeoName ID for the city. This attribute is returned by all endpoints
+        /// The GeoName ID for the city. 
         /// </summary>
         [JsonProperty("geoname_id")]
         [DeserializeAs(Name = "geoname_id")]
@@ -57,8 +56,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         /// The name of the city based on the locales list passed to the
-        /// <see cref="WebServiceClient"/> constructor. This
-        /// attribute is returned by all endpoints.
+        /// <see cref="WebServiceClient"/> constructor.
         /// </summary>
         public string Name
         {

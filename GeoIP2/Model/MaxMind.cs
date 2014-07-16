@@ -4,8 +4,6 @@ namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     /// Contains data related to your MaxMind account.
-    /// 
-    /// This record is returned by all the end points.
     /// </summary>
     public class MaxMind
     {
@@ -23,8 +21,9 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        /// The number of remaining queried in your account for the current
-        /// end point.
+        /// The number of remaining queried in your account for the web
+        /// service end point. This will be null when using a local
+        /// database.
         /// </summary>
         [JsonProperty("queries_remaining")]
         public int? QueriesRemaining { get; internal set; }

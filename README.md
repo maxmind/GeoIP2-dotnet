@@ -60,23 +60,23 @@ See the API documentation for more details.
 // key.
 var client = new WebServiceClient(42, "license_key");
 
-// Replace "Omni" with the method corresponding to the web service that
-// you are using, e.g., "Country", "City", "CityIspOrg".
-var omni = client.Omni("128.101.101.101");
+// Replace "City" with the method corresponding to the web service that
+// you are using, e.g., "Country", "Insights".
+var city = client.City("128.101.101.101");
 
-Console.WriteLine(omni.Country.IsoCode); // 'US'
-Console.WriteLine(omni.Country.Name); // 'United States'
-Console.WriteLine(omni.Country.Names["zh-CN"]); // '美国'
+Console.WriteLine(city.Country.IsoCode); // 'US'
+Console.WriteLine(city.Country.Name); // 'United States'
+Console.WriteLine(city.Country.Names["zh-CN"]); // '美国'
 
-Console.WriteLine(omni.MostSpecificSubdivision.Name); // 'Minnesota'
-Console.WriteLine(omni.MostSpecificSubdivision.IsoCode); // 'MN'
+Console.WriteLine(city.MostSpecificSubdivision.Name); // 'Minnesota'
+Console.WriteLine(city.MostSpecificSubdivision.IsoCode); // 'MN'
 
-Console.WriteLine(omni.City.Name); // 'Minneapolis'
+Console.WriteLine(city.City.Name); // 'Minneapolis'
 
-Console.WriteLine(omni.Postal.Code); // '55455'
+Console.WriteLine(city.Postal.Code); // '55455'
 
-Console.WriteLine(omni.Location.Latitude); // 44.9733
-Console.WriteLine(omni.Location.Longitude); // -93.2323
+Console.WriteLine(city.Location.Latitude); // 44.9733
+Console.WriteLine(city.Location.Longitude); // -93.2323
 
 ```
 
@@ -88,7 +88,7 @@ file access mode. You may then call the appropriate method (e.g., `city`) for
 your database, passing it the IP address you want to look up.
 
 If the lookup succeeds, the method call will return a response class for the
-GeoIP lookup. This class in turn contains multiple model classes, each of
+GeoIP2 lookup. This class in turn contains multiple model classes, each of
 which represents part of the data returned by the database.
 
 We recommend reusing the `DatabaseReader` object rather than creating a new
@@ -212,12 +212,12 @@ piece of data for any given IP address.
 Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.
 
-See the [GeoIP2 web service
+See the [GeoIP2 Precision web service
 docs](http://dev.maxmind.com/geoip/geoip2/web-services) for details on what
 data each end point may return.
 
 The only piece of data which is always returned is the `ipAddress` attribute
-in the `GeoIp2\Record\Traits` record.
+in the `MaxMind.GeoIP2.Traits` record.
 
 Every record class attribute has a corresponding predicate method so you can
 check to see if the attribute is set.

@@ -14,10 +14,10 @@ namespace MaxMind.GeoIP2
 {
     /// <summary>
     /// <para>
-    /// This class provides a client API for all the GeoIP2 web service's end points.
-    /// The end points are Country, City, City/ISP/Org, and Omni. Each end point
+    /// This class provides a client API for all the GeoIP2 Precision web service 
+    /// end points. The end points are Country, City, and Insights. Each end point
     /// returns a different set of data about an IP address, with Country returning
-    /// the least data and Omni the most.
+    /// the least data and Insights the most.
     /// </para>
     ///
     /// <para>
@@ -112,7 +112,7 @@ namespace MaxMind.GeoIP2
 
         private IRestClient CreateClient()
         {
-            var restClient = new RestClient("https://" + _host + "/geoip/v2.0");
+            var restClient = new RestClient("https://" + _host + "/geoip/v2.1");
             restClient.Authenticator = new HttpBasicAuthenticator(_userID.ToString(), _licenseKey);
             restClient.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
@@ -125,12 +125,33 @@ namespace MaxMind.GeoIP2
             return restClient;
         }
 
+        /// <summary>
+        /// Returns an <see cref="InsightsResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <returns>An <see cref="InsightsResponse"/></returns>
+        public InsightsResponse Insights(string ipAddress)
+        {
+            return Insights(ipAddress, CreateClient());
+        }
+
+        /// <summary>
+        /// Returns an <see cref="InsightsResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="restClient">The RestClient to use</param>
+        /// <returns>An <see cref="InsightsResponse"/></returns>
+        internal InsightsResponse Insights(string ipAddress, IRestClient restClient)
+        {
+            return Execute<InsightsResponse>("insights/{ip}", ipAddress, restClient);
+        }
 
         /// <summary>
         /// Returns an <see cref="OmniResponse"/> for the specified ip address.
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="OmniResponse"/></returns>
+        [Obsolete("Omni is deprecated. Please use Insights instead.")]
         public OmniResponse Omni(string ipAddress)
         {
             return Omni(ipAddress, CreateClient());
@@ -142,9 +163,10 @@ namespace MaxMind.GeoIP2
         /// <param name="ipAddress">The ip address.</param>
         /// <param name="restClient">The RestClient to use</param>
         /// <returns>An <see cref="OmniResponse"/></returns>
+        [Obsolete("Omni is deprecated. Please use Insights instead.")]
         internal OmniResponse Omni(string ipAddress, IRestClient restClient)
         {
-            return Execute<OmniResponse>("omni/{ip}", ipAddress, restClient);
+            return Execute<OmniResponse>("insights/{ip}", ipAddress, restClient);
         }
 
         /// <summary>
@@ -194,6 +216,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="CityIspOrgResponse"/></returns>
+        [Obsolete("CityIspOrg is deprecated. Please use City instead.")]
         public CityIspOrgResponse CityIspOrg(string ipAddress)
         {
             return CityIspOrg(ipAddress, CreateClient());
@@ -205,9 +228,10 @@ namespace MaxMind.GeoIP2
         /// <param name="ipAddress">The ip address.</param>
         /// <param name="restClient">The RestClient to use</param>
         /// <returns>An <see cref="CityIspOrgResponse"/></returns>
+        [Obsolete("CityIspOrg is deprecated. Please use City instead.")]
         internal CityIspOrgResponse CityIspOrg(string ipAddress, IRestClient restClient)
         {
-            return Execute<CityIspOrgResponse>("city_isp_org/{ip}", ipAddress, restClient);
+            return Execute<CityIspOrgResponse>("city/{ip}", ipAddress, restClient);
         }
 
         private T Execute<T>(string urlPattern, string ipAddress, IRestClient restClient) where T : AbstractCountryResponse, new()
