@@ -168,14 +168,14 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void CanDeserializeFromDatabaseJToken()
         {
-            var reader = new Reader(Path.Combine("..", "..", "TestData", "GeoLite2-City.mmdb"));
+            var reader = new Reader(Path.Combine("..", "..", "TestData", "MaxMind-DB", "test-data", "GeoIP2-City-Test.mmdb"));
 
-            var obj = reader.Find("74.125.227.161");
+            var obj = reader.Find("216.160.83.56");
             var response = obj.ToObject<OmniResponse>();
             response.SetLocales(new List<string> { "en" });
 
-            Assert.That(response.City.GeoNameId, Is.EqualTo(5375480));
-            Assert.That(response.City.Name, Is.EqualTo("Mountain View"));
+            Assert.That(response.City.GeoNameId, Is.EqualTo(5803556));
+            Assert.That(response.City.Name, Is.EqualTo("Milton"));
 
             Assert.That(response.Continent.Code, Is.EqualTo("NA"));
             Assert.That(response.Continent.GeoNameId, Is.EqualTo(6255149));
@@ -185,20 +185,20 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.That(response.Country.IsoCode, Is.EqualTo("US"));
             Assert.That(response.Country.Name, Is.EqualTo("United States"));
 
-            Assert.That(response.Location.Latitude, Is.EqualTo(37.419200000000004));
-            Assert.That(response.Location.Longitude, Is.EqualTo(-122.0574));
-            Assert.That(response.Location.MetroCode, Is.EqualTo(807));
+            Assert.That(response.Location.Latitude, Is.EqualTo(47.2513));
+            Assert.That(response.Location.Longitude, Is.EqualTo(-122.3149));
+            Assert.That(response.Location.MetroCode, Is.EqualTo(819));
             Assert.That(response.Location.TimeZone, Is.EqualTo("America/Los_Angeles"));
 
-            Assert.That(response.Postal.Code, Is.EqualTo("94043"));
+            Assert.That(response.Postal.Code, Is.EqualTo("98354"));
 
-            Assert.That(response.RegisteredCountry.GeoNameId, Is.EqualTo(6252001));
-            Assert.That(response.RegisteredCountry.IsoCode, Is.EqualTo("US"));
-            Assert.That(response.RegisteredCountry.Name, Is.EqualTo("United States"));
+            Assert.That(response.RegisteredCountry.GeoNameId, Is.EqualTo(2635167));
+            Assert.That(response.RegisteredCountry.IsoCode, Is.EqualTo("GB"));
+            Assert.That(response.RegisteredCountry.Name, Is.EqualTo("United Kingdom"));
 
-            Assert.That(response.Subdivisions[0].GeoNameId, Is.EqualTo(5332921));
-            Assert.That(response.Subdivisions[0].IsoCode, Is.EqualTo("CA"));
-            Assert.That(response.Subdivisions[0].Name, Is.EqualTo("California"));
+            Assert.That(response.Subdivisions[0].GeoNameId, Is.EqualTo(5815135));
+            Assert.That(response.Subdivisions[0].IsoCode, Is.EqualTo("WA"));
+            Assert.That(response.Subdivisions[0].Name, Is.EqualTo("Washington"));
         }
     }
 }
