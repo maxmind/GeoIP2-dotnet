@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-0.4.0 (2014-07-xx)
+0.4.0 (2014-07-22)
 ------------------
 
 * The web service client API has been updated for the v2.1 release of the web
@@ -9,6 +9,7 @@ GeoIP2 .NET API Release Notes
   `WebServiceClient` have been deprecated. The `City` method now provides all
   of the data formerly provided by `CityIspOrg`, and the `Omni` method has
   been replaced by the `Insights` method.
+* Support was added for the GeoIP2 Connection Type, Domain, and ISP databases.
 
 
 0.3.3 (2014-06-02)
