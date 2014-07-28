@@ -2,6 +2,7 @@
 using System.IO;
 using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
+using MaxMind.GeoIP2.Responses;
 using NUnit.Framework;
 
 namespace MaxMind.GeoIP2.UnitTests
@@ -79,6 +80,16 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 reader.City("10.10.10.10");
             }
+        }
+
+        [Test]
+        public void UnknownAddressTryGet()
+        {
+          using (var reader = new DatabaseReader(_databaseFile))
+          {
+            CityResponse response;
+            Assert.IsFalse(reader.TryGetCity("10.10.10.10", out response));
+          }
         }
 
         [Test]
