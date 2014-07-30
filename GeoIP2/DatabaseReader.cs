@@ -87,7 +87,7 @@ namespace MaxMind.GeoIP2
 
             if (token == null)
             {
-            return false;
+                return false;
             }
 
             JObject ipObject;
@@ -95,7 +95,7 @@ namespace MaxMind.GeoIP2
             {
                 if (token["traits"] == null)
                 {
-                  ((JObject)token).Add("traits", new JObject());
+                    ((JObject)token).Add("traits", new JObject());
                 }
 
                 ipObject = (JObject)token["traits"];
