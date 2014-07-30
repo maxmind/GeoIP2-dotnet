@@ -79,7 +79,9 @@ namespace MaxMind.GeoIP2
 
             IPAddress ip;
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
-            throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
+            {
+                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
+            }
 
             var token = _reader.Find(ipAddress);
 
@@ -91,16 +93,16 @@ namespace MaxMind.GeoIP2
             JObject ipObject;
             if (hasTraits)
             {
-            if (token["traits"] == null)
-            {
-              ((JObject)token).Add("traits", new JObject());
-            }
+                if (token["traits"] == null)
+                {
+                  ((JObject)token).Add("traits", new JObject());
+                }
 
-            ipObject = (JObject)token["traits"];
+                ipObject = (JObject)token["traits"];
             }
             else
             {
-            ipObject = (JObject)token;
+                ipObject = (JObject)token;
             }
 
             ipObject.Add("ip_address", ipAddress);
