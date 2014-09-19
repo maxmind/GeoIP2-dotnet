@@ -64,14 +64,31 @@ namespace MaxMind.GeoIP2
 
         private T Execute<T>(string ipAddress, bool hasTraits = true) where T : AbstractResponse
         {
+            T response;
+            if (TryExecute(ipAddress, out response, hasTraits))
+            {
+            return response;
+            }
+
+            throw new AddressNotFoundException("The address " + ipAddress + " is not in the database.");
+        }
+
+        private bool TryExecute<T>(string ipAddress, out T response, bool hasTraits = true) where T : AbstractResponse
+        {
+            response = null;
+
             IPAddress ip;
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
+            {
                 throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
+            }
 
             var token = _reader.Find(ipAddress);
 
             if (token == null)
-                throw new AddressNotFoundException("The address " + ipAddress + " is not in the database.");
+            {
+                return false;
+            }
 
             JObject ipObject;
             if (hasTraits)
@@ -87,12 +104,13 @@ namespace MaxMind.GeoIP2
             {
                 ipObject = (JObject)token;
             }
+
             ipObject.Add("ip_address", ipAddress);
 
-            var response = token.ToObject<T>();
+            response = token.ToObject<T>();
             response.SetLocales(_locales);
 
-            return response;
+            return true;
         }
 
         /// <summary>
@@ -117,6 +135,17 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        /// Returns true if an <see cref="CountryResponse"/> is found for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="response">The <see cref="CountryResponse"/> if found.</param>
+        /// <returns>true if an <see cref="CountryResponse"/> if found.</returns>
+        public bool TryGetCountry(string ipAddress, out CountryResponse response)
+        {
+            return TryExecute(ipAddress, out response);
+        }
+
+        /// <summary>
         /// Returns an <see cref="CityResponse"/> for the specified ip address.
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
@@ -124,6 +153,17 @@ namespace MaxMind.GeoIP2
         public CityResponse City(string ipAddress)
         {
             return Execute<CityResponse>(ipAddress);
+        }
+
+        /// <summary>
+        /// Returns true if an <see cref="CityResponse"/> is found for the specified ip address.
+        /// </summary>
+        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="response">The <see cref="CityResponse"/> if found.</param>
+        /// <returns>true if an <see cref="CityResponse"/> if found.</returns>
+        public bool TryGetCity(string ipAddress, out CityResponse response)
+        {
+            return TryExecute(ipAddress, out response);
         }
 
         /// <summary>
