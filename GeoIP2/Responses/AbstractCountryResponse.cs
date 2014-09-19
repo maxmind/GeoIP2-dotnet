@@ -81,7 +81,7 @@ namespace MaxMind.GeoIP2.Responses
         /// </returns>
         public override string ToString()
         {
-            return "Country ["
+            return this.GetType().Name + " ["
                    + (Continent != null ? "Continent=" + Continent + ", " : "")
                    + (Country != null ? "Country=" + Country + ", " : "")
                    + (RegisteredCountry != null ? "RegisteredCountry=" + RegisteredCountry + ", " : "")
