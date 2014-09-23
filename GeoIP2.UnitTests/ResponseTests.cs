@@ -10,12 +10,12 @@ namespace MaxMind.GeoIP2.UnitTests
     {
 
         [Test]
-        public void OmniConstruction()
+        public void InsightsConstruction()
         {
             var city = new City();
-            var omniReponse = new OmniResponse(city: city);
+            var insightsReponse = new InsightsResponse(city: city);
 
-            Assert.AreEqual(omniReponse.City, city);
+            Assert.AreEqual(insightsReponse.City, city);
         }
 
     }

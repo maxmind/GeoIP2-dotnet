@@ -3,6 +3,7 @@ using System.IO;
 using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
 using NUnit.Framework;
+using System;
 
 namespace MaxMind.GeoIP2.UnitTests
 {
@@ -33,7 +34,7 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             using (var reader = new DatabaseReader(_databaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
             {
-                var resp = reader.Omni("81.2.69.160");
+                var resp = reader.City("81.2.69.160");
                 Assert.That(resp.City.Name, Is.EqualTo("Лондон"));
             }
         }
@@ -66,7 +67,7 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             using (var reader = new DatabaseReader(_databaseFile))
             {
-                var resp = reader.CityIspOrg("81.2.69.160");
+                var resp = reader.City("81.2.69.160");
                 Assert.That(resp.Traits.IPAddress, Is.EqualTo("81.2.69.160"));
             }
         }
@@ -78,6 +79,26 @@ namespace MaxMind.GeoIP2.UnitTests
             using (var reader = new DatabaseReader(_databaseFile))
             {
                 reader.City("10.10.10.10");
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "A GeoIP2-City database cannot be opened with the Country method", MatchType = MessageMatch.Contains)]
+        public void InvalidMethod()
+        {
+            using (var reader = new DatabaseReader(_databaseFile))
+            {
+                reader.Country("10.10.10.10");
+            }
+        }
+
+        [Test]
+        public void TestCountry()
+        {
+            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb")))
+            {
+                var resp = reader.Country("81.2.69.160");
+                Assert.That(resp.Country.IsoCode, Is.EqualTo("GB"));
             }
         }
 
@@ -121,6 +142,15 @@ namespace MaxMind.GeoIP2.UnitTests
 
                 Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
 
+            }
+        }
+
+        [Test]
+        public void Metadata()
+        {
+            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Domain-Test.mmdb")))
+            {
+                Assert.That(reader.Metadata.DatabaseType, Is.EqualTo("GeoIP2-Domain"));
             }
         }
     }

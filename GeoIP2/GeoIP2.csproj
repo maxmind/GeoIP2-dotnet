@@ -80,14 +80,12 @@
     <Compile Include="Responses\AbstractCityResponse.cs" />
     <Compile Include="Responses\AbstractCountryResponse.cs" />
     <Compile Include="Responses\AbstractResponse.cs" />
-    <Compile Include="Responses\CityIspOrgResponse.cs" />
     <Compile Include="Responses\CityResponse.cs" />
     <Compile Include="Responses\IspResponse.cs" />
     <Compile Include="Responses\ConnectionTypeResponse.cs" />
     <Compile Include="Responses\DomainResponse.cs" />
     <Compile Include="Responses\CountryResponse.cs" />
     <Compile Include="Responses\InsightsResponse.cs" />
-    <Compile Include="Responses\OmniResponse.cs" />
     <Compile Include="WebServiceClient.cs" />
   </ItemGroup>
   <ItemGroup>
