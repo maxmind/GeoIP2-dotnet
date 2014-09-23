@@ -10,14 +10,6 @@ namespace MaxMind.GeoIP2
     public interface IGeoIP2Provider
     {
         /// <summary>
-        /// Returns an <see cref="OmniResponse"/> for the specified ip address.
-        /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
-        /// <returns>An <see cref="OmniResponse"/></returns>
-        [Obsolete]
-        OmniResponse Omni(string ipAddress);
-
-        /// <summary>
         /// Returns an <see cref="CountryResponse"/> for the specified ip address.
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
@@ -30,13 +22,5 @@ namespace MaxMind.GeoIP2
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="CityResponse"/></returns>
         CityResponse City(string ipAddress);
-
-        /// <summary>
-        /// Returns an <see cref="CityIspOrgResponse"/> for the specified ip address.
-        /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
-        /// <returns>An <see cref="CityIspOrgResponse"/></returns>
-        [Obsolete("CityIspOrg is deprecated. Please use City instead.")]
-        CityIspOrgResponse CityIspOrg(string ipAddress);
     }
 }
