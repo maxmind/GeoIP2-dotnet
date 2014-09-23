@@ -96,17 +96,6 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="OmniResponse"/> for the specified ip address.
-        /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
-        /// <returns>An <see cref="OmniResponse"/></returns>
-        [Obsolete("Omni is deprecated. Please use City instead.")]
-        public OmniResponse Omni(string ipAddress)
-        {
-            return Execute<OmniResponse>(ipAddress);
-        }
-
-        /// <summary>
         /// Returns an <see cref="CountryResponse"/> for the specified ip address.
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
@@ -124,17 +113,6 @@ namespace MaxMind.GeoIP2
         public CityResponse City(string ipAddress)
         {
             return Execute<CityResponse>(ipAddress);
-        }
-
-        /// <summary>
-        /// Returns an <see cref="CityIspOrgResponse"/> for the specified ip address.
-        /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
-        /// <returns>An <see cref="CityIspOrgResponse"/></returns>
-        [Obsolete("CityIspOrg is deprecated. Please use City instead.")]
-        public CityIspOrgResponse CityIspOrg(string ipAddress)
-        {
-            return Execute<CityIspOrgResponse>(ipAddress);
         }
 
         /// <summary>

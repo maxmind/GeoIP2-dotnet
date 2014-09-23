@@ -33,7 +33,7 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             using (var reader = new DatabaseReader(_databaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
             {
-                var resp = reader.Omni("81.2.69.160");
+                var resp = reader.City("81.2.69.160");
                 Assert.That(resp.City.Name, Is.EqualTo("Лондон"));
             }
         }
@@ -66,7 +66,7 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             using (var reader = new DatabaseReader(_databaseFile))
             {
-                var resp = reader.CityIspOrg("81.2.69.160");
+                var resp = reader.City("81.2.69.160");
                 Assert.That(resp.Traits.IPAddress, Is.EqualTo("81.2.69.160"));
             }
         }

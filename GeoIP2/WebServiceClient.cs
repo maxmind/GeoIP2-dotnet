@@ -147,29 +147,6 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="OmniResponse"/> for the specified ip address.
-        /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
-        /// <returns>An <see cref="OmniResponse"/></returns>
-        [Obsolete("Omni is deprecated. Please use Insights instead.")]
-        public OmniResponse Omni(string ipAddress)
-        {
-            return Omni(ipAddress, CreateClient());
-        }
-
-        /// <summary>
-        /// Returns an <see cref="OmniResponse"/> for the specified ip address.
-        /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
-        /// <param name="restClient">The RestClient to use</param>
-        /// <returns>An <see cref="OmniResponse"/></returns>
-        [Obsolete("Omni is deprecated. Please use Insights instead.")]
-        internal OmniResponse Omni(string ipAddress, IRestClient restClient)
-        {
-            return Execute<OmniResponse>("insights/{ip}", ipAddress, restClient);
-        }
-
-        /// <summary>
         /// Returns an <see cref="CountryResponse"/> for the specified ip address.
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
@@ -209,29 +186,6 @@ namespace MaxMind.GeoIP2
         internal CityResponse City(string ipAddress, IRestClient restClient)
         {
             return Execute<CityResponse>("city/{ip}", ipAddress, restClient);
-        }
-
-        /// <summary>
-        /// Returns an <see cref="CityIspOrgResponse"/> for the specified ip address.
-        /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
-        /// <returns>An <see cref="CityIspOrgResponse"/></returns>
-        [Obsolete("CityIspOrg is deprecated. Please use City instead.")]
-        public CityIspOrgResponse CityIspOrg(string ipAddress)
-        {
-            return CityIspOrg(ipAddress, CreateClient());
-        }
-
-        /// <summary>
-        /// Returns an <see cref="CityIspOrgResponse"/> for the specified ip address.
-        /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
-        /// <param name="restClient">The RestClient to use</param>
-        /// <returns>An <see cref="CityIspOrgResponse"/></returns>
-        [Obsolete("CityIspOrg is deprecated. Please use City instead.")]
-        internal CityIspOrgResponse CityIspOrg(string ipAddress, IRestClient restClient)
-        {
-            return Execute<CityIspOrgResponse>("city/{ip}", ipAddress, restClient);
         }
 
         private T Execute<T>(string urlPattern, string ipAddress, IRestClient restClient) where T : AbstractCountryResponse, new()
