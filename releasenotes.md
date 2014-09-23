@@ -1,6 +1,15 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+0.5.0 (2014-09-XX)
+------------------
+
+* The deprecated `CityIspOrg` and `Omni` methods were removed.
+* `DatabaseReader` methods will now throw an `InvalidOperationException` when
+  called for the wrong database type.
+* `DatabaseReader` now has a `Metadata` property that provides an object
+   containing the metadata for the open database.
+
 0.4.0 (2014-07-22)
 ------------------
 

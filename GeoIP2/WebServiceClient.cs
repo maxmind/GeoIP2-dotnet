@@ -114,10 +114,9 @@ namespace MaxMind.GeoIP2
         {
             var restClient = new RestClient("https://" + _host + "/geoip/v2.1");
             restClient.Authenticator = new HttpBasicAuthenticator(_userID.ToString(), _licenseKey);
-            restClient.AddHandler("application/vnd.maxmind.com-omni+json", new JsonDeserializer());
+            restClient.AddHandler("application/vnd.maxmind.com-insights+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
-            restClient.AddHandler("application/vnd.maxmind.com-city-isp-org+json", new JsonDeserializer());
             restClient.Timeout = _timeout;
 
             restClient.UserAgent = String.Format("GeoIP2 .NET Client {0}", version);
