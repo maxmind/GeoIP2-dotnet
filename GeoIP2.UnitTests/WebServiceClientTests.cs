@@ -137,10 +137,10 @@ namespace MaxMind.GeoIP2.UnitTests
             restClient.Stub(r => r.Execute(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
             var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
-            var result = wsc.CityIspOrg("1.2.3.4", restClient);
+            var result = wsc.City("1.2.3.4", restClient);
 
             Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.InstanceOf<CityIspOrgResponse>());
+            Assert.That(result, Is.InstanceOf<CityResponse>());
         }
 
         [Test]
