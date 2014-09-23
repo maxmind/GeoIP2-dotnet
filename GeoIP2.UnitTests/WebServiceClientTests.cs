@@ -119,31 +119,6 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        public void CorrectlyFormattedCityIspOrgResponseShouldDeserializeIntoResponseObject()
-        {
-
-            var restResponse = new RestResponse
-            {
-                Content = INSIGHTS_BODY,
-                ContentType = "application/json",
-                ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode)200
-            };
-
-            restResponse.ContentLength = restResponse.Content.Length;
-
-            var restClient = MockRepository.GenerateStub<IRestClient>();
-
-            restClient.Stub(r => r.Execute(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
-
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
-            var result = wsc.City("1.2.3.4", restClient);
-
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.InstanceOf<CityResponse>());
-        }
-
-        [Test]
         public void CorrectlyFormattedInsightsResponseShouldDeserializeIntoResponseObject()
         {
 
