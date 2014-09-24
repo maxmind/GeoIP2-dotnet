@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-0.5.0 (2014-09-XX)
+0.5.0 (2014-09-24)
 ------------------
 
 * The deprecated `CityIspOrg` and `Omni` methods were removed.
