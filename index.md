@@ -2,18 +2,10 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v0.4.0
+version: v2.0.0
 ---
 
 # GeoIP2 .NET API #
-
-## Beta Note ##
-
-This is a beta release. The API may change before the first production
-release, which will be numbered 2.0.0.
-
-You may find information on the GeoIP2 beta release process on [our
-website](http://www.maxmind.com/en/geoip2_beta).
 
 ## Description ##
 
@@ -61,30 +53,72 @@ See the API documentation for more details.
 
 ## Web Service Example ##
 
+### Country Service ###
+
 ```csharp
 // This creates a WebServiceClient object that can be reused across requests.
 // Replace "42" with your user ID and "license_key" with your license
 // key.
 var client = new WebServiceClient(42, "license_key");
 
-// Replace "City" with the method corresponding to the web service that
-// you are using, e.g., "Country", "Insights".
-var city = client.City("128.101.101.101");
+// Do the lookup
+var response = client.Country("128.101.101.101");
 
-Console.WriteLine(city.Country.IsoCode); // 'US'
-Console.WriteLine(city.Country.Name); // 'United States'
-Console.WriteLine(city.Country.Names["zh-CN"]); // '美国'
+Console.WriteLine(response.Country.IsoCode);        // 'US'
+Console.WriteLine(response.Country.Name);           // 'United States'
+Console.WriteLine(response.Country.Names["zh-CN"]); // '美国'
+```
 
-Console.WriteLine(city.MostSpecificSubdivision.Name); // 'Minnesota'
-Console.WriteLine(city.MostSpecificSubdivision.IsoCode); // 'MN'
+### City Service ###
 
-Console.WriteLine(city.City.Name); // 'Minneapolis'
+```csharp
+// This creates a WebServiceClient object that can be reused across requests.
+// Replace "42" with your user ID and "license_key" with your license
+// key.
+var client = new WebServiceClient(42, "license_key");
 
-Console.WriteLine(city.Postal.Code); // '55455'
+// Do the lookup
+var response = client.City("128.101.101.101");
 
-Console.WriteLine(city.Location.Latitude); // 44.9733
-Console.WriteLine(city.Location.Longitude); // -93.2323
+Console.WriteLine(response.Country.IsoCode);        // 'US'
+Console.WriteLine(response.Country.Name);           // 'United States'
+Console.WriteLine(response.Country.Names["zh-CN"]); // '美国'
 
+Console.WriteLine(response.MostSpecificSubdivision.Name);    // 'Minnesota'
+Console.WriteLine(response.MostSpecificSubdivision.IsoCode); // 'MN'
+
+Console.WriteLine(response.City.Name); // 'Minneapolis'
+
+Console.WriteLine(response.Postal.Code); // '55455'
+
+Console.WriteLine(response.Location.Latitude);  // 44.9733
+Console.WriteLine(response.Location.Longitude); // -93.2323
+```
+
+### Insights Service ###
+
+```csharp
+// This creates a WebServiceClient object that can be reused across requests.
+// Replace "42" with your user ID and "license_key" with your license
+// key.
+var client = new WebServiceClient(42, "license_key");
+
+// Do the lookup
+var response = client.Insights("128.101.101.101");
+
+Console.WriteLine(response.Country.IsoCode);        // 'US'
+Console.WriteLine(response.Country.Name);           // 'United States'
+Console.WriteLine(response.Country.Names["zh-CN"]); // '美国'
+
+Console.WriteLine(response.MostSpecificSubdivision.Name);    // 'Minnesota'
+Console.WriteLine(response.MostSpecificSubdivision.IsoCode); // 'MN'
+
+Console.WriteLine(response.City.Name); // 'Minneapolis'
+
+Console.WriteLine(response.Postal.Code); // '55455'
+
+Console.WriteLine(response.Location.Latitude);  // 44.9733
+Console.WriteLine(response.Location.Longitude); // -93.2323
 ```
 
 ## Database Usage ##
