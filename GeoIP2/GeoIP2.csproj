@@ -81,6 +81,7 @@
     <Compile Include="Responses\AbstractCountryResponse.cs" />
     <Compile Include="Responses\AbstractResponse.cs" />
     <Compile Include="Responses\CityResponse.cs" />
+    <Compile Include="Responses\AnonymousIPResponse.cs" />
     <Compile Include="Responses\IspResponse.cs" />
     <Compile Include="Responses\ConnectionTypeResponse.cs" />
     <Compile Include="Responses\DomainResponse.cs" />

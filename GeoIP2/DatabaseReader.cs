@@ -135,6 +135,16 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        /// Look up an IP address in a GeoIP2 Anonymous IP.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AnonymousIPResponse"/></returns>
+        public AnonymousIPResponse AnonymousIP(string ipAddress)
+        {
+            return Execute<AnonymousIPResponse>(ipAddress, false, "GeoIP2-Anonymous-IP");
+        }
+
+        /// <summary>
         /// Returns an <see cref="ConnectionTypeResponse"/> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
