@@ -103,6 +103,25 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
+        public void AnonymousIP()
+        {
+            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Anonymous-IP-Test.mmdb")))
+            {
+                var ipAddress ="1.2.0.1";
+
+                var response = reader.AnonymousIP(ipAddress);
+
+                Assert.That(response.IsAnonymous, Is.True);
+                Assert.That(response.IsAnonymousVpn, Is.True);
+                Assert.That(response.IsHostingProvider, Is.False);
+                Assert.That(response.IsPublicProxy, Is.False);
+                Assert.That(response.IsTorExitNode, Is.False);
+                Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
+
+            }
+        }
+
+        [Test]
         public void ConnectionType()
         {
             using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Connection-Type-Test.mmdb")))
