@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.1.0 (2014-11-XX)
+2.1.0 (2014-11-06)
 ------------------
 
 * Added support for the GeoIP2 Anonymous IP database. The `DatabaseReader`
