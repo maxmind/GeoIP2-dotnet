@@ -36,6 +36,9 @@ namespace MaxMind.GeoIP2.Responses
         [JsonProperty("is_public_proxy")]
         public bool IsPublicProxy { get; internal set; }
 
+        /// <summary>
+        /// Returns true if IP is a Tor exit node.
+        /// </summary>
         [JsonProperty("is_tor_exit_node")]
         public bool IsTorExitNode { get; internal set; }
 
