@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v2.0.0
+version: v2.1.0
 ---
 
 # GeoIP2 .NET API #
@@ -139,6 +139,22 @@ must read in metadata for the file.
 See the API documentation for more details.
 
 ## Database Examples ##
+
+### Anonymous IP Database ###
+
+```csharp
+
+using (var reader = new DatabaseReader("GeoIP2-Anonymous-IP.mmdb"))
+{
+    var response = reader.AnonymousIP("85.25.43.84");
+    Console.WriteLine(response.IsAnonymous);       // true
+    Console.WriteLine(response.IsAnonymousVpn);    // false
+    Console.WriteLine(response.IsHostingProvider); // false
+    Console.WriteLine(response.IsPublicProxy;      // false
+    Console.WriteLine(response.IsTorExitNode);     // true
+    Console.WriteLine(response.IPAddress);         // '85.25.43.84'
+}
+```
 
 ### City Database ###
 
