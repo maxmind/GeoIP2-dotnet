@@ -90,7 +90,7 @@ namespace MaxMind.GeoIP2
             var token = _reader.Find(ipAddress);
 
             if (token == null)
-                throw new AddressNotFoundException("The address " + ipAddress + " is not in the database.");
+                return default(T);
 
             JObject ipObject;
             if (hasTraits)
