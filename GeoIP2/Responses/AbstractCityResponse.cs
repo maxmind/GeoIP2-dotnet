@@ -72,6 +72,7 @@ namespace MaxMind.GeoIP2.Responses
         /// If the response did not contain any subdivisions, this method
         /// returns an empty array.
         /// </summary>
+        [JsonIgnore]
         public List<Subdivision> Subdivisions
         {
             get { return new List<Subdivision>(_subdivisions); }
