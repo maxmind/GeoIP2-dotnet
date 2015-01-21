@@ -36,6 +36,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         /// A <see cref="System.Collections.Generic.Dictionary{T,U}"/> from locale codes to the name in that locale.
         /// </summary>
+        [JsonIgnore]
         public Dictionary<string, string> Names
         {
             get { return new Dictionary<string, string>(_names); }
