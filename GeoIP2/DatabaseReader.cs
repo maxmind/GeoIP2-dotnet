@@ -14,7 +14,7 @@ namespace MaxMind.GeoIP2
     /// <summary>
     /// Instances of this class provide a reader for the GeoIP2 database format
     /// </summary>
-    public class DatabaseReader : IGeoIP2Provider, IDisposable
+    public class DatabaseReader : IGeoIP2DatabaseReader, IDisposable
     {
         private readonly List<string> _locales;
         private readonly Reader _reader;
