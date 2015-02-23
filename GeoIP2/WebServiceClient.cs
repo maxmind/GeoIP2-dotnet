@@ -67,7 +67,7 @@ namespace MaxMind.GeoIP2
     /// </para>
     ///
     /// </summary>
-    public class WebServiceClient : IGeoIP2Provider
+    public class WebServiceClient : IGeoIP2WebServicesClient
     {
         private static readonly Version version = Assembly.GetExecutingAssembly().GetName().Version;
 
