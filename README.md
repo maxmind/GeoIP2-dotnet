@@ -319,7 +319,13 @@ possible.
 
 ## Versioning ##
 
-The API uses [Semantic Versioning](http://semver.org/).
+The API uses [Semantic Versioning](http://semver.org/). However, adding new
+methods to `IGeoIP2Provider`, `IGeoIP2DatabaseReader`, and
+`IGeoIP2WebServicesClient` will not be considered a breaking change. These
+interfaces only exist to facilitate unit testing and dependency injection.
+They will be updated to match additional methods added to the `DatabaseReader`
+and `WebServiceClient`. Such additions will be accompanied by a minor version
+bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
