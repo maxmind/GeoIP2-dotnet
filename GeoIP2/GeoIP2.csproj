@@ -64,7 +64,9 @@
     <Compile Include="Exceptions\HttpException.cs" />
     <Compile Include="Exceptions\InvalidRequestException.cs" />
     <Compile Include="Exceptions\OutOfQueriesException.cs" />
+    <Compile Include="IGeoIP2DatabaseReader.cs" />
     <Compile Include="IGeoIP2Provider.cs" />
+    <Compile Include="IGeoIP2WebServicesClient.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Continent.cs" />
     <Compile Include="Model\Country.cs" />
