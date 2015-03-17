@@ -33,6 +33,15 @@ namespace MaxMind.GeoIP2.Model
         public int? AccuracyRadius { get; internal set; }
 
         /// <summary>
+        /// Determines whether both the <see cref="Latitude">latitude</see>
+        /// and <see cref="Longitude">longitude</see> have values.
+        /// </summary>
+        public bool HasCoordinates
+        {
+            get { return Latitude.HasValue && Longitude.HasValue; }
+        }
+
+        /// <summary>
         /// The latitude of the location as a floating point number.
         /// </summary>
         [JsonProperty("latitude")]
