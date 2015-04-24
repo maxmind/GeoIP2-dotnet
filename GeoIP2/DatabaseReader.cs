@@ -29,7 +29,7 @@ namespace MaxMind.GeoIP2
                 return _reader.Metadata;
             }
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseReader"/> class.
         /// </summary>
@@ -93,7 +93,7 @@ namespace MaxMind.GeoIP2
             {
                 StackFrame frame = new StackFrame(2, true);
                 throw new InvalidOperationException(
-                    string.Format("A {0} database cannot be opened with the {1} method", 
+                    string.Format("A {0} database cannot be opened with the {1} method",
                     Metadata.DatabaseType, frame.GetMethod().Name));
             }
 
@@ -125,19 +125,19 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// Returns an <see cref="CountryResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ip">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="CountryResponse"/></returns>
-        public CountryResponse Country(IPAddress ip)
+        public CountryResponse Country(IPAddress ipAddress)
         {
-            return Execute<CountryResponse>(ip, true, "Country");
+            return Execute<CountryResponse>(ipAddress, true, "Country");
         }
 
         /// <summary>
-        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// Returns an <see cref="CountryResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="CountryResponse"/></returns>
         public CountryResponse Country(string ipAddress)
         {
@@ -145,23 +145,33 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// Returns an <see cref="CityResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ip">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="CityResponse"/></returns>
-        public CityResponse City(IPAddress ip)
+        public CityResponse City(IPAddress ipAddress)
         {
-            return Execute<CityResponse>(ip, true, "City");
+            return Execute<CityResponse>(ipAddress, true, "City");
         }
 
         /// <summary>
-        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// Returns an <see cref="CityResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="CityResponse"/></returns>
         public CityResponse City(string ipAddress)
         {
             return Execute<CityResponse>(ipAddress, true, "City");
+        }
+
+        /// <summary>
+        /// Look up an IP address in a GeoIP2 Anonymous IP.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AnonymousIPResponse"/></returns>
+        public AnonymousIPResponse AnonymousIP(IPAddress ipAddress)
+        {
+            return Execute<AnonymousIPResponse>(ipAddress, false, "GeoIP2-Anonymous-IP");
         }
 
         /// <summary>
@@ -179,6 +189,16 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="ConnectionTypeResponse"/></returns>
+        public ConnectionTypeResponse ConnectionType(IPAddress ipAddress)
+        {
+            return Execute<ConnectionTypeResponse>(ipAddress, false, "GeoIP2-Connection-Type");
+        }
+
+        /// <summary>
+        /// Returns an <see cref="ConnectionTypeResponse"/> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="ConnectionTypeResponse"/></returns>
         public ConnectionTypeResponse ConnectionType(string ipAddress)
         {
             return Execute<ConnectionTypeResponse>(ipAddress, false, "GeoIP2-Connection-Type");
@@ -189,9 +209,29 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="DomainResponse"/></returns>
+        public DomainResponse Domain(IPAddress ipAddress)
+        {
+            return Execute<DomainResponse>(ipAddress, false, "GeoIP2-Domain");
+        }
+
+        /// <summary>
+        /// Returns an <see cref="DomainResponse"/> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="DomainResponse"/></returns>
         public DomainResponse Domain(string ipAddress)
         {
             return Execute<DomainResponse>(ipAddress, false, "GeoIP2-Domain");
+        }
+
+        /// <summary>
+        /// Returns an <see cref="IspResponse"/> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="IspResponse"/></returns>
+        public IspResponse Isp(IPAddress ipAddress)
+        {
+            return Execute<IspResponse>(ipAddress, false, "GeoIP2-ISP");
         }
 
         /// <summary>
