@@ -1,4 +1,5 @@
-﻿using MaxMind.GeoIP2.Responses;
+﻿using System.Net;
+using MaxMind.GeoIP2.Responses;
 
 namespace MaxMind.GeoIP2
 {
@@ -10,5 +11,12 @@ namespace MaxMind.GeoIP2
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="InsightsResponse"/></returns>
         InsightsResponse Insights(string ipAddress);
+
+        /// <summary>
+        /// Returns an <see cref="InsightsResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="InsightsResponse"/></returns>
+        InsightsResponse Insights(IPAddress ip);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
 using NUnit.Framework;
@@ -17,6 +18,16 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             _databaseDir = Path.Combine("..", "..", "TestData", "MaxMind-DB", "test-data");
             _databaseFile = Path.Combine(_databaseDir, "GeoIP2-City-Test.mmdb");
+        }
+
+        [Test]
+        public void TestWithIPAddress()
+        {
+            using (var reader = new DatabaseReader(_databaseFile))
+            {
+                var resp = reader.City(IPAddress.Parse("81.2.69.160"));
+                Assert.That(resp.City.Name, Is.EqualTo("London"));
+            }
         }
 
         [Test]
@@ -98,6 +109,16 @@ namespace MaxMind.GeoIP2.UnitTests
             using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb")))
             {
                 var resp = reader.Country("81.2.69.160");
+                Assert.That(resp.Country.IsoCode, Is.EqualTo("GB"));
+            }
+        }
+
+        [Test]
+        public void TestCountryWithIPAddress()
+        {
+            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb")))
+            {
+                var resp = reader.Country(IPAddress.Parse("81.2.69.160"));
                 Assert.That(resp.Country.IsoCode, Is.EqualTo("GB"));
             }
         }
