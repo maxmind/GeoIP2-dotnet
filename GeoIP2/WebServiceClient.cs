@@ -14,7 +14,7 @@ namespace MaxMind.GeoIP2
 {
     /// <summary>
     /// <para>
-    /// This class provides a client API for all the GeoIP2 Precision web service 
+    /// This class provides a client API for all the GeoIP2 Precision web service
     /// end points. The end points are Country, City, and Insights. Each end point
     /// returns a different set of data about an IP address, with Country returning
     /// the least data and Insights the most.
@@ -125,19 +125,19 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="InsightsResponse"/> for the specified ip address.
+        /// Returns an <see cref="InsightsResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ip">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="InsightsResponse"/></returns>
-        public InsightsResponse Insights(IPAddress ip)
+        public InsightsResponse Insights(IPAddress ipAddress)
         {
-            return Insights(ip.ToString());
+            return Insights(ipAddress.ToString());
         }
 
         /// <summary>
-        /// Returns an <see cref="InsightsResponse"/> for the specified ip address.
+        /// Returns an <see cref="InsightsResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="InsightsResponse"/></returns>
         public InsightsResponse Insights(string ipAddress)
         {
@@ -145,9 +145,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="InsightsResponse"/> for the specified ip address.
+        /// Returns an <see cref="InsightsResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <param name="restClient">The RestClient to use</param>
         /// <returns>An <see cref="InsightsResponse"/></returns>
         internal InsightsResponse Insights(string ipAddress, IRestClient restClient)
@@ -156,19 +156,19 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// Returns an <see cref="CountryResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ip">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="CountryResponse"/></returns>
-        public CountryResponse Country(IPAddress ip)
+        public CountryResponse Country(IPAddress ipAddress)
         {
-            return Country(ip.ToString());
+            return Country(ipAddress.ToString());
         }
 
         /// <summary>
-        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// Returns an <see cref="CountryResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="CountryResponse"/></returns>
         public CountryResponse Country(string ipAddress)
         {
@@ -176,9 +176,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// Returns an <see cref="CountryResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <param name="restClient">The RestClient to use</param>
         /// <returns>An <see cref="CountryResponse"/></returns>
         internal CountryResponse Country(string ipAddress, IRestClient restClient)
@@ -187,19 +187,19 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// Returns an <see cref="CityResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ip">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="CityResponse"/></returns>
-        public CityResponse City(IPAddress ip)
+        public CityResponse City(IPAddress ipAddress)
         {
-            return City(ip.ToString());
+            return City(ipAddress.ToString());
         }
 
         /// <summary>
-        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// Returns an <see cref="CityResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="CityResponse"/></returns>
         public CityResponse City(string ipAddress)
         {
@@ -207,9 +207,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// Returns an <see cref="CityResponse"/> for the specified IP address.
         /// </summary>
-        /// <param name="ipAddress">The ip address.</param>
+        /// <param name="ipAddress">The IP address.</param>
         /// <param name="restClient">The RestClient to use</param>
         /// <returns>An <see cref="CityResponse"/></returns>
         internal CityResponse City(string ipAddress, IRestClient restClient)

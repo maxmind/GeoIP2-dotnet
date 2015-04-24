@@ -1,6 +1,14 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.2.0 (2015-XX-XX)
+------------------
+
+* All of the database methods in `DatabaseReader` and all of the web service
+  methods in `WebServiceClient` now have a counterpart that takes an
+  `IPAddress` instead of a `string`. Pull request by Guillaume Turri. GitHub
+  #24.
+
 2.1.0 (2014-11-06)
 ------------------
 
