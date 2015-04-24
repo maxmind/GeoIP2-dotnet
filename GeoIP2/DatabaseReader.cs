@@ -117,11 +117,31 @@ namespace MaxMind.GeoIP2
         /// <summary>
         /// Returns an <see cref="CountryResponse"/> for the specified ip address.
         /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="CountryResponse"/></returns>
+        public CountryResponse Country(IPAddress ip)
+        {
+            return Country(ip.ToString());
+        }
+
+        /// <summary>
+        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// </summary>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="CountryResponse"/></returns>
         public CountryResponse Country(string ipAddress)
         {
             return Execute<CountryResponse>(ipAddress, true, "Country");
+        }
+
+        /// <summary>
+        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="CityResponse"/></returns>
+        public CityResponse City(IPAddress ip)
+        {
+            return City(ip.ToString());
         }
 
         /// <summary>

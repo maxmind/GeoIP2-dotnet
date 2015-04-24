@@ -1,4 +1,5 @@
-﻿using MaxMind.GeoIP2.Responses;
+﻿using System.Net;
+using MaxMind.GeoIP2.Responses;
 using System;
 
 namespace MaxMind.GeoIP2
@@ -17,10 +18,24 @@ namespace MaxMind.GeoIP2
         CountryResponse Country(string ipAddress);
 
         /// <summary>
+        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="CountryResponse"/></returns>
+        CountryResponse Country(IPAddress ip);
+
+        /// <summary>
         /// Returns an <see cref="CityResponse"/> for the specified ip address.
         /// </summary>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="CityResponse"/></returns>
         CityResponse City(string ipAddress);
+
+        /// <summary>
+        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="CityResponse"/></returns>
+        CityResponse City(IPAddress ip);
     }
 }
