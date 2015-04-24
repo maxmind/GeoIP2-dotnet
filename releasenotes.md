@@ -8,6 +8,13 @@ GeoIP2 .NET API Release Notes
   methods in `WebServiceClient` now have a counterpart that takes an
   `IPAddress` instead of a `string`. Pull request by Guillaume Turri. GitHub
   #24.
+* The `JsonIgnore` attribute was added to `Names` in `NamedEntity` and
+  `Subdivisions` in `AbstractCityResponse` as  these were already exposed to
+  JSON.NET through the private field backing them. Pull request by Dan Byrne
+  GitHub #21.
+* The interfaces `IGeoIP2DatabaseReader` and `IGeoIP2WebServicesClient` were
+  added to facilitate dependency injection and mocking. Pull request by Naz
+  Soogund. GitHub #22.
 
 2.1.0 (2014-11-06)
 ------------------
