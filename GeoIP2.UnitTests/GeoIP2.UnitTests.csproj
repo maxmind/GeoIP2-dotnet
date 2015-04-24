@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\LocationTests.cs" />
     <Compile Include="ResponseTests.cs" />
     <Compile Include="DatabaseReaderTests.cs" />
     <Compile Include="DeserializationTests.cs" />
