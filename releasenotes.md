@@ -15,6 +15,9 @@ GeoIP2 .NET API Release Notes
 * The interfaces `IGeoIP2DatabaseReader` and `IGeoIP2WebServicesClient` were
   added to facilitate dependency injection and mocking. Pull request by Naz
   Soogund. GitHub #22.
+* A `HasCoordinates` getter was added to the `Location` class. This will
+  return true if both the `Latitude` and `Longitude` have values. Pull request
+  by Darren Hickling. GitHub #23.
 
 2.1.0 (2014-11-06)
 ------------------
