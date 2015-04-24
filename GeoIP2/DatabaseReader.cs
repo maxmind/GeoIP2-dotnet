@@ -76,18 +76,28 @@ namespace MaxMind.GeoIP2
 
         private T Execute<T>(string ipAddress, bool hasTraits, string type) where T : AbstractResponse
         {
+            IPAddress ip = null;
+            if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
+                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
+            return Execute<T>(ipAddress, ip, hasTraits, type);
+        }
+
+        private T Execute<T>(IPAddress ip, bool hasTraits, string type) where T : AbstractResponse
+        {
+            return Execute<T>(ip.ToString(), ip, hasTraits, type);
+        }
+
+        private T Execute<T>(string ipAddress, IPAddress ip, bool hasTraits, string type) where T : AbstractResponse
+        {
             if (!Metadata.DatabaseType.Contains(type))
             {
-                StackFrame frame = new StackFrame(1, true);
+                StackFrame frame = new StackFrame(2, true);
                 throw new InvalidOperationException(
                     string.Format("A {0} database cannot be opened with the {1} method", 
                     Metadata.DatabaseType, frame.GetMethod().Name));
             }
-            IPAddress ip;
-            if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
-                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
 
-            var token = _reader.Find(ipAddress);
+            var token = _reader.Find(ip);
 
             if (token == null)
                 throw new AddressNotFoundException("The address " + ipAddress + " is not in the database.");
@@ -117,11 +127,31 @@ namespace MaxMind.GeoIP2
         /// <summary>
         /// Returns an <see cref="CountryResponse"/> for the specified ip address.
         /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="CountryResponse"/></returns>
+        public CountryResponse Country(IPAddress ip)
+        {
+            return Execute<CountryResponse>(ip, true, "Country");
+        }
+
+        /// <summary>
+        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// </summary>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="CountryResponse"/></returns>
         public CountryResponse Country(string ipAddress)
         {
             return Execute<CountryResponse>(ipAddress, true, "Country");
+        }
+
+        /// <summary>
+        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="CityResponse"/></returns>
+        public CityResponse City(IPAddress ip)
+        {
+            return Execute<CityResponse>(ip, true, "City");
         }
 
         /// <summary>

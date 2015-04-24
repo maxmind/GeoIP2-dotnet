@@ -127,6 +127,16 @@ namespace MaxMind.GeoIP2
         /// <summary>
         /// Returns an <see cref="InsightsResponse"/> for the specified ip address.
         /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="InsightsResponse"/></returns>
+        public InsightsResponse Insights(IPAddress ip)
+        {
+            return Insights(ip.ToString());
+        }
+
+        /// <summary>
+        /// Returns an <see cref="InsightsResponse"/> for the specified ip address.
+        /// </summary>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="InsightsResponse"/></returns>
         public InsightsResponse Insights(string ipAddress)
@@ -148,6 +158,16 @@ namespace MaxMind.GeoIP2
         /// <summary>
         /// Returns an <see cref="CountryResponse"/> for the specified ip address.
         /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="CountryResponse"/></returns>
+        public CountryResponse Country(IPAddress ip)
+        {
+            return Country(ip.ToString());
+        }
+
+        /// <summary>
+        /// Returns an <see cref="CountryResponse"/> for the specified ip address.
+        /// </summary>
         /// <param name="ipAddress">The ip address.</param>
         /// <returns>An <see cref="CountryResponse"/></returns>
         public CountryResponse Country(string ipAddress)
@@ -164,6 +184,16 @@ namespace MaxMind.GeoIP2
         internal CountryResponse Country(string ipAddress, IRestClient restClient)
         {
             return Execute<CountryResponse>("country/{ip}", ipAddress, restClient);
+        }
+
+        /// <summary>
+        /// Returns an <see cref="CityResponse"/> for the specified ip address.
+        /// </summary>
+        /// <param name="ip">The ip address.</param>
+        /// <returns>An <see cref="CityResponse"/></returns>
+        public CityResponse City(IPAddress ip)
+        {
+            return City(ip.ToString());
         }
 
         /// <summary>
