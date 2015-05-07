@@ -10,7 +10,9 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Constructor
         /// </summary>
-        public IspResponse() { }
+        public IspResponse()
+        {
+        }
 
         /// <summary>
         /// The <a

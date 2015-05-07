@@ -19,7 +19,9 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Constructor
         /// </summary>
-        public InsightsResponse() { }
+        public InsightsResponse()
+        {
+        }
 
         /// <summary>
         /// Constructor
@@ -36,7 +38,8 @@ namespace MaxMind.GeoIP2.Responses
             List<Subdivision> subdivisions = null,
             Traits traits = null)
             : base(
-                city, continent, country, location, maxMind, postal, registeredCountry, representedCountry, subdivisions, traits)
+                city, continent, country, location, maxMind, postal, registeredCountry, representedCountry, subdivisions,
+                traits)
         {
         }
     }

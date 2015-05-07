@@ -21,10 +21,12 @@ namespace MaxMind.GeoIP2.Responses
             RepresentedCountry = new RepresentedCountry();
             Traits = new Traits();
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AbstractCountryResponse"/> class.
         /// </summary>
-        public AbstractCountryResponse(Continent continent = null, Country country = null, Model.MaxMind maxMind = null, Country registeredCountry = null, RepresentedCountry representedCountry = null, Traits traits = null)
+        public AbstractCountryResponse(Continent continent = null, Country country = null, Model.MaxMind maxMind = null,
+            Country registeredCountry = null, RepresentedCountry representedCountry = null, Traits traits = null)
         {
             Continent = continent ?? new Continent();
             Country = country ?? new Country();

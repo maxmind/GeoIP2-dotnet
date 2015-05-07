@@ -6,15 +6,14 @@ using Newtonsoft.Json;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    /// Abstract class that city-level response.
+    ///     Abstract class that city-level response.
     /// </summary>
     public abstract class AbstractCityResponse : AbstractCountryResponse
     {
-        [JsonProperty("subdivisions")]
-        private List<Subdivision> _subdivisions;
+        [JsonProperty("subdivisions")] private List<Subdivision> _subdivisions;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AbstractCityResponse"/> class.
+        ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.
         /// </summary>
         public AbstractCityResponse()
         {
@@ -23,17 +22,18 @@ namespace MaxMind.GeoIP2.Responses
             Postal = new Postal();
             Subdivisions = new List<Subdivision>();
         }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="AbstractCityResponse"/> class.
+        ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.
         /// </summary>
         public AbstractCityResponse(
-            City city = null, 
-            Continent continent = null, 
+            City city = null,
+            Continent continent = null,
             Country country = null,
             Location location = null,
             Model.MaxMind maxMind = null,
             Postal postal = null,
-            Country registeredCountry = null, 
+            Country registeredCountry = null,
             RepresentedCountry representedCountry = null,
             List<Subdivision> subdivisions = null,
             Traits traits = null)
@@ -46,31 +46,31 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        /// Gets the city for the requested IP address.
+        ///     Gets the city for the requested IP address.
         /// </summary>
         [JsonProperty("city")]
         public City City { get; internal set; }
 
         /// <summary>
-        /// Gets the location for the requested IP address.
+        ///     Gets the location for the requested IP address.
         /// </summary>
         [JsonProperty("location")]
         public Location Location { get; internal set; }
 
         /// <summary>
-        /// Gets the postal object for the requested IP address.
+        ///     Gets the postal object for the requested IP address.
         /// </summary>
         [JsonProperty("postal")]
         public Postal Postal { get; internal set; }
 
         /// <summary>
-        /// An <see cref="System.Collections.Generic.List{T}"/> of <see cref="Subdivision"/> objects representing
-        /// the country subdivisions for the requested IP address. The number
-        /// and type of subdivisions varies by country, but a subdivision is
-        /// typically a state, province, county, etc. Subdivisions are
-        /// ordered from most general (largest) to most specific (smallest).
-        /// If the response did not contain any subdivisions, this method
-        /// returns an empty array.
+        ///     An <see cref="System.Collections.Generic.List{T}" /> of <see cref="Subdivision" /> objects representing
+        ///     the country subdivisions for the requested IP address. The number
+        ///     and type of subdivisions varies by country, but a subdivision is
+        ///     typically a state, province, county, etc. Subdivisions are
+        ///     ordered from most general (largest) to most specific (smallest).
+        ///     If the response did not contain any subdivisions, this method
+        ///     returns an empty array.
         /// </summary>
         [JsonIgnore]
         public List<Subdivision> Subdivisions
@@ -80,9 +80,9 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        /// An object representing the most specific subdivision returned. If
-        /// the response did not contain any subdivisions, this method
-        /// returns an empty <see cref="Subdivision"/> object.
+        ///     An object representing the most specific subdivision returned. If
+        ///     the response did not contain any subdivisions, this method
+        ///     returns an empty <see cref="Subdivision" /> object.
         /// </summary>
         [JsonIgnore]
         public Subdivision MostSpecificSubdivision
@@ -97,18 +97,21 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        ///     Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        ///     A <see cref="System.String" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
-            return this.GetType().Name + " ["
+            return GetType().Name + " ["
                    + (City != null ? "City=" + City + ", " : "")
                    + (Location != null ? "Location=" + Location + ", " : "")
                    + (Postal != null ? "Postal=" + Postal + ", " : "")
-                   + (Subdivisions != null ? "Subdivisions={" + string.Join(",", Subdivisions.Select(s => s.ToString()).ToArray()) + "}, " : "")
+                   +
+                   (Subdivisions != null
+                       ? "Subdivisions={" + string.Join(",", Subdivisions.Select(s => s.ToString()).ToArray()) + "}, "
+                       : "")
                    + (Continent != null ? "Continent=" + Continent + ", " : "")
                    + (Country != null ? "Country=" + Country + ", " : "")
                    + (RegisteredCountry != null ? "RegisteredCountry=" + RegisteredCountry + ", " : "")
@@ -118,7 +121,7 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        /// Sets the locales on all the NamedEntity properties.
+        ///     Sets the locales on all the NamedEntity properties.
         /// </summary>
         /// <param name="locales">The locales specified by the user.</param>
         protected internal override void SetLocales(List<string> locales)

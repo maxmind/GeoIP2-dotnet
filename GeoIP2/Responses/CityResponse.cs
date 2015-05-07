@@ -3,7 +3,6 @@ using MaxMind.GeoIP2.Model;
 
 namespace MaxMind.GeoIP2.Responses
 {
-
     /// <summary>
     /// This class provides a model for the data returned by GeoIP2 Precision: City and GeoIP2 City.
     /// 
@@ -18,24 +17,27 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Constructor
         /// </summary>
-        public CityResponse() { }
+        public CityResponse()
+        {
+        }
 
         /// <summary>
         /// Constructor
         /// </summary>
         public CityResponse(
-            City city = null, 
+            City city = null,
             Continent continent = null,
-            Country country = null, 
+            Country country = null,
             Location location = null,
-            Model.MaxMind maxMind = null, 
+            Model.MaxMind maxMind = null,
             Postal postal = null,
             Country registeredCountry = null,
             RepresentedCountry representedCountry = null,
             List<Subdivision> subdivisions = null,
             Traits traits = null)
             : base(
-                city, continent, country, location, maxMind, postal, registeredCountry, representedCountry, subdivisions, traits)
+                city, continent, country, location, maxMind, postal, registeredCountry, representedCountry, subdivisions,
+                traits)
         {
         }
     }

@@ -10,7 +10,9 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Constructor
         /// </summary>
-        public AnonymousIPResponse() { }
+        public AnonymousIPResponse()
+        {
+        }
 
         /// <summary>
         /// Returns true if the IP address belongs to any sort of anonymous network.

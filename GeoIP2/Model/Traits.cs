@@ -10,7 +10,9 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         /// Constructor
         /// </summary>
-        public Traits() { }
+        public Traits()
+        {
+        }
 
         /// <summary>
         /// Constructor
@@ -137,17 +139,19 @@ namespace MaxMind.GeoIP2.Model
         public override string ToString()
         {
             return "Traits ["
-                + (AutonomousSystemNumber != null ? "AutonomousSystemNumber=" + AutonomousSystemNumber + ", " : "")
-                + (AutonomousSystemOrganization != null ? "AutonomousSystemOrganization=" + AutonomousSystemOrganization + ", " : "")
-                + (Domain != null ? "Domain=" + Domain + ", " : "")
-                + (IPAddress != null ? "IpAddress=" + IPAddress + ", " : "")
-                + "IsAnonymousProxy=" + IsAnonymousProxy
-                + ", IsSatelliteProvider=" + IsSatelliteProvider + ", "
-                + (Isp != null ? "Isp=" + Isp + ", " : "")
-                + (Organization != null ? "Organization=" + Organization + ", " : "")
-                + (UserType != null ? "UserType=" + UserType : "")
-                + "]";
-
+                   + (AutonomousSystemNumber != null ? "AutonomousSystemNumber=" + AutonomousSystemNumber + ", " : "")
+                   +
+                   (AutonomousSystemOrganization != null
+                       ? "AutonomousSystemOrganization=" + AutonomousSystemOrganization + ", "
+                       : "")
+                   + (Domain != null ? "Domain=" + Domain + ", " : "")
+                   + (IPAddress != null ? "IpAddress=" + IPAddress + ", " : "")
+                   + "IsAnonymousProxy=" + IsAnonymousProxy
+                   + ", IsSatelliteProvider=" + IsSatelliteProvider + ", "
+                   + (Isp != null ? "Isp=" + Isp + ", " : "")
+                   + (Organization != null ? "Organization=" + Organization + ", " : "")
+                   + (UserType != null ? "UserType=" + UserType : "")
+                   + "]";
         }
     }
 }

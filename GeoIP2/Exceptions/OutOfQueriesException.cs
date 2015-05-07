@@ -17,7 +17,6 @@ namespace MaxMind.GeoIP2.Exceptions
         public OutOfQueriesException(string message)
             : base(message)
         {
-
         }
     }
 }

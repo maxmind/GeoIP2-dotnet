@@ -10,12 +10,15 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         /// Constructor
         /// </summary>
-        public Location() { }
+        public Location()
+        {
+        }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public Location(int? accuracyRadius = null, double? latitude = null, double? longitude = null, int? metroCode = null, string timeZone = null)
+        public Location(int? accuracyRadius = null, double? latitude = null, double? longitude = null,
+            int? metroCode = null, string timeZone = null)
         {
             AccuracyRadius = accuracyRadius;
             Latitude = latitude;
@@ -80,11 +83,11 @@ namespace MaxMind.GeoIP2.Model
         public override string ToString()
         {
             return "Location [ "
-                + (AccuracyRadius.HasValue ? "AccuracyRadius=" + AccuracyRadius + ", " : string.Empty)
-                + (Latitude.HasValue ? "Latitude=" + Latitude + ", " : string.Empty)
-                + (Longitude.HasValue ? "Longitude=" + Longitude + ", " : string.Empty)
-                + (MetroCode.HasValue ? "MetroCode=" + MetroCode + ", " : string.Empty)
-                + (TimeZone != null ? "TimeZone=" + TimeZone : "") + "]";
+                   + (AccuracyRadius.HasValue ? "AccuracyRadius=" + AccuracyRadius + ", " : string.Empty)
+                   + (Latitude.HasValue ? "Latitude=" + Latitude + ", " : string.Empty)
+                   + (Longitude.HasValue ? "Longitude=" + Longitude + ", " : string.Empty)
+                   + (MetroCode.HasValue ? "MetroCode=" + MetroCode + ", " : string.Empty)
+                   + (TimeZone != null ? "TimeZone=" + TimeZone : "") + "]";
         }
     }
 }

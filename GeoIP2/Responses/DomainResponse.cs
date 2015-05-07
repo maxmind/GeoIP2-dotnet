@@ -10,7 +10,9 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Constructor
         /// </summary>
-        public DomainResponse() { }
+        public DomainResponse()
+        {
+        }
 
         /// <summary>
         /// The second level domain associated with the IP address. This will

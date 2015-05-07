@@ -10,7 +10,9 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Constructor
         /// </summary>
-        public ConnectionTypeResponse() { }
+        public ConnectionTypeResponse()
+        {
+        }
 
         /// <summary>
         /// The connection type of the IP address.
