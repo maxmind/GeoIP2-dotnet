@@ -53,12 +53,14 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         /// Gets or sets the locales specified by the user.
         /// </summary>
-        internal List<string> Locales { get; set; }
+        [JsonIgnore]
+        protected internal List<string> Locales { get; set; }
 
         /// <summary>
         /// The name of the city based on the locales list passed to the
         /// <see cref="WebServiceClient"/> constructor.
         /// </summary>
+        [JsonIgnore]
         public string Name
         {
             get

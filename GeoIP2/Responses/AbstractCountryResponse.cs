@@ -37,6 +37,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Gets the continent for the requested IP address.
         /// </summary>
+        [JsonProperty("continent")]
         public Continent Continent { get; internal set; }
 
         /// <summary>
@@ -44,11 +45,13 @@ namespace MaxMind.GeoIP2.Responses
         /// object represents the country where MaxMind believes
         /// the end user is located
         /// </summary>
+        [JsonProperty("country")]
         public Country Country { get; internal set; }
 
         /// <summary>
         /// Gets the MaxMind record containing data related to your account
         /// </summary>
+        [JsonProperty("maxmind")]
         public Model.MaxMind MaxMind { get; internal set; }
 
         /// <summary>
@@ -71,6 +74,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Gets the traits for the requested IP address.
         /// </summary>
+        [JsonProperty("traits")]
         public Traits Traits { get; internal set; }
 
         /// <summary>
@@ -94,7 +98,7 @@ namespace MaxMind.GeoIP2.Responses
         /// Sets the locales on all the NamedEntity properties.
         /// </summary>
         /// <param name="locales">The locales specified by the user.</param>
-        internal override void SetLocales(List<string> locales)
+        protected internal override void SetLocales(List<string> locales)
         {
             if (Continent != null)
                 Continent.Locales = locales;
