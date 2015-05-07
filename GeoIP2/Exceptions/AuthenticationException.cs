@@ -17,7 +17,6 @@ namespace MaxMind.GeoIP2.Exceptions
         public AuthenticationException(string message)
             : base(message)
         {
-
         }
     }
 }

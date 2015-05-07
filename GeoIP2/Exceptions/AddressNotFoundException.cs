@@ -19,7 +19,6 @@ namespace MaxMind.GeoIP2.Exceptions
         public AddressNotFoundException(string message)
             : base(message)
         {
-
         }
     }
 }

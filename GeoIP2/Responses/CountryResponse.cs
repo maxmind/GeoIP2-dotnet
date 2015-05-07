@@ -16,7 +16,9 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         /// Constructor
         /// </summary>
-        public CountryResponse() { }
+        public CountryResponse()
+        {
+        }
 
         /// <summary>
         /// Constructor

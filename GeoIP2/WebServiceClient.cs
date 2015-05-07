@@ -89,7 +89,7 @@ namespace MaxMind.GeoIP2
         /// <param name="baseUrl">The base url to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
         public WebServiceClient(int userID, string licenseKey, string baseUrl = "geoip.maxmind.com", int timeout = 3000)
-            : this(userID, licenseKey, new List<string> { "en" }, baseUrl, timeout)
+            : this(userID, licenseKey, new List<string> {"en"}, baseUrl, timeout)
         {
         }
 
@@ -101,7 +101,8 @@ namespace MaxMind.GeoIP2
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
         /// <param name="host">The base url to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userID, string licenseKey, List<string> locales, string host = "geoip.maxmind.com", int timeout = 3000)
+        public WebServiceClient(int userID, string licenseKey, List<string> locales, string host = "geoip.maxmind.com",
+            int timeout = 3000)
         {
             _userID = userID;
             _licenseKey = licenseKey;
@@ -217,11 +218,13 @@ namespace MaxMind.GeoIP2
             return Execute<CityResponse>("city/{ip}", ipAddress, restClient);
         }
 
-        private T Execute<T>(string urlPattern, string ipAddress, IRestClient restClient) where T : AbstractCountryResponse, new()
+        private T Execute<T>(string urlPattern, string ipAddress, IRestClient restClient)
+            where T : AbstractCountryResponse, new()
         {
             IPAddress ip;
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
-                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
+                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}",
+                    ipAddress));
 
             var request = new RestRequest(urlPattern);
 
@@ -231,17 +234,23 @@ namespace MaxMind.GeoIP2
 
             if (response.ResponseStatus == ResponseStatus.Error)
             {
-                throw new HttpException(string.Format("Error received while making request: {0}", response.ErrorMessage), response.StatusCode, response.ResponseUri, response.ErrorException);
+                throw new HttpException(
+                    string.Format("Error received while making request: {0}", response.ErrorMessage),
+                    response.StatusCode, response.ResponseUri, response.ErrorException);
             }
 
-            var status = (int)response.StatusCode;
+            var status = (int) response.StatusCode;
             if (status == 200)
             {
                 if (response.ContentLength <= 0)
-                    throw new HttpException(string.Format("Received a 200 response for {0} but there was no message body.", response.ResponseUri), response.StatusCode, response.ResponseUri);
+                    throw new HttpException(
+                        string.Format("Received a 200 response for {0} but there was no message body.",
+                            response.ResponseUri), response.StatusCode, response.ResponseUri);
 
                 if (response.ContentType == null || !response.ContentType.Contains("json"))
-                    throw new GeoIP2Exception(string.Format("Received a 200 response for {0} but it does not appear to be JSON:\n", response.ContentType));
+                    throw new GeoIP2Exception(
+                        string.Format("Received a 200 response for {0} but it does not appear to be JSON:\n",
+                            response.ContentType));
 
                 T model;
                 try
@@ -251,7 +260,8 @@ namespace MaxMind.GeoIP2
                 }
                 catch (SerializationException ex)
                 {
-                    throw new GeoIP2Exception(string.Format("Received a 200 response but not decode it as JSON: {0}", response.Content), ex);
+                    throw new GeoIP2Exception(
+                        string.Format("Received a 200 response but not decode it as JSON: {0}", response.Content), ex);
                 }
 
                 model.SetLocales(_locales);
@@ -263,10 +273,13 @@ namespace MaxMind.GeoIP2
             }
             else if (status >= 500 && status < 600)
             {
-                throw new HttpException(string.Format("Received a server ({0}) error for {1}", (int)response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
+                throw new HttpException(
+                    string.Format("Received a server ({0}) error for {1}", (int) response.StatusCode,
+                        response.ResponseUri), response.StatusCode, response.ResponseUri);
             }
 
-            var errorMessage = string.Format("Received an unexpected response for {0} (status code: {1})", response.ResponseUri, (int)response.StatusCode);
+            var errorMessage = string.Format("Received an unexpected response for {0} (status code: {1})",
+                response.ResponseUri, (int) response.StatusCode);
             throw new HttpException(errorMessage, response.StatusCode, response.ResponseUri);
         }
 
@@ -274,7 +287,9 @@ namespace MaxMind.GeoIP2
         {
             if (string.IsNullOrEmpty(response.Content))
             {
-                throw new HttpException(string.Format("Received a {0} error for {1} with no body", response.StatusCode, response.ResponseUri), response.StatusCode, response.ResponseUri);
+                throw new HttpException(
+                    string.Format("Received a {0} error for {1} with no body", response.StatusCode, response.ResponseUri),
+                    response.StatusCode, response.ResponseUri);
             }
 
             try
@@ -285,22 +300,25 @@ namespace MaxMind.GeoIP2
             }
             catch (SerializationException ex)
             {
-                throw new HttpException(string.Format("Received a {0} error for {1} but it did not include the expected JSON body: {2}", response.StatusCode, response.ResponseUri, response.Content), response.StatusCode, response.ResponseUri, ex);
+                throw new HttpException(
+                    string.Format("Received a {0} error for {1} but it did not include the expected JSON body: {2}",
+                        response.StatusCode, response.ResponseUri, response.Content), response.StatusCode,
+                    response.ResponseUri, ex);
             }
-
         }
 
         private static void HandleErrorWithJsonBody(WebServiceError webServiceError, IRestResponse response)
         {
-
             if (webServiceError.Code == null || webServiceError.Error == null)
                 throw new HttpException(
-                    "Response contains JSON but does not specify code or error keys: " + response.Content, response.StatusCode,
+                    "Response contains JSON but does not specify code or error keys: " + response.Content,
+                    response.StatusCode,
                     response.ResponseUri);
 
             if (webServiceError.Code == "IP_ADDRESS_NOT_FOUND" || webServiceError.Code == "IP_ADDRESS_RESERVED")
                 throw new AddressNotFoundException(webServiceError.Error);
-            else if (webServiceError.Code == "AUTHORIZATION_INVALID" || webServiceError.Code == "LICENSE_KEY_REQUIRED" || webServiceError.Code == "USER_ID_REQUIRED")
+            else if (webServiceError.Code == "AUTHORIZATION_INVALID" || webServiceError.Code == "LICENSE_KEY_REQUIRED" ||
+                     webServiceError.Code == "USER_ID_REQUIRED")
                 throw new AuthenticationException(webServiceError.Error);
             else if (webServiceError.Code == "OUT_OF_QUERIES")
                 throw new OutOfQueriesException(webServiceError.Error);

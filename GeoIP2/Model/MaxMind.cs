@@ -10,7 +10,9 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         /// Constructor
         /// </summary>
-        public MaxMind() { }
+        public MaxMind()
+        {
+        }
 
         /// <summary>
         /// Constructor

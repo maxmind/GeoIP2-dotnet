@@ -24,10 +24,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         public Metadata Metadata
         {
-            get
-            {
-                return _reader.Metadata;
-            }
+            get { return _reader.Metadata; }
         }
 
         /// <summary>
@@ -36,9 +33,8 @@ namespace MaxMind.GeoIP2
         /// <param name="file">The MaxMind DB file.</param>
         /// <param name="mode">The mode by which to access the DB file.</param>
         public DatabaseReader(string file, FileAccessMode mode = FileAccessMode.MemoryMapped)
-            : this(file, new List<string> { "en" }, mode)
+            : this(file, new List<string> {"en"}, mode)
         {
-
         }
 
         /// <summary>
@@ -58,9 +54,8 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="stream">A stream of the MaxMind DB file.</param>
         public DatabaseReader(Stream stream)
-            : this(stream, new List<string> { "en" })
+            : this(stream, new List<string> {"en"})
         {
-
         }
 
         /// <summary>
@@ -78,7 +73,8 @@ namespace MaxMind.GeoIP2
         {
             IPAddress ip = null;
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
-                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}", ipAddress));
+                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}",
+                    ipAddress));
             return Execute<T>(ipAddress, ip, hasTraits, type);
         }
 
@@ -94,7 +90,7 @@ namespace MaxMind.GeoIP2
                 StackFrame frame = new StackFrame(2, true);
                 throw new InvalidOperationException(
                     string.Format("A {0} database cannot be opened with the {1} method",
-                    Metadata.DatabaseType, frame.GetMethod().Name));
+                        Metadata.DatabaseType, frame.GetMethod().Name));
             }
 
             var token = _reader.Find(ip);
@@ -107,14 +103,14 @@ namespace MaxMind.GeoIP2
             {
                 if (token["traits"] == null)
                 {
-                    ((JObject)token).Add("traits", new JObject());
+                    ((JObject) token).Add("traits", new JObject());
                 }
 
-                ipObject = (JObject)token["traits"];
+                ipObject = (JObject) token["traits"];
             }
             else
             {
-                ipObject = (JObject)token;
+                ipObject = (JObject) token;
             }
             ipObject.Add("ip_address", ipAddress);
 

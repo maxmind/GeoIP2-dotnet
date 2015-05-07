@@ -11,12 +11,15 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         /// Constructor
         /// </summary>
-        public Country() { }
+        public Country()
+        {
+        }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public Country(int? confidence = null, int? geoNameId = null, string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null)
+        public Country(int? confidence = null, int? geoNameId = null, string isoCode = null,
+            Dictionary<string, string> names = null, List<string> locales = null)
             : base(geoNameId, names, locales)
         {
             Confidence = confidence;
