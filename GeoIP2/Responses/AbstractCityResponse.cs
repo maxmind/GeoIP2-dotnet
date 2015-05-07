@@ -84,6 +84,7 @@ namespace MaxMind.GeoIP2.Responses
         /// the response did not contain any subdivisions, this method
         /// returns an empty <see cref="Subdivision"/> object.
         /// </summary>
+        [JsonIgnore]
         public Subdivision MostSpecificSubdivision
         {
             get
@@ -120,7 +121,7 @@ namespace MaxMind.GeoIP2.Responses
         /// Sets the locales on all the NamedEntity properties.
         /// </summary>
         /// <param name="locales">The locales specified by the user.</param>
-        internal override void SetLocales(List<string> locales)
+        protected internal override void SetLocales(List<string> locales)
         {
             base.SetLocales(locales);
 

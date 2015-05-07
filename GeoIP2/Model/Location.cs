@@ -36,6 +36,7 @@ namespace MaxMind.GeoIP2.Model
         /// Determines whether both the <see cref="Latitude">latitude</see>
         /// and <see cref="Longitude">longitude</see> have values.
         /// </summary>
+        [JsonIgnore]
         public bool HasCoordinates
         {
             get { return Latitude.HasValue && Longitude.HasValue; }

@@ -11,7 +11,7 @@ namespace MaxMind.GeoIP2.Responses
     public abstract class AbstractResponse
     {
         // This is simplify the database API. Also, we may need to use the locales in the future.
-        internal virtual void SetLocales(List<string> locales)
+        protected internal virtual void SetLocales(List<string> locales)
         { }
     }
 }
