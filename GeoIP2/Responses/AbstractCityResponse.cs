@@ -15,7 +15,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.
         /// </summary>
-        public AbstractCityResponse()
+        protected AbstractCityResponse()
         {
             City = new City();
             Location = new Location();
@@ -26,7 +26,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.
         /// </summary>
-        public AbstractCityResponse(
+        protected AbstractCityResponse(
             City city = null,
             Continent continent = null,
             Country country = null,

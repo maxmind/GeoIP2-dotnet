@@ -4,25 +4,25 @@ using MaxMind.GeoIP2.Model;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    /// This class provides a model for the data returned by GeoIP2 Precision: City and GeoIP2 City.
-    /// 
-    /// The only difference between the City and Insights response classes is
-    /// which fields in each record may be populated.
-    /// 
-    /// <a href="http://dev.maxmind.com/geoip/geoip2/web-services">GeoIP2 Web
-    ///      Services</a>
+    ///     This class provides a model for the data returned by GeoIP2 Precision: City and GeoIP2 City.
+    ///     The only difference between the City and Insights response classes is
+    ///     which fields in each record may be populated.
+    ///     <a href="http://dev.maxmind.com/geoip/geoip2/web-services">
+    ///         GeoIP2 Web
+    ///         Services
+    ///     </a>
     /// </summary>
     public class CityResponse : AbstractCityResponse
     {
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         public CityResponse()
         {
         }
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         public CityResponse(
             City city = null,
