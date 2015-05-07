@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    /// Abstract class that represents a generic response.
+    ///     Abstract class that represents a generic response.
     /// </summary>
     public abstract class AbstractResponse
     {

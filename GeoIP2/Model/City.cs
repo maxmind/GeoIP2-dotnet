@@ -4,19 +4,19 @@ using Newtonsoft.Json;
 namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
-    /// City-level data associated with an IP address.
+    ///     City-level data associated with an IP address.
     /// </summary>
     public class City : NamedEntity
     {
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         public City()
         {
         }
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         public City(int? confidence = null, int? geoNameId = null, Dictionary<string, string> names = null,
             List<string> locales = null)
@@ -26,8 +26,8 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        /// A value from 0-100 indicating MaxMind's confidence that the city
-        /// is correct.      
+        ///     A value from 0-100 indicating MaxMind's confidence that the city
+        ///     is correct.
         /// </summary>
         [JsonProperty("confidence")]
         public int? Confidence { get; internal set; }
