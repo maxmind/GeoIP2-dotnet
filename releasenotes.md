@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.2.0 (2015-XX-XX)
+2.2.0 (2015-05-19)
 ------------------
 
 * All of the database methods in `DatabaseReader` and all of the web service
