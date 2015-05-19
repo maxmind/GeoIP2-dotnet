@@ -7,13 +7,6 @@ namespace MaxMind.GeoIP2.UnitTests.Model
     public class LocationTests
     {
         [Test]
-        public void HasCoordinatesSuccess()
-        {
-            var location = new Location(latitude: 50.0, longitude: 0.0);
-            Assert.IsTrue(location.HasCoordinates);
-        }
-
-        [Test]
         [TestCase(null, null)]
         [TestCase(50.0, null)]
         [TestCase(null, 0.0)]
@@ -23,6 +16,13 @@ namespace MaxMind.GeoIP2.UnitTests.Model
                 (latitude: latitude, longitude: longitude);
 
             Assert.IsFalse(location.HasCoordinates);
+        }
+
+        [Test]
+        public void HasCoordinatesSuccess()
+        {
+            var location = new Location(latitude: 50.0, longitude: 0.0);
+            Assert.IsTrue(location.HasCoordinates);
         }
     }
 }

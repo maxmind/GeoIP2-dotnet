@@ -3,17 +3,19 @@
 namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
-    /// Contains data related to your MaxMind account.
+    ///     Contains data related to your MaxMind account.
     /// </summary>
     public class MaxMind
     {
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
-        public MaxMind() { }
+        public MaxMind()
+        {
+        }
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         public MaxMind(int? queriesRemaining = null)
         {
@@ -21,18 +23,18 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        /// The number of remaining queried in your account for the web
-        /// service end point. This will be null when using a local
-        /// database.
+        ///     The number of remaining queried in your account for the web
+        ///     service end point. This will be null when using a local
+        ///     database.
         /// </summary>
         [JsonProperty("queries_remaining")]
         public int? QueriesRemaining { get; internal set; }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        ///     Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        ///     A <see cref="System.String" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
