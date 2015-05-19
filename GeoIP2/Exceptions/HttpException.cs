@@ -1,31 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 
 namespace MaxMind.GeoIP2.Exceptions
 {
     /// <summary>
-    /// This class represents an HTTP transport error. This is not an error returned
-    /// by the web service itself. As such, it is a IOException instead of a
-    /// GeoIP2Exception.
+    ///     This class represents an HTTP transport error. This is not an error returned
+    ///     by the web service itself. As such, it is a IOException instead of a
+    ///     GeoIP2Exception.
     /// </summary>
     public class HttpException : IOException
     {
         /// <summary>
-        /// The HTTP status code returned by the web service.
-        /// </summary>
-        public HttpStatusCode HttpStatus { get; private set; }
-
-        /// <summary>
-        /// The URI queried by the web service.
-        /// </summary>
-        public Uri Uri { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HttpException"/> class.
+        ///     Initializes a new instance of the <see cref="HttpException" /> class.
         /// </summary>
         /// <param name="message">A message describing the reason why the exception was thrown.</param>
         /// <param name="httpStatus">The HTTP status of the response that caused the exception.</param>
@@ -38,7 +25,7 @@ namespace MaxMind.GeoIP2.Exceptions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpException"/> class.
+        ///     Initializes a new instance of the <see cref="HttpException" /> class.
         /// </summary>
         /// <param name="message">A message describing the reason why the exception was thrown.</param>
         /// <param name="httpStatus">The HTTP status of the response that caused the exception.</param>
@@ -50,5 +37,15 @@ namespace MaxMind.GeoIP2.Exceptions
             HttpStatus = httpStatus;
             Uri = uri;
         }
+
+        /// <summary>
+        ///     The HTTP status code returned by the web service.
+        /// </summary>
+        public HttpStatusCode HttpStatus { get; private set; }
+
+        /// <summary>
+        ///     The URI queried by the web service.
+        /// </summary>
+        public Uri Uri { get; private set; }
     }
 }

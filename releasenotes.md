@@ -18,6 +18,12 @@ GeoIP2 .NET API Release Notes
 * A `HasCoordinates` getter was added to the `Location` class. This will
   return true if both the `Latitude` and `Longitude` have values. Pull request
   by Darren Hickling. GitHub #23.
+* All of the response and model properties now set the appropriate
+  `JsonProperty` rather than relying an JSON.NET's automatic matching.
+  Serializing these objects should now product JSON much more similar to the
+  JSON returned by the web service and internal structure of the data in
+  database files.
+* Dependencies were updated to most recent versions.
 
 2.1.0 (2014-11-06)
 ------------------

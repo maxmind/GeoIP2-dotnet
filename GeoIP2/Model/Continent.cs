@@ -4,27 +4,30 @@ using Newtonsoft.Json;
 namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
-    /// Contains data for the continent record associated with an IP address.  
+    ///     Contains data for the continent record associated with an IP address.
     /// </summary>
     public class Continent : NamedEntity
     {
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
-        public Continent() { }
+        public Continent()
+        {
+        }
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
-        public Continent(string code = null, int? geoNameId = null, Dictionary<string, string> names = null, List<string> locales = null)
+        public Continent(string code = null, int? geoNameId = null, Dictionary<string, string> names = null,
+            List<string> locales = null)
             : base(geoNameId, names, locales)
         {
             Code = code;
         }
 
         /// <summary>
-        /// A two character continent code like "NA" (North America) or "OC"
-        /// (Oceania).      
+        ///     A two character continent code like "NA" (North America) or "OC"
+        ///     (Oceania).
         /// </summary>
         [JsonProperty("code")]
         public string Code { get; internal set; }
