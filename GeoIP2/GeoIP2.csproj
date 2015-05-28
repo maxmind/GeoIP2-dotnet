@@ -93,6 +93,7 @@
     <Compile Include="WebServiceClient.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NuGet.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

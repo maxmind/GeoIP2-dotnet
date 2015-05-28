@@ -15,6 +15,7 @@ namespace MaxMind.GeoIP2
     /// </summary>
     public class DatabaseReader : IGeoIP2DatabaseReader, IDisposable
     {
+        private bool _disposed;
         private readonly List<string> _locales;
         private readonly Reader _reader;
 
@@ -63,18 +64,32 @@ namespace MaxMind.GeoIP2
         /// <summary>
         ///     The metadata for the open MaxMind DB file.
         /// </summary>
-        public Metadata Metadata
-        {
-            get { return _reader.Metadata; }
-        }
+        public Metadata Metadata => _reader.Metadata;
 
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         public void Dispose()
         {
-            if (_reader != null)
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
                 _reader.Dispose();
+            }
+
+            _disposed = true;
         }
 
         /// <summary>
@@ -161,8 +176,7 @@ namespace MaxMind.GeoIP2
         {
             IPAddress ip = null;
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
-                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}",
-                    ipAddress));
+                throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipAddress}");
             return Execute<T>(ipAddress, ip, hasTraits, type);
         }
 
@@ -177,8 +191,7 @@ namespace MaxMind.GeoIP2
             {
                 var frame = new StackFrame(2, true);
                 throw new InvalidOperationException(
-                    string.Format("A {0} database cannot be opened with the {1} method",
-                        Metadata.DatabaseType, frame.GetMethod().Name));
+                    $"A {Metadata.DatabaseType} database cannot be opened with the {frame.GetMethod().Name} method");
             }
 
             var token = _reader.Find(ip);

@@ -2,6 +2,7 @@
 using System.IO;
 using MaxMind.Db;
 using MaxMind.GeoIP2.Responses;
+using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using RestSharp;
@@ -12,46 +13,6 @@ namespace MaxMind.GeoIP2.UnitTests
     [TestFixture]
     public class DeserializationTests
     {
-        private readonly string _insightsBody = "{" + "\"city\":{"
-                                                + "\"confidence\":76," + "\"geoname_id\":9876," + "\"names\":{"
-                                                + "\"en\":\"Minneapolis\"" + "}" + "}," + "\"continent\":{"
-                                                + "\"code\":\"NA\"," + "\"geoname_id\":42," + "\"names\":{"
-                                                + "\"en\":\"North America\"" + "}" + "}," + "\"country\":{"
-                                                + "\"confidence\":99," + "\"iso_code\":\"US\","
-                                                + "\"geoname_id\":1," + "\"names\":{"
-                                                + "\"en\":\"United States of America\"" + "}" + "},"
-                                                + "\"location\":{" + "\"accuracy_radius\":1500,"
-                                                + "\"latitude\":44.98," + "\"longitude\":93.2636,"
-                                                + "\"metro_code\":765," + "\"time_zone\":\"America/Chicago\""
-                                                + "}," + "\"postal\":{\"confidence\": 33, \"code\":\"55401\"},"
-                                                + "\"registered_country\":{" + "\"geoname_id\":2,"
-                                                + "\"iso_code\":\"CA\"," + "\"names\":{" + "\"en\":\"Canada\""
-                                                + "}" + "}," + "\"represented_country\":{" + "\"geoname_id\":3,"
-                                                + "\"iso_code\":\"GB\"," + "\"names\":{"
-                                                + "\"en\":\"United Kingdom\"" + "}," + "\"type\":\"C<military>\""
-                                                + "}," + "\"subdivisions\":[{" + "\"confidence\":88,"
-                                                + "\"geoname_id\":574635," + "\"iso_code\":\"MN\"," + "\"names\":{"
-                                                + "\"en\":\"Minnesota\"" + "}" + "}," + "{\"iso_code\":\"TT\"}],"
-                                                + "\"traits\":{" + "\"autonomous_system_number\":1234,"
-                                                + "\"autonomous_system_organization\":\"AS Organization\","
-                                                + "\"domain\":\"example.com\"," + "\"ip_address\":\"1.2.3.4\","
-                                                + "\"is_anonymous_proxy\":true,"
-                                                + "\"is_satellite_provider\":true," + "\"isp\":\"Comcast\","
-                                                + "\"organization\":\"Blorg\"," + "\"user_type\":\"college\""
-                                                + "}," + "\"maxmind\":{\"queries_remaining\":11}" + "}";
-
-        private static readonly string _countryBody = "{\"continent\":{"
-                                                      + "\"code\":\"NA\"," + "\"geoname_id\":42,"
-                                                      + "\"names\":{\"en\":\"North America\"}" + "}," + "\"country\":{"
-                                                      + "\"geoname_id\":1," + "\"iso_code\":\"US\","
-                                                      + "\"confidence\":56," + "\"names\":{\"en\":\"United States\"}"
-                                                      + "}," + "\"registered_country\":{" + "\"geoname_id\":2,"
-                                                      + "\"iso_code\":\"CA\"," + "\"names\":{\"en\":\"Canada\"}},"
-                                                      + "\"represented_country\":{" + "\"geoname_id\":4,"
-                                                      + "\"iso_code\":\"GB\"," +
-                                                      "\"names\":{\"en\":\"United Kingdom\"},"
-                                                      + "\"type\":\"military\"}," + "\"traits\":{"
-                                                      + "\"ip_address\":\"1.2.3.4\"" + "}}";
 
         public void CanDeserializeCountryResponse(CountryResponse resp)
         {
@@ -100,6 +61,8 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual(93.263599999999997, insights.Location.Longitude);
             Assert.AreEqual(765, insights.Location.MetroCode);
             Assert.AreEqual("America/Chicago", insights.Location.TimeZone);
+            Assert.AreEqual(50000, insights.Location.AverageIncome);
+            Assert.AreEqual(100, insights.Location.EstimatedPopulation);
 
             Assert.AreEqual(11, insights.MaxMind.QueriesRemaining);
 
@@ -113,7 +76,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual(3, insights.RepresentedCountry.GeoNameId);
             Assert.AreEqual("GB", insights.RepresentedCountry.IsoCode);
             Assert.AreEqual("United Kingdom", insights.RepresentedCountry.Name);
-            Assert.AreEqual("C<military>", insights.RepresentedCountry.Type);
+            Assert.AreEqual("military", insights.RepresentedCountry.Type);
 
             Assert.AreEqual(2, insights.Subdivisions.Count);
             insights.Subdivisions[0].Locales = new List<string> {"en"};
@@ -137,15 +100,14 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void CanDeserializeCountryResponseNewtonsoftJson()
         {
-            CanDeserializeCountryResponse(JsonConvert.DeserializeObject<CountryResponse>(_countryBody));
+            CanDeserializeCountryResponse(JsonConvert.DeserializeObject<CountryResponse>(CountryJson));
         }
 
         [Test]
         public void CanDeserializeCountryResponseRestSharp()
         {
             var d = new JsonDeserializer();
-            var r = new RestResponse();
-            r.Content = _countryBody;
+            var r = new RestResponse {Content = CountryJson};
             CanDeserializeCountryResponse(d.Deserialize<CountryResponse>(r));
         }
 
@@ -189,15 +151,14 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void CanDeserializeInsightsResponseNewtonsoftJson()
         {
-            CanDeserializeInsightsResponse(JsonConvert.DeserializeObject<InsightsResponse>(_insightsBody));
+            CanDeserializeInsightsResponse(JsonConvert.DeserializeObject<InsightsResponse>(InsightsJson));
         }
 
         [Test]
         public void CanDeserializeInsightsResponseRestSharp()
         {
             var d = new JsonDeserializer();
-            var r = new RestResponse();
-            r.Content = _insightsBody;
+            var r = new RestResponse {Content = InsightsJson };
             CanDeserializeInsightsResponse(d.Deserialize<InsightsResponse>(r));
         }
     }

@@ -10,9 +10,11 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void CanGetSingleName()
         {
-            var c = new City();
-            c.Locales = new List<string> {"en"};
-            c.Names = new Dictionary<string, string> {{"en", "Foo"}};
+            var c = new City
+            {
+                Locales = new List<string> {"en"},
+                Names = new Dictionary<string, string> {{"en", "Foo"}}
+            };
 
             Assert.AreEqual("Foo", c.Name);
         }
@@ -20,9 +22,11 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void NameReturnsCorrectLocale()
         {
-            var c = new City();
-            c.Locales = new List<string> {"es"};
-            c.Names = new Dictionary<string, string> {{"en", "Mexico City"}, {"es", "Ciudad de México"}};
+            var c = new City
+            {
+                Locales = new List<string> {"es"},
+                Names = new Dictionary<string, string> {{"en", "Mexico City"}, {"es", "Ciudad de México"}}
+            };
 
             Assert.AreEqual("Ciudad de México", c.Name);
         }

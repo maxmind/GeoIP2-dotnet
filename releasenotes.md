@@ -1,6 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.3.0 (2015-XX-XX)
+------------------
+
+* `AverageIncome` and `EstimatePopulation` were added to the `Location`
+  model for use with the new fields in GeoIP2 Insights.
+
 2.2.0 (2015-05-19)
 ------------------
 

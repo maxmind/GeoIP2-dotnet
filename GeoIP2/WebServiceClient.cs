@@ -161,14 +161,16 @@ namespace MaxMind.GeoIP2
 
         private IRestClient CreateClient()
         {
-            var restClient = new RestClient("https://" + _host + "/geoip/v2.1");
-            restClient.Authenticator = new HttpBasicAuthenticator(_userId.ToString(), _licenseKey);
+            var restClient = new RestClient("https://" + _host + "/geoip/v2.1")
+            {
+                Authenticator = new HttpBasicAuthenticator(_userId.ToString(), _licenseKey)
+            };
             restClient.AddHandler("application/vnd.maxmind.com-insights+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
             restClient.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
             restClient.Timeout = _timeout;
 
-            restClient.UserAgent = string.Format("GeoIP2 .NET Client {0}", Version);
+            restClient.UserAgent = $"GeoIP2 .NET Client {Version}";
 
             return restClient;
         }
@@ -211,8 +213,7 @@ namespace MaxMind.GeoIP2
         {
             IPAddress ip;
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
-                throw new GeoIP2Exception(string.Format("The specified IP address was incorrectly formatted: {0}",
-                    ipAddress));
+                throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipAddress}");
 
             var request = new RestRequest(urlPattern);
 
@@ -223,7 +224,7 @@ namespace MaxMind.GeoIP2
             if (response.ResponseStatus == ResponseStatus.Error)
             {
                 throw new HttpException(
-                    string.Format("Error received while making request: {0}", response.ErrorMessage),
+                    $"Error received while making request: {response.ErrorMessage}",
                     response.StatusCode, response.ResponseUri, response.ErrorException);
             }
 
@@ -232,13 +233,11 @@ namespace MaxMind.GeoIP2
             {
                 if (response.ContentLength <= 0)
                     throw new HttpException(
-                        string.Format("Received a 200 response for {0} but there was no message body.",
-                            response.ResponseUri), response.StatusCode, response.ResponseUri);
+                        $"Received a 200 response for {response.ResponseUri} but there was no message body.", response.StatusCode, response.ResponseUri);
 
                 if (response.ContentType == null || !response.ContentType.Contains("json"))
                     throw new GeoIP2Exception(
-                        string.Format("Received a 200 response for {0} but it does not appear to be JSON:\n",
-                            response.ContentType));
+                        $"Received a 200 response for {response.ContentType} but it does not appear to be JSON:\n");
 
                 T model;
                 try
@@ -249,7 +248,7 @@ namespace MaxMind.GeoIP2
                 catch (SerializationException ex)
                 {
                     throw new GeoIP2Exception(
-                        string.Format("Received a 200 response but not decode it as JSON: {0}", response.Content), ex);
+                        $"Received a 200 response but not decode it as JSON: {response.Content}", ex);
                 }
 
                 model.SetLocales(_locales);
@@ -262,12 +261,11 @@ namespace MaxMind.GeoIP2
             else if (status >= 500 && status < 600)
             {
                 throw new HttpException(
-                    string.Format("Received a server ({0}) error for {1}", (int) response.StatusCode,
-                        response.ResponseUri), response.StatusCode, response.ResponseUri);
+                    $"Received a server ({(int) response.StatusCode}) error for {response.ResponseUri}", response.StatusCode, response.ResponseUri);
             }
 
-            var errorMessage = string.Format("Received an unexpected response for {0} (status code: {1})",
-                response.ResponseUri, (int) response.StatusCode);
+            var errorMessage =
+                $"Received an unexpected response for {response.ResponseUri} (status code: {(int) response.StatusCode})";
             throw new HttpException(errorMessage, response.StatusCode, response.ResponseUri);
         }
 
@@ -276,7 +274,7 @@ namespace MaxMind.GeoIP2
             if (string.IsNullOrEmpty(response.Content))
             {
                 throw new HttpException(
-                    string.Format("Received a {0} error for {1} with no body", response.StatusCode, response.ResponseUri),
+                    $"Received a {response.StatusCode} error for {response.ResponseUri} with no body",
                     response.StatusCode, response.ResponseUri);
             }
 
@@ -289,8 +287,7 @@ namespace MaxMind.GeoIP2
             catch (SerializationException ex)
             {
                 throw new HttpException(
-                    string.Format("Received a {0} error for {1} but it did not include the expected JSON body: {2}",
-                        response.StatusCode, response.ResponseUri, response.Content), response.StatusCode,
+                    $"Received a {response.StatusCode} error for {response.ResponseUri} but it did not include the expected JSON body: {response.Content}", response.StatusCode,
                     response.ResponseUri, ex);
             }
         }

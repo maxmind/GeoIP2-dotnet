@@ -2,6 +2,9 @@
 
 namespace MaxMind.GeoIP2
 {
+    /// <summary>
+    ///     Interface for database reader
+    /// </summary>
     public interface IGeoIP2DatabaseReader : IGeoIP2Provider
     {
         /// <summary>

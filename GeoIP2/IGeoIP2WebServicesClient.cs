@@ -3,6 +3,9 @@ using MaxMind.GeoIP2.Responses;
 
 namespace MaxMind.GeoIP2
 {
+    /// <summary>
+    ///     Interface for web-service client
+    /// </summary>
     public interface IGeoIP2WebServicesClient : IGeoIP2Provider
     {
         /// <summary>
