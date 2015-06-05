@@ -50,12 +50,12 @@ namespace MaxMind.GeoIP2.UnitTests
                 "location", new JObject
                 {
                     {"accuracy_radius", 1500},
+                    {"average_income", 50000 },
+                    {"estimated_population", 100 },
                     {"latitude", 44.98},
                     {"longitude", 93.2636},
                     {"metro_code", 765},
-                    {"time_zone", "America/Chicago"},
-                    {"average_income", 50000 },
-                    {"estimated_population", 100 }
+                    {"time_zone", "America/Chicago"}
                 }
             },
             {
