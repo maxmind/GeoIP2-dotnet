@@ -7,7 +7,10 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public abstract class AbstractResponse
     {
-        // This is simplify the database API. Also, we may need to use the locales in the future.
+        /// <summary>
+        ///     This is simplify the database API. Also, we may need to use the locales in the future.
+        /// </summary>
+        /// <param name="locales"></param>
         protected internal virtual void SetLocales(List<string> locales)
         {
         }

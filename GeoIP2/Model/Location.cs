@@ -36,14 +36,23 @@ namespace MaxMind.GeoIP2.Model
         public int? AccuracyRadius { get; internal set; }
 
         /// <summary>
+        ///     The average income per household in US dollars.
+        /// </summary>
+        [JsonProperty("average_income")]
+        public int? AverageIncome { get; internal set; }
+
+        /// <summary>
         ///     Determines whether both the <see cref="Latitude">latitude</see>
         ///     and <see cref="Longitude">longitude</see> have values.
         /// </summary>
         [JsonIgnore]
-        public bool HasCoordinates
-        {
-            get { return Latitude.HasValue && Longitude.HasValue; }
-        }
+        public bool HasCoordinates => Latitude.HasValue && Longitude.HasValue;
+
+        /// <summary>
+        ///     The estimated number of people per square kilometer.	
+        /// </summary>
+        [JsonProperty("estimated_population")]
+        public int? EstimatedPopulation { get; internal set; }
 
         /// <summary>
         ///     The latitude of the location as a floating point number.

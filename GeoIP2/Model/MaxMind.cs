@@ -38,7 +38,7 @@ namespace MaxMind.GeoIP2.Model
         /// </returns>
         public override string ToString()
         {
-            return string.Format("MaxMind [{0}]", QueriesRemaining.HasValue ? QueriesRemaining.ToString() : string.Empty);
+            return $"MaxMind [ QueriesRemaining={QueriesRemaining} ]";
         }
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="DeserializationTests.cs" />
     <Compile Include="NamedEntityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseHelper.cs" />
     <Compile Include="WebServiceClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
