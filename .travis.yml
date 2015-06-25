@@ -9,6 +9,8 @@ script:
   - xbuild
   - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./GeoIP2.UnitTests/bin/Debug/MaxMind.GeoIP2.UnitTests.dll
 
+sudo: false
+
 notifications:
   email:
     recipients:
