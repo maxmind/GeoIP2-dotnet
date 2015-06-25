@@ -295,8 +295,10 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.IsNull(traits.Isp);
             Assert.IsNull(traits.Organization);
             Assert.IsNull(traits.UserType);
+#pragma warning disable 0618
             Assert.IsFalse(traits.IsAnonymousProxy);
             Assert.IsFalse(traits.IsSatelliteProvider);
+#pragma warning restore 0618
             Assert.AreEqual(
                 "Traits [IsAnonymousProxy=False, IsSatelliteProvider=False, ]",
                 traits.ToString());
