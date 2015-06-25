@@ -1,24 +1,31 @@
 #!/bin/bash
 
-TAG=$1
+set -e
 
-if [ -z $TAG ]; then
-    echo "Please specify a tag"
-    exit 1
-fi
+VERSION=$(perl -MFile::Slurp::Tiny=read_file -MDateTime <<EOF
+use v5.16;
+my \$log = read_file(q{releasenotes.md});
+\$log =~ /\n(\d+\.\d+\.\d+) \((\d{4}-\d{2}-\d{2})\)\n/;
+die 'Release time is not today!' unless DateTime->now->ymd eq \$2;
+say \$1;
+EOF
+)
+
+TAG="v$VERSION"
+
 
 if [ -n "$(git status --porcelain)" ]; then
     echo ". is not clean." >&2
-#    exit 1
+    exit 1
 fi
 
 if [ ! -d .gh-pages ]; then
     echo "Checking out gh-pages in .gh-pages"
     git clone -b gh-pages git@github.com:maxmind/GeoIP2-dotnet.git .gh-pages
-    cd .gh-pages
+    pushd .gh-pages
 else
     echo "Updating .gh-pages"
-    cd .gh-pages
+    pushd .gh-pages
     git pull
 fi
 
@@ -27,7 +34,7 @@ if [ -n "$(git status --porcelain)" ]; then
     exit 1
 fi
 
-cd ..
+popd
 
 PAGE=.gh-pages/index.md
 cat <<EOF > $PAGE
@@ -46,7 +53,7 @@ xbuild /property:Configuration=Release
 monodocer -assembly:GeoIP2/bin/Release/MaxMind.GeoIP2.dll -importslashdoc:GeoIP2/bin/Release/MaxMind.GeoIP2.XML -path:/tmp/dotnet-$TAG -pretty
 mdoc export-html -o .gh-pages/doc/$TAG /tmp/dotnet-$TAG
 
-cd .gh-pages
+pushd .gh-pages
 
 git add doc/
 git commit -m "Updated for $TAG" -a
@@ -60,7 +67,7 @@ fi
 
 git push
 
-cd ..
+popd
 git tag $TAG
 git push
 git push --tags
