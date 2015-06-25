@@ -6,6 +6,10 @@ GeoIP2 .NET API Release Notes
 
 * `AverageIncome` and `EstimatePopulation` were added to the `Location`
   model for use with the new fields in GeoIP2 Insights.
+* `IsAnonymousProxy` and `IsSatelliteProvider` in `GeoIP2.Model.Traits` have
+  been deprecated. Please use our [GeoIP2 Anonymous IP
+  database](https://www.maxmind.com/en/geoip2-anonymous- ip-database) to
+  determine whether an IP address is used by an anonymizing service.
 
 2.2.0 (2015-05-19)
 ------------------

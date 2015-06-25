@@ -91,12 +91,14 @@ namespace MaxMind.GeoIP2.Model
         ///     </a>
         /// </summary>
         [JsonProperty("is_anonymous_proxy")]
+        [Obsolete("Use our GeoIP2 Anonymous IP database instead.")]
         public bool IsAnonymousProxy { get; internal set; }
 
         /// <summary>
         ///     This is true if the IP belong to a satellite internet provider.
         /// </summary>
         [JsonProperty("is_satellite_provider")]
+        [Obsolete("Use our GeoIP2 Anonymous IP database instead.")]
         public bool IsSatelliteProvider { get; internal set; }
 
         /// <summary>
