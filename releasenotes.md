@@ -4,7 +4,7 @@ GeoIP2 .NET API Release Notes
 2.3.0 (2015-XX-XX)
 ------------------
 
-* `AverageIncome` and `EstimatePopulation` were added to the `Location`
+* `AverageIncome` and `PopulationDensity` were added to the `Location`
   model for use with the new fields in GeoIP2 Insights.
 * `IsAnonymousProxy` and `IsSatelliteProvider` in `GeoIP2.Model.Traits` have
   been deprecated. Please use our [GeoIP2 Anonymous IP
