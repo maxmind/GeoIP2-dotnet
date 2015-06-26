@@ -36,7 +36,7 @@ namespace MaxMind.GeoIP2.Model
         public int? AccuracyRadius { get; internal set; }
 
         /// <summary>
-        ///     The average income per household in US dollars.
+        ///     The average income in US dollars associated with the IP address.
         /// </summary>
         [JsonProperty("average_income")]
         public int? AverageIncome { get; internal set; }
@@ -47,12 +47,6 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonIgnore]
         public bool HasCoordinates => Latitude.HasValue && Longitude.HasValue;
-
-        /// <summary>
-        ///     The estimated number of people per square kilometer.	
-        /// </summary>
-        [JsonProperty("estimated_population")]
-        public int? EstimatedPopulation { get; internal set; }
 
         /// <summary>
         ///     The latitude of the location as a floating point number.
@@ -73,6 +67,12 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonProperty("metro_code")]
         public int? MetroCode { get; internal set; }
+
+        /// <summary>
+        ///     The estimated number of people per square kilometer.
+        /// </summary>
+        [JsonProperty("population_density")]
+        public int? PopulationDensity { get; internal set; }
 
         /// <summary>
         ///     The time zone associated with location, as specified by the

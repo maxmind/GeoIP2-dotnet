@@ -51,10 +51,10 @@ namespace MaxMind.GeoIP2.UnitTests
                 {
                     {"accuracy_radius", 1500},
                     {"average_income", 50000 },
-                    {"estimated_population", 100 },
                     {"latitude", 44.98},
                     {"longitude", 93.2636},
                     {"metro_code", 765},
+                    {"population_density", 100 },
                     {"time_zone", "America/Chicago"}
                 }
             },
