@@ -62,7 +62,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual(765, insights.Location.MetroCode);
             Assert.AreEqual("America/Chicago", insights.Location.TimeZone);
             Assert.AreEqual(50000, insights.Location.AverageIncome);
-            Assert.AreEqual(100, insights.Location.EstimatedPopulation);
+            Assert.AreEqual(100, insights.Location.PopulationDensity);
 
             Assert.AreEqual(11, insights.MaxMind.QueriesRemaining);
 
