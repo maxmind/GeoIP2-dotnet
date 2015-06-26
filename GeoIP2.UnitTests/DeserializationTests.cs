@@ -90,8 +90,10 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual("AS Organization", insights.Traits.AutonomousSystemOrganization);
             Assert.AreEqual("example.com", insights.Traits.Domain);
             Assert.AreEqual("1.2.3.4", insights.Traits.IPAddress);
+#pragma warning disable 0618
             Assert.AreEqual(true, insights.Traits.IsAnonymousProxy);
             Assert.AreEqual(true, insights.Traits.IsSatelliteProvider);
+#pragma warning restore 0618
             Assert.AreEqual("Comcast", insights.Traits.Isp);
             Assert.AreEqual("Blorg", insights.Traits.Organization);
             Assert.AreEqual("college", insights.Traits.UserType);
