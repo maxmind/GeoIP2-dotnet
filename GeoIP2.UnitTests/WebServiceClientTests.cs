@@ -261,7 +261,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.IsNull(location.Longitude);
             Assert.IsNull(location.MetroCode);
             Assert.IsNull(location.TimeZone);
-            Assert.IsNull(location.EstimatedPopulation);
+            Assert.IsNull(location.PopulationDensity);
             Assert.IsNull(location.AverageIncome);
 
             var maxmind = insights.MaxMind;
