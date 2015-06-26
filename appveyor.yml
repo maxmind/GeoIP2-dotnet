@@ -5,7 +5,8 @@ install:
  - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
 
 notifications:
-  - provider: HipChat
-    auth_token:
-      secure: NtKXu/kGk8Td4YqCH95camAcNQtB3rMll+5DALAmbDY=
-    room: dev
+- provider: Email
+  to: dev@maxmind.com
+  on_build_success: false
+  on_build_failure: true
+  on_build_status_changed: true
