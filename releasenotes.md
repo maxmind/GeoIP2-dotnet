@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.3.0 (2015-XX-XX)
+2.3.0 (2015-06-29)
 ------------------
 
 * `AverageIncome` and `PopulationDensity` were added to the `Location`
