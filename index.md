@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v2.3.0
+version: v2.3.1-beta1
 ---
 
 # GeoIP2 .NET API #
