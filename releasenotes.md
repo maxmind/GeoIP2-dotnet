@@ -1,6 +1,13 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.3.1-beta1 (2015-06-30)
+------------------------
+
+* Upgrade to Json.NET 7.0.1.
+* Upgrade to MaxMind.Db 1.1.0-beta1. This release includes a number of
+  significant improvements for the memory-mapped file mode.
+
 2.3.0 (2015-06-29)
 ------------------
 
