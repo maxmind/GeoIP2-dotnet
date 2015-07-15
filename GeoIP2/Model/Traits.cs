@@ -101,7 +101,7 @@ namespace MaxMind.GeoIP2.Model
         ///     This is true if the IP belong to a satellite internet provider.
         /// </summary>
         [JsonProperty("is_satellite_provider")]
-        [Obsolete("Use our GeoIP2 Anonymous IP database instead.")]
+        [Obsolete("Due to increased mobile usage, we have insufficient data to maintain this field.")]
         public bool IsSatelliteProvider { get; internal set; }
 
         /// <summary>
