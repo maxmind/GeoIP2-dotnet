@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace MaxMind.GeoIP2.Exceptions
 {
@@ -7,6 +9,7 @@ namespace MaxMind.GeoIP2.Exceptions
     ///     service. This occurs when the web service is up and responding to requests,
     ///     but the request sent was invalid in some way.
     /// </summary>
+    [Serializable]
     public class InvalidRequestException : GeoIP2Exception
     {
         /// <summary>
@@ -23,6 +26,19 @@ namespace MaxMind.GeoIP2.Exceptions
         }
 
         /// <summary>
+        /// Constructor for deserialization.
+        /// </summary>
+        /// <param name="info">The SerializationInfo with data.</param>
+        /// <param name="context">The source for this deserialization.</param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        protected InvalidRequestException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            Code = info.GetString("Code");
+            this.Uri = (Uri)info.GetValue("Uri", typeof(Uri));
+        }
+
+        /// <summary>
         ///     The error code returned by the web service.
         /// </summary>
         public string Code { get; private set; }
@@ -31,5 +47,18 @@ namespace MaxMind.GeoIP2.Exceptions
         ///     The URI queried by the web service.
         /// </summary>
         public Uri Uri { get; private set; }
+
+        /// <summary>
+        /// Populates a SerializationInfo with the data needed to serialize the target object.
+        /// </summary>
+        /// <param name="info">The SerializationInfo to populate with data.</param>
+        /// <param name="context">The destination (see StreamingContext) for this serialization.</param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Code", Code);
+            info.AddValue("Uri", this.Uri);
+            base.GetObjectData(info, context);
+        }
     }
 }

@@ -1,8 +1,11 @@
-﻿namespace MaxMind.GeoIP2.Exceptions
+﻿using System;
+
+namespace MaxMind.GeoIP2.Exceptions
 {
     /// <summary>
     ///     This exception is thrown when your account does not have any queries remaining for the called service.
     /// </summary>
+    [Serializable]
     public class OutOfQueriesException : GeoIP2Exception
     {
         /// <summary>

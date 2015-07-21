@@ -1,8 +1,11 @@
-﻿namespace MaxMind.GeoIP2.Exceptions
+﻿using System;
+
+namespace MaxMind.GeoIP2.Exceptions
 {
     /// <summary>
     ///     This exception is thrown when there is an authentication error.
     /// </summary>
+    [Serializable]
     public class AuthenticationException : GeoIP2Exception
     {
         /// <summary>
