@@ -2,7 +2,7 @@
 
 namespace MaxMind.GeoIP2.UnitTests
 {
-    class ResponseHelper
+    internal class ResponseHelper
     {
         public static JObject InsightsJObject => new JObject
         {

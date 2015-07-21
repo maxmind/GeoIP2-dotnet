@@ -1,12 +1,12 @@
-﻿using System;
+﻿using MaxMind.Db;
+using MaxMind.GeoIP2.Exceptions;
+using MaxMind.GeoIP2.Responses;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using MaxMind.Db;
-using MaxMind.GeoIP2.Exceptions;
-using MaxMind.GeoIP2.Responses;
-using Newtonsoft.Json.Linq;
 
 namespace MaxMind.GeoIP2
 {
@@ -25,7 +25,7 @@ namespace MaxMind.GeoIP2
         /// <param name="file">The MaxMind DB file.</param>
         /// <param name="mode">The mode by which to access the DB file.</param>
         public DatabaseReader(string file, FileAccessMode mode = FileAccessMode.MemoryMapped)
-            : this(file, new List<string> {"en"}, mode)
+            : this(file, new List<string> { "en" }, mode)
         {
         }
 
@@ -46,7 +46,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="stream">A stream of the MaxMind DB file.</param>
         public DatabaseReader(Stream stream)
-            : this(stream, new List<string> {"en"})
+            : this(stream, new List<string> { "en" })
         {
         }
 
@@ -204,14 +204,14 @@ namespace MaxMind.GeoIP2
             {
                 if (token["traits"] == null)
                 {
-                    ((JObject) token).Add("traits", new JObject());
+                    ((JObject)token).Add("traits", new JObject());
                 }
 
-                ipObject = (JObject) token["traits"];
+                ipObject = (JObject)token["traits"];
             }
             else
             {
-                ipObject = (JObject) token;
+                ipObject = (JObject)token;
             }
             ipObject.Add("ip_address", ipAddress);
 

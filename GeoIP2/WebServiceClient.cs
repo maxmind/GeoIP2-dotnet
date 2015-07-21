@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Reflection;
-using System.Runtime.Serialization;
-using MaxMind.GeoIP2.Exceptions;
+﻿using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
 using RestSharp;
 using RestSharp.Deserializers;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace MaxMind.GeoIP2
 {
@@ -77,7 +77,7 @@ namespace MaxMind.GeoIP2
         /// <param name="baseUrl">The base url to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
         public WebServiceClient(int userID, string licenseKey, string baseUrl = "geoip.maxmind.com", int timeout = 3000)
-            : this(userID, licenseKey, new List<string> {"en"}, baseUrl, timeout)
+            : this(userID, licenseKey, new List<string> { "en" }, baseUrl, timeout)
         {
         }
 
@@ -228,7 +228,7 @@ namespace MaxMind.GeoIP2
                     response.StatusCode, response.ResponseUri, response.ErrorException);
             }
 
-            var status = (int) response.StatusCode;
+            var status = (int)response.StatusCode;
             if (status == 200)
             {
                 if (response.ContentLength <= 0)
@@ -261,11 +261,11 @@ namespace MaxMind.GeoIP2
             else if (status >= 500 && status < 600)
             {
                 throw new HttpException(
-                    $"Received a server ({(int) response.StatusCode}) error for {response.ResponseUri}", response.StatusCode, response.ResponseUri);
+                    $"Received a server ({(int)response.StatusCode}) error for {response.ResponseUri}", response.StatusCode, response.ResponseUri);
             }
 
             var errorMessage =
-                $"Received an unexpected response for {response.ResponseUri} (status code: {(int) response.StatusCode})";
+                $"Received an unexpected response for {response.ResponseUri} (status code: {(int)response.StatusCode})";
             throw new HttpException(errorMessage, response.StatusCode, response.ResponseUri);
         }
 
