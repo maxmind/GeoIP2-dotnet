@@ -1,6 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.3.1 (2015-07-21)
+------------------
+
+* Upgrade to MaxMind.Db 1.1.0.
+* Fix serialization on exceptions.
+
 2.3.1-beta1 (2015-06-30)
 ------------------------
 
