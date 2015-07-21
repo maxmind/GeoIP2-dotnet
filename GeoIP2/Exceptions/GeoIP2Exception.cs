@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace MaxMind.GeoIP2.Exceptions
 {
@@ -6,6 +8,7 @@ namespace MaxMind.GeoIP2.Exceptions
     ///     This class represents a generic GeoIP2 error. All other exceptions thrown by
     ///     the GeoIP2 API subclass this exception
     /// </summary>
+    [Serializable]
     public class GeoIP2Exception : ApplicationException
     {
         /// <summary>
@@ -23,6 +26,17 @@ namespace MaxMind.GeoIP2.Exceptions
         /// <param name="innerException">The inner exception.</param>
         public GeoIP2Exception(string message, Exception innerException)
             : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Constructor for deserialization.
+        /// </summary>
+        /// <param name="info">The SerializationInfo with data.</param>
+        /// <param name="context">The source for this deserialization.</param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        protected GeoIP2Exception(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }
