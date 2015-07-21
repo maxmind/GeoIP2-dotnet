@@ -38,5 +38,5 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("2.3.0.0")]
 [assembly: AssemblyFileVersion("2.3.1")]
-[assembly: AssemblyInformationalVersion("2.3.1-beta1")]
+[assembly: AssemblyInformationalVersion("2.3.1")]
 [assembly: InternalsVisibleTo("MaxMind.GeoIP2.UnitTests")]
