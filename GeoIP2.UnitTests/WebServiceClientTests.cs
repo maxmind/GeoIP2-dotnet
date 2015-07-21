@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using MaxMind.GeoIP2.Exceptions;
+﻿using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
-using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 using NUnit.Framework;
 using RestSharp;
 using Rhino.Mocks;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
 namespace MaxMind.GeoIP2.UnitTests
 {
     [TestFixture]
     public class WebServiceClientTests
     {
-
         public InsightsResponse RunClientGivenResponse(RestResponse response)
         {
             response.ContentLength = response.Content.Length;
@@ -23,12 +22,12 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute(Arg<IRestRequest>.Is.Anything)).Return(response);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
             return wsc.Insights("1.2.3.4", restClient);
         }
 
         [Test]
-        [ExpectedException(typeof (AddressNotFoundException),
+        [ExpectedException(typeof(AddressNotFoundException),
             ExpectedMessage = "The value 1.2.3.16 is not in the database", MatchType = MessageMatch.Contains)]
         public void AddressNotFoundShouldThrowException()
         {
@@ -37,14 +36,14 @@ namespace MaxMind.GeoIP2.UnitTests
                 Content =
                     "{\"code\":\"IP_ADDRESS_NOT_FOUND\", \"error\":\"The value 1.2.3.16 is not in the database.\"}",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 404
+                StatusCode = (HttpStatusCode)404
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (AddressNotFoundException),
+        [ExpectedException(typeof(AddressNotFoundException),
             ExpectedMessage = "The value 1.2.3.17 belongs to a reserved or private range",
             MatchType = MessageMatch.Contains)]
         public void AddressReservedShouldThrowException()
@@ -54,14 +53,14 @@ namespace MaxMind.GeoIP2.UnitTests
                 Content =
                     "{\"code\":\"IP_ADDRESS_RESERVED\",\"error\":\"The value 1.2.3.17 belongs to a reserved or private range.\"}",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 400
+                StatusCode = (HttpStatusCode)400
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (HttpException), ExpectedMessage = "Cannot satisfy your Accept-Charset requirements",
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "Cannot satisfy your Accept-Charset requirements",
             MatchType = MessageMatch.Contains)]
         public void BadCharsetRequirementShouldThrowException()
         {
@@ -70,14 +69,14 @@ namespace MaxMind.GeoIP2.UnitTests
                 Content = "Cannot satisfy your Accept-Charset requirements",
                 ContentType = "text/plain",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 406
+                StatusCode = (HttpStatusCode)406
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2Exception), ExpectedMessage = "but it does not appear to be JSON",
+        [ExpectedException(typeof(GeoIP2Exception), ExpectedMessage = "but it does not appear to be JSON",
             MatchType = MessageMatch.Contains)]
         public void BadContentTypeShouldThrowException()
         {
@@ -109,7 +108,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
             var result = wsc.City("1.2.3.4", restClient);
 
             Assert.That(result, Is.Not.Null);
@@ -133,7 +132,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             restClient.Stub(r => r.Execute(Arg<IRestRequest>.Is.Anything)).Return(restResponse);
 
-            var wsc = new WebServiceClient(0, "abcdef", new List<string> {"en"});
+            var wsc = new WebServiceClient(0, "abcdef", new List<string> { "en" });
             var result = wsc.Country("1.2.3.4", restClient);
 
             Assert.That(result, Is.Not.Null);
@@ -158,7 +157,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (HttpException), ExpectedMessage = "message body", MatchType = MessageMatch.Contains)]
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "message body", MatchType = MessageMatch.Contains)]
         public void EmptyBodyShouldThrowException()
         {
             var restResponse = new RestResponse
@@ -172,7 +171,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (HttpException),
+        [ExpectedException(typeof(HttpException),
             ExpectedMessage = "Error received while making request: Internal error message",
             MatchType = MessageMatch.Exact)]
         public void ErrorExceptionSetShouldThrowException()
@@ -190,16 +189,16 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2Exception),
+        [ExpectedException(typeof(GeoIP2Exception),
             ExpectedMessage = "The specified IP address was incorrectly formatted", MatchType = MessageMatch.Contains)]
         public void IncorrectlyFormattedIPAddressShouldThrowException()
         {
-            var client = new WebServiceClient(0, "abcde", new List<string> {"en"});
+            var client = new WebServiceClient(0, "abcde", new List<string> { "en" });
             client.Insights("foo");
         }
 
         [Test]
-        [ExpectedException(typeof (HttpException), ExpectedMessage = "Received a server (500) error",
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "Received a server (500) error",
             MatchType = MessageMatch.Contains)]
         public void InternalServerErrorShouldThrowException()
         {
@@ -213,7 +212,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (AuthenticationException),
+        [ExpectedException(typeof(AuthenticationException),
             ExpectedMessage = "You have supplied an invalid MaxMind user ID and/or license key",
             MatchType = MessageMatch.Contains)]
         public void InvalidAuthShouldThrowException()
@@ -223,7 +222,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Content =
                     "{\"code\":\"AUTHORIZATION_INVALID\",\"error\":\"You have supplied an invalid MaxMind user ID and/or license key in the Authorization header.\"}",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 401
+                StatusCode = (HttpStatusCode)401
             };
 
             RunClientGivenResponse(restResponse);
@@ -241,7 +240,6 @@ namespace MaxMind.GeoIP2.UnitTests
             };
 
             var insights = RunClientGivenResponse(restResponse);
-
 
             var city = insights.City;
             Assert.IsNotNull(city);
@@ -328,7 +326,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (AuthenticationException),
+        [ExpectedException(typeof(AuthenticationException),
             ExpectedMessage = "You have not supplied a MaxMind license key in the Authorization header",
             MatchType = MessageMatch.Contains)]
         public void MissingLicenseShouldThrowException()
@@ -338,14 +336,14 @@ namespace MaxMind.GeoIP2.UnitTests
                 Content =
                     "{\"code\":\"LICENSE_KEY_REQUIRED\",\"error\":\"You have not supplied a MaxMind license key in the Authorization header.\"}",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 401
+                StatusCode = (HttpStatusCode)401
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (AuthenticationException),
+        [ExpectedException(typeof(AuthenticationException),
             ExpectedMessage = "You have not supplied a MaxMind user ID in the Authorization header",
             MatchType = MessageMatch.Contains)]
         public void MissingUserIDShouldThrowException()
@@ -355,14 +353,14 @@ namespace MaxMind.GeoIP2.UnitTests
                 Content =
                     "{\"code\":\"USER_ID_REQUIRED\",\"error\":\"You have not supplied a MaxMind user ID in the Authorization header.\"}",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 401
+                StatusCode = (HttpStatusCode)401
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (HttpException), ExpectedMessage = "with no body",
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "with no body",
             MatchType = MessageMatch.Contains)]
         public void NoErrorBodyShouldThrowException()
         {
@@ -370,14 +368,14 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 Content = null,
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 400
+                StatusCode = (HttpStatusCode)400
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (OutOfQueriesException),
+        [ExpectedException(typeof(OutOfQueriesException),
             ExpectedMessage = "The license key you have provided is out of queries", MatchType = MessageMatch.Contains)]
         public void OutOfQueriesShouldThrowException()
         {
@@ -386,14 +384,14 @@ namespace MaxMind.GeoIP2.UnitTests
                 Content =
                     "{\"code\":\"OUT_OF_QUERIES\",\"error\":\"The license key you have provided is out of queries. Please purchase more queries to use this service.\"}",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 402
+                StatusCode = (HttpStatusCode)402
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (HttpException),
+        [ExpectedException(typeof(HttpException),
             ExpectedMessage = "Received an unexpected response for http://foo.com/insights/1.2.3.4 (status code: 300)",
             MatchType = MessageMatch.Exact)]
         public void SurprisingStatusShouldThrowException()
@@ -401,14 +399,14 @@ namespace MaxMind.GeoIP2.UnitTests
             var restResponse = new RestResponse
             {
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 300
+                StatusCode = (HttpStatusCode)300
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (GeoIP2Exception),
+        [ExpectedException(typeof(GeoIP2Exception),
             ExpectedMessage = "Received a 200 response but not decode it as JSON", MatchType = MessageMatch.Contains)]
         public void UndeserializableJsonShouldThrowException()
         {
@@ -417,14 +415,14 @@ namespace MaxMind.GeoIP2.UnitTests
                 Content = "{\"invalid\":yes}",
                 ContentType = "application/json",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 200
+                StatusCode = (HttpStatusCode)200
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (HttpException), ExpectedMessage = "it did not include the expected JSON body",
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "it did not include the expected JSON body",
             MatchType = MessageMatch.Contains)]
         public void UnexpectedErrorBodyShouldThrowException()
         {
@@ -432,14 +430,14 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 Content = "{\"invalid\": }",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 400
+                StatusCode = (HttpStatusCode)400
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidRequestException), ExpectedMessage = "not a valid ip address",
+        [ExpectedException(typeof(InvalidRequestException), ExpectedMessage = "not a valid ip address",
             MatchType = MessageMatch.Contains)]
         public void WebServiceErrorShouldThrowException()
         {
@@ -448,14 +446,14 @@ namespace MaxMind.GeoIP2.UnitTests
                 Content = "{\"code\":\"IP_ADDRESS_INVALID\","
                           + "\"error\":\"The value 1.2.3 is not a valid ip address\"}",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3"),
-                StatusCode = (HttpStatusCode) 400
+                StatusCode = (HttpStatusCode)400
             };
 
             RunClientGivenResponse(restResponse);
         }
 
         [Test]
-        [ExpectedException(typeof (HttpException), ExpectedMessage = "does not specify code or error keys",
+        [ExpectedException(typeof(HttpException), ExpectedMessage = "does not specify code or error keys",
             MatchType = MessageMatch.Contains)]
         public void WeirdErrorBodyShouldThrowException()
         {
@@ -463,7 +461,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 Content = "{\"weird\": 42}",
                 ResponseUri = new Uri("http://foo.com/insights/1.2.3.4"),
-                StatusCode = (HttpStatusCode) 400
+                StatusCode = (HttpStatusCode)400
             };
 
             RunClientGivenResponse(restResponse);

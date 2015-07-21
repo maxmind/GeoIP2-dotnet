@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MaxMind.GeoIP2.Model;
+﻿using MaxMind.GeoIP2.Model;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MaxMind.GeoIP2.Responses
 {
@@ -10,7 +10,8 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public abstract class AbstractCityResponse : AbstractCountryResponse
     {
-        [JsonProperty("subdivisions")] private List<Subdivision> _subdivisions;
+        [JsonProperty("subdivisions")]
+        private List<Subdivision> _subdivisions;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.

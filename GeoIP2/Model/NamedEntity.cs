@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RestSharp.Deserializers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MaxMind.GeoIP2.Model
 {
@@ -10,7 +10,8 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public abstract class NamedEntity
     {
-        [JsonProperty("names")] private Dictionary<string, string> _names;
+        [JsonProperty("names")]
+        private Dictionary<string, string> _names;
 
         /// <summary>
         ///     Constructor

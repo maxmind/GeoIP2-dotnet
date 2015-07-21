@@ -1,5 +1,5 @@
-﻿using System.Net;
-using MaxMind.GeoIP2.Responses;
+﻿using MaxMind.GeoIP2.Responses;
+using System.Net;
 
 namespace MaxMind.GeoIP2
 {

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using MaxMind.GeoIP2.Model;
+﻿using MaxMind.GeoIP2.Model;
+using System.Collections.Generic;
 
 namespace MaxMind.GeoIP2.Responses
 {
