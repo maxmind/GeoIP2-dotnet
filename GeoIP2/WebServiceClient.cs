@@ -1,13 +1,17 @@
-﻿using MaxMind.GeoIP2.Exceptions;
+﻿#region
+
+using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
-using RestSharp;
-using RestSharp.Deserializers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Reflection;
-using System.Runtime.Serialization;
+using System.Text;
+
+#endregion
 
 namespace MaxMind.GeoIP2
 {
@@ -116,7 +120,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="InsightsResponse" /></returns>
         public InsightsResponse Insights(string ipAddress)
         {
-            return Insights(ipAddress, CreateClient());
+            return Execute<InsightsResponse>("insights", ipAddress);
         }
 
         /// <summary>
@@ -136,7 +140,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CountryResponse" /></returns>
         public CountryResponse Country(string ipAddress)
         {
-            return Country(ipAddress, CreateClient());
+            return Execute<CountryResponse>("country", ipAddress);
         }
 
         /// <summary>
@@ -156,162 +160,168 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CityResponse" /></returns>
         public CityResponse City(string ipAddress)
         {
-            return City(ipAddress, CreateClient());
+            return Execute<CityResponse>("city", ipAddress);
         }
 
-        private IRestClient CreateClient()
+        private WebRequest CreateRequest(string type, string ipAddress)
         {
-            var restClient = new RestClient("https://" + _host + "/geoip/v2.1")
-            {
-                Authenticator = new HttpBasicAuthenticator(_userId.ToString(), _licenseKey)
-            };
-            restClient.AddHandler("application/vnd.maxmind.com-insights+json", new JsonDeserializer());
-            restClient.AddHandler("application/vnd.maxmind.com-country+json", new JsonDeserializer());
-            restClient.AddHandler("application/vnd.maxmind.com-city+json", new JsonDeserializer());
-            restClient.Timeout = _timeout;
+            var request = (HttpWebRequest)WebRequest.Create($"https://{_host}/geoip/v2.1/{type}/{ipAddress}");
+            var authInfo = Convert.ToBase64String(Encoding.Default.GetBytes($"{_userId}:{_licenseKey}"));
+            request.Headers["Authorization"] = $"Basic {authInfo}";
+            request.Timeout = _timeout;
 
-            restClient.UserAgent = $"GeoIP2 .NET Client {Version}";
+            // XXX - Fix user agent to be valid
+            request.UserAgent = $"GeoIP2 .NET Client {Version}";
 
-            return restClient;
+            return request;
         }
 
-        /// <summary>
-        ///     Returns an <see cref="InsightsResponse" /> for the specified IP address.
-        /// </summary>
-        /// <param name="ipAddress">The IP address.</param>
-        /// <param name="restClient">The RestClient to use</param>
-        /// <returns>An <see cref="InsightsResponse" /></returns>
-        internal InsightsResponse Insights(string ipAddress, IRestClient restClient)
-        {
-            return Execute<InsightsResponse>("insights/{ip}", ipAddress, restClient);
-        }
-
-        /// <summary>
-        ///     Returns an <see cref="CountryResponse" /> for the specified IP address.
-        /// </summary>
-        /// <param name="ipAddress">The IP address.</param>
-        /// <param name="restClient">The RestClient to use</param>
-        /// <returns>An <see cref="CountryResponse" /></returns>
-        internal CountryResponse Country(string ipAddress, IRestClient restClient)
-        {
-            return Execute<CountryResponse>("country/{ip}", ipAddress, restClient);
-        }
-
-        /// <summary>
-        ///     Returns an <see cref="CityResponse" /> for the specified IP address.
-        /// </summary>
-        /// <param name="ipAddress">The IP address.</param>
-        /// <param name="restClient">The RestClient to use</param>
-        /// <returns>An <see cref="CityResponse" /></returns>
-        internal CityResponse City(string ipAddress, IRestClient restClient)
-        {
-            return Execute<CityResponse>("city/{ip}", ipAddress, restClient);
-        }
-
-        private T Execute<T>(string urlPattern, string ipAddress, IRestClient restClient)
+        private T Execute<T>(string type, string ipAddress)
             where T : AbstractCountryResponse, new()
         {
             IPAddress ip;
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
                 throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipAddress}");
 
-            var request = new RestRequest(urlPattern);
+            var request = CreateRequest(type, ipAddress ?? "me");
 
-            request.AddUrlSegment("ip", ipAddress ?? "me");
+            try
+            {
+                var response = (HttpWebResponse)request.GetResponse();
+                return CreateModel<T>(response);
+            }
+            catch (WebException e)
+            {
+                if (e.Status != WebExceptionStatus.ProtocolError)
+                {
+                    throw new HttpException(
+                        $"Error received while making request: {e.Message}",
+                        0, request.RequestUri, e);
+                }
+                throw CreateStatusException((HttpWebResponse)e.Response);
+            }
+        }
 
-            var response = restClient.Execute(request);
-
-            if (response.ResponseStatus == ResponseStatus.Error)
+        private T CreateModel<T>(HttpWebResponse response)
+            where T : AbstractCountryResponse, new()
+        {
+            if (response.StatusCode != HttpStatusCode.OK)
             {
                 throw new HttpException(
-                    $"Error received while making request: {response.ErrorMessage}",
-                    response.StatusCode, response.ResponseUri, response.ErrorException);
+                    $"Received an unexpected {response.StatusCode} response for {response.ResponseUri}",
+                    response.StatusCode, response.ResponseUri);
             }
 
-            var status = (int)response.StatusCode;
-            if (status == 200)
+            if (response.ContentType == null || !response.ContentType.Contains("json"))
+                throw new GeoIP2Exception(
+                    $"Received a 200 response for {response.ContentType} but it does not appear to be JSON:\n");
+
+            var stream = response.GetResponseStream();
+            if (response.ContentLength <= 0 || stream == null)
             {
-                if (response.ContentLength <= 0)
-                    throw new HttpException(
-                        $"Received a 200 response for {response.ResponseUri} but there was no message body.", response.StatusCode, response.ResponseUri);
-
-                if (response.ContentType == null || !response.ContentType.Contains("json"))
-                    throw new GeoIP2Exception(
-                        $"Received a 200 response for {response.ContentType} but it does not appear to be JSON:\n");
-
-                T model;
-                try
-                {
-                    var d = new JsonDeserializer();
-                    model = d.Deserialize<T>(response);
-                }
-                catch (SerializationException ex)
-                {
-                    throw new GeoIP2Exception(
-                        $"Received a 200 response but not decode it as JSON: {response.Content}", ex);
-                }
-
-                model.SetLocales(_locales);
-                return model;
+                stream?.Dispose();
+                throw new HttpException(
+                    $"Received a 200 response for {response.ResponseUri} but there was no message body.",
+                    response.StatusCode, response.ResponseUri);
             }
+
+            var sr = new StreamReader(stream);
+            try
+            {
+                using (JsonReader reader = new JsonTextReader(sr))
+                {
+                    sr = null;
+                    var serializer = new JsonSerializer();
+                    var model = serializer.Deserialize<T>(reader);
+                    model.SetLocales(_locales);
+                    return model;
+                }
+            }
+            catch (JsonSerializationException ex)
+            {
+                throw new GeoIP2Exception(
+                    "Received a 200 response but not decode it as JSON", ex);
+            }
+            finally
+            {
+                sr?.Dispose();
+            }
+        }
+
+        private Exception CreateStatusException(HttpWebResponse response)
+        {
+            var status = (int)response.StatusCode;
             if (status >= 400 && status < 500)
             {
-                Handle4xxStatus(response);
+                return Create4xxException(response);
             }
             else if (status >= 500 && status < 600)
             {
-                throw new HttpException(
-                    $"Received a server ({(int)response.StatusCode}) error for {response.ResponseUri}", response.StatusCode, response.ResponseUri);
+                return new HttpException(
+                    $"Received a server ({(int)response.StatusCode}) error for {response.ResponseUri}",
+                    response.StatusCode, response.ResponseUri);
             }
 
             var errorMessage =
                 $"Received an unexpected response for {response.ResponseUri} (status code: {(int)response.StatusCode})";
-            throw new HttpException(errorMessage, response.StatusCode, response.ResponseUri);
+            return new HttpException(errorMessage, response.StatusCode, response.ResponseUri);
         }
 
-        private void Handle4xxStatus(IRestResponse response)
+        private Exception Create4xxException(HttpWebResponse response)
         {
-            if (string.IsNullOrEmpty(response.Content))
+            string content = null;
+            using (var stream = response.GetResponseStream())
             {
-                throw new HttpException(
+                if (stream != null)
+                {
+                    var reader = new StreamReader(stream, Encoding.UTF8);
+                    content = reader.ReadToEnd();
+                }
+            }
+            if (string.IsNullOrEmpty(content))
+            {
+                return new HttpException(
                     $"Received a {response.StatusCode} error for {response.ResponseUri} with no body",
                     response.StatusCode, response.ResponseUri);
             }
 
             try
             {
-                var d = new JsonDeserializer();
-                var webServiceError = d.Deserialize<WebServiceError>(response);
-                HandleErrorWithJsonBody(webServiceError, response);
+                var webServiceError = JsonConvert.DeserializeObject<WebServiceError>(content);
+
+                return CreateExceptionFromJson(webServiceError, response, content);
             }
-            catch (SerializationException ex)
+            catch (JsonSerializationException e)
             {
-                throw new HttpException(
-                    $"Received a {response.StatusCode} error for {response.ResponseUri} but it did not include the expected JSON body: {response.Content}", response.StatusCode,
-                    response.ResponseUri, ex);
+                return new HttpException(
+                    $"Received a {response.StatusCode} error for {response.ResponseUri} but it did not include the expected JSON body: {content}",
+                    response.StatusCode, response.ResponseUri, e);
             }
         }
 
-        private static void HandleErrorWithJsonBody(WebServiceError webServiceError, IRestResponse response)
+        private static Exception CreateExceptionFromJson(WebServiceError webServiceError, HttpWebResponse response, string content)
         {
             if (webServiceError.Code == null || webServiceError.Error == null)
-                throw new HttpException(
-                    "Response contains JSON but does not specify code or error keys: " + response.Content,
+                return new HttpException(
+                    $"Response contains JSON but does not specify code or error keys: {content}",
                     response.StatusCode,
                     response.ResponseUri);
             switch (webServiceError.Code)
             {
                 case "IP_ADDRESS_NOT_FOUND":
                 case "IP_ADDRESS_RESERVED":
-                    throw new AddressNotFoundException(webServiceError.Error);
+                    return new AddressNotFoundException(webServiceError.Error);
+
                 case "AUTHORIZATION_INVALID":
                 case "LICENSE_KEY_REQUIRED":
                 case "USER_ID_REQUIRED":
-                    throw new AuthenticationException(webServiceError.Error);
+                    return new AuthenticationException(webServiceError.Error);
+
                 case "OUT_OF_QUERIES":
-                    throw new OutOfQueriesException(webServiceError.Error);
+                    return new OutOfQueriesException(webServiceError.Error);
+
                 default:
-                    throw new InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
+                    return new InvalidRequestException(webServiceError.Error, webServiceError.Code, response.ResponseUri);
             }
         }
     }
