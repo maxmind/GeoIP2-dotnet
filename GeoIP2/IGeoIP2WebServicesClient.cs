@@ -1,5 +1,6 @@
 ﻿using MaxMind.GeoIP2.Responses;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace MaxMind.GeoIP2
 {
@@ -20,6 +21,18 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="ip">The ip address.</param>
         /// <returns>An <see cref="InsightsResponse" /></returns>
-        InsightsResponse Insights(IPAddress ip);
+        InsightsResponse Insights(IPAddress ipAddress);
+
+        Task<CountryResponse> CountryAsync(string ipAddress);
+
+        Task<CountryResponse> CountryAsync(IPAddress ipAddress);
+
+        Task<CityResponse> CityAsync(string ipAddress);
+
+        Task<CityResponse> CityAsync(IPAddress ipAddress);
+
+        Task<InsightsResponse> InsightsAsync(string ipAddress);
+
+        Task<InsightsResponse> InsightsAsync(IPAddress ipAddress);
     }
 }
