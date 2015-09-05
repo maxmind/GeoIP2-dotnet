@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
 using System.Runtime.Serialization;
+using RestSharp.Authenticators;
 
 namespace MaxMind.GeoIP2
 {
