@@ -45,5 +45,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("2.3.0.0")]
 [assembly: AssemblyFileVersion("2.4.0")]
 [assembly: AssemblyInformationalVersion("2.4.0-beta1")]
-[assembly: InternalsVisibleTo("MaxMind.GeoIP2.UnitTests")]
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: InternalsVisibleTo("MaxMind.GeoIP2.UnitTests,PublicKey=" +
+    "0024000004800000940000000602000000240000525341310004000001000100e30b6e4a9425b1" +
+    "617ffc8bdf79801e67a371f9f650db860dc0dfff92cb63258765a0955c6fcde1da78dbaf5bf84d" +
+    "0230946435957d2e52dc0d15673e372248dbff3bc8e6c75a632072e52cb0444850dddff5cc2be8" +
+    "f3e1f8954d7ede7675675a071672d9e97d3153d96b40fd30234be33eeb7fd1a4a78d6342967700" +
+     "56a2b1e5")]

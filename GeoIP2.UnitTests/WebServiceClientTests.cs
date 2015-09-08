@@ -4,7 +4,7 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
-using NSubstitute;
+using MaxMind.GeoIP2.UnitTests.Mock;
 using NUnit.Framework;
 using RichardSzalay.MockHttp;
 using System;
@@ -68,10 +68,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var contentsBytes = Encoding.UTF8.GetBytes(content);
             var responseStream = new MemoryStream(contentsBytes);
 
-            var syncWebRequest = Substitute.For<ISyncClient>();
-            syncWebRequest
-                .Get(uri)
-                .Returns(new Response(uri, status, contentType, responseStream));
+            var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, responseStream));
 
             return new WebServiceClient(6, "0123456789", new List<string> { "en" },
                 httpMessageHandler: mockHttp, syncWebRequest: syncWebRequest);
