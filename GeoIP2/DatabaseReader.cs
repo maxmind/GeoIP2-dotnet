@@ -20,7 +20,7 @@ namespace MaxMind.GeoIP2
     public class DatabaseReader : IGeoIP2DatabaseReader, IDisposable
     {
         private bool _disposed;
-        private readonly IList<string> _locales;
+        private readonly List<string> _locales;
         private readonly Reader _reader;
 
         /// <summary>

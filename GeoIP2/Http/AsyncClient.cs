@@ -16,6 +16,8 @@ namespace MaxMind.GeoIP2.Http
         private bool _disposed;
         private readonly HttpMessageHandler _httpMessageHandler;
 
+        // As far as I can tell, this warning is a false positive. It is for the HttpClient instance.
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public AsyncClient(
             string auth,
             int timeout,
@@ -24,16 +26,25 @@ namespace MaxMind.GeoIP2.Http
             )
         {
             _httpMessageHandler = httpMessageHandler ?? new HttpClientHandler();
-            _httpClient = new HttpClient(_httpMessageHandler)
+            try
             {
-                DefaultRequestHeaders =
+                _httpClient = new HttpClient(_httpMessageHandler)
                 {
-                    Authorization = new AuthenticationHeaderValue("Basic", auth),
-                    Accept = {new MediaTypeWithQualityHeaderValue("application/json")},
-                    UserAgent = {userAgent}
-                },
-                Timeout = TimeSpan.FromMilliseconds(timeout)
-            };
+                    DefaultRequestHeaders =
+                    {
+                        Authorization = new AuthenticationHeaderValue("Basic", auth),
+                        Accept = {new MediaTypeWithQualityHeaderValue("application/json")},
+                        UserAgent = {userAgent}
+                    },
+                    Timeout = TimeSpan.FromMilliseconds(timeout)
+                };
+            }
+            catch
+            {
+                _httpClient?.Dispose();
+                _httpMessageHandler.Dispose();
+                throw;
+            }
         }
 
         public async Task<Response> Get(Uri uri)

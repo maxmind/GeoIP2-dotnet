@@ -129,7 +129,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     Sets the locales on all the NamedEntity properties.
         /// </summary>
         /// <param name="locales">The locales specified by the user.</param>
-        protected internal override void SetLocales(IList<string> locales)
+        protected internal override void SetLocales(List<string> locales)
         {
             base.SetLocales(locales);
 
