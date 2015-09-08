@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Responses
 {
@@ -11,7 +15,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     This is simplify the database API. Also, we may need to use the locales in the future.
         /// </summary>
         /// <param name="locales"></param>
-        protected internal virtual void SetLocales(List<string> locales)
+        protected internal virtual void SetLocales(IList<string> locales)
         {
         }
     }

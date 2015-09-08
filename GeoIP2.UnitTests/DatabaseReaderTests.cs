@@ -1,10 +1,14 @@
-﻿using MaxMind.Db;
-using MaxMind.GeoIP2.Exceptions;
-using NUnit.Framework;
+﻿#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using MaxMind.Db;
+using MaxMind.GeoIP2.Exceptions;
+using NUnit.Framework;
+
+#endregion
 
 namespace MaxMind.GeoIP2.UnitTests
 {
@@ -74,7 +78,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException),
+        [ExpectedException(typeof (InvalidOperationException),
             ExpectedMessage = "A GeoIP2-City database cannot be opened with the Country method",
             MatchType = MessageMatch.Contains)]
         public void InvalidMethod()
@@ -143,7 +147,7 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void TestLocaleList()
         {
-            using (var reader = new DatabaseReader(_databaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
+            using (var reader = new DatabaseReader(_databaseFile, new List<string> {"xx", "ru", "pt-BR", "es", "en"}))
             {
                 var resp = reader.City("81.2.69.160");
                 Assert.That(resp.City.Name, Is.EqualTo("Лондон"));
@@ -184,7 +188,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(AddressNotFoundException), ExpectedMessage = "10.10.10.10 is not in the database",
+        [ExpectedException(typeof (AddressNotFoundException), ExpectedMessage = "10.10.10.10 is not in the database",
             MatchType = MessageMatch.Contains)]
         public void UnknownAddress()
         {

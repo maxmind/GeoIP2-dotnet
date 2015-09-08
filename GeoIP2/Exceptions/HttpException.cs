@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Exceptions
 {
@@ -41,28 +45,28 @@ namespace MaxMind.GeoIP2.Exceptions
         }
 
         /// <summary>
-        /// Constructor for deserialization.
+        ///     Constructor for deserialization.
         /// </summary>
         /// <param name="info">The SerializationInfo with data.</param>
         /// <param name="context">The source for this deserialization.</param>
         protected HttpException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             HttpStatus = (HttpStatusCode)info.GetValue("HttpStatus", typeof(HttpStatusCode));
-            this.Uri = (Uri)info.GetValue("Uri", typeof(Uri));
+            Uri = (Uri)info.GetValue("Uri", typeof(Uri));
         }
 
         /// <summary>
         ///     The HTTP status code returned by the web service.
         /// </summary>
-        public HttpStatusCode HttpStatus { get; private set; }
+        public HttpStatusCode HttpStatus { get; }
 
         /// <summary>
         ///     The URI queried by the web service.
         /// </summary>
-        public Uri Uri { get; private set; }
+        public Uri Uri { get; }
 
         /// <summary>
-        /// Populates a SerializationInfo with the data needed to serialize the target object.
+        ///     Populates a SerializationInfo with the data needed to serialize the target object.
         /// </summary>
         /// <param name="info">The SerializationInfo to populate with data.</param>
         /// <param name="context">The destination (see StreamingContext) for this serialization.</param>
