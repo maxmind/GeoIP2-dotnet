@@ -73,7 +73,7 @@ namespace MaxMind.GeoIP2
         private static readonly string Version = ((AssemblyInformationalVersionAttribute)Attribute.GetCustomAttribute(typeof(WebServiceClient).Assembly, typeof(AssemblyInformationalVersionAttribute))).InformationalVersion;
 
         private readonly string _host;
-        private readonly IList<string> _locales;
+        private readonly List<string> _locales;
         private readonly AsyncClient _asyncClient;
         private readonly ISyncClient _syncClient;
         private bool _disposed;
@@ -108,7 +108,7 @@ namespace MaxMind.GeoIP2
         internal WebServiceClient(
             int userId,
             string licenseKey,
-            IList<string> locales,
+            List<string> locales,
             string host = "geoip.maxmind.com",
             int timeout = 3000,
             HttpMessageHandler httpMessageHandler = null,

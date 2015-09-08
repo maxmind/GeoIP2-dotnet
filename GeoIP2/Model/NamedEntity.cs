@@ -1,8 +1,8 @@
 ﻿#region
 
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 
 #endregion
 
@@ -13,7 +13,8 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public abstract class NamedEntity
     {
-        [JsonProperty("names")] private Dictionary<string, string> _names;
+        [JsonProperty("names")]
+        private Dictionary<string, string> _names;
 
         /// <summary>
         ///     Constructor
@@ -28,7 +29,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Constructor
         /// </summary>
         protected NamedEntity(int? geoNameId = null, Dictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
+            List<string> locales = null)
         {
             Names = names ?? new Dictionary<string, string>();
             GeoNameId = geoNameId;
@@ -55,7 +56,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Gets or sets the locales specified by the user.
         /// </summary>
         [JsonIgnore]
-        protected internal IEnumerable<string> Locales { get; set; }
+        protected internal List<string> Locales { get; set; }
 
         /// <summary>
         ///     The name of the city based on the locales list passed to the

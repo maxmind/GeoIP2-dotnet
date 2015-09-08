@@ -23,7 +23,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Constructor
         /// </summary>
         public City(int? confidence = null, int? geoNameId = null, Dictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
+            List<string> locales = null)
             : base(geoNameId, names, locales)
         {
             Confidence = confidence;
