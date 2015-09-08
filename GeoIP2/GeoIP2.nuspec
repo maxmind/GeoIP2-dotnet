@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/maxmind/GeoIP2-dotnet</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <copyright>Copyright 2014</copyright>
+    <copyright>Copyright 2015</copyright>
     <tags>MaxMind GeoIP GeoIP2 IP database geolocation</tags>
   </metadata>
 </package>
