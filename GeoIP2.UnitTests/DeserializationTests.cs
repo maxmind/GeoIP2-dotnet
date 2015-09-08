@@ -1,12 +1,14 @@
-﻿using MaxMind.Db;
+﻿#region
+
+using MaxMind.Db;
 using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using RestSharp;
-using RestSharp.Deserializers;
 using System.Collections.Generic;
 using System.IO;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
+
+#endregion
 
 namespace MaxMind.GeoIP2.UnitTests
 {
@@ -105,14 +107,6 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        public void CanDeserializeCountryResponseRestSharp()
-        {
-            var d = new JsonDeserializer();
-            var r = new RestResponse { Content = CountryJson };
-            CanDeserializeCountryResponse(d.Deserialize<CountryResponse>(r));
-        }
-
-        [Test]
         public void CanDeserializeFromDatabaseJToken()
         {
             var reader =
@@ -153,14 +147,6 @@ namespace MaxMind.GeoIP2.UnitTests
         public void CanDeserializeInsightsResponseNewtonsoftJson()
         {
             CanDeserializeInsightsResponse(JsonConvert.DeserializeObject<InsightsResponse>(InsightsJson));
-        }
-
-        [Test]
-        public void CanDeserializeInsightsResponseRestSharp()
-        {
-            var d = new JsonDeserializer();
-            var r = new RestResponse { Content = InsightsJson };
-            CanDeserializeInsightsResponse(d.Deserialize<InsightsResponse>(r));
         }
     }
 }

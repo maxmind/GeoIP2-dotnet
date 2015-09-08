@@ -1,4 +1,6 @@
-﻿using MaxMind.Db;
+﻿#region
+
+using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json.Linq;
@@ -8,6 +10,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 
+#endregion
+
 namespace MaxMind.GeoIP2
 {
     /// <summary>
@@ -16,7 +20,7 @@ namespace MaxMind.GeoIP2
     public class DatabaseReader : IGeoIP2DatabaseReader, IDisposable
     {
         private bool _disposed;
-        private readonly List<string> _locales;
+        private readonly IList<string> _locales;
         private readonly Reader _reader;
 
         /// <summary>
@@ -35,7 +39,7 @@ namespace MaxMind.GeoIP2
         /// <param name="file">The MaxMind DB file.</param>
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
         /// <param name="mode">The mode by which to access the DB file.</param>
-        public DatabaseReader(string file, List<string> locales, FileAccessMode mode = FileAccessMode.MemoryMapped)
+        public DatabaseReader(string file, IList<string> locales, FileAccessMode mode = FileAccessMode.MemoryMapped)
         {
             _locales = locales;
             _reader = new Reader(file, mode);
@@ -55,7 +59,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="stream">A stream of the MaxMind DB file.</param>
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
-        public DatabaseReader(Stream stream, List<string> locales)
+        public DatabaseReader(Stream stream, IList<string> locales)
         {
             _locales = locales;
             _reader = new Reader(stream);
@@ -172,20 +176,20 @@ namespace MaxMind.GeoIP2
             return Execute<IspResponse>(ipAddress, false, "GeoIP2-ISP");
         }
 
-        private T Execute<T>(string ipAddress, bool hasTraits, string type) where T : AbstractResponse
+        private T Execute<T>(string ipStr, bool hasTraits, string type) where T : AbstractResponse
         {
             IPAddress ip = null;
-            if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
-                throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipAddress}");
-            return Execute<T>(ipAddress, ip, hasTraits, type);
+            if (ipStr != null && !IPAddress.TryParse(ipStr, out ip))
+                throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipStr}");
+            return Execute<T>(ipStr, ip, hasTraits, type);
         }
 
-        private T Execute<T>(IPAddress ip, bool hasTraits, string type) where T : AbstractResponse
+        private T Execute<T>(IPAddress ipAddress, bool hasTraits, string type) where T : AbstractResponse
         {
-            return Execute<T>(ip.ToString(), ip, hasTraits, type);
+            return Execute<T>(ipAddress.ToString(), ipAddress, hasTraits, type);
         }
 
-        private T Execute<T>(string ipAddress, IPAddress ip, bool hasTraits, string type) where T : AbstractResponse
+        private T Execute<T>(string ipStr, IPAddress ipAddress, bool hasTraits, string type) where T : AbstractResponse
         {
             if (!Metadata.DatabaseType.Contains(type))
             {
@@ -194,26 +198,26 @@ namespace MaxMind.GeoIP2
                     $"A {Metadata.DatabaseType} database cannot be opened with the {frame.GetMethod().Name} method");
             }
 
-            var token = _reader.Find(ip);
+            var token = (JObject)_reader.Find(ipAddress);
 
             if (token == null)
-                throw new AddressNotFoundException("The address " + ipAddress + " is not in the database.");
+                throw new AddressNotFoundException("The address " + ipStr + " is not in the database.");
 
             JObject ipObject;
             if (hasTraits)
             {
                 if (token["traits"] == null)
                 {
-                    ((JObject)token).Add("traits", new JObject());
+                    token.Add("traits", new JObject());
                 }
 
                 ipObject = (JObject)token["traits"];
             }
             else
             {
-                ipObject = (JObject)token;
+                ipObject = token;
             }
-            ipObject.Add("ip_address", ipAddress);
+            ipObject.Add("ip_address", ipStr);
 
             var response = token.ToObject<T>();
             response.SetLocales(_locales);

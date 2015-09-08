@@ -25,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>GeoIP2.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\MaxMind.GeoIP2.XML</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>GeoIP2.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaxMind.Db, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -95,6 +97,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Http\AsyncClient.cs" />
+    <Compile Include="Http\Response.cs" />
+    <Compile Include="Http\SyncClient.cs" />
+    <Compile Include="Http\ISyncClient.cs" />
     <Compile Include="DatabaseReader.cs" />
     <Compile Include="Exceptions\AddressNotFoundException.cs" />
     <Compile Include="Exceptions\AuthenticationException.cs" />
@@ -130,9 +137,14 @@
     <Compile Include="WebServiceClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GeoIP2.ruleset" />
     <None Include="NuGet.targets" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿#region
+
 using System.Collections.Generic;
+using Newtonsoft.Json;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Model
 {
@@ -19,7 +23,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Constructor
         /// </summary>
         public Subdivision(int? confidence = null, int? geoNameId = null, string isoCode = null,
-            Dictionary<string, string> names = null, List<string> locales = null)
+            Dictionary<string, string> names = null, IEnumerable<string> locales = null)
             : base(geoNameId, names, locales)
         {
             Confidence = confidence;

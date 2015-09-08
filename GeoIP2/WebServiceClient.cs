@@ -1,14 +1,13 @@
 ﻿#region
 
 using MaxMind.GeoIP2.Exceptions;
+using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -69,17 +68,16 @@ namespace MaxMind.GeoIP2
     ///         .
     ///     </para>
     /// </summary>
-    public class WebServiceClient : IGeoIP2WebServicesClient
+    public class WebServiceClient : IGeoIP2WebServicesClient, IDisposable
     {
         // XXX - check that this is right given changes in assembly versioning
         private static readonly Version Version = Assembly.GetExecutingAssembly().GetName().Version;
 
         private readonly string _host;
-        private readonly string _licenseKey;
-        private readonly List<string> _locales;
-        private readonly int _timeout;
-        private readonly int _userId;
-        private readonly HttpClient _httpClient;
+        private readonly IList<string> _locales;
+        private readonly AsyncClient _asyncClient;
+        private readonly ISyncClient _syncClient;
+        private bool _disposed;
 
         private ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version.ToString());
 
@@ -88,7 +86,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="userID">Your MaxMind user ID.</param>
         /// <param name="licenseKey">Your MaxMind license key.</param>
-        /// <param name="baseUrl">The base url to use when accessing the service</param>
+        /// <param name="baseUrl">The host to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
         public WebServiceClient(int userID, string licenseKey, string baseUrl = "geoip.maxmind.com", int timeout = 3000)
             : this(userID, licenseKey, new List<string> { "en" }, baseUrl, timeout)
@@ -101,54 +99,85 @@ namespace MaxMind.GeoIP2
         /// <param name="userID">The user unique identifier.</param>
         /// <param name="licenseKey">The license key.</param>
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
-        /// <param name="host">The base url to use when accessing the service</param>
+        /// <param name="host">The host to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userID, string licenseKey, List<string> locales, string host = "geoip.maxmind.com",
-            int timeout = 3000)
+        public WebServiceClient(int userID, string licenseKey, IList<string> locales, string host = "geoip.maxmind.com",
+            int timeout = 3000) : this(userID, licenseKey, locales, host, timeout, null)
         {
-            _userId = userID;
-            _licenseKey = licenseKey;
-            _locales = locales;
-            _host = host;
-            _timeout = timeout;
-
-            _httpClient = new HttpClient()
-            {
-                DefaultRequestHeaders =
-                {
-                    Authorization = new AuthenticationHeaderValue("Basic", EncodedAuth()),
-                    Accept = {new MediaTypeWithQualityHeaderValue("application/json")},
-                    UserAgent = {UserAgent}
-                },
-                Timeout = TimeSpan.FromMilliseconds(timeout)
-            };
         }
 
+        internal WebServiceClient(
+            int userId,
+            string licenseKey,
+            IList<string> locales,
+            string host = "geoip.maxmind.com",
+            int timeout = 3000,
+            HttpMessageHandler httpMessageHandler = null,
+            ISyncClient syncWebRequest = null
+            )
+        {
+            var auth = EncodedAuth(userId, licenseKey);
+            _host = host;
+            _locales = locales;
+            _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
+            _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpMessageHandler);
+        }
+
+        /// <summary>
+        ///     Asynchronously query the GeoIP2 Precision: Country web service for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>Task that produces an object modeling the Country response</returns>
         public async Task<CountryResponse> CountryAsync(string ipAddress)
         {
             return await CountryAsync(ParseIP(ipAddress));
         }
 
+        /// <summary>
+        ///     Asynchronously query the GeoIP2 Precision: Country web service for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>Task that produces an object modeling the Country response</returns>
         public async Task<CountryResponse> CountryAsync(IPAddress ipAddress)
         {
             return await ExecuteAsync<CountryResponse>("country", ipAddress);
         }
 
+        /// <summary>
+        ///     Asynchronously query the GeoIP2 Precision: City web service for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>Task that produces an object modeling the City response</returns>
         public async Task<CityResponse> CityAsync(string ipAddress)
         {
             return await CityAsync(ParseIP(ipAddress));
         }
 
+        /// <summary>
+        ///     Asynchronously query the GeoIP2 Precision: City web service for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>Task that produces an object modeling the City response</returns>
         public async Task<CityResponse> CityAsync(IPAddress ipAddress)
         {
             return await ExecuteAsync<CityResponse>("city", ipAddress);
         }
 
+        /// <summary>
+        ///     Asynchronously query the GeoIP2 Precision: Insights web service for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>Task that produces an object modeling the Insights response</returns>
         public async Task<InsightsResponse> InsightsAsync(string ipAddress)
         {
             return await InsightsAsync(ParseIP(ipAddress));
         }
 
+        /// <summary>
+        ///     Asynchronously query the GeoIP2 Precision: Insights web service for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>Task that produces an object modeling the Insights response</returns>
         public async Task<InsightsResponse> InsightsAsync(IPAddress ipAddress)
         {
             return await ExecuteAsync<InsightsResponse>("insights", ipAddress);
@@ -228,85 +257,60 @@ namespace MaxMind.GeoIP2
             where T : AbstractCountryResponse, new()
         {
             var uri = BuildUri(type, ipAddress);
-            var request = (HttpWebRequest)WebRequest.Create(uri);
-            request.Headers["Authorization"] = $"Basic {EncodedAuth()}";
-            request.Timeout = _timeout;
-
-            request.UserAgent = UserAgent.ToString();
-
-            HttpWebResponse response;
-            try
+            using (var response = _syncClient.Get(uri))
             {
-                response = (HttpWebResponse)request.GetResponse();
+                return HandleResponse<T>(response);
             }
-            catch (WebException e)
-            {
-                if (e.Status != WebExceptionStatus.ProtocolError)
-                {
-                    throw new HttpException(
-                        $"Error received while making request: {e.Message}",
-                        0, request.RequestUri, e);
-                }
-                response = (HttpWebResponse)e.Response;
-            }
-            return HandleResponse<T>(response.StatusCode, response.ContentType, response.GetResponseStream(), uri);
         }
 
         private async Task<T> ExecuteAsync<T>(string type, IPAddress ipAddress)
-                        where T : AbstractCountryResponse, new()
+            where T : AbstractCountryResponse, new()
         {
             var uri = BuildUri(type, ipAddress);
-            var response = await _httpClient.GetAsync(uri).ConfigureAwait(false);
-
-            using (
-                var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false)
-                )
+            using (var response = await _asyncClient.Get(uri))
             {
-                var contentType = response.Content.Headers.GetValues("Content-Type")?.FirstOrDefault();
-                return HandleResponse<T>(response.StatusCode, contentType, stream, uri);
+                return HandleResponse<T>(response);
             }
         }
 
         private Uri BuildUri(string type, IPAddress ipAddress)
         {
-            var endpoint = ipAddress == null ? "me" : ipAddress.ToString();
+            var endpoint = ipAddress?.ToString() ?? "me";
             return new UriBuilder("https", _host, -1, $"/geoip/v2.1/{type}/{endpoint}").Uri;
         }
 
-        private string EncodedAuth()
+        private string EncodedAuth(int userId, string licenseKey)
         {
-            return Convert.ToBase64String(
-                Encoding.ASCII.GetBytes(
-                    $"{_userId}:{_licenseKey}"));
+            return Convert.ToBase64String(Encoding.ASCII.GetBytes($"{userId}:{licenseKey}"));
         }
 
-        private T HandleResponse<T>(HttpStatusCode status, string contentType, Stream stream, Uri uri)
-                        where T : AbstractCountryResponse, new()
-        {
-            if (status != HttpStatusCode.OK)
-            {
-                throw CreateStatusException(status, stream, uri);
-            }
-            return CreateModel<T>(contentType, stream, uri);
-        }
-
-        private T CreateModel<T>(string contentType, Stream stream, Uri uri)
+        private T HandleResponse<T>(Response response)
             where T : AbstractCountryResponse, new()
         {
-            if (contentType == null || !contentType.Contains("json"))
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw CreateStatusException(response);
+            }
+            return CreateModel<T>(response);
+        }
+
+        private T CreateModel<T>(Response response)
+            where T : AbstractCountryResponse, new()
+        {
+            if (response.ContentType == null || !response.ContentType.Contains("json"))
             {
                 throw new GeoIP2Exception(
-                    $"Received a 200 response for {contentType} but it does not appear to be JSON:\n");
+                    $"Received a 200 response for {response.ContentType} but it does not appear to be JSON:\n");
             }
 
-            if (stream == null)
+            if (response.Stream == null)
             {
                 throw new HttpException(
-                    $"Received a 200 response for {uri} but there was no message body.",
-                    HttpStatusCode.OK, uri);
+                    $"Received a 200 response for {response.RequestUri} but there was no message body.",
+                    HttpStatusCode.OK, response.RequestUri);
             }
 
-            var sr = new StreamReader(stream);
+            var sr = new StreamReader(response.Stream);
             try
             {
                 using (JsonReader reader = new JsonTextReader(sr))
@@ -314,11 +318,17 @@ namespace MaxMind.GeoIP2
                     sr = null;
                     var serializer = new JsonSerializer();
                     var model = serializer.Deserialize<T>(reader);
+                    if (model == null)
+                    {
+                        throw new HttpException(
+                            $"Received a 200 response for {response.RequestUri} but there was no message body.",
+                                                HttpStatusCode.OK, response.RequestUri);
+                    }
                     model.SetLocales(_locales);
                     return model;
                 }
             }
-            catch (JsonSerializationException ex)
+            catch (JsonReaderException ex)
             {
                 throw new GeoIP2Exception(
                     "Received a 200 response but not decode it as JSON", ex);
@@ -329,63 +339,64 @@ namespace MaxMind.GeoIP2
             }
         }
 
-        private Exception CreateStatusException(HttpStatusCode statusCode, Stream stream, Uri uri)
+        private Exception CreateStatusException(Response response)
         {
-            var status = (int)statusCode;
+            var status = (int)response.StatusCode;
             if (status >= 400 && status < 500)
             {
-                return Create4xxException(statusCode, stream, uri);
+                return Create4xxException(response);
             }
-            else if (status >= 500 && status < 600)
+            if (status >= 500 && status < 600)
             {
                 return new HttpException(
-                    $"Received a server ({status}) error for {uri}",
-                    statusCode, uri);
+                    $"Received a server ({status}) error for {response.RequestUri}",
+                    response.StatusCode, response.RequestUri);
             }
 
             var errorMessage =
-                $"Received an unexpected response for {uri} (status code: {status})";
-            return new HttpException(errorMessage, statusCode, uri);
+                $"Received an unexpected response for {response.RequestUri} (status code: {status})";
+            return new HttpException(errorMessage, response.StatusCode, response.RequestUri);
         }
 
-        private Exception Create4xxException(HttpStatusCode statusCode, Stream stream, Uri uri)
+        private Exception Create4xxException(Response response)
         {
             string content = null;
 
-            if (stream != null)
+            if (response.Stream != null)
             {
-                var reader = new StreamReader(stream, Encoding.UTF8);
+                var reader = new StreamReader(response.Stream, Encoding.UTF8);
                 content = reader.ReadToEnd();
             }
 
             if (string.IsNullOrEmpty(content))
             {
                 return new HttpException(
-                    $"Received a {statusCode} error for {uri} with no body",
-                    statusCode, uri);
+                    $"Received a {response.StatusCode} error for {response.RequestUri} with no body",
+                    response.StatusCode, response.RequestUri);
             }
 
             try
             {
                 var webServiceError = JsonConvert.DeserializeObject<WebServiceError>(content);
 
-                return CreateExceptionFromJson(statusCode, webServiceError, content, uri);
+                return CreateExceptionFromJson(response, webServiceError, content);
             }
-            catch (JsonSerializationException e)
+            catch (JsonReaderException e)
             {
                 return new HttpException(
-                    $"Received a {statusCode} error for {uri} but it did not include the expected JSON body: {content}",
-                    statusCode, uri, e);
+                    $"Received a {response.StatusCode} error for {response.RequestUri} but it did not include the expected JSON body: {content}",
+                    response.StatusCode, response.RequestUri, e);
             }
         }
 
-        private static Exception CreateExceptionFromJson(HttpStatusCode statusCode, WebServiceError webServiceError, string content, Uri uri)
+        private static Exception CreateExceptionFromJson(Response response, WebServiceError webServiceError,
+            string content)
         {
             if (webServiceError.Code == null || webServiceError.Error == null)
                 return new HttpException(
                     $"Response contains JSON but does not specify code or error keys: {content}",
-                    statusCode,
-                    uri);
+                    response.StatusCode,
+                    response.RequestUri);
             switch (webServiceError.Code)
             {
                 case "IP_ADDRESS_NOT_FOUND":
@@ -401,8 +412,34 @@ namespace MaxMind.GeoIP2
                     return new OutOfQueriesException(webServiceError.Error);
 
                 default:
-                    return new InvalidRequestException(webServiceError.Error, webServiceError.Code, uri);
+                    return new InvalidRequestException(webServiceError.Error, webServiceError.Code, response.RequestUri);
             }
+        }
+
+        /// <summary>
+        ///     Release resources back to the operating system.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        ///     Release resources back to the operating system.
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                _asyncClient.Dispose();
+            }
+
+            _disposed = true;
         }
     }
 }

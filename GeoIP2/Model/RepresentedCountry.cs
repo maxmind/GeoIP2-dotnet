@@ -1,5 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿#region
+
+using Newtonsoft.Json;
 using System.Collections.Generic;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Model
 {
@@ -22,7 +26,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Constructor
         /// </summary>
         public RepresentedCountry(string type = null, int? confidence = null, int? geoNameId = null,
-            string isoCode = null, Dictionary<string, string> names = null, List<string> locales = null)
+            string isoCode = null, Dictionary<string, string> names = null, IEnumerable<string> locales = null)
             : base(confidence, geoNameId, isoCode, names, locales)
         {
             Type = type;

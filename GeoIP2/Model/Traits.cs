@@ -1,5 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿#region
+
 using System;
+using Newtonsoft.Json;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Model
 {

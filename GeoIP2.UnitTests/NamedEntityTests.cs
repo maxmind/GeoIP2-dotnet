@@ -1,6 +1,10 @@
-﻿using MaxMind.GeoIP2.Model;
-using NUnit.Framework;
+﻿#region
+
 using System.Collections.Generic;
+using MaxMind.GeoIP2.Model;
+using NUnit.Framework;
+
+#endregion
 
 namespace MaxMind.GeoIP2.UnitTests
 {
@@ -12,8 +16,8 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             var c = new City
             {
-                Locales = new List<string> { "en" },
-                Names = new Dictionary<string, string> { { "en", "Foo" } }
+                Locales = new List<string> {"en"},
+                Names = new Dictionary<string, string> {{"en", "Foo"}}
             };
 
             Assert.AreEqual("Foo", c.Name);
@@ -24,8 +28,8 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             var c = new City
             {
-                Locales = new List<string> { "es" },
-                Names = new Dictionary<string, string> { { "en", "Mexico City" }, { "es", "Ciudad de México" } }
+                Locales = new List<string> {"es"},
+                Names = new Dictionary<string, string> {{"en", "Mexico City"}, {"es", "Ciudad de México"}}
             };
 
             Assert.AreEqual("Ciudad de México", c.Name);
