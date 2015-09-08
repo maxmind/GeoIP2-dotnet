@@ -70,8 +70,7 @@ namespace MaxMind.GeoIP2
     /// </summary>
     public class WebServiceClient : IGeoIP2WebServicesClient, IDisposable
     {
-        // XXX - check that this is right given changes in assembly versioning
-        private static readonly Version Version = Assembly.GetExecutingAssembly().GetName().Version;
+        private static readonly string Version = ((AssemblyInformationalVersionAttribute)Attribute.GetCustomAttribute(typeof(WebServiceClient).Assembly, typeof(AssemblyInformationalVersionAttribute))).InformationalVersion;
 
         private readonly string _host;
         private readonly IList<string> _locales;
@@ -79,7 +78,7 @@ namespace MaxMind.GeoIP2
         private readonly ISyncClient _syncClient;
         private bool _disposed;
 
-        private ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version.ToString());
+        private ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
