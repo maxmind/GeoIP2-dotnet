@@ -27,7 +27,7 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message)
         {
             HttpStatus = httpStatus;
-            Uri = uri;
+            this.Uri = uri;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message, innerException)
         {
             HttpStatus = httpStatus;
-            Uri = uri;
+            this.Uri = uri;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace MaxMind.GeoIP2.Exceptions
         protected HttpException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             HttpStatus = (HttpStatusCode)info.GetValue("HttpStatus", typeof(HttpStatusCode));
-            Uri = (Uri)info.GetValue("Uri", typeof(Uri));
+            this.Uri = (Uri)info.GetValue("Uri", typeof(Uri));
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace MaxMind.GeoIP2.Exceptions
         {
             base.GetObjectData(info, context);
             info.AddValue("HttpStatus", HttpStatus);
-            info.AddValue("Uri", Uri);
+            info.AddValue("Uri", this.Uri);
         }
     }
 }

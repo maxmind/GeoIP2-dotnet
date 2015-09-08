@@ -101,7 +101,7 @@ namespace MaxMind.GeoIP2
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
         /// <param name="host">The host to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userID, string licenseKey, IList<string> locales, string host = "geoip.maxmind.com",
+        public WebServiceClient(int userID, string licenseKey, List<string> locales, string host = "geoip.maxmind.com",
             int timeout = 3000) : this(userID, licenseKey, locales, host, timeout, null)
         {
         }

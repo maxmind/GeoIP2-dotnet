@@ -26,7 +26,7 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message)
         {
             Code = code;
-            Uri = uri;
+            this.Uri = uri;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(info, context)
         {
             Code = info.GetString("Code");
-            Uri = (Uri)info.GetValue("Uri", typeof(Uri));
+            this.Uri = (Uri)info.GetValue("Uri", typeof(Uri));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace MaxMind.GeoIP2.Exceptions
                 throw new ArgumentNullException(nameof(info));
             }
             info.AddValue("Code", Code);
-            info.AddValue("Uri", Uri);
+            info.AddValue("Uri", this.Uri);
             base.GetObjectData(info, context);
         }
     }
