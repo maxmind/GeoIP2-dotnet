@@ -1,5 +1,9 @@
-﻿using MaxMind.GeoIP2.Model;
+﻿#region
+
 using System.Collections.Generic;
+using MaxMind.GeoIP2.Model;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Responses
 {

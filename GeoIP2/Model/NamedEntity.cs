@@ -1,7 +1,10 @@
-﻿using Newtonsoft.Json;
-using RestSharp.Deserializers;
+﻿#region
+
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Model
 {
@@ -47,7 +50,6 @@ namespace MaxMind.GeoIP2.Model
         ///     The GeoName ID for the city.
         /// </summary>
         [JsonProperty("geoname_id")]
-        [DeserializeAs(Name = "geoname_id")]
         public int? GeoNameId { get; internal set; }
 
         /// <summary>

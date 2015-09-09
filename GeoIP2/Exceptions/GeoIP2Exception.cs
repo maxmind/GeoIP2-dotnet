@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Exceptions
 {
@@ -30,7 +34,7 @@ namespace MaxMind.GeoIP2.Exceptions
         }
 
         /// <summary>
-        /// Constructor for deserialization.
+        ///     Constructor for deserialization.
         /// </summary>
         /// <param name="info">The SerializationInfo with data.</param>
         /// <param name="context">The source for this deserialization.</param>

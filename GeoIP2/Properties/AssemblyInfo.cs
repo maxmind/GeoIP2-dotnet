@@ -1,6 +1,11 @@
-﻿using System.Reflection;
+﻿#region
+
+using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+
+#endregion
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -24,6 +29,7 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
 [assembly: Guid("7352289c-bf62-4994-bc2b-6cf4c1ea4b2d")]
+[assembly: CLSCompliant(true)]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -37,6 +43,7 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 
 [assembly: AssemblyVersion("2.3.0.0")]
-[assembly: AssemblyFileVersion("2.3.1")]
-[assembly: AssemblyInformationalVersion("2.3.1")]
+[assembly: AssemblyFileVersion("2.4.0")]
+[assembly: AssemblyInformationalVersion("2.4.0-beta1")]
 [assembly: InternalsVisibleTo("MaxMind.GeoIP2.UnitTests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
