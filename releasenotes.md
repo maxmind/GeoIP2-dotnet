@@ -8,8 +8,8 @@ GeoIP2 .NET API Release Notes
   point now has a corresponding *Async(ip)` method. GitHub #1.
 * Use of RestSharp was replaced by `HttpWebRequest` for synchronous HTTP
   requests and `HttpClient` for asynchronous requests. Microsoft BCL libraries
-  are used to provide `async`/`await` and `HttpClient` support on .NET 4.0.
-  GitHub #32.
+  and `System.Net.Http` are used to provide `async`/`await` and `HttpClient`
+  support on .NET 4.0. GitHub #33.
 * The library now has a strong name.
 
 2.3.1 (2015-07-21)
