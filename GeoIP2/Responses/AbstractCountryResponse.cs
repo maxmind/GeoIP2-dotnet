@@ -1,6 +1,10 @@
-﻿using MaxMind.GeoIP2.Model;
+﻿#region
+
+using MaxMind.GeoIP2.Model;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Responses
 {

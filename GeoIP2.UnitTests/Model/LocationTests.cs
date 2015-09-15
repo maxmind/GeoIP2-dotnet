@@ -1,5 +1,9 @@
-﻿using MaxMind.GeoIP2.Model;
+﻿#region
+
+using MaxMind.GeoIP2.Model;
 using NUnit.Framework;
+
+#endregion
 
 namespace MaxMind.GeoIP2.UnitTests.Model
 {

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Rules for GeoIP2" Description="Code analysis rules for GeoIP2.csproj." ToolsVersion="14.0">
+  <IncludeAll Action="Warning" />
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1026" Action="None" />
+    <Rule Id="CA1032" Action="None" />
+    <Rule Id="CA1305" Action="None" />
+    <Rule Id="CA1704" Action="None" />
+    <Rule Id="CA1822" Action="None" />
+  </Rules>
+</RuleSet>
