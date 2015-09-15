@@ -1,4 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
+﻿#region
+
+using Newtonsoft.Json.Linq;
+
+#endregion
 
 namespace MaxMind.GeoIP2.UnitTests
 {
@@ -14,9 +18,9 @@ namespace MaxMind.GeoIP2.UnitTests
                     {
                         "names", new JObject
                         {
-                            { "en","Minneapolis"}
+                            {"en", "Minneapolis"}
                         }
-                    },
+                    }
                 }
             },
             {
@@ -50,11 +54,11 @@ namespace MaxMind.GeoIP2.UnitTests
                 "location", new JObject
                 {
                     {"accuracy_radius", 1500},
-                    {"average_income", 50000 },
+                    {"average_income", 50000},
                     {"latitude", 44.98},
                     {"longitude", 93.2636},
                     {"metro_code", 765},
-                    {"population_density", 100 },
+                    {"population_density", 100},
                     {"time_zone", "America/Chicago"}
                 }
             },
@@ -65,7 +69,7 @@ namespace MaxMind.GeoIP2.UnitTests
                         "confidence",
                         33
                     },
-                    {"code", "55401"},
+                    {"code", "55401"}
                 }
             },
             {
@@ -98,7 +102,7 @@ namespace MaxMind.GeoIP2.UnitTests
                         {"confidence", 88},
                         {"geoname_id", 574635},
                         {"iso_code", "MN"},
-                        {"names", new JObject {{"en", "Minnesota"}}},
+                        {"names", new JObject {{"en", "Minnesota"}}}
                     }
                     ,
                     new JObject {{"iso_code", "TT"}}
@@ -157,10 +161,14 @@ namespace MaxMind.GeoIP2.UnitTests
                     {"type", "military"}
                 }
             },
-
             {"traits", new JObject {{"ip_address", "1.2.3.4"}}}
         };
 
         public static string CountryJson => CountryJObject.ToString();
+
+        public static string ErrorJson(string code, string message)
+        {
+            return new JObject() { { "code", code }, { "error", message } }.ToString();
+        }
     }
 }

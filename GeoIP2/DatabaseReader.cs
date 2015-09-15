@@ -1,4 +1,6 @@
-﻿using MaxMind.Db;
+﻿#region
+
+using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json.Linq;
@@ -7,6 +9,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+
+#endregion
 
 namespace MaxMind.GeoIP2
 {
@@ -172,20 +176,20 @@ namespace MaxMind.GeoIP2
             return Execute<IspResponse>(ipAddress, false, "GeoIP2-ISP");
         }
 
-        private T Execute<T>(string ipAddress, bool hasTraits, string type) where T : AbstractResponse
+        private T Execute<T>(string ipStr, bool hasTraits, string type) where T : AbstractResponse
         {
             IPAddress ip = null;
-            if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
-                throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipAddress}");
-            return Execute<T>(ipAddress, ip, hasTraits, type);
+            if (ipStr != null && !IPAddress.TryParse(ipStr, out ip))
+                throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipStr}");
+            return Execute<T>(ipStr, ip, hasTraits, type);
         }
 
-        private T Execute<T>(IPAddress ip, bool hasTraits, string type) where T : AbstractResponse
+        private T Execute<T>(IPAddress ipAddress, bool hasTraits, string type) where T : AbstractResponse
         {
-            return Execute<T>(ip.ToString(), ip, hasTraits, type);
+            return Execute<T>(ipAddress.ToString(), ipAddress, hasTraits, type);
         }
 
-        private T Execute<T>(string ipAddress, IPAddress ip, bool hasTraits, string type) where T : AbstractResponse
+        private T Execute<T>(string ipStr, IPAddress ipAddress, bool hasTraits, string type) where T : AbstractResponse
         {
             if (!Metadata.DatabaseType.Contains(type))
             {
@@ -194,26 +198,26 @@ namespace MaxMind.GeoIP2
                     $"A {Metadata.DatabaseType} database cannot be opened with the {frame.GetMethod().Name} method");
             }
 
-            var token = _reader.Find(ip);
+            var token = (JObject)_reader.Find(ipAddress);
 
             if (token == null)
-                throw new AddressNotFoundException("The address " + ipAddress + " is not in the database.");
+                throw new AddressNotFoundException("The address " + ipStr + " is not in the database.");
 
             JObject ipObject;
             if (hasTraits)
             {
                 if (token["traits"] == null)
                 {
-                    ((JObject)token).Add("traits", new JObject());
+                    token.Add("traits", new JObject());
                 }
 
                 ipObject = (JObject)token["traits"];
             }
             else
             {
-                ipObject = (JObject)token;
+                ipObject = token;
             }
-            ipObject.Add("ip_address", ipAddress);
+            ipObject.Add("ip_address", ipStr);
 
             var response = token.ToObject<T>();
             response.SetLocales(_locales);

@@ -1,4 +1,8 @@
-﻿using MaxMind.GeoIP2.Model;
+﻿#region
+
+using MaxMind.GeoIP2.Model;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Responses
 {

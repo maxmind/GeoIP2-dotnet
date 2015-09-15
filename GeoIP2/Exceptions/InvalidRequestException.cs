@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+
+#endregion
 
 namespace MaxMind.GeoIP2.Exceptions
 {
@@ -22,11 +26,11 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message)
         {
             Code = code;
-            Uri = uri;
+            this.Uri = uri;
         }
 
         /// <summary>
-        /// Constructor for deserialization.
+        ///     Constructor for deserialization.
         /// </summary>
         /// <param name="info">The SerializationInfo with data.</param>
         /// <param name="context">The source for this deserialization.</param>
@@ -41,21 +45,25 @@ namespace MaxMind.GeoIP2.Exceptions
         /// <summary>
         ///     The error code returned by the web service.
         /// </summary>
-        public string Code { get; private set; }
+        public string Code { get; }
 
         /// <summary>
         ///     The URI queried by the web service.
         /// </summary>
-        public Uri Uri { get; private set; }
+        public Uri Uri { get; }
 
         /// <summary>
-        /// Populates a SerializationInfo with the data needed to serialize the target object.
+        ///     Populates a SerializationInfo with the data needed to serialize the target object.
         /// </summary>
         /// <param name="info">The SerializationInfo to populate with data.</param>
         /// <param name="context">The destination (see StreamingContext) for this serialization.</param>
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            if (info == null)
+            {
+                throw new ArgumentNullException(nameof(info));
+            }
             info.AddValue("Code", Code);
             info.AddValue("Uri", this.Uri);
             base.GetObjectData(info, context);
