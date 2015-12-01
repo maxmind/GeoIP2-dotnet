@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -17,7 +18,7 @@ namespace MaxMind.GeoIP2.Http
         private readonly HttpMessageHandler _httpMessageHandler;
 
         // As far as I can tell, this warning is a false positive. It is for the HttpClient instance.
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public AsyncClient(
             string auth,
             int timeout,

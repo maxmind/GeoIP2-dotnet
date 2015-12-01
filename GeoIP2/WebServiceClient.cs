@@ -70,7 +70,10 @@ namespace MaxMind.GeoIP2
     /// </summary>
     public class WebServiceClient : IGeoIP2WebServicesClient, IDisposable
     {
-        private static readonly string Version = ((AssemblyInformationalVersionAttribute)Attribute.GetCustomAttribute(typeof(WebServiceClient).Assembly, typeof(AssemblyInformationalVersionAttribute))).InformationalVersion;
+        private static readonly string Version =
+            ((AssemblyInformationalVersionAttribute)
+                Attribute.GetCustomAttribute(typeof(WebServiceClient).Assembly,
+                    typeof(AssemblyInformationalVersionAttribute))).InformationalVersion;
 
         private readonly string _host;
         private readonly List<string> _locales;
@@ -129,7 +132,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the Country response</returns>
         public async Task<CountryResponse> CountryAsync(string ipAddress)
         {
-            return await CountryAsync(ParseIP(ipAddress));
+            return await CountryAsync(ParseIP(ipAddress)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -139,7 +142,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the Country response</returns>
         public async Task<CountryResponse> CountryAsync(IPAddress ipAddress)
         {
-            return await ExecuteAsync<CountryResponse>("country", ipAddress);
+            return await ExecuteAsync<CountryResponse>("country", ipAddress).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -149,7 +152,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the City response</returns>
         public async Task<CityResponse> CityAsync(string ipAddress)
         {
-            return await CityAsync(ParseIP(ipAddress));
+            return await CityAsync(ParseIP(ipAddress)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -159,7 +162,8 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the City response</returns>
         public async Task<CityResponse> CityAsync(IPAddress ipAddress)
         {
-            return await ExecuteAsync<CityResponse>("city", ipAddress);
+            return await ExecuteAsync<CityResponse>("city", ipAddress).ConfigureAwait(false);
+            ;
         }
 
         /// <summary>
@@ -169,7 +173,8 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the Insights response</returns>
         public async Task<InsightsResponse> InsightsAsync(string ipAddress)
         {
-            return await InsightsAsync(ParseIP(ipAddress));
+            return await InsightsAsync(ParseIP(ipAddress)).ConfigureAwait(false);
+            ;
         }
 
         /// <summary>
@@ -179,7 +184,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the Insights response</returns>
         public async Task<InsightsResponse> InsightsAsync(IPAddress ipAddress)
         {
-            return await ExecuteAsync<InsightsResponse>("insights", ipAddress);
+            return await ExecuteAsync<InsightsResponse>("insights", ipAddress).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -266,7 +271,7 @@ namespace MaxMind.GeoIP2
             where T : AbstractCountryResponse, new()
         {
             var uri = BuildUri(type, ipAddress);
-            using (var response = await _asyncClient.Get(uri))
+            using (var response = await _asyncClient.Get(uri).ConfigureAwait(false))
             {
                 return HandleResponse<T>(response);
             }
@@ -321,7 +326,7 @@ namespace MaxMind.GeoIP2
                     {
                         throw new HttpException(
                             $"Received a 200 response for {response.RequestUri} but there was no message body.",
-                                                HttpStatusCode.OK, response.RequestUri);
+                            HttpStatusCode.OK, response.RequestUri);
                     }
                     model.SetLocales(_locales);
                     return model;

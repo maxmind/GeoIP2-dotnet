@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
 #endregion
@@ -110,7 +111,8 @@ namespace MaxMind.GeoIP2.UnitTests
         public void CanDeserializeFromDatabaseJToken()
         {
             var reader =
-                new Reader(Path.Combine("..", "..", "TestData", "MaxMind-DB", "test-data", "GeoIP2-City-Test.mmdb"));
+                new Reader(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                    "..", "..", "TestData", "MaxMind-DB", "test-data", "GeoIP2-City-Test.mmdb"));
 
             var obj = reader.Find("216.160.83.56");
             var response = obj.ToObject<InsightsResponse>();

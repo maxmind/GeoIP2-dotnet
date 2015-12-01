@@ -1,12 +1,13 @@
 ﻿#region
 
+using MaxMind.Db;
+using MaxMind.GeoIP2.Exceptions;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using MaxMind.Db;
-using MaxMind.GeoIP2.Exceptions;
-using NUnit.Framework;
+using System.Reflection;
 
 #endregion
 
@@ -20,7 +21,8 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public DatabaseReaderTests()
         {
-            _databaseDir = Path.Combine("..", "..", "TestData", "MaxMind-DB", "test-data");
+            _databaseDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "..", "..", "TestData", "MaxMind-DB", "test-data");
             _databaseFile = Path.Combine(_databaseDir, "GeoIP2-City-Test.mmdb");
         }
 
@@ -78,14 +80,13 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidOperationException),
-            ExpectedMessage = "A GeoIP2-City database cannot be opened with the Country method",
-            MatchType = MessageMatch.Contains)]
         public void InvalidMethod()
         {
             using (var reader = new DatabaseReader(_databaseFile))
             {
-                reader.Country("10.10.10.10");
+                Assert.Throws(Is.TypeOf<InvalidOperationException>()
+                    .And.Message.Contains("A GeoIP2-City database cannot be opened with the Country method"),
+                    () => reader.Country("10.10.10.10"));
             }
         }
 
@@ -147,7 +148,7 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void TestLocaleList()
         {
-            using (var reader = new DatabaseReader(_databaseFile, new List<string> {"xx", "ru", "pt-BR", "es", "en"}))
+            using (var reader = new DatabaseReader(_databaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
             {
                 var resp = reader.City("81.2.69.160");
                 Assert.That(resp.City.Name, Is.EqualTo("Лондон"));
@@ -188,13 +189,13 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof (AddressNotFoundException), ExpectedMessage = "10.10.10.10 is not in the database",
-            MatchType = MessageMatch.Contains)]
         public void UnknownAddress()
         {
             using (var reader = new DatabaseReader(_databaseFile))
             {
-                reader.City("10.10.10.10");
+                Assert.Throws(Is.TypeOf<AddressNotFoundException>()
+                    .And.Message.Contains("10.10.10.10 is not in the database"),
+                    () => reader.City("10.10.10.10"));
             }
         }
     }
