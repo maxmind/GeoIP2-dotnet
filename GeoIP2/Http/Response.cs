@@ -21,7 +21,7 @@ namespace MaxMind.GeoIP2.Http
             RequestUri = requestUri;
             StatusCode = statusCode;
             ContentType = contentType;
-            Stream = stream;
+            this.Stream = stream;
         }
 
         public void Dispose()
@@ -37,7 +37,7 @@ namespace MaxMind.GeoIP2.Http
 
             if (disposing)
             {
-                Stream.Dispose();
+                this.Stream.Dispose();
             }
 
             _disposed = true;
