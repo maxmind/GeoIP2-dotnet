@@ -88,7 +88,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        public async Task AddressReservedShouldThrowException(string type, ClientRunner cr, Type t)
+        public void AddressReservedShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var ip = "1.2.3.17";
             var client = CreateClient(type, ip, HttpStatusCode.Forbidden,
