@@ -1,6 +1,16 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.5.0 (2015-12-01)
+------------------
+
+* IMPORTANT: The target framework is now 4.5.2. Microsoft is ending support
+  for 4.0, 4.5, and 4.5.1 on January 12, 2016. Removing support for these
+  frameworks allows us to remove the dependency on the BCL libraries and fixes
+  several outstanding issues. Closes #38, #39, #40, and #42.
+* The assembly version was bumped to 2.5.0.
+* The tests now use NUnit 3.
+
 2.4.0 (2015-09-23)
 ------------------
 

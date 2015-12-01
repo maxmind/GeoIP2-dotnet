@@ -168,7 +168,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public static string ErrorJson(string code, string message)
         {
-            return new JObject() { { "code", code }, { "error", message } }.ToString();
+            return new JObject { { "code", code }, { "error", message } }.ToString();
         }
     }
 }

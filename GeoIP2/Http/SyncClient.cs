@@ -1,9 +1,9 @@
 ﻿#region
 
-using MaxMind.GeoIP2.Exceptions;
 using System;
 using System.Net;
 using System.Net.Http.Headers;
+using MaxMind.GeoIP2.Exceptions;
 
 #endregion
 
@@ -28,7 +28,7 @@ namespace MaxMind.GeoIP2.Http
 
         public Response Get(Uri uri)
         {
-            var request = (HttpWebRequest)WebRequest.Create(uri);
+            var request = (HttpWebRequest) WebRequest.Create(uri);
             request.Timeout = _timeout;
             request.UserAgent = _userAgent;
             request.Headers["Authorization"] = $"Basic {_auth}";
@@ -36,7 +36,7 @@ namespace MaxMind.GeoIP2.Http
             HttpWebResponse response;
             try
             {
-                response = (HttpWebResponse)request.GetResponse();
+                response = (HttpWebResponse) request.GetResponse();
             }
             catch (WebException e)
             {
@@ -46,7 +46,7 @@ namespace MaxMind.GeoIP2.Http
                         $"Error received while making request: {e.Message}",
                         0, uri, e);
                 }
-                response = (HttpWebResponse)e.Response;
+                response = (HttpWebResponse) e.Response;
             }
             return new Response(uri, response.StatusCode, response.ContentType,
                 response.GetResponseStream());
