@@ -19,21 +19,12 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     Constructor
         /// </summary>
-        protected NamedEntity()
-        {
-            Names = new Dictionary<string, string>();
-            Locales = new List<string>();
-        }
-
-        /// <summary>
-        ///     Constructor
-        /// </summary>
         protected NamedEntity(int? geoNameId = null, Dictionary<string, string> names = null,
             List<string> locales = null)
         {
             Names = names ?? new Dictionary<string, string>();
             GeoNameId = geoNameId;
-            Locales = locales ?? new List<string>();
+            Locales = locales ?? new List<string> { "en" };
         }
 
         /// <summary>

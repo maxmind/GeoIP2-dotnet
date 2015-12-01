@@ -4,7 +4,6 @@ using MaxMind.Db;
 using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
@@ -18,8 +17,6 @@ namespace MaxMind.GeoIP2.UnitTests
     {
         public void CanDeserializeCountryResponse(CountryResponse resp)
         {
-            resp.SetLocales(new List<string> { "en" });
-
             Assert.That(resp.Continent.Code, Is.EqualTo("NA"));
             Assert.That(resp.Continent.GeoNameId, Is.EqualTo(42));
             Assert.That(resp.Continent.Name, Is.EqualTo("North America"));
@@ -43,8 +40,6 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public void CanDeserializeInsightsResponse(InsightsResponse insights)
         {
-            insights.SetLocales(new List<string> { "en" });
-
             Assert.AreEqual(76, insights.City.Confidence);
             Assert.AreEqual(9876, insights.City.GeoNameId);
             Assert.AreEqual("Minneapolis", insights.City.Name);
@@ -81,7 +76,6 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.AreEqual("military", insights.RepresentedCountry.Type);
 
             Assert.AreEqual(2, insights.Subdivisions.Count);
-            insights.Subdivisions[0].Locales = new List<string> { "en" };
             Assert.AreEqual(88, insights.Subdivisions[0].Confidence);
             Assert.AreEqual(574635, insights.Subdivisions[0].GeoNameId);
             Assert.AreEqual("MN", insights.Subdivisions[0].IsoCode);
@@ -116,7 +110,6 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var obj = reader.Find("216.160.83.56");
             var response = obj.ToObject<InsightsResponse>();
-            response.SetLocales(new List<string> { "en" });
 
             Assert.That(response.City.GeoNameId, Is.EqualTo(5803556));
             Assert.That(response.City.Name, Is.EqualTo("Milton"));

@@ -9,6 +9,11 @@ GeoIP2 .NET API Release Notes
   frameworks allows us to remove the dependency on the BCL libraries and fixes
   several outstanding issues. Closes #38, #39, #40, and #42.
 * The assembly version was bumped to 2.5.0.
+* Classes subclassing `NamedEntity` now have a default locale of `en`. This
+  allows the `Name` property to be used (for English names) when the object is
+  deserialized from JSON. Closes #41.
+* The `locale` parameter for the `DatabaseReader` and `WebServiceClient`
+  constructors is now an `IEnumerable<string>` rather than a `List<string>`.
 * The tests now use NUnit 3.
 
 2.4.0 (2015-09-23)
