@@ -3,11 +3,11 @@ language: csharp
 before_install:
   - git submodule update --init --recursive
   - nuget restore GeoIP2.sln
-  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+  - nuget install NUnit.Console -Version 3.0.0
 
 script:
-  - xbuild
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./GeoIP2.UnitTests/bin/Debug/MaxMind.GeoIP2.UnitTests.dll
+  - xbuild /p:TargetFrameworkVersion="v4.5"
+  - mono ./NUnit.Console.3.0.0/tools/nunit3-console.exe ./GeoIP2.UnitTests/bin/Debug/MaxMind.GeoIP2.UnitTests.dll
 
 sudo: false
 
