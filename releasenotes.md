@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.5.0 (2015-12-01)
+2.5.0 (2015-12-XX)
 ------------------
 
 * IMPORTANT: The target framework is now 4.5.2. Microsoft is ending support
