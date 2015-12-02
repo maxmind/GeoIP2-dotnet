@@ -9,13 +9,11 @@ the free [GeoLite2 databases](http://dev.maxmind.com/geoip/geoip2/geolite2/).
 
 ## Requirements ##
 
-This library works with .NET Framework version 4.0 and above. If you are
+This library works with .NET Framework version 4.5.2 and above. If you are
 using Mono, 3.2 or greater is required.
 
 This library depends on
-[MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet) and
-uses Microsoft's BCL libraries to provide `async` and `HttpClient` support on
-.NET 4.0.
+[MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet).
 
 ## Installation ##
 
@@ -400,6 +398,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2014 by MaxMind, Inc.
+This software is Copyright (c) 2015 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.

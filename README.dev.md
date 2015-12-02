@@ -12,8 +12,8 @@ To publish the to NuGet:
     for more information.
   * Due to incorrectly increasing the `AssemblyVersion`, it is at 2.3.0.0
     rather than 2.0.0.0. Ignore the temptation to increase it unless there
-    is a breaking changes, which should only happen at 3.0.0 (or a
-    pre-release of it).
+    is a breaking changes that requires recompilation against the new
+    assembly.
 3. Commit/push any changes. Wait for CI.
 4. Build solution.
 5. From the GeoIP2 subdirectory:
