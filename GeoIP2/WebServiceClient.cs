@@ -76,7 +76,7 @@ namespace MaxMind.GeoIP2
                     typeof(AssemblyInformationalVersionAttribute))).InformationalVersion;
 
         private readonly string _host;
-        private readonly List<string> _locales;
+        private readonly IEnumerable<string> _locales;
         private readonly AsyncClient _asyncClient;
         private readonly ISyncClient _syncClient;
         private bool _disposed;
@@ -103,7 +103,8 @@ namespace MaxMind.GeoIP2
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
         /// <param name="host">The host to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userId, string licenseKey, IEnumerable<string> locales, string host = "geoip.maxmind.com",
+        public WebServiceClient(int userId, string licenseKey, IEnumerable<string> locales,
+            string host = "geoip.maxmind.com",
             int timeout = 3000) : this(userId, licenseKey, locales, host, timeout, null)
         {
         }
