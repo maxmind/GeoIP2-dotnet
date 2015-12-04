@@ -51,7 +51,7 @@ EOF
 
 cat README.md >> $PAGE
 
-xbuild /property:Configuration=Release
+xbuild /property:Configuration=Release /p:TargetFrameworkVersion="v4.5"
 monodocer -assembly:GeoIP2/bin/Release/MaxMind.GeoIP2.dll -importslashdoc:GeoIP2/bin/Release/MaxMind.GeoIP2.XML -path:/tmp/dotnet-$TAG -pretty
 mdoc export-html -o .gh-pages/doc/$TAG /tmp/dotnet-$TAG
 
