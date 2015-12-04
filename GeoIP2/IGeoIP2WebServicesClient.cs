@@ -1,8 +1,8 @@
 ﻿#region
 
+using MaxMind.GeoIP2.Responses;
 using System.Net;
 using System.Threading.Tasks;
-using MaxMind.GeoIP2.Responses;
 
 #endregion
 

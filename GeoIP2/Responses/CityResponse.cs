@@ -1,7 +1,7 @@
 ﻿#region
 
-using System.Collections.Generic;
 using MaxMind.GeoIP2.Model;
+using System.Collections.Generic;
 
 #endregion
 
@@ -37,7 +37,7 @@ namespace MaxMind.GeoIP2.Responses
             Postal postal = null,
             Country registeredCountry = null,
             RepresentedCountry representedCountry = null,
-            List<Subdivision> subdivisions = null,
+            IEnumerable<Subdivision> subdivisions = null,
             Traits traits = null)
             : base(
                 city, continent, country, location, maxMind, postal, registeredCountry, representedCountry, subdivisions,

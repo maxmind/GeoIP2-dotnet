@@ -14,26 +14,17 @@ namespace MaxMind.GeoIP2.Model
     public abstract class NamedEntity
     {
         [JsonProperty("names")]
-        private Dictionary<string, string> _names;
+        private IDictionary<string, string> _names;
 
         /// <summary>
         ///     Constructor
         /// </summary>
-        protected NamedEntity()
+        protected NamedEntity(int? geoNameId = null, IDictionary<string, string> names = null,
+            IEnumerable<string> locales = null)
         {
-            Names = new Dictionary<string, string>();
-            Locales = new List<string>();
-        }
-
-        /// <summary>
-        ///     Constructor
-        /// </summary>
-        protected NamedEntity(int? geoNameId = null, Dictionary<string, string> names = null,
-            List<string> locales = null)
-        {
-            Names = names ?? new Dictionary<string, string>();
+            Names = names != null ? new Dictionary<string, string>(names) : new Dictionary<string, string>();
             GeoNameId = geoNameId;
-            Locales = locales ?? new List<string>();
+            Locales = locales != null ? new List<string>(locales) : new List<string> { "en" };
         }
 
         /// <summary>
@@ -56,7 +47,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Gets or sets the locales specified by the user.
         /// </summary>
         [JsonIgnore]
-        protected internal List<string> Locales { get; set; }
+        protected internal IEnumerable<string> Locales { get; set; }
 
         /// <summary>
         ///     The name of the city based on the locales list passed to the

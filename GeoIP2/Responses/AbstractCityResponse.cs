@@ -15,7 +15,7 @@ namespace MaxMind.GeoIP2.Responses
     public abstract class AbstractCityResponse : AbstractCountryResponse
     {
         [JsonProperty("subdivisions")]
-        private List<Subdivision> _subdivisions;
+        private IList<Subdivision> _subdivisions;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.
@@ -40,14 +40,14 @@ namespace MaxMind.GeoIP2.Responses
             Postal postal = null,
             Country registeredCountry = null,
             RepresentedCountry representedCountry = null,
-            List<Subdivision> subdivisions = null,
+            IEnumerable<Subdivision> subdivisions = null,
             Traits traits = null)
             : base(continent, country, maxMind, registeredCountry, representedCountry, traits)
         {
             City = city ?? new City();
             Location = location ?? new Location();
             Postal = postal ?? new Postal();
-            Subdivisions = subdivisions ?? new List<Subdivision>();
+            Subdivisions = subdivisions != null ? new List<Subdivision>(subdivisions) : new List<Subdivision>();
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     Sets the locales on all the NamedEntity properties.
         /// </summary>
         /// <param name="locales">The locales specified by the user.</param>
-        protected internal override void SetLocales(List<string> locales)
+        protected internal override void SetLocales(IEnumerable<string> locales)
         {
             base.SetLocales(locales);
 

@@ -1,7 +1,7 @@
 ﻿#region
 
-using System;
 using Newtonsoft.Json;
+using System;
 
 #endregion
 
