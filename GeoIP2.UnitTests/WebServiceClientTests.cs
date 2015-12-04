@@ -75,188 +75,186 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(AddressNotFoundException),
-            ExpectedMessage = "The value 1.2.3.16 is not in the database", MatchType = MessageMatch.Contains)]
-        public async Task AddressNotFoundShouldThrowException(string type, ClientRunner cr, Type t)
+        public void AddressNotFoundShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var ip = "1.2.3.16";
             var client = CreateClient(type, ip, HttpStatusCode.NotFound,
                 content: ErrorJson("IP_ADDRESS_NOT_FOUND", "The value 1.2.3.16 is not in the database."));
 
-            await cr(client, ip);
+            // Not using Assert.Throws due to https://github.com/nunit/nunit/issues/464
+            Assert.That(async () => await cr(client, ip),
+                Throws.TypeOf<AddressNotFoundException>()
+                    .And.Message.Contains("The value 1.2.3.16 is not in the database"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(AddressNotFoundException),
-            ExpectedMessage = "The value 1.2.3.17 belongs to a reserved or private range",
-            MatchType = MessageMatch.Contains)]
-        public async Task AddressReservedShouldThrowException(string type, ClientRunner cr, Type t)
+        public void AddressReservedShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var ip = "1.2.3.17";
             var client = CreateClient(type, ip, HttpStatusCode.Forbidden,
                 content: ErrorJson("IP_ADDRESS_RESERVED", "The value 1.2.3.17 belongs to a reserved or private range."));
 
-            await cr(client, ip);
+            Assert.That(async () => await cr(client, ip),
+                Throws.TypeOf<AddressNotFoundException>()
+                    .And.Message.Contains("The value 1.2.3.17 belongs to a reserved or private range"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(HttpException), ExpectedMessage = "Cannot satisfy your Accept-Charset requirements",
-            MatchType = MessageMatch.Contains)]
-        public async Task BadCharsetRequirementShouldThrowException(string type, ClientRunner cr, Type t)
+        public void BadCharsetRequirementShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.NotAcceptable,
                 content: "Cannot satisfy your Accept-Charset requirements",
                 contentType: "text/plain");
 
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<HttpException>()
+                    .And.Message.Contains("Cannot satisfy your Accept-Charset requirements"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(GeoIP2Exception), ExpectedMessage = "but it does not appear to be JSON",
-            MatchType = MessageMatch.Contains)]
-        public async Task BadContentTypeShouldThrowException(string type, ClientRunner cr, Type t)
+        public void BadContentTypeShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.OK,
                 content: CountryJson, contentType: "bad/content-type");
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<GeoIP2Exception>()
+                    .And.Message.Contains("but it does not appear to be JSON"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(HttpException), ExpectedMessage = "message body", MatchType = MessageMatch.Contains)]
-        public async Task EmptyBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        public void EmptyBodyShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type);
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<HttpException>()
+                    .And.Message.Contains("message body"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(HttpException), ExpectedMessage = "Received a server (500) error",
-            MatchType = MessageMatch.Contains)]
-        public async Task InternalServerErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        public void InternalServerErrorShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.InternalServerError,
                 content: "Internal Server Error");
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<HttpException>()
+                    .And.Message.Contains("Received a server (500) error"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(GeoIP2Exception),
-            ExpectedMessage = "The specified IP address was incorrectly formatted", MatchType = MessageMatch.Contains)]
-        public async Task IncorrectlyFormattedIPAddressShouldThrowException(string type, ClientRunner cr, Type t)
+        public void IncorrectlyFormattedIPAddressShouldThrowException(string type, ClientRunner cr, Type t)
         {
-            await cr(CreateClient(type), "foo");
+            Assert.That(async () => await cr(CreateClient(type), "foo"),
+                Throws.TypeOf<GeoIP2Exception>()
+                    .And.Message.Contains("The specified IP address was incorrectly formatted"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(AuthenticationException),
-            ExpectedMessage = "You have supplied an invalid MaxMind user ID and/or license key",
-            MatchType = MessageMatch.Contains)]
-        public async Task InvalidAuthShouldThrowException(string type, ClientRunner cr, Type t)
+        public void InvalidAuthShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
                     ErrorJson("AUTHORIZATION_INVALID",
                         "You have supplied an invalid MaxMind user ID and/or license key in the Authorization header."));
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<AuthenticationException>()
+                    .And.Message.Contains("You have supplied an invalid MaxMind user ID and/or license key"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(AuthenticationException),
-            ExpectedMessage = "You have not supplied a MaxMind license key in the Authorization header",
-            MatchType = MessageMatch.Contains)]
-        public async Task MissingLicenseShouldThrowException(string type, ClientRunner cr, Type t)
+        public void MissingLicenseShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
                     ErrorJson("LICENSE_KEY_REQUIRED",
                         "You have not supplied a MaxMind license key in the Authorization header."));
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<AuthenticationException>()
+                    .And.Message.Contains("You have not supplied a MaxMind license key in the Authorization header"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(AuthenticationException),
-            ExpectedMessage = "You have not supplied a MaxMind user ID in the Authorization header",
-            MatchType = MessageMatch.Contains)]
-        public async Task MissingUserIdShouldThrowException(string type, ClientRunner cr, Type t)
+        public void MissingUserIdShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
                     ErrorJson("USER_ID_REQUIRED", "You have not supplied a MaxMind user ID in the Authorization header."));
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<AuthenticationException>()
+                    .And.Message.Contains("You have not supplied a MaxMind user ID in the Authorization header."));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(HttpException), ExpectedMessage = "with no body",
-            MatchType = MessageMatch.Contains)]
-        public async Task NoErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        public void NoErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden);
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<HttpException>()
+                    .And.Message.Contains("with no body"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(OutOfQueriesException),
-            ExpectedMessage = "The license key you have provided is out of queries", MatchType = MessageMatch.Contains)]
-        public async Task OutOfQueriesShouldThrowException(string type, ClientRunner cr, Type t)
+        public void OutOfQueriesShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.PaymentRequired,
                 content:
                     ErrorJson("OUT_OF_QUERIES",
                         "The license key you have provided is out of queries. Please purchase more queries to use this service."));
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<OutOfQueriesException>()
+                    .And.Message.Contains("The license key you have provided is out of queries"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(HttpException),
-            ExpectedMessage = "Received an unexpected response for",
-            MatchType = MessageMatch.Contains)]
-        public async Task SurprisingStatusShouldThrowException(string type, ClientRunner cr, Type t)
+        public void SurprisingStatusShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.MultipleChoices);
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<HttpException>()
+                    .And.Message.Contains("Received an unexpected response for"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(GeoIP2Exception),
-            ExpectedMessage = "Received a 200 response but not decode it as JSON", MatchType = MessageMatch.Contains)]
-        public async Task UndeserializableJsonShouldThrowException(string type, ClientRunner cr, Type t)
+        public void UndeserializableJsonShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.OK,
                 content: "{\"invalid\":yes}");
 
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<GeoIP2Exception>()
+                    .And.Message.Contains("Received a 200 response but not decode it as JSON"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(HttpException), ExpectedMessage = "it did not include the expected JSON body",
-            MatchType = MessageMatch.Contains)]
-        public async Task UnexpectedErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        public void UnexpectedErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: "{\"invalid\": }");
-            await cr(client);
+
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<HttpException>()
+                    .And.Message.Contains("it did not include the expected JSON body"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(InvalidRequestException), ExpectedMessage = "not a valid IP address",
-            MatchType = MessageMatch.Contains)]
-        public async Task WebServiceErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        public void WebServiceErrorShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: ErrorJson("IP_ADDRESS_INVALID",
                     "The value 1.2.3 is not a valid IP address"));
 
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<InvalidRequestException>()
+                    .And.Message.Contains("not a valid IP address"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
-        [ExpectedException(typeof(HttpException), ExpectedMessage = "does not specify code or error keys",
-            MatchType = MessageMatch.Contains)]
-        public async Task WeirdErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        public void WeirdErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: "{\"weird\": 42}");
-            await cr(client);
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<HttpException>()
+                    .And.Message.Contains("does not specify code or error keys"));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
@@ -272,7 +270,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         [Test, TestCaseSource(nameof(TestCases))]
         public async Task MeEndpointIsCalledCorrectly(string type, ClientRunner cr,
-    Type t)
+            Type t)
         {
             var client = CreateClient(type, "me", content: CountryJson);
             var result = await cr(client, null);

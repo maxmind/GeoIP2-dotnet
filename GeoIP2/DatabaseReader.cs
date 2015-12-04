@@ -20,7 +20,7 @@ namespace MaxMind.GeoIP2
     public class DatabaseReader : IGeoIP2DatabaseReader, IDisposable
     {
         private bool _disposed;
-        private readonly List<string> _locales;
+        private readonly IEnumerable<string> _locales;
         private readonly Reader _reader;
 
         /// <summary>
@@ -39,9 +39,10 @@ namespace MaxMind.GeoIP2
         /// <param name="file">The MaxMind DB file.</param>
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
         /// <param name="mode">The mode by which to access the DB file.</param>
-        public DatabaseReader(string file, List<string> locales, FileAccessMode mode = FileAccessMode.MemoryMapped)
+        public DatabaseReader(string file, IEnumerable<string> locales,
+            FileAccessMode mode = FileAccessMode.MemoryMapped)
         {
-            _locales = locales;
+            _locales = new List<string>(locales);
             _reader = new Reader(file, mode);
         }
 
@@ -59,9 +60,9 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="stream">A stream of the MaxMind DB file.</param>
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
-        public DatabaseReader(Stream stream, List<string> locales)
+        public DatabaseReader(Stream stream, IEnumerable<string> locales)
         {
-            _locales = locales;
+            _locales = new List<string>(locales);
             _reader = new Reader(stream);
         }
 

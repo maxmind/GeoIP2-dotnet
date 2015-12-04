@@ -37,7 +37,7 @@ namespace MaxMind.GeoIP2.Http
 
             if (disposing)
             {
-                Stream.Dispose();
+                this.Stream.Dispose();
             }
 
             _disposed = true;
