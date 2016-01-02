@@ -31,12 +31,18 @@ namespace MaxMind.GeoIP2.UnitTests
         // "Async" added to the name so that Nunit can tell them apart.
         private static readonly object[][] TestCases =
         {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"country", (ClientRunner) (async (c, i) => c.Country(i)), typeof (CountryResponse)},
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[]
             {"countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof (CountryResponse)},
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"city", (ClientRunner) (async (c, i) => c.City(i)), typeof (CityResponse)},
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof (CityResponse)},
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"insights", (ClientRunner) (async (c, i) => c.Insights(i)), typeof (InsightsResponse)},
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[]
             {"insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof (InsightsResponse)}
         };

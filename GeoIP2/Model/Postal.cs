@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 
 #endregion
@@ -21,6 +22,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     Constructor
         /// </summary>
+        [Constructor]
         public Postal(string code = null, int? confidence = null)
         {
             Code = code;

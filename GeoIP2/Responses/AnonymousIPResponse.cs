@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 
 #endregion
@@ -11,6 +12,40 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public class AnonymousIPResponse : AbstractResponse
     {
+        /// <summary>
+        /// Construct AnonymousIPResponse model
+        /// </summary>
+        public AnonymousIPResponse()
+        {
+        }
+
+        /// <summary>
+        /// Construct AnonymousIPResponse model
+        /// </summary>
+        /// <param name="isAnonymous"></param>
+        /// <param name="isAnonymousVpn"></param>
+        /// <param name="isHostingProvider"></param>
+        /// <param name="isPublicProxy"></param>
+        /// <param name="isTorExitNode"></param>
+        /// <param name="ipAddress"></param>
+        [Constructor]
+        public AnonymousIPResponse(
+            [Parameter("is_anonymous")] bool isAnonymous,
+            [Parameter("is_anonymous_vpn")] bool isAnonymousVpn,
+            [Parameter("is_hosting_provider")] bool isHostingProvider,
+            [Parameter("is_public_proxy")] bool isPublicProxy,
+            [Parameter("is_tor_exit_node")] bool isTorExitNode,
+            [Inject("ip_address")] string ipAddress
+        )
+        {
+            IsAnonymous = isAnonymous;
+            IsAnonymousVpn = isAnonymousVpn;
+            IsHostingProvider = isHostingProvider;
+            IsPublicProxy = isPublicProxy;
+            IsTorExitNode = isTorExitNode;
+            IPAddress = ipAddress;
+        }
+
         /// <summary>
         ///     Returns true if the IP address belongs to any sort of anonymous network.
         /// </summary>

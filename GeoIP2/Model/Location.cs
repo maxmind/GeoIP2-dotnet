@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 
 #endregion
@@ -21,8 +22,13 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     Constructor
         /// </summary>
-        public Location(int? accuracyRadius = null, double? latitude = null, double? longitude = null,
-            int? metroCode = null, string timeZone = null)
+        [Constructor]
+        public Location(
+            [Parameter("accuracy_radius")] int? accuracyRadius = null,
+            double? latitude = null,
+            double? longitude = null,
+            [Parameter("metro_code")] int? metroCode = null,
+            [Parameter("time_zone")] string timeZone = null)
         {
             AccuracyRadius = accuracyRadius;
             Latitude = latitude;

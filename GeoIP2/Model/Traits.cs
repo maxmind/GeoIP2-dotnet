@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 using System;
 
@@ -22,25 +23,26 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     Constructor
         /// </summary>
+        [Constructor]
         public Traits(
-            int? autonomousSystemNumber = null,
-            string autonomousSystemOrganization = null,
+            [Parameter("autonomous_system_number")] int? autonomousSystemNumber = null,
+            [Parameter("autonomous_system_organization")] string autonomousSystemOrganization = null,
             string domain = null,
-            string ipAddress = null,
-            bool isAnonymousProxy = false,
-            bool isSatelliteProvider = false,
+            [Inject("ip_address")] string ipAddress = null,
+            [Parameter("is_anonymous_proxy")] bool isAnonymousProxy = false,
+            [Parameter("is_satellite_provider")]  bool isSatelliteProvider = false,
             string isp = null,
             string organization = null,
-            string userType = null)
+            [Parameter("user_type")] string userType = null)
         {
             AutonomousSystemNumber = autonomousSystemNumber;
             AutonomousSystemOrganization = autonomousSystemOrganization;
             Domain = domain;
             IPAddress = ipAddress;
-#pragma warning disable 0618
+#pragma warning disable 618
             IsAnonymousProxy = isAnonymousProxy;
             IsSatelliteProvider = isSatelliteProvider;
-#pragma warning restore 0618
+#pragma warning restore 618
             Isp = isp;
             Organization = organization;
             UserType = userType;

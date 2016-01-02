@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 
 #endregion
@@ -11,6 +12,33 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public class IspResponse : AbstractResponse
     {
+        /// <summary>
+        /// Construct an IspResponse model.
+        /// </summary>
+        public IspResponse() : this(null, null, null, null, null)
+        {
+        }
+
+        /// <summary>
+        /// Construct an IspResponse model.
+        /// </summary>
+        [Constructor]
+        public IspResponse(
+            [Parameter("autonomous_system_number")] long? autonomousSystemNumber,
+            [Parameter("autonomous_system_organization")] string autonomousSystemOrganization,
+            string isp,
+            string organization,
+            [Inject("ip_address")] string ipAddress)
+        {
+            // XXX - if we ever do a breaking release, this property should
+            // be changes to long?
+            AutonomousSystemNumber = (int?)autonomousSystemNumber;
+            AutonomousSystemOrganization = autonomousSystemOrganization;
+            Isp = isp;
+            Organization = organization;
+            IPAddress = ipAddress;
+        }
+
         /// <summary>
         ///     The
         ///     <a
