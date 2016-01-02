@@ -5,6 +5,12 @@ GeoIP2 .NET API Release Notes
   return the record for the requesting IP address using the `me` endpoint as
   documented in the web services API documentation.
 
+2.6.0-beta1 (2016-01-18)
+------------------------
+
+* Upgrade MaxMindb.Db reader to 2.0.0-beta1. This includes significant
+  performance increases.
+
 2.5.0 (2015-12-04)
 ------------------
 

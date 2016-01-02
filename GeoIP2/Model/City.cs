@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -27,6 +28,21 @@ namespace MaxMind.GeoIP2.Model
             : base(geoNameId, names, locales)
         {
             Confidence = confidence;
+        }
+
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        [Constructor]
+        public City(int? confidence = null,
+            // Unfortunately the existing models incorrectly use an int rather
+            // than a long for the geoname_id. This should be corrected if we
+            // ever do a major version bump.
+            [Parameter("geoname_id")] long? geoNameId = null,
+            IDictionary<string, string> names = null,
+            IEnumerable<string> locales = null)
+            : this(confidence, (int?)geoNameId, names, locales)
+        {
         }
 
         /// <summary>
