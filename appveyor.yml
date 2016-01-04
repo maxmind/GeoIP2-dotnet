@@ -14,7 +14,7 @@ test_script:
 
 notifications:
 - provider: Email
-  to: dev@maxmind.com
+  to: dev-ci@maxmind.com
   on_build_success: false
   on_build_failure: true
   on_build_status_changed: true
