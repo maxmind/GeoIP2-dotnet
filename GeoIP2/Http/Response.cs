@@ -21,7 +21,9 @@ namespace MaxMind.GeoIP2.Http
             RequestUri = requestUri;
             StatusCode = statusCode;
             ContentType = contentType;
+#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
             this.Stream = stream;
+#pragma warning restore IDE0003
         }
 
         public void Dispose()
@@ -37,7 +39,9 @@ namespace MaxMind.GeoIP2.Http
 
             if (disposing)
             {
+#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
                 this.Stream.Dispose();
+#pragma warning restore IDE0003
             }
 
             _disposed = true;

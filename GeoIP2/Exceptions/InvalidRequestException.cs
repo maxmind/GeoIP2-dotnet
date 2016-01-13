@@ -2,6 +2,7 @@
 
 using System;
 using System.Runtime.Serialization;
+using System.Security;
 using System.Security.Permissions;
 
 #endregion
@@ -26,7 +27,9 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message)
         {
             Code = code;
+#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
             this.Uri = uri;
+#pragma warning restore IDE0003
         }
 
         /// <summary>
@@ -39,7 +42,9 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(info, context)
         {
             Code = info.GetString("Code");
+#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
             this.Uri = (Uri)info.GetValue("Uri", typeof(Uri));
+#pragma warning restore IDE0003
         }
 
         /// <summary>
@@ -58,6 +63,7 @@ namespace MaxMind.GeoIP2.Exceptions
         /// <param name="info">The SerializationInfo to populate with data.</param>
         /// <param name="context">The destination (see StreamingContext) for this serialization.</param>
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
@@ -65,7 +71,9 @@ namespace MaxMind.GeoIP2.Exceptions
                 throw new ArgumentNullException(nameof(info));
             }
             info.AddValue("Code", Code);
+#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
             info.AddValue("Uri", this.Uri);
+#pragma warning restore IDE0003
             base.GetObjectData(info, context);
         }
     }

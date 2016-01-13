@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
+using System.Security;
 
 #endregion
 
@@ -27,7 +28,9 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message)
         {
             HttpStatus = httpStatus;
+#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
             this.Uri = uri;
+#pragma warning restore IDE0003
         }
 
         /// <summary>
@@ -41,7 +44,9 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message, innerException)
         {
             HttpStatus = httpStatus;
+#pragma warning disable IDE0003 // Mono gets confused without 'this'
             this.Uri = uri;
+#pragma warning restore IDE0003
         }
 
         /// <summary>
@@ -52,7 +57,9 @@ namespace MaxMind.GeoIP2.Exceptions
         protected HttpException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             HttpStatus = (HttpStatusCode)info.GetValue("HttpStatus", typeof(HttpStatusCode));
+#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
             this.Uri = (Uri)info.GetValue("Uri", typeof(Uri));
+#pragma warning restore IDE0003
         }
 
         /// <summary>
@@ -70,11 +77,14 @@ namespace MaxMind.GeoIP2.Exceptions
         /// </summary>
         /// <param name="info">The SerializationInfo to populate with data.</param>
         /// <param name="context">The destination (see StreamingContext) for this serialization.</param>
+        [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             info.AddValue("HttpStatus", HttpStatus);
+#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
             info.AddValue("Uri", this.Uri);
+#pragma warning restore IDE0003
         }
     }
 }
