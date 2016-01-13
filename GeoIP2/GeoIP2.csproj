@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="GlobalSuppressions2.cs" />
     <Compile Include="Http\AsyncClient.cs" />
     <Compile Include="Http\Response.cs" />
     <Compile Include="Http\SyncClient.cs" />
