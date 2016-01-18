@@ -102,10 +102,10 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        ///     Returns a <see cref="System.String" /> that represents this instance.
+        ///     Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        ///     A <see cref="System.String" /> that represents this instance.
+        ///     A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -131,6 +131,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <param name="locales">The locales specified by the user.</param>
         protected internal override void SetLocales(IEnumerable<string> locales)
         {
+            locales = locales.ToList();
             base.SetLocales(locales);
 
             if (City != null)

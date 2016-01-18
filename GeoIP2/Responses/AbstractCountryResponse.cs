@@ -3,6 +3,7 @@
 using MaxMind.GeoIP2.Model;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 
@@ -85,10 +86,10 @@ namespace MaxMind.GeoIP2.Responses
         public Traits Traits { get; internal set; }
 
         /// <summary>
-        ///     Returns a <see cref="System.String" /> that represents this instance.
+        ///     Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        ///     A <see cref="System.String" /> that represents this instance.
+        ///     A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -107,6 +108,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <param name="locales">The locales specified by the user.</param>
         protected internal override void SetLocales(IEnumerable<string> locales)
         {
+            locales = locales.ToList();
             if (Continent != null)
                 Continent.Locales = locales;
 

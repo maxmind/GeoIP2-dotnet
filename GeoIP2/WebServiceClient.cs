@@ -81,7 +81,7 @@ namespace MaxMind.GeoIP2
         private readonly ISyncClient _syncClient;
         private bool _disposed;
 
-        private ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
+        private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
@@ -246,7 +246,7 @@ namespace MaxMind.GeoIP2
             return Insights(ParseIP(ipAddress));
         }
 
-        private IPAddress ParseIP(string ipAddress)
+        private static IPAddress ParseIP(string ipAddress)
         {
             IPAddress ip = null;
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
@@ -282,7 +282,7 @@ namespace MaxMind.GeoIP2
             return new UriBuilder("https", _host, -1, $"/geoip/v2.1/{type}/{endpoint}").Uri;
         }
 
-        private string EncodedAuth(int userId, string licenseKey)
+        private static string EncodedAuth(int userId, string licenseKey)
         {
             return Convert.ToBase64String(Encoding.ASCII.GetBytes($"{userId}:{licenseKey}"));
         }
@@ -342,7 +342,7 @@ namespace MaxMind.GeoIP2
             }
         }
 
-        private Exception CreateStatusException(Response response)
+        private static Exception CreateStatusException(Response response)
         {
             var status = (int)response.StatusCode;
             if (status >= 400 && status < 500)
@@ -361,7 +361,7 @@ namespace MaxMind.GeoIP2
             return new HttpException(errorMessage, response.StatusCode, response.RequestUri);
         }
 
-        private Exception Create4xxException(Response response)
+        private static Exception Create4xxException(Response response)
         {
             string content = null;
 
