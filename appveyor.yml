@@ -1,20 +1,26 @@
+---
 os: Visual Studio 2015 RC
-
 before_build:
   - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/nuget-restore.cmd
   - nuget-restore
   - nuget install NUnit.Console -version 3.0.0
-
 install:
- - git submodule update --init --recursive
- - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
-
+  - git submodule update --init --recursive
+  - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
 test_script:
- - NUnit.Console.3.0.0\tools\nunit3-console.exe "C:\projects\geoip2-dotnet\GeoIP2.UnitTests\bin\Debug\MaxMind.GeoIP2.UnitTests.dll"
-
+  - NUnit.Console.3.0.0\tools\nunit3-console.exe "C:\projects\geoip2-dotnet\GeoIP2.UnitTests\bin\Debug\MaxMind.GeoIP2.UnitTests.dll"
 notifications:
-- provider: Email
-  to: dev-ci@maxmind.com
-  on_build_success: false
-  on_build_failure: true
-  on_build_status_changed: true
+  - auth_token:
+      secure: X+ymndzchVeC2LYsehzOt/GEMFfZJeTENeAU9lwNwTuCxBXFJNkuwZLd9joAtHgykHQoYqmEv/nH64+MA6nTlw==
+    channel: ci
+    on_build_failure: true
+    on_build_status_changed: true
+    on_build_success: false
+    provider: Slack
+  - on_build_failure: true
+    on_build_status_changed: true
+    on_build_success: false
+    provider: Email
+    subject: 'AppVeyor build {{status}}'
+    to:
+      - dev-ci@maxmind.com
