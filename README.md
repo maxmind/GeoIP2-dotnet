@@ -32,7 +32,8 @@ To use the web service API, you must create a new
 `MaxMind.GeoIP2.WebServiceClient` object with your `userID` and `licenseKey`.
 You may also specify the fall-back locales, the host, timeout, or the request
 timeout. You may then call the sync or async method corresponding to the
-specific end point, passing it the IP address you want to look up.
+specific end point, passing it the IP address you want to look up or no
+parameters if you want to look up the current device.
 
 If the request succeeds, the method call will return a response class for the
 endpoint you called. This response in turn contains multiple model classes,

@@ -147,6 +147,15 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        ///     Asynchronously query the GeoIP2 Precision: Country web service for the requesting IP address.
+        /// </summary>
+        /// <returns>Task that produces an object modeling the Country response</returns>
+        public async Task<CountryResponse> CountryAsync()
+        {
+            return await CountryAsync((IPAddress)null).ConfigureAwait(false);
+        }
+
+        /// <summary>
         ///     Asynchronously query the GeoIP2 Precision: City web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
@@ -164,6 +173,15 @@ namespace MaxMind.GeoIP2
         public async Task<CityResponse> CityAsync(IPAddress ipAddress)
         {
             return await ExecuteAsync<CityResponse>("city", ipAddress).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///     Asynchronously query the GeoIP2 Precision: City web service for the requesting IP address.
+        /// </summary>
+        /// <returns>Task that produces an object modeling the City response</returns>
+        public async Task<CityResponse> CityAsync()
+        {
+            return await CityAsync((IPAddress)null).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -187,6 +205,15 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        ///     Asynchronously query the GeoIP2 Precision: Insights web service for the requesting IP address.
+        /// </summary>
+        /// <returns>Task that produces an object modeling the Insights response</returns>
+        public async Task<InsightsResponse> InsightsAsync()
+        {
+            return await InsightsAsync((IPAddress)null).ConfigureAwait(false);
+        }
+
+        /// <summary>
         ///     Returns an <see cref="CountryResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
@@ -204,6 +231,15 @@ namespace MaxMind.GeoIP2
         public CountryResponse Country(string ipAddress)
         {
             return Country(ParseIP(ipAddress));
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="CountryResponse" /> for the requesting IP address.
+        /// </summary>
+        /// <returns>An <see cref="CountryResponse" /></returns>
+        public CountryResponse Country()
+        {
+            return Country((IPAddress)null);
         }
 
         /// <summary>
@@ -227,6 +263,15 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        ///     Returns an <see cref="CityResponse" /> for the requesting IP address.
+        /// </summary>
+        /// <returns>An <see cref="CityResponse" /></returns>
+        public CityResponse City()
+        {
+            return City((IPAddress)null);
+        }
+
+        /// <summary>
         ///     Returns an <see cref="InsightsResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
@@ -244,6 +289,15 @@ namespace MaxMind.GeoIP2
         public InsightsResponse Insights(string ipAddress)
         {
             return Insights(ParseIP(ipAddress));
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="InsightsResponse" /> for the requesting IP address.
+        /// </summary>
+        /// <returns>An <see cref="InsightsResponse" /></returns>
+        public InsightsResponse Insights()
+        {
+            return Insights((IPAddress)null);
         }
 
         private static IPAddress ParseIP(string ipAddress)

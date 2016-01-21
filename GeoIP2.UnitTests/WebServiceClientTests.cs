@@ -41,6 +41,20 @@ namespace MaxMind.GeoIP2.UnitTests
             {"insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof (InsightsResponse)}
         };
 
+        public delegate Task<AbstractCountryResponse> MeClientRunner(WebServiceClient c);
+
+        private static readonly object[][] MeTestCases =
+        {
+            new object[] {"country", (MeClientRunner) (async (c) => c.Country()), typeof (CountryResponse)},
+            new object[]
+            {"countryAsync", (MeClientRunner) (async (c) => await c.CountryAsync()), typeof (CountryResponse)},
+            new object[] {"city", (MeClientRunner) (async (c) => c.City()), typeof (CityResponse)},
+            new object[] {"cityAsync", (MeClientRunner) (async (c) => await c.CityAsync()), typeof (CityResponse)},
+            new object[] {"insights", (MeClientRunner) (async (c) => c.Insights()), typeof (InsightsResponse)},
+            new object[]
+            {"insightsAsync", (MeClientRunner) (async (c) => await c.InsightsAsync()), typeof (InsightsResponse)}
+        };
+
         private WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
             HttpStatusCode status = HttpStatusCode.OK, string contentType = null, string content = "")
         {
@@ -268,14 +282,15 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.That(result.GetType(), Is.EqualTo(t));
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public async Task MeEndpointIsCalledCorrectly(string type, ClientRunner cr,
+        [Test, TestCaseSource(nameof(MeTestCases))]
+        public async Task MeEndpointIsCalledCorrectly(string type, MeClientRunner cr,
             Type t)
         {
             var client = CreateClient(type, "me", content: CountryJson);
-            var result = await cr(client, null);
+            var result = await cr(client);
 
             Assert.That(result, Is.Not.Null);
+            Assert.That(result.GetType(), Is.EqualTo(t));
         }
 
         [Test]
