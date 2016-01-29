@@ -1,9 +1,14 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.6.0-beta2 (2016-01-18)
+------------------------
+
 * Parameterless endpoint methods were added to `WebServiceClient`. These
   return the record for the requesting IP address using the `me` endpoint as
   documented in the web services API documentation.
+* The target framework is now .NET 4.5 rather than 4.5.2 in order to work
+  better with Mono. GitHub #44.
 
 2.6.0-beta1 (2016-01-18)
 ------------------------
