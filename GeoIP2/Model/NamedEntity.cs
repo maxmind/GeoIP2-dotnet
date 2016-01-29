@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     Constructor
         /// </summary>
+        [Constructor]
         protected NamedEntity(int? geoNameId = null, IDictionary<string, string> names = null,
             IEnumerable<string> locales = null)
         {

@@ -5,6 +5,7 @@ using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
@@ -101,15 +102,15 @@ namespace MaxMind.GeoIP2.UnitTests
             CanDeserializeCountryResponse(JsonConvert.DeserializeObject<CountryResponse>(CountryJson));
         }
 
+        // XXX - not sure this tests anything new now.
         [Test]
-        public void CanDeserializeFromDatabaseJToken()
+        public void CanDeserializeFromDatabaseType()
         {
             var reader =
-                new Reader(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                new DatabaseReader(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                     "..", "..", "TestData", "MaxMind-DB", "test-data", "GeoIP2-City-Test.mmdb"));
 
-            var obj = reader.Find("216.160.83.56");
-            var response = obj.ToObject<InsightsResponse>();
+            var response = reader.City(IPAddress.Parse("216.160.83.56"));
 
             Assert.That(response.City.GeoNameId, Is.EqualTo(5803556));
             Assert.That(response.City.Name, Is.EqualTo("Milton"));

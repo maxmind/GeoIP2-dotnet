@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 
 #endregion
@@ -11,6 +12,26 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public class ConnectionTypeResponse : AbstractResponse
     {
+        /// <summary>
+        /// Construct ConnectionTypeResponse model
+        /// </summary>
+        public ConnectionTypeResponse()
+        {
+        }
+
+        /// <summary>
+        /// Construct ConnectionTypeResponse model
+        /// </summary>
+        [Constructor]
+        public ConnectionTypeResponse(
+            [Parameter("connection_type")] string connectionType,
+            [Inject("ip_address")] string ipAddress
+            )
+        {
+            ConnectionType = connectionType;
+            IPAddress = ipAddress;
+        }
+
         /// <summary>
         ///     The connection type of the IP address.
         /// </summary>

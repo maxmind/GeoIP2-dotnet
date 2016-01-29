@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -30,6 +31,22 @@ namespace MaxMind.GeoIP2.Model
             : base(confidence, geoNameId, isoCode, names, locales)
         {
             Type = type;
+        }
+
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        [Constructor]
+        public RepresentedCountry(
+            string type = null,
+            int? confidence = null,
+            // See note in City model
+            [Parameter("geoname_id")] long? geoNameId = null,
+            [Parameter("iso_code")] string isoCode = null,
+            IDictionary<string, string> names = null,
+            IEnumerable<string> locales = null)
+            : this(type, confidence, (int?)geoNameId, isoCode, names, locales)
+        {
         }
 
         /// <summary>

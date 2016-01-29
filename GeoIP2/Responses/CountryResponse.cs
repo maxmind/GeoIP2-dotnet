@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using MaxMind.GeoIP2.Model;
 
 #endregion
@@ -28,9 +29,15 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     Constructor
         /// </summary>
-        public CountryResponse(Continent continent = null, Country country = null, Model.MaxMind maxMind = null,
-            Country registeredCountry = null, RepresentedCountry representedCountry = null, Traits traits = null)
-            : base(continent, country, maxMind, registeredCountry, representedCountry, traits)
+        [Constructor]
+        public CountryResponse(
+            Continent continent = null,
+            Country country = null,
+            [Parameter("maxmind")] Model.MaxMind maxMind = null,
+            Country registeredCountry = null,
+            [Parameter("represented_country")] RepresentedCountry representedCountry = null,
+            [Parameter("traits", true)] Traits traits = null
+            ) : base(continent, country, maxMind, registeredCountry, representedCountry, traits)
         {
         }
     }
