@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using MaxMind.GeoIP2.Model;
 using System.Collections.Generic;
 
@@ -28,17 +29,18 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     Constructor
         /// </summary>
+        [Constructor]
         public CityResponse(
             City city = null,
             Continent continent = null,
             Country country = null,
             Location location = null,
-            Model.MaxMind maxMind = null,
+            [Parameter("maxmind")] Model.MaxMind maxMind = null,
             Postal postal = null,
-            Country registeredCountry = null,
-            RepresentedCountry representedCountry = null,
+            [Parameter("registered_country")] Country registeredCountry = null,
+            [Parameter("represented_country")] RepresentedCountry representedCountry = null,
             IEnumerable<Subdivision> subdivisions = null,
-            Traits traits = null)
+            [Parameter("traits", true)] Traits traits = null)
             : base(
                 city, continent, country, location, maxMind, postal, registeredCountry, representedCountry, subdivisions,
                 traits)

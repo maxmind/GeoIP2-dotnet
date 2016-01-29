@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 
 #endregion
@@ -11,6 +12,27 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public class DomainResponse : AbstractResponse
     {
+        /// <summary>
+        /// Construct a DomainResponse model object.
+        /// </summary>
+        public DomainResponse() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Construct a DomainResponse model object.
+        /// </summary>
+        /// <param name="domain"></param>
+        /// <param name="ipAddress"></param>
+        [Constructor]
+        public DomainResponse(
+            string domain,
+            [Inject("ip_address")] string ipAddress)
+        {
+            Domain = domain;
+            IPAddress = ipAddress;
+        }
+
         /// <summary>
         ///     The second level domain associated with the IP address. This will
         ///     be something like "example.com" or "example.co.uk", not

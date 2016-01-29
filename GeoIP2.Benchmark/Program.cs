@@ -19,11 +19,11 @@ namespace GeoIP2.Benchmark
                 Bench("Memory mode", reader);
             }
 
-            using (var reader = new DatabaseReader("GeoLite2-City.mmdb", FileAccessMode.MemoryMapped))
-            {
-                Bench("Warm-up for MMAP mode", reader);
-                Bench("MMAP mode", reader);
-            }
+            //            using (var reader = new DatabaseReader("GeoLite2-City.mmdb", FileAccessMode.MemoryMapped))
+            //            {
+            //                Bench("Warm-up for MMAP mode", reader);
+            //                Bench("MMAP mode", reader);
+            //            }
         }
 
         private static void Bench(string name, DatabaseReader reader)

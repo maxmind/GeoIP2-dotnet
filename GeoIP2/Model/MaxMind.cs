@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using Newtonsoft.Json;
 
 #endregion
@@ -21,7 +22,8 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     Constructor
         /// </summary>
-        public MaxMind(int? queriesRemaining = null)
+        [Constructor]
+        public MaxMind([Parameter("queries_remaining")] int? queriesRemaining = null)
         {
             QueriesRemaining = queriesRemaining;
         }

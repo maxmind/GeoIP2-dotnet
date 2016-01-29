@@ -3,7 +3,6 @@
 using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -104,7 +103,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CountryResponse" /></returns>
         public CountryResponse Country(IPAddress ipAddress)
         {
-            return Execute<CountryResponse>(ipAddress, true, "Country");
+            return Execute<CountryResponse>(ipAddress, "Country");
         }
 
         /// <summary>
@@ -114,7 +113,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CountryResponse" /></returns>
         public CountryResponse Country(string ipAddress)
         {
-            return Execute<CountryResponse>(ipAddress, true, "Country");
+            return Execute<CountryResponse>(ipAddress, "Country");
         }
 
         /// <summary>
@@ -124,7 +123,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CityResponse" /></returns>
         public CityResponse City(IPAddress ipAddress)
         {
-            return Execute<CityResponse>(ipAddress, true, "City");
+            return Execute<CityResponse>(ipAddress, "City");
         }
 
         /// <summary>
@@ -134,7 +133,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CityResponse" /></returns>
         public CityResponse City(string ipAddress)
         {
-            return Execute<CityResponse>(ipAddress, true, "City");
+            return Execute<CityResponse>(ipAddress, "City");
         }
 
         /// <summary>
@@ -144,7 +143,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="AnonymousIPResponse" /></returns>
         public AnonymousIPResponse AnonymousIP(string ipAddress)
         {
-            return Execute<AnonymousIPResponse>(ipAddress, false, "GeoIP2-Anonymous-IP");
+            return Execute<AnonymousIPResponse>(ipAddress, "GeoIP2-Anonymous-IP");
         }
 
         /// <summary>
@@ -154,7 +153,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="ConnectionTypeResponse" /></returns>
         public ConnectionTypeResponse ConnectionType(string ipAddress)
         {
-            return Execute<ConnectionTypeResponse>(ipAddress, false, "GeoIP2-Connection-Type");
+            return Execute<ConnectionTypeResponse>(ipAddress, "GeoIP2-Connection-Type");
         }
 
         /// <summary>
@@ -164,7 +163,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="DomainResponse" /></returns>
         public DomainResponse Domain(string ipAddress)
         {
-            return Execute<DomainResponse>(ipAddress, false, "GeoIP2-Domain");
+            return Execute<DomainResponse>(ipAddress, "GeoIP2-Domain");
         }
 
         /// <summary>
@@ -174,23 +173,23 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="IspResponse" /></returns>
         public IspResponse Isp(string ipAddress)
         {
-            return Execute<IspResponse>(ipAddress, false, "GeoIP2-ISP");
+            return Execute<IspResponse>(ipAddress, "GeoIP2-ISP");
         }
 
-        private T Execute<T>(string ipStr, bool hasTraits, string type) where T : AbstractResponse
+        private T Execute<T>(string ipStr, string type) where T : AbstractResponse
         {
             IPAddress ip = null;
             if (ipStr != null && !IPAddress.TryParse(ipStr, out ip))
                 throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipStr}");
-            return Execute<T>(ipStr, ip, hasTraits, type);
+            return Execute<T>(ipStr, ip, type);
         }
 
-        private T Execute<T>(IPAddress ipAddress, bool hasTraits, string type) where T : AbstractResponse
+        private T Execute<T>(IPAddress ipAddress, string type) where T : AbstractResponse
         {
-            return Execute<T>(ipAddress.ToString(), ipAddress, hasTraits, type);
+            return Execute<T>(ipAddress.ToString(), ipAddress, type);
         }
 
-        private T Execute<T>(string ipStr, IPAddress ipAddress, bool hasTraits, string type) where T : AbstractResponse
+        private T Execute<T>(string ipStr, IPAddress ipAddress, string type) where T : AbstractResponse
         {
             if (!Metadata.DatabaseType.Contains(type))
             {
@@ -199,28 +198,13 @@ namespace MaxMind.GeoIP2
                     $"A {Metadata.DatabaseType} database cannot be opened with the {frame.GetMethod().Name} method");
             }
 
-            var token = (JObject)_reader.Find(ipAddress);
+            var injectables = new InjectableValues();
+            injectables.AddValue("ip_address", ipStr);
+            var response = _reader.Find<T>(ipAddress, injectables);
 
-            if (token == null)
+            if (response == null)
                 throw new AddressNotFoundException("The address " + ipStr + " is not in the database.");
 
-            JObject ipObject;
-            if (hasTraits)
-            {
-                if (token["traits"] == null)
-                {
-                    token.Add("traits", new JObject());
-                }
-
-                ipObject = (JObject)token["traits"];
-            }
-            else
-            {
-                ipObject = token;
-            }
-            ipObject.Add("ip_address", ipStr);
-
-            var response = token.ToObject<T>();
             response.SetLocales(_locales);
 
             return response;
@@ -233,7 +217,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="AnonymousIPResponse" /></returns>
         public AnonymousIPResponse AnonymousIP(IPAddress ipAddress)
         {
-            return Execute<AnonymousIPResponse>(ipAddress, false, "GeoIP2-Anonymous-IP");
+            return Execute<AnonymousIPResponse>(ipAddress, "GeoIP2-Anonymous-IP");
         }
 
         /// <summary>
@@ -243,7 +227,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="ConnectionTypeResponse" /></returns>
         public ConnectionTypeResponse ConnectionType(IPAddress ipAddress)
         {
-            return Execute<ConnectionTypeResponse>(ipAddress, false, "GeoIP2-Connection-Type");
+            return Execute<ConnectionTypeResponse>(ipAddress, "GeoIP2-Connection-Type");
         }
 
         /// <summary>
@@ -253,7 +237,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="DomainResponse" /></returns>
         public DomainResponse Domain(IPAddress ipAddress)
         {
-            return Execute<DomainResponse>(ipAddress, false, "GeoIP2-Domain");
+            return Execute<DomainResponse>(ipAddress, "GeoIP2-Domain");
         }
 
         /// <summary>
@@ -263,7 +247,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="IspResponse" /></returns>
         public IspResponse Isp(IPAddress ipAddress)
         {
-            return Execute<IspResponse>(ipAddress, false, "GeoIP2-ISP");
+            return Execute<IspResponse>(ipAddress, "GeoIP2-ISP");
         }
     }
 }

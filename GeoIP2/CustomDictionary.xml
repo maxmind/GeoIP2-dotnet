@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Dictionary>
+  <Words>
+    <Recognized>
+      <Word>injectables</Word>
+      <Word>ip</Word>
+      <Word>iso</Word>
+      <Word>isp</Word>
+      <Word>MaxMind</Word>
+      <Word>Vpn</Word>
+    </Recognized>
+    <DiscreteExceptions>
+      <Term>MaxMind</Term>
+    </DiscreteExceptions>
+  </Words>
+</Dictionary>
