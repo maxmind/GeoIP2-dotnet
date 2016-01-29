@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MaxMind, Inc.")]
 [assembly: AssemblyProduct("MaxMind.GeoIP2")]
-[assembly: AssemblyCopyright("Copyright © 2015")]
+[assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -44,7 +44,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("2.6.0.0")]
 [assembly: AssemblyFileVersion("2.6.0")]
-[assembly: AssemblyInformationalVersion("2.6.0-beta1")]
+[assembly: AssemblyInformationalVersion("2.6.0-beta2")]
 [assembly: InternalsVisibleTo("MaxMind.GeoIP2.UnitTests,PublicKey=" +
                               "0024000004800000940000000602000000240000525341310004000001000100e30b6e4a9425b1" +
                               "617ffc8bdf79801e67a371f9f650db860dc0dfff92cb63258765a0955c6fcde1da78dbaf5bf84d" +
