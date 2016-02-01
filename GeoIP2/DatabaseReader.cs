@@ -176,20 +176,20 @@ namespace MaxMind.GeoIP2
             return Execute<IspResponse>(ipAddress, "GeoIP2-ISP");
         }
 
-        private T Execute<T>(string ipStr, string type) where T : AbstractResponse
+        private T Execute<T>(string ipStr, string type, bool throwOnNullResponse = true) where T : AbstractResponse
         {
             IPAddress ip = null;
             if (ipStr != null && !IPAddress.TryParse(ipStr, out ip))
                 throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipStr}");
-            return Execute<T>(ipStr, ip, type);
+            return Execute<T>(ipStr, ip, type, throwOnNullResponse);
         }
 
-        private T Execute<T>(IPAddress ipAddress, string type) where T : AbstractResponse
+        private T Execute<T>(IPAddress ipAddress, string type, bool throwOnNullResponse = true) where T : AbstractResponse
         {
-            return Execute<T>(ipAddress.ToString(), ipAddress, type);
+            return Execute<T>(ipAddress.ToString(), ipAddress, type, throwOnNullResponse);
         }
 
-        private T Execute<T>(string ipStr, IPAddress ipAddress, string type) where T : AbstractResponse
+        private T Execute<T>(string ipStr, IPAddress ipAddress, string type, bool throwOnNullResponse = true) where T : AbstractResponse
         {
             if (!Metadata.DatabaseType.Contains(type))
             {
@@ -203,7 +203,16 @@ namespace MaxMind.GeoIP2
             var response = _reader.Find<T>(ipAddress, injectables);
 
             if (response == null)
-                throw new AddressNotFoundException("The address " + ipStr + " is not in the database.");
+            {
+                if (throwOnNullResponse)
+                {
+                    throw new AddressNotFoundException("The address " + ipStr + " is not in the database.");
+                }
+                else
+                {
+                    return null;
+                }
+            }
 
             response.SetLocales(_locales);
 
