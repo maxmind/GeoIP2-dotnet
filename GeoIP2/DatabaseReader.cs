@@ -117,6 +117,30 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        ///     Tries to lookup a <see cref="CountryResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="CountryResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryCountry(IPAddress ipAddress, out CountryResponse response)
+        {
+            response = Execute<CountryResponse>(ipAddress, "Country", false);
+            return response != null;
+        }
+
+        /// <summary>
+        ///     Tries to lookup a <see cref="CountryResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="CountryResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryCountry(string ipAddress, out CountryResponse response)
+        {
+            response = Execute<CountryResponse>(ipAddress, "Country", false);
+            return response != null;
+        }
+
+        /// <summary>
         ///     Returns an <see cref="CityResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
@@ -134,6 +158,30 @@ namespace MaxMind.GeoIP2
         public CityResponse City(string ipAddress)
         {
             return Execute<CityResponse>(ipAddress, "City");
+        }
+
+        /// <summary>
+        ///     Tries to lookup a <see cref="CityResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="CityResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryCity(IPAddress ipAddress, out CityResponse response)
+        {
+            response = Execute<CityResponse>(ipAddress, "City", false);
+            return response != null;
+        }
+
+        /// <summary>
+        ///     Tries to lookup a <see cref="CityResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="CityResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryCity(string ipAddress, out CityResponse response)
+        {
+            response = Execute<CityResponse>(ipAddress, "City", false);
+            return response != null;
         }
 
         /// <summary>
