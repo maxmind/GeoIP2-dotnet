@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using MaxMind.GeoIP2.Responses;
 
 #endregion
 
@@ -136,6 +137,19 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
+        public void TestTryCountry()
+        {
+            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb")))
+            {
+                CountryResponse response;
+                var status = reader.TryCountry("81.2.69.160", out response);
+
+                Assert.IsTrue(status);
+                Assert.That(response.Country.IsoCode, Is.EqualTo("GB"));
+            }
+        }
+
+        [Test]
         public void TestDefaultLocale()
         {
             using (var reader = new DatabaseReader(_databaseFile))
@@ -196,6 +210,18 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Throws(Is.TypeOf<AddressNotFoundException>()
                     .And.Message.Contains("10.10.10.10 is not in the database"),
                     () => reader.City("10.10.10.10"));
+            }
+        }
+
+        [Test]
+        public void TryCityUnknownAddress()
+        {
+            using (var reader = new DatabaseReader(_databaseFile))
+            {
+                CityResponse response;
+                var status = reader.TryCity("10.10.10.10", out response);
+
+                Assert.IsFalse(status);
             }
         }
     }
