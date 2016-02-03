@@ -195,6 +195,18 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        ///     Tries to lookup an <see cref="AnonymousIPResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AnonymousIPResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryAnonymousIP(string ipAddress, out AnonymousIPResponse response)
+        {
+            response = Execute<AnonymousIPResponse>(ipAddress, "GeoIP2-Anonymous-IP", false);
+            return response != null;
+        }
+
+        /// <summary>
         ///     Returns an <see cref="ConnectionTypeResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
@@ -202,6 +214,18 @@ namespace MaxMind.GeoIP2
         public ConnectionTypeResponse ConnectionType(string ipAddress)
         {
             return Execute<ConnectionTypeResponse>(ipAddress, "GeoIP2-Connection-Type");
+        }
+
+        /// <summary>
+        ///     Tries to lookup a <see cref="ConnectionTypeResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="ConnectionTypeResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryConnectionType(string ipAddress, out ConnectionTypeResponse response)
+        {
+            response = Execute<ConnectionTypeResponse>(ipAddress, "GeoIP2-Connection-Type", false);
+            return response != null;
         }
 
         /// <summary>
@@ -215,6 +239,18 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        ///     Tries to lookup a <see cref="DomainResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="DomainResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryDomain(string ipAddress, out DomainResponse response)
+        {
+            response = Execute<DomainResponse>(ipAddress, "GeoIP2-Domain", false);
+            return response != null;
+        }
+
+        /// <summary>
         ///     Returns an <see cref="IspResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
@@ -222,6 +258,18 @@ namespace MaxMind.GeoIP2
         public IspResponse Isp(string ipAddress)
         {
             return Execute<IspResponse>(ipAddress, "GeoIP2-ISP");
+        }
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="IspResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="IspResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryIsp(string ipAddress, out IspResponse response)
+        {
+            response = Execute<IspResponse>(ipAddress, "GeoIP2-ISP", false);
+            return response != null;
         }
 
         private T Execute<T>(string ipStr, string type, bool throwOnNullResponse = true) where T : AbstractResponse
