@@ -2,13 +2,13 @@
 
 using MaxMind.Db;
 using MaxMind.GeoIP2.Exceptions;
+using MaxMind.GeoIP2.Responses;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
-using MaxMind.GeoIP2.Responses;
 
 #endregion
 
@@ -18,24 +18,76 @@ namespace MaxMind.GeoIP2.UnitTests
     public class DatabaseReaderTests
     {
         private readonly string _databaseDir;
-        private readonly string _databaseFile;
+        private readonly string _cityDatabaseFile;
+        private readonly string _domainDatabaseFile;
+        private readonly string _countryDatabaseFile;
+        private readonly string _anonymousIPDatabaseFile;
+        private readonly string _ispDatabaseFile;
+        private readonly string _connectionTypeDatabaseFile;
 
         public DatabaseReaderTests()
         {
             _databaseDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 "..", "..", "TestData", "MaxMind-DB", "test-data");
-            _databaseFile = Path.Combine(_databaseDir, "GeoIP2-City-Test.mmdb");
+
+            _cityDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-City-Test.mmdb");
+            _domainDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Domain-Test.mmdb");
+            _countryDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb");
+            _anonymousIPDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Anonymous-IP-Test.mmdb");
+            _ispDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-ISP-Test.mmdb");
+            _connectionTypeDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Connection-Type-Test.mmdb");
         }
 
         [Test]
-        public void AnonymousIP()
+        public void DatabaseReader_HasDatabaseMetadata()
         {
-            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Anonymous-IP-Test.mmdb")))
+            using (var reader = new DatabaseReader(_domainDatabaseFile))
+            {
+                Assert.That(reader.Metadata.DatabaseType, Is.EqualTo("GeoIP2-Domain"));
+            }
+        }
+
+        [Test]
+        public void DatabaseReaderInMemoryMode_ValidResponse()
+        {
+            using (var reader = new DatabaseReader(_cityDatabaseFile, FileAccessMode.Memory))
+            {
+                var response = reader.City("81.2.69.160");
+                Assert.That(response.City.Name, Is.EqualTo("London"));
+            }
+        }
+
+        [Test]
+        public void DatabaseReaderWithStreamConstructor_ValidResponse()
+        {
+            using (var streamReader = new StreamReader(_cityDatabaseFile))
+            {
+                using (var reader = new DatabaseReader(streamReader.BaseStream))
+                {
+                    var response = reader.City("81.2.69.160");
+                    Assert.That(response.City.Name, Is.EqualTo("London"));
+                }
+            }
+        }
+
+        [Test]
+        public void InvalidCountryMethodForCityDatabase_ExceptionThrown()
+        {
+            using (var reader = new DatabaseReader(_cityDatabaseFile))
+            {
+                Assert.Throws(Is.TypeOf<InvalidOperationException>()
+                    .And.Message.Contains("A GeoIP2-City database cannot be opened with the Country method"),
+                    () => reader.Country("10.10.10.10"));
+            }
+        }
+
+        [Test]
+        public void AnonymousIP_ValidResponse()
+        {
+            using (var reader = new DatabaseReader(_anonymousIPDatabaseFile))
             {
                 var ipAddress = "1.2.0.1";
-
                 var response = reader.AnonymousIP(ipAddress);
-
                 Assert.That(response.IsAnonymous, Is.True);
                 Assert.That(response.IsAnonymousVpn, Is.True);
                 Assert.That(response.IsHostingProvider, Is.False);
@@ -46,12 +98,11 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        public void ConnectionType()
+        public void ConnectionType_ValidResponse()
         {
-            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Connection-Type-Test.mmdb")))
+            using (var reader = new DatabaseReader(_connectionTypeDatabaseFile))
             {
                 var ipAddress = "1.0.1.0";
-
                 var response = reader.ConnectionType(ipAddress);
                 Assert.That(response.ConnectionType, Is.EqualTo("Cable/DSL"));
                 Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
@@ -59,9 +110,24 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        public void Domain()
+        public void Isp_ValidResponse()
         {
-            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Domain-Test.mmdb")))
+            using (var reader = new DatabaseReader(_ispDatabaseFile))
+            {
+                var ipAddress = "1.128.0.0";
+                var response = reader.Isp(ipAddress);
+                Assert.That(response.AutonomousSystemNumber, Is.EqualTo(1221));
+                Assert.That(response.AutonomousSystemOrganization, Is.EqualTo("Telstra Pty Ltd"));
+                Assert.That(response.Isp, Is.EqualTo("Telstra Internet"));
+                Assert.That(response.Organization, Is.EqualTo("Telstra Internet"));
+                Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
+            }
+        }
+
+        [Test]
+        public void Domain_ValidResponse()
+        {
+            using (var reader = new DatabaseReader(_domainDatabaseFile))
             {
                 var ipAddress = "1.2.0.0";
                 var response = reader.Domain(ipAddress);
@@ -71,141 +137,91 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        public void HasIPAddress()
+        public void Country_ValidResponse()
         {
-            using (var reader = new DatabaseReader(_databaseFile))
+            using (var reader = new DatabaseReader(_countryDatabaseFile))
             {
-                var resp = reader.City("81.2.69.160");
-                Assert.That(resp.Traits.IPAddress, Is.EqualTo("81.2.69.160"));
-            }
-        }
-
-        [Test]
-        public void InvalidMethod()
-        {
-            using (var reader = new DatabaseReader(_databaseFile))
-            {
-                Assert.Throws(Is.TypeOf<InvalidOperationException>()
-                    .And.Message.Contains("A GeoIP2-City database cannot be opened with the Country method"),
-                    () => reader.Country("10.10.10.10"));
-            }
-        }
-
-        [Test]
-        public void Isp()
-        {
-            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-ISP-Test.mmdb")))
-            {
-                var ipAddress = "1.128.0.0";
-                var response = reader.Isp(ipAddress);
-                Assert.That(response.AutonomousSystemNumber, Is.EqualTo(1221));
-                Assert.That(response.AutonomousSystemOrganization, Is.EqualTo("Telstra Pty Ltd"));
-                Assert.That(response.Isp, Is.EqualTo("Telstra Internet"));
-                Assert.That(response.Organization, Is.EqualTo("Telstra Internet"));
-
-                Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
-            }
-        }
-
-        [Test]
-        public void Metadata()
-        {
-            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Domain-Test.mmdb")))
-            {
-                Assert.That(reader.Metadata.DatabaseType, Is.EqualTo("GeoIP2-Domain"));
-            }
-        }
-
-        [Test]
-        public void TestCountry()
-        {
-            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb")))
-            {
-                var resp = reader.Country("81.2.69.160");
-                Assert.That(resp.Country.IsoCode, Is.EqualTo("GB"));
-            }
-        }
-
-        [Test]
-        public void TestCountryWithIPAddress()
-        {
-            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb")))
-            {
-                var resp = reader.Country(IPAddress.Parse("81.2.69.160"));
-                Assert.That(resp.Country.IsoCode, Is.EqualTo("GB"));
-            }
-        }
-
-        [Test]
-        public void TestTryCountry()
-        {
-            using (var reader = new DatabaseReader(Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb")))
-            {
-                CountryResponse response;
-                var status = reader.TryCountry("81.2.69.160", out response);
-
-                Assert.IsTrue(status);
+                var response = reader.Country("81.2.69.160");
                 Assert.That(response.Country.IsoCode, Is.EqualTo("GB"));
             }
         }
 
         [Test]
-        public void TestDefaultLocale()
+        public void CountryWithIPAddressClass_ValidResponse()
         {
-            using (var reader = new DatabaseReader(_databaseFile))
+            using (var reader = new DatabaseReader(_countryDatabaseFile))
             {
-                var resp = reader.City("81.2.69.160");
-                Assert.That(resp.City.Name, Is.EqualTo("London"));
+                var response = reader.Country(IPAddress.Parse("81.2.69.160"));
+                Assert.That(response.Country.IsoCode, Is.EqualTo("GB"));
             }
         }
 
         [Test]
-        public void TestLocaleList()
+        public void City_ValidResponse()
         {
-            using (var reader = new DatabaseReader(_databaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
+            using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
-                var resp = reader.City("81.2.69.160");
-                Assert.That(resp.City.Name, Is.EqualTo("Лондон"));
+                var response = reader.City("81.2.69.160");
+                Assert.That(response.City.Name, Is.EqualTo("London"));
             }
         }
 
         [Test]
-        public void TestMemoryMode()
+        public void TryCity_ValidResponse()
         {
-            using (var reader = new DatabaseReader(_databaseFile, FileAccessMode.Memory))
+            using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
-                var resp = reader.City("81.2.69.160");
-                Assert.That(resp.City.Name, Is.EqualTo("London"));
+                CityResponse response;
+                var lookupSuccess = reader.TryCity("81.2.69.160", out response);
+                Assert.IsTrue(lookupSuccess);
+                Assert.That(response.City.Name, Is.EqualTo("London"));
             }
         }
 
         [Test]
-        public void TestStreamConstructor()
+        public void City_ResponseHasIPAddress()
         {
-            using (var streamReader = new StreamReader(_databaseFile))
+            using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
-                using (var reader = new DatabaseReader(streamReader.BaseStream))
-                {
-                    var resp = reader.City("81.2.69.160");
-                    Assert.That(resp.City.Name, Is.EqualTo("London"));
-                }
+                var response = reader.City("81.2.69.160");
+                Assert.That(response.Traits.IPAddress, Is.EqualTo("81.2.69.160"));
             }
         }
 
         [Test]
-        public void TestWithIPAddress()
+        public void CityWithIPAddressClass_ValidResponse()
         {
-            using (var reader = new DatabaseReader(_databaseFile))
+            using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
-                var resp = reader.City(IPAddress.Parse("81.2.69.160"));
-                Assert.That(resp.City.Name, Is.EqualTo("London"));
+                var response = reader.City(IPAddress.Parse("81.2.69.160"));
+                Assert.That(response.City.Name, Is.EqualTo("London"));
             }
         }
 
         [Test]
-        public void UnknownAddress()
+        public void CityWithDefaultLocale_ValidResponse()
         {
-            using (var reader = new DatabaseReader(_databaseFile))
+            using (var reader = new DatabaseReader(_cityDatabaseFile))
+            {
+                var response = reader.City("81.2.69.160");
+                Assert.That(response.City.Name, Is.EqualTo("London"));
+            }
+        }
+
+        [Test]
+        public void CityWithLocaleList_ValidResponse()
+        {
+            using (var reader = new DatabaseReader(_cityDatabaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
+            {
+                var response = reader.City("81.2.69.160");
+                Assert.That(response.City.Name, Is.EqualTo("Лондон"));
+            }
+        }
+
+        [Test]
+        public void CityWithUnknownAddress_ExceptionThrown()
+        {
+            using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
                 Assert.Throws(Is.TypeOf<AddressNotFoundException>()
                     .And.Message.Contains("10.10.10.10 is not in the database"),
@@ -214,14 +230,14 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
-        public void TryCityUnknownAddress()
+        public void TryCityUnknownAddress_False()
         {
-            using (var reader = new DatabaseReader(_databaseFile))
+            using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
                 CityResponse response;
                 var status = reader.TryCity("10.10.10.10", out response);
-
                 Assert.IsFalse(status);
+                Assert.IsNull(response);
             }
         }
     }
