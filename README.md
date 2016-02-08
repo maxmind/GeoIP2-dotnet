@@ -315,6 +315,19 @@ Finally, if the web service returns a 200 but the body is invalid, the client
 throws a `GeoIP2Exception`. This exception also is the parent exception to the
 above exceptions.
 
+## Values to use for Database or Dictionary Keys ##
+
+**We strongly discourage your from using a value from any `names` accessor as
+a key in a database or dictionary data structure.**
+
+These names may change between releases. Instead we recommend using one of the
+following:
+
+* city - `geoname_id`
+* continent - `code` or `geoname_id`
+* country, registered_country, and represented_country - `iso_code` or `geoname_id`
+* postal - `code`
+* subdivisions - `iso_code` or `geoname_id`
 
 ## Multi-Threaded Use ##
 
