@@ -1,6 +1,15 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.6.0-beta3 (2016-02-10)
+------------------------
+
+* Try-based lookup methods were added to `DatabaseReader` as an alternative to
+  the existing methods. These methods return a boolean indicating whether the
+  record was found rather than throwing an exception when it is not found.
+  Pull request by Mani Gandham. GitHub #31, #50.
+
+
 2.6.0-beta2 (2016-01-18)
 ------------------------
 

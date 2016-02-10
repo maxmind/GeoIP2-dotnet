@@ -392,10 +392,7 @@ namespace MaxMind.GeoIP2
                 {
                     throw new AddressNotFoundException("The address " + ipStr + " is not in the database.");
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
 
             response.SetLocales(_locales);
