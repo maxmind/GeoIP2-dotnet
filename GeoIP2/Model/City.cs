@@ -11,6 +11,10 @@ namespace MaxMind.GeoIP2.Model
     /// <summary>
     ///     City-level data associated with an IP address.
     /// </summary>
+    /// <remarks>
+    //      Do not use any of the city names as a database or dictionary
+    //      key. Use the <see cred="GeoNameId" /> instead.
+    /// </remarks>
     public class City : NamedEntity
     {
         /// <summary>
