@@ -318,7 +318,7 @@ above exceptions.
 ## Values to use for Database or Dictionary Keys ##
 
 **We strongly discourage your from using a value from any `names` accessor as
-a key in a database or dictionary data structure.**
+a key in a database or dictionary.**
 
 These names may change between releases. Instead we recommend using one of the
 following:
