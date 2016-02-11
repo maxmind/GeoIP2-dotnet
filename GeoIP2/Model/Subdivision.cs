@@ -11,6 +11,11 @@ namespace MaxMind.GeoIP2.Model
     /// <summary>
     ///     Contains data for the subdivisions associated with an IP address.
     /// </summary>
+    /// <remarks>
+    //      Do not use any of the subdivions names as a database or dictionary
+    //      key. Use the <see cred="GeoNameId" /> or <see cred="IsoCode">
+    //      instead.
+    /// </remarks>
     public class Subdivision : NamedEntity
     {
         /// <summary>

@@ -318,16 +318,15 @@ above exceptions.
 ## Values to use for Database or Dictionary Keys ##
 
 **We strongly discourage your from using a value from any `names` accessor as
-a key in a database or dictionary data structure.**
+a key in a database or dictionary.**
 
 These names may change between releases. Instead we recommend using one of the
 following:
 
-* city - `geoname_id`
-* continent - `code` or `geoname_id`
-* country, registered_country, and represented_country - `iso_code` or `geoname_id`
-* postal - `code`
-* subdivisions - `iso_code` or `geoname_id`
+* `MaxMind.GeoIP2.Model.City` - `City.GeoNameId`
+* `MaxMind.GeoIP2.Model.Continent` - `Continent.Code` or `Continent.GeoNameId`
+* `MaxMind.GeoIP2.Model.Country` and `MaxMind.GeoIP2.Model.RepresentedCountry` - `Country.IsoCode` or `Country.GeoNameId`
+* `MaxMind.GeoIP2.Model.Subdivision` - `Subdivision.IsoCode` or `Subdivision.GeoNameId`
 
 ## Multi-Threaded Use ##
 

@@ -14,6 +14,11 @@ namespace MaxMind.GeoIP2.Model
     ///     the IP's represented country. The represented country is the country
     ///     represented by something like a military base.
     /// </summary>
+    /// <remarks>
+    //      Do not use any of the country names as a database or dictionary
+    //      key. Use the <see cred="GeoNameId" /> or <see cred="IsoCode">
+    //      instead.
+    /// </remarks>
     public class RepresentedCountry : Country
     {
         /// <summary>
