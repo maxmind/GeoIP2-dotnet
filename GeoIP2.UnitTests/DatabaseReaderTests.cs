@@ -18,24 +18,26 @@ namespace MaxMind.GeoIP2.UnitTests
     public class DatabaseReaderTests
     {
         private readonly string _databaseDir;
-        private readonly string _cityDatabaseFile;
-        private readonly string _domainDatabaseFile;
-        private readonly string _countryDatabaseFile;
         private readonly string _anonymousIPDatabaseFile;
-        private readonly string _ispDatabaseFile;
+        private readonly string _cityDatabaseFile;
         private readonly string _connectionTypeDatabaseFile;
+        private readonly string _countryDatabaseFile;
+        private readonly string _domainDatabaseFile;
+        private readonly string _enterpriseDatabaseFile;
+        private readonly string _ispDatabaseFile;
 
         public DatabaseReaderTests()
         {
             _databaseDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 "..", "..", "TestData", "MaxMind-DB", "test-data");
 
-            _cityDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-City-Test.mmdb");
-            _domainDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Domain-Test.mmdb");
-            _countryDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb");
             _anonymousIPDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Anonymous-IP-Test.mmdb");
-            _ispDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-ISP-Test.mmdb");
+            _cityDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-City-Test.mmdb");
             _connectionTypeDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Connection-Type-Test.mmdb");
+            _countryDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb");
+            _domainDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Domain-Test.mmdb");
+            _enterpriseDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Enterprise-Test.mmdb");
+            _ispDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-ISP-Test.mmdb");
         }
 
         [Test]
@@ -110,6 +112,35 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test]
+        public void Domain_ValidResponse()
+        {
+            using (var reader = new DatabaseReader(_domainDatabaseFile))
+            {
+                var ipAddress = "1.2.0.0";
+                var response = reader.Domain(ipAddress);
+                Assert.That(response.Domain, Is.EqualTo("maxmind.com"));
+                Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
+            }
+        }
+
+        [Test]
+        public void Enterprise_ValidResponse()
+        {
+            using (var reader = new DatabaseReader(_enterpriseDatabaseFile))
+            {
+                var ipAddress = "74.209.24.0";
+                var response = reader.Enterprise(ipAddress);
+                Assert.That(response.City.Confidence, Is.EqualTo(11));
+                Assert.That(response.Country.Confidence, Is.EqualTo(99));
+                Assert.That(response.Country.GeoNameId, Is.EqualTo(6252001));
+                Assert.That(response.Location.AccuracyRadius, Is.EqualTo(27));
+                Assert.That(response.Traits.ConnectionType, Is.EqualTo("Cable/DSL"));
+                Assert.IsTrue(response.Traits.IsLegitimateProxy);
+                Assert.That(response.Traits.IPAddress, Is.EqualTo(ipAddress));
+            }
+        }
+
+        [Test]
         public void Isp_ValidResponse()
         {
             using (var reader = new DatabaseReader(_ispDatabaseFile))
@@ -120,18 +151,6 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.That(response.AutonomousSystemOrganization, Is.EqualTo("Telstra Pty Ltd"));
                 Assert.That(response.Isp, Is.EqualTo("Telstra Internet"));
                 Assert.That(response.Organization, Is.EqualTo("Telstra Internet"));
-                Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
-            }
-        }
-
-        [Test]
-        public void Domain_ValidResponse()
-        {
-            using (var reader = new DatabaseReader(_domainDatabaseFile))
-            {
-                var ipAddress = "1.2.0.0";
-                var response = reader.Domain(ipAddress);
-                Assert.That(response.Domain, Is.EqualTo("maxmind.com"));
                 Assert.That(response.IPAddress, Is.EqualTo(ipAddress));
             }
         }
@@ -211,7 +230,8 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void CityWithLocaleList_ValidResponse()
         {
-            using (var reader = new DatabaseReader(_cityDatabaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
+            using (
+                var reader = new DatabaseReader(_cityDatabaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
             {
                 var response = reader.City("81.2.69.160");
                 Assert.That(response.City.Name, Is.EqualTo("Лондон"));

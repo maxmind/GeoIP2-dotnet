@@ -12,8 +12,8 @@ namespace MaxMind.GeoIP2.Model
     ///     City-level data associated with an IP address.
     /// </summary>
     /// <remarks>
-    //      Do not use any of the city names as a database or dictionary
-    //      key. Use the <see cred="GeoNameId" /> instead.
+    ///     Do not use any of the city names as a database or dictionary
+    ///     key. Use the <see cred="GeoNameId" /> instead.
     /// </remarks>
     public class City : NamedEntity
     {
@@ -51,7 +51,8 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     A value from 0-100 indicating MaxMind's confidence that the city
-        ///     is correct.
+        ///     is correct. This value is only set when using the Insights
+        ///     web service or the Enterprise database.
         /// </summary>
         [JsonProperty("confidence")]
         public int? Confidence { get; internal set; }

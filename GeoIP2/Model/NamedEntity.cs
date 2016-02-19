@@ -32,8 +32,10 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     A <see cref="System.Collections.Generic.Dictionary{T,U}" />
         ///     from locale codes to the name in that locale. Don't use any of
-        ///     these names as a database or dictionary key. Use the <see
-        ///     cred="GeoNameId" /> or relevant code instead.
+        ///     these names as a database or dictionary key. Use the
+        ///     <see
+        ///         cred="GeoNameId" />
+        ///     or relevant code instead.
         /// </summary>
         [JsonIgnore]
         public Dictionary<string, string> Names
@@ -57,8 +59,10 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The name of the city based on the locales list passed to the
         ///     <see cref="WebServiceClient" /> constructor. Don't use any of
-        ///     these names as a database or dictionary key. Use the <see
-        ///     cred="GeoNameId" /> or relevant code instead.
+        ///     these names as a database or dictionary key. Use the
+        ///     <see
+        ///         cred="GeoNameId" />
+        ///     or relevant code instead.
         /// </summary>
         [JsonIgnore]
         public string Name

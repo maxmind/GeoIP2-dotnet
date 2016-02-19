@@ -13,14 +13,14 @@ namespace MaxMind.GeoIP2.Responses
     public class IspResponse : AbstractResponse
     {
         /// <summary>
-        /// Construct an IspResponse model.
+        ///     Construct an IspResponse model.
         /// </summary>
         public IspResponse() : this(null, null, null, null, null)
         {
         }
 
         /// <summary>
-        /// Construct an IspResponse model.
+        ///     Construct an IspResponse model.
         /// </summary>
         [Constructor]
         public IspResponse(
