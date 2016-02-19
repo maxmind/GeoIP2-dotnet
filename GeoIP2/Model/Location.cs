@@ -39,8 +39,8 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     The radius in kilometers around the specified location where the
-        ///     IP address is likely to be. This attribute is only available from
-        ///     the Insights end point.
+        ///     IP address is likely to be. This value is only set when using the Insights
+        ///     web service or the Enterprise database.
         /// </summary>
         [JsonProperty("accuracy_radius")]
         public int? AccuracyRadius { get; internal set; }

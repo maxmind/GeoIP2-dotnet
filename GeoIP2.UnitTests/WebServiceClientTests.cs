@@ -360,9 +360,6 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.IsFalse(traits.IsAnonymousProxy);
             Assert.IsFalse(traits.IsSatelliteProvider);
 #pragma warning restore 0618
-            Assert.AreEqual(
-                "Traits [IsAnonymousProxy=False, IsSatelliteProvider=False, ]",
-                traits.ToString());
 
             foreach (var c in new[]
             {
