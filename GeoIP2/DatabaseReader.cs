@@ -317,6 +317,50 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        ///     Returns an <see cref="EnterpriseResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="EnterpriseResponse" /></returns>
+        public EnterpriseResponse Enterprise(IPAddress ipAddress)
+        {
+            return Execute<EnterpriseResponse>(ipAddress, "Enterprise");
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="EnterpriseResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="EnterpriseResponse" /></returns>
+        public EnterpriseResponse Enterprise(string ipAddress)
+        {
+            return Execute<EnterpriseResponse>(ipAddress, "Enterprise");
+        }
+
+        /// <summary>
+        ///     Tries to lookup a <see cref="EnterpriseResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="EnterpriseResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryEnterprise(IPAddress ipAddress, out EnterpriseResponse response)
+        {
+            response = Execute<EnterpriseResponse>(ipAddress, "Enterprise", false);
+            return response != null;
+        }
+
+        /// <summary>
+        ///     Tries to lookup a <see cref="EnterpriseResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="EnterpriseResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryEnterprise(string ipAddress, out EnterpriseResponse response)
+        {
+            response = Execute<EnterpriseResponse>(ipAddress, "Enterprise", false);
+            return response != null;
+        }
+
+        /// <summary>
         ///     Returns an <see cref="IspResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
@@ -368,12 +412,14 @@ namespace MaxMind.GeoIP2
             return Execute<T>(ipStr, ip, type, throwOnNullResponse);
         }
 
-        private T Execute<T>(IPAddress ipAddress, string type, bool throwOnNullResponse = true) where T : AbstractResponse
+        private T Execute<T>(IPAddress ipAddress, string type, bool throwOnNullResponse = true)
+            where T : AbstractResponse
         {
             return Execute<T>(ipAddress.ToString(), ipAddress, type, throwOnNullResponse);
         }
 
-        private T Execute<T>(string ipStr, IPAddress ipAddress, string type, bool throwOnNullResponse = true) where T : AbstractResponse
+        private T Execute<T>(string ipStr, IPAddress ipAddress, string type, bool throwOnNullResponse = true)
+            where T : AbstractResponse
         {
             if (!Metadata.DatabaseType.Contains(type))
             {

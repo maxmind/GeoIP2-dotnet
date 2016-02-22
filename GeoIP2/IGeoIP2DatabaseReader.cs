@@ -135,6 +135,36 @@ namespace MaxMind.GeoIP2
         bool TryDomain(string ipAddress, out DomainResponse response);
 
         /// <summary>
+        ///     Returns an <see cref="EnterpriseResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="EnterpriseResponse" /></returns>
+        EnterpriseResponse Enterprise(IPAddress ipAddress);
+
+        /// <summary>
+        ///     Returns an <see cref="EnterpriseResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="EnterpriseResponse" /></returns>
+        EnterpriseResponse Enterprise(string ipAddress);
+
+        /// <summary>
+        ///     Tries to lookup a <see cref="EnterpriseResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="EnterpriseResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        bool TryEnterprise(IPAddress ipAddress, out EnterpriseResponse response);
+
+        /// <summary>
+        ///     Tries to lookup a <see cref="EnterpriseResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="EnterpriseResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        bool TryEnterprise(string ipAddress, out EnterpriseResponse response);
+
+        /// <summary>
         ///     Returns an <see cref="IspResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>

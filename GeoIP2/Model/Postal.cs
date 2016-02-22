@@ -39,8 +39,8 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     A value from 0-100 indicating MaxMind's confidence that the
-        ///     postal code is correct. This attribute is only available from the
-        ///     Insight web service end point.
+        ///     postal code is correct. This value is only set when using the
+        ///     Insights web service or the Enterprise database.
         /// </summary>
         [JsonProperty("confidence")]
         public int? Confidence { get; internal set; }
@@ -53,7 +53,7 @@ namespace MaxMind.GeoIP2.Model
         /// </returns>
         public override string ToString()
         {
-            return Code ?? string.Empty;
+            return $"Code: {Code}, Confidence: {Confidence}";
         }
     }
 }

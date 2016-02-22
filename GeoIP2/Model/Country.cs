@@ -10,12 +10,10 @@ namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     ///     Contains data for the country record associated with an IP address.
+    ///     Do not use any of the country names as a database or dictionary
+    ///     key. Use the <see cred="GeoNameId" /> or <see cred="IsoCode" />
+    ///     instead.
     /// </summary>
-    /// <remarks>
-    //      Do not use any of the country names as a database or dictionary
-    //      key. Use the <see cred="GeoNameId" /> or <see cred="IsoCode">
-    //      instead.
-    /// </remarks>
     public class Country : NamedEntity
     {
         /// <summary>
@@ -53,8 +51,8 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     A value from 0-100 indicating MaxMind's confidence that the country
-        ///     is correct. This attribute is only available from the Insights web
-        ///     service end point.
+        ///     is correct. This value is only set when using the Insights
+        ///     web service or the Enterprise database.
         /// </summary>
         [JsonProperty("confidence")]
         public int? Confidence { get; internal set; }
