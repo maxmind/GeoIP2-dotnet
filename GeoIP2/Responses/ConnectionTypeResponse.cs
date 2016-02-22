@@ -13,14 +13,14 @@ namespace MaxMind.GeoIP2.Responses
     public class ConnectionTypeResponse : AbstractResponse
     {
         /// <summary>
-        /// Construct ConnectionTypeResponse model
+        ///     Construct ConnectionTypeResponse model
         /// </summary>
         public ConnectionTypeResponse()
         {
         }
 
         /// <summary>
-        /// Construct ConnectionTypeResponse model
+        ///     Construct ConnectionTypeResponse model
         /// </summary>
         [Constructor]
         public ConnectionTypeResponse(

@@ -1,7 +1,7 @@
 ﻿#region
 
-using System.Net;
 using MaxMind.GeoIP2.Responses;
+using System.Net;
 
 #endregion
 
