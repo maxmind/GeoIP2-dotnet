@@ -26,6 +26,12 @@ following into the Visual Studio Package Manager Console:
 install-package MaxMind.GeoIP2
 ```
 
+## IP Geolocation Usage ##
+
+IP geolocation is inherently imprecise. Locations are often near the center of
+the population. Any location provided by a GeoIP2 database or web service
+should not be used to identify a particular address or household.
+
 ## Web Service Usage ##
 
 To use the web service API, you must create a new
