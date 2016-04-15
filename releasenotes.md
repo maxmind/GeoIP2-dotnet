@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.6.0 (2016-XX-XX)
+2.6.0 (2016-04-15)
 ------------------
 
 * Added support for the GeoIP2 Enterprise database.
