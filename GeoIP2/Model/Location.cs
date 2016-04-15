@@ -52,20 +52,24 @@ namespace MaxMind.GeoIP2.Model
         public int? AverageIncome { get; internal set; }
 
         /// <summary>
-        ///     Determines whether both the <see cref="Latitude">latitude</see>
-        ///     and <see cref="Longitude">longitude</see> have values.
+        ///     Determines whether both the <see cref="Latitude">Latitude</see>
+        ///     and <see cref="Longitude">Longitude</see> have values.
         /// </summary>
         [JsonIgnore]
         public bool HasCoordinates => Latitude.HasValue && Longitude.HasValue;
 
         /// <summary>
-        ///     The latitude of the location as a floating point number.
+        ///     The approximate latitude of the location associated with the
+        ///     IP address. This value is not precise and should not be used
+        ///     to identify a particular address or household.
         /// </summary>
         [JsonProperty("latitude")]
         public double? Latitude { get; internal set; }
 
         /// <summary>
-        ///     The longitude of the location as a floating point number.
+        ///     The approximate longitude of the location associated with the
+        ///     IP address. This value is not precise and should not be used
+        ///     to identify a particular address or household.
         /// </summary>
         [JsonProperty("longitude")]
         public double? Longitude { get; internal set; }
