@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v2.5.0
+version: v2.6.0
 ---
 
 # GeoIP2 .NET API #
@@ -16,7 +16,7 @@ works with the free [GeoLite2 databases](http://dev.maxmind.com/geoip/geoip2/geo
 
 ## Requirements ##
 
-This library works with .NET Framework version 4.5.2 and above. If you are
+This library works with .NET Framework version 4.5 and above. If you are
 using Mono, 3.2 or greater is required.
 
 This library depends on
@@ -33,13 +33,20 @@ following into the Visual Studio Package Manager Console:
 install-package MaxMind.GeoIP2
 ```
 
+## IP Geolocation Usage ##
+
+IP geolocation is inherently imprecise. Locations are often near the center of
+the population. Any location provided by a GeoIP2 database or web service
+should not be used to identify a particular address or household.
+
 ## Web Service Usage ##
 
 To use the web service API, you must create a new
 `MaxMind.GeoIP2.WebServiceClient` object with your `userID` and `licenseKey`.
 You may also specify the fall-back locales, the host, timeout, or the request
 timeout. You may then call the sync or async method corresponding to the
-specific end point, passing it the IP address you want to look up.
+specific end point, passing it the IP address you want to look up or no
+parameters if you want to look up the current device.
 
 If the request succeeds, the method call will return a response class for the
 endpoint you called. This response in turn contains multiple model classes,
@@ -277,6 +284,40 @@ using (var reader = new DatabaseReader("GeoIP2-Domain.mmdb"))
 }
 ```
 
+### Enterprise Database ###
+
+```csharp
+using (var reader = new DatabaseReader("/path/to/GeoIP2-Enterprise.mmdb"))
+{
+    //  Use the Enterprise(ip) method to do a lookup in the Enterprise database
+    var response = reader.enterprise("128.101.101.101");
+
+    var country = response.Country;
+    Console.WriteLine(country.IsoCode);            // 'US'
+    Console.WriteLine(country.Name);               // 'United States'
+    Console.WriteLine(country.Names["zh-CN"]);     // '美国'
+    Console.WriteLine(country.Confidence);         // 99
+
+    var subdivision = response.MostSpecificSubdivision;
+    Console.WriteLine(subdivision.Name);           // 'Minnesota'
+    Console.WriteLine(subdivision.IsoCode);        // 'MN'
+    Console.WriteLine(subdivision.Confidence);     // 77
+
+    var city = response.City;
+    Console.WriteLine(city.Name);       // 'Minneapolis'
+    Console.WriteLine(city.Confidence); // 11
+
+    var postal = response.Postal;
+    Console.WriteLine(postal.Code); // '55455'
+    Console.WriteLine(postal.Confidence); // 5
+
+    var location = response.Location;
+    Console.WriteLine(location.Latitude);       // 44.9733
+    Console.WriteLine(location.Longitude);      // -93.2323
+    Console.WriteLine(location.AccuracyRadius); // 50
+}
+```
+
 ### ISP Database ###
 
 ```csharp
@@ -321,6 +362,20 @@ Finally, if the web service returns a 200 but the body is invalid, the client
 throws a `GeoIP2Exception`. This exception also is the parent exception to the
 above exceptions.
 
+## Values to use for Database or Dictionary Keys ##
+
+**We strongly discourage you from using a value from any `Names` property as
+a key in a database or dictionary.**
+
+These names may change between releases. Instead we recommend using one of the
+following:
+
+* `MaxMind.GeoIP2.Model.City` - `City.GeoNameId`
+* `MaxMind.GeoIP2.Model.Continent` - `Continent.Code` or `Continent.GeoNameId`
+* `MaxMind.GeoIP2.Model.Country` and `MaxMind.GeoIP2.Model.RepresentedCountry`
+  - `Country.IsoCode` or `Country.GeoNameId`
+* `MaxMind.GeoIP2.Model.Subdivision` - `Subdivision.IsoCode` or
+  `Subdivision.GeoNameId`
 
 ## Multi-Threaded Use ##
 
@@ -405,6 +460,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2015 by MaxMind, Inc.
+This software is Copyright (c) 2013-2016 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.
