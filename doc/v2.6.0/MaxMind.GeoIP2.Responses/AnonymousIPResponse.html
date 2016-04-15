@@ -1,0 +1,583 @@
+<html>
+  <head>
+    <title>MaxMind.GeoIP2.Responses.AnonymousIPResponse</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      a { text-decoration: none }
+
+      div.SideBar {
+        padding-left: 1em;
+        padding-right: 1em;
+        right: 0;
+        float: right;
+        border: thin solid black;
+        background-color: #f2f2f2;
+      }
+    
+      .CollectionTitle { font-weight: bold }
+      .PageTitle { font-size: 150%; font-weight: bold }
+
+      .Summary { }
+      .Signature { }          
+      .Remarks { }
+      .Members { }
+      .Copyright { }
+      
+      .Section { font-size: 125%; font-weight: bold }
+      p.Summary {
+        margin-left: 1em;
+      }
+      .SectionBox { margin-left: 2em }
+      .NamespaceName { font-size: 105%; font-weight: bold }
+      .NamespaceSumary { }
+      .MemberName { font-size: 115%; font-weight: bold; margin-top: 1em }
+      .Subsection { font-size: 105%; font-weight: bold }
+      .SubsectionBox { margin-left: 2em; margin-bottom: 1em }
+
+      .CodeExampleTable { background-color: #f5f5dd; border: thin solid black; padding: .25em; }
+      
+      .TypesListing {
+        border-collapse: collapse;
+      }
+
+      td {
+        vertical-align: top;
+      }
+      th {
+        text-align: left;
+      }
+
+      .TypesListing td { 
+        margin: 0px;  
+        padding: .25em;
+        border: solid gray 1px;
+      }
+
+      .TypesListing th { 
+        margin: 0px;  
+        padding: .25em;
+        background-color: #f2f2f2;
+        border: solid gray 1px;
+      }
+
+      div.Footer {
+        border-top: 1px solid gray;
+        margin-top: 1.5em;
+        padding-top: 0.6em;
+        text-align: center;
+        color: gray;
+      }
+
+      span.NotEntered /* Documentation for this section has not yet been entered */ {
+        font-style: italic;
+        color: red;	
+      }
+
+      div.Header {
+        background: #B0C4DE;
+        border: double;
+        border-color: white;
+        border-width: 7px;
+        padding: 0.5em;
+      }
+
+      div.Header * {
+        font-size: smaller;
+      }
+
+      div.Note {
+      }
+
+      i.ParamRef {
+      }
+
+      i.subtitle {
+      }
+
+      ul.TypeMembersIndex {
+        text-align: left;
+        background: #F8F8F8;
+      }
+
+      ul.TypeMembersIndex li {
+        display: inline;
+        margin:  0.5em;
+      }
+
+      table.HeaderTable {
+      }
+
+      table.SignatureTable {
+      }
+
+      table.Documentation, table.Enumeration, table.TypeDocumentation {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table.Documentation tr th, table.TypeMembers tr th, table.Enumeration tr th, table.TypeDocumentation tr th {
+        background: whitesmoke;
+        padding: 0.8em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      table.Documentation tr td, table.TypeMembers tr td, table.Enumeration tr td, table.TypeDocumentation tr td {
+        padding: 0.5em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      table.TypeMembers {
+        border: 1px solid #C0C0C0;
+        width: 100%;
+      }
+
+      table.TypeMembers tr td {
+        background: #F8F8F8;
+        border: white;
+      }
+
+      table.Documentation {
+      }
+
+      table.TypeMembers {
+      }
+
+      div.CodeExample {
+        width: 100%;
+        border: 1px solid #DDDDDD;
+        background-color: #F8F8F8;
+      }
+
+      div.CodeExample p {
+        margin: 0.5em;
+        border-bottom: 1px solid #DDDDDD;
+      }
+
+      div.CodeExample div {
+        margin: 0.5em;
+      }
+
+      h4 {
+        margin-bottom: 0;
+      }
+
+      div.Signature {
+        border: 1px solid #C0C0C0;
+        background: #F2F2F2;
+        padding: 1em;
+      }
+    </style>
+    <script type="text/JavaScript">
+      function toggle_display (block) {
+        var w = document.getElementById (block);
+        var t = document.getElementById (block + ":toggle");
+        if (w.style.display == "none") {
+          w.style.display = "block";
+          t.innerHTML = "⊟";
+        } else {
+          w.style.display = "none";
+          t.innerHTML = "⊞";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="CollectionTitle">
+      <a href="../index.html">MaxMind.GeoIP2</a> : <a href="index.html">MaxMind.GeoIP2.Responses Namespace</a></div>
+    <div class="SideBar">
+      <p>
+        <a href="#T:MaxMind.GeoIP2.Responses.AnonymousIPResponse">Overview</a>
+      </p>
+      <p>
+        <a href="#T:MaxMind.GeoIP2.Responses.AnonymousIPResponse:Signature">Signature</a>
+      </p>
+      <p>
+        <a href="#T:MaxMind.GeoIP2.Responses.AnonymousIPResponse:Docs">Remarks</a>
+      </p>
+      <p>
+        <a href="#Members">Members</a>
+      </p>
+      <p>
+        <a href="#T:MaxMind.GeoIP2.Responses.AnonymousIPResponse:Members">Member Details</a>
+      </p>
+    </div>
+    <h1 class="PageTitle" id="T:MaxMind.GeoIP2.Responses.AnonymousIPResponse">AnonymousIPResponse  Class</h1>
+    <p class="Summary" id="T:MaxMind.GeoIP2.Responses.AnonymousIPResponse:Summary">
+            This class represents the GeoIP2 Anonymous IP response.
+            </p>
+    <div>
+      <h2>Syntax</h2>
+      <div class="Signature" id="T:MaxMind.GeoIP2.Responses.AnonymousIPResponse:Signature">public class  <b>AnonymousIPResponse</b> : <a href="../MaxMind.GeoIP2.Responses/AbstractResponse.html">AbstractResponse</a></div>
+    </div>
+    <div class="Remarks" id="T:MaxMind.GeoIP2.Responses.AnonymousIPResponse:Docs">
+      <h2 class="Section">Remarks</h2>
+      <div class="SectionBox" id="T:MaxMind.GeoIP2.Responses.AnonymousIPResponse:Docs:Remarks">
+        <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+      </div>
+      <h2 class="Section">Requirements</h2>
+      <div class="SectionBox" id="T:MaxMind.GeoIP2.Responses.AnonymousIPResponse:Docs:Version Information">
+        <b>Namespace: </b>MaxMind.GeoIP2.Responses<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+      <h2 class="Section" id="Members">Members</h2>
+      <div class="SectionBox" id="_Members">
+        <p>
+								See Also: Inherited members from
+								<a href="../MaxMind.GeoIP2.Responses/AbstractResponse.html">AbstractResponse</a>.
+							</p>
+        <h2 class="Section">Public Constructors</h2>
+        <div class="SectionBox" id="Public Constructors">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <b>
+                      <a href="#C:MaxMind.GeoIP2.Responses.AnonymousIPResponse()">AnonymousIPResponse</a>
+                    </b>()</div>
+                </td>
+                <td>
+            Construct AnonymousIPResponse model
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <b>
+                      <a href="#C:MaxMind.GeoIP2.Responses.AnonymousIPResponse(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)">AnonymousIPResponse</a>
+                    </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)</div>
+                </td>
+                <td>
+            Construct AnonymousIPResponse model
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Properties</h2>
+        <div class="SectionBox" id="Public Properties">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IPAddress">IPAddress</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The IP address that the data in the model is for. If you
+            performed a "me" lookup against the web service, this will be the
+            externally routable IP address for the system the code is running
+            on. If the system is behind a NAT, this may differ from the IP
+            address locally assigned to it.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymous">IsAnonymous</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Returns true if the IP address belongs to any sort of anonymous network.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymousVpn">IsAnonymousVpn</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Returns true if the IP address belongs to an anonymous VPN system.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsHostingProvider">IsHostingProvider</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Returns true if the IP address belongs to a hosting provider.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsPublicProxy">IsPublicProxy</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Returns true if the IP address belongs to a public proxy.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsTorExitNode">IsTorExitNode</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Returns true if IP is a Tor exit node.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Protected Methods</h2>
+        <div class="SectionBox" id="Protected Methods">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="../MaxMind.GeoIP2.Responses/AbstractResponse.html#M:MaxMind.GeoIP2.Responses.AbstractResponse.SetLocales(System.Collections.Generic.IEnumerable{System.String})">SetLocales</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Collections.Generic.IEnumerable`1">IEnumerable&lt;string&gt;</a>)<blockquote>
+            This is simplify the database API. Also, we may need to use the locales in the future.
+             (<i>Inherited from <a href="../MaxMind.GeoIP2.Responses/AbstractResponse.html">AbstractResponse</a>.</i>)</blockquote></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Members" id="T:MaxMind.GeoIP2.Responses.AnonymousIPResponse:Members">
+      <h2 class="Section" id="MemberDetails">Member Details</h2>
+      <div class="SectionBox" id="_MemberDetails">
+        <h3 id="C:MaxMind.GeoIP2.Responses.AnonymousIPResponse()">AnonymousIPResponse Constructor</h3>
+        <blockquote id="C:MaxMind.GeoIP2.Responses.AnonymousIPResponse():member">
+          <div class="msummary">
+            Construct AnonymousIPResponse model
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public  <b>AnonymousIPResponse</b> ()</div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="C:MaxMind.GeoIP2.Responses.AnonymousIPResponse():Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="C:MaxMind.GeoIP2.Responses.AnonymousIPResponse():Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Responses<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="C:MaxMind.GeoIP2.Responses.AnonymousIPResponse(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)">AnonymousIPResponse Constructor</h3>
+        <blockquote id="C:MaxMind.GeoIP2.Responses.AnonymousIPResponse(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String):member">
+          <div class="msummary">
+            Construct AnonymousIPResponse model
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[MaxMind.Db.Constructor]<br />public  <b>AnonymousIPResponse</b> ([MaxMind.Db.Parameter("is_anonymous", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> isAnonymous, [MaxMind.Db.Parameter("is_anonymous_vpn", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> isAnonymousVpn, [MaxMind.Db.Parameter("is_hosting_provider", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> isHostingProvider, [MaxMind.Db.Parameter("is_public_proxy", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> isPublicProxy, [MaxMind.Db.Parameter("is_tor_exit_node", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> isTorExitNode, [MaxMind.Db.Inject("ip_address")] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> ipAddress)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="C:MaxMind.GeoIP2.Responses.AnonymousIPResponse(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String):Parameters">
+            <dl>
+              <dt>
+                <i>isAnonymous</i>
+              </dt>
+              <dd>
+              </dd>
+              <dt>
+                <i>isAnonymousVpn</i>
+              </dt>
+              <dd>
+              </dd>
+              <dt>
+                <i>isHostingProvider</i>
+              </dt>
+              <dd>
+              </dd>
+              <dt>
+                <i>isPublicProxy</i>
+              </dt>
+              <dd>
+              </dd>
+              <dt>
+                <i>isTorExitNode</i>
+              </dt>
+              <dd>
+              </dd>
+              <dt>
+                <i>ipAddress</i>
+              </dt>
+              <dd>
+              </dd>
+            </dl>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="C:MaxMind.GeoIP2.Responses.AnonymousIPResponse(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="C:MaxMind.GeoIP2.Responses.AnonymousIPResponse(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String):Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Responses<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IPAddress">IPAddress Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IPAddress:member">
+          <div class="msummary">
+            The IP address that the data in the model is for. If you
+            performed a "me" lookup against the web service, this will be the
+            externally routable IP address for the system the code is running
+            on. If the system is behind a NAT, this may differ from the IP
+            address locally assigned to it.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("ip_address")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>IPAddress</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IPAddress:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IPAddress:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IPAddress:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Responses<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymous">IsAnonymous Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymous:member">
+          <div class="msummary">
+            Returns true if the IP address belongs to any sort of anonymous network.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("is_anonymous")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>IsAnonymous</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymous:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymous:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymous:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Responses<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymousVpn">IsAnonymousVpn Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymousVpn:member">
+          <div class="msummary">
+            Returns true if the IP address belongs to an anonymous VPN system.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("is_anonymous_vpn")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>IsAnonymousVpn</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymousVpn:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymousVpn:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsAnonymousVpn:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Responses<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsHostingProvider">IsHostingProvider Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsHostingProvider:member">
+          <div class="msummary">
+            Returns true if the IP address belongs to a hosting provider.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("is_hosting_provider")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>IsHostingProvider</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsHostingProvider:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsHostingProvider:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsHostingProvider:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Responses<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsPublicProxy">IsPublicProxy Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsPublicProxy:member">
+          <div class="msummary">
+            Returns true if the IP address belongs to a public proxy.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("is_public_proxy")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>IsPublicProxy</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsPublicProxy:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsPublicProxy:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsPublicProxy:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Responses<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsTorExitNode">IsTorExitNode Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsTorExitNode:member">
+          <div class="msummary">
+            Returns true if IP is a Tor exit node.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("is_tor_exit_node")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>IsTorExitNode</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsTorExitNode:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsTorExitNode:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Responses.AnonymousIPResponse.IsTorExitNode:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Responses<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+      </div>
+    </div>
+    <hr size="1" />
+    <div class="Copyright">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,864 @@
+<html>
+  <head>
+    <title>MaxMind.GeoIP2.Model.Traits</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      a { text-decoration: none }
+
+      div.SideBar {
+        padding-left: 1em;
+        padding-right: 1em;
+        right: 0;
+        float: right;
+        border: thin solid black;
+        background-color: #f2f2f2;
+      }
+    
+      .CollectionTitle { font-weight: bold }
+      .PageTitle { font-size: 150%; font-weight: bold }
+
+      .Summary { }
+      .Signature { }          
+      .Remarks { }
+      .Members { }
+      .Copyright { }
+      
+      .Section { font-size: 125%; font-weight: bold }
+      p.Summary {
+        margin-left: 1em;
+      }
+      .SectionBox { margin-left: 2em }
+      .NamespaceName { font-size: 105%; font-weight: bold }
+      .NamespaceSumary { }
+      .MemberName { font-size: 115%; font-weight: bold; margin-top: 1em }
+      .Subsection { font-size: 105%; font-weight: bold }
+      .SubsectionBox { margin-left: 2em; margin-bottom: 1em }
+
+      .CodeExampleTable { background-color: #f5f5dd; border: thin solid black; padding: .25em; }
+      
+      .TypesListing {
+        border-collapse: collapse;
+      }
+
+      td {
+        vertical-align: top;
+      }
+      th {
+        text-align: left;
+      }
+
+      .TypesListing td { 
+        margin: 0px;  
+        padding: .25em;
+        border: solid gray 1px;
+      }
+
+      .TypesListing th { 
+        margin: 0px;  
+        padding: .25em;
+        background-color: #f2f2f2;
+        border: solid gray 1px;
+      }
+
+      div.Footer {
+        border-top: 1px solid gray;
+        margin-top: 1.5em;
+        padding-top: 0.6em;
+        text-align: center;
+        color: gray;
+      }
+
+      span.NotEntered /* Documentation for this section has not yet been entered */ {
+        font-style: italic;
+        color: red;	
+      }
+
+      div.Header {
+        background: #B0C4DE;
+        border: double;
+        border-color: white;
+        border-width: 7px;
+        padding: 0.5em;
+      }
+
+      div.Header * {
+        font-size: smaller;
+      }
+
+      div.Note {
+      }
+
+      i.ParamRef {
+      }
+
+      i.subtitle {
+      }
+
+      ul.TypeMembersIndex {
+        text-align: left;
+        background: #F8F8F8;
+      }
+
+      ul.TypeMembersIndex li {
+        display: inline;
+        margin:  0.5em;
+      }
+
+      table.HeaderTable {
+      }
+
+      table.SignatureTable {
+      }
+
+      table.Documentation, table.Enumeration, table.TypeDocumentation {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table.Documentation tr th, table.TypeMembers tr th, table.Enumeration tr th, table.TypeDocumentation tr th {
+        background: whitesmoke;
+        padding: 0.8em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      table.Documentation tr td, table.TypeMembers tr td, table.Enumeration tr td, table.TypeDocumentation tr td {
+        padding: 0.5em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      table.TypeMembers {
+        border: 1px solid #C0C0C0;
+        width: 100%;
+      }
+
+      table.TypeMembers tr td {
+        background: #F8F8F8;
+        border: white;
+      }
+
+      table.Documentation {
+      }
+
+      table.TypeMembers {
+      }
+
+      div.CodeExample {
+        width: 100%;
+        border: 1px solid #DDDDDD;
+        background-color: #F8F8F8;
+      }
+
+      div.CodeExample p {
+        margin: 0.5em;
+        border-bottom: 1px solid #DDDDDD;
+      }
+
+      div.CodeExample div {
+        margin: 0.5em;
+      }
+
+      h4 {
+        margin-bottom: 0;
+      }
+
+      div.Signature {
+        border: 1px solid #C0C0C0;
+        background: #F2F2F2;
+        padding: 1em;
+      }
+    </style>
+    <script type="text/JavaScript">
+      function toggle_display (block) {
+        var w = document.getElementById (block);
+        var t = document.getElementById (block + ":toggle");
+        if (w.style.display == "none") {
+          w.style.display = "block";
+          t.innerHTML = "⊟";
+        } else {
+          w.style.display = "none";
+          t.innerHTML = "⊞";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="CollectionTitle">
+      <a href="../index.html">MaxMind.GeoIP2</a> : <a href="index.html">MaxMind.GeoIP2.Model Namespace</a></div>
+    <div class="SideBar">
+      <p>
+        <a href="#T:MaxMind.GeoIP2.Model.Traits">Overview</a>
+      </p>
+      <p>
+        <a href="#T:MaxMind.GeoIP2.Model.Traits:Signature">Signature</a>
+      </p>
+      <p>
+        <a href="#T:MaxMind.GeoIP2.Model.Traits:Docs">Remarks</a>
+      </p>
+      <p>
+        <a href="#Members">Members</a>
+      </p>
+      <p>
+        <a href="#T:MaxMind.GeoIP2.Model.Traits:Members">Member Details</a>
+      </p>
+    </div>
+    <h1 class="PageTitle" id="T:MaxMind.GeoIP2.Model.Traits">Traits  Class</h1>
+    <p class="Summary" id="T:MaxMind.GeoIP2.Model.Traits:Summary">
+            Contains data for the traits record associated with an IP address.
+            </p>
+    <div>
+      <h2>Syntax</h2>
+      <div class="Signature" id="T:MaxMind.GeoIP2.Model.Traits:Signature">public class  <b>Traits</b></div>
+    </div>
+    <div class="Remarks" id="T:MaxMind.GeoIP2.Model.Traits:Docs">
+      <h2 class="Section">Remarks</h2>
+      <div class="SectionBox" id="T:MaxMind.GeoIP2.Model.Traits:Docs:Remarks">
+        <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+      </div>
+      <h2 class="Section">Requirements</h2>
+      <div class="SectionBox" id="T:MaxMind.GeoIP2.Model.Traits:Docs:Version Information">
+        <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+      <h2 class="Section" id="Members">Members</h2>
+      <div class="SectionBox" id="_Members">
+        <p>
+								See Also: Inherited members from
+								<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a>.
+							</p>
+        <h2 class="Section">Public Constructors</h2>
+        <div class="SectionBox" id="Public Constructors">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <b>
+                      <a href="#C:MaxMind.GeoIP2.Model.Traits()">Traits</a>
+                    </b>()</div>
+                </td>
+                <td>
+            Constructor
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <b>
+                      <a href="#C:MaxMind.GeoIP2.Model.Traits(System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String)">Traits</a>
+                    </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Nullable`1">Nullable&lt;long&gt;</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)</div>
+                </td>
+                <td>
+            Constructor
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Properties</h2>
+        <div class="SectionBox" id="Public Properties">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemNumber">AutonomousSystemNumber</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Nullable`1">Nullable&lt;int&gt;</a>
+                  </i>. 
+            The
+            
+            autonomous system number
+            
+            associated with the IP address.
+            This value is only set when using the City or Insights web
+            service or the Enterprise database.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemOrganization">AutonomousSystemOrganization</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The organization associated with the registered
+            
+            autonomous system number
+            
+            for the IP address. This value is only set when using the City or
+            Insights web service or the Enterprise database.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.ConnectionType">ConnectionType</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The connection type of the IP address. This value is only set when
+            using the Enterprise database.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.Domain">Domain</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The second level domain associated with the IP address. This will
+            be something like "example.com" or "example.co.uk", not
+            "foo.example.com". This value is only set when using the City or
+            Insights web service or the Enterprise database.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.IPAddress">IPAddress</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The IP address that the data in the model is for. If you
+            performed a "me" lookup against the web service, this will be the
+            externally routable IP address for the system the code is running
+            on. If the system is behind a NAT, this may differ from the IP
+            address locally assigned to it.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.IsAnonymousProxy">IsAnonymousProxy</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            This is true if the IP is an anonymous proxy. See
+            
+            MaxMind's GeoIP
+            FAQ
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.IsLegitimateProxy">IsLegitimateProxy</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            True if MaxMind believes this IP address to be a legitimate
+            proxy, such as an internal VPN used by a corporation.This is only
+            available in the GeoIP2 Enterprise database.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.Isp">Isp</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The name of the ISP associated with the IP address. This value
+            is only set when using the City or Insights web service or the
+            Enterprise database.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.IsSatelliteProvider">IsSatelliteProvider</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            This is true if the IP belong to a satellite Internet provider.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.Organization">Organization</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The name of the organization associated with the IP address. This
+            value is only set when using the City or Insights web service or the
+            Enterprise database.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:MaxMind.GeoIP2.Model.Traits.UserType">UserType</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The user type associated with the IP address. This can be one of
+            the following values:
+            <ul><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+            This value is only set when using the City or Insights web service
+            or the Enterprise database.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Methods</h2>
+        <div class="SectionBox" id="Public Methods">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>override </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:MaxMind.GeoIP2.Model.Traits.ToString()">ToString</a>
+                  </b>()<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a></nobr><blockquote>
+            Returns a <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> that represents this instance.
+            </blockquote></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Members" id="T:MaxMind.GeoIP2.Model.Traits:Members">
+      <h2 class="Section" id="MemberDetails">Member Details</h2>
+      <div class="SectionBox" id="_MemberDetails">
+        <h3 id="C:MaxMind.GeoIP2.Model.Traits()">Traits Constructor</h3>
+        <blockquote id="C:MaxMind.GeoIP2.Model.Traits():member">
+          <div class="msummary">
+            Constructor
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public  <b>Traits</b> ()</div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="C:MaxMind.GeoIP2.Model.Traits():Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="C:MaxMind.GeoIP2.Model.Traits():Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="C:MaxMind.GeoIP2.Model.Traits(System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String)">Traits Constructor</h3>
+        <blockquote id="C:MaxMind.GeoIP2.Model.Traits(System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String):member">
+          <div class="msummary">
+            Constructor
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[MaxMind.Db.Constructor]<br />public  <b>Traits</b> ([MaxMind.Db.Parameter("autonomous_system_number", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Nullable`1">Nullable&lt;long&gt;</a> autonomousSystemNumber, [MaxMind.Db.Parameter("autonomous_system_organization", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> autonomousSystemOrganization, [MaxMind.Db.Parameter("connection_type", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> connectionType, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> domain, [MaxMind.Db.Inject("ip_address")] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> ipAddress, [MaxMind.Db.Parameter("is_anonymous_proxy", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> isAnonymousProxy, [MaxMind.Db.Parameter("is_legitimate_proxy", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> isLegitimateProxy, [MaxMind.Db.Parameter("is_satellite_provider", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> isSatelliteProvider, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> isp, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> organization, [MaxMind.Db.Parameter("user_type", false)] <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> userType)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="C:MaxMind.GeoIP2.Model.Traits(System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String):Parameters">
+            <dl>
+              <dt>
+                <i>autonomousSystemNumber</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>autonomousSystemOrganization</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>connectionType</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>domain</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>ipAddress</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>isAnonymousProxy</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>isLegitimateProxy</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>isSatelliteProvider</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>isp</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>organization</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+              <dt>
+                <i>userType</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+            </dl>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="C:MaxMind.GeoIP2.Model.Traits(System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="C:MaxMind.GeoIP2.Model.Traits(System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String):Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemNumber">AutonomousSystemNumber Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemNumber:member">
+          <div class="msummary">
+            The
+            
+            autonomous system number
+            
+            associated with the IP address.
+            This value is only set when using the City or Insights web
+            service or the Enterprise database.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("autonomous_system_number")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Nullable`1">Nullable&lt;int&gt;</a> <b>AutonomousSystemNumber</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemNumber:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemNumber:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemNumber:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemOrganization">AutonomousSystemOrganization Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemOrganization:member">
+          <div class="msummary">
+            The organization associated with the registered
+            
+            autonomous system number
+            
+            for the IP address. This value is only set when using the City or
+            Insights web service or the Enterprise database.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("autonomous_system_organization")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>AutonomousSystemOrganization</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemOrganization:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemOrganization:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.AutonomousSystemOrganization:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.ConnectionType">ConnectionType Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.ConnectionType:member">
+          <div class="msummary">
+            The connection type of the IP address. This value is only set when
+            using the Enterprise database.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("connection_type")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>ConnectionType</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.ConnectionType:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.ConnectionType:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.ConnectionType:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.Domain">Domain Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.Domain:member">
+          <div class="msummary">
+            The second level domain associated with the IP address. This will
+            be something like "example.com" or "example.co.uk", not
+            "foo.example.com". This value is only set when using the City or
+            Insights web service or the Enterprise database.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("domain")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>Domain</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.Domain:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.Domain:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.Domain:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.IPAddress">IPAddress Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.IPAddress:member">
+          <div class="msummary">
+            The IP address that the data in the model is for. If you
+            performed a "me" lookup against the web service, this will be the
+            externally routable IP address for the system the code is running
+            on. If the system is behind a NAT, this may differ from the IP
+            address locally assigned to it.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("ip_address")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>IPAddress</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IPAddress:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IPAddress:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IPAddress:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.IsAnonymousProxy">IsAnonymousProxy Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.IsAnonymousProxy:member">
+          <div class="msummary">
+            This is true if the IP is an anonymous proxy. See
+            
+            MaxMind's GeoIP
+            FAQ
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("is_anonymous_proxy")]<br />[System.Obsolete("Use our GeoIP2 Anonymous IP database instead.")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>IsAnonymousProxy</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IsAnonymousProxy:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IsAnonymousProxy:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IsAnonymousProxy:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.IsLegitimateProxy">IsLegitimateProxy Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.IsLegitimateProxy:member">
+          <div class="msummary">
+            True if MaxMind believes this IP address to be a legitimate
+            proxy, such as an internal VPN used by a corporation.This is only
+            available in the GeoIP2 Enterprise database.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("is_legitimate_proxy")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>IsLegitimateProxy</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IsLegitimateProxy:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IsLegitimateProxy:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IsLegitimateProxy:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.Isp">Isp Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.Isp:member">
+          <div class="msummary">
+            The name of the ISP associated with the IP address. This value
+            is only set when using the City or Insights web service or the
+            Enterprise database.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("isp")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>Isp</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.Isp:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.Isp:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.Isp:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.IsSatelliteProvider">IsSatelliteProvider Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.IsSatelliteProvider:member">
+          <div class="msummary">
+            This is true if the IP belong to a satellite Internet provider.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("is_satellite_provider")]<br />[System.Obsolete("Due to increased mobile usage, we have insufficient data to maintain this field.")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>IsSatelliteProvider</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IsSatelliteProvider:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IsSatelliteProvider:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.IsSatelliteProvider:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.Organization">Organization Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.Organization:member">
+          <div class="msummary">
+            The name of the organization associated with the IP address. This
+            value is only set when using the City or Insights web service or the
+            Enterprise database.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("organization")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>Organization</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.Organization:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.Organization:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.Organization:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:MaxMind.GeoIP2.Model.Traits.ToString()">ToString Method</h3>
+        <blockquote id="M:MaxMind.GeoIP2.Model.Traits.ToString():member">
+          <div class="msummary">
+            Returns a <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> that represents this instance.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public override <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>ToString</b> ()</div>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:MaxMind.GeoIP2.Model.Traits.ToString():Returns">
+            A <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> that represents this instance.
+            </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:MaxMind.GeoIP2.Model.Traits.ToString():Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:MaxMind.GeoIP2.Model.Traits.ToString():Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:MaxMind.GeoIP2.Model.Traits.UserType">UserType Property</h3>
+        <blockquote id="P:MaxMind.GeoIP2.Model.Traits.UserType:member">
+          <div class="msummary">
+            The user type associated with the IP address. This can be one of
+            the following values:
+            <ul><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+            This value is only set when using the City or Insights web service
+            or the Enterprise database.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[Newtonsoft.Json.JsonProperty("user_type")]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>UserType</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:MaxMind.GeoIP2.Model.Traits.UserType:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.UserType:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:MaxMind.GeoIP2.Model.Traits.UserType:Version Information">
+            <b>Namespace: </b>MaxMind.GeoIP2.Model<br /><b>Assembly: </b>MaxMind.GeoIP2 (in MaxMind.GeoIP2.dll)<br /><b>Assembly Versions: </b>2.6.0.0</div>
+          <hr size="1" />
+        </blockquote>
+      </div>
+    </div>
+    <hr size="1" />
+    <div class="Copyright">
+    </div>
+  </body>
+</html>
