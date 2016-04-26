@@ -1,6 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.6.1 (2016-XX-XX)
+------------------
+
+* Updated documentation to reflect that the accuracy radius is now included
+  in City.
+
 2.6.0 (2016-04-15)
 ------------------
 
@@ -13,7 +19,6 @@ GeoIP2 .NET API Release Notes
   the existing methods. These methods return a boolean indicating whether the
   record was found rather than throwing an exception when it is not found.
   Pull request by Mani Gandham. GitHub #31, #50.
-
 
 2.6.0-beta2 (2016-01-18)
 ------------------------
