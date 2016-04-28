@@ -182,6 +182,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 var response = reader.City("81.2.69.160");
                 Assert.That(response.City.Name, Is.EqualTo("London"));
+                Assert.That(response.Location.AccuracyRadius, Is.EqualTo(100));
             }
         }
 
