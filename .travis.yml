@@ -1,13 +1,74 @@
 ---
 sudo: false
-language: csharp
+language: c++
+# dotnet cli require Ubuntu 14.04
+sudo: required
+dist: trusty
+
+# dotnet cli require OSX 10.10
+osx_image: xcode7.1
+
+addons:
+  apt:
+    packages:
+    - gettext
+    - libcurl4-openssl-dev
+    - libicu-dev
+    - libssl-dev
+    - libunwind8
+    - zlib1g
+
+os:
+  - osx
+  - linux
+
+env:
+  matrix:
+    - CLI_VERSION: 1.0.0-preview2-002710
+      Configuration: Debug
+      Framework: netcoreapp1.0
+    - CLI_VERSION: 1.0.0-preview2-002710
+      Configuration: Release
+      Framework: netcoreapp1.0
+
 before_install:
+  # Download script to install dotnet cli
+  - curl -L --create-dirs https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.sh -o ./scripts/install.sh
+
+  - export DOTNET_INSTALL_DIR="$PWD/.dotnetcli"
+
+  # Install the latest versio of dotnet CLI
+  - bash ./scripts/install.sh --channel "preview" --version "$CLI_VERSION" --install-dir "$DOTNET_INSTALL_DIR" --no-path
+
+  # Add dotnet to PATH
+  - export PATH="$DOTNET_INSTALL_DIR:$PATH"
+
+install:
   - git submodule update --init --recursive
-  - nuget restore GeoIP2.sln
-  - nuget install NUnit.Console -Version 3.0.0
+  - which dotnet;
+    if [ $? -eq 0 ]; then
+      echo "Using dotnet:";
+      dotnet --info;
+    else
+      echo "dotnet.exe not found"
+      exit 1;
+    fi
+
+  # Restore dependencies
+  - dotnet restore
+
+  - FrameworkLibsMoniker="netstandard1.4"
+
+  # Build projects 
+  - dotnet build -c $Configuration -f $FrameworkLibsMoniker ./GeoIP2
+  - dotnet build -c $Configuration -f $Framework ./GeoIP2.Benchmark
+  - dotnet build -c $Configuration -f $Framework ./GeoIP2.UnitTests
+
 script:
-  - xbuild /p:TargetFrameworkVersion="v4.5"
-  - mono ./NUnit.Console.3.0.0/tools/nunit3-console.exe ./GeoIP2.UnitTests/bin/Debug/MaxMind.GeoIP2.UnitTests.dll
+  # Run tests
+  - cd ./GeoIP2.UnitTests
+  - dotnet run -f $Framework
+
 notifications:
   email:
     on_failure: always
