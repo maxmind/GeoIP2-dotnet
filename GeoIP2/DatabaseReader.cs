@@ -423,9 +423,16 @@ namespace MaxMind.GeoIP2
         {
             if (!Metadata.DatabaseType.Contains(type))
             {
+#if !NETSTANDARD1_4
                 var frame = new StackFrame(2, true);
                 throw new InvalidOperationException(
                     $"A {Metadata.DatabaseType} database cannot be opened with the {frame.GetMethod().Name} method");
+#else
+                // CoreFX is yet to support StackFrame via "System.Diagnostics.StackTrace" contract.
+                // see: https://github.com/dotnet/corefx/issues/1797
+                throw new InvalidOperationException(
+                    $"A {Metadata.DatabaseType} database cannot be opened with the given method");
+#endif
             }
 
             var injectables = new InjectableValues();

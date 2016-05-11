@@ -107,8 +107,7 @@ namespace MaxMind.GeoIP2.UnitTests
         public void CanDeserializeFromDatabaseType()
         {
             var reader =
-                new DatabaseReader(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                    "..", "..", "TestData", "MaxMind-DB", "test-data", "GeoIP2-City-Test.mmdb"));
+                new DatabaseReader(Path.Combine(Program.CurrentDirectory, "TestData", "MaxMind-DB", "test-data", "GeoIP2-City-Test.mmdb"));
 
             var response = reader.City(IPAddress.Parse("216.160.83.56"));
 

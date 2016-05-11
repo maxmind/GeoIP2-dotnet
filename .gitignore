@@ -2,6 +2,10 @@
 [Bb]in/
 [Oo]bj/
 
+# dotnet CLI stuff
+.dotnetcli/
+scripts/
+
 # mstest test results
 TestResults
 
@@ -81,6 +85,7 @@ publish
 
 # NuGet Packages Directory
 packages
+*.lock.json
 
 # Windows Azure Build Output
 csx
@@ -92,6 +97,7 @@ AppPackages/
 # Others
 [Bb]in
 [Oo]bj
+artifacts
 sql
 TestResults
 [Tt]est[Rr]esult*

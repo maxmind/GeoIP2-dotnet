@@ -3,9 +3,10 @@
 using System;
 using System.IO;
 using System.Net;
+#if !NETSTANDARD1_4
 using System.Runtime.Serialization;
 using System.Security;
-
+#endif
 #endregion
 
 namespace MaxMind.GeoIP2.Exceptions
@@ -15,7 +16,9 @@ namespace MaxMind.GeoIP2.Exceptions
     ///     by the web service itself. As such, it is a IOException instead of a
     ///     GeoIP2Exception.
     /// </summary>
+#if !NETSTANDARD1_4
     [Serializable]
+#endif
     public class HttpException : IOException
     {
         /// <summary>
@@ -49,6 +52,7 @@ namespace MaxMind.GeoIP2.Exceptions
 #pragma warning restore IDE0003
         }
 
+#if !NETSTANDARD1_4
         /// <summary>
         ///     Constructor for deserialization.
         /// </summary>
@@ -61,6 +65,7 @@ namespace MaxMind.GeoIP2.Exceptions
             this.Uri = (Uri)info.GetValue("Uri", typeof(Uri));
 #pragma warning restore IDE0003
         }
+#endif
 
         /// <summary>
         ///     The HTTP status code returned by the web service.
@@ -72,6 +77,7 @@ namespace MaxMind.GeoIP2.Exceptions
         /// </summary>
         public Uri Uri { get; }
 
+#if !NETSTANDARD1_4
         /// <summary>
         ///     Populates a SerializationInfo with the data needed to serialize the target object.
         /// </summary>
@@ -86,5 +92,6 @@ namespace MaxMind.GeoIP2.Exceptions
             info.AddValue("Uri", this.Uri);
 #pragma warning restore IDE0003
         }
+#endif
     }
 }

@@ -1,9 +1,10 @@
 ﻿#region
 
 using System;
+#if !NETSTANDARD1_4
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-
+#endif
 #endregion
 
 namespace MaxMind.GeoIP2.Exceptions
@@ -12,8 +13,12 @@ namespace MaxMind.GeoIP2.Exceptions
     ///     This class represents a generic GeoIP2 error. All other exceptions thrown by
     ///     the GeoIP2 API subclass this exception
     /// </summary>
+#if !NETSTANDARD1_4
     [Serializable]
     public class GeoIP2Exception : ApplicationException
+#else
+    public class GeoIP2Exception : Exception
+#endif
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="GeoIP2Exception" /> class.
@@ -33,6 +38,7 @@ namespace MaxMind.GeoIP2.Exceptions
         {
         }
 
+#if !NETSTANDARD1_4
         /// <summary>
         ///     Constructor for deserialization.
         /// </summary>
@@ -43,5 +49,6 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(info, context)
         {
         }
+#endif
     }
 }
