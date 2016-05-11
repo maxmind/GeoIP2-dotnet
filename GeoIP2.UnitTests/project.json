@@ -1,0 +1,54 @@
+﻿{
+  "version": "2.6.0-*",
+  "name": "MaxMind.GeoIP2.UnitTests",
+  "description": "Test project to validate MaxMind GeoIP2 Database Reader and Web Service Client",
+  "packOptions": {
+    "authors": ["MaxMind, Inc."],
+    "tags": [""],
+    "projectUrl": "https://github.com/maxmind/GeoIP2-dotnet",
+    "licenseUrl": "https://github.com/maxmind/GeoIP2-dotnet/blob/v2.6.0/LICENSE",
+    "copyright": "Copyright © 2013-2016"
+  },
+
+  "commands": {
+    "test": "MaxMind.Db.Test"
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "keyFile": "../MaxMind.snk"
+  },
+
+  "dependencies": {
+    "GeoIP2": "2.6.0-*",
+    "NUnitLite": "3.2.1"
+  },
+
+  "frameworks": {
+    "net45": {
+      "dependencies": {
+        "MockHttpSigned": "1.2.1"
+      }
+    },
+    "netcoreapp1.0": {
+      "imports": "dnxcore50",
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0-rc2-3002543"
+        },
+        "Microsoft.CSharp": "4.0.1-rc3-24110-00",
+        "System.Collections": "4.0.11-rc3-24110-00",
+        "System.Globalization": "4.0.11-rc3-24110-00",
+        "System.IO": "4.1.0-rc3-24110-00",
+        "System.Linq": "4.1.0-rc3-24110-00",
+        "System.Reflection": "4.1.0-rc3-24110-00",
+        "System.Resources.ResourceManager": "4.0.1-rc3-24110-00",
+        "System.Runtime": "4.1.0-rc3-24110-00",
+        "System.Runtime.Numerics": "4.0.1-rc3-24110-00",
+        "System.Threading": "4.0.11-rc3-24110-00",
+        "System.Threading.Tasks.Parallel": "4.0.1-rc3-24110-00"
+      }
+    }
+  }
+}

@@ -17,8 +17,7 @@ namespace MaxMind.GeoIP2.UnitTests
     [TestFixture]
     public class DatabaseReaderTests
     {
-        private readonly string _databaseDir;
-        private readonly string _anonymousIPDatabaseFile;
+        private readonly string _anonymousIpDatabaseFile;
         private readonly string _cityDatabaseFile;
         private readonly string _connectionTypeDatabaseFile;
         private readonly string _countryDatabaseFile;
@@ -28,16 +27,15 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public DatabaseReaderTests()
         {
-            _databaseDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                "..", "..", "TestData", "MaxMind-DB", "test-data");
+            var databaseDir = Path.Combine(Program.CurrentDirectory, "TestData", "MaxMind-DB", "test-data");
 
-            _anonymousIPDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Anonymous-IP-Test.mmdb");
-            _cityDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-City-Test.mmdb");
-            _connectionTypeDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Connection-Type-Test.mmdb");
-            _countryDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Country-Test.mmdb");
-            _domainDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Domain-Test.mmdb");
-            _enterpriseDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-Enterprise-Test.mmdb");
-            _ispDatabaseFile = Path.Combine(_databaseDir, "GeoIP2-ISP-Test.mmdb");
+            _anonymousIpDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Anonymous-IP-Test.mmdb");
+            _cityDatabaseFile = Path.Combine(databaseDir, "GeoIP2-City-Test.mmdb");
+            _connectionTypeDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Connection-Type-Test.mmdb");
+            _countryDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Country-Test.mmdb");
+            _domainDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Domain-Test.mmdb");
+            _enterpriseDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Enterprise-Test.mmdb");
+            _ispDatabaseFile = Path.Combine(databaseDir, "GeoIP2-ISP-Test.mmdb");
         }
 
         [Test]
@@ -62,7 +60,7 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void DatabaseReaderWithStreamConstructor_ValidResponse()
         {
-            using (var streamReader = new StreamReader(_cityDatabaseFile))
+            using (var streamReader = File.OpenText(_cityDatabaseFile))
             {
                 using (var reader = new DatabaseReader(streamReader.BaseStream))
                 {
@@ -78,7 +76,11 @@ namespace MaxMind.GeoIP2.UnitTests
             using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
                 Assert.Throws(Is.TypeOf<InvalidOperationException>()
+#if !NETCOREAPP1_0
                     .And.Message.Contains("A GeoIP2-City database cannot be opened with the Country method"),
+#else
+                    .And.Message.Contains("A GeoIP2-City database cannot be opened with the given method"),
+#endif
                     () => reader.Country("10.10.10.10"));
             }
         }
@@ -86,7 +88,7 @@ namespace MaxMind.GeoIP2.UnitTests
         [Test]
         public void AnonymousIP_ValidResponse()
         {
-            using (var reader = new DatabaseReader(_anonymousIPDatabaseFile))
+            using (var reader = new DatabaseReader(_anonymousIpDatabaseFile))
             {
                 var ipAddress = "1.2.0.1";
                 var response = reader.AnonymousIP(ipAddress);

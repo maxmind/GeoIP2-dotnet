@@ -10,7 +10,11 @@ namespace MaxMind.GeoIP2
     /// <summary>
     ///     Interface for database reader
     /// </summary>
+#if !NETSTANDARD1_4
     public interface IGeoIP2DatabaseReader : IGeoIP2Provider
+#else
+    public interface IGeoIP2DatabaseReader
+#endif
     {
         /// <summary>
         ///     Look up an IP address in a GeoIP2 Anonymous IP.

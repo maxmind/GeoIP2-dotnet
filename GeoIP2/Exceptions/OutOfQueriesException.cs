@@ -1,9 +1,10 @@
 ﻿#region
 
 using System;
+#if !NETSTANDARD1_4
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-
+#endif
 #endregion
 
 namespace MaxMind.GeoIP2.Exceptions
@@ -11,7 +12,9 @@ namespace MaxMind.GeoIP2.Exceptions
     /// <summary>
     ///     This exception is thrown when your account does not have any queries remaining for the called service.
     /// </summary>
+#if !NETSTANDARD1_4
     [Serializable]
+#endif
     public class OutOfQueriesException : GeoIP2Exception
     {
         /// <summary>
@@ -33,6 +36,7 @@ namespace MaxMind.GeoIP2.Exceptions
         {
         }
 
+#if !NETSTANDARD1_4
         /// <summary>
         ///     Constructor for deserialization.
         /// </summary>
@@ -43,5 +47,6 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(info, context)
         {
         }
+#endif
     }
 }

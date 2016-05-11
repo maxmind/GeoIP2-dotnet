@@ -2,8 +2,9 @@
 
 using System;
 using System.Runtime.Serialization;
+#if !NETSTANDARD1_4
 using System.Security.Permissions;
-
+#endif
 #endregion
 
 namespace MaxMind.GeoIP2.Exceptions
@@ -11,7 +12,9 @@ namespace MaxMind.GeoIP2.Exceptions
     /// <summary>
     ///     This exception is thrown when there is an authentication error.
     /// </summary>
+#if !NETSTANDARD1_4
     [Serializable]
+#endif
     public class AuthenticationException : GeoIP2Exception
     {
         /// <summary>
@@ -33,6 +36,7 @@ namespace MaxMind.GeoIP2.Exceptions
         {
         }
 
+#if !NETSTANDARD1_4
         /// <summary>
         ///     Constructor for deserialization.
         /// </summary>
@@ -43,5 +47,6 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(info, context)
         {
         }
+#endif
     }
 }
