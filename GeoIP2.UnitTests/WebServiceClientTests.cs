@@ -1,4 +1,6 @@
-﻿#region
+﻿#if !NETCOREAPP1_0
+// FIXME: The dependency RichardSzalay.MockHttp is not supported by NetStandard yet
+#region
 
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
@@ -51,14 +53,14 @@ namespace MaxMind.GeoIP2.UnitTests
 
         private static readonly object[][] MeTestCases =
         {
-            new object[] {"country", (MeClientRunner) (async (c) => c.Country()), typeof (CountryResponse)},
+            new object[] {"country", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Country())), typeof (CountryResponse)},
             new object[]
-            {"countryAsync", (MeClientRunner) (async (c) => await c.CountryAsync()), typeof (CountryResponse)},
-            new object[] {"city", (MeClientRunner) (async (c) => c.City()), typeof (CityResponse)},
-            new object[] {"cityAsync", (MeClientRunner) (async (c) => await c.CityAsync()), typeof (CityResponse)},
-            new object[] {"insights", (MeClientRunner) (async (c) => c.Insights()), typeof (InsightsResponse)},
+            {"countryAsync", (MeClientRunner) (async c => await c.CountryAsync()), typeof (CountryResponse)},
+            new object[] {"city", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.City())), typeof (CityResponse)},
+            new object[] {"cityAsync", (MeClientRunner) (async c => await c.CityAsync()), typeof (CityResponse)},
+            new object[] {"insights", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Insights())), typeof (InsightsResponse)},
             new object[]
-            {"insightsAsync", (MeClientRunner) (async (c) => await c.InsightsAsync()), typeof (InsightsResponse)}
+            {"insightsAsync", (MeClientRunner) (async c => await c.InsightsAsync()), typeof (InsightsResponse)}
         };
 
         private WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
@@ -386,3 +388,4 @@ namespace MaxMind.GeoIP2.UnitTests
         }
     }
 }
+#endif

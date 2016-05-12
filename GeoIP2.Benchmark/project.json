@@ -1,0 +1,31 @@
+﻿{
+  "version": "2.6.0-*",
+  "description": "Benchmark project to validate MaxMind GeoIP2 Database Reader and Web Service Client",
+  "packOptions": {
+    "authors": ["MaxMind, Inc."],
+    "tags": [""],
+    "projectUrl": "https://github.com/maxmind/MaxMind-DB-Reader-dotnet",
+    "licenseUrl": "https://github.com/maxmind/MaxMind-DB-Reader-dotnet/blob/v2.0.0/LICENSE",
+    "copyright": "Copyright © 2013-2016"
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "keyFile": "../MaxMind.snk"
+  },
+  "dependencies": {
+    "GeoIP2": "2.6.0-*"
+  },
+  "frameworks": {
+    "net45": {},
+    "netcoreapp1.0": {
+      "imports": "dnxcore50",
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0-rc2-3002543"
+        }
+      }
+    }
+  }
+}

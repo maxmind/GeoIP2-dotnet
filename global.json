@@ -1,0 +1,3 @@
+﻿{
+  "projects": [ "GeoIP2", "GeoIP2.Benchmark", "GeoIP2.UnitTests" ]
+}
