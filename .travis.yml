@@ -1,6 +1,6 @@
 ---
 sudo: false
-language: c++
+language: csharp
 # dotnet cli require Ubuntu 14.04
 sudo: required
 dist: trusty
@@ -11,12 +11,7 @@ osx_image: xcode7.1
 addons:
   apt:
     packages:
-    - gettext
-    - libcurl4-openssl-dev
-    - libicu-dev
-    - libssl-dev
     - libunwind8
-    - zlib1g
 
 os:
   - osx
@@ -24,10 +19,10 @@ os:
 
 env:
   matrix:
-    - CLI_VERSION: 1.0.0-preview2-002710
+    - CLI_VERSION: Latest
       Configuration: Debug
       Framework: netcoreapp1.0
-    - CLI_VERSION: 1.0.0-preview2-002710
+    - CLI_VERSION: Latest
       Configuration: Release
       Framework: netcoreapp1.0
 
@@ -67,7 +62,7 @@ install:
 script:
   # Run tests
   - cd ./GeoIP2.UnitTests
-  - dotnet run -f $Framework
+  - dotnet run -f $Framework -c $Configuration
 
 notifications:
   email:

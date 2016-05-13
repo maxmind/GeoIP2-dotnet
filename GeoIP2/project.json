@@ -12,6 +12,7 @@
 
   "buildOptions": {
     "keyFile": "../MaxMind.snk",
+    "outputName": "MaxMind.GeoIP2"
   },
 
   "dependencies": {

@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Net;
 
-namespace GeoIP2.Benchmark
+namespace MaxMind.GeoIP2.Benchmark
 {
     internal class Program
     {
