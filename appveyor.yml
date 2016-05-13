@@ -5,16 +5,16 @@ os: Visual Studio 2015
 
 environment:
   matrix:
-    - CLI_VERSION: 1.0.0-preview2-002710
+    - CLI_VERSION: Latest
       Configuration: Debug
       Framework: net45
-    - CLI_VERSION: 1.0.0-preview2-002710
+    - CLI_VERSION: Latest
       Configuration: Release
       Framework: net45
-    - CLI_VERSION: 1.0.0-preview2-002710
+    - CLI_VERSION: Latest
       Configuration: Debug
       Framework: netcoreapp1.0
-    - CLI_VERSION: 1.0.0-preview2-002710
+    - CLI_VERSION: Latest
       Configuration: Release
       Framework: netcoreapp1.0
 
@@ -64,7 +64,7 @@ test_script:
       # Run tests
       cd .\GeoIP2.UnitTests
 
-      dotnet run -f $env:Framework
+      dotnet run -f $env:Framework -c $env:Configuration
 
 notifications:
   - auth_token:
