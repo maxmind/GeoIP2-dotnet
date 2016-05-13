@@ -1,12 +1,12 @@
 ﻿{
-  "version": "2.6.0-*",
+  "version": "2.7.0-*",
   "name": "MaxMind.GeoIP2.UnitTests",
   "description": "Test project to validate MaxMind GeoIP2 Database Reader and Web Service Client",
   "packOptions": {
     "authors": ["MaxMind, Inc."],
     "tags": [""],
     "projectUrl": "https://github.com/maxmind/GeoIP2-dotnet",
-    "licenseUrl": "https://github.com/maxmind/GeoIP2-dotnet/blob/v2.6.0/LICENSE",
+    "licenseUrl": "https://github.com/maxmind/GeoIP2-dotnet/blob/master/LICENSE",
     "copyright": "Copyright © 2013-2016"
   },
 
@@ -20,7 +20,7 @@
   },
 
   "dependencies": {
-    "GeoIP2": "2.6.0-*",
+    "GeoIP2": "2.7.0-*",
     "NUnitLite": "3.2.1"
   },
 
