@@ -27,7 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>GeoIP2.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MaxMind.GeoIP2.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -39,7 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\MaxMind.GeoIP2.XML</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>GeoIP2.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MaxMind.GeoIP2.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
@@ -112,7 +112,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="GeoIP2.ruleset" />
+    <None Include="MaxMind.GeoIP2.ruleset" />
     <None Include="NuGet.targets" />
     <None Include="packages.config" />
   </ItemGroup>
