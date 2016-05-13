@@ -20,7 +20,7 @@
   },
 
   "dependencies": {
-    "GeoIP2": "2.7.0-*",
+    "MaxMind.GeoIP2": "2.7.0-*",
     "NUnitLite": "3.2.1"
   },
 

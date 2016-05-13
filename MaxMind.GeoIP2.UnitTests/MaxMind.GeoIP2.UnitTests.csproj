@@ -97,9 +97,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GeoIP2\GeoIP2.csproj">
+    <ProjectReference Include="..\MaxMind.GeoIP2\MaxMind.GeoIP2.csproj">
       <Project>{024e2fa9-242c-4c9a-bfea-64c83352b79d}</Project>
-      <Name>GeoIP2</Name>
+      <Name>MaxMind.GeoIP2</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

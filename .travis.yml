@@ -59,14 +59,14 @@ install:
 
   - FrameworkLibsMoniker="netstandard1.4"
 
-  # Build projects 
-  - dotnet build -c $Configuration -f $FrameworkLibsMoniker ./GeoIP2
-  - dotnet build -c $Configuration -f $Framework ./GeoIP2.Benchmark
-  - dotnet build -c $Configuration -f $Framework ./GeoIP2.UnitTests
+  # Build projects
+  - dotnet build -c $Configuration -f $FrameworkLibsMoniker ./MaxMind.GeoIP2
+  - dotnet build -c $Configuration -f $Framework ./MaxMind.GeoIP2.Benchmark
+  - dotnet build -c $Configuration -f $Framework ./MaxMind.GeoIP2.UnitTests
 
 script:
   # Run tests
-  - cd ./GeoIP2.UnitTests
+  - cd ./MaxMind.GeoIP2.UnitTests
   - dotnet run -f $Framework
 
 notifications:
