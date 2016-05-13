@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.6.0-*",
+  "version": "2.7.0-*",
   "description": "Benchmark project to validate MaxMind GeoIP2 Database Reader and Web Service Client",
   "packOptions": {
     "authors": ["MaxMind, Inc."],
@@ -14,7 +14,7 @@
     "keyFile": "../MaxMind.snk"
   },
   "dependencies": {
-    "GeoIP2": "2.6.0-*"
+    "GeoIP2": "2.7.0-*"
   },
   "frameworks": {
     "net45": {},

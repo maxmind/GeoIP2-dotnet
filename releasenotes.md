@@ -1,9 +1,11 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.6.1 (2016-XX-XX)
-------------------
+2.7.0-beta1 (2016-05-13)
+------------------------
 
+* .NET Core support. Switched to `dotnet/cli` for building. Pull request by
+  Adeel Mujahid. GitHub #60.
 * Updated documentation to reflect that the accuracy radius is now included
   in City.
 
