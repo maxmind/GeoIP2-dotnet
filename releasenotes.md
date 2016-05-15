@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.7.0-beta1 (2016-05-13)
+2.7.0-beta1 (2016-05-15)
 ------------------------
 
 * .NET Core support. Switched to `dotnet/cli` for building. Pull request by
