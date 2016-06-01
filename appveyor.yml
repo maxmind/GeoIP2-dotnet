@@ -24,7 +24,7 @@ install:
       mkdir -f scripts/ > $null
 
       # Download install script from CLI repo
-      wget https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.ps1 -OutFile .\scripts\install.ps1
+      wget https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.ps1 -OutFile .\scripts\install.ps1
 
       $DOTNET_INSTALL_DIR = "$pwd\.dotnetcli"
 
@@ -54,7 +54,7 @@ build_script:
         $FrameworkLibsMoniker = "netstandard1.4"
       }
 
-      # Build projects 
+      # Build projects
       dotnet build -c $env:Configuration -f $FrameworkLibsMoniker .\GeoIP2
       dotnet build -c $env:Configuration -f $env:Framework .\GeoIP2.Benchmark
       dotnet build -c $env:Configuration -f $env:Framework .\GeoIP2.UnitTests

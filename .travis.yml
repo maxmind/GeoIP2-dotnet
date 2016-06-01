@@ -28,7 +28,7 @@ env:
 
 before_install:
   # Download script to install dotnet cli
-  - curl -L --create-dirs https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.sh -o ./scripts/install.sh
+  - curl -L --create-dirs https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh -o ./scripts/install.sh
 
   - export DOTNET_INSTALL_DIR="$PWD/.dotnetcli"
 
@@ -54,7 +54,7 @@ install:
 
   - FrameworkLibsMoniker="netstandard1.4"
 
-  # Build projects 
+  # Build projects
   - dotnet build -c $Configuration -f $FrameworkLibsMoniker ./GeoIP2
   - dotnet build -c $Configuration -f $Framework ./GeoIP2.Benchmark
   - dotnet build -c $Configuration -f $Framework ./GeoIP2.UnitTests
