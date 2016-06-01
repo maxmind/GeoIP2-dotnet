@@ -121,7 +121,7 @@ namespace MaxMind.GeoIP2
 #if !NETSTANDARD1_4
             ISyncClient syncWebRequest = null
 #else
-            object syncWebRequest = null 
+            object syncWebRequest = null
 #endif
             )
         {
@@ -222,6 +222,7 @@ namespace MaxMind.GeoIP2
         }
 
 #if !NETSTANDARD1_4
+
         /// <summary>
         ///     Returns an <see cref="CountryResponse" /> for the specified IP address.
         /// </summary>
@@ -308,6 +309,7 @@ namespace MaxMind.GeoIP2
         {
             return Insights((IPAddress)null);
         }
+
 #endif
 
         private static IPAddress ParseIP(string ipAddress)
@@ -321,6 +323,7 @@ namespace MaxMind.GeoIP2
         }
 
 #if !NETSTANDARD1_4
+
         private T Execute<T>(string type, IPAddress ipAddress)
             where T : AbstractCountryResponse, new()
         {
@@ -330,6 +333,7 @@ namespace MaxMind.GeoIP2
                 return HandleResponse<T>(response);
             }
         }
+
 #endif
 
         private async Task<T> ExecuteAsync<T>(string type, IPAddress ipAddress)
@@ -475,10 +479,15 @@ namespace MaxMind.GeoIP2
                 case "AUTHORIZATION_INVALID":
                 case "LICENSE_KEY_REQUIRED":
                 case "USER_ID_REQUIRED":
+                case "USER_ID_UNKNOWN":
                     return new AuthenticationException(webServiceError.Error);
 
+                case "INSUFFICIENT_FUNDS":
                 case "OUT_OF_QUERIES":
                     return new OutOfQueriesException(webServiceError.Error);
+
+                case "PERMISSION_REQUIRED":
+                    return new PermissionRequiredException(webServiceError.Error);
 
                 default:
                     return new InvalidRequestException(webServiceError.Error, webServiceError.Code, response.RequestUri);

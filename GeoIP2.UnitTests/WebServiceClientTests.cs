@@ -171,6 +171,30 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
+        public void PermissionRequiredShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var msg = "You do not have permission to use this web service.";
+            var client = CreateClient(type, status: HttpStatusCode.Forbidden,
+                content:
+                    ErrorJson("PERMISSION_REQUIRED", msg));
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<PermissionRequiredException>()
+                    .And.Message.Contains(msg));
+        }
+
+        [Test, TestCaseSource(nameof(TestCases))]
+        public void UnknownUserIdShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var msg = "You have supplied an invalid MaxMind user ID and/or license key in the Authorization header.";
+            var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
+                content:
+                    ErrorJson("USER_ID_UNKNOWN", msg));
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<AuthenticationException>()
+                    .And.Message.Contains(msg));
+        }
+
+        [Test, TestCaseSource(nameof(TestCases))]
         public void InvalidAuthShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
@@ -224,6 +248,19 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.That(async () => await cr(client),
                 Throws.TypeOf<OutOfQueriesException>()
                     .And.Message.Contains("The license key you have provided is out of queries"));
+        }
+
+        [Test, TestCaseSource(nameof(TestCases))]
+        public void InsufficientFundsShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var msg =
+                "The license key you have provided is out of queries. Please purchase more queries to use this service.";
+            var client = CreateClient(type, status: HttpStatusCode.PaymentRequired,
+                content:
+                    ErrorJson("INSUFFICIENT_FUNDS", msg));
+            Assert.That(async () => await cr(client),
+                Throws.TypeOf<OutOfQueriesException>()
+                    .And.Message.Contains(msg));
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
@@ -388,4 +425,5 @@ namespace MaxMind.GeoIP2.UnitTests
         }
     }
 }
+
 #endif

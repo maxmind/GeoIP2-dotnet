@@ -1,6 +1,11 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.7.0-beta2 (2016-XX-XX)
+------------------------
+
+* Added handling of additional error codes that the web service may return.
+
 2.7.0-beta1 (2016-05-15)
 ------------------------
 
