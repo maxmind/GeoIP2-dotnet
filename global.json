@@ -1,3 +1,10 @@
 ﻿{
-  "projects": [ "GeoIP2", "GeoIP2.Benchmark", "GeoIP2.UnitTests" ]
+  "projects": [
+    "GeoIP2",
+    "GeoIP2.Benchmark",
+    "GeoIP2.UnitTests"
+  ],
+  "sdk": {
+    "version": "1.0.0-preview1-002702"
+  }
 }
