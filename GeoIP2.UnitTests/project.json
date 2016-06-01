@@ -2,6 +2,7 @@
   "version": "2.7.0-*",
   "name": "MaxMind.GeoIP2.UnitTests",
   "description": "Test project to validate MaxMind GeoIP2 Database Reader and Web Service Client",
+
   "packOptions": {
     "authors": ["MaxMind, Inc."],
     "tags": [""],
@@ -20,7 +21,9 @@
   },
 
   "dependencies": {
-    "GeoIP2": "2.7.0-*",
+    "GeoIP2": {
+      "target": "project"
+    },
     "NUnitLite": "3.2.1"
   },
 
@@ -35,19 +38,8 @@
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",
-          "version": "1.0.0-rc2-3002543"
-        },
-        "Microsoft.CSharp": "4.0.1-rc3-24110-00",
-        "System.Collections": "4.0.11-rc3-24110-00",
-        "System.Globalization": "4.0.11-rc3-24110-00",
-        "System.IO": "4.1.0-rc3-24110-00",
-        "System.Linq": "4.1.0-rc3-24110-00",
-        "System.Reflection": "4.1.0-rc3-24110-00",
-        "System.Resources.ResourceManager": "4.0.1-rc3-24110-00",
-        "System.Runtime": "4.1.0-rc3-24110-00",
-        "System.Runtime.Numerics": "4.0.1-rc3-24110-00",
-        "System.Threading": "4.0.11-rc3-24110-00",
-        "System.Threading.Tasks.Parallel": "4.0.1-rc3-24110-00"
+          "version": "1.0.0-rc2-3002702"
+        }
       }
     }
   }
