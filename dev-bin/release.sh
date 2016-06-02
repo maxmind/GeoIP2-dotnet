@@ -31,15 +31,17 @@ jq ".version=\"$VERSION\"" "$PROJECT_JSON"| sponge "$PROJECT_JSON"
 
 git diff
 
-read -e -p "Commit? " SHOULD_COMMIT
+read -e -p "Continue (and commit above)? " SHOULD_COMMIT
 
 if [ "$SHOULD_COMMIT" != "y" ]; then
     echo "Aborting"
     exit 1
 fi
 
-git add "$PROJECT_JSON"
-git commit -m "Prepare for $VERSION"
+if [ -n "$(git status --porcelain)" ]; then
+    git add "$PROJECT_JSON"
+    git commit -m "Prepare for $VERSION"
+fi
 
 pushd GeoIP2
 
@@ -93,8 +95,7 @@ EOF
 
 cat README.md >> "$PAGE"
 
-xbuild /property:Configuration=Release /p:TargetFrameworkVersion="v4.5"
-monodocer -assembly:GeoIP2/bin/Release/net45/MMaxMind.GeoIP2.dll -importslashdoc:GeoIP2/bin/Release/net45/MaxMind.GeoIP2.xml "-path:/tmp/dotnet-$TAG" -pretty
+monodocer -assembly:GeoIP2/bin/Release/net45/MaxMind.GeoIP2.dll -importslashdoc:GeoIP2/bin/Release/net45/MaxMind.GeoIP2.xml "-path:/tmp/dotnet-$TAG" -pretty
 mdoc export-html -o ".gh-pages/doc/$TAG" "/tmp/dotnet-$TAG"
 
 pushd .gh-pages
