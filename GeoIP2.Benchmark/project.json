@@ -2,6 +2,7 @@
   "version": "2.7.0-*",
   "name": "MaxMind.GeoIP2.Benchmark",
   "description": "Benchmark project to validate MaxMind GeoIP2 Database Reader and Web Service Client",
+
   "packOptions": {
     "authors": ["MaxMind, Inc."],
     "tags": [""],
@@ -14,17 +15,20 @@
     "emitEntryPoint": true,
     "keyFile": "../MaxMind.snk"
   },
+
   "dependencies": {
-    "GeoIP2": "2.7.0-*"
+    "GeoIP2": {
+      "target": "project"
+    }
   },
+
   "frameworks": {
     "net45": {},
     "netcoreapp1.0": {
-      "imports": "dnxcore50",
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",
-          "version": "1.0.0-rc2-3002543"
+          "version": "1.0.0-rc2-3002702"
         }
       }
     }
