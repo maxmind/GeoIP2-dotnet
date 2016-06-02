@@ -1,6 +1,12 @@
 #!/bin/bash
 
 set -e
+set -u
+
+shopt -s extglob
+
+PROJECT_JSON="GeoIP2/project.json"
+
 
 VERSION=$(perl -MFile::Slurp::Tiny=read_file -MDateTime <<EOF
 use v5.16;
@@ -18,6 +24,42 @@ TAG="v$VERSION"
 
 if [ -n "$(git status --porcelain)" ]; then
     echo ". is not clean." >&2
+    exit 1
+fi
+
+jq ".version=\"$VERSION\"" "$PROJECT_JSON"| sponge "$PROJECT_JSON"
+
+git diff
+
+read -e -p "Commit? " SHOULD_COMMIT
+
+if [ "$SHOULD_COMMIT" != "y" ]; then
+    echo "Aborting"
+    exit 1
+fi
+
+git add "$PROJECT_JSON"
+git commit -m "Prepare for $VERSION"
+
+pushd GeoIP2
+
+dotnet restore
+dotnet build -c Release
+dotnet pack -c Release
+
+popd
+
+pushd GeoIP2.UnitTests
+
+dotnet restore
+dotnet run -c Release
+
+popd
+
+read -e -p "Continue given test results? " SHOULD_CONTINUE
+
+if [ "$SHOULD_CONTINUE" != "y" ]; then
+    echo "Aborting"
     exit 1
 fi
 
@@ -39,7 +81,7 @@ fi
 popd
 
 PAGE=.gh-pages/index.md
-cat <<EOF > $PAGE
+cat <<EOF > "$PAGE"
 ---
 layout: default
 title: MaxMind GeoIP2 .NET API
@@ -49,11 +91,11 @@ version: $TAG
 
 EOF
 
-cat README.md >> $PAGE
+cat README.md >> "$PAGE"
 
 xbuild /property:Configuration=Release /p:TargetFrameworkVersion="v4.5"
-monodocer -assembly:GeoIP2/bin/Release/MaxMind.GeoIP2.dll -importslashdoc:GeoIP2/bin/Release/MaxMind.GeoIP2.XML -path:/tmp/dotnet-$TAG -pretty
-mdoc export-html -o .gh-pages/doc/$TAG /tmp/dotnet-$TAG
+monodocer -assembly:GeoIP2/bin/Release/net45/MMaxMind.GeoIP2.dll -importslashdoc:GeoIP2/bin/Release/net45/MaxMind.GeoIP2.xml "-path:/tmp/dotnet-$TAG" -pretty
+mdoc export-html -o ".gh-pages/doc/$TAG" "/tmp/dotnet-$TAG"
 
 pushd .gh-pages
 
@@ -70,6 +112,8 @@ fi
 git push
 
 popd
-git tag $TAG
+git tag "$TAG"
 git push
 git push --tags
+
+nuget push "GeoIP2/bin/Release/MaxMind.GeoIP2.$VERSION.nupkg"
