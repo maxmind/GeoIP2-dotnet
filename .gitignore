@@ -97,6 +97,10 @@ csx
 # Windows Store app package directory
 AppPackages/
 
+# Idea
+.idea
+*.iml
+
 # Others
 [Bb]in
 [Oo]bj
@@ -109,6 +113,7 @@ ClientBin
 [Ss]tyle[Cc]op.*
 ~$*
 *.dbmdl
+*.sw?
 Generated_Code #added for RIA/Silverlight projects
 
 # Backup & report files from converting an old project file to a newer
