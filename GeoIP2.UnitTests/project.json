@@ -24,15 +24,12 @@
     "GeoIP2": {
       "target": "project"
     },
-    "NUnitLite": "3.2.1"
+    "NUnitLite": "3.2.1",
+    "MockHttpSigned": "1.3.0-netstandard-alpha3"
   },
 
   "frameworks": {
-    "net45": {
-      "dependencies": {
-        "MockHttpSigned": "1.2.1"
-      }
-    },
+    "net45": {},
     "netcoreapp1.0": {
       "imports": "dnxcore50",
       "dependencies": {

@@ -1,12 +1,12 @@
-﻿#if !NETCOREAPP1_0
-// FIXME: The dependency RichardSzalay.MockHttp is not supported by NetStandard yet
-#region
+﻿#region
 
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
+#if !NETCOREAPP1_0
 using MaxMind.GeoIP2.UnitTests.Mock;
+#endif
 using NUnit.Framework;
 using RichardSzalay.MockHttp;
 using System;
@@ -33,34 +33,34 @@ namespace MaxMind.GeoIP2.UnitTests
         // "Async" added to the name so that Nunit can tell them apart.
         private static readonly object[][] TestCases =
         {
+#if !NETCOREAPP1_0
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"country", (ClientRunner) (async (c, i) => c.Country(i)), typeof (CountryResponse)},
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[]
-            {"countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof (CountryResponse)},
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"city", (ClientRunner) (async (c, i) => c.City(i)), typeof (CityResponse)},
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof (CityResponse)},
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"insights", (ClientRunner) (async (c, i) => c.Insights(i)), typeof (InsightsResponse)},
+#endif
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[]
-            {"insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof (InsightsResponse)}
+            new object[] {"countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof (CountryResponse)},
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+            new object[] {"cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof (CityResponse)},
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+            new object[] {"insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof (InsightsResponse)}
         };
 
         public delegate Task<AbstractCountryResponse> MeClientRunner(WebServiceClient c);
 
         private static readonly object[][] MeTestCases =
         {
+#if !NETCOREAPP1_0
             new object[] {"country", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Country())), typeof (CountryResponse)},
-            new object[]
-            {"countryAsync", (MeClientRunner) (async c => await c.CountryAsync()), typeof (CountryResponse)},
             new object[] {"city", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.City())), typeof (CityResponse)},
-            new object[] {"cityAsync", (MeClientRunner) (async c => await c.CityAsync()), typeof (CityResponse)},
             new object[] {"insights", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Insights())), typeof (InsightsResponse)},
-            new object[]
-            {"insightsAsync", (MeClientRunner) (async c => await c.InsightsAsync()), typeof (InsightsResponse)}
+#endif
+            new object[] {"countryAsync", (MeClientRunner) (async c => await c.CountryAsync()), typeof (CountryResponse)},
+            new object[] {"cityAsync", (MeClientRunner) (async c => await c.CityAsync()), typeof (CityResponse)},
+            new object[] {"insightsAsync", (MeClientRunner) (async c => await c.InsightsAsync()), typeof (InsightsResponse)}
         };
 
         private WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
@@ -86,14 +86,20 @@ namespace MaxMind.GeoIP2.UnitTests
                 .WithHeaders("Accept", "application/json")
                 .Respond(message);
 
+#if !NETCOREAPP1_0
             // HttpWebRequest mock
             var contentsBytes = Encoding.UTF8.GetBytes(content);
             var responseStream = new MemoryStream(contentsBytes);
 
             var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, responseStream));
+#endif
 
             return new WebServiceClient(6, "0123456789", new List<string> { "en" },
-                httpMessageHandler: mockHttp, syncWebRequest: syncWebRequest);
+                httpMessageHandler: mockHttp
+#if !NETCOREAPP1_0
+                , syncWebRequest: syncWebRequest
+#endif
+                );
         }
 
         [Test, TestCaseSource(nameof(TestCases))]
@@ -338,6 +344,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.That(result.GetType(), Is.EqualTo(t));
         }
 
+#if !NETCOREAPP1_0
         [Test]
         public void MissingKeys()
         {
@@ -423,7 +430,6 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.AreEqual("", r.ToString());
             }
         }
+#endif
     }
 }
-
-#endif
