@@ -117,11 +117,9 @@ namespace MaxMind.GeoIP2
             IEnumerable<string> locales,
             string host = "geoip.maxmind.com",
             int timeout = 3000,
-            HttpMessageHandler httpMessageHandler = null,
+            HttpMessageHandler httpMessageHandler = null
 #if !NETSTANDARD1_4
-            ISyncClient syncWebRequest = null
-#else
-            object syncWebRequest = null
+            , ISyncClient syncWebRequest = null
 #endif
             )
         {
