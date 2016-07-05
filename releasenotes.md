@@ -1,6 +1,11 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.7.0 (2016-XX-XX)
+------------------
+
+* Updated documentation to clarify what the accuracy radius refers to.
+
 2.7.0-beta2 (2016-06-02)
 ------------------------
 
