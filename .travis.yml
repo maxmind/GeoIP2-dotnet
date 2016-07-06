@@ -40,7 +40,7 @@ before_install:
   - export DOTNET_INSTALL_DIR="$PWD/.dotnetcli"
 
   # Install the latest versio of dotnet CLI
-  - bash ./scripts/install.sh --channel "preview" --version "$CLI_VERSION" --install-dir "$DOTNET_INSTALL_DIR" --no-path
+  - bash ./scripts/install.sh --version "$CLI_VERSION" --install-dir "$DOTNET_INSTALL_DIR" --no-path
 
   # Add dotnet to PATH
   - export PATH="$DOTNET_INSTALL_DIR:$PATH"
