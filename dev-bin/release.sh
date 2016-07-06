@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -e
-set -u
+set -eu -o pipefail
 
 shopt -s extglob
 
