@@ -1,52 +1,64 @@
 ---
-sudo: false
-language: csharp
-# dotnet cli require Ubuntu 14.04
-sudo: required
-dist: trusty
-
-# dotnet cli require OSX 10.10
-osx_image: xcode7.1
+language: generic
 
 addons:
   apt:
     packages:
+    - gettext
+    - libcurl4-openssl-dev
+    - libicu-dev
+    - libssl-dev
     - libunwind8
-
-os:
-  - osx
-  - linux
+    - zlib1g
 
 env:
-  matrix:
-    - CLI_VERSION: Latest
-      Configuration: Debug
-      Framework: netcoreapp1.0
-    - CLI_VERSION: Latest
-      Configuration: Release
-      Framework: netcoreapp1.0
+  global:
+    - MAXMIND_BENCHMARK_DB=GeoIP2.Benchmark/GeoLite2-City.mmdb
+    - MAXMIND_TEST_BASE_DIR=GeoIP2.UnitTests
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty # Ubuntu 14.04
+      sudo: required
+      env: CONFIGURATION=Debug
+    - os: linux
+      dist: trusty
+      sudo: required
+      env: CONFIGURATION=Release
+    - os: osx
+      osx_image: xcode7.2 # macOS 10.11
+      env: CONFIGURATION=Debug
+    - os: osx
+      osx_image: xcode7.2
+      env: CONFIGURATION=Release
 
 before_install:
   # Install OpenSSL
+  # Also set download URLs obtained from https://www.microsoft.com/net/download#core
   - if test "$TRAVIS_OS_NAME" == "osx"; then
-      brew update;
       brew install openssl;
       brew link --force openssl;
+      export DOTNET_SDK_URL="https://go.microsoft.com/fwlink/?LinkID=809128";
+    else
+      export DOTNET_SDK_URL="https://go.microsoft.com/fwlink/?LinkID=809129";
     fi
-
-  # Download script to install dotnet cli
-  - curl -L --create-dirs https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh -o ./scripts/install.sh
 
   - export DOTNET_INSTALL_DIR="$PWD/.dotnetcli"
 
-  # Install the latest versio of dotnet CLI
-  - bash ./scripts/install.sh --version "$CLI_VERSION" --install-dir "$DOTNET_INSTALL_DIR" --no-path
+  # Install .NET CLI
+  - mkdir $DOTNET_INSTALL_DIR
+  - curl -L $DOTNET_SDK_URL -o dotnet_package
+  - tar -xvzf dotnet_package -C $DOTNET_INSTALL_DIR
 
   # Add dotnet to PATH
   - export PATH="$DOTNET_INSTALL_DIR:$PATH"
 
-install:
+  # Update submodules
   - git submodule update --init --recursive
+
+install:
+  # Display dotnet version info
   - which dotnet;
     if [ $? -eq 0 ]; then
       echo "Using dotnet:";
@@ -56,20 +68,26 @@ install:
       exit 1;
     fi
 
-  # Restore dependencies
+  # Hack for: https://github.com/dotnet/cli/issues/3658
+  - if test "$TRAVIS_OS_NAME" == "linux"; then
+      nvm install stable && nvm use stable;
+    fi
+  - node -e "jsonPath='./GeoIP2.Benchmark/project.json';data=require(jsonPath);fs=require('fs');delete data.frameworks.net45;fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2))"
+
+  # Restore Packages
   - dotnet restore
 
-  - FrameworkLibsMoniker="netstandard1.4"
-
-  # Build projects
-  - dotnet build -c $Configuration -f $FrameworkLibsMoniker ./GeoIP2
-  - dotnet build -c $Configuration -f $Framework ./GeoIP2.Benchmark
-  - dotnet build -c $Configuration -f $Framework ./GeoIP2.UnitTests
+  # Build Projects
+  - dotnet build -c $CONFIGURATION -f netstandard1.4 ./GeoIP2
+  - dotnet build -c $CONFIGURATION -f netcoreapp1.0 ./GeoIP2.Benchmark
+  - dotnet build -c $CONFIGURATION -f netcoreapp1.0 ./GeoIP2.UnitTests
 
 script:
-  # Run tests
-  - cd ./GeoIP2.UnitTests
-  - dotnet run -f $Framework -c $Configuration
+  # Run Benchmark
+  - dotnet run -f netcoreapp1.0 -c $CONFIGURATION -p GeoIP2.Benchmark
+
+  # Run Unit Tests
+  - dotnet test -f netcoreapp1.0 -c $CONFIGURATION GeoIP2.UnitTests
 
 notifications:
   email:

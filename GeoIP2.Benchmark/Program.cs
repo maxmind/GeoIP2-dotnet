@@ -4,16 +4,50 @@ using MaxMind.GeoIP2.Exceptions;
 using System;
 using System.Diagnostics;
 using System.Net;
+using System.IO;
 
 namespace MaxMind.GeoIP2.Benchmark
 {
-    internal class Program
+    public class Program
     {
         private static readonly int COUNT = 200000;
 
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            using (var reader = new DatabaseReader("GeoLite2-City.mmdb", FileAccessMode.Memory))
+            // first we check if the command-line argument is provided
+            string dbPath = args.Length > 0 ? args[0] : null;
+            if (dbPath != null)
+            {
+                if (!File.Exists(dbPath))
+                {
+                    throw new Exception("Path provided by command-line argument does not exist!");
+                }
+            }
+            else
+            {
+                // check if environment variable MAXMIND_BENCHMARK_DB is set
+                dbPath = Environment.GetEnvironmentVariable("MAXMIND_BENCHMARK_DB");
+
+                if (!string.IsNullOrEmpty(dbPath))
+                {
+                    if (!File.Exists(dbPath))
+                    {
+                        throw new Exception("Path set as environment variable MAXMIND_BENCHMARK_DB does not exist!");
+                    }
+                }
+                else
+                {
+                    // check if GeoLite2-City.mmdb exists in CWD
+                    dbPath = "GeoLite2-City.mmdb";
+
+                    if (!File.Exists(dbPath))
+                    {
+                        throw new Exception($"{dbPath} does not exist in current directory!");
+                    }
+                }
+            }
+
+            using (var reader = new DatabaseReader(dbPath, FileAccessMode.Memory))
             {
                 Bench("Warm-up for Memory mode", reader);
                 Bench("Memory mode", reader);
