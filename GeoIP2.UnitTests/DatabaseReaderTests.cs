@@ -27,7 +27,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public DatabaseReaderTests()
         {
-            var databaseDir = Path.Combine(Program.CurrentDirectory, "TestData", "MaxMind-DB", "test-data");
+            var databaseDir = Path.Combine(TestUtils.TestDirectory, "TestData", "MaxMind-DB", "test-data");
 
             _anonymousIpDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Anonymous-IP-Test.mmdb");
             _cityDatabaseFile = Path.Combine(databaseDir, "GeoIP2-City-Test.mmdb");
