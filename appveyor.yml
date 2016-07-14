@@ -4,18 +4,31 @@ version: '1.0.{build}'
 os: Visual Studio 2015
 
 environment:
+  global:
+    MAXMIND_BENCHMARK_DB: GeoIP2.Benchmark/GeoLite2-City.mmdb
+    MAXMIND_TEST_BASE_DIR: GeoIP2.UnitTests
   matrix:
-    - Configuration: Debug
-      Framework: net45
-    - Configuration: Release
-      Framework: net45
-    - Configuration: Debug
-      Framework: netcoreapp1.0
-    - Configuration: Release
-      Framework: netcoreapp1.0
+    - CONFIGURATION: Debug
+      FRAMEWORK: net45
+      SECONDARYFRAMEWORK: net451
+      FrameworkLibsMoniker: net45
+    - CONFIGURATION: Release
+      FRAMEWORK: net45
+      SECONDARYFRAMEWORK: net451
+      FrameworkLibsMoniker: net45
+    - CONFIGURATION: Debug
+      FRAMEWORK: netcoreapp1.0
+      SECONDARYFRAMEWORK: netcoreapp1.0
+      FrameworkLibsMoniker: netstandard1.4
+    - CONFIGURATION: Release
+      FRAMEWORK: netcoreapp1.0
+      SECONDARYFRAMEWORK: netcoreapp1.0
+      FrameworkLibsMoniker: netstandard1.4
+
+before_build:
+  - git submodule update --init --recursive
 
 build_script:
-  - git submodule update --init --recursive
   - ps: |
       if (gcm dotnet -errorAction SilentlyContinue) {
         echo "Using dotnet '$((gcm dotnet).Path)'"
@@ -26,26 +39,27 @@ build_script:
         exit 1
       }
 
-      # Restore packages
+      # Restore Packages
       dotnet restore
 
-      if($env:Framework -eq "net45") {
-        $FrameworkLibsMoniker = "net45"
-      } else {
-        $FrameworkLibsMoniker = "netstandard1.4"
-      }
-
-      # Build projects
-      dotnet build -c $env:Configuration -f $FrameworkLibsMoniker .\GeoIP2
-      dotnet build -c $env:Configuration -f $env:Framework .\GeoIP2.Benchmark
-      dotnet build -c $env:Configuration -f $env:Framework .\GeoIP2.UnitTests
+      # Build Projects
+      dotnet build -c $env:CONFIGURATION -f $env:FrameworkLibsMoniker .\GeoIP2
+      dotnet build -c $env:CONFIGURATION -f $env:FRAMEWORK .\GeoIP2.Benchmark
+      dotnet build -c $env:CONFIGURATION -f $env:SECONDARYFRAMEWORK .\GeoIP2.UnitTests
 
 test_script:
-  - ps: |
-      # Run tests
-      cd .\GeoIP2.UnitTests
+  # Run Benchmark
+  - dotnet run -f %FRAMEWORK% -c %CONFIGURATION% -p GeoIP2.Benchmark
 
-      dotnet run -f $env:Framework -c $env:Configuration
+  # Run Unit Tests
+  - dotnet test -f %SECONDARYFRAMEWORK% -c %CONFIGURATION% GeoIP2.UnitTests
+
+after_test:
+  # Run Unit Tests
+  - dotnet pack -c %CONFIGURATION% GeoIP2
+
+artifacts:
+  - path: 'GeoIP2\bin\**\*.nupkg'
 
 notifications:
   - auth_token:
