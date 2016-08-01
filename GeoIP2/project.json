@@ -1,11 +1,22 @@
 {
-  "version": "2.7.0-beta2",
+  "version": "2.7.0",
   "name": "MaxMind.GeoIP2",
   "description": "MaxMind GeoIP2 Database Reader and Web Service Client",
-
   "packOptions": {
-    "authors": ["Gregory Oschwald", "Mark Fowler"],
-    "tags": ["maxmind", "ip", "geoip", "geoip2", "geolocation", "maxmind", "ipv4", "ipv6"],
+    "authors": [
+      "Gregory Oschwald",
+      "Mark Fowler"
+    ],
+    "tags": [
+      "maxmind",
+      "ip",
+      "geoip",
+      "geoip2",
+      "geolocation",
+      "maxmind",
+      "ipv4",
+      "ipv6"
+    ],
     "iconUrl": "https://raw.githubusercontent.com/maxmind/GeoIP2-dotnet/master/MaxMind-logo.png",
     "projectUrl": "https://github.com/maxmind/GeoIP2-dotnet",
     "licenseUrl": "https://github.com/maxmind/GeoIP2-dotnet/blob/master/LICENSE",
@@ -15,7 +26,6 @@
       "url": "https://github.com/maxmind/GeoIP2-dotnet"
     }
   },
-
   "buildOptions": {
     "keyFile": "../MaxMind.snk",
     "outputName": "MaxMind.GeoIP2",
