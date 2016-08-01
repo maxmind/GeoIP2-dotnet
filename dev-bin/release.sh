@@ -53,7 +53,8 @@ popd
 pushd GeoIP2.UnitTests
 
 dotnet restore
-dotnet run -c Release
+# netcoreapp1.0 only due to https://github.com/dotnet/cli/issues/3073
+dotnet test -c Release -f netcoreapp1.0
 
 popd
 
