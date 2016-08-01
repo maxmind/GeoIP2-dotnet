@@ -1,9 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.7.0 (2016-XX-XX)
+2.7.0 (2016-08-01)
 ------------------
 
+* First non-beta release with .NET Core support.
+* The tests now use the .NET Core NUnit runner. Pull request by Adeel Mujahid.
+  GitHub #68.
 * Updated documentation to clarify what the accuracy radius refers to.
 
 2.7.0-beta2 (2016-06-02)
