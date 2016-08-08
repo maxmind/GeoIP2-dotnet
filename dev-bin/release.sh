@@ -46,7 +46,7 @@ pushd GeoIP2
 
 dotnet restore
 dotnet build -c Release
-dotnet pack -c Release
+# dotnet pack -c Release
 
 popd
 
@@ -117,4 +117,5 @@ git tag "$TAG"
 git push
 git push --tags
 
-nuget push "GeoIP2/bin/Release/MaxMind.GeoIP2.$VERSION.nupkg"
+# nuget push "GeoIP2/bin/Release/MaxMind.GeoIP2.$VERSION.nupkg"
+echo "Currently, signing does not work properly from Linux. Please pack and release from Windows."
