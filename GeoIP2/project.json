@@ -1,5 +1,5 @@
 {
-  "version": "2.7.0",
+  "version": "2.7.1",
   "name": "MaxMind.GeoIP2",
   "description": "MaxMind GeoIP2 Database Reader and Web Service Client",
   "packOptions": {
@@ -32,7 +32,7 @@
     "xmlDoc": true
   },
   "dependencies": {
-    "MaxMind.Db": "2.1.1-*",
+    "MaxMind.Db": "2.1.2-*",
     "Newtonsoft.Json": "9.0.1"
   },
   "frameworks": {

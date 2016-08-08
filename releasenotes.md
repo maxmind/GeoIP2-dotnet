@@ -1,6 +1,11 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.7.1 (2016-08-08)
+------------------
+
+* Re-release of 2.7.0 to fix strong name issue. No code changes.
+
 2.7.0 (2016-08-01)
 ------------------
 
