@@ -1,4 +1,4 @@
-﻿---
+---
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
