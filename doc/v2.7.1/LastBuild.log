@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder and Tools" version="2016.5.28.0" projectFile="C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\geoip2.shfbproj" started="9/16/2016 3:28:50 PM">
+<shfbBuild product="Sandcastle Help File Builder and Tools" version="2016.5.28.0" projectFile="C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\geoip2.shfbproj" started="9/16/2016 3:34:47 PM">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
@@ -35,16 +35,16 @@ Copying XML comments files
 <buildStep step="GenerateSharedContent">
 Generating shared content files (en-US, English (United States))...
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
-</plugIn>    Last step completed in 00:00:00.0192
+</plugIn>    Last step completed in 00:00:00.0239
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00.0034
+    Last step completed in 00:00:00.0133
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
 [C:\Program Files (x86)\MSBuild\14.0\bin\MSBuild.exe - GenerateRefInfo.proj]
-Build started 9/16/2016 3:28:52 PM.
+Build started 9/16/2016 3:34:49 PM.
 The target &quot;_ConvertPdbFiles&quot; listed in a BeforeTargets attribute at &quot;C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,37)&quot; does not exist in the project, and will be ignored.
 The target &quot;_CollectPdbFiles&quot; listed in an AfterTargets attribute at &quot;C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,70)&quot; does not exist in the project, and will be ignored.
 The target &quot;_CollectMdbFiles&quot; listed in a BeforeTargets attribute at &quot;C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (41,38)&quot; does not exist in the project, and will be ignored.
@@ -67,13 +67,13 @@ Done Building Project &quot;C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-
 
 Build succeeded.
 
-Time Elapsed 00:00:00.55
-    Last step completed in 00:00:00.6683
+Time Elapsed 00:00:00.60
+    Last step completed in 00:00:00.7189
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
 [C:\Program Files (x86)\MSBuild\14.0\bin\MSBuild.exe - TransformManifest.proj]
-Build started 9/16/2016 3:28:52 PM.
+Build started 9/16/2016 3:34:49 PM.
 Project &quot;C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\TransformManifest.proj&quot; on node 1 (default targets).
 TransformManifest:
   XslTransform (v2016.5.28.0)
@@ -191,26 +191,26 @@ Done Building Project &quot;C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-
 
 Build succeeded.
 
-Time Elapsed 00:00:00.57
-    Last step completed in 00:00:00.6846
+Time Elapsed 00:00:00.64
+    Last step completed in 00:00:00.7360
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00.0322
+    Last step completed in 00:00:00.0315
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 No additional content to copy
-    Last step completed in 00:00:00.0026
+    Last step completed in 00:00:00.0041
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00.0004
+    Last step completed in 00:00:00.0005
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
 [C:\Program Files (x86)\MSBuild\14.0\bin\MSBuild.exe - GenerateIntermediateTOC.proj]
-Build started 9/16/2016 3:28:53 PM.
+Build started 9/16/2016 3:34:50 PM.
 Project &quot;C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\GenerateIntermediateTOC.proj&quot; on node 1 (default targets).
 GenerateIntermediateTOC:
   XslTransform (v2016.5.28.0)
@@ -221,26 +221,26 @@ Done Building Project &quot;C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-
 
 Build succeeded.
 
-Time Elapsed 00:00:00.09
+Time Elapsed 00:00:00.11
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00.1631
+    Last step completed in 00:00:00.1857
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00.1758
+    Last step completed in 00:00:00.1687
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
 C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\sandcastle.config
   Updating reference topic configurations.
   No conceptual content.  Removing conceptual content components.
-    Last step completed in 00:00:00.0139
+    Last step completed in 00:00:00.0147
 </buildStep>
 <buildStep step="BuildTopics">
 Building help topics...
 [C:\Program Files (x86)\MSBuild\14.0\bin\MSBuild.exe - BuildTopics.proj]
-Build started 9/16/2016 3:28:53 PM.
+Build started 9/16/2016 3:34:51 PM.
 Project &quot;C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\BuildTopics.proj&quot; on node 1 (default targets).
 BuildTopics:
   BuildAssembler (v2016.5.28.0)
@@ -410,17 +410,16 @@ BuildAssembler : warning : ShowMissingComponent: [G:MaxMind.GeoIP2] Missing &lt;
   158 warning(s)
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 8 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 4 of 30.
-  SaveComponent: Waiting for the document writer task to finish (100 Website API file(s) remaining)...
 Done Building Project &quot;C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\BuildTopics.proj&quot; (default targets).
 
 Build succeeded.
 
-Time Elapsed 00:00:13.29
-    Last step completed in 00:00:13.4098
+Time Elapsed 00:00:16.77
+    Last step completed in 00:00:16.9629
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
-    Last step completed in 00:00:00.0048
+    Last step completed in 00:00:00.0181
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -436,7 +435,7 @@ Processed 475 HTML files
 Sorting keywords and generating See Also indices
 Saving website keyword index to C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\WebKI.xml
 Saving website table of contents to C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\WebTOC.xml
-    Last step completed in 00:00:02.6416
+    Last step completed in 00:00:03.1049
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -515,33 +514,33 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyle
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocOpen.gif -&gt; C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\Output\Website\icons\TocOpen.gif
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\Output\Website\scripts\branding-Website.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-1.11.0.min.js -&gt; C:\Users\Gregory\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.7.1\Working\Output\Website\scripts\jquery-1.11.0.min.js
-    Last step completed in 00:00:00.2872
+    Last step completed in 00:00:08.3895
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
-    Last step completed in 00:00:00.0010
+    Last step completed in 00:00:00.0004
 </buildStep>
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
 Adding lightweight search and TOC elements to each topic...
-</plugIn>    Last step completed in 00:00:03.8948
+</plugIn>    Last step completed in 00:00:03.3175
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
 
 Copied 500 files
 Copied 741 files for the website content
-    Last step completed in 00:00:00.7505
+    Last step completed in 00:00:00.8127
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:00.1827
+    Last step completed in 00:00:00.1329
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 9/16/2016 3:29:15 PM.  Total time: 00:00:24.8808
+Build completed successfully at 9/16/2016 3:35:23 PM.  Total time: 00:00:36.6729
 
 </buildStep>
 </shfbBuild>
