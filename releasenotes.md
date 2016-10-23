@@ -1,6 +1,11 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.7.2
+------------------
+
+* Use framework assembly for `System.Net.Http` on .NET 4.5.
+
 2.7.1 (2016-08-08)
 ------------------
 
