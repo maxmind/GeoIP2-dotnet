@@ -37,9 +37,9 @@
   },
   "frameworks": {
     "net45": {
-      "dependencies": {
-        "System.Net.Http": "4.0.0"
-      }
+        "frameworkAssemblies":{
+            "System.Net.Http":""
+        }
     },
     "netstandard1.4": {
       "dependencies": {
