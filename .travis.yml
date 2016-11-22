@@ -39,9 +39,9 @@ before_install:
   - if test "$TRAVIS_OS_NAME" == "osx"; then
       brew install openssl;
       brew link --force openssl;
-      export DOTNET_SDK_URL="https://go.microsoft.com/fwlink/?LinkID=809128";
+      export DOTNET_SDK_URL="https://go.microsoft.com/fwlink/?LinkID=835011";
     else
-      export DOTNET_SDK_URL="https://go.microsoft.com/fwlink/?LinkID=809129";
+      export DOTNET_SDK_URL="https://go.microsoft.com/fwlink/?LinkID=834989";
     fi
 
   - export DOTNET_INSTALL_DIR="$PWD/.dotnetcli"
