@@ -31,10 +31,7 @@ if ((Read-Host -Prompt 'Continue? (y/n)') -ne 'y') {
     Write-Error 'Aborting'
 }
 
-if (-Not(& git status --porcelain)) {
-    & git add $projectJsonFile
-    & git commit -m "Prepare for $version"
-}
+& git commit -m "Prepare for $version" -a
 
 Push-Location GeoIP2
 
@@ -107,4 +104,4 @@ Pop-Location
 & git push
 & git push --tags
 
-& nuget push "GeoIP2/bin/Release/GeoIP2.$version.nupkg" -Source https://www.nuget.org/api/v2/package
+& nuget push "GeoIP2/bin/Release/MaxMind.GeoIP2.$version.nupkg" -Source https://www.nuget.org/api/v2/package
