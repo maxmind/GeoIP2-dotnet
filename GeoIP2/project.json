@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.7.1",
+  "version": "2.7.2",
   "name": "MaxMind.GeoIP2",
   "description": "MaxMind GeoIP2 Database Reader and Web Service Client",
   "packOptions": {
