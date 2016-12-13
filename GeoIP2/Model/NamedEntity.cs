@@ -69,8 +69,9 @@ namespace MaxMind.GeoIP2.Model
         {
             get
             {
-                var locale = Locales.FirstOrDefault(l => Names.ContainsKey(l));
-                return locale == null ? null : Names[locale];
+                var names = _names;
+                var locale = Locales.FirstOrDefault(l => names.ContainsKey(l));
+                return locale == null ? null : names[locale];
             }
         }
 
