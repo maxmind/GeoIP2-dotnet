@@ -50,11 +50,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaxMind.Db, Version=2.0.0.0, Culture=neutral, PublicKeyToken=66afa4cc5ae853ac, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaxMind.Db.2.0.0\lib\net45\MaxMind.Db.dll</HintPath>
+      <HintPath>packages\MaxMind.Db.2.1.2\lib\net45\MaxMind.Db.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -68,50 +68,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Http\AsyncClient.cs" />
-    <Compile Include="Http\Response.cs" />
-    <Compile Include="Http\SyncClient.cs" />
-    <Compile Include="Http\ISyncClient.cs" />
-    <Compile Include="DatabaseReader.cs" />
-    <Compile Include="Exceptions\AddressNotFoundException.cs" />
-    <Compile Include="Exceptions\AuthenticationException.cs" />
-    <Compile Include="Exceptions\GeoIP2Exception.cs" />
-    <Compile Include="Exceptions\HttpException.cs" />
-    <Compile Include="Exceptions\InvalidRequestException.cs" />
-    <Compile Include="Exceptions\OutOfQueriesException.cs" />
-    <Compile Include="IGeoIP2DatabaseReader.cs" />
-    <Compile Include="IGeoIP2Provider.cs" />
-    <Compile Include="IGeoIP2WebServicesClient.cs" />
-    <Compile Include="Model\City.cs" />
-    <Compile Include="Model\Continent.cs" />
-    <Compile Include="Model\Country.cs" />
-    <Compile Include="Model\WebServiceError.cs" />
-    <Compile Include="Model\Location.cs" />
-    <Compile Include="Model\MaxMind.cs" />
-    <Compile Include="Model\NamedEntity.cs" />
-    <Compile Include="Model\Postal.cs" />
-    <Compile Include="Model\RepresentedCountry.cs" />
-    <Compile Include="Model\Subdivision.cs" />
-    <Compile Include="Model\Traits.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responses\AbstractCityResponse.cs" />
-    <Compile Include="Responses\AbstractCountryResponse.cs" />
-    <Compile Include="Responses\AbstractResponse.cs" />
-    <Compile Include="Responses\CityResponse.cs" />
-    <Compile Include="Responses\AnonymousIPResponse.cs" />
-    <Compile Include="Responses\EnterpriseResponse.cs" />
-    <Compile Include="Responses\IspResponse.cs" />
-    <Compile Include="Responses\ConnectionTypeResponse.cs" />
-    <Compile Include="Responses\DomainResponse.cs" />
-    <Compile Include="Responses\CountryResponse.cs" />
-    <Compile Include="Responses\InsightsResponse.cs" />
-    <Compile Include="WebServiceClient.cs" />
+    <Compile Include="..\GeoIP2\GlobalSuppressions.cs" />
+    <Compile Include="..\GeoIP2\Http\AsyncClient.cs" />
+    <Compile Include="..\GeoIP2\Http\Response.cs" />
+    <Compile Include="..\GeoIP2\Http\SyncClient.cs" />
+    <Compile Include="..\GeoIP2\Http\ISyncClient.cs" />
+    <Compile Include="..\GeoIP2\DatabaseReader.cs" />
+    <Compile Include="..\GeoIP2\Exceptions\AddressNotFoundException.cs" />
+    <Compile Include="..\GeoIP2\Exceptions\AuthenticationException.cs" />
+    <Compile Include="..\GeoIP2\Exceptions\GeoIP2Exception.cs" />
+    <Compile Include="..\GeoIP2\Exceptions\HttpException.cs" />
+    <Compile Include="..\GeoIP2\Exceptions\InvalidRequestException.cs" />
+    <Compile Include="..\GeoIP2\Exceptions\OutOfQueriesException.cs" />
+    <Compile Include="..\GeoIP2\Exceptions\PermissionRequiredException.cs" />
+    <Compile Include="..\GeoIP2\IGeoIP2DatabaseReader.cs" />
+    <Compile Include="..\GeoIP2\IGeoIP2Provider.cs" />
+    <Compile Include="..\GeoIP2\IGeoIP2WebServicesClient.cs" />
+    <Compile Include="..\GeoIP2\Model\City.cs" />
+    <Compile Include="..\GeoIP2\Model\Continent.cs" />
+    <Compile Include="..\GeoIP2\Model\Country.cs" />
+    <Compile Include="..\GeoIP2\Model\WebServiceError.cs" />
+    <Compile Include="..\GeoIP2\Model\Location.cs" />
+    <Compile Include="..\GeoIP2\Model\MaxMind.cs" />
+    <Compile Include="..\GeoIP2\Model\NamedEntity.cs" />
+    <Compile Include="..\GeoIP2\Model\Postal.cs" />
+    <Compile Include="..\GeoIP2\Model\RepresentedCountry.cs" />
+    <Compile Include="..\GeoIP2\Model\Subdivision.cs" />
+    <Compile Include="..\GeoIP2\Model\Traits.cs" />
+    <Compile Include="..\GeoIP2\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\GeoIP2\Responses\AbstractCityResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\AbstractCountryResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\AbstractResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\CityResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\AnonymousIPResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\EnterpriseResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\IspResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\ConnectionTypeResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\DomainResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\CountryResponse.cs" />
+    <Compile Include="..\GeoIP2\Responses\InsightsResponse.cs" />
+    <Compile Include="..\GeoIP2\WebServiceClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="GeoIP2.ruleset" />
     <None Include="NuGet.targets" />
     <None Include="packages.config" />
