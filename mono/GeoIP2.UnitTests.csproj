@@ -44,37 +44,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaxMind.Db, Version=2.0.0.0, Culture=neutral, PublicKeyToken=66afa4cc5ae853ac, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaxMind.Db.2.0.0\lib\net45\MaxMind.Db.dll</HintPath>
+      <HintPath>packages\MaxMind.Db.2.1.2\lib\net45\MaxMind.Db.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NSubstitute, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
-      <HintPath>..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
+      <HintPath>packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.2.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.4.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>packages\NUnit.3.4.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RichardSzalay.MockHttp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ed48272b5473f4a9, processorArchitecture=MSIL">
-      <HintPath>..\packages\MockHttpSigned.1.2.1\lib\net45\RichardSzalay.MockHttp.dll</HintPath>
+      <HintPath>packages\MockHttpSigned.1.3.0-netstandard-alpha3\lib\net45\RichardSzalay.MockHttp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -82,22 +74,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mock\MockSyncClient.cs" />
-    <Compile Include="Model\LocationTests.cs" />
-    <Compile Include="ResponseTests.cs" />
-    <Compile Include="DatabaseReaderTests.cs" />
-    <Compile Include="DeserializationTests.cs" />
-    <Compile Include="NamedEntityTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResponseHelper.cs" />
-    <Compile Include="WebServiceClientTests.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\Mock\MockSyncClient.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\Model\LocationTests.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\ResponseTests.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\DatabaseReaderTests.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\DeserializationTests.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\NamedEntityTests.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\ResponseHelper.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\TestUtils.cs" />
+    <Compile Include="..\GeoIP2.UnitTests\WebServiceClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GeoIP2\GeoIP2.csproj">
+    <ProjectReference Include="GeoIP2.csproj">
       <Project>{024e2fa9-242c-4c9a-bfea-64c83352b79d}</Project>
       <Name>GeoIP2</Name>
     </ProjectReference>
@@ -108,13 +100,6 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,93 +1,35 @@
 ---
-language: generic
-
-addons:
-  apt:
-    packages:
-    - gettext
-    - libcurl4-openssl-dev
-    - libicu-dev
-    - libssl-dev
-    - libunwind8
-    - zlib1g
+language: csharp
+solution: mono/GeoIP2.sln
 
 env:
   global:
-    - MAXMIND_BENCHMARK_DB=GeoIP2.Benchmark/GeoLite2-City.mmdb
-    - MAXMIND_TEST_BASE_DIR=GeoIP2.UnitTests
+    - CONFIGURATION=Release
+    - MAXMIND_BENCHMARK_DB=$TRAVIS_BUILD_DIR/GeoIP2.Benchmark/GeoLite2-City.mmdb
+    - MAXMIND_TEST_BASE_DIR="$PWD/GeoIP2.UnitTests"
 
 matrix:
   include:
-    - os: linux
-      dist: trusty # Ubuntu 14.04
-      sudo: required
-      env: CONFIGURATION=Debug
-    - os: linux
-      dist: trusty
-      sudo: required
-      env: CONFIGURATION=Release
-    - os: osx
-      osx_image: xcode7.2 # macOS 10.11
-      env: CONFIGURATION=Debug
-    - os: osx
-      osx_image: xcode7.2
-      env: CONFIGURATION=Release
+  - os: linux
+    dist: trusty # Ubuntu 14.04
+    dotnet: 1.0.0-preview2-1-003177
+    mono: none
+    env: DOTNETCORE=1
+    sudo: required
+  - os: osx
+    osx_image: xcode7.3 # macOS 10.11
+    dotnet: 1.0.0-preview2-1-003177
+    mono: none
+    env: DOTNETCORE=1
+  - os: linux
+    dist: trusty # Ubuntu 14.04
+    mono: latest
+    sudo: false
+  - os: osx
+    osx_image: xcode7.3 # macOS 10.11
+    mono: latest
 
-before_install:
-  # Install OpenSSL
-  # Also set download URLs obtained from https://www.microsoft.com/net/download#core
-  - if test "$TRAVIS_OS_NAME" == "osx"; then
-      brew install openssl;
-      brew link --force openssl;
-      export DOTNET_SDK_URL="https://go.microsoft.com/fwlink/?LinkID=835011";
-    else
-      export DOTNET_SDK_URL="https://go.microsoft.com/fwlink/?LinkID=834989";
-    fi
-
-  - export DOTNET_INSTALL_DIR="$PWD/.dotnetcli"
-
-  # Install .NET CLI
-  - mkdir $DOTNET_INSTALL_DIR
-  - curl -L $DOTNET_SDK_URL -o dotnet_package
-  - tar -xvzf dotnet_package -C $DOTNET_INSTALL_DIR
-
-  # Add dotnet to PATH
-  - export PATH="$DOTNET_INSTALL_DIR:$PATH"
-
-  # Update submodules
-  - git submodule update --init --recursive
-
-install:
-  # Display dotnet version info
-  - which dotnet;
-    if [ $? -eq 0 ]; then
-      echo "Using dotnet:";
-      dotnet --info;
-    else
-      echo "dotnet.exe not found"
-      exit 1;
-    fi
-
-  # Hack for: https://github.com/dotnet/cli/issues/3658
-  - if test "$TRAVIS_OS_NAME" == "linux"; then
-      nvm install stable && nvm use stable;
-    fi
-  - node -e "jsonPath='./GeoIP2.Benchmark/project.json';data=require(jsonPath);fs=require('fs');delete data.frameworks.net45;fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2))"
-
-  # Restore Packages
-  - dotnet restore
-
-  # Build Projects
-  - dotnet build -c $CONFIGURATION -f netstandard1.4 ./GeoIP2
-  - dotnet build -c $CONFIGURATION -f netcoreapp1.0 ./GeoIP2.Benchmark
-  - dotnet build -c $CONFIGURATION -f netcoreapp1.0 ./GeoIP2.UnitTests
-
-script:
-  # Run Benchmark
-  - dotnet run -f netcoreapp1.0 -c $CONFIGURATION -p GeoIP2.Benchmark
-
-  # Run Unit Tests
-  - dotnet test -f netcoreapp1.0 -c $CONFIGURATION GeoIP2.UnitTests
+script: ./dev-bin/build.sh
 
 notifications:
   email:
