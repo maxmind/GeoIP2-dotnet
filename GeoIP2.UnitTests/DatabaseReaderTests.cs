@@ -211,22 +211,37 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Fact]
-        public void CityWithIPAddressClass_ValidResponse()
+        public void City_ManyFields()
         {
             using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
-                var response = reader.City(IPAddress.Parse("81.2.69.160"));
-                Assert.Equal("London", response.City.Name);
-            }
-        }
+                var response = reader.City(IPAddress.Parse("216.160.83.56"));
 
-        [Fact]
-        public void CityWithDefaultLocale_ValidResponse()
-        {
-            using (var reader = new DatabaseReader(_cityDatabaseFile))
-            {
-                var response = reader.City("81.2.69.160");
-                Assert.Equal("London", response.City.Name);
+                Assert.Equal(5803556, response.City.GeoNameId);
+                Assert.Equal("Milton", response.City.Name);
+
+                Assert.Equal("NA", response.Continent.Code);
+                Assert.Equal(6255149, response.Continent.GeoNameId);
+                Assert.Equal("North America", response.Continent.Name);
+
+                Assert.Equal(6252001, response.Country.GeoNameId);
+                Assert.Equal("US", response.Country.IsoCode);
+                Assert.Equal("United States", response.Country.Name);
+
+                Assert.Equal(47.2513, response.Location.Latitude);
+                Assert.Equal(-122.3149, response.Location.Longitude);
+                Assert.Equal(819, response.Location.MetroCode);
+                Assert.Equal("America/Los_Angeles", response.Location.TimeZone);
+
+                Assert.Equal("98354", response.Postal.Code);
+
+                Assert.Equal(2635167, response.RegisteredCountry.GeoNameId);
+                Assert.Equal("GB", response.RegisteredCountry.IsoCode);
+                Assert.Equal("United Kingdom", response.RegisteredCountry.Name);
+
+                Assert.Equal(5815135, response.Subdivisions[0].GeoNameId);
+                Assert.Equal("WA", response.Subdivisions[0].IsoCode);
+                Assert.Equal("Washington", response.Subdivisions[0].Name);
             }
         }
 
