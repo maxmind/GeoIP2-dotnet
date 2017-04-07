@@ -1,29 +1,29 @@
 ---
 version: '1.0.{build}'
 
-os: Visual Studio 2015
+os: Visual Studio 2017
 
 environment:
   global:
-    MAXMIND_BENCHMARK_DB: GeoIP2.Benchmark/GeoLite2-City.mmdb
-    MAXMIND_TEST_BASE_DIR: GeoIP2.UnitTests
+    MAXMIND_BENCHMARK_DB: $(APPVEYOR_BUILD_FOLDER)/GeoIP2.Benchmark/GeoLite2-City.mmdb
+    MAXMIND_TEST_BASE_DIR: $(APPVEYOR_BUILD_FOLDER)/GeoIP2.UnitTests
   matrix:
     - CONFIGURATION: Debug
-      FRAMEWORK: net45
-      SECONDARYFRAMEWORK: net451
-      FrameworkLibsMoniker: net45
+      CONSOLE_FRAMEWORK: net45
+      LIB_FRAMEWORK: net45
+      TEST_FRAMEWORK: net452
     - CONFIGURATION: Release
-      FRAMEWORK: net45
-      SECONDARYFRAMEWORK: net451
-      FrameworkLibsMoniker: net45
+      CONSOLE_FRAMEWORK: net45
+      TEST_FRAMEWORK: net452
+      LIB_FRAMEWORK: net45
     - CONFIGURATION: Debug
-      FRAMEWORK: netcoreapp1.0
-      SECONDARYFRAMEWORK: netcoreapp1.0
-      FrameworkLibsMoniker: netstandard1.4
+      CONSOLE_FRAMEWORK: netcoreapp1.0
+      LIB_FRAMEWORK: netstandard1.4
+      TEST_FRAMEWORK: netcoreapp1.0
     - CONFIGURATION: Release
-      FRAMEWORK: netcoreapp1.0
-      SECONDARYFRAMEWORK: netcoreapp1.0
-      FrameworkLibsMoniker: netstandard1.4
+      CONSOLE_FRAMEWORK: netcoreapp1.0
+      LIB_FRAMEWORK: netstandard1.4
+      TEST_FRAMEWORK: netcoreapp1.0
 
 before_build:
   - git submodule update --init --recursive
@@ -43,16 +43,16 @@ build_script:
       dotnet restore
 
       # Build Projects
-      dotnet build -c $env:CONFIGURATION -f $env:FrameworkLibsMoniker .\GeoIP2
-      dotnet build -c $env:CONFIGURATION -f $env:FRAMEWORK .\GeoIP2.Benchmark
-      dotnet build -c $env:CONFIGURATION -f $env:SECONDARYFRAMEWORK .\GeoIP2.UnitTests
+      dotnet build -c $env:CONFIGURATION -f $env:LIB_FRAMEWORK .\GeoIP2
+      dotnet build -c $env:CONFIGURATION -f $env:CONSOLE_FRAMEWORK .\GeoIP2.Benchmark
+      dotnet build -c $env:CONFIGURATION -f $env:TEST_FRAMEWORK .\GeoIP2.UnitTests
 
 test_script:
   # Run Benchmark
-  - dotnet run -f %FRAMEWORK% -c %CONFIGURATION% -p GeoIP2.Benchmark
+  - dotnet run -f %CONSOLE_FRAMEWORK% -c %CONFIGURATION% -p GeoIP2.Benchmark/GeoIP2.Benchmark.csproj
 
   # Run Unit Tests
-  - dotnet test -f %SECONDARYFRAMEWORK% -c %CONFIGURATION% GeoIP2.UnitTests
+  - dotnet test -f %TEST_FRAMEWORK% -c %CONFIGURATION% GeoIP2.UnitTests/GeoIP2.UnitTests.csproj
 
 after_test:
   # Run Unit Tests
