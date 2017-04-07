@@ -1,4 +1,5 @@
 ﻿#if !NETCOREAPP1_0
+
 #region
 
 using MaxMind.GeoIP2.Http;
@@ -23,4 +24,5 @@ namespace MaxMind.GeoIP2.UnitTests.Mock
         }
     }
 }
+
 #endif

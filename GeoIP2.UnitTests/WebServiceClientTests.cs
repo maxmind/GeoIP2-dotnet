@@ -7,7 +7,6 @@ using MaxMind.GeoIP2.Responses;
 #if !NETCOREAPP1_0
 using MaxMind.GeoIP2.UnitTests.Mock;
 #endif
-using NUnit.Framework;
 using RichardSzalay.MockHttp;
 using System;
 using System.Collections.Generic;
@@ -17,13 +16,14 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
+using Xunit.Extensions;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
 #endregion
 
 namespace MaxMind.GeoIP2.UnitTests
 {
-    [TestFixture]
     public class WebServiceClientTests
     {
         public delegate Task<AbstractCountryResponse> ClientRunner(WebServiceClient c, string ip = "1.2.3.4");
@@ -31,39 +31,54 @@ namespace MaxMind.GeoIP2.UnitTests
         // I don't love running the sync tests with async, but the alternative
         // seems to be a lot of code duplication.
         // "Async" added to the name so that Nunit can tell them apart.
-        private static readonly object[][] TestCases =
+        public static readonly object[][] TestCases =
         {
 #if !NETCOREAPP1_0
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"country", (ClientRunner) (async (c, i) => c.Country(i)), typeof (CountryResponse)},
+            new object[] {"country", (ClientRunner) (async (c, i) => c.Country(i)), typeof(CountryResponse)},
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"city", (ClientRunner) (async (c, i) => c.City(i)), typeof (CityResponse)},
+            new object[] {"city", (ClientRunner) (async (c, i) => c.City(i)), typeof(CityResponse)},
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"insights", (ClientRunner) (async (c, i) => c.Insights(i)), typeof (InsightsResponse)},
+            new object[] {"insights", (ClientRunner) (async (c, i) => c.Insights(i)), typeof(InsightsResponse)},
 #endif
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof (CountryResponse)},
+            new object[]
+                {"countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof(CountryResponse)},
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof (CityResponse)},
+            new object[] {"cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof(CityResponse)},
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof (InsightsResponse)}
+            new object[]
+                {"insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof(InsightsResponse)}
         };
 
         public delegate Task<AbstractCountryResponse> MeClientRunner(WebServiceClient c);
 
-        private static readonly object[][] MeTestCases =
+        public static readonly object[][] MeTestCases =
         {
 #if !NETCOREAPP1_0
-            new object[] {"country", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Country())), typeof (CountryResponse)},
-            new object[] {"city", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.City())), typeof (CityResponse)},
-            new object[] {"insights", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Insights())), typeof (InsightsResponse)},
+            new object[]
+            {
+                "country", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Country())),
+                typeof(CountryResponse)
+            },
+            new object[]
+            {
+                "city", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.City())), typeof(CityResponse)
+            },
+            new object[]
+            {
+                "insights", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Insights())),
+                typeof(InsightsResponse)
+            },
 #endif
-            new object[] {"countryAsync", (MeClientRunner) (async c => await c.CountryAsync()), typeof (CountryResponse)},
-            new object[] {"cityAsync", (MeClientRunner) (async c => await c.CityAsync()), typeof (CityResponse)},
-            new object[] {"insightsAsync", (MeClientRunner) (async c => await c.InsightsAsync()), typeof (InsightsResponse)}
+            new object[]
+                {"countryAsync", (MeClientRunner) (async c => await c.CountryAsync()), typeof(CountryResponse)},
+            new object[] {"cityAsync", (MeClientRunner) (async c => await c.CityAsync()), typeof(CityResponse)},
+            new object[]
+                {"insightsAsync", (MeClientRunner) (async c => await c.InsightsAsync()), typeof(InsightsResponse)}
         };
 
-        private WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
+        private static WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
             HttpStatusCode status = HttpStatusCode.OK, string contentType = null, string content = "")
         {
             var service = type.Replace("Async", "");
@@ -94,317 +109,346 @@ namespace MaxMind.GeoIP2.UnitTests
             var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, responseStream));
 #endif
 
-            return new WebServiceClient(6, "0123456789", new List<string> { "en" },
+            return new WebServiceClient(6, "0123456789", new List<string> {"en"},
                 httpMessageHandler: mockHttp
 #if !NETCOREAPP1_0
                 , syncWebRequest: syncWebRequest
 #endif
-                );
+            );
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void AddressNotFoundShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void AddressNotFoundShouldThrowException(string type, ClientRunner cr, Type t)
         {
-            var ip = "1.2.3.16";
-            var client = CreateClient(type, ip, HttpStatusCode.NotFound,
+            var client = CreateClient(type, status: HttpStatusCode.NotFound,
                 content: ErrorJson("IP_ADDRESS_NOT_FOUND", "The value 1.2.3.16 is not in the database."));
 
-            // Not using Assert.Throws due to https://github.com/nunit/nunit/issues/464
-            Assert.That(async () => await cr(client, ip),
-                Throws.TypeOf<AddressNotFoundException>()
-                    .And.Message.Contains("The value 1.2.3.16 is not in the database"));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AddressNotFoundException>(exception);
+            Assert.Contains("The value 1.2.3.16 is not in the database", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void AddressReservedShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void AddressReservedShouldThrowException(string type, ClientRunner cr, Type t)
         {
-            var ip = "1.2.3.17";
-            var client = CreateClient(type, ip, HttpStatusCode.Forbidden,
-                content: ErrorJson("IP_ADDRESS_RESERVED", "The value 1.2.3.17 belongs to a reserved or private range."));
+            var client = CreateClient(type, status: HttpStatusCode.Forbidden,
+                content: ErrorJson("IP_ADDRESS_RESERVED",
+                    "The value 1.2.3.17 belongs to a reserved or private range."));
 
-            Assert.That(async () => await cr(client, ip),
-                Throws.TypeOf<AddressNotFoundException>()
-                    .And.Message.Contains("The value 1.2.3.17 belongs to a reserved or private range"));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AddressNotFoundException>(exception);
+            Assert.Contains("The value 1.2.3.17 belongs to a reserved or private range", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void BadCharsetRequirementShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void BadCharsetRequirementShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.NotAcceptable,
                 content: "Cannot satisfy your Accept-Charset requirements",
                 contentType: "text/plain");
 
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<HttpException>()
-                    .And.Message.Contains("Cannot satisfy your Accept-Charset requirements"));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("Cannot satisfy your Accept-Charset requirements", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void BadContentTypeShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void BadContentTypeShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.OK,
                 content: CountryJson, contentType: "bad/content-type");
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<GeoIP2Exception>()
-                    .And.Message.Contains("but it does not appear to be JSON"));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<GeoIP2Exception>(exception);
+            Assert.Contains("but it does not appear to be JSON", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void EmptyBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void EmptyBodyShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type);
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<HttpException>()
-                    .And.Message.Contains("message body"));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("message body", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void InternalServerErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void InternalServerErrorShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.InternalServerError,
                 content: "Internal Server Error");
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<HttpException>()
-                    .And.Message.Contains("Received a server (500) error"));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("Received a server (500) error", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void IncorrectlyFormattedIPAddressShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void IncorrectlyFormattedIPAddressShouldThrowException(string type, ClientRunner cr, Type t)
         {
-            Assert.That(async () => await cr(CreateClient(type), "foo"),
-                Throws.TypeOf<GeoIP2Exception>()
-                    .And.Message.Contains("The specified IP address was incorrectly formatted"));
+            var exception = await Record.ExceptionAsync(async () => await cr(CreateClient(type), "foo"));
+            Assert.NotNull(exception);
+            Assert.IsType<GeoIP2Exception>(exception);
+            Assert.Contains("The specified IP address was incorrectly formatted", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void PermissionRequiredShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void PermissionRequiredShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var msg = "You do not have permission to use this web service.";
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content:
-                    ErrorJson("PERMISSION_REQUIRED", msg));
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<PermissionRequiredException>()
-                    .And.Message.Contains(msg));
+                ErrorJson("PERMISSION_REQUIRED", msg));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<PermissionRequiredException>(exception);
+            Assert.Contains(msg, exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void UnknownUserIdShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void UnknownUserIdShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var msg = "You have supplied an invalid MaxMind user ID and/or license key in the Authorization header.";
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
-                    ErrorJson("USER_ID_UNKNOWN", msg));
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<AuthenticationException>()
-                    .And.Message.Contains(msg));
+                ErrorJson("USER_ID_UNKNOWN", msg));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AuthenticationException>(exception);
+            Assert.Contains(msg, exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void InvalidAuthShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void InvalidAuthShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
-                    ErrorJson("AUTHORIZATION_INVALID",
-                        "You have supplied an invalid MaxMind user ID and/or license key in the Authorization header."));
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<AuthenticationException>()
-                    .And.Message.Contains("You have supplied an invalid MaxMind user ID and/or license key"));
+                ErrorJson("AUTHORIZATION_INVALID",
+                    "You have supplied an invalid MaxMind user ID and/or license key in the Authorization header."));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AuthenticationException>(exception);
+            Assert.Contains("You have supplied an invalid MaxMind user ID and/or license key", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void MissingLicenseShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void MissingLicenseShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
-                    ErrorJson("LICENSE_KEY_REQUIRED",
-                        "You have not supplied a MaxMind license key in the Authorization header."));
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<AuthenticationException>()
-                    .And.Message.Contains("You have not supplied a MaxMind license key in the Authorization header"));
+                ErrorJson("LICENSE_KEY_REQUIRED",
+                    "You have not supplied a MaxMind license key in the Authorization header."));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AuthenticationException>(exception);
+            Assert.Contains("You have not supplied a MaxMind license key in the Authorization header",
+                exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void MissingUserIdShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void MissingUserIdShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
-                    ErrorJson("USER_ID_REQUIRED", "You have not supplied a MaxMind user ID in the Authorization header."));
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<AuthenticationException>()
-                    .And.Message.Contains("You have not supplied a MaxMind user ID in the Authorization header."));
+                ErrorJson("USER_ID_REQUIRED", "You have not supplied a MaxMind user ID in the Authorization header."));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AuthenticationException>(exception);
+            Assert.Contains("You have not supplied a MaxMind user ID in the Authorization header.", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void NoErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void NoErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden);
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<HttpException>()
-                    .And.Message.Contains("with no body"));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("with no body", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void OutOfQueriesShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void OutOfQueriesShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.PaymentRequired,
                 content:
-                    ErrorJson("OUT_OF_QUERIES",
-                        "The license key you have provided is out of queries. Please purchase more queries to use this service."));
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<OutOfQueriesException>()
-                    .And.Message.Contains("The license key you have provided is out of queries"));
+                ErrorJson("OUT_OF_QUERIES",
+                    "The license key you have provided is out of queries. Please purchase more queries to use this service."));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<OutOfQueriesException>(exception);
+            Assert.Contains("The license key you have provided is out of queries", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void InsufficientFundsShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void InsufficientFundsShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var msg =
                 "The license key you have provided is out of queries. Please purchase more queries to use this service.";
             var client = CreateClient(type, status: HttpStatusCode.PaymentRequired,
                 content:
-                    ErrorJson("INSUFFICIENT_FUNDS", msg));
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<OutOfQueriesException>()
-                    .And.Message.Contains(msg));
+                ErrorJson("INSUFFICIENT_FUNDS", msg));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<OutOfQueriesException>(exception);
+            Assert.Contains(msg, exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void SurprisingStatusShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void SurprisingStatusShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.MultipleChoices);
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<HttpException>()
-                    .And.Message.Contains("Received an unexpected response for"));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("Received an unexpected response for", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void UndeserializableJsonShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void UndeserializableJsonShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.OK,
                 content: "{\"invalid\":yes}");
 
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<GeoIP2Exception>()
-                    .And.Message.Contains("Received a 200 response but not decode it as JSON"));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<GeoIP2Exception>(exception);
+            Assert.Contains("Received a 200 response but not decode it as JSON", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void UnexpectedErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void UnexpectedErrorBodyShouldThrowExceptionAsync(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: "{\"invalid\": }");
 
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<HttpException>()
-                    .And.Message.Contains("it did not include the expected JSON body"));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("it did not include the expected JSON body", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void WebServiceErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void WebServiceErrorShouldThrowException(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: ErrorJson("IP_ADDRESS_INVALID",
                     "The value 1.2.3 is not a valid IP address"));
-
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<InvalidRequestException>()
-                    .And.Message.Contains("not a valid IP address"));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<InvalidRequestException>(exception);
+            Assert.Contains("not a valid IP address", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
-        public void WeirdErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        [Theory, MemberData(nameof(TestCases))]
+        public async void WeirdErrorBodyShouldThrowExceptionAsync(string type, ClientRunner cr, Type t)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: "{\"weird\": 42}");
-            Assert.That(async () => await cr(client),
-                Throws.TypeOf<HttpException>()
-                    .And.Message.Contains("does not specify code or error keys"));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("does not specify code or error keys", exception.Message);
         }
 
-        [Test, TestCaseSource(nameof(TestCases))]
+        [Theory, MemberData(nameof(TestCases))]
         public async Task CorrectlyFormattedResponseShouldDeserializeIntoResponseObject(string type, ClientRunner cr,
             Type t)
         {
             var client = CreateClient(type, content: CountryJson);
             var result = await cr(client);
 
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.GetType(), Is.EqualTo(t));
+            Assert.NotNull(result);
+            Assert.Equal(t, result.GetType());
         }
 
-        [Test, TestCaseSource(nameof(MeTestCases))]
+        [Theory, MemberData(nameof(MeTestCases))]
         public async Task MeEndpointIsCalledCorrectly(string type, MeClientRunner cr,
             Type t)
         {
             var client = CreateClient(type, "me", content: CountryJson);
             var result = await cr(client);
 
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.GetType(), Is.EqualTo(t));
+            Assert.NotNull(result);
+            Assert.Equal(t, result.GetType());
         }
 
 #if !NETCOREAPP1_0
-        [Test]
+
+        [Fact]
         public void MissingKeys()
         {
             var insights = CreateClient("insights", content: "{}").Insights("1.2.3.4");
 
             var city = insights.City;
-            Assert.IsNotNull(city);
-            Assert.IsNull(city.Confidence);
+            Assert.NotNull(city);
+            Assert.Null(city.Confidence);
 
             var continent = insights.Continent;
-            Assert.IsNotNull(continent);
-            Assert.IsNull(continent.Code);
+            Assert.NotNull(continent);
+            Assert.Null(continent.Code);
 
             var country = insights.Country;
-            Assert.IsNotNull(country);
+            Assert.NotNull(country);
 
             var location = insights.Location;
-            Assert.IsNotNull(location);
-            Assert.IsNull(location.AccuracyRadius);
-            Assert.IsNull(location.Latitude);
-            Assert.IsNull(location.Longitude);
-            Assert.IsNull(location.MetroCode);
-            Assert.IsNull(location.TimeZone);
-            Assert.IsNull(location.PopulationDensity);
-            Assert.IsNull(location.AverageIncome);
+            Assert.NotNull(location);
+            Assert.Null(location.AccuracyRadius);
+            Assert.Null(location.Latitude);
+            Assert.Null(location.Longitude);
+            Assert.Null(location.MetroCode);
+            Assert.Null(location.TimeZone);
+            Assert.Null(location.PopulationDensity);
+            Assert.Null(location.AverageIncome);
 
             var maxmind = insights.MaxMind;
-            Assert.IsNotNull(maxmind);
-            Assert.IsNull(maxmind.QueriesRemaining);
+            Assert.NotNull(maxmind);
+            Assert.Null(maxmind.QueriesRemaining);
 
-            Assert.IsNotNull(insights.Postal);
+            Assert.NotNull(insights.Postal);
 
             var registeredCountry = insights.RegisteredCountry;
-            Assert.IsNotNull(registeredCountry);
+            Assert.NotNull(registeredCountry);
 
             var representedCountry = insights.RepresentedCountry;
-            Assert.IsNotNull(representedCountry);
-            Assert.IsNull(representedCountry.Type);
+            Assert.NotNull(representedCountry);
+            Assert.Null(representedCountry.Type);
 
             var subdivisions = insights.Subdivisions;
-            Assert.IsNotNull(subdivisions);
-            Assert.AreEqual(0, subdivisions.Count);
+            Assert.NotNull(subdivisions);
+            Assert.Equal(0, subdivisions.Count);
 
             var subdiv = insights.MostSpecificSubdivision;
-            Assert.IsNotNull(subdiv);
-            Assert.IsNull(subdiv.IsoCode);
-            Assert.IsNull(subdiv.Confidence);
+            Assert.NotNull(subdiv);
+            Assert.Null(subdiv.IsoCode);
+            Assert.Null(subdiv.Confidence);
 
             var traits = insights.Traits;
-            Assert.IsNotNull(traits);
-            Assert.IsNull(traits.AutonomousSystemNumber);
-            Assert.IsNull(traits.AutonomousSystemOrganization);
-            Assert.IsNull(traits.Domain);
-            Assert.IsNull(traits.IPAddress);
-            Assert.IsNull(traits.Isp);
-            Assert.IsNull(traits.Organization);
-            Assert.IsNull(traits.UserType);
+            Assert.NotNull(traits);
+            Assert.Null(traits.AutonomousSystemNumber);
+            Assert.Null(traits.AutonomousSystemOrganization);
+            Assert.Null(traits.Domain);
+            Assert.Null(traits.IPAddress);
+            Assert.Null(traits.Isp);
+            Assert.Null(traits.Organization);
+            Assert.Null(traits.UserType);
 #pragma warning disable 0618
-            Assert.IsFalse(traits.IsAnonymousProxy);
-            Assert.IsFalse(traits.IsSatelliteProvider);
+            Assert.False(traits.IsAnonymousProxy);
+            Assert.False(traits.IsSatelliteProvider);
 #pragma warning restore 0618
 
             foreach (var c in new[]
@@ -413,8 +457,8 @@ namespace MaxMind.GeoIP2.UnitTests
                 representedCountry
             })
             {
-                Assert.IsNull(c.Confidence);
-                Assert.IsNull(c.IsoCode);
+                Assert.Null(c.Confidence);
+                Assert.Null(c.IsoCode);
             }
 
             foreach (var r in new NamedEntity[]
@@ -424,12 +468,13 @@ namespace MaxMind.GeoIP2.UnitTests
                 subdiv
             })
             {
-                Assert.IsNull(r.GeoNameId);
-                Assert.IsNull(r.Name);
-                Assert.AreEqual(0, r.Names.Count);
-                Assert.AreEqual("", r.ToString());
+                Assert.Null(r.GeoNameId);
+                Assert.Null(r.Name);
+                Assert.Equal(0, r.Names.Count);
+                Assert.Equal("", r.ToString());
             }
         }
+
 #endif
     }
 }

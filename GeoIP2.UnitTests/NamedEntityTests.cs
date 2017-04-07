@@ -2,16 +2,15 @@
 
 using System.Collections.Generic;
 using MaxMind.GeoIP2.Model;
-using NUnit.Framework;
+using Xunit;
 
 #endregion
 
 namespace MaxMind.GeoIP2.UnitTests
 {
-    [TestFixture]
     public class NamedEntityTests
     {
-        [Test]
+        [Fact]
         public void CanGetSingleName()
         {
             var c = new City
@@ -20,10 +19,10 @@ namespace MaxMind.GeoIP2.UnitTests
                 Names = new Dictionary<string, string> {{"en", "Foo"}}
             };
 
-            Assert.AreEqual("Foo", c.Name);
+            Assert.Equal("Foo", c.Name);
         }
 
-        [Test]
+        [Fact]
         public void NameReturnsCorrectLocale()
         {
             var c = new City
@@ -32,7 +31,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Names = new Dictionary<string, string> {{"en", "Mexico City"}, {"es", "Ciudad de México"}}
             };
 
-            Assert.AreEqual("Ciudad de México", c.Name);
+            Assert.Equal("Ciudad de México", c.Name);
         }
     }
 }

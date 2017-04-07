@@ -3,107 +3,105 @@
 using MaxMind.Db;
 using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json;
-using NUnit.Framework;
 using System.IO;
 using System.Net;
-using System.Reflection;
+using Xunit;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
 #endregion
 
 namespace MaxMind.GeoIP2.UnitTests
 {
-    [TestFixture]
     public class DeserializationTests
     {
         public void CanDeserializeCountryResponse(CountryResponse resp)
         {
-            Assert.That(resp.Continent.Code, Is.EqualTo("NA"));
-            Assert.That(resp.Continent.GeoNameId, Is.EqualTo(42));
-            Assert.That(resp.Continent.Name, Is.EqualTo("North America"));
+            Assert.Equal("NA", resp.Continent.Code);
+            Assert.Equal(42, resp.Continent.GeoNameId);
+            Assert.Equal("North America", resp.Continent.Name);
 
-            Assert.That(resp.Country.GeoNameId, Is.EqualTo(1));
-            Assert.That(resp.Country.IsoCode, Is.EqualTo("US"));
-            Assert.That(resp.Country.Confidence, Is.EqualTo(56));
-            Assert.That(resp.Country.Name, Is.EqualTo("United States"));
+            Assert.Equal(1, resp.Country.GeoNameId);
+            Assert.Equal("US", resp.Country.IsoCode);
+            Assert.Equal(56, resp.Country.Confidence);
+            Assert.Equal("United States", resp.Country.Name);
 
-            Assert.That(resp.RegisteredCountry.GeoNameId, Is.EqualTo(2));
-            Assert.That(resp.RegisteredCountry.IsoCode, Is.EqualTo("CA"));
-            Assert.That(resp.RegisteredCountry.Name, Is.EqualTo("Canada"));
+            Assert.Equal(2, resp.RegisteredCountry.GeoNameId);
+            Assert.Equal("CA", resp.RegisteredCountry.IsoCode);
+            Assert.Equal("Canada", resp.RegisteredCountry.Name);
 
-            Assert.That(resp.RepresentedCountry.GeoNameId, Is.EqualTo(4));
-            Assert.That(resp.RepresentedCountry.IsoCode, Is.EqualTo("GB"));
-            Assert.That(resp.RepresentedCountry.Name, Is.EqualTo("United Kingdom"));
-            Assert.That(resp.RepresentedCountry.Type, Is.EqualTo("military"));
+            Assert.Equal(4, resp.RepresentedCountry.GeoNameId);
+            Assert.Equal("GB", resp.RepresentedCountry.IsoCode);
+            Assert.Equal("United Kingdom", resp.RepresentedCountry.Name);
+            Assert.Equal("military", resp.RepresentedCountry.Type);
 
-            Assert.That(resp.Traits.IPAddress, Is.EqualTo("1.2.3.4"));
+            Assert.Equal("1.2.3.4", resp.Traits.IPAddress);
         }
 
         public void CanDeserializeInsightsResponse(InsightsResponse insights)
         {
-            Assert.AreEqual(76, insights.City.Confidence);
-            Assert.AreEqual(9876, insights.City.GeoNameId);
-            Assert.AreEqual("Minneapolis", insights.City.Name);
+            Assert.Equal(76, insights.City.Confidence);
+            Assert.Equal(9876, insights.City.GeoNameId);
+            Assert.Equal("Minneapolis", insights.City.Name);
 
-            Assert.AreEqual("NA", insights.Continent.Code);
-            Assert.AreEqual(42, insights.Continent.GeoNameId);
-            Assert.AreEqual("North America", insights.Continent.Name);
+            Assert.Equal("NA", insights.Continent.Code);
+            Assert.Equal(42, insights.Continent.GeoNameId);
+            Assert.Equal("North America", insights.Continent.Name);
 
-            Assert.AreEqual(99, insights.Country.Confidence);
-            Assert.AreEqual(1, insights.Country.GeoNameId);
-            Assert.AreEqual("US", insights.Country.IsoCode);
-            Assert.AreEqual("United States of America", insights.Country.Name);
+            Assert.Equal(99, insights.Country.Confidence);
+            Assert.Equal(1, insights.Country.GeoNameId);
+            Assert.Equal("US", insights.Country.IsoCode);
+            Assert.Equal("United States of America", insights.Country.Name);
 
-            Assert.AreEqual(1500, insights.Location.AccuracyRadius);
-            Assert.AreEqual(44.979999999999997, insights.Location.Latitude);
-            Assert.AreEqual(93.263599999999997, insights.Location.Longitude);
-            Assert.AreEqual(765, insights.Location.MetroCode);
-            Assert.AreEqual("America/Chicago", insights.Location.TimeZone);
-            Assert.AreEqual(50000, insights.Location.AverageIncome);
-            Assert.AreEqual(100, insights.Location.PopulationDensity);
+            Assert.Equal(1500, insights.Location.AccuracyRadius);
+            Assert.Equal(44.979999999999997, insights.Location.Latitude);
+            Assert.Equal(93.263599999999997, insights.Location.Longitude);
+            Assert.Equal(765, insights.Location.MetroCode);
+            Assert.Equal("America/Chicago", insights.Location.TimeZone);
+            Assert.Equal(50000, insights.Location.AverageIncome);
+            Assert.Equal(100, insights.Location.PopulationDensity);
 
-            Assert.AreEqual(11, insights.MaxMind.QueriesRemaining);
+            Assert.Equal(11, insights.MaxMind.QueriesRemaining);
 
-            Assert.AreEqual("55401", insights.Postal.Code);
-            Assert.AreEqual(33, insights.Postal.Confidence);
+            Assert.Equal("55401", insights.Postal.Code);
+            Assert.Equal(33, insights.Postal.Confidence);
 
-            Assert.AreEqual(2, insights.RegisteredCountry.GeoNameId);
-            Assert.AreEqual("CA", insights.RegisteredCountry.IsoCode);
-            Assert.AreEqual("Canada", insights.RegisteredCountry.Name);
+            Assert.Equal(2, insights.RegisteredCountry.GeoNameId);
+            Assert.Equal("CA", insights.RegisteredCountry.IsoCode);
+            Assert.Equal("Canada", insights.RegisteredCountry.Name);
 
-            Assert.AreEqual(3, insights.RepresentedCountry.GeoNameId);
-            Assert.AreEqual("GB", insights.RepresentedCountry.IsoCode);
-            Assert.AreEqual("United Kingdom", insights.RepresentedCountry.Name);
-            Assert.AreEqual("military", insights.RepresentedCountry.Type);
+            Assert.Equal(3, insights.RepresentedCountry.GeoNameId);
+            Assert.Equal("GB", insights.RepresentedCountry.IsoCode);
+            Assert.Equal("United Kingdom", insights.RepresentedCountry.Name);
+            Assert.Equal("military", insights.RepresentedCountry.Type);
 
-            Assert.AreEqual(2, insights.Subdivisions.Count);
-            Assert.AreEqual(88, insights.Subdivisions[0].Confidence);
-            Assert.AreEqual(574635, insights.Subdivisions[0].GeoNameId);
-            Assert.AreEqual("MN", insights.Subdivisions[0].IsoCode);
-            Assert.AreEqual("Minnesota", insights.Subdivisions[0].Name);
-            Assert.AreEqual("TT", insights.Subdivisions[1].IsoCode);
+            Assert.Equal(2, insights.Subdivisions.Count);
+            Assert.Equal(88, insights.Subdivisions[0].Confidence);
+            Assert.Equal(574635, insights.Subdivisions[0].GeoNameId);
+            Assert.Equal("MN", insights.Subdivisions[0].IsoCode);
+            Assert.Equal("Minnesota", insights.Subdivisions[0].Name);
+            Assert.Equal("TT", insights.Subdivisions[1].IsoCode);
 
-            Assert.AreEqual(1234, insights.Traits.AutonomousSystemNumber);
-            Assert.AreEqual("AS Organization", insights.Traits.AutonomousSystemOrganization);
-            Assert.AreEqual("example.com", insights.Traits.Domain);
-            Assert.AreEqual("1.2.3.4", insights.Traits.IPAddress);
+            Assert.Equal(1234, insights.Traits.AutonomousSystemNumber);
+            Assert.Equal("AS Organization", insights.Traits.AutonomousSystemOrganization);
+            Assert.Equal("example.com", insights.Traits.Domain);
+            Assert.Equal("1.2.3.4", insights.Traits.IPAddress);
 #pragma warning disable 0618
-            Assert.AreEqual(true, insights.Traits.IsAnonymousProxy);
-            Assert.AreEqual(true, insights.Traits.IsSatelliteProvider);
+            Assert.Equal(true, insights.Traits.IsAnonymousProxy);
+            Assert.Equal(true, insights.Traits.IsSatelliteProvider);
 #pragma warning restore 0618
-            Assert.AreEqual("Comcast", insights.Traits.Isp);
-            Assert.AreEqual("Blorg", insights.Traits.Organization);
-            Assert.AreEqual("college", insights.Traits.UserType);
+            Assert.Equal("Comcast", insights.Traits.Isp);
+            Assert.Equal("Blorg", insights.Traits.Organization);
+            Assert.Equal("college", insights.Traits.UserType);
         }
 
-        [Test]
+        [Fact]
         public void CanDeserializeCountryResponseNewtonsoftJson()
         {
             CanDeserializeCountryResponse(JsonConvert.DeserializeObject<CountryResponse>(CountryJson));
         }
 
         // XXX - not sure this tests anything new now.
-        [Test]
+        [Fact]
         public void CanDeserializeFromDatabaseType()
         {
             var reader =
@@ -111,34 +109,34 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var response = reader.City(IPAddress.Parse("216.160.83.56"));
 
-            Assert.That(response.City.GeoNameId, Is.EqualTo(5803556));
-            Assert.That(response.City.Name, Is.EqualTo("Milton"));
+            Assert.Equal(5803556, response.City.GeoNameId);
+            Assert.Equal("Milton", response.City.Name);
 
-            Assert.That(response.Continent.Code, Is.EqualTo("NA"));
-            Assert.That(response.Continent.GeoNameId, Is.EqualTo(6255149));
-            Assert.That(response.Continent.Name, Is.EqualTo("North America"));
+            Assert.Equal("NA", response.Continent.Code);
+            Assert.Equal(6255149, response.Continent.GeoNameId);
+            Assert.Equal("North America", response.Continent.Name);
 
-            Assert.That(response.Country.GeoNameId, Is.EqualTo(6252001));
-            Assert.That(response.Country.IsoCode, Is.EqualTo("US"));
-            Assert.That(response.Country.Name, Is.EqualTo("United States"));
+            Assert.Equal(6252001, response.Country.GeoNameId);
+            Assert.Equal("US", response.Country.IsoCode);
+            Assert.Equal("United States", response.Country.Name);
 
-            Assert.That(response.Location.Latitude, Is.EqualTo(47.2513));
-            Assert.That(response.Location.Longitude, Is.EqualTo(-122.3149));
-            Assert.That(response.Location.MetroCode, Is.EqualTo(819));
-            Assert.That(response.Location.TimeZone, Is.EqualTo("America/Los_Angeles"));
+            Assert.Equal(47.2513, response.Location.Latitude);
+            Assert.Equal(-122.3149, response.Location.Longitude);
+            Assert.Equal(819, response.Location.MetroCode);
+            Assert.Equal("America/Los_Angeles", response.Location.TimeZone);
 
-            Assert.That(response.Postal.Code, Is.EqualTo("98354"));
+            Assert.Equal("98354", response.Postal.Code);
 
-            Assert.That(response.RegisteredCountry.GeoNameId, Is.EqualTo(2635167));
-            Assert.That(response.RegisteredCountry.IsoCode, Is.EqualTo("GB"));
-            Assert.That(response.RegisteredCountry.Name, Is.EqualTo("United Kingdom"));
+            Assert.Equal(2635167, response.RegisteredCountry.GeoNameId);
+            Assert.Equal("GB", response.RegisteredCountry.IsoCode);
+            Assert.Equal("United Kingdom", response.RegisteredCountry.Name);
 
-            Assert.That(response.Subdivisions[0].GeoNameId, Is.EqualTo(5815135));
-            Assert.That(response.Subdivisions[0].IsoCode, Is.EqualTo("WA"));
-            Assert.That(response.Subdivisions[0].Name, Is.EqualTo("Washington"));
+            Assert.Equal(5815135, response.Subdivisions[0].GeoNameId);
+            Assert.Equal("WA", response.Subdivisions[0].IsoCode);
+            Assert.Equal("Washington", response.Subdivisions[0].Name);
         }
 
-        [Test]
+        [Fact]
         public void CanDeserializeInsightsResponseNewtonsoftJson()
         {
             CanDeserializeInsightsResponse(JsonConvert.DeserializeObject<InsightsResponse>(InsightsJson));
