@@ -1,32 +1,31 @@
 ﻿#region
 
 using MaxMind.GeoIP2.Model;
-using NUnit.Framework;
+using Xunit;
 
 #endregion
 
 namespace MaxMind.GeoIP2.UnitTests.Model
 {
-    [TestFixture]
     public class LocationTests
     {
-        [Test]
-        [TestCase(null, null)]
-        [TestCase(50.0, null)]
-        [TestCase(null, 0.0)]
+        [Theory]
+        [InlineData(null, null)]
+        [InlineData(50.0, null)]
+        [InlineData(null, 0.0)]
         public void HasCoordinatesFailure(double? latitude, double? longitude)
         {
             var location = new Location
                 (latitude: latitude, longitude: longitude);
 
-            Assert.IsFalse(location.HasCoordinates);
+            Assert.False(location.HasCoordinates);
         }
 
-        [Test]
+        [Fact]
         public void HasCoordinatesSuccess()
         {
             var location = new Location(latitude: 50.0, longitude: 0.0);
-            Assert.IsTrue(location.HasCoordinates);
+            Assert.True(location.HasCoordinates);
         }
     }
 }
