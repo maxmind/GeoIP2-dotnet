@@ -50,11 +50,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaxMind.Db, Version=2.0.0.0, Culture=neutral, PublicKeyToken=66afa4cc5ae853ac, processorArchitecture=MSIL">
-      <HintPath>packages\MaxMind.Db.2.1.2\lib\net45\MaxMind.Db.dll</HintPath>
+      <HintPath>..\packages\MaxMind.Db.2.1.2\lib\net45\MaxMind.Db.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -110,9 +110,9 @@
     <Compile Include="..\GeoIP2\WebServiceClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GeoIP2.ruleset" />
-    <None Include="NuGet.targets" />
-    <None Include="packages.config" />
+    <None Include="..\GeoIP2\GeoIP2.ruleset" />
+    <None Include="..\GeoIP2\NuGet.targets" />
+    <None Include="..\GeoIP2\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="CustomDictionary.xml" />
