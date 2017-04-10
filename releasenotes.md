@@ -1,6 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.8.0
+------------------
+
+* Switch to the updated MSBuild .NET Core build system.
+* Move tests from  NUnit to xUnit.net.
+
 2.7.2 (2016-11-22)
 ------------------
 
