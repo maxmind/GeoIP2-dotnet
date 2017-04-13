@@ -1,3 +1,8 @@
+To run the unit tests on Linux:
+
+1. Install dotnet core, cli, and sdk
+2. `MAXMIND_TEST_BASE_DIR="$PWD/GeoIP2.UnitTests" CONFIGURATION=Debug dev-bin`
+
 To publish the to NuGet:
 
 1. Update release notes.
