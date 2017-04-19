@@ -226,6 +226,19 @@ using (var reader = new DatabaseReader("GeoIP2-Anonymous-IP.mmdb"))
 }
 ```
 
+### ASN ###
+
+```csharp
+
+using (var reader = new DatabaseReader("GeoLite2-ASN.mmdb"))
+{
+    var response = reader.Asn("85.25.43.84");
+    Console.WriteLine(response.AutonomousSystemNumber); // 217
+    Console.WriteLine(response.AutonomousSystemOrganization); // 'University of Minnesota'
+    Console.WriteLine(response.IPAddress); // '128.101.101.101'
+}
+```
+
 ### City Database ###
 
 ```csharp
