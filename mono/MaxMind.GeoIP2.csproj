@@ -27,7 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>GeoIP2.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MaxMind.GeoIP2.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -39,7 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\MaxMind.GeoIP2.XML</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>GeoIP2.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MaxMind.GeoIP2.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
@@ -68,51 +68,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\GeoIP2\GlobalSuppressions.cs" />
-    <Compile Include="..\GeoIP2\Http\AsyncClient.cs" />
-    <Compile Include="..\GeoIP2\Http\Response.cs" />
-    <Compile Include="..\GeoIP2\Http\SyncClient.cs" />
-    <Compile Include="..\GeoIP2\Http\ISyncClient.cs" />
-    <Compile Include="..\GeoIP2\DatabaseReader.cs" />
-    <Compile Include="..\GeoIP2\Exceptions\AddressNotFoundException.cs" />
-    <Compile Include="..\GeoIP2\Exceptions\AuthenticationException.cs" />
-    <Compile Include="..\GeoIP2\Exceptions\GeoIP2Exception.cs" />
-    <Compile Include="..\GeoIP2\Exceptions\HttpException.cs" />
-    <Compile Include="..\GeoIP2\Exceptions\InvalidRequestException.cs" />
-    <Compile Include="..\GeoIP2\Exceptions\OutOfQueriesException.cs" />
-    <Compile Include="..\GeoIP2\Exceptions\PermissionRequiredException.cs" />
-    <Compile Include="..\GeoIP2\IGeoIP2DatabaseReader.cs" />
-    <Compile Include="..\GeoIP2\IGeoIP2Provider.cs" />
-    <Compile Include="..\GeoIP2\IGeoIP2WebServicesClient.cs" />
-    <Compile Include="..\GeoIP2\Model\City.cs" />
-    <Compile Include="..\GeoIP2\Model\Continent.cs" />
-    <Compile Include="..\GeoIP2\Model\Country.cs" />
-    <Compile Include="..\GeoIP2\Model\WebServiceError.cs" />
-    <Compile Include="..\GeoIP2\Model\Location.cs" />
-    <Compile Include="..\GeoIP2\Model\MaxMind.cs" />
-    <Compile Include="..\GeoIP2\Model\NamedEntity.cs" />
-    <Compile Include="..\GeoIP2\Model\Postal.cs" />
-    <Compile Include="..\GeoIP2\Model\RepresentedCountry.cs" />
-    <Compile Include="..\GeoIP2\Model\Subdivision.cs" />
-    <Compile Include="..\GeoIP2\Model\Traits.cs" />
-    <Compile Include="..\GeoIP2\Properties\AssemblyInfo.cs" />
-    <Compile Include="..\GeoIP2\Responses\AbstractCityResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\AbstractCountryResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\AbstractResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\CityResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\AnonymousIPResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\EnterpriseResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\IspResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\ConnectionTypeResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\DomainResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\CountryResponse.cs" />
-    <Compile Include="..\GeoIP2\Responses\InsightsResponse.cs" />
-    <Compile Include="..\GeoIP2\WebServiceClient.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\GlobalSuppressions.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Http\AsyncClient.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Http\Response.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Http\SyncClient.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Http\ISyncClient.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\DatabaseReader.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Exceptions\AddressNotFoundException.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Exceptions\AuthenticationException.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Exceptions\GeoIP2Exception.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Exceptions\HttpException.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Exceptions\InvalidRequestException.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Exceptions\OutOfQueriesException.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Exceptions\PermissionRequiredException.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\IGeoIP2DatabaseReader.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\IGeoIP2Provider.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\IGeoIP2WebServicesClient.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\City.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\Continent.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\Country.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\WebServiceError.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\Location.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\MaxMind.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\NamedEntity.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\Postal.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\RepresentedCountry.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\Subdivision.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Model\Traits.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\AbstractCityResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\AbstractCountryResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\AbstractResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\AsnResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\CityResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\AnonymousIPResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\EnterpriseResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\IspResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\ConnectionTypeResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\DomainResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\CountryResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\Responses\InsightsResponse.cs" />
+    <Compile Include="..\MaxMind.GeoIP2\WebServiceClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\GeoIP2\GeoIP2.ruleset" />
-    <None Include="..\GeoIP2\NuGet.targets" />
-    <None Include="..\GeoIP2\packages.config" />
+    <None Include="..\MaxMind.GeoIP2\MaxMind.GeoIP2.ruleset" />
+    <None Include="..\MaxMind.GeoIP2\NuGet.targets" />
+    <None Include="..\MaxMind.GeoIP2\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="CustomDictionary.xml" />

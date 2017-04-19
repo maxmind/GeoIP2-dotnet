@@ -58,7 +58,7 @@ namespace MaxMind.GeoIP2
         ///     Returns an <see cref="AsnResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
-        /// <returns>An <see cref=AsnResponse" /></returns>
+        /// <returns>An <see cref="AsnResponse" /></returns>
         AsnResponse Asn(string ipAddress);
 
         /// <summary>

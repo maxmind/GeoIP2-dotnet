@@ -7,8 +7,8 @@
     <ProjectGuid>{423DD8CD-DA73-483D-BA2C-F521FD3F01EB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GeoIP2.Benchmark</RootNamespace>
-    <AssemblyName>GeoIP2.Benchmark</AssemblyName>
+    <RootNamespace>MaxMind.GeoIP2.Benchmark</RootNamespace>
+    <AssemblyName>MaxMind.GeoIP2.Benchmark</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,16 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\GeoIP2.Benchmark\Program.cs" />
-    <Compile Include="..\GeoIP2.Benchmark\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.Benchmark\Program.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.Benchmark\Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\GeoIP2.Benchmark\packages.config" />
+    <None Include="..\MaxMind.GeoIP2.Benchmark\packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="GeoIP2.csproj">
+    <ProjectReference Include="MaxMind.GeoIP2.csproj">
       <Project>{024E2FA9-242C-4C9A-BFEA-64C83352B79D}</Project>
-      <Name>GeoIP2</Name>
+      <Name>MaxMind.GeoIP2</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

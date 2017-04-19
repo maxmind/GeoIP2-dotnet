@@ -15,15 +15,15 @@ if [ -n "${DOTNETCORE:-}" ]; then
     echo "new limit: `ulimit -n`"
   fi
 
-  dotnet restore
+  dotnet restore ./MaxMind.GeoIP2.sln
 
-  dotnet build -f netstandard1.4 -c "$CONFIGURATION" ./GeoIP2
+  dotnet build -f netstandard1.4 -c "$CONFIGURATION" ./MaxMind.GeoIP2
 
   # Running Benchmark
-  dotnet run -f netcoreapp1.0 -c "$CONFIGURATION"  -p ./GeoIP2.Benchmark/GeoIP2.Benchmark.csproj
+  dotnet run -f netcoreapp1.1 -c "$CONFIGURATION"  -p ./MaxMind.GeoIP2.Benchmark/MaxMind.GeoIP2.Benchmark.csproj
 
   # Running Unit Tests
-  dotnet test -f netcoreapp1.0 -c "$CONFIGURATION" ./GeoIP2.UnitTests/GeoIP2.UnitTests.csproj
+  dotnet test -f netcoreapp1.1 -c "$CONFIGURATION" ./MaxMind.GeoIP2.UnitTests/MaxMind.GeoIP2.UnitTests.csproj
 
 else
 
@@ -31,7 +31,7 @@ else
 
   nuget restore
 
-  xbuild /p:Configuration=$CONFIGURATION mono/GeoIP2.sln
+  xbuild /p:Configuration=$CONFIGURATION mono/MaxMind.GeoIP2.sln
 
   mono ./packages/xunit.runner.console.2.2.0/tools/xunit.console.exe ./mono/bin/$CONFIGURATION/MaxMind.GeoIP2.UnitTests.dll
 
