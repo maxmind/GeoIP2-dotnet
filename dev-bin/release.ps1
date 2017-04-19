@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 $DebugPreference = 'Continue'
 
-$projectJsonFile=(Get-Item "GeoIP2/project.json").FullName
+$projectJsonFile=(Get-Item "MaxMind.GeoIP2/project.json").FullName
 $matches = (Get-Content -Encoding UTF8 releasenotes.md) ` |
             Select-String '(\d+\.\d+\.\d+(?:-\w+)?) \((\d{4}-\d{2}-\d{2})\)' `
 
@@ -33,7 +33,7 @@ if ((Read-Host -Prompt 'Continue? (y/n)') -ne 'y') {
 
 & git commit -m "Prepare for $version" -a
 
-Push-Location GeoIP2
+Push-Location MaxMind.GeoIP2
 
 & dotnet restore
 & dotnet build -c Release
@@ -41,7 +41,7 @@ Push-Location GeoIP2
 
 Pop-Location
 
-Push-Location GeoIP2.UnitTests
+Push-Location MaxMind.GeoIP2.UnitTests
 
 & dotnet restore
 & dotnet test -c Release
@@ -58,7 +58,7 @@ if (Test-Path .gh-pages ) {
     & git pull
 } else {
     Write-Debug "Checking out gh-pages in .gh-pages"
-    & git clone -b gh-pages git@github.com:maxmind/GeoIP2-dotnet.git .gh-pages
+    & git clone -b gh-pages git@github.com:maxmind/MaxMind.GeoIP2-dotnet.git .gh-pages
     Push-Location .gh-pages
 }
 
@@ -104,4 +104,4 @@ Pop-Location
 & git push
 & git push --tags
 
-& nuget push "GeoIP2/bin/Release/MaxMind.GeoIP2.$version.nupkg" -Source https://www.nuget.org/api/v2/package
+& nuget push "MaxMind.GeoIP2/bin/Release/MaxMind.GeoIP2.$version.nupkg" -Source https://www.nuget.org/api/v2/package

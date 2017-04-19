@@ -137,9 +137,9 @@ namespace MaxMind.GeoIP2.Responses
             if (City != null)
                 City.Locales = locales;
 
-            if (Subdivisions != null && Subdivisions.Count > 0)
-                foreach (var subdivision in Subdivisions)
-                    subdivision.Locales = locales;
+            if (Subdivisions == null || Subdivisions.Count <= 0) return;
+            foreach (var subdivision in Subdivisions)
+                subdivision.Locales = locales;
         }
     }
 }

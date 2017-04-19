@@ -1,5 +1,4 @@
 ﻿using MaxMind.Db;
-using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json;
 
 namespace MaxMind.GeoIP2.Responses

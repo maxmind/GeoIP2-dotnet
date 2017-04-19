@@ -78,7 +78,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 var exception = Record.Exception(() => reader.Country("10.10.10.10"));
                 Assert.NotNull(exception);
                 Assert.Contains(exception.Message,
-#if !NETCOREAPP1_0
+#if !NETCOREAPP1_1
                     "A GeoIP2-City database cannot be opened with the Country method");
 #else
                     "A GeoIP2-City database cannot be opened with the given method");
@@ -110,21 +110,21 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 var ipAddressStr = "1.128.0.0";
                 var response = reader.Asn(ipAddressStr);
-                checkAsn(response, ipAddressStr);
+                CheckAsn(response, ipAddressStr);
 
                 Assert.True(reader.TryAsn(ipAddressStr, out response));
-                checkAsn(response, ipAddressStr);
+                CheckAsn(response, ipAddressStr);
 
                 var ipAddress = IPAddress.Parse(ipAddressStr);
                 response = reader.Asn(ipAddress);
-                checkAsn(response, ipAddressStr);
+                CheckAsn(response, ipAddressStr);
 
                 Assert.True(reader.TryAsn(ipAddress, out response));
-                checkAsn(response, ipAddressStr);
+                CheckAsn(response, ipAddressStr);
             }
         }
 
-        private static void checkAsn(AsnResponse response, string ipAddress)
+        private static void CheckAsn(AsnResponse response, string ipAddress)
         {
             Assert.Equal(1221, response.AutonomousSystemNumber);
             Assert.Equal("Telstra Pty Ltd", response.AutonomousSystemOrganization);

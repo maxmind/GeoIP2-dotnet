@@ -9,7 +9,7 @@
     <AssemblyOriginatorKeyFile>../MaxMind.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-    <PackageId>GeoIP2</PackageId>
+    <PackageId>MaxMind.GeoIP2</PackageId>
     <PackageTags>maxmind;ip;geoip;geoip2;geolocation;maxmind;ipv4;ipv6</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/maxmind/GeoIP2-dotnet/master/MaxMind-logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/maxmind/GeoIP2-dotnet</PackageProjectUrl>

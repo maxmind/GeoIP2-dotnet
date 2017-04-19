@@ -5,7 +5,9 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
 using System;
 using System.Collections.Generic;
+#if !NETSTANDARD1_4
 using System.Diagnostics;
+#endif
 using System.IO;
 using System.Net;
 
