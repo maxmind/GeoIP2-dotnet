@@ -229,6 +229,50 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        ///     Returns an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AsnResponse" /></returns>
+        public AsnResponse Asn(IPAddress ipAddress)
+        {
+            return Execute<AsnResponse>(ipAddress, "GeoLite2-ASN");
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AsnResponse" /></returns>
+        public AsnResponse Asn(string ipAddress)
+        {
+            return Execute<AsnResponse>(ipAddress, "GeoLite2-ASN");
+        }
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AsnResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryAsn(IPAddress ipAddress, out AsnResponse response)
+        {
+            response = Execute<AsnResponse>(ipAddress, "GeoLite2-ASN", false);
+            return response != null;
+        }
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AsnResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryAsn(string ipAddress, out AsnResponse response)
+        {
+            response = Execute<AsnResponse>(ipAddress, "GeoLite2-ASN", false);
+            return response != null;
+        }
+
+        /// <summary>
         ///     Returns an <see cref="ConnectionTypeResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>

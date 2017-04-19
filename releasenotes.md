@@ -4,6 +4,7 @@ GeoIP2 .NET API Release Notes
 2.8.0
 ------------------
 
+* Added support for GeoLite2 ASN.
 * Switch to the updated MSBuild .NET Core build system.
 * Move tests from  NUnit to xUnit.net.
 
