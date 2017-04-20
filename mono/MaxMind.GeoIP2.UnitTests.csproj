@@ -82,24 +82,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\GeoIP2.UnitTests\Mock\MockSyncClient.cs" />
-    <Compile Include="..\GeoIP2.UnitTests\Model\LocationTests.cs" />
-    <Compile Include="..\GeoIP2.UnitTests\ResponseTests.cs" />
-    <Compile Include="..\GeoIP2.UnitTests\DatabaseReaderTests.cs" />
-    <Compile Include="..\GeoIP2.UnitTests\DeserializationTests.cs" />
-    <Compile Include="..\GeoIP2.UnitTests\NamedEntityTests.cs" />
-    <Compile Include="..\GeoIP2.UnitTests\Properties\AssemblyInfo.cs" />
-    <Compile Include="..\GeoIP2.UnitTests\ResponseHelper.cs" />
-    <Compile Include="..\GeoIP2.UnitTests\TestUtils.cs" />
-    <Compile Include="..\GeoIP2.UnitTests\WebServiceClientTests.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\Mock\MockSyncClient.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\Model\LocationTests.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\ResponseTests.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\DatabaseReaderTests.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\DeserializationTests.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\NamedEntityTests.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\ResponseHelper.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\TestUtils.cs" />
+    <Compile Include="..\MaxMind.GeoIP2.UnitTests\WebServiceClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\GeoIP2.UnitTests\packages.config" />
+    <None Include="..\MaxMind.GeoIP2.UnitTests\packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="GeoIP2.csproj">
+    <ProjectReference Include="MaxMind.GeoIP2.csproj">
       <Project>{024e2fa9-242c-4c9a-bfea-64c83352b79d}</Project>
-      <Name>GeoIP2</Name>
+      <Name>MaxMind.GeoIP2</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

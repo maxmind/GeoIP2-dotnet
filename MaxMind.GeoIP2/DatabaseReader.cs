@@ -5,7 +5,9 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
 using System;
 using System.Collections.Generic;
+#if !NETSTANDARD1_4
 using System.Diagnostics;
+#endif
 using System.IO;
 using System.Net;
 
@@ -225,6 +227,50 @@ namespace MaxMind.GeoIP2
         public bool TryAnonymousIP(string ipAddress, out AnonymousIPResponse response)
         {
             response = Execute<AnonymousIPResponse>(ipAddress, "GeoIP2-Anonymous-IP", false);
+            return response != null;
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AsnResponse" /></returns>
+        public AsnResponse Asn(IPAddress ipAddress)
+        {
+            return Execute<AsnResponse>(ipAddress, "GeoLite2-ASN");
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AsnResponse" /></returns>
+        public AsnResponse Asn(string ipAddress)
+        {
+            return Execute<AsnResponse>(ipAddress, "GeoLite2-ASN");
+        }
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AsnResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryAsn(IPAddress ipAddress, out AsnResponse response)
+        {
+            response = Execute<AsnResponse>(ipAddress, "GeoLite2-ASN", false);
+            return response != null;
+        }
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AsnResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryAsn(string ipAddress, out AsnResponse response)
+        {
+            response = Execute<AsnResponse>(ipAddress, "GeoLite2-ASN", false);
             return response != null;
         }
 

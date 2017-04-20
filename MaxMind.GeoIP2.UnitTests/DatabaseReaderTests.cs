@@ -16,6 +16,7 @@ namespace MaxMind.GeoIP2.UnitTests
     public class DatabaseReaderTests
     {
         private readonly string _anonymousIpDatabaseFile;
+        private readonly string _asnDatabaseFile;
         private readonly string _cityDatabaseFile;
         private readonly string _connectionTypeDatabaseFile;
         private readonly string _countryDatabaseFile;
@@ -28,6 +29,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var databaseDir = Path.Combine(TestUtils.TestDirectory, "TestData", "MaxMind-DB", "test-data");
 
             _anonymousIpDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Anonymous-IP-Test.mmdb");
+            _asnDatabaseFile = Path.Combine(databaseDir, "GeoLite2-ASN-Test.mmdb");
             _cityDatabaseFile = Path.Combine(databaseDir, "GeoIP2-City-Test.mmdb");
             _connectionTypeDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Connection-Type-Test.mmdb");
             _countryDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Country-Test.mmdb");
@@ -76,7 +78,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 var exception = Record.Exception(() => reader.Country("10.10.10.10"));
                 Assert.NotNull(exception);
                 Assert.Contains(exception.Message,
-#if !NETCOREAPP1_0
+#if !NETCOREAPP1_1
                     "A GeoIP2-City database cannot be opened with the Country method");
 #else
                     "A GeoIP2-City database cannot be opened with the given method");
@@ -100,6 +102,35 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Equal(ipAddress, response.IPAddress);
             }
         }
+
+        [Fact]
+        public void Asn_ValidResponse()
+        {
+            using (var reader = new DatabaseReader(_asnDatabaseFile))
+            {
+                var ipAddressStr = "1.128.0.0";
+                var response = reader.Asn(ipAddressStr);
+                CheckAsn(response, ipAddressStr);
+
+                Assert.True(reader.TryAsn(ipAddressStr, out response));
+                CheckAsn(response, ipAddressStr);
+
+                var ipAddress = IPAddress.Parse(ipAddressStr);
+                response = reader.Asn(ipAddress);
+                CheckAsn(response, ipAddressStr);
+
+                Assert.True(reader.TryAsn(ipAddress, out response));
+                CheckAsn(response, ipAddressStr);
+            }
+        }
+
+        private static void CheckAsn(AsnResponse response, string ipAddress)
+        {
+            Assert.Equal(1221, response.AutonomousSystemNumber);
+            Assert.Equal("Telstra Pty Ltd", response.AutonomousSystemOrganization);
+            Assert.Equal(ipAddress, response.IPAddress);
+        }
+
 
         [Fact]
         public void ConnectionType_ValidResponse()

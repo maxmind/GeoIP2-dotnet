@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Description>Test project to validate MaxMind GeoIP2 Database Reader and Web Service Client</Description>
     <VersionPrefix>2.7.0</VersionPrefix>
-    <TargetFrameworks>net452;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>net452;netcoreapp1.1</TargetFrameworks>
     <AssemblyName>MaxMind.GeoIP2.UnitTests</AssemblyName>
     <AssemblyOriginatorKeyFile>../MaxMind.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-    <PackageId>GeoIP2.UnitTests</PackageId>
+    <PackageId>MaxMind.GeoIP2.UnitTests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
@@ -25,10 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GeoIP2\GeoIP2.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="MaxMind.Db" Version="2.1.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <PackageReference Include="MockHttpSigned" Version="1.3.0-netstandard-alpha3" />
     <PackageReference Include="xunit" Version="2.2.0" />
@@ -42,6 +39,10 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MaxMind.GeoIP2\MaxMind.GeoIP2.csproj" />
   </ItemGroup>
 
   <ItemGroup>

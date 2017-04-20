@@ -1,8 +1,8 @@
 ﻿#region
 
 using System;
-using System.Runtime.Serialization;
 #if !NETSTANDARD1_4
+using System.Runtime.Serialization; 
 using System.Security.Permissions;
 #endif
 #endregion

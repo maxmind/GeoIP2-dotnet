@@ -4,7 +4,7 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
-#if !NETCOREAPP1_0
+#if !NETCOREAPP1_1
 using MaxMind.GeoIP2.UnitTests.Mock;
 #endif
 using RichardSzalay.MockHttp;
@@ -17,7 +17,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Extensions;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
 #endregion
@@ -33,7 +32,7 @@ namespace MaxMind.GeoIP2.UnitTests
         // "Async" added to the name so that Nunit can tell them apart.
         public static readonly object[][] TestCases =
         {
-#if !NETCOREAPP1_0
+#if !NETCOREAPP1_1
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"country", (ClientRunner) (async (c, i) => c.Country(i)), typeof(CountryResponse)},
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -55,7 +54,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public static readonly object[][] MeTestCases =
         {
-#if !NETCOREAPP1_0
+#if !NETCOREAPP1_1
             new object[]
             {
                 "country", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Country())),
@@ -101,7 +100,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 .WithHeaders("Accept", "application/json")
                 .Respond(message);
 
-#if !NETCOREAPP1_0
+#if !NETCOREAPP1_1
             // HttpWebRequest mock
             var contentsBytes = Encoding.UTF8.GetBytes(content);
             var responseStream = new MemoryStream(contentsBytes);
@@ -111,7 +110,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             return new WebServiceClient(6, "0123456789", new List<string> {"en"},
                 httpMessageHandler: mockHttp
-#if !NETCOREAPP1_0
+#if !NETCOREAPP1_1
                 , syncWebRequest: syncWebRequest
 #endif
             );
@@ -387,7 +386,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal(t, result.GetType());
         }
 
-#if !NETCOREAPP1_0
+#if !NETCOREAPP1_1
 
         [Fact]
         public void MissingKeys()

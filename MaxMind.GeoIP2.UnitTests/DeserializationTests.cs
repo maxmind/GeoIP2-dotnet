@@ -1,10 +1,7 @@
 ﻿#region
 
-using MaxMind.Db;
 using MaxMind.GeoIP2.Responses;
 using Newtonsoft.Json;
-using System.IO;
-using System.Net;
 using Xunit;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
