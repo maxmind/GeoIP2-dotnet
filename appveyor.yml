@@ -5,8 +5,8 @@ os: Visual Studio 2017
 
 environment:
   global:
-    MAXMIND_BENCHMARK_DB: $(APPVEYOR_BUILD_FOLDER)/GeoIP2.Benchmark/GeoLite2-City.mmdb
-    MAXMIND_TEST_BASE_DIR: $(APPVEYOR_BUILD_FOLDER)/GeoIP2.UnitTests
+    MAXMIND_BENCHMARK_DB: $(APPVEYOR_BUILD_FOLDER)/MaxMind.GeoIP2.Benchmark/GeoLite2-City.mmdb
+    MAXMIND_TEST_BASE_DIR: $(APPVEYOR_BUILD_FOLDER)/MaxMind.GeoIP2.UnitTests
   matrix:
     - CONFIGURATION: Debug
       CONSOLE_FRAMEWORK: net45
@@ -17,13 +17,13 @@ environment:
       TEST_FRAMEWORK: net452
       LIB_FRAMEWORK: net45
     - CONFIGURATION: Debug
-      CONSOLE_FRAMEWORK: netcoreapp1.0
+      CONSOLE_FRAMEWORK: netcoreapp1.1
       LIB_FRAMEWORK: netstandard1.4
-      TEST_FRAMEWORK: netcoreapp1.0
+      TEST_FRAMEWORK: netcoreapp1.1
     - CONFIGURATION: Release
-      CONSOLE_FRAMEWORK: netcoreapp1.0
+      CONSOLE_FRAMEWORK: netcoreapp1.1
       LIB_FRAMEWORK: netstandard1.4
-      TEST_FRAMEWORK: netcoreapp1.0
+      TEST_FRAMEWORK: netcoreapp1.1
 
 before_build:
   - git submodule update --init --recursive
@@ -40,26 +40,26 @@ build_script:
       }
 
       # Restore Packages
-      dotnet restore
+      dotnet restore MaxMind.GeoIP2.sln
 
       # Build Projects
-      dotnet build -c $env:CONFIGURATION -f $env:LIB_FRAMEWORK .\GeoIP2
-      dotnet build -c $env:CONFIGURATION -f $env:CONSOLE_FRAMEWORK .\GeoIP2.Benchmark
-      dotnet build -c $env:CONFIGURATION -f $env:TEST_FRAMEWORK .\GeoIP2.UnitTests
+      dotnet build -c $env:CONFIGURATION -f $env:LIB_FRAMEWORK .\MaxMind.GeoIP2
+      dotnet build -c $env:CONFIGURATION -f $env:CONSOLE_FRAMEWORK .\MaxMind.GeoIP2.Benchmark
+      dotnet build -c $env:CONFIGURATION -f $env:TEST_FRAMEWORK .\MaxMind.GeoIP2.UnitTests
 
 test_script:
   # Run Benchmark
-  - dotnet run -f %CONSOLE_FRAMEWORK% -c %CONFIGURATION% -p GeoIP2.Benchmark/GeoIP2.Benchmark.csproj
+  - dotnet run -f %CONSOLE_FRAMEWORK% -c %CONFIGURATION% -p MaxMind.GeoIP2.Benchmark/MaxMind.GeoIP2.Benchmark.csproj
 
   # Run Unit Tests
-  - dotnet test -f %TEST_FRAMEWORK% -c %CONFIGURATION% GeoIP2.UnitTests/GeoIP2.UnitTests.csproj
+  - dotnet test -f %TEST_FRAMEWORK% -c %CONFIGURATION% MaxMind.GeoIP2.UnitTests/MaxMind.GeoIP2.UnitTests.csproj
 
 after_test:
   # Run Unit Tests
-  - dotnet pack -c %CONFIGURATION% GeoIP2
+  - dotnet pack -c %CONFIGURATION% MaxMind.GeoIP2
 
 artifacts:
-  - path: 'GeoIP2\bin\**\*.nupkg'
+  - path: 'MaxMind.GeoIP2\bin\**\*.nupkg'
 
 notifications:
   - incoming_webhook:

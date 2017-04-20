@@ -1,12 +1,12 @@
 ---
 language: csharp
-solution: mono/GeoIP2.sln
+solution: mono/MaxMind.GeoIP2.sln
 
 env:
   global:
     - CONFIGURATION=Release
-    - MAXMIND_BENCHMARK_DB=$TRAVIS_BUILD_DIR/GeoIP2.Benchmark/GeoLite2-City.mmdb
-    - MAXMIND_TEST_BASE_DIR="$PWD/GeoIP2.UnitTests"
+    - MAXMIND_BENCHMARK_DB=$TRAVIS_BUILD_DIR/MaxMind.GeoIP2.Benchmark/GeoLite2-City.mmdb
+    - MAXMIND_TEST_BASE_DIR="$PWD/MaxMind.GeoIP2.UnitTests"
 
 matrix:
   include:

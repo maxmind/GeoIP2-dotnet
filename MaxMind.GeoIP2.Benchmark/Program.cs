@@ -1,5 +1,4 @@
 ﻿using MaxMind.Db;
-using MaxMind.GeoIP2;
 using MaxMind.GeoIP2.Exceptions;
 using System;
 using System.Diagnostics;
@@ -10,12 +9,12 @@ namespace MaxMind.GeoIP2.Benchmark
 {
     public class Program
     {
-        private static readonly int COUNT = 200000;
+        private const int Count = 200000;
 
         public static void Main(string[] args)
         {
             // first we check if the command-line argument is provided
-            string dbPath = args.Length > 0 ? args[0] : null;
+            var dbPath = args.Length > 0 ? args[0] : null;
             if (dbPath != null)
             {
                 if (!File.Exists(dbPath))
@@ -65,7 +64,7 @@ namespace MaxMind.GeoIP2.Benchmark
             Console.Write($"\n{name}: ");
             var rand = new Random(1);
             var s = Stopwatch.StartNew();
-            for (var i = 0; i < COUNT; i++)
+            for (var i = 0; i < Count; i++)
             {
                 var ip = new IPAddress(rand.Next(int.MaxValue));
                 try
@@ -75,7 +74,7 @@ namespace MaxMind.GeoIP2.Benchmark
                 catch (AddressNotFoundException) { }
             }
             s.Stop();
-            Console.WriteLine("{0:N0} queries per second", COUNT / s.Elapsed.TotalSeconds);
+            Console.WriteLine("{0:N0} queries per second", Count / s.Elapsed.TotalSeconds);
         }
     }
 }

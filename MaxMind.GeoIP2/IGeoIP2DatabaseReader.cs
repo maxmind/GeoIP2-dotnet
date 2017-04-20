@@ -2,6 +2,7 @@
 
 using MaxMind.GeoIP2.Responses;
 using System.Net;
+using MaxMind.GeoIP2.Http;
 
 #endregion
 
@@ -45,6 +46,36 @@ namespace MaxMind.GeoIP2
         /// <param name="response">The <see cref="AnonymousIPResponse" />.</param>
         /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
         bool TryAnonymousIP(string ipAddress, out AnonymousIPResponse response);
+
+        /// <summary>
+        ///     Returns an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="Response" /></returns>
+        AsnResponse Asn(IPAddress ipAddress);
+
+        /// <summary>
+        ///     Returns an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AsnResponse" /></returns>
+        AsnResponse Asn(string ipAddress);
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AsnResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        bool TryAsn(IPAddress ipAddress, out AsnResponse response);
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AsnResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AsnResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        bool TryAsn(string ipAddress, out AsnResponse response);
 
         /// <summary>
         ///     Tries to lookup a <see cref="CityResponse" /> for the specified IP address.

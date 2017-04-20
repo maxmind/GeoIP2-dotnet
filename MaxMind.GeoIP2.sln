@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5CCD8D4-F996-41F5-BEED-191CDF645F8A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoIP2", "GeoIP2\GeoIP2.csproj", "{1532C665-FDC3-4A8C-BB83-B0729F547A3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxMind.GeoIP2", "MaxMind.GeoIP2\MaxMind.GeoIP2.csproj", "{1532C665-FDC3-4A8C-BB83-B0729F547A3B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoIP2.UnitTests", "GeoIP2.UnitTests\GeoIP2.UnitTests.csproj", "{C23F19DE-FC59-4AE7-A626-816DF28C0A97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxMind.GeoIP2.UnitTests", "MaxMind.GeoIP2.UnitTests\MaxMind.GeoIP2.UnitTests.csproj", "{C23F19DE-FC59-4AE7-A626-816DF28C0A97}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoIP2.Benchmark", "GeoIP2.Benchmark\GeoIP2.Benchmark.csproj", "{257FAD1A-9A52-4BA1-9869-61950F3B4687}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxMind.GeoIP2.Benchmark", "MaxMind.GeoIP2.Benchmark\MaxMind.GeoIP2.Benchmark.csproj", "{257FAD1A-9A52-4BA1-9869-61950F3B4687}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
