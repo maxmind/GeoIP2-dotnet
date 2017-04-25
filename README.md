@@ -9,8 +9,8 @@ works with the free [GeoLite2 databases](http://dev.maxmind.com/geoip/geoip2/geo
 
 ## Requirements ##
 
-This library works with .NET Framework version 4.5 and above. If you are
-using Mono, 3.2 or greater is required.
+This library works with .NET Framework version 4.5 and above and .NET Standard 1.4 or
+above. If you are using Mono, 3.2 or greater is required.
 
 This library depends on
 [MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet).
