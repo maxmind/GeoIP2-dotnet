@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v2.7.2
+version: v2.8.0
 ---
 # GeoIP2 .NET API #
 
@@ -15,8 +15,8 @@ works with the free [GeoLite2 databases](http://dev.maxmind.com/geoip/geoip2/geo
 
 ## Requirements ##
 
-This library works with .NET Framework version 4.5 and above. If you are
-using Mono, 3.2 or greater is required.
+This library works with .NET Framework version 4.5 and above and .NET Standard 1.4 or
+above. If you are using Mono, 3.2 or greater is required.
 
 This library depends on
 [MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet).
@@ -229,6 +229,19 @@ using (var reader = new DatabaseReader("GeoIP2-Anonymous-IP.mmdb"))
     Console.WriteLine(response.IsPublicProxy);      // false
     Console.WriteLine(response.IsTorExitNode);     // true
     Console.WriteLine(response.IPAddress);         // '85.25.43.84'
+}
+```
+
+### ASN ###
+
+```csharp
+
+using (var reader = new DatabaseReader("GeoLite2-ASN.mmdb"))
+{
+    var response = reader.Asn("85.25.43.84");
+    Console.WriteLine(response.AutonomousSystemNumber); // 217
+    Console.WriteLine(response.AutonomousSystemOrganization); // 'University of Minnesota'
+    Console.WriteLine(response.IPAddress); // '128.101.101.101'
 }
 ```
 
