@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>MaxMind GeoIP2 Database Reader and Web Service Client</Description>
-    <VersionPrefix>2.7.2</VersionPrefix>
+    <VersionPrefix>2.8.0</VersionPrefix>
     <TargetFrameworks>net45;netstandard1.4</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>MaxMind.GeoIP2</AssemblyName>
