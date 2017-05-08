@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shfbBuild product="Sandcastle Help File Builder and Tools" version="2017.1.28.0" projectFile="C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\geoip2.shfbproj" started="5/8/2017 2:35:28 PM">
+<buildStep step="Initializing">
+Finding tools...
+The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
+Locating components in the following folder(s):
+    C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet
+    C:\ProgramData\EWSoftware\Sandcastle Help File Builder\Components and Plug-Ins\
+    C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\
+Using framework reflection data for &#39;.NET Framework 4.5&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Data\.NETFramework&#39;
+Using presentation style &#39;VS2013&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013&#39;
+Loading and initializing plug-ins...
+Lightweight Website Style Version 2017.1.28.0
+Copyright &#169; 2006-2017, Eric Woodruff, All Rights Reserved
+Portions Copyright &#169; 2014, Sam Harwell, All Rights Reserved
+</buildStep>
+<buildStep step="ClearWorkFolder">
+Clearing working folder...
+-------------------------------
+Clearing any prior web/markdown output...
+</buildStep>
+<buildStep step="ValidatingDocumentationSources">
+Validating and copying documentation source information
+Source: C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\MaxMind.GeoIP2\bin\Release\net45\MaxMind.GeoIP2.xml
+Source: C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\MaxMind.GeoIP2\bin\Release\net45\MaxMind.GeoIP2.dll
+    Found assembly &#39;C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\MaxMind.GeoIP2\bin\Release\net45\MaxMind.GeoIP2.dll&#39;
+Source: C:\Users\osch0\Documents\GitHub\MaxMind-DB-Reader-dotnet\MaxMind.Db\bin\Release\net45\MaxMind.Db.dll
+    Found assembly &#39;C:\Users\osch0\Documents\GitHub\MaxMind-DB-Reader-dotnet\MaxMind.Db\bin\Release\net45\MaxMind.Db.dll&#39;
+Source: C:\Users\osch0\Documents\GitHub\MaxMind-DB-Reader-dotnet\MaxMind.Db\bin\Release\net45\MaxMind.Db.xml
+
+Copying XML comments files
+    C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\MaxMind.GeoIP2\bin\Release\net45\MaxMind.GeoIP2.xml -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\MaxMind.GeoIP2.xml
+    C:\Users\osch0\Documents\GitHub\MaxMind-DB-Reader-dotnet\MaxMind.Db\bin\Release\net45\MaxMind.Db.xml -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\MaxMind.Db.xml
+</buildStep>
+<buildStep step="GenerateSharedContent">
+Generating shared content files (en-US, English (United States))...
+<plugIn name="Lightweight Website Style" behavior="After" priority="1000">
+</plugIn>    Last step completed in 00:00:00.0462
+</buildStep>
+<buildStep step="GenerateApiFilter">
+Generating API filter for MRefBuilder...
+    Last step completed in 00:00:00.0113
+</buildStep>
+<buildStep step="GenerateReflectionInfo">
+Generating reflection information...
+[C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe - GenerateRefInfo.proj]
+Build started 5/8/2017 2:35:30 PM.
+Project &quot;C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\GenerateRefInfo.proj&quot; on node 1 (default targets).
+Project file contains ToolsVersion=&quot;12.0&quot;. This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion=&quot;4.0&quot;. For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+PrepareForBuild:
+  Creating directory &quot;obj\Debug\&quot;.
+GenerateRefInfo:
+  MRefBuilder (v2017.1.28.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  No source code context base path specified.  Source context information is unavailable.
+  Loaded 2 assemblies for reflection and 1 dependency assemblies.
+  Wrote information on 5 namespaces, 44 types, and 282 members
+  Copying file from &quot;reflection.org&quot; to &quot;reflection.all&quot;.
+  XslTransform (v2017.1.28.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\MergeDuplicates.xsl&#39;.
+Done Building Project &quot;C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\GenerateRefInfo.proj&quot; (default targets).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.48
+    Last step completed in 00:00:00.6148
+</buildStep>
+<buildStep step="TransformReflectionInfo">
+Transforming reflection output...
+[C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe - TransformManifest.proj]
+Build started 5/8/2017 2:35:30 PM.
+Project &quot;C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\TransformManifest.proj&quot; on node 1 (default targets).
+Project file contains ToolsVersion=&quot;12.0&quot;. This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion=&quot;4.0&quot;. For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+TransformManifest:
+  XslTransform (v2017.1.28.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\ApplyVSDocModel.xsl&#39;.
+  Copying file from &quot;reflection.xml&quot; to &quot;reflection.ungrouped&quot;.
+  AddNamespaceGroups (v2017.1.28.0)
+  Copyright c 2006-2017, Eric Woodruff, All Rights Reserved
+  Added 1 namespace group entries
+  Copying file from &quot;reflection.xml&quot; to &quot;reflection.nofilenames&quot;.
+  XslTransform (v2017.1.28.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\AddFilenames.xsl&#39;.
+    Unique name M_MaxMind_Db_DeserializationException__ctor_1 generated for M:MaxMind.Db.DeserializationException.#ctor(System.String,System.Exception)
+    Unique name M_MaxMind_Db_InvalidDatabaseException__ctor_1 generated for M:MaxMind.Db.InvalidDatabaseException.#ctor(System.String,System.Exception)
+    Unique name M_MaxMind_Db_Reader__ctor_1 generated for M:MaxMind.Db.Reader.#ctor(System.String)
+    Unique name M_MaxMind_Db_Reader__ctor_2 generated for M:MaxMind.Db.Reader.#ctor(System.String,MaxMind.Db.FileAccessMode)
+    Unique name M_MaxMind_Db_Reader_Find__1_1 generated for M:MaxMind.Db.Reader.Find``1(System.Net.IPAddress,System.Int32@,MaxMind.Db.InjectableValues)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader__ctor_1 generated for M:MaxMind.GeoIP2.DatabaseReader.#ctor(System.IO.Stream,System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_DatabaseReader__ctor_2 generated for M:MaxMind.GeoIP2.DatabaseReader.#ctor(System.String,MaxMind.Db.FileAccessMode)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader__ctor_3 generated for M:MaxMind.GeoIP2.DatabaseReader.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String},MaxMind.Db.FileAccessMode)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_AnonymousIP_1 generated for M:MaxMind.GeoIP2.DatabaseReader.AnonymousIP(System.String)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_Asn_1 generated for M:MaxMind.GeoIP2.DatabaseReader.Asn(System.String)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_City_1 generated for M:MaxMind.GeoIP2.DatabaseReader.City(System.String)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_ConnectionType_1 generated for M:MaxMind.GeoIP2.DatabaseReader.ConnectionType(System.String)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_Country_1 generated for M:MaxMind.GeoIP2.DatabaseReader.Country(System.String)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_Dispose_1 generated for M:MaxMind.GeoIP2.DatabaseReader.Dispose(System.Boolean)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_Domain_1 generated for M:MaxMind.GeoIP2.DatabaseReader.Domain(System.String)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_Enterprise_1 generated for M:MaxMind.GeoIP2.DatabaseReader.Enterprise(System.String)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_Isp_1 generated for M:MaxMind.GeoIP2.DatabaseReader.Isp(System.String)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_TryAnonymousIP_1 generated for M:MaxMind.GeoIP2.DatabaseReader.TryAnonymousIP(System.String,MaxMind.GeoIP2.Responses.AnonymousIPResponse@)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_TryAsn_1 generated for M:MaxMind.GeoIP2.DatabaseReader.TryAsn(System.String,MaxMind.GeoIP2.Responses.AsnResponse@)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_TryCity_1 generated for M:MaxMind.GeoIP2.DatabaseReader.TryCity(System.String,MaxMind.GeoIP2.Responses.CityResponse@)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_TryConnectionType_1 generated for M:MaxMind.GeoIP2.DatabaseReader.TryConnectionType(System.String,MaxMind.GeoIP2.Responses.ConnectionTypeResponse@)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_TryCountry_1 generated for M:MaxMind.GeoIP2.DatabaseReader.TryCountry(System.String,MaxMind.GeoIP2.Responses.CountryResponse@)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_TryDomain_1 generated for M:MaxMind.GeoIP2.DatabaseReader.TryDomain(System.String,MaxMind.GeoIP2.Responses.DomainResponse@)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_TryEnterprise_1 generated for M:MaxMind.GeoIP2.DatabaseReader.TryEnterprise(System.String,MaxMind.GeoIP2.Responses.EnterpriseResponse@)
+    Unique name M_MaxMind_GeoIP2_DatabaseReader_TryIsp_1 generated for M:MaxMind.GeoIP2.DatabaseReader.TryIsp(System.String,MaxMind.GeoIP2.Responses.IspResponse@)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_AnonymousIP_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.AnonymousIP(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Asn_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.Asn(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_ConnectionType_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.ConnectionType(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Domain_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.Domain(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Enterprise_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.Enterprise(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Isp_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.Isp(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryAnonymousIP_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.TryAnonymousIP(System.String,MaxMind.GeoIP2.Responses.AnonymousIPResponse@)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryAsn_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.TryAsn(System.String,MaxMind.GeoIP2.Responses.AsnResponse@)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryCity_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.TryCity(System.String,MaxMind.GeoIP2.Responses.CityResponse@)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryConnectionType_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.TryConnectionType(System.String,MaxMind.GeoIP2.Responses.ConnectionTypeResponse@)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryCountry_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.TryCountry(System.String,MaxMind.GeoIP2.Responses.CountryResponse@)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryDomain_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.TryDomain(System.String,MaxMind.GeoIP2.Responses.DomainResponse@)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryEnterprise_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.TryEnterprise(System.String,MaxMind.GeoIP2.Responses.EnterpriseResponse@)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryIsp_1 generated for M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.TryIsp(System.String,MaxMind.GeoIP2.Responses.IspResponse@)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2Provider_City_1 generated for M:MaxMind.GeoIP2.IGeoIP2Provider.City(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2Provider_Country_1 generated for M:MaxMind.GeoIP2.IGeoIP2Provider.Country(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2WebServicesClient_CityAsync_1 generated for M:MaxMind.GeoIP2.IGeoIP2WebServicesClient.CityAsync(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2WebServicesClient_CityAsync_2 generated for M:MaxMind.GeoIP2.IGeoIP2WebServicesClient.CityAsync(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2WebServicesClient_CountryAsync_1 generated for M:MaxMind.GeoIP2.IGeoIP2WebServicesClient.CountryAsync(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2WebServicesClient_CountryAsync_2 generated for M:MaxMind.GeoIP2.IGeoIP2WebServicesClient.CountryAsync(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2WebServicesClient_Insights_1 generated for M:MaxMind.GeoIP2.IGeoIP2WebServicesClient.Insights(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2WebServicesClient_Insights_2 generated for M:MaxMind.GeoIP2.IGeoIP2WebServicesClient.Insights(System.String)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2WebServicesClient_InsightsAsync_1 generated for M:MaxMind.GeoIP2.IGeoIP2WebServicesClient.InsightsAsync(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_IGeoIP2WebServicesClient_InsightsAsync_2 generated for M:MaxMind.GeoIP2.IGeoIP2WebServicesClient.InsightsAsync(System.String)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient__ctor_1 generated for M:MaxMind.GeoIP2.WebServiceClient.#ctor(System.Int32,System.String,System.String,System.Int32)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_City_1 generated for M:MaxMind.GeoIP2.WebServiceClient.City(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_City_2 generated for M:MaxMind.GeoIP2.WebServiceClient.City(System.String)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_CityAsync_1 generated for M:MaxMind.GeoIP2.WebServiceClient.CityAsync(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_CityAsync_2 generated for M:MaxMind.GeoIP2.WebServiceClient.CityAsync(System.String)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_Country_1 generated for M:MaxMind.GeoIP2.WebServiceClient.Country(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_Country_2 generated for M:MaxMind.GeoIP2.WebServiceClient.Country(System.String)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_CountryAsync_1 generated for M:MaxMind.GeoIP2.WebServiceClient.CountryAsync(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_CountryAsync_2 generated for M:MaxMind.GeoIP2.WebServiceClient.CountryAsync(System.String)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_Dispose_1 generated for M:MaxMind.GeoIP2.WebServiceClient.Dispose(System.Boolean)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_Insights_1 generated for M:MaxMind.GeoIP2.WebServiceClient.Insights(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_Insights_2 generated for M:MaxMind.GeoIP2.WebServiceClient.Insights(System.String)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_InsightsAsync_1 generated for M:MaxMind.GeoIP2.WebServiceClient.InsightsAsync(System.Net.IPAddress)
+    Unique name M_MaxMind_GeoIP2_WebServiceClient_InsightsAsync_2 generated for M:MaxMind.GeoIP2.WebServiceClient.InsightsAsync(System.String)
+    Unique name M_MaxMind_GeoIP2_Exceptions_AddressNotFoundException__ctor_1 generated for M:MaxMind.GeoIP2.Exceptions.AddressNotFoundException.#ctor(System.String)
+    Unique name M_MaxMind_GeoIP2_Exceptions_AddressNotFoundException__ctor_2 generated for M:MaxMind.GeoIP2.Exceptions.AddressNotFoundException.#ctor(System.String,System.Exception)
+    Unique name M_MaxMind_GeoIP2_Exceptions_AuthenticationException__ctor_1 generated for M:MaxMind.GeoIP2.Exceptions.AuthenticationException.#ctor(System.String)
+    Unique name M_MaxMind_GeoIP2_Exceptions_AuthenticationException__ctor_2 generated for M:MaxMind.GeoIP2.Exceptions.AuthenticationException.#ctor(System.String,System.Exception)
+    Unique name M_MaxMind_GeoIP2_Exceptions_GeoIP2Exception__ctor_1 generated for M:MaxMind.GeoIP2.Exceptions.GeoIP2Exception.#ctor(System.String)
+    Unique name M_MaxMind_GeoIP2_Exceptions_GeoIP2Exception__ctor_2 generated for M:MaxMind.GeoIP2.Exceptions.GeoIP2Exception.#ctor(System.String,System.Exception)
+    Unique name M_MaxMind_GeoIP2_Exceptions_HttpException__ctor_1 generated for M:MaxMind.GeoIP2.Exceptions.HttpException.#ctor(System.String,System.Net.HttpStatusCode,System.Uri)
+    Unique name M_MaxMind_GeoIP2_Exceptions_HttpException__ctor_2 generated for M:MaxMind.GeoIP2.Exceptions.HttpException.#ctor(System.String,System.Net.HttpStatusCode,System.Uri,System.Exception)
+    Unique name M_MaxMind_GeoIP2_Exceptions_InvalidRequestException__ctor_1 generated for M:MaxMind.GeoIP2.Exceptions.InvalidRequestException.#ctor(System.String,System.String,System.Uri)
+    Unique name M_MaxMind_GeoIP2_Exceptions_OutOfQueriesException__ctor_1 generated for M:MaxMind.GeoIP2.Exceptions.OutOfQueriesException.#ctor(System.String)
+    Unique name M_MaxMind_GeoIP2_Exceptions_OutOfQueriesException__ctor_2 generated for M:MaxMind.GeoIP2.Exceptions.OutOfQueriesException.#ctor(System.String,System.Exception)
+    Unique name M_MaxMind_GeoIP2_Exceptions_PermissionRequiredException__ctor_1 generated for M:MaxMind.GeoIP2.Exceptions.PermissionRequiredException.#ctor(System.String,System.Exception)
+    Unique name M_MaxMind_GeoIP2_Model_City__ctor_1 generated for M:MaxMind.GeoIP2.Model.City.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_City__ctor_2 generated for M:MaxMind.GeoIP2.Model.City.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int64},System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_Continent__ctor_1 generated for M:MaxMind.GeoIP2.Model.Continent.#ctor(System.String,System.Nullable{System.Int32},System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_Continent__ctor_2 generated for M:MaxMind.GeoIP2.Model.Continent.#ctor(System.String,System.Nullable{System.Int64},System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_Country__ctor_1 generated for M:MaxMind.GeoIP2.Model.Country.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_Country__ctor_2 generated for M:MaxMind.GeoIP2.Model.Country.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int64},System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_Location__ctor_1 generated for M:MaxMind.GeoIP2.Model.Location.#ctor(System.Nullable{System.Int32},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Int32},System.String)
+    Unique name M_MaxMind_GeoIP2_Model_MaxMind__ctor_1 generated for M:MaxMind.GeoIP2.Model.MaxMind.#ctor(System.Nullable{System.Int32})
+    Unique name M_MaxMind_GeoIP2_Model_Postal__ctor_1 generated for M:MaxMind.GeoIP2.Model.Postal.#ctor(System.String,System.Nullable{System.Int32})
+    Unique name M_MaxMind_GeoIP2_Model_RepresentedCountry__ctor_1 generated for M:MaxMind.GeoIP2.Model.RepresentedCountry.#ctor(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_RepresentedCountry__ctor_2 generated for M:MaxMind.GeoIP2.Model.RepresentedCountry.#ctor(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_Subdivision__ctor_1 generated for M:MaxMind.GeoIP2.Model.Subdivision.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_Subdivision__ctor_2 generated for M:MaxMind.GeoIP2.Model.Subdivision.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int64},System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.String})
+    Unique name M_MaxMind_GeoIP2_Model_Traits__ctor_1 generated for M:MaxMind.GeoIP2.Model.Traits.#ctor(System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String)
+    Unique name M_MaxMind_GeoIP2_Responses_AbstractCityResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.AbstractCityResponse.#ctor(MaxMind.GeoIP2.Model.City,MaxMind.GeoIP2.Model.Continent,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.Location,MaxMind.GeoIP2.Model.MaxMind,MaxMind.GeoIP2.Model.Postal,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.RepresentedCountry,System.Collections.Generic.IEnumerable{MaxMind.GeoIP2.Model.Subdivision},MaxMind.GeoIP2.Model.Traits)
+    Unique name M_MaxMind_GeoIP2_Responses_AbstractCountryResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.AbstractCountryResponse.#ctor(MaxMind.GeoIP2.Model.Continent,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.MaxMind,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.RepresentedCountry,MaxMind.GeoIP2.Model.Traits)
+    Unique name M_MaxMind_GeoIP2_Responses_AnonymousIPResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.AnonymousIPResponse.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)
+    Unique name M_MaxMind_GeoIP2_Responses_AsnResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.AsnResponse.#ctor(System.Nullable{System.Int64},System.String,System.String)
+    Unique name M_MaxMind_GeoIP2_Responses_CityResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.CityResponse.#ctor(MaxMind.GeoIP2.Model.City,MaxMind.GeoIP2.Model.Continent,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.Location,MaxMind.GeoIP2.Model.MaxMind,MaxMind.GeoIP2.Model.Postal,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.RepresentedCountry,System.Collections.Generic.IEnumerable{MaxMind.GeoIP2.Model.Subdivision},MaxMind.GeoIP2.Model.Traits)
+    Unique name M_MaxMind_GeoIP2_Responses_ConnectionTypeResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.ConnectionTypeResponse.#ctor(System.String,System.String)
+    Unique name M_MaxMind_GeoIP2_Responses_CountryResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.CountryResponse.#ctor(MaxMind.GeoIP2.Model.Continent,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.MaxMind,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.RepresentedCountry,MaxMind.GeoIP2.Model.Traits)
+    Unique name M_MaxMind_GeoIP2_Responses_DomainResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.DomainResponse.#ctor(System.String,System.String)
+    Unique name M_MaxMind_GeoIP2_Responses_InsightsResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.InsightsResponse.#ctor(MaxMind.GeoIP2.Model.City,MaxMind.GeoIP2.Model.Continent,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.Location,MaxMind.GeoIP2.Model.MaxMind,MaxMind.GeoIP2.Model.Postal,MaxMind.GeoIP2.Model.Country,MaxMind.GeoIP2.Model.RepresentedCountry,System.Collections.Generic.IEnumerable{MaxMind.GeoIP2.Model.Subdivision},MaxMind.GeoIP2.Model.Traits)
+    Unique name M_MaxMind_GeoIP2_Responses_IspResponse__ctor_1 generated for M:MaxMind.GeoIP2.Responses.IspResponse.#ctor(System.Nullable{System.Int64},System.String,System.String,System.String,System.String)
+  XslTransform (v2017.1.28.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\ReflectionToManifest.xsl&#39;.
+Done Building Project &quot;C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\TransformManifest.proj&quot; (default targets).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.57
+    Last step completed in 00:00:00.7069
+</buildStep>
+<buildStep step="GenerateNamespaceSummaries">
+Generating namespace summary information...
+    Last step completed in 00:00:00.0323
+</buildStep>
+<buildStep step="CopyAdditionalContent">
+Copying additional content files...
+No additional content to copy
+    Last step completed in 00:00:00.0036
+</buildStep>
+<buildStep step="MergeTablesOfContents">
+Merging conceptual and additional tables of contents...
+    Last step completed in 00:00:00.0015
+</buildStep>
+<buildStep step="GenerateIntermediateTableOfContents">
+Generating intermediate table of contents file...
+[C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe - GenerateIntermediateTOC.proj]
+Build started 5/8/2017 2:35:31 PM.
+Project &quot;C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\GenerateIntermediateTOC.proj&quot; on node 1 (default targets).
+Project file contains ToolsVersion=&quot;12.0&quot;. This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion=&quot;4.0&quot;. For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+GenerateIntermediateTOC:
+  XslTransform (v2017.1.28.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\CreateVSToc.xsl&#39;.
+Done Building Project &quot;C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\GenerateIntermediateTOC.proj&quot; (default targets).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.08
+Generating conceptual content intermediate TOC file...
+    Last step completed in 00:00:00.1881
+</buildStep>
+<buildStep step="CreateBuildAssemblerConfigs">
+Creating Sandcastle configuration files...
+    sandcastle.config
+    Last step completed in 00:00:00.2186
+</buildStep>
+<buildStep step="MergeCustomConfigs">
+Merging custom build component configurations
+C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\sandcastle.config
+  Updating reference topic configurations.
+  No conceptual content.  Removing conceptual content components.
+    Last step completed in 00:00:00.0138
+</buildStep>
+<buildStep step="BuildTopics">
+Building help topics...
+[C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe - BuildTopics.proj]
+Build started 5/8/2017 2:35:31 PM.
+Project &quot;C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\BuildTopics.proj&quot; on node 1 (default targets).
+Project file contains ToolsVersion=&quot;12.0&quot;. This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion=&quot;4.0&quot;. For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+BuildTopics:
+  BuildAssembler (v2017.1.28.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Loading configuration...
+  Processing topics...
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:MaxMind.GeoIP2.IGeoIP2DatabaseReader.Asn(System.Net.IPAddress)] Unknown reference link target &#39;T:MaxMind.GeoIP2.Http.Response&#39;. [C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\BuildTopics.proj]
+  Processed 496 topic(s)
+  1 warning(s)
+  CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 8 of 15.
+  CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 4 of 30.
+  SaveComponent: Waiting for the document writer task to finish (99 Website API file(s) remaining)...
+Done Building Project &quot;C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\BuildTopics.proj&quot; (default targets).
+
+Build succeeded.
+
+Time Elapsed 00:00:13.16
+    Last step completed in 00:00:13.2695
+</buildStep>
+<buildStep step="CombiningIntermediateTocFiles">
+Combining conceptual and API intermediate TOC files...
+    Last step completed in 00:00:00.0056
+</buildStep>
+<buildStep step="ExtractingHtmlInfo">
+Extracting HTML info for HTML Help 1 and/or website...
+[C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe - ExtractHtmlInfo.proj]
+Project file contains ToolsVersion=&quot;12.0&quot;. This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion=&quot;4.0&quot;. For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
+Sandcastle Help File Builder and Tools, version 2017.1.28.0
+Copyright c 2006-2017, Eric Woodruff, All Rights Reserved
+E-Mail: Eric@EWoodruff.us
+
+Using LCID &#39;1033&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
+
+Processing website files in C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website
+Processed 496 HTML files
+Sorting keywords and generating See Also indices
+Saving website keyword index to C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\WebKI.xml
+Saving website table of contents to C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\WebTOC.xml
+    Last step completed in 00:00:03.3619
+</buildStep>
+<buildStep step="CopyStandardHelpContent">
+Copying standard help content...
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertCaution.png -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\AlertCaution.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertNote.png -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\AlertNote.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertSecurity.png -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\AlertSecurity.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CFW.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\CFW.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CodeExample.png -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\CodeExample.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\favicon.ico -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\favicon.ico
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privclass.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privdelegate.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privenumeration.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privevent.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privextension.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privfield.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privinterface.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privmethod.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privproperty.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privstructure.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\privstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protclass.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protdelegate.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protenumeration.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protevent.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protextension.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protfield.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protinterface.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protmethod.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protoperator.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protoperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protproperty.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protstructure.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\protstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubclass.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubdelegate.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubenumeration.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubevent.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubextension.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubfield.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubinterface.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubmethod.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\puboperator.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\puboperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubproperty.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubstructure.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\pubstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionCollapsed.png -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\SectionCollapsed.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionExpanded.png -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\SectionExpanded.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\slMobile.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\slMobile.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\static.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\static.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\xna.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\xna.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\scripts\branding.js -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\scripts\branding.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-cs-CZ.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-cs-CZ.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-de-DE.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-de-DE.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-en-US.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-en-US.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-es-ES.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-es-ES.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-fr-FR.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-fr-FR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help1.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-Help1.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-HelpViewer.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-HelpViewer.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-it-IT.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-it-IT.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ja-JP.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-ja-JP.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ko-KR.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-ko-KR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pl-PL.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-pl-PL.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pt-BR.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-pt-BR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ru-RU.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-ru-RU.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-tr-TR.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-tr-TR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Website.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-Website.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-CN.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-zh-CN.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-TW.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding-zh-TW.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding.css -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\styles\branding.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\index.html -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\index.html
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\search.html -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\search.html
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.aspx -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\SearchHelp.aspx
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.inc.php -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\SearchHelp.inc.php
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.php -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\SearchHelp.php
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\Web.Config -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\Web.Config
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\Search.png -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\Search.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocClose.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\TocClose.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocCollapsed.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\TocCollapsed.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocExpanded.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\TocExpanded.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocOpen.gif -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\icons\TocOpen.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\scripts\branding-Website.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\clipboard.min.js -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\scripts\clipboard.min.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-1.11.0.min.js -&gt; C:\Users\osch0\Documents\GitHub\GeoIP2-dotnet\.gh-pages\doc\v2.8.0\Working\Output\Website\scripts\jquery-1.11.0.min.js
+    Last step completed in 00:00:00.4308
+</buildStep>
+<buildStep step="GenerateHelpFormatTableOfContents">
+Generating website table of contents file...
+    Last step completed in 00:00:00.0008
+</buildStep>
+<buildStep step="GenerateFullTextIndex">
+Generating full-text index for the website...
+
+<plugIn name="Lightweight Website Style" behavior="After" priority="1000">
+Adding lightweight search and TOC elements to each topic...
+</plugIn>    Last step completed in 00:00:03.8906
+</buildStep>
+<buildStep step="CopyingWebsiteFiles">
+Copying website files to output folder...
+
+Copied 500 files
+Copied 770 files for the website content
+    Last step completed in 00:00:00.7265
+</buildStep>
+<buildStep step="CleanIntermediates">
+Removing intermediate files...
+    Last step completed in 00:00:00.1697
+</buildStep>
+<buildStep step="Completed">
+
+Build completed successfully at 5/8/2017 2:35:53 PM.  Total time: 00:00:24.5588
+
+</buildStep>
+</shfbBuild>
