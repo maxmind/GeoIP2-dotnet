@@ -24,10 +24,11 @@
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CleanIntermediates>True</CleanIntermediates>
     <DocumentationSources>
-      <DocumentationSource sourceFile="GeoIP2\bin\Release\net45\MaxMind.GeoIP2.xml" />
-<DocumentationSource sourceFile="GeoIP2\bin\Release\net45\MaxMind.GeoIP2.dll" />
-<DocumentationSource sourceFile="..\MaxMind-DB-Reader-dotnet\MaxMind.Db\bin\Release\net45\MaxMind.Db.dll" />
-<DocumentationSource sourceFile="..\MaxMind-DB-Reader-dotnet\MaxMind.Db\bin\Release\net45\MaxMind.Db.xml" /></DocumentationSources>
+      <DocumentationSource sourceFile="MaxMind.GeoIP2\bin\Release\net45\MaxMind.GeoIP2.xml" />
+      <DocumentationSource sourceFile="MaxMind.GeoIP2\bin\Release\net45\MaxMind.GeoIP2.dll" />
+      <DocumentationSource sourceFile="..\MaxMind-DB-Reader-dotnet\MaxMind.Db\bin\Release\net45\MaxMind.Db.dll" />
+      <DocumentationSource sourceFile="..\MaxMind-DB-Reader-dotnet\MaxMind.Db\bin\Release\net45\MaxMind.Db.xml" />
+    </DocumentationSources>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>True</NamespaceGrouping>
@@ -39,6 +40,7 @@
     <NamingMethod>MemberName</NamingMethod>
     <HelpTitle>MaxMind.GeoIP2 Library</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <MissingTags>AutoDocumentCtors, AutoDocumentDispose</MissingTags>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
@@ -69,10 +71,4 @@
     </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="GeoIP2\GeoIP2.xproj">
-      <Name>MaxMind.MinFraud</Name>
-      <Project>1532c665-fdc3-4a8c-bb83-b0729f547a3b</Project>
-    </ProjectReference>
-  </ItemGroup>
 </Project>
