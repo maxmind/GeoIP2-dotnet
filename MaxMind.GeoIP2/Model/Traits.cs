@@ -107,7 +107,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP is an anonymous proxy. See
-        ///     <a href="http://dev.maxmind.com/faq/geoip#anonproxy">
+        ///     <a href="https://dev.maxmind.com/faq/geoip#anonproxy">
         ///         MaxMind's GeoIP
         ///         FAQ
         ///     </a>
