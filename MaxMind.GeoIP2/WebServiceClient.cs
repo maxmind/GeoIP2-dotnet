@@ -61,7 +61,7 @@ namespace MaxMind.GeoIP2
     ///     <para>
     ///         For details on the possible errors returned by the web service itself, see
     ///         <a
-    ///             href="http://dev.maxmind.com/geoip2/geoip/web-services">
+    ///             href="https://dev.maxmind.com/geoip/geoip2/web-services">
     ///             the GeoIP2 web
     ///             service documentation
     ///         </a>
