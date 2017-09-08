@@ -77,12 +77,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 var exception = Record.Exception(() => reader.Country("10.10.10.10"));
                 Assert.NotNull(exception);
-                Assert.Contains(exception.Message,
-#if !NETCOREAPP1_1
-                    "A GeoIP2-City database cannot be opened with the Country method");
-#else
-                    "A GeoIP2-City database cannot be opened with the given method");
-#endif
+                Assert.Contains("A GeoIP2-City database cannot be opened with the", exception.Message);
                 Assert.IsType<InvalidOperationException>(exception);
             }
         }
@@ -280,7 +275,7 @@ namespace MaxMind.GeoIP2.UnitTests
         public void CityWithLocaleList_ValidResponse()
         {
             using (
-                var reader = new DatabaseReader(_cityDatabaseFile, new List<string> {"xx", "ru", "pt-BR", "es", "en"}))
+                var reader = new DatabaseReader(_cityDatabaseFile, new List<string> { "xx", "ru", "pt-BR", "es", "en" }))
             {
                 var response = reader.City("81.2.69.160");
                 Assert.Equal("Лондон", response.City.Name);
