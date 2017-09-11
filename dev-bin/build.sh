@@ -17,23 +17,22 @@ if [ -n "${DOTNETCORE:-}" ]; then
 
   dotnet restore ./MaxMind.GeoIP2.sln
 
-  dotnet build -f netstandard1.4 -c "$CONFIGURATION" ./MaxMind.GeoIP2
-
   # Running Benchmark
-  dotnet run -f netcoreapp1.1 -c "$CONFIGURATION"  -p ./MaxMind.GeoIP2.Benchmark/MaxMind.GeoIP2.Benchmark.csproj
+  dotnet run -f $CONSOLE_FRAMEWORK -c "$CONFIGURATION"  -p ./MaxMind.GeoIP2.Benchmark/MaxMind.GeoIP2.Benchmark.csproj
 
   # Running Unit Tests
-  dotnet test -f netcoreapp1.1 -c "$CONFIGURATION" ./MaxMind.GeoIP2.UnitTests/MaxMind.GeoIP2.UnitTests.csproj
+  dotnet test -f $CONSOLE_FRAMEWORK -c "$CONFIGURATION" ./MaxMind.GeoIP2.UnitTests/MaxMind.GeoIP2.UnitTests.csproj
 
 else
 
   echo Using Mono
 
-  nuget restore
+  msbuild /t:restore ./MaxMind.GeoIP2.sln
 
-  xbuild /p:Configuration=$CONFIGURATION mono/MaxMind.GeoIP2.sln
+  msbuild /t:build /p:Configuration=$CONFIGURATION /p:TargetFramework=net452 ./MaxMind.GeoIP2.UnitTests/MaxMind.GeoIP2.UnitTests.csproj
 
-  mono ./packages/xunit.runner.console.2.2.0/tools/xunit.console.exe ./mono/bin/$CONFIGURATION/MaxMind.GeoIP2.UnitTests.dll
+  nuget install xunit.runner.console -ExcludeVersion -Version 2.2.0 -OutputDirectory .
+  mono ./xunit.runner.console/tools/xunit.console.exe ./MaxMind.GeoIP2.UnitTests/bin/$CONFIGURATION/net452/MaxMind.GeoIP2.UnitTests.dll
 
 fi
 
