@@ -1,12 +1,12 @@
 ---
 language: csharp
-solution: mono/MaxMind.GeoIP2.sln
+solution: MaxMind.GeoIP2.sln
 
 env:
   global:
-    - CONFIGURATION=Release
     - MAXMIND_BENCHMARK_DB=$TRAVIS_BUILD_DIR/MaxMind.GeoIP2.Benchmark/GeoLite2-City.mmdb
     - MAXMIND_TEST_BASE_DIR="$PWD/MaxMind.GeoIP2.UnitTests"
+    - CONFIGURATION=Release
 
 matrix:
   include:
@@ -14,13 +14,24 @@ matrix:
     dist: trusty # Ubuntu 14.04
     dotnet: 1.0.1
     mono: none
-    env: DOTNETCORE=1
     sudo: required
+    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp1.1
   - os: osx
     osx_image: xcode7.3 # macOS 10.11
     dotnet: 1.0.1
     mono: none
-    env: DOTNETCORE=1
+    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp1.1
+  - os: linux
+    dist: trusty # Ubuntu 14.04
+    dotnet: 2.0.0
+    mono: none
+    sudo: required
+    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp2.0
+  - os: osx
+    osx_image: xcode9 # macOS 10.12
+    dotnet: 2.0.0
+    mono: none
+    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp2.0
   - os: linux
     dist: trusty # Ubuntu 14.04
     mono: latest
@@ -28,6 +39,8 @@ matrix:
   - os: osx
     osx_image: xcode7.3 # macOS 10.11
     mono: latest
+
+install: git submodule update --init --recursive
 
 script: ./dev-bin/build.sh
 
