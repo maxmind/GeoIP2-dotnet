@@ -1,6 +1,13 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.8.1 (2017-09-XX)
+------------------
+
+* Deserialization of the registered country when reading a GeoLite2 Country or
+  GeoIP2 Country database now works. Previously, it was deserialized to the
+  wrong name. Reported by oliverherdener.
+
 2.8.0 (2017-05-08)
 ------------------
 
