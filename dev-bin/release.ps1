@@ -28,7 +28,7 @@ if ((Read-Host -Prompt 'Continue? (y/n)') -ne 'y') {
     Write-Error 'Aborting'
 }
 
-& git commit -m "Prepare for $version" -a
+& git commit -m "$version" -a
 
 Push-Location MaxMind.GeoIP2
 
@@ -66,7 +66,6 @@ Pop-Location
 
 $page = (Get-Item '.gh-pages\index.md').FullName
 
-
 $pageHeader = @"
 ---
 layout: default
@@ -97,8 +96,7 @@ if ((Read-Host -Prompt 'Should push? (y/n)') -ne 'y') {
 & git push
 
 Pop-Location
-& git tag "$tag"
-& git push
+& hub release create "$tag"
 & git push --tags
 
 & nuget push "MaxMind.GeoIP2/bin/Release/MaxMind.GeoIP2.$version.nupkg" -Source https://www.nuget.org/api/v2/package
