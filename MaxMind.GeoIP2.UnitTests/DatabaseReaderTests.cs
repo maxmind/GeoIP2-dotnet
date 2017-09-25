@@ -205,6 +205,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 var response = reader.Country(IPAddress.Parse("81.2.69.160"));
                 Assert.Equal("GB", response.Country.IsoCode);
+                Assert.Equal("US", response.RegisteredCountry.IsoCode);
             }
         }
 
