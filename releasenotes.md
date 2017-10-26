@@ -1,9 +1,13 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.8.1 (2017-09-XX)
+2.9.0 (2017-10-XX)
 ------------------
 
+* The following new anonymizer properties were added to
+  `MaxMind.GeoIP2.Model.Traits` for use with GeoIP2 Precision Insights:
+  `IsAnonymous`, `IsAnonymousVpn`, `IsHostingProvider`, `IsPublicProxy`,
+  and `IsTorExitNode`.
 * Deserialization of the registered country when reading a GeoLite2 Country or
   GeoIP2 Country database now works. Previously, it was deserialized to the
   wrong name. Reported by oliverherdener.
@@ -101,7 +105,7 @@ GeoIP2 .NET API Release Notes
 ------------------------
 
 * Async support was added to the `WebServiceClient`. Each web-service end
-  point now has a corresponding *Async(ip)` method. GitHub #1.
+  point now has a corresponding `*Async(ip)` method. GitHub #1.
 * Use of RestSharp was replaced by `HttpWebRequest` for synchronous HTTP
   requests and `HttpClient` for asynchronous requests. Microsoft BCL libraries
   and `System.Net.Http` are used to provide `async`/`await` and `HttpClient`
@@ -126,9 +130,9 @@ GeoIP2 .NET API Release Notes
 
 * `AverageIncome` and `PopulationDensity` were added to the `Location`
   model for use with the new fields in GeoIP2 Insights.
-* `IsAnonymousProxy` and `IsSatelliteProvider` in `GeoIP2.Model.Traits` have
-  been deprecated. Please use our [GeoIP2 Anonymous IP
-  database](https://www.maxmind.com/en/geoip2-anonymous- ip-database) to
+* `IsAnonymousProxy` and `IsSatelliteProvider` in `MaxMind.GeoIP2.Model.Traits`
+  have been deprecated. Please use our [GeoIP2 Anonymous IP
+  database](https://www.maxmind.com/en/geoip2-anonymous-ip-database) to
   determine whether an IP address is used by an anonymizing service.
 
 2.2.0 (2015-05-19)

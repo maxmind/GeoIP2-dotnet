@@ -220,8 +220,7 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
-                CityResponse response;
-                var lookupSuccess = reader.TryCity("81.2.69.160", out response);
+                var lookupSuccess = reader.TryCity("81.2.69.160", out var response);
                 Assert.True(lookupSuccess);
                 Assert.Equal("London", response.City.Name);
             }
@@ -300,8 +299,7 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             using (var reader = new DatabaseReader(_cityDatabaseFile))
             {
-                CityResponse response;
-                var status = reader.TryCity("10.10.10.10", out response);
+                var status = reader.TryCity("10.10.10.10", out var response);
                 Assert.False(status);
                 Assert.Null(response);
             }
