@@ -11,6 +11,11 @@ GeoIP2 .NET API Release Notes
 * Deserialization of the registered country when reading a GeoLite2 Country or
   GeoIP2 Country database now works. Previously, it was deserialized to the
   wrong name. Reported by oliverherdener.
+* A `netstandard2.0` target was added to eliminate additional dependencies
+  required by the `netstandard1.4` target. Pull request by Adeel Mujahid.
+  GitHub #81.
+* As part of the above work, the separate Mono build files were dropped. As
+  of Mono 5.0.0, `msbuild` is supported.
 
 2.8.0 (2017-05-08)
 ------------------
