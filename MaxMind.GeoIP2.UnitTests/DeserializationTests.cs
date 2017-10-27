@@ -82,9 +82,14 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("AS Organization", insights.Traits.AutonomousSystemOrganization);
             Assert.Equal("example.com", insights.Traits.Domain);
             Assert.Equal("1.2.3.4", insights.Traits.IPAddress);
+            Assert.True(insights.Traits.IsAnonymous);
+            Assert.True(insights.Traits.IsAnonymousVpn);
+            Assert.True(insights.Traits.IsHostingProvider);
+            Assert.True(insights.Traits.IsPublicProxy);
+            Assert.True(insights.Traits.IsTorExitNode);
 #pragma warning disable 0618
-            Assert.Equal(true, insights.Traits.IsAnonymousProxy);
-            Assert.Equal(true, insights.Traits.IsSatelliteProvider);
+            Assert.True(insights.Traits.IsAnonymousProxy);
+            Assert.True(insights.Traits.IsSatelliteProvider);
 #pragma warning restore 0618
             Assert.Equal("Comcast", insights.Traits.Isp);
             Assert.Equal("Blorg", insights.Traits.Organization);

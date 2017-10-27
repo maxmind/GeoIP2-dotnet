@@ -114,8 +114,13 @@ namespace MaxMind.GeoIP2.UnitTests
                     {"autonomous_system_organization", "AS Organization"},
                     {"domain", "example.com"},
                     {"ip_address", "1.2.3.4"},
+                    {"is_anonymous", true},
                     {"is_anonymous_proxy", true},
+                    {"is_anonymous_vpn", true},
+                    {"is_hosting_provider", true},
+                    {"is_public_proxy", true},
                     {"is_satellite_provider", true},
+                    {"is_tor_exit_node", true},
                     {"isp", "Comcast"},
                     {"organization", "Blorg"},
                     {"user_type", "college"}
