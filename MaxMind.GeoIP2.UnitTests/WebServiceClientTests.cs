@@ -116,6 +116,8 @@ namespace MaxMind.GeoIP2.UnitTests
             );
         }
 
+        // See https://github.com/xunit/xunit/issues/1517
+#pragma warning disable xUnit1026
         [Theory, MemberData(nameof(TestCases))]
         public async void AddressNotFoundShouldThrowException(string type, ClientRunner cr, Type t)
         {
@@ -363,6 +365,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.IsType<HttpException>(exception);
             Assert.Contains("does not specify code or error keys", exception.Message);
         }
+#pragma warning restore xUnit1026
 
         [Theory, MemberData(nameof(TestCases))]
         public async Task CorrectlyFormattedResponseShouldDeserializeIntoResponseObject(string type, ClientRunner cr,
@@ -429,7 +432,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var subdivisions = insights.Subdivisions;
             Assert.NotNull(subdivisions);
-            Assert.Equal(0, subdivisions.Count);
+            Assert.Empty(subdivisions);
 
             var subdiv = insights.MostSpecificSubdivision;
             Assert.NotNull(subdiv);
@@ -469,7 +472,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 Assert.Null(r.GeoNameId);
                 Assert.Null(r.Name);
-                Assert.Equal(0, r.Names.Count);
+                Assert.Empty(r.Names);
                 Assert.Equal("", r.ToString());
             }
         }
