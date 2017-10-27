@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-2.9.0 (2017-10-XX)
+2.9.0 (2017-10-27)
 ------------------
 
 * The following new anonymizer properties were added to
