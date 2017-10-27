@@ -2,16 +2,19 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v2.8.0
+version: v2.9.0
 ---
 # GeoIP2 .NET API #
+
+[![Windows CI](https://ci.appveyor.com/api/projects/status/github/maxmind/GeoIP2-dotnet?svg=true)](https://ci.appveyor.com/project/maxmind/GeoIP2-dotnet/branch/master "Appveyor CI")
+[![Unix CI](https://travis-ci.org/maxmind/GeoIP2-dotnet.svg?branch=master)](https://travis-ci.org/maxmind/GeoIP2-dotnet "Travis CI")
 
 ## Description ##
 
 This distribution provides an API for the GeoIP2
-[web services](http://dev.maxmind.com/geoip/geoip2/web-services) and
-[databases](http://dev.maxmind.com/geoip/geoip2/downloadable). The API also
-works with the free [GeoLite2 databases](http://dev.maxmind.com/geoip/geoip2/geolite2/).
+[web services](https://dev.maxmind.com/geoip/geoip2/web-services) and
+[databases](https://dev.maxmind.com/geoip/geoip2/downloadable). The API also
+works with the free [GeoLite2 databases](https://dev.maxmind.com/geoip/geoip2/geolite2/).
 
 ## Requirements ##
 
@@ -40,12 +43,25 @@ should not be used to identify a particular address or household.
 
 ## Web Service Usage ##
 
-To use the web service API, you must create a new
-`MaxMind.GeoIP2.WebServiceClient` object with your `userID` and `licenseKey`.
-You may also specify the fall-back locales, the host, timeout, or the request
-timeout. You may then call the sync or async method corresponding to the
-specific end point, passing it the IP address you want to look up or no
-parameters if you want to look up the current device.
+To use the web service API, first create a new `WebServiceClient` object
+with your user ID and license key:
+
+```
+var client = new WebServiceClient(42, "license_key1"));
+```
+
+You may also specify the fall-back locales, the host, or the timeout as
+optional parameters. See the API docs for more information.
+
+This object is safe to share across threads. If you are making multiple
+requests, the object should be reused to so that new connections are not
+created for each request. Once you have finished making requests, you
+should dispose of the object to ensure the connections are closed and any
+resources are promptly returned to the system.
+
+You may then call the sync or async method corresponding to the specific end
+point, passing it the IP address you want to look up or no parameters if you
+want to look up the current device.
 
 If the request succeeds, the method call will return a response class for the
 endpoint you called. This response in turn contains multiple model classes,
@@ -58,7 +74,10 @@ See the API documentation for more details.
 ### Country Service (Sync) ###
 
 ```csharp
-// This creates a WebServiceClient object that can be reused across requests.
+// If you are making multiple requests, a single WebServiceClient
+// should be shared across requests to allow connection reuse. The
+// class is thread safe.
+//
 // Replace "42" with your user ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
@@ -75,7 +94,10 @@ using (var client = new WebServiceClient(42, "license_key"))
 ### Country Service (Async) ###
 
 ```csharp
-// This creates a WebServiceClient object that can be reused across requests.
+// If you are making multiple requests, a single WebServiceClient
+// should be shared across requests to allow connection reuse. The
+// class is thread safe.
+//
 // Replace "42" with your user ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
@@ -92,7 +114,10 @@ using (var client = new WebServiceClient(42, "license_key"))
 ### City Service (Sync) ###
 
 ```csharp
-// This creates a WebServiceClient object that can be reused across requests.
+// If you are making multiple requests, a single WebServiceClient
+// should be shared across requests to allow connection reuse. The
+// class is thread safe.
+//
 // Replace "42" with your user ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
@@ -119,7 +144,10 @@ using (var client = new WebServiceClient(42, "license_key"))
 ### City Service (Async) ###
 
 ```csharp
-// This creates a WebServiceClient object that can be reused across requests.
+// If you are making multiple requests, a single WebServiceClient
+// should be shared across requests to allow connection reuse. The
+// class is thread safe.
+//
 // Replace "42" with your user ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
@@ -146,7 +174,10 @@ using (var client = new WebServiceClient(42, "license_key"))
 ### Insights Service (Sync) ###
 
 ```csharp
-// This creates a WebServiceClient object that can be reused across requests.
+// If you are making multiple requests, a single WebServiceClient
+// should be shared across requests to allow connection reuse. The
+// class is thread safe.
+//
 // Replace "42" with your user ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
@@ -173,7 +204,10 @@ using (var client = new WebServiceClient(42, "license_key"))
 ### Insights Service (Async) ###
 
 ```csharp
-// This creates a WebServiceClient object that can be reused across requests.
+// If you are making multiple requests, a single WebServiceClient
+// should be shared across requests to allow connection reuse. The
+// class is thread safe.
+//
 // Replace "42" with your user ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
@@ -358,7 +392,7 @@ If an address is not available in the database, a
 ### Web Service ###
 
 For details on the possible errors returned by the web service itself, [see
-the GeoIP2 web service documentation](http://dev.maxmind.com/geoip2/geoip/web-services).
+the GeoIP2 web service documentation](https://dev.maxmind.com/geoip/geoip2/web-services).
 
 If the web service returns an explicit error document, this is thrown as a
 `AddressNotFoundException`, a `AuthenticationException`, a
@@ -406,7 +440,7 @@ Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.
 
 See the [GeoIP2 Precision web service
-docs](http://dev.maxmind.com/geoip/geoip2/web-services) for details on what
+docs](https://dev.maxmind.com/geoip/geoip2/web-services) for details on what
 data each end point may return.
 
 The only piece of data which is always returned is the `ipAddress` attribute
@@ -472,6 +506,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2013-2016 by MaxMind, Inc.
+This software is Copyright (c) 2013-2017 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.
