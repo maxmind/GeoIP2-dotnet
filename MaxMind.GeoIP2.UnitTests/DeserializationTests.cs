@@ -11,7 +11,7 @@ namespace MaxMind.GeoIP2.UnitTests
 {
     public class DeserializationTests
     {
-        public void CanDeserializeCountryResponse(CountryResponse resp)
+        private void CanDeserializeCountryResponse(CountryResponse resp)
         {
             Assert.Equal("NA", resp.Continent.Code);
             Assert.Equal(42, resp.Continent.GeoNameId);
@@ -34,7 +34,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("1.2.3.4", resp.Traits.IPAddress);
         }
 
-        public void CanDeserializeInsightsResponse(InsightsResponse insights)
+        private void CanDeserializeInsightsResponse(InsightsResponse insights)
         {
             Assert.Equal(76, insights.City.Confidence);
             Assert.Equal(9876, insights.City.GeoNameId);
