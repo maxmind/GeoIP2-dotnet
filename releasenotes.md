@@ -1,6 +1,13 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+2.10.0
+------------------
+
+* The `IsInEuropeanUnion` property was added to `MaxMind.GeoIP2.Model.Country`
+  and `MaxMind.GeoIP2.Model.RepresentedCountry`. This property is `true` if the
+  country is a member state of the European Union.
+
 2.9.0 (2017-10-27)
 ------------------
 
