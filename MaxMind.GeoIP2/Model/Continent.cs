@@ -24,13 +24,12 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor
+        ///     Constructor for binary compatibility
         /// </summary>
         public Continent(string code = null, int? geoNameId = null, IDictionary<string, string> names = null,
             IEnumerable<string> locales = null)
-            : base(geoNameId, names, locales)
+            : this(code, (long?)geoNameId, names, locales)
         {
-            Code = code;
         }
 
         /// <summary>
@@ -39,12 +38,12 @@ namespace MaxMind.GeoIP2.Model
         [Constructor]
         public Continent(
             string code = null,
-            // See note in City model
             [Parameter("geoname_id")] long? geoNameId = null,
             IDictionary<string, string> names = null,
             IEnumerable<string> locales = null)
-            : this(code, (int?)geoNameId, names, locales)
+            : base(geoNameId, names, locales)
         {
+            Code = code;
         }
 
         /// <summary>
