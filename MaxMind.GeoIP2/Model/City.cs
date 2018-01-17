@@ -25,11 +25,11 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor
+        ///     Constructor for binary compatibility
         /// </summary>
         public City(int? confidence = null, int? geoNameId = null, IDictionary<string, string> names = null,
             IEnumerable<string> locales = null)
-            : base(geoNameId, names, locales)
+            : this(confidence, (long?)geoNameId, names, locales)
         {
             Confidence = confidence;
         }
@@ -39,14 +39,12 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [Constructor]
         public City(int? confidence = null,
-            // Unfortunately the existing models incorrectly use an int rather
-            // than a long for the geoname_id. This should be corrected if we
-            // ever do a major version bump.
             [Parameter("geoname_id")] long? geoNameId = null,
             IDictionary<string, string> names = null,
             IEnumerable<string> locales = null)
-            : this(confidence, (int?)geoNameId, names, locales)
+            : base(geoNameId, names, locales)
         {
+            Confidence = confidence;
         }
 
         /// <summary>

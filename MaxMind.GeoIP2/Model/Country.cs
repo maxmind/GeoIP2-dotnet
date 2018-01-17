@@ -24,14 +24,12 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor
+        ///     Constructor for binary compatibility
         /// </summary>
         public Country(int? confidence = null, int? geoNameId = null, string isoCode = null,
             IDictionary<string, string> names = null, IEnumerable<string> locales = null)
-            : base(geoNameId, names, locales)
+            : this(confidence, (long?)geoNameId, isoCode, names, locales)
         {
-            Confidence = confidence;
-            IsoCode = isoCode;
         }
 
         /// <summary>
@@ -40,13 +38,14 @@ namespace MaxMind.GeoIP2.Model
         [Constructor]
         public Country(
             int? confidence = null,
-            // See note in City model
             [Parameter("geoname_id")] long? geoNameId = null,
             [Parameter("iso_code")] string isoCode = null,
             IDictionary<string, string> names = null,
             IEnumerable<string> locales = null)
-            : this(confidence, (int?)geoNameId, isoCode, names, locales)
+            : base(geoNameId, names, locales)
         {
+            Confidence = confidence;
+            IsoCode = isoCode;
         }
 
         /// <summary>
