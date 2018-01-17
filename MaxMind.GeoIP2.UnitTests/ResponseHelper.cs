@@ -76,8 +76,9 @@ namespace MaxMind.GeoIP2.UnitTests
                 "registered_country", new JObject
                 {
                     {"geoname_id", 2},
-                    {"iso_code", "CA"},
-                    {"names", new JObject {{"en", "Canada"}}}
+                    {"is_in_european_union", true },
+                    {"iso_code", "DE"},
+                    {"names", new JObject {{"en", "Germany"}}}
                 }
             },
             {
@@ -153,7 +154,13 @@ namespace MaxMind.GeoIP2.UnitTests
             },
             {
                 "registered_country",
-                new JObject {{"geoname_id", 2}, {"iso_code", "CA"}, {"names", new JObject {{"en", "Canada"}}}}
+                new JObject
+                {
+                    {"geoname_id", 2},
+                    {"is_in_european_union", true },
+                    {"iso_code", "DE"},
+                    {"names", new JObject {{"en", "Germany"}}}
+                }
             },
             {
                 "represented_country",

@@ -18,13 +18,15 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("North America", resp.Continent.Name);
 
             Assert.Equal(1, resp.Country.GeoNameId);
+            Assert.False(resp.Country.IsInEuropeanUnion);
             Assert.Equal("US", resp.Country.IsoCode);
             Assert.Equal(56, resp.Country.Confidence);
             Assert.Equal("United States", resp.Country.Name);
 
             Assert.Equal(2, resp.RegisteredCountry.GeoNameId);
-            Assert.Equal("CA", resp.RegisteredCountry.IsoCode);
-            Assert.Equal("Canada", resp.RegisteredCountry.Name);
+            Assert.True(resp.RegisteredCountry.IsInEuropeanUnion);
+            Assert.Equal("DE", resp.RegisteredCountry.IsoCode);
+            Assert.Equal("Germany", resp.RegisteredCountry.Name);
 
             Assert.Equal(4, resp.RepresentedCountry.GeoNameId);
             Assert.Equal("GB", resp.RepresentedCountry.IsoCode);
@@ -46,6 +48,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             Assert.Equal(99, insights.Country.Confidence);
             Assert.Equal(1, insights.Country.GeoNameId);
+            Assert.False(insights.Country.IsInEuropeanUnion);
             Assert.Equal("US", insights.Country.IsoCode);
             Assert.Equal("United States of America", insights.Country.Name);
 
@@ -63,8 +66,9 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal(33, insights.Postal.Confidence);
 
             Assert.Equal(2, insights.RegisteredCountry.GeoNameId);
-            Assert.Equal("CA", insights.RegisteredCountry.IsoCode);
-            Assert.Equal("Canada", insights.RegisteredCountry.Name);
+            Assert.True(insights.RegisteredCountry.IsInEuropeanUnion);
+            Assert.Equal("DE", insights.RegisteredCountry.IsoCode);
+            Assert.Equal("Germany", insights.RegisteredCountry.Name);
 
             Assert.Equal(3, insights.RepresentedCountry.GeoNameId);
             Assert.Equal("GB", insights.RepresentedCountry.IsoCode);

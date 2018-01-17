@@ -175,8 +175,8 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     True if MaxMind believes this IP address to be a legitimate
-        ///     proxy, such as an internal VPN used by a corporation.This is only
-        ///     available in the GeoIP2 Enterprise database.
+        ///     proxy, such as an internal VPN used by a corporation. This is
+        ///     only available in the GeoIP2 Enterprise database.
         /// </summary>
         [JsonProperty("is_legitimate_proxy")]
         public bool IsLegitimateProxy { get; internal set; }

@@ -160,8 +160,10 @@ namespace MaxMind.GeoIP2.UnitTests
                 var response = reader.Enterprise(ipAddress);
                 Assert.Equal(11, response.City.Confidence);
                 Assert.Equal(99, response.Country.Confidence);
+                Assert.False(response.Country.IsInEuropeanUnion);
                 Assert.Equal(6252001, response.Country.GeoNameId);
                 Assert.Equal(27, response.Location.AccuracyRadius);
+                Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
                 Assert.Equal("Cable/DSL", response.Traits.ConnectionType);
                 Assert.True(response.Traits.IsLegitimateProxy);
                 Assert.Equal(ipAddress, response.Traits.IPAddress);
@@ -190,6 +192,8 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 var response = reader.Country("81.2.69.160");
                 Assert.Equal("GB", response.Country.IsoCode);
+                Assert.True(response.Country.IsInEuropeanUnion);
+                Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             }
         }
 
@@ -200,7 +204,9 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 var response = reader.Country(IPAddress.Parse("81.2.69.160"));
                 Assert.Equal("GB", response.Country.IsoCode);
+                Assert.True(response.Country.IsInEuropeanUnion);
                 Assert.Equal("US", response.RegisteredCountry.IsoCode);
+                Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             }
         }
 
@@ -211,7 +217,9 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 var response = reader.City("81.2.69.160");
                 Assert.Equal("London", response.City.Name);
+                Assert.True(response.Country.IsInEuropeanUnion);
                 Assert.Equal(100, response.Location.AccuracyRadius);
+                Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             }
         }
 
@@ -222,7 +230,9 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 var lookupSuccess = reader.TryCity("81.2.69.160", out var response);
                 Assert.True(lookupSuccess);
+                Assert.True(response.Country.IsInEuropeanUnion);
                 Assert.Equal("London", response.City.Name);
+                Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             }
         }
 
