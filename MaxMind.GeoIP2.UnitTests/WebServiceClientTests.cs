@@ -406,6 +406,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var country = insights.Country;
             Assert.NotNull(country);
+            Assert.False(country.IsInEuropeanUnion);
 
             var location = insights.Location;
             Assert.NotNull(location);
@@ -425,9 +426,11 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var registeredCountry = insights.RegisteredCountry;
             Assert.NotNull(registeredCountry);
+            Assert.False(registeredCountry.IsInEuropeanUnion);
 
             var representedCountry = insights.RepresentedCountry;
             Assert.NotNull(representedCountry);
+            Assert.False(representedCountry.IsInEuropeanUnion);
             Assert.Null(representedCountry.Type);
 
             var subdivisions = insights.Subdivisions;

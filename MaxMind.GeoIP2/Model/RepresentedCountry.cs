@@ -27,13 +27,21 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor
+        ///     Constructor for binary compatibility
         /// </summary>
         public RepresentedCountry(string type = null, int? confidence = null, int? geoNameId = null,
             string isoCode = null, IDictionary<string, string> names = null, IEnumerable<string> locales = null)
-            : base(confidence, geoNameId, isoCode, names, locales)
+            : this(type, confidence, (long?)geoNameId, isoCode, names, locales)
         {
-            Type = type;
+        }
+
+        /// <summary>
+        ///     Constructor for binary compatibility
+        /// </summary>
+        public RepresentedCountry(string type = null, int? confidence = null, long? geoNameId = null,
+            string isoCode = null, IDictionary<string, string> names = null, IEnumerable<string> locales = null)
+            : this(type, confidence, geoNameId, false, isoCode, names, locales)
+        {
         }
 
         /// <summary>
@@ -43,13 +51,14 @@ namespace MaxMind.GeoIP2.Model
         public RepresentedCountry(
             string type = null,
             int? confidence = null,
-            // See note in City model
             [Parameter("geoname_id")] long? geoNameId = null,
+            [Parameter("is_in_european_union")] bool isInEuropeanUnion = false,
             [Parameter("iso_code")] string isoCode = null,
             IDictionary<string, string> names = null,
             IEnumerable<string> locales = null)
-            : this(type, confidence, (int?)geoNameId, isoCode, names, locales)
+            : base(confidence, geoNameId, isInEuropeanUnion, isoCode, names, locales)
         {
+            Type = type;
         }
 
         /// <summary>
