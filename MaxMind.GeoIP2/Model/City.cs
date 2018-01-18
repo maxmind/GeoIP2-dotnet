@@ -31,7 +31,6 @@ namespace MaxMind.GeoIP2.Model
             IEnumerable<string> locales = null)
             : this(confidence, (long?)geoNameId, names, locales)
         {
-            Confidence = confidence;
         }
 
         /// <summary>
