@@ -82,9 +82,13 @@ namespace MaxMind.GeoIP2.UnitTests
                 }
             },
             {
+                // Note that currently we only have represented_country
+                // for the US, but this could change in future database
+                // updates.
                 "represented_country", new JObject
                 {
                     {"geoname_id", 3},
+                    { "is_in_european_union", true },
                     {"iso_code", "GB"},
                     {
                         "names", new JObject
@@ -163,10 +167,12 @@ namespace MaxMind.GeoIP2.UnitTests
                 }
             },
             {
+                // See note above about non-US represented countries
                 "represented_country",
                 new JObject
                 {
                     {"geoname_id", 4},
+                    {"is_in_european_union", true },
                     {"iso_code", "GB"},
                     {"names", new JObject {{"en", "United Kingdom"}}},
                     {"type", "military"}

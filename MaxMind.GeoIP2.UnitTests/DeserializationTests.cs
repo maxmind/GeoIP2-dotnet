@@ -29,6 +29,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("Germany", resp.RegisteredCountry.Name);
 
             Assert.Equal(4, resp.RepresentedCountry.GeoNameId);
+            Assert.True(resp.RepresentedCountry.IsInEuropeanUnion);
             Assert.Equal("GB", resp.RepresentedCountry.IsoCode);
             Assert.Equal("United Kingdom", resp.RepresentedCountry.Name);
             Assert.Equal("military", resp.RepresentedCountry.Type);
@@ -71,6 +72,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("Germany", insights.RegisteredCountry.Name);
 
             Assert.Equal(3, insights.RepresentedCountry.GeoNameId);
+            Assert.True(insights.RepresentedCountry.IsInEuropeanUnion);
             Assert.Equal("GB", insights.RepresentedCountry.IsoCode);
             Assert.Equal("United Kingdom", insights.RepresentedCountry.Name);
             Assert.Equal("military", insights.RepresentedCountry.Type);

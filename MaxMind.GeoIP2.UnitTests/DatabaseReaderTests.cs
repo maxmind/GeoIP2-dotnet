@@ -164,6 +164,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Equal(6252001, response.Country.GeoNameId);
                 Assert.Equal(27, response.Location.AccuracyRadius);
                 Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
+                Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
                 Assert.Equal("Cable/DSL", response.Traits.ConnectionType);
                 Assert.True(response.Traits.IsLegitimateProxy);
                 Assert.Equal(ipAddress, response.Traits.IPAddress);
@@ -194,6 +195,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Equal("GB", response.Country.IsoCode);
                 Assert.True(response.Country.IsInEuropeanUnion);
                 Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
+                Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
             }
         }
 
@@ -207,6 +209,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.True(response.Country.IsInEuropeanUnion);
                 Assert.Equal("US", response.RegisteredCountry.IsoCode);
                 Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
+                Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
             }
         }
 
@@ -220,6 +223,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.True(response.Country.IsInEuropeanUnion);
                 Assert.Equal(100, response.Location.AccuracyRadius);
                 Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
+                Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
             }
         }
 
@@ -233,6 +237,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.True(response.Country.IsInEuropeanUnion);
                 Assert.Equal("London", response.City.Name);
                 Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
+                Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
             }
         }
 
@@ -261,6 +266,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Equal("North America", response.Continent.Name);
 
                 Assert.Equal(6252001, response.Country.GeoNameId);
+                Assert.False(response.Country.IsInEuropeanUnion);
                 Assert.Equal("US", response.Country.IsoCode);
                 Assert.Equal("United States", response.Country.Name);
 
@@ -272,8 +278,11 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Equal("98354", response.Postal.Code);
 
                 Assert.Equal(2635167, response.RegisteredCountry.GeoNameId);
+                Assert.True(response.RegisteredCountry.IsInEuropeanUnion);
                 Assert.Equal("GB", response.RegisteredCountry.IsoCode);
                 Assert.Equal("United Kingdom", response.RegisteredCountry.Name);
+
+                Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
 
                 Assert.Equal(5815135, response.Subdivisions[0].GeoNameId);
                 Assert.Equal("WA", response.Subdivisions[0].IsoCode);
