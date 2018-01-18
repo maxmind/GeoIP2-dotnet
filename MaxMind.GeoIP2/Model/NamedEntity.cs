@@ -21,11 +21,14 @@ namespace MaxMind.GeoIP2.Model
         ///     Constructor
         /// </summary>
         [Constructor]
-        protected NamedEntity(int? geoNameId = null, IDictionary<string, string> names = null,
+        protected NamedEntity(long? geoNameId = null, IDictionary<string, string> names = null,
             IEnumerable<string> locales = null)
         {
             Names = names != null ? new Dictionary<string, string>(names) : new Dictionary<string, string>();
-            GeoNameId = geoNameId;
+            // Unfortunately the existing models incorrectly use an int rather
+            // than a long for the geoname_id. This should be corrected if we
+            // ever do a major version bump.
+            GeoNameId = (int?) geoNameId;
             Locales = locales != null ? new List<string>(locales) : new List<string> { "en" };
         }
 

@@ -24,14 +24,21 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor
+        ///     Constructor for binary compatibility
         /// </summary>
         public Country(int? confidence = null, int? geoNameId = null, string isoCode = null,
             IDictionary<string, string> names = null, IEnumerable<string> locales = null)
-            : base(geoNameId, names, locales)
+            : this(confidence, (long?)geoNameId, isoCode, names, locales)
         {
-            Confidence = confidence;
-            IsoCode = isoCode;
+        }
+
+        /// <summary>
+        ///     Constructor for binary compatibility
+        /// </summary>
+        public Country(int? confidence = null, long? geoNameId = null, string isoCode = null,
+            IDictionary<string, string> names = null, IEnumerable<string> locales = null)
+            : this(confidence, geoNameId, false, isoCode, names, locales)
+        {
         }
 
         /// <summary>
@@ -40,13 +47,16 @@ namespace MaxMind.GeoIP2.Model
         [Constructor]
         public Country(
             int? confidence = null,
-            // See note in City model
             [Parameter("geoname_id")] long? geoNameId = null,
+            [Parameter("is_in_european_union")] bool isInEuropeanUnion = false,
             [Parameter("iso_code")] string isoCode = null,
             IDictionary<string, string> names = null,
             IEnumerable<string> locales = null)
-            : this(confidence, (int?)geoNameId, isoCode, names, locales)
+            : base(geoNameId, names, locales)
         {
+            Confidence = confidence;
+            IsoCode = isoCode;
+            IsInEuropeanUnion = isInEuropeanUnion;
         }
 
         /// <summary>
@@ -56,6 +66,14 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonProperty("confidence")]
         public int? Confidence { get; internal set; }
+
+        /// <summary>
+        ///     This is true if the country is a member state of the
+        ///     European Union. This is available from  all location
+        ///     services and databases.
+        /// </summary>
+        [JsonProperty("is_in_european_union")]
+        public bool IsInEuropeanUnion { get; internal set; }
 
         /// <summary>
         ///     The
