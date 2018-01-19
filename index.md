@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v2.9.0
+version: v2.10.0
 ---
 # GeoIP2 .NET API #
 
@@ -506,6 +506,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2013-2017 by MaxMind, Inc.
+This software is Copyright (c) 2013-2018 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.
