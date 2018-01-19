@@ -55,7 +55,7 @@ if (Test-Path .gh-pages ) {
     & git pull
 } else {
     Write-Debug "Checking out gh-pages in .gh-pages"
-    & git clone -b gh-pages git@github.com:maxmind/MaxMind.GeoIP2-dotnet.git .gh-pages
+    & git clone -b gh-pages https://github.com/maxmind/GeoIP2-dotnet.git .gh-pages
     Push-Location .gh-pages
 }
 
