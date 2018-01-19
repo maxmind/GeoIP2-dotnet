@@ -96,7 +96,12 @@ if ((Read-Host -Prompt 'Should push? (y/n)') -ne 'y') {
 & git push
 
 Pop-Location
+& git push
+
+if ((Read-Host -Prompt 'Should release? (y/n)') -ne 'y') {
+    Write-Error 'Aborting'
+}
+
 & hub release create "$tag"
-& git push --tags
 
 & nuget push "MaxMind.GeoIP2/bin/Release/MaxMind.GeoIP2.$version.nupkg" -Source https://www.nuget.org/api/v2/package
