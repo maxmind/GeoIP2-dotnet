@@ -1,6 +1,9 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+* Rename `userId` to `accountId` in various places and add support for the
+  future `ACCOUNT_ID_REQUIRED` and `ACCOUNT_ID_UNKNOWN` error codes.
+
 2.10.0 (2018-01-19)
 -------------------
 

@@ -217,10 +217,24 @@ namespace MaxMind.GeoIP2.UnitTests
         [Theory, MemberData(nameof(TestCases))]
         public async void UnknownUserIdShouldThrowException(string type, ClientRunner cr, Type t)
         {
-            var msg = "You have supplied an invalid MaxMind user ID and/or license key in the Authorization header.";
+            var msg = "You have supplied an invalid MaxMind account ID and/or license key in the Authorization header.";
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
                 ErrorJson("USER_ID_UNKNOWN", msg));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AuthenticationException>(exception);
+            Assert.Contains(msg, exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void UnknownAccountIdShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var msg = "You have supplied an invalid MaxMind account ID and/or license key in the Authorization header.";
+            var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
+                content:
+                ErrorJson("ACCOUNT_ID_UNKNOWN", msg));
 
             var exception = await Record.ExceptionAsync(async () => await cr(client));
             Assert.NotNull(exception);
@@ -234,12 +248,12 @@ namespace MaxMind.GeoIP2.UnitTests
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
                 ErrorJson("AUTHORIZATION_INVALID",
-                    "You have supplied an invalid MaxMind user ID and/or license key in the Authorization header."));
+                    "You have supplied an invalid MaxMind account ID and/or license key in the Authorization header."));
 
             var exception = await Record.ExceptionAsync(async () => await cr(client));
             Assert.NotNull(exception);
             Assert.IsType<AuthenticationException>(exception);
-            Assert.Contains("You have supplied an invalid MaxMind user ID and/or license key", exception.Message);
+            Assert.Contains("You have supplied an invalid MaxMind account ID and/or license key", exception.Message);
         }
 
         [Theory, MemberData(nameof(TestCases))]
@@ -262,13 +276,27 @@ namespace MaxMind.GeoIP2.UnitTests
         {
             var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
                 content:
-                ErrorJson("USER_ID_REQUIRED", "You have not supplied a MaxMind user ID in the Authorization header."));
+                ErrorJson("USER_ID_REQUIRED", "You have not supplied a MaxMind account ID in the Authorization header."));
 
             var exception = await Record.ExceptionAsync(async () => await cr(client));
             Assert.NotNull(exception);
             Assert.IsType<AuthenticationException>(exception);
-            Assert.Contains("You have not supplied a MaxMind user ID in the Authorization header.", exception.Message);
+            Assert.Contains("You have not supplied a MaxMind account ID in the Authorization header.", exception.Message);
         }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void MissingAccountIdShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
+                content:
+                ErrorJson("ACCOUNT_ID_REQUIRED", "You have not supplied a MaxMind account ID in the Authorization header."));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AuthenticationException>(exception);
+            Assert.Contains("You have not supplied a MaxMind account ID in the Authorization header.", exception.Message);
+        }
+
 
         [Theory, MemberData(nameof(TestCases))]
         public async void NoErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
