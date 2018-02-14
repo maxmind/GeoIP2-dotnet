@@ -44,7 +44,7 @@ namespace MaxMind.GeoIP2
     ///     <para>
     ///         The basic API for this class is the same for all of the web service end
     ///         points. First you create a web service object with your MaxMind
-    ///         userID and licenseKey, then you call the method corresponding
+    ///         <c>accountId</c> and <c>licenseKey</c>, then you call the method corresponding
     ///         to a specific end point, passing it the IP address you want to look up.
     ///     </para>
     ///     <para>
@@ -88,44 +88,36 @@ namespace MaxMind.GeoIP2
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
         /// </summary>
-        /// <param name="userId">Your MaxMind user ID.</param>
+        /// <param name="accountId">Your MaxMind account ID.</param>
         /// <param name="licenseKey">Your MaxMind license key.</param>
-        /// <param name="host">The host to use when accessing the service</param>
-        /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userId, string licenseKey, string host = "geoip.maxmind.com", int timeout = 3000)
-            : this(userId, licenseKey, new List<string> { "en" }, host, timeout)
-        {
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
-        /// </summary>
-        /// <param name="userId">The user unique identifier.</param>
-        /// <param name="licenseKey">The license key.</param>
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
         /// <param name="host">The host to use when accessing the service</param>
         /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        public WebServiceClient(int userId, string licenseKey, IEnumerable<string> locales,
+        public WebServiceClient(
+            int accountId,
+            string licenseKey,
+            IEnumerable<string> locales = null,
             string host = "geoip.maxmind.com",
-            int timeout = 3000) : this(userId, licenseKey, locales, host, timeout, null)
+            int timeout = 3000
+        ) : this(accountId, licenseKey, locales, host, timeout, null)
         {
         }
 
         internal WebServiceClient(
-            int userId,
+            int accountId,
             string licenseKey,
             IEnumerable<string> locales,
-            string host = "geoip.maxmind.com",
-            int timeout = 3000,
-            HttpMessageHandler httpMessageHandler = null
+            string host,
+            int timeout,
+            HttpMessageHandler httpMessageHandler
 #if !NETSTANDARD1_4
             , ISyncClient syncWebRequest = null
 #endif
             )
         {
-            var auth = EncodedAuth(userId, licenseKey);
+            var auth = EncodedAuth(accountId, licenseKey);
             _host = host;
-            _locales = new List<string>(locales);
+            _locales = locales == null ? new List<string> { "en" } : new List<string>(locales);
 #if !NETSTANDARD1_4
             _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
 #endif
@@ -350,9 +342,9 @@ namespace MaxMind.GeoIP2
             return new UriBuilder("https", _host, -1, $"/geoip/v2.1/{type}/{endpoint}").Uri;
         }
 
-        private static string EncodedAuth(int userId, string licenseKey)
+        private static string EncodedAuth(int accountId, string licenseKey)
         {
-            return Convert.ToBase64String(Encoding.ASCII.GetBytes($"{userId}:{licenseKey}"));
+            return Convert.ToBase64String(Encoding.ASCII.GetBytes($"{accountId}:{licenseKey}"));
         }
 
         private T HandleResponse<T>(Response response)
@@ -474,6 +466,8 @@ namespace MaxMind.GeoIP2
                 case "IP_ADDRESS_RESERVED":
                     return new AddressNotFoundException(webServiceError.Error);
 
+                case "ACCOUNT_ID_REQUIRED":
+                case "ACCOUNT_ID_UNKNOWN":
                 case "AUTHORIZATION_INVALID":
                 case "LICENSE_KEY_REQUIRED":
                 case "USER_ID_REQUIRED":

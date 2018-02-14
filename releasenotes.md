@@ -1,6 +1,13 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+3.0.0
+------------------
+
+* The `userId` constructor parameter for `WebServiceClient` was renamed to
+  `accountId` and support was added for the error codes `ACCOUNT_ID_REQUIRED`
+  and `ACCOUNT_ID_UNKNOWN`.
+
 2.10.0 (2018-01-19)
 -------------------
 

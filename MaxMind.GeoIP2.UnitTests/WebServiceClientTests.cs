@@ -85,6 +85,7 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 contentType = $"application/vnd.maxmind.com-{service}+json";
             }
+
             var stringContent = new StringContent(content);
             stringContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
             stringContent.Headers.Add("Content-Length", content.Length.ToString());
@@ -108,7 +109,10 @@ namespace MaxMind.GeoIP2.UnitTests
             var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, responseStream));
 #endif
 
-            return new WebServiceClient(6, "0123456789", new List<string> {"en"},
+            return new WebServiceClient(6, "0123456789",
+                locales: new List<string> {"en"},
+                host: "geoip.maxmind.com",
+                timeout: 3000,
                 httpMessageHandler: mockHttp
 #if !NETCOREAPP1_1
                 , syncWebRequest: syncWebRequest
@@ -215,59 +219,29 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async void UnknownUserIdShouldThrowException(string type, ClientRunner cr, Type t)
+        public async void AuthenticationErrorShouldThrowException(string type, ClientRunner cr, Type t)
         {
-            var msg = "You have supplied an invalid MaxMind user ID and/or license key in the Authorization header.";
-            var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
-                content:
-                ErrorJson("USER_ID_UNKNOWN", msg));
+            var errors = new List<string>()
+            {
+                "ACCOUNT_ID_REQUIRED",
+                "ACCOUNT_ID_UNKNOWN",
+                "AUTHORIZATION_INVALID",
+                "LICENSE_KEY_REQUIRED",
+                "USER_ID_REQUIRED",
+                "USER_ID_UNKNOWN"
+            };
+            foreach (var error in errors)
+            {
+                var msg = "Appropriate user-readable error message";
+                var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
+                    content:
+                    ErrorJson(error, msg));
 
-            var exception = await Record.ExceptionAsync(async () => await cr(client));
-            Assert.NotNull(exception);
-            Assert.IsType<AuthenticationException>(exception);
-            Assert.Contains(msg, exception.Message);
-        }
-
-        [Theory, MemberData(nameof(TestCases))]
-        public async void InvalidAuthShouldThrowException(string type, ClientRunner cr, Type t)
-        {
-            var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
-                content:
-                ErrorJson("AUTHORIZATION_INVALID",
-                    "You have supplied an invalid MaxMind user ID and/or license key in the Authorization header."));
-
-            var exception = await Record.ExceptionAsync(async () => await cr(client));
-            Assert.NotNull(exception);
-            Assert.IsType<AuthenticationException>(exception);
-            Assert.Contains("You have supplied an invalid MaxMind user ID and/or license key", exception.Message);
-        }
-
-        [Theory, MemberData(nameof(TestCases))]
-        public async void MissingLicenseShouldThrowException(string type, ClientRunner cr, Type t)
-        {
-            var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
-                content:
-                ErrorJson("LICENSE_KEY_REQUIRED",
-                    "You have not supplied a MaxMind license key in the Authorization header."));
-
-            var exception = await Record.ExceptionAsync(async () => await cr(client));
-            Assert.NotNull(exception);
-            Assert.IsType<AuthenticationException>(exception);
-            Assert.Contains("You have not supplied a MaxMind license key in the Authorization header",
-                exception.Message);
-        }
-
-        [Theory, MemberData(nameof(TestCases))]
-        public async void MissingUserIdShouldThrowException(string type, ClientRunner cr, Type t)
-        {
-            var client = CreateClient(type, status: HttpStatusCode.Unauthorized,
-                content:
-                ErrorJson("USER_ID_REQUIRED", "You have not supplied a MaxMind user ID in the Authorization header."));
-
-            var exception = await Record.ExceptionAsync(async () => await cr(client));
-            Assert.NotNull(exception);
-            Assert.IsType<AuthenticationException>(exception);
-            Assert.Contains("You have not supplied a MaxMind user ID in the Authorization header.", exception.Message);
+                var exception = await Record.ExceptionAsync(async () => await cr(client));
+                Assert.NotNull(exception);
+                Assert.IsType<AuthenticationException>(exception);
+                Assert.Contains(msg, exception.Message);
+            }
         }
 
         [Theory, MemberData(nameof(TestCases))]
@@ -481,5 +455,20 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
 #endif
+
+        [Fact]
+        public void Constructors()
+        {
+            var id = 42;
+            var key = "1234567890ab";
+
+            // This is mostly to test that the various ways to call this
+            // compile. If you have to change these tests to get them to
+            // compile and you aren't doing a major release, you are
+            // probably doing something wrong.
+            Assert.NotNull(new WebServiceClient(id, key));
+            Assert.NotNull(new WebServiceClient(id, key, new List<string>()));
+            Assert.NotNull(new WebServiceClient(accountId: id, licenseKey: key));
+        }
     }
 }
