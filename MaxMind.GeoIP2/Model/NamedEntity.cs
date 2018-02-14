@@ -43,8 +43,8 @@ namespace MaxMind.GeoIP2.Model
         [JsonIgnore]
         public Dictionary<string, string> Names
         {
-            get { return new Dictionary<string, string>(_names); }
-            internal set { _names = value; }
+            get => new Dictionary<string, string>(_names);
+            internal set => _names = value;
         }
 
         /// <summary>
