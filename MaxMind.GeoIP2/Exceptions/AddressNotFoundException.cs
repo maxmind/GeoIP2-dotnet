@@ -1,10 +1,6 @@
 ﻿#region
 
 using System;
-#if !NETSTANDARD1_4
-using System.Runtime.Serialization; 
-using System.Security.Permissions;
-#endif
 #endregion
 
 namespace MaxMind.GeoIP2.Exceptions
@@ -13,9 +9,6 @@ namespace MaxMind.GeoIP2.Exceptions
     ///     This exception is thrown when the IP address is not found in the database.
     ///     This generally means that the address was a private or reserved address.
     /// </summary>
-#if !NETSTANDARD1_4
-    [Serializable]
-#endif
     public class AddressNotFoundException : GeoIP2Exception
     {
         /// <summary>
@@ -36,18 +29,5 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message, innerException)
         {
         }
-
-#if !NETSTANDARD1_4
-        /// <summary>
-        ///     Constructor for deserialization.
-        /// </summary>
-        /// <param name="info">The SerializationInfo with data.</param>
-        /// <param name="context">The source for this deserialization.</param>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected AddressNotFoundException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-#endif
     }
 }
