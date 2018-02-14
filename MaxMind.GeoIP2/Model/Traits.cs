@@ -42,9 +42,7 @@ namespace MaxMind.GeoIP2.Model
             string organization = null,
             [Parameter("user_type")] string userType = null)
         {
-            // XXX - if we ever do a breaking release, this property should
-            // be changes to long.
-            AutonomousSystemNumber = (int?)autonomousSystemNumber;
+            AutonomousSystemNumber = autonomousSystemNumber;
             AutonomousSystemOrganization = autonomousSystemOrganization;
             ConnectionType = connectionType;
             Domain = domain;
@@ -77,7 +75,7 @@ namespace MaxMind.GeoIP2.Model
         ///     service or the Enterprise database.
         /// </summary>
         [JsonProperty("autonomous_system_number")]
-        public int? AutonomousSystemNumber { get; internal set; }
+        public long? AutonomousSystemNumber { get; internal set; }
 
         /// <summary>
         ///     The organization associated with the registered
