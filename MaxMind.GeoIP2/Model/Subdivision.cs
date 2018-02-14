@@ -24,16 +24,6 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor for binary compatibility
-        /// </summary>
-        public Subdivision(int? confidence = null, int? geoNameId = null, string isoCode = null,
-            IDictionary<string, string> names = null, IEnumerable<string> locales = null)
-            : this(confidence, (long?) geoNameId, isoCode, names, locales)
-
-        {
-        }
-
-        /// <summary>
         ///     Constructor
         /// </summary>
         [Constructor]

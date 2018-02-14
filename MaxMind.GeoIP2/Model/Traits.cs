@@ -21,28 +21,6 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor for binary compatibility.
-        /// </summary>
-        [Obsolete]
-        public Traits(
-            long? autonomousSystemNumber,
-            string autonomousSystemOrganization,
-            string connectionType,
-            string domain,
-            string ipAddress,
-            bool isAnonymousProxy,
-            bool isLegitimateProxy,
-            bool isSatelliteProvider,
-            string isp,
-            string organization,
-            string userType)
-            : this(autonomousSystemNumber, autonomousSystemOrganization, connectionType, domain,
-                  ipAddress, false, isAnonymousProxy, false, false, isLegitimateProxy, false,
-                  isSatelliteProvider, false, isp, organization, userType)
-        {
-        }
-
-        /// <summary>
         ///     Constructor
         /// </summary>
         [Constructor]
