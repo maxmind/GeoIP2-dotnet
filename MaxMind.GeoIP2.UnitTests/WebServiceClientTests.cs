@@ -221,7 +221,7 @@ namespace MaxMind.GeoIP2.UnitTests
         [Theory, MemberData(nameof(TestCases))]
         public async void AuthenticationErrorShouldThrowException(string type, ClientRunner cr, Type t)
         {
-            var errors = new List<string>()
+            var errors = new List<string>
             {
                 "ACCOUNT_ID_REQUIRED",
                 "ACCOUNT_ID_UNKNOWN",
