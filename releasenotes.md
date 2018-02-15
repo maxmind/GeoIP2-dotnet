@@ -1,6 +1,20 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+3.0.0
+------------------
+
+* The `userId` constructor parameter for `WebServiceClient` was renamed to
+  `accountId` and support was added for the error codes `ACCOUNT_ID_REQUIRED`
+  and `ACCOUNT_ID_UNKNOWN`.
+* The exception classes are no longer serializable when using the .NET
+  Framework. This eliminates a difference between the .NET Framework
+  assemblies and the .NET Standard ones.
+* The `AutonomousSystemNumber` properties on `MaxMind.GeoIP2.Model.Traits`,
+  `MaxMind.GeoIP2.Responses.AsnResponse`, and
+  `MaxMind.GeoIP2.Responses.IspResponse` are now `long?` to match the underlying
+  types in the databases.
+
 2.10.0 (2018-01-19)
 -------------------
 

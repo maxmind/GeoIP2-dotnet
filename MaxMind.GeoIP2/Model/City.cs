@@ -25,15 +25,6 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor for binary compatibility
-        /// </summary>
-        public City(int? confidence = null, int? geoNameId = null, IDictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
-            : this(confidence, (long?)geoNameId, names, locales)
-        {
-        }
-
-        /// <summary>
         ///     Constructor
         /// </summary>
         [Constructor]

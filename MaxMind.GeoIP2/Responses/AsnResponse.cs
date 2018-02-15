@@ -24,9 +24,7 @@ namespace MaxMind.GeoIP2.Responses
             [Parameter("autonomous_system_organization")] string autonomousSystemOrganization,
             [Inject("ip_address")] string ipAddress)
         {
-            // XXX - if we ever do a breaking release, this property should
-            // be changes to long?
-            AutonomousSystemNumber = (int?)autonomousSystemNumber;
+            AutonomousSystemNumber = autonomousSystemNumber;
             AutonomousSystemOrganization = autonomousSystemOrganization;
             IPAddress = ipAddress;
         }
@@ -40,7 +38,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     associated with the IP address.
         /// </summary>
         [JsonProperty("autonomous_system_number")]
-        public int? AutonomousSystemNumber { get; internal set; }
+        public long? AutonomousSystemNumber { get; internal set; }
 
         /// <summary>
         ///     The organization associated with the registered
