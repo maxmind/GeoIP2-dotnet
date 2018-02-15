@@ -24,15 +24,6 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor for binary compatibility
-        /// </summary>
-        public Continent(string code = null, int? geoNameId = null, IDictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
-            : this(code, (long?)geoNameId, names, locales)
-        {
-        }
-
-        /// <summary>
         ///     Constructor
         /// </summary>
         [Constructor]

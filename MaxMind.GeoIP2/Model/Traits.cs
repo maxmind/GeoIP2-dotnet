@@ -21,28 +21,6 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor for binary compatibility.
-        /// </summary>
-        [Obsolete]
-        public Traits(
-            long? autonomousSystemNumber,
-            string autonomousSystemOrganization,
-            string connectionType,
-            string domain,
-            string ipAddress,
-            bool isAnonymousProxy,
-            bool isLegitimateProxy,
-            bool isSatelliteProvider,
-            string isp,
-            string organization,
-            string userType)
-            : this(autonomousSystemNumber, autonomousSystemOrganization, connectionType, domain,
-                  ipAddress, false, isAnonymousProxy, false, false, isLegitimateProxy, false,
-                  isSatelliteProvider, false, isp, organization, userType)
-        {
-        }
-
-        /// <summary>
         ///     Constructor
         /// </summary>
         [Constructor]
@@ -64,9 +42,7 @@ namespace MaxMind.GeoIP2.Model
             string organization = null,
             [Parameter("user_type")] string userType = null)
         {
-            // XXX - if we ever do a breaking release, this property should
-            // be changes to long.
-            AutonomousSystemNumber = (int?)autonomousSystemNumber;
+            AutonomousSystemNumber = autonomousSystemNumber;
             AutonomousSystemOrganization = autonomousSystemOrganization;
             ConnectionType = connectionType;
             Domain = domain;
@@ -99,7 +75,7 @@ namespace MaxMind.GeoIP2.Model
         ///     service or the Enterprise database.
         /// </summary>
         [JsonProperty("autonomous_system_number")]
-        public int? AutonomousSystemNumber { get; internal set; }
+        public long? AutonomousSystemNumber { get; internal set; }
 
         /// <summary>
         ///     The organization associated with the registered

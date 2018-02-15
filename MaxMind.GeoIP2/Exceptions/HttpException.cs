@@ -3,10 +3,6 @@
 using System;
 using System.IO;
 using System.Net;
-#if !NETSTANDARD1_4
-using System.Runtime.Serialization;
-using System.Security;
-#endif
 #endregion
 
 namespace MaxMind.GeoIP2.Exceptions
@@ -16,9 +12,6 @@ namespace MaxMind.GeoIP2.Exceptions
     ///     by the web service itself. As such, it is a IOException instead of a
     ///     GeoIP2Exception.
     /// </summary>
-#if !NETSTANDARD1_4
-    [Serializable]
-#endif
     public class HttpException : IOException
     {
         /// <summary>
@@ -52,21 +45,6 @@ namespace MaxMind.GeoIP2.Exceptions
 #pragma warning restore IDE0003
         }
 
-#if !NETSTANDARD1_4
-        /// <summary>
-        ///     Constructor for deserialization.
-        /// </summary>
-        /// <param name="info">The SerializationInfo with data.</param>
-        /// <param name="context">The source for this deserialization.</param>
-        protected HttpException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            HttpStatus = (HttpStatusCode)info.GetValue("HttpStatus", typeof(HttpStatusCode));
-#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
-            this.Uri = (Uri)info.GetValue("Uri", typeof(Uri));
-#pragma warning restore IDE0003
-        }
-#endif
-
         /// <summary>
         ///     The HTTP status code returned by the web service.
         /// </summary>
@@ -76,22 +54,5 @@ namespace MaxMind.GeoIP2.Exceptions
         ///     The URI queried by the web service.
         /// </summary>
         public Uri Uri { get; }
-
-#if !NETSTANDARD1_4
-        /// <summary>
-        ///     Populates a SerializationInfo with the data needed to serialize the target object.
-        /// </summary>
-        /// <param name="info">The SerializationInfo to populate with data.</param>
-        /// <param name="context">The destination (see StreamingContext) for this serialization.</param>
-        [SecurityCritical]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-            info.AddValue("HttpStatus", HttpStatus);
-#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
-            info.AddValue("Uri", this.Uri);
-#pragma warning restore IDE0003
-        }
-#endif
     }
 }

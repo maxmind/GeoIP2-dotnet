@@ -80,8 +80,8 @@ namespace MaxMind.GeoIP2.Responses
         [JsonIgnore]
         public List<Subdivision> Subdivisions
         {
-            get { return new List<Subdivision>(_subdivisions); }
-            internal set { _subdivisions = value; }
+            get => new List<Subdivision>(_subdivisions);
+            internal set => _subdivisions = value;
         }
 
         /// <summary>
