@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v2.10.0
+version: v3.0.0
 ---
 # GeoIP2 .NET API #
 
@@ -44,7 +44,7 @@ should not be used to identify a particular address or household.
 ## Web Service Usage ##
 
 To use the web service API, first create a new `WebServiceClient` object
-with your user ID and license key:
+with your account ID and license key:
 
 ```
 var client = new WebServiceClient(42, "license_key1"));
@@ -78,7 +78,7 @@ See the API documentation for more details.
 // should be shared across requests to allow connection reuse. The
 // class is thread safe.
 //
-// Replace "42" with your user ID and "license_key" with your license
+// Replace "42" with your account ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
 {
@@ -98,7 +98,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 // should be shared across requests to allow connection reuse. The
 // class is thread safe.
 //
-// Replace "42" with your user ID and "license_key" with your license
+// Replace "42" with your account ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
 {
@@ -118,7 +118,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 // should be shared across requests to allow connection reuse. The
 // class is thread safe.
 //
-// Replace "42" with your user ID and "license_key" with your license
+// Replace "42" with your account ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
 {
@@ -148,7 +148,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 // should be shared across requests to allow connection reuse. The
 // class is thread safe.
 //
-// Replace "42" with your user ID and "license_key" with your license
+// Replace "42" with your account ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
 {
@@ -178,7 +178,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 // should be shared across requests to allow connection reuse. The
 // class is thread safe.
 //
-// Replace "42" with your user ID and "license_key" with your license
+// Replace "42" with your account ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
 {
@@ -208,7 +208,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 // should be shared across requests to allow connection reuse. The
 // class is thread safe.
 //
-// Replace "42" with your user ID and "license_key" with your license
+// Replace "42" with your account ID and "license_key" with your license
 // key.
 using (var client = new WebServiceClient(42, "license_key"))
 {
