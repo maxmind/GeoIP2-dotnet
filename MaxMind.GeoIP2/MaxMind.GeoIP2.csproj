@@ -28,7 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaxMind.Db" Version="2.3.0" />
+    <PackageReference Include="MaxMind.Db" Version="2.4.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
