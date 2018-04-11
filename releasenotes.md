@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-3.0.0
+3.0.0 (2018-04-11)
 ------------------
 
 * The `userId` constructor parameter for `WebServiceClient` was renamed to
