@@ -14,7 +14,7 @@ GeoIP2 .NET API Release Notes
   `MaxMind.GeoIP2.Responses.AsnResponse`, and
   `MaxMind.GeoIP2.Responses.IspResponse` are now `long?` to match the underlying
   types in the databases.
-* `MaxMind.Db` was upgraded to 2.4.0. This add a new file mode enum value for
+* `MaxMind.Db` was upgraded to 2.4.0. This adds a new file mode enum value for
   the database reader, `FileAccessMode.MemoryMappedGlobal`. When used, this will
   open the file in global memory map mode. This requires the "create global
   objects" right.
