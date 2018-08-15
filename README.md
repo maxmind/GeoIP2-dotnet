@@ -41,7 +41,7 @@ To use the web service API, first create a new `WebServiceClient` object
 with your account ID and license key:
 
 ```
-var client = new WebServiceClient(42, "license_key1"));
+var client = new WebServiceClient(42, "license_key1");
 ```
 
 You may also specify the fall-back locales, the host, or the timeout as
