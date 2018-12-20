@@ -4,8 +4,8 @@ GeoIP2 .NET API Release Notes
 3.0.1
 ------------------
 
-* Updated documentation of anonymizer properties - IsAnonymousVpn and
-  IsHostingProvider - to be more descriptive.
+* Updated documentation of anonymizer properties - `IsAnonymousVpn` and
+  `IsHostingProvider` - to be more descriptive.
 
 3.0.0 (2018-04-11)
 ------------------
