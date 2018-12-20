@@ -135,15 +135,21 @@ namespace MaxMind.GeoIP2.Model
         public bool IsAnonymousProxy { get; internal set; }
 
         /// <summary>
-        ///     This is true if the IP address belongs to an anonymous VPN
-        ///     system. This value is only available from GeoIP2 Precision
-        ///     Insights.
+        ///     This is true if the IP address is registered to an anonymous
+        ///     VPN provider.
+        ///     This value is only available from GeoIP2 Precision Insights.
         /// </summary>
+        /// <remarks>
+        ///     If a VPN provider does not register subnets under names
+        ///     associated with them, we will likely only flag their IP ranges
+        ///     using the IsHostingProvider property.
+        /// </remarks>
         [JsonProperty("is_anonymous_vpn")]
         public bool IsAnonymousVpn { get; internal set; }
 
         /// <summary>
-        ///     This is true if the IP address belongs to a hosting provider.
+        ///     This is true if the IP address belongs to a hosting or VPN
+        ///     provider (see description of IsAnonymousVpn property).
         ///     This value is only available from GeoIP2 Precision Insights.
         /// </summary>
         [JsonProperty("is_hosting_provider")]
