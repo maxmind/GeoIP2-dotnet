@@ -53,13 +53,20 @@ namespace MaxMind.GeoIP2.Responses
         public bool IsAnonymous { get; internal set; }
 
         /// <summary>
-        ///     Returns true if the IP address belongs to an anonymous VPN system.
+        ///     Returns true if the IP address is registered to an anonymous
+        ///     VPN provider.
         /// </summary>
+        /// <remarks>
+        ///     If a VPN provider does not register subnets under names
+        ///     associated with them, we will likely only flag their IP ranges
+        ///     using the IsHostingProvider property.
+        /// </remarks>
         [JsonProperty("is_anonymous_vpn")]
         public bool IsAnonymousVpn { get; internal set; }
 
         /// <summary>
-        ///     Returns true if the IP address belongs to a hosting provider.
+        ///     Returns true if the IP address belongs to a hosting or
+        ///     VPN provider (see description of IsAnonymousVpn property).
         /// </summary>
         [JsonProperty("is_hosting_provider")]
         public bool IsHostingProvider { get; internal set; }
