@@ -4,7 +4,7 @@ solution: MaxMind.GeoIP2.sln
 
 env:
   global:
-    - MAXMIND_BENCHMARK_DB=$TRAVIS_BUILD_DIR/MaxMind.GeoIP2.Benchmark/GeoLite2-City.mmdb
+    - MAXMIND_BENCHMARK_DB=$TRAVIS_BUILD_DIR/MaxMind.GeoIP2.UnitTests/TestData/MaxMind-DB/test-data/GeoIP2-City-Test.mmdb
     - MAXMIND_TEST_BASE_DIR="$PWD/MaxMind.GeoIP2.UnitTests"
     - CONFIGURATION=Release
 
