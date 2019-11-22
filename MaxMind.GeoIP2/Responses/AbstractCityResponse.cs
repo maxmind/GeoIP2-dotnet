@@ -1,7 +1,7 @@
 ﻿#region
 
 using MaxMind.GeoIP2.Model;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +14,6 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public abstract class AbstractCityResponse : AbstractCountryResponse
     {
-        [JsonProperty("subdivisions")]
         private IList<Subdivision> _subdivisions;
 
         /// <summary>
@@ -53,19 +52,19 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     Gets the city for the requested IP address.
         /// </summary>
-        [JsonProperty("city")]
+        [JsonPropertyName("city")]
         public City City { get; internal set; }
 
         /// <summary>
         ///     Gets the location for the requested IP address.
         /// </summary>
-        [JsonProperty("location")]
+        [JsonPropertyName("location")]
         public Location Location { get; internal set; }
 
         /// <summary>
         ///     Gets the postal object for the requested IP address.
         /// </summary>
-        [JsonProperty("postal")]
+        [JsonPropertyName("postal")]
         public Postal Postal { get; internal set; }
 
         /// <summary>
@@ -77,7 +76,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     If the response did not contain any subdivisions, this method
         ///     returns an empty array.
         /// </summary>
-        [JsonIgnore]
+        [JsonPropertyName("subdivisions")]
         public List<Subdivision> Subdivisions
         {
             get => new List<Subdivision>(_subdivisions);

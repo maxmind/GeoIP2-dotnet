@@ -1,7 +1,7 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -35,7 +35,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     The connection type of the IP address.
         /// </summary>
-        [JsonProperty("connection_type")]
+        [JsonPropertyName("connection_type")]
         public string ConnectionType { get; internal set; }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     on. If the system is behind a NAT, this may differ from the IP
         ///     address locally assigned to it.
         /// </summary>
-        [JsonProperty("ip_address")]
+        [JsonPropertyName("ip_address")]
         public string IPAddress { get; internal set; }
     }
 }

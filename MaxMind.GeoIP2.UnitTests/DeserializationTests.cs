@@ -1,7 +1,8 @@
 ﻿#region
 
 using MaxMind.GeoIP2.Responses;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Xunit;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
@@ -98,6 +99,11 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.True(insights.Traits.IsSatelliteProvider);
 #pragma warning restore 0618
             Assert.Equal("Comcast", insights.Traits.Isp);
+
+            var network = insights.Traits.Network;
+            Assert.Equal("1.2.3.0", network.NetworkAddress.ToString());
+            Assert.Equal(24, network.PrefixLength);
+
             Assert.Equal("Blorg", insights.Traits.Organization);
             Assert.Equal("college", insights.Traits.UserType);
         }
@@ -105,13 +111,13 @@ namespace MaxMind.GeoIP2.UnitTests
         [Fact]
         public void CanDeserializeCountryResponseNewtonsoftJson()
         {
-            CanDeserializeCountryResponse(JsonConvert.DeserializeObject<CountryResponse>(CountryJson));
+            CanDeserializeCountryResponse(JsonSerializer.Deserialize<CountryResponse>(CountryJson));
         }
 
         [Fact]
         public void CanDeserializeInsightsResponseNewtonsoftJson()
         {
-            CanDeserializeInsightsResponse(JsonConvert.DeserializeObject<InsightsResponse>(InsightsJson));
+            CanDeserializeInsightsResponse(JsonSerializer.Deserialize<InsightsResponse>(InsightsJson));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +14,6 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public abstract class NamedEntity
     {
-        [JsonProperty("names")]
         private IDictionary<string, string> _names;
 
         /// <summary>
@@ -40,7 +39,7 @@ namespace MaxMind.GeoIP2.Model
         ///         cred="GeoNameId" />
         ///     or relevant code instead.
         /// </summary>
-        [JsonIgnore]
+        [JsonPropertyName("names")]
         public Dictionary<string, string> Names
         {
             get => new Dictionary<string, string>(_names);
@@ -50,7 +49,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The GeoName ID for the city.
         /// </summary>
-        [JsonProperty("geoname_id")]
+        [JsonPropertyName("geoname_id")]
         public int? GeoNameId { get; internal set; }
 
         /// <summary>

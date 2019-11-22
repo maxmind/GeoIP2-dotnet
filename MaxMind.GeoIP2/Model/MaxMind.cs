@@ -1,7 +1,7 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -33,7 +33,7 @@ namespace MaxMind.GeoIP2.Model
         ///     service end point. This will be null when using a local
         ///     database.
         /// </summary>
-        [JsonProperty("queries_remaining")]
+        [JsonPropertyName("queries_remaining")]
         public int? QueriesRemaining { get; internal set; }
 
         /// <summary>

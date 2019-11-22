@@ -4,7 +4,7 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +14,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 #endregion
 
@@ -80,6 +81,7 @@ namespace MaxMind.GeoIP2
         private readonly AsyncClient _asyncClient;
 #if !NETSTANDARD1_4
         private readonly ISyncClient _syncClient;
+
 #endif
         private bool _disposed;
 
@@ -376,11 +378,7 @@ namespace MaxMind.GeoIP2
             var sr = new StreamReader(response.Stream);
             try
             {
-                using (JsonReader reader = new JsonTextReader(sr))
-                {
-                    sr = null;
-                    var serializer = new JsonSerializer();
-                    var model = serializer.Deserialize<T>(reader);
+                    var model = JsonSerializer.Deserialize<T>(sr.ReadToEnd());
                     if (model == null)
                     {
                         throw new HttpException(
@@ -389,9 +387,8 @@ namespace MaxMind.GeoIP2
                     }
                     model.SetLocales(_locales);
                     return model;
-                }
             }
-            catch (JsonReaderException ex)
+            catch (JsonException ex)
             {
                 throw new GeoIP2Exception(
                     "Received a 200 response but not decode it as JSON", ex);
@@ -440,11 +437,11 @@ namespace MaxMind.GeoIP2
 
             try
             {
-                var webServiceError = JsonConvert.DeserializeObject<WebServiceError>(content);
+                var webServiceError = JsonSerializer.Deserialize<WebServiceError>(content);
 
                 return CreateExceptionFromJson(response, webServiceError, content);
             }
-            catch (JsonReaderException e)
+            catch (JsonException e)
             {
                 return new HttpException(
                     $"Received a {response.StatusCode} error for {response.RequestUri} but it did not include the expected JSON body: {content}",
