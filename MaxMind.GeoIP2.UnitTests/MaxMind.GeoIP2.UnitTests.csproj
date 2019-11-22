@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Test project to validate MaxMind GeoIP2 Database Reader and Web Service Client</Description>
     <VersionPrefix>2.7.0</VersionPrefix>
-    <TargetFrameworks>net452;netcoreapp1.1;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net452;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
     <AssemblyName>MaxMind.GeoIP2.UnitTests</AssemblyName>
     <AssemblyOriginatorKeyFile>../MaxMind.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Benchmark project to validate MaxMind GeoIP2 Database Reader and Web Service Client</Description>
     <VersionPrefix>2.7.0</VersionPrefix>
-    <TargetFrameworks>net45;netcoreapp1.1;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net45;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
     <AssemblyName>MaxMind.GeoIP2.Benchmark</AssemblyName>
     <OutputType>Exe</OutputType>
     <AssemblyOriginatorKeyFile>../MaxMind.snk</AssemblyOriginatorKeyFile>
