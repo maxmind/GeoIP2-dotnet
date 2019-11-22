@@ -1,191 +1,115 @@
-﻿#region
-
-using Newtonsoft.Json.Linq;
-
-#endregion
-
-namespace MaxMind.GeoIP2.UnitTests
+﻿namespace MaxMind.GeoIP2.UnitTests
 {
     internal class ResponseHelper
     {
-        public static JObject InsightsJObject => new JObject
-        {
+        public static string InsightsJson = @"
             {
-                "city", new JObject
-                {
-                    {"confidence", 76},
-                    {"geoname_id", 9876},
+                ""city"": {
+                    ""confidence"": 76,
+                    ""geoname_id"": 9876,
+                    ""names"": {""en"": ""Minneapolis""}
+                },
+                ""continent"": {
+                    ""code"": ""NA"",
+                    ""geoname_id"": 42,
+                    ""names"": {""en"": ""North America""}
+                },
+                ""country"": {
+                    ""confidence"": 99,
+                    ""iso_code"": ""US"",
+                    ""geoname_id"": 1,
+                    ""names"": {""en"": ""United States of America""}
+                },
+                ""location"": {
+                    ""accuracy_radius"": 1500,
+                    ""average_income"": 50000,
+                    ""latitude"": 44.98,
+                    ""longitude"": 93.2636,
+                    ""metro_code"": 765,
+                    ""population_density"": 100,
+                    ""time_zone"": ""America/Chicago""
+                },
+                ""postal"": {
+                    ""confidence"": 33,
+                    ""code"": ""55401""
+                },
+                ""registered_country"": {
+                    ""geoname_id"": 2,
+                    ""is_in_european_union"": true,
+                    ""iso_code"": ""DE"",
+                    ""names"": {""en"": ""Germany""}
+                },
+                ""represented_country"": {
+                    ""geoname_id"": 3,
+                    ""is_in_european_union"": true,
+                    ""iso_code"": ""GB"",
+                    ""names"": {""en"": ""United Kingdom""},
+                    ""type"": ""military""
+                },
+                ""subdivisions"": [
                     {
-                        "names", new JObject
-                        {
-                            {"en", "Minneapolis"}
-                        }
-                    }
-                }
-            },
-            {
-                "continent", new JObject
-                {
-                    {"code", "NA"},
-                    {"geoname_id", 42},
-                    {
-                        "names", new JObject
-                        {
-                            {"en", "North America"}
-                        }
-                    }
-                }
-            },
-            {
-                "country", new JObject
-                {
-                    {"confidence", 99},
-                    {"iso_code", "US"},
-                    {"geoname_id", 1},
-                    {
-                        "names", new JObject
-                        {
-                            {"en", "United States of America"}
-                        }
-                    }
-                }
-            },
-            {
-                "location", new JObject
-                {
-                    {"accuracy_radius", 1500},
-                    {"average_income", 50000},
-                    {"latitude", 44.98},
-                    {"longitude", 93.2636},
-                    {"metro_code", 765},
-                    {"population_density", 100},
-                    {"time_zone", "America/Chicago"}
-                }
-            },
-            {
-                "postal", new JObject
-                {
-                    {
-                        "confidence",
-                        33
+                        ""confidence"": 88,
+                        ""geoname_id"": 574635,
+                        ""iso_code"": ""MN"",
+                        ""names"": {""en"": ""Minnesota""}
                     },
-                    {"code", "55401"}
-                }
-            },
-            {
-                "registered_country", new JObject
-                {
-                    {"geoname_id", 2},
-                    {"is_in_european_union", true },
-                    {"iso_code", "DE"},
-                    {"names", new JObject {{"en", "Germany"}}}
-                }
-            },
-            {
-                // Note that currently we only have represented_country
-                // for the US, but this could change in future database
-                // updates.
-                "represented_country", new JObject
-                {
-                    {"geoname_id", 3},
-                    { "is_in_european_union", true },
-                    {"iso_code", "GB"},
-                    {
-                        "names", new JObject
-                        {
-                            {"en", "United Kingdom"}
-                        }
-                    },
-                    {"type", "military"}
-                }
-            },
-            {
-                "subdivisions", new JArray
-                {
-                    new JObject
-                    {
-                        {"confidence", 88},
-                        {"geoname_id", 574635},
-                        {"iso_code", "MN"},
-                        {"names", new JObject {{"en", "Minnesota"}}}
-                    },
-                    new JObject {{"iso_code", "TT"}}
-                }
-            },
-            {
-                "traits", new JObject
-                {
-                    {"autonomous_system_number", 1234},
-                    {"autonomous_system_organization", "AS Organization"},
-                    {"domain", "example.com"},
-                    {"ip_address", "1.2.3.4"},
-                    {"is_anonymous", true},
-                    {"is_anonymous_proxy", true},
-                    {"is_anonymous_vpn", true},
-                    {"is_hosting_provider", true},
-                    {"is_public_proxy", true},
-                    {"is_satellite_provider", true},
-                    {"is_tor_exit_node", true},
-                    {"isp", "Comcast"},
-                    {"organization", "Blorg"},
-                    {"user_type", "college"}
-                }
-            },
-            {"maxmind", new JObject {{"queries_remaining", 11}}}
-        };
+                    {""iso_code"": ""TT""}
+                ],
+                ""traits"": {
+                    ""autonomous_system_number"": 1234,
+                    ""autonomous_system_organization"": ""AS Organization"",
+                    ""domain"": ""example.com"",
+                    ""ip_address"": ""1.2.3.4"",
+                    ""is_anonymous"": true,
+                    ""is_anonymous_proxy"": true,
+                    ""is_anonymous_vpn"": true,
+                    ""is_hosting_provider"": true,
+                    ""is_public_proxy"": true,
+                    ""is_satellite_provider"": true,
+                    ""is_tor_exit_node"": true,
+                    ""isp"": ""Comcast"",
+                    ""network"": ""1.2.3.0/24"",
+                    ""organization"": ""Blorg"",
+                    ""user_type"": ""college""
+                },
+                ""maxmind"": {""queries_remaining"": 11}
+            }";
 
-        public static string InsightsJson => InsightsJObject.ToString();
-
-        public static JObject CountryJObject => new JObject
-        {
+        public static string CountryJson = @"
             {
-                "continent", new JObject
-                {
-                    {"code", "NA"},
-                    {"geoname_id", 42},
-                    {"names", new JObject {{"en", "North America"}}}
+                ""continent"": {
+                    ""code"": ""NA"",
+                    ""geoname_id"": 42,
+                    ""names"": {""en"": ""North America""}
+                },
+                ""country"": {
+                    ""geoname_id"": 1,
+                    ""iso_code"": ""US"",
+                    ""confidence"": 56,
+                    ""names"": {""en"": ""United States""}
+                },
+                ""registered_country"": {
+                    ""geoname_id"": 2,
+                    ""is_in_european_union"": true ,
+                    ""iso_code"": ""DE"",
+                    ""names"": {""en"": ""Germany""}
+                },
+                ""represented_country"": {
+                    ""geoname_id"": 4,
+                    ""is_in_european_union"": true ,
+                    ""iso_code"": ""GB"",
+                    ""names"": {""en"": ""United Kingdom""},
+                    ""type"": ""military""
+                },
+                ""traits"": {
+                    ""ip_address"": ""1.2.3.4"",
+                    ""network"": ""1.2.3.0/24""
                 }
-            },
-            {
-                "country",
-                new JObject
-                {
-                    {"geoname_id", 1},
-                    {"iso_code", "US"},
-                    {"confidence", 56},
-                    {"names", new JObject {{"en", "United States"}}}
-                }
-            },
-            {
-                "registered_country",
-                new JObject
-                {
-                    {"geoname_id", 2},
-                    {"is_in_european_union", true },
-                    {"iso_code", "DE"},
-                    {"names", new JObject {{"en", "Germany"}}}
-                }
-            },
-            {
-                // See note above about non-US represented countries
-                "represented_country",
-                new JObject
-                {
-                    {"geoname_id", 4},
-                    {"is_in_european_union", true },
-                    {"iso_code", "GB"},
-                    {"names", new JObject {{"en", "United Kingdom"}}},
-                    {"type", "military"}
-                }
-            },
-            {"traits", new JObject {{"ip_address", "1.2.3.4"}}}
-        };
-
-        public static string CountryJson => CountryJObject.ToString();
+            }";
 
         public static string ErrorJson(string code, string message)
         {
-            return new JObject {{"code", code}, {"error", message}}.ToString();
+            return $@"{{""code"": ""{code}"", ""error"": ""{message}""}}";
         }
     }
 }
