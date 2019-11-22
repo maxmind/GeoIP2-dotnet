@@ -15,23 +15,23 @@ matrix:
     dotnet: 1.0.4
     mono: none
     sudo: required
-    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp1.1
+    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp2.1
   - os: osx
     osx_image: xcode7.3 # macOS 10.11
     dotnet: 1.0.4
     mono: none
-    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp1.1
+    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp2.1
   - os: linux
     dist: trusty # Ubuntu 14.04
     dotnet: 2.0.0
     mono: none
     sudo: required
-    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp2.0
+    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp3.0
   - os: osx
     osx_image: xcode9 # macOS 10.12
     dotnet: 2.0.0
     mono: none
-    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp2.0
+    env: DOTNETCORE=1 CONSOLE_FRAMEWORK=netcoreapp3.0
   - os: linux
     dist: trusty # Ubuntu 14.04
     mono: latest

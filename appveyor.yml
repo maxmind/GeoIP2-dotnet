@@ -1,7 +1,7 @@
 ---
 version: '1.0.{build}'
 
-os: Visual Studio 2017
+os: Visual Studio 2019
 
 environment:
   global:
@@ -17,13 +17,21 @@ environment:
       TEST_FRAMEWORK: net452
       LIB_FRAMEWORK: net45
     - CONFIGURATION: Debug
-      CONSOLE_FRAMEWORK: netcoreapp1.1
+      CONSOLE_FRAMEWORK: netcoreapp3.0
       LIB_FRAMEWORK: netstandard1.4
-      TEST_FRAMEWORK: netcoreapp1.1
+      TEST_FRAMEWORK: netcoreapp3.0
     - CONFIGURATION: Release
-      CONSOLE_FRAMEWORK: netcoreapp1.1
+      CONSOLE_FRAMEWORK: netcoreapp3.0
       LIB_FRAMEWORK: netstandard1.4
-      TEST_FRAMEWORK: netcoreapp1.1
+      TEST_FRAMEWORK: netcoreapp3.0
+    - CONFIGURATION: Debug
+      CONSOLE_FRAMEWORK: netcoreapp3.0
+      LIB_FRAMEWORK: netstandard2.0
+      TEST_FRAMEWORK: netcoreapp3.0
+    - CONFIGURATION: Release
+      CONSOLE_FRAMEWORK: netcoreapp3.0
+      LIB_FRAMEWORK: netstandard2.0
+      TEST_FRAMEWORK: netcoreapp3.0
 
 before_build:
   - git submodule update --init --recursive
