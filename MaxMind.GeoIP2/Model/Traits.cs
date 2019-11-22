@@ -40,7 +40,9 @@ namespace MaxMind.GeoIP2.Model
             [Parameter("is_tor_exit_node")] bool isTorExitNode = false,
             string isp = null,
             string organization = null,
-            [Parameter("user_type")] string userType = null)
+            [Parameter("user_type")] string userType = null,
+            [Network] Network network = null
+        )
         {
             AutonomousSystemNumber = autonomousSystemNumber;
             AutonomousSystemOrganization = autonomousSystemOrganization;
@@ -60,6 +62,7 @@ namespace MaxMind.GeoIP2.Model
 #pragma warning restore 618
             IsTorExitNode = isTorExitNode;
             Isp = isp;
+            Network = network;
             Organization = organization;
             UserType = userType;
         }
@@ -191,6 +194,14 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonProperty("isp")]
         public string Isp { get; internal set; }
+
+        /// <summary>
+        ///     The network associated with the record. In particular, this is
+        ///     the largest network where all of the fields besides
+        ///     <c>IPAddress</c> have the same value.
+        /// </summary>
+        [JsonProperty("network")]
+        public Network Network { get; internal set; }
 
         /// <summary>
         ///     The name of the organization associated with the IP address. This

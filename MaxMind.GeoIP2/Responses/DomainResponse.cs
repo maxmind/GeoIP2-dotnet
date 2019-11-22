@@ -24,13 +24,17 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         /// <param name="domain"></param>
         /// <param name="ipAddress"></param>
+        /// <param name="network"></param>
         [Constructor]
         public DomainResponse(
             string domain,
-            [Inject("ip_address")] string ipAddress)
+            [Inject("ip_address")] string ipAddress,
+            [Network] Network network = null
+        )
         {
             Domain = domain;
             IPAddress = ipAddress;
+            Network = network;
         }
 
         /// <summary>
@@ -50,5 +54,13 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonProperty("ip_address")]
         public string IPAddress { get; internal set; }
+
+        /// <summary>
+        ///     The network associated with the record. In particular, this is
+        ///     the largest network where all of the fields besides
+        ///     <c>IPAddress</c> have the same value.
+        /// </summary>
+        [JsonProperty("network")]
+        public Network Network { get; internal set; }
     }
 }

@@ -98,6 +98,11 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.True(insights.Traits.IsSatelliteProvider);
 #pragma warning restore 0618
             Assert.Equal("Comcast", insights.Traits.Isp);
+
+            var network = insights.Traits.Network;
+            Assert.Equal("1.2.3.0", network.NetworkAddress.ToString());
+            Assert.Equal(24, network.PrefixLength);
+
             Assert.Equal("Blorg", insights.Traits.Organization);
             Assert.Equal("college", insights.Traits.UserType);
         }
@@ -105,13 +110,13 @@ namespace MaxMind.GeoIP2.UnitTests
         [Fact]
         public void CanDeserializeCountryResponseNewtonsoftJson()
         {
-            CanDeserializeCountryResponse(JsonConvert.DeserializeObject<CountryResponse>(CountryJson));
+            CanDeserializeCountryResponse(JsonConvert.DeserializeObject<CountryResponse>(CountryJson, new NetworkConverter()));
         }
 
         [Fact]
         public void CanDeserializeInsightsResponseNewtonsoftJson()
         {
-            CanDeserializeInsightsResponse(JsonConvert.DeserializeObject<InsightsResponse>(InsightsJson));
+            CanDeserializeInsightsResponse(JsonConvert.DeserializeObject<InsightsResponse>(InsightsJson, new NetworkConverter()));
         }
     }
 }

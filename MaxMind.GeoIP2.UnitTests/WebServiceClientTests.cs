@@ -350,6 +350,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             Assert.NotNull(result);
             Assert.Equal(t, result.GetType());
+            Assert.Equal("1.2.3.0/24", result.Traits.Network.ToString());
         }
 
         [Theory, MemberData(nameof(MeTestCases))]
