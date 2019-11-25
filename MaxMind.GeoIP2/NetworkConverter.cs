@@ -5,7 +5,7 @@ using System.Net;
 
 namespace MaxMind.GeoIP2
 {
-    class NetworkConverter : JsonConverter<Network>
+    internal class NetworkConverter : JsonConverter<Network>
     {
         public override void WriteJson(JsonWriter writer, Network value, JsonSerializer serializer)
         {
