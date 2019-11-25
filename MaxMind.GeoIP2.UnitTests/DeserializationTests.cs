@@ -104,6 +104,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal(24, network.PrefixLength);
 
             Assert.Equal("Blorg", insights.Traits.Organization);
+            Assert.Equal(1, insights.Traits.UserCount);
             Assert.Equal("college", insights.Traits.UserType);
         }
 

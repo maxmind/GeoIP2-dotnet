@@ -7,6 +7,10 @@ GeoIP2 .NET API Release Notes
 * A `Network` property has been added to the various response models. This
   represents the largest network where all the fields besides the IP
   address are the same.
+* The `UserCount` property has been added to `MaxMind.GeoIP2.Model.Traits`.
+  This output is available from GeoIP2 Precision Insights. It is an
+  estimate of the number of users sharing the IP/network over the past
+  24 hours.
 * Updated documentation of anonymizer properties - `IsAnonymousVpn` and
   `IsHostingProvider` - to be more descriptive.
 

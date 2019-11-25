@@ -41,7 +41,8 @@ namespace MaxMind.GeoIP2.Model
             string isp = null,
             string organization = null,
             [Parameter("user_type")] string userType = null,
-            [Network] Network network = null
+            [Network] Network network = null,
+            [Parameter("user_count")] int? userCount = null
         )
         {
             AutonomousSystemNumber = autonomousSystemNumber;
@@ -64,6 +65,7 @@ namespace MaxMind.GeoIP2.Model
             Isp = isp;
             Network = network;
             Organization = organization;
+            UserCount = userCount;
             UserType = userType;
         }
 
@@ -210,6 +212,15 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonProperty("organization")]
         public string Organization { get; internal set; }
+
+        /// <summary>
+        ///     The estimated number of users sharing the IP/network during the past
+        ///     24 hours. For IPv4, the count is for the individual IP. For IPv6, the
+        ///     count is for the /64 network. This value is only available from
+        ///     GeoIP2 Precision Insights.
+        /// </summary>
+        [JsonProperty("user_count")]
+        public int? UserCount { get; internal set; }
 
         /// <summary>
         ///     The user type associated with the IP address. This can be one of
