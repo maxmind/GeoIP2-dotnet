@@ -28,6 +28,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <param name="isPublicProxy"></param>
         /// <param name="isTorExitNode"></param>
         /// <param name="ipAddress"></param>
+        /// <param name="network"></param>
         [Constructor]
         public AnonymousIPResponse(
             [Parameter("is_anonymous")] bool isAnonymous,
@@ -35,7 +36,8 @@ namespace MaxMind.GeoIP2.Responses
             [Parameter("is_hosting_provider")] bool isHostingProvider,
             [Parameter("is_public_proxy")] bool isPublicProxy,
             [Parameter("is_tor_exit_node")] bool isTorExitNode,
-            [Inject("ip_address")] string ipAddress
+            [Inject("ip_address")] string ipAddress,
+            [Network] Network network = null
         )
         {
             IsAnonymous = isAnonymous;
@@ -44,6 +46,7 @@ namespace MaxMind.GeoIP2.Responses
             IsPublicProxy = isPublicProxy;
             IsTorExitNode = isTorExitNode;
             IPAddress = ipAddress;
+            Network = network;
         }
 
         /// <summary>
@@ -92,5 +95,13 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonProperty("ip_address")]
         public string IPAddress { get; internal set; }
+
+        /// <summary>
+        ///     The network associated with the record. In particular, this is
+        ///     the largest network where all of the fields besides
+        ///     <c>IPAddress</c> have the same value.
+        /// </summary>
+        [JsonProperty("network")]
+        public Network Network { get; internal set; }
     }
 }

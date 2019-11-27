@@ -1,9 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-3.0.1
+3.1.0
 ------------------
 
+* A `Network` property has been added to the various response models. This
+  represents the largest network where all the fields besides the IP
+  address are the same.
 * Updated documentation of anonymizer properties - `IsAnonymousVpn` and
   `IsHostingProvider` - to be more descriptive.
 

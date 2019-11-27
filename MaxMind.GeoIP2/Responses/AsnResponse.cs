@@ -22,11 +22,14 @@ namespace MaxMind.GeoIP2.Responses
         public AsnResponse(
             [Parameter("autonomous_system_number")] long? autonomousSystemNumber,
             [Parameter("autonomous_system_organization")] string autonomousSystemOrganization,
-            [Inject("ip_address")] string ipAddress)
+            [Inject("ip_address")] string ipAddress,
+            [Network] Network network = null
+        )
         {
             AutonomousSystemNumber = autonomousSystemNumber;
             AutonomousSystemOrganization = autonomousSystemOrganization;
             IPAddress = ipAddress;
+            Network = network;
         }
 
         /// <summary>
@@ -60,5 +63,13 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonProperty("ip_address")]
         public string IPAddress { get; internal set; }
+
+        /// <summary>
+        ///     The network associated with the record. In particular, this is
+        ///     the largest network where all of the fields besides
+        ///     <c>IPAddress</c> have the same value.
+        /// </summary>
+        [JsonProperty("network")]
+        public Network Network { get; internal set; }
     }
 }

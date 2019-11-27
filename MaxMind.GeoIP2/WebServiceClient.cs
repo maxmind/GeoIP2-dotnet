@@ -379,7 +379,9 @@ namespace MaxMind.GeoIP2
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     sr = null;
-                    var serializer = new JsonSerializer();
+                    var settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new NetworkConverter());
+                    var serializer = JsonSerializer.Create(settings);
                     var model = serializer.Deserialize<T>(reader);
                     if (model == null)
                     {
