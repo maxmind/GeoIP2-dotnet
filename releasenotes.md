@@ -7,6 +7,9 @@ GeoIP2 .NET API Release Notes
 * A `Network` property has been added to the various response models. This
   represents the largest network where all the fields besides the IP
   address are the same.
+* The `StaticIPScore` property has been added to `MaxMind.GeoIP2.Model.Traits`.
+  This output is available from GeoIP2 Precision Insights. It is an indicator
+  of how static or dynamic an IP address is.
 * The `UserCount` property has been added to `MaxMind.GeoIP2.Model.Traits`.
   This output is available from GeoIP2 Precision Insights. It is an
   estimate of the number of users sharing the IP/network over the past

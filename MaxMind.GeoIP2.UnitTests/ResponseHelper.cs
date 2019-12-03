@@ -70,6 +70,7 @@
                     ""isp"": ""Comcast"",
                     ""network"": ""1.2.3.0/24"",
                     ""organization"": ""Blorg"",
+                    ""static_ip_score"": 1.5,
                     ""user_count"": 1,
                     ""user_type"": ""college""
                 },
