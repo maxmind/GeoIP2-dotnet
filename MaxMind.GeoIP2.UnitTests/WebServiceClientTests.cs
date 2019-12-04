@@ -425,6 +425,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Null(traits.IPAddress);
             Assert.Null(traits.Isp);
             Assert.Null(traits.Organization);
+            Assert.Null(traits.StaticIPScore);
             Assert.Null(traits.UserCount);
             Assert.Null(traits.UserType);
 #pragma warning disable 0618

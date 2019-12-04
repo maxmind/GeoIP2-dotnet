@@ -42,6 +42,7 @@ namespace MaxMind.GeoIP2.Model
             string organization = null,
             [Parameter("user_type")] string userType = null,
             [Network] Network network = null,
+            [Parameter("static_ip_score")] double? staticIPScore = null,
             [Parameter("user_count")] int? userCount = null
         )
         {
@@ -65,6 +66,7 @@ namespace MaxMind.GeoIP2.Model
             Isp = isp;
             Network = network;
             Organization = organization;
+            StaticIPScore = staticIPScore;
             UserCount = userCount;
             UserType = userType;
         }
@@ -212,6 +214,20 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonProperty("organization")]
         public string Organization { get; internal set; }
+
+        /// <summary>
+        ///     An indicator of how static or dynamic an IP address is. The value
+        ///     ranges from 0 to 99.99 with higher values meaning a greater static
+        ///     association. For example, many IP addresses with a <c>UserType</c>
+        ///     of <c>cellular</c> have a lifetime under one. Static Cable/DSL IPs
+        ///     typically have a lifetime above thirty.
+        /// </summary>
+        /// <remark>
+        ///     This indicator can be useful for deciding whether an IP address
+        ///     represents the same user over time.
+        /// </remark>
+        [JsonProperty("static_ip_score")]
+        public double? StaticIPScore { get; internal set; }
 
         /// <summary>
         ///     The estimated number of users sharing the IP/network during the past
