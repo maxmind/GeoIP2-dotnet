@@ -207,7 +207,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
-    var response = await client.InsightsSync("128.101.101.101");
+    var response = await client.InsightsAsync("128.101.101.101");
 
     Console.WriteLine(response.Country.IsoCode);        // 'US'
     Console.WriteLine(response.Country.Name);           // 'United States'
