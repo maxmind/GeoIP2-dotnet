@@ -28,7 +28,7 @@ namespace MaxMind.GeoIP2.Http
             string auth,
             int timeout,
             ProductInfoHeaderValue userAgent,
-            HttpMessageHandler httpMessageHandler = null
+            HttpMessageHandler? httpMessageHandler = null
             )
         {
             _httpMessageHandler = httpMessageHandler ?? new HttpClientHandler();

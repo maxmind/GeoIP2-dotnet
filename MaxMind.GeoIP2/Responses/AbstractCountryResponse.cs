@@ -30,9 +30,13 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     Initializes a new instance of the <see cref="AbstractCountryResponse" /> class.
         /// </summary>
-        protected AbstractCountryResponse(Continent continent = null, Country country = null,
-            Model.MaxMind maxMind = null,
-            Country registeredCountry = null, RepresentedCountry representedCountry = null, Traits traits = null)
+        protected AbstractCountryResponse(
+            Continent? continent = null, 
+            Country? country = null,
+            Model.MaxMind? maxMind = null,
+            Country? registeredCountry = null, 
+            RepresentedCountry? representedCountry = null,
+            Traits? traits = null)
         {
             Continent = continent ?? new Continent();
             Country = country ?? new Country();

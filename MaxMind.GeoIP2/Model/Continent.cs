@@ -28,10 +28,10 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [Constructor]
         public Continent(
-            string code = null,
+            string? code = null,
             [Parameter("geoname_id")] long? geoNameId = null,
-            IDictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
+            IDictionary<string, string>? names = null,
+            IEnumerable<string>? locales = null)
             : base(geoNameId, names, locales)
         {
             Code = code;
@@ -42,6 +42,6 @@ namespace MaxMind.GeoIP2.Model
         ///     (Oceania).
         /// </summary>
         [JsonProperty("code")]
-        public string Code { get; internal set; }
+        public string? Code { get; internal set; }
     }
 }

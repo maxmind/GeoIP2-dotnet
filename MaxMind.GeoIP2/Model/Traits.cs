@@ -26,10 +26,10 @@ namespace MaxMind.GeoIP2.Model
         [Constructor]
         public Traits(
             [Parameter("autonomous_system_number")] long? autonomousSystemNumber = null,
-            [Parameter("autonomous_system_organization")] string autonomousSystemOrganization = null,
-            [Parameter("connection_type")] string connectionType = null,
-            string domain = null,
-            [Inject("ip_address")] string ipAddress = null,
+            [Parameter("autonomous_system_organization")] string? autonomousSystemOrganization = null,
+            [Parameter("connection_type")] string? connectionType = null,
+            string? domain = null,
+            [Inject("ip_address")] string? ipAddress = null,
             [Parameter("is_anonymous")] bool isAnonymous = false,
             [Parameter("is_anonymous_proxy")] bool isAnonymousProxy = false,
             [Parameter("is_anonymous_vpn")] bool isAnonymousVpn = false,
@@ -38,10 +38,10 @@ namespace MaxMind.GeoIP2.Model
             [Parameter("is_public_proxy")] bool isPublicProxy = false,
             [Parameter("is_satellite_provider")] bool isSatelliteProvider = false,
             [Parameter("is_tor_exit_node")] bool isTorExitNode = false,
-            string isp = null,
-            string organization = null,
-            [Parameter("user_type")] string userType = null,
-            [Network] Network network = null,
+            string? isp = null,
+            string? organization = null,
+            [Parameter("user_type")] string? userType = null,
+            [Network] Network? network = null,
             [Parameter("static_ip_score")] double? staticIPScore = null,
             [Parameter("user_count")] int? userCount = null
         )
@@ -94,14 +94,14 @@ namespace MaxMind.GeoIP2.Model
         ///     Insights web service or the Enterprise database.
         /// </summary>
         [JsonProperty("autonomous_system_organization")]
-        public string AutonomousSystemOrganization { get; internal set; }
+        public string? AutonomousSystemOrganization { get; internal set; }
 
         /// <summary>
         ///     The connection type of the IP address. This value is only set when
         ///     using the Enterprise database.
         /// </summary>
         [JsonProperty("connection_type")]
-        public string ConnectionType { get; internal set; }
+        public string? ConnectionType { get; internal set; }
 
         /// <summary>
         ///     The second level domain associated with the IP address. This will
@@ -110,7 +110,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Insights web service or the Enterprise database.
         /// </summary>
         [JsonProperty("domain")]
-        public string Domain { get; internal set; }
+        public string? Domain { get; internal set; }
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -120,7 +120,7 @@ namespace MaxMind.GeoIP2.Model
         ///     address locally assigned to it.
         /// </summary>
         [JsonProperty("ip_address")]
-        public string IPAddress { get; internal set; }
+        public string? IPAddress { get; internal set; }
 
         /// <summary>
         ///     This is true if the IP address belongs to any sort of anonymous
@@ -197,7 +197,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Enterprise database.
         /// </summary>
         [JsonProperty("isp")]
-        public string Isp { get; internal set; }
+        public string? Isp { get; internal set; }
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -205,7 +205,7 @@ namespace MaxMind.GeoIP2.Model
         ///     <c>IPAddress</c> have the same value.
         /// </summary>
         [JsonProperty("network")]
-        public Network Network { get; internal set; }
+        public Network? Network { get; internal set; }
 
         /// <summary>
         ///     The name of the organization associated with the IP address. This
@@ -213,7 +213,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Enterprise database.
         /// </summary>
         [JsonProperty("organization")]
-        public string Organization { get; internal set; }
+        public string? Organization { get; internal set; }
 
         /// <summary>
         ///     An indicator of how static or dynamic an IP address is. The value
@@ -292,7 +292,7 @@ namespace MaxMind.GeoIP2.Model
         ///     or the Enterprise database.
         /// </summary>
         [JsonProperty("user_type")]
-        public string UserType { get; internal set; }
+        public string? UserType { get; internal set; }
 
         /// <summary>
         ///     Returns a <see cref="string" /> that represents this instance.

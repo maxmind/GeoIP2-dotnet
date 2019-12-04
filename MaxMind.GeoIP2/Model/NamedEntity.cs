@@ -21,10 +21,10 @@ namespace MaxMind.GeoIP2.Model
         ///     Constructor
         /// </summary>
         [Constructor]
-        protected NamedEntity(long? geoNameId = null, IDictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
+        protected NamedEntity(long? geoNameId = null, IDictionary<string, string>? names = null,
+            IEnumerable<string>? locales = null)
         {
-            Names = names != null ? new Dictionary<string, string>(names) : new Dictionary<string, string>();
+            _names = names != null ? new Dictionary<string, string>(names) : new Dictionary<string, string>();
             // Unfortunately the existing models incorrectly use an int rather
             // than a long for the geoname_id. This should be corrected if we
             // ever do a major version bump.
@@ -44,7 +44,6 @@ namespace MaxMind.GeoIP2.Model
         public Dictionary<string, string> Names
         {
             get => new Dictionary<string, string>(_names);
-            internal set => _names = value;
         }
 
         /// <summary>
@@ -68,7 +67,7 @@ namespace MaxMind.GeoIP2.Model
         ///     or relevant code instead.
         /// </summary>
         [JsonIgnore]
-        public string Name
+        public string? Name
         {
             get
             {

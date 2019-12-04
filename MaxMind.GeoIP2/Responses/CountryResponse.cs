@@ -31,12 +31,12 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [Constructor]
         public CountryResponse(
-            Continent continent = null,
-            Country country = null,
-            [Parameter("maxmind")] Model.MaxMind maxMind = null,
-            [Parameter("registered_country")] Country registeredCountry = null,
-            [Parameter("represented_country")] RepresentedCountry representedCountry = null,
-            [Parameter("traits", true)] Traits traits = null
+            Continent? continent = null,
+            Country? country = null,
+            [Parameter("maxmind")] Model.MaxMind? maxMind = null,
+            [Parameter("registered_country")] Country? registeredCountry = null,
+            [Parameter("represented_country")] RepresentedCountry? representedCountry = null,
+            [Parameter("traits", true)] Traits? traits = null
             ) : base(continent, country, maxMind, registeredCountry, representedCountry, traits)
         {
         }
