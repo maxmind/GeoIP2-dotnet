@@ -15,7 +15,7 @@ namespace MaxMind.GeoIP2.Responses
     public abstract class AbstractCityResponse : AbstractCountryResponse
     {
         [JsonProperty("subdivisions")]
-        private IList<Subdivision> _subdivisions;
+        private readonly IList<Subdivision> _subdivisions;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.
@@ -78,10 +78,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     returns an empty array.
         /// </summary>
         [JsonIgnore]
-        public List<Subdivision> Subdivisions
-        {
-            get => new List<Subdivision>(_subdivisions);
-        }
+        public List<Subdivision> Subdivisions => new List<Subdivision>(_subdivisions);
 
         /// <summary>
         ///     An object representing the most specific subdivision returned. If

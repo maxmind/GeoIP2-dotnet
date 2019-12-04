@@ -1,8 +1,8 @@
 ﻿#region
 
+using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Responses;
 using System.Net;
-using MaxMind.GeoIP2.Http;
 
 #endregion
 

@@ -110,7 +110,7 @@ namespace MaxMind.GeoIP2.UnitTests
 #endif
 
             return new WebServiceClient(6, "0123456789",
-                locales: new List<string> {"en"},
+                locales: new List<string> { "en" },
                 host: "geoip.maxmind.com",
                 timeout: 3000,
                 httpMessageHandler: mockHttp

@@ -1,7 +1,7 @@
 ﻿#region
 
-using System.Collections.Generic;
 using MaxMind.GeoIP2.Model;
+using System.Collections.Generic;
 using Xunit;
 
 #endregion

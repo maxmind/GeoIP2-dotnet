@@ -2,8 +2,8 @@
 using MaxMind.GeoIP2.Exceptions;
 using System;
 using System.Diagnostics;
-using System.Net;
 using System.IO;
+using System.Net;
 
 namespace MaxMind.GeoIP2.Benchmark
 {

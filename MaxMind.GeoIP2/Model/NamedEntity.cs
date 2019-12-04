@@ -15,7 +15,7 @@ namespace MaxMind.GeoIP2.Model
     public abstract class NamedEntity
     {
         [JsonProperty("names")]
-        private IDictionary<string, string> _names;
+        private readonly IDictionary<string, string> _names;
 
         /// <summary>
         ///     Constructor
@@ -28,7 +28,7 @@ namespace MaxMind.GeoIP2.Model
             // Unfortunately the existing models incorrectly use an int rather
             // than a long for the geoname_id. This should be corrected if we
             // ever do a major version bump.
-            GeoNameId = (int?) geoNameId;
+            GeoNameId = (int?)geoNameId;
             Locales = locales != null ? new List<string>(locales) : new List<string> { "en" };
         }
 
@@ -41,10 +41,7 @@ namespace MaxMind.GeoIP2.Model
         ///     or relevant code instead.
         /// </summary>
         [JsonIgnore]
-        public Dictionary<string, string> Names
-        {
-            get => new Dictionary<string, string>(_names);
-        }
+        public Dictionary<string, string> Names => new Dictionary<string, string>(_names);
 
         /// <summary>
         ///     The GeoName ID for the city.
