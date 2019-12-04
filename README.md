@@ -207,7 +207,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
-    var response = await client.InsightsSync("128.101.101.101");
+    var response = await client.InsightsAsync("128.101.101.101");
 
     Console.WriteLine(response.Country.IsoCode);        // 'US'
     Console.WriteLine(response.Country.Name);           // 'United States'
@@ -500,6 +500,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2013-2018 by MaxMind, Inc.
+This software is Copyright (c) 2013-2019 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.
