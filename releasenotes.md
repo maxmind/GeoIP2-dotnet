@@ -16,6 +16,7 @@ GeoIP2 .NET API Release Notes
   24 hours.
 * Updated documentation of anonymizer properties - `IsAnonymousVpn` and
   `IsHostingProvider` - to be more descriptive.
+* `netstandard2.1` was added as a target framework.
 
 3.0.0 (2018-04-11)
 ------------------
