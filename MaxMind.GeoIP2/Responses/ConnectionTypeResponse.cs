@@ -24,9 +24,9 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [Constructor]
         public ConnectionTypeResponse(
-            [Parameter("connection_type")] string connectionType,
-            [Inject("ip_address")] string ipAddress,
-            [Network] Network network = null
+            [Parameter("connection_type")] string? connectionType,
+            [Inject("ip_address")] string? ipAddress,
+            [Network] Network? network = null
         )
         {
             ConnectionType = connectionType;
@@ -38,7 +38,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     The connection type of the IP address.
         /// </summary>
         [JsonProperty("connection_type")]
-        public string ConnectionType { get; internal set; }
+        public string? ConnectionType { get; internal set; }
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -48,7 +48,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     address locally assigned to it.
         /// </summary>
         [JsonProperty("ip_address")]
-        public string IPAddress { get; internal set; }
+        public string? IPAddress { get; internal set; }
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -56,6 +56,6 @@ namespace MaxMind.GeoIP2.Responses
         ///     <c>IPAddress</c> have the same value.
         /// </summary>
         [JsonProperty("network")]
-        public Network Network { get; internal set; }
+        public Network? Network { get; internal set; }
     }
 }

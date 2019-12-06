@@ -30,8 +30,8 @@ namespace MaxMind.GeoIP2.Model
         [Constructor]
         public City(int? confidence = null,
             [Parameter("geoname_id")] long? geoNameId = null,
-            IDictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
+            IDictionary<string, string>? names = null,
+            IEnumerable<string>? locales = null)
             : base(geoNameId, names, locales)
         {
             Confidence = confidence;

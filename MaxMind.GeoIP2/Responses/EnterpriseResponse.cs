@@ -25,16 +25,16 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [Constructor]
         public EnterpriseResponse(
-            City city = null,
-            Continent continent = null,
-            Country country = null,
-            Location location = null,
-            Model.MaxMind maxMind = null,
-            Postal postal = null,
-            Country registeredCountry = null,
-            RepresentedCountry representedCountry = null,
-            IEnumerable<Subdivision> subdivisions = null,
-            Traits traits = null)
+            City? city = null,
+            Continent? continent = null,
+            Country? country = null,
+            Location? location = null,
+            Model.MaxMind? maxMind = null,
+            Postal? postal = null,
+            Country? registeredCountry = null,
+            RepresentedCountry? representedCountry = null,
+            IEnumerable<Subdivision>? subdivisions = null,
+            Traits? traits = null)
             : base(
                 city, continent, country, location, maxMind, postal, registeredCountry, representedCountry, subdivisions,
                 traits)

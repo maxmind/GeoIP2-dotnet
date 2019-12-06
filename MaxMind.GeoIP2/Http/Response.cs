@@ -14,9 +14,9 @@ namespace MaxMind.GeoIP2.Http
         internal HttpStatusCode StatusCode { get; }
         internal Uri RequestUri { get; }
         internal Stream Stream { get; }
-        internal string ContentType { get; }
+        internal string? ContentType { get; }
 
-        public Response(Uri requestUri, HttpStatusCode statusCode, string contentType, Stream stream)
+        public Response(Uri requestUri, HttpStatusCode statusCode, string? contentType, Stream stream)
         {
             RequestUri = requestUri;
             StatusCode = statusCode;

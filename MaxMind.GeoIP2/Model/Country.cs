@@ -31,9 +31,9 @@ namespace MaxMind.GeoIP2.Model
             int? confidence = null,
             [Parameter("geoname_id")] long? geoNameId = null,
             [Parameter("is_in_european_union")] bool isInEuropeanUnion = false,
-            [Parameter("iso_code")] string isoCode = null,
-            IDictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
+            [Parameter("iso_code")] string? isoCode = null,
+            IDictionary<string, string>? names = null,
+            IEnumerable<string>? locales = null)
             : base(geoNameId, names, locales)
         {
             Confidence = confidence;
@@ -67,6 +67,6 @@ namespace MaxMind.GeoIP2.Model
         ///     for the country.
         /// </summary>
         [JsonProperty("iso_code")]
-        public string IsoCode { get; internal set; }
+        public string? IsoCode { get; internal set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿#region
 
-using System.Collections.Generic;
 using MaxMind.GeoIP2.Model;
+using System.Collections.Generic;
 using Xunit;
 
 #endregion
@@ -13,11 +13,10 @@ namespace MaxMind.GeoIP2.UnitTests
         [Fact]
         public void CanGetSingleName()
         {
-            var c = new City
-            {
-                Locales = new List<string> {"en"},
-                Names = new Dictionary<string, string> {{"en", "Foo"}}
-            };
+            var c = new City(
+                names: new Dictionary<string, string> { { "en", "Foo" } },
+                locales: new List<string> { "en" }
+                );
 
             Assert.Equal("Foo", c.Name);
         }
@@ -25,11 +24,10 @@ namespace MaxMind.GeoIP2.UnitTests
         [Fact]
         public void NameReturnsCorrectLocale()
         {
-            var c = new City
-            {
-                Locales = new List<string> {"es"},
-                Names = new Dictionary<string, string> {{"en", "Mexico City"}, {"es", "Ciudad de México"}}
-            };
+            var c = new City(
+                names: new Dictionary<string, string> { { "en", "Mexico City" }, { "es", "Ciudad de México" } },
+                locales: new List<string> { "es" }
+                );
 
             Assert.Equal("Ciudad de México", c.Name);
         }

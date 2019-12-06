@@ -95,7 +95,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.False(response.IsPublicProxy);
                 Assert.False(response.IsTorExitNode);
                 Assert.Equal(ipAddress, response.IPAddress);
-                Assert.Equal("1.2.0.0/16", response.Network.ToString());
+                Assert.Equal("1.2.0.0/16", response.Network?.ToString());
             }
         }
 
@@ -108,14 +108,14 @@ namespace MaxMind.GeoIP2.UnitTests
                 var response = reader.Asn(ipAddressStr);
                 CheckAsn(response, ipAddressStr);
 
-                Assert.True(reader.TryAsn(ipAddressStr, out response));
+                Assert.True(reader.TryAsn(ipAddressStr, out response!));
                 CheckAsn(response, ipAddressStr);
 
                 var ipAddress = IPAddress.Parse(ipAddressStr);
                 response = reader.Asn(ipAddress);
                 CheckAsn(response, ipAddressStr);
 
-                Assert.True(reader.TryAsn(ipAddress, out response));
+                Assert.True(reader.TryAsn(ipAddress, out response!));
                 CheckAsn(response, ipAddressStr);
             }
         }
@@ -125,7 +125,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal(1221, response.AutonomousSystemNumber);
             Assert.Equal("Telstra Pty Ltd", response.AutonomousSystemOrganization);
             Assert.Equal(ipAddress, response.IPAddress);
-            Assert.Equal("1.128.0.0/11", response.Network.ToString());
+            Assert.Equal("1.128.0.0/11", response.Network?.ToString());
         }
 
 
@@ -138,7 +138,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 var response = reader.ConnectionType(ipAddress);
                 Assert.Equal("Cable/DSL", response.ConnectionType);
                 Assert.Equal(ipAddress, response.IPAddress);
-                Assert.Equal("1.0.1.0/24", response.Network.ToString());
+                Assert.Equal("1.0.1.0/24", response.Network?.ToString());
             }
         }
 
@@ -151,7 +151,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 var response = reader.Domain(ipAddress);
                 Assert.Equal("maxmind.com", response.Domain);
                 Assert.Equal(ipAddress, response.IPAddress);
-                Assert.Equal("1.2.0.0/16", response.Network.ToString());
+                Assert.Equal("1.2.0.0/16", response.Network?.ToString());
             }
         }
 
@@ -172,7 +172,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Equal("Cable/DSL", response.Traits.ConnectionType);
                 Assert.True(response.Traits.IsLegitimateProxy);
                 Assert.Equal(ipAddress, response.Traits.IPAddress);
-                Assert.Equal("74.209.16.0/20", response.Traits.Network.ToString());
+                Assert.Equal("74.209.16.0/20", response.Traits.Network?.ToString());
             }
         }
 
@@ -188,7 +188,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Equal("Telstra Internet", response.Isp);
                 Assert.Equal("Telstra Internet", response.Organization);
                 Assert.Equal(ipAddress, response.IPAddress);
-                Assert.Equal("1.128.0.0/11", response.Network.ToString());
+                Assert.Equal("1.128.0.0/11", response.Network?.ToString());
             }
         }
 
@@ -202,7 +202,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.True(response.Country.IsInEuropeanUnion);
                 Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
                 Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
-                Assert.Equal("81.2.69.160/27", response.Traits.Network.ToString());
+                Assert.Equal("81.2.69.160/27", response.Traits.Network?.ToString());
             }
         }
 
@@ -217,7 +217,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Equal("US", response.RegisteredCountry.IsoCode);
                 Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
                 Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
-                Assert.Equal("81.2.69.160/27", response.Traits.Network.ToString());
+                Assert.Equal("81.2.69.160/27", response.Traits.Network?.ToString());
             }
         }
 
@@ -232,7 +232,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Equal(100, response.Location.AccuracyRadius);
                 Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
                 Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
-                Assert.Equal("81.2.69.160/27", response.Traits.Network.ToString());
+                Assert.Equal("81.2.69.160/27", response.Traits.Network?.ToString());
             }
         }
 
@@ -243,11 +243,11 @@ namespace MaxMind.GeoIP2.UnitTests
             {
                 var lookupSuccess = reader.TryCity("81.2.69.160", out var response);
                 Assert.True(lookupSuccess);
-                Assert.True(response.Country.IsInEuropeanUnion);
-                Assert.Equal("London", response.City.Name);
-                Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
-                Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
-                Assert.Equal("81.2.69.160/27", response.Traits.Network.ToString());
+                Assert.True(response?.Country.IsInEuropeanUnion);
+                Assert.Equal("London", response?.City.Name);
+                Assert.False(response?.RegisteredCountry.IsInEuropeanUnion);
+                Assert.False(response?.RepresentedCountry.IsInEuropeanUnion);
+                Assert.Equal("81.2.69.160/27", response?.Traits.Network?.ToString());
             }
         }
 

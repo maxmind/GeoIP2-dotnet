@@ -30,9 +30,9 @@ namespace MaxMind.GeoIP2.Model
         public Subdivision(
             int? confidence = null,
             [Parameter("geoname_id")] long? geoNameId = null,
-            [Parameter("iso_code")] string isoCode = null,
-            IDictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
+            [Parameter("iso_code")] string? isoCode = null,
+            IDictionary<string, string>? names = null,
+            IEnumerable<string>? locales = null)
             : base(geoNameId, names, locales)
         {
             Confidence = confidence;
@@ -57,6 +57,6 @@ namespace MaxMind.GeoIP2.Model
         ///     .
         /// </summary>
         [JsonProperty("iso_code")]
-        public string IsoCode { get; set; }
+        public string? IsoCode { get; set; }
     }
 }

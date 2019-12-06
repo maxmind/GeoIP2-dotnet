@@ -27,9 +27,9 @@ namespace MaxMind.GeoIP2.Responses
         /// <param name="network"></param>
         [Constructor]
         public DomainResponse(
-            string domain,
-            [Inject("ip_address")] string ipAddress,
-            [Network] Network network = null
+            string? domain,
+            [Inject("ip_address")] string? ipAddress,
+            [Network] Network? network = null
         )
         {
             Domain = domain;
@@ -43,7 +43,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     "foo.example.com".
         /// </summary>
         [JsonProperty("domain")]
-        public string Domain { get; internal set; }
+        public string? Domain { get; internal set; }
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -53,7 +53,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     address locally assigned to it.
         /// </summary>
         [JsonProperty("ip_address")]
-        public string IPAddress { get; internal set; }
+        public string? IPAddress { get; internal set; }
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -61,6 +61,6 @@ namespace MaxMind.GeoIP2.Responses
         ///     <c>IPAddress</c> have the same value.
         /// </summary>
         [JsonProperty("network")]
-        public Network Network { get; internal set; }
+        public Network? Network { get; internal set; }
     }
 }

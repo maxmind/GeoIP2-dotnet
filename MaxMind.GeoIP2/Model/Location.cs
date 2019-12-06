@@ -28,7 +28,7 @@ namespace MaxMind.GeoIP2.Model
             double? latitude = null,
             double? longitude = null,
             [Parameter("metro_code")] int? metroCode = null,
-            [Parameter("time_zone")] string timeZone = null)
+            [Parameter("time_zone")] string? timeZone = null)
         {
             AccuracyRadius = accuracyRadius;
             Latitude = latitude;
@@ -100,7 +100,7 @@ namespace MaxMind.GeoIP2.Model
         ///     , e.g., "America/New_York".
         /// </summary>
         [JsonProperty("time_zone")]
-        public string TimeZone { get; internal set; }
+        public string? TimeZone { get; internal set; }
 
         /// <summary>
         ///     Returns a <see cref="string" /> that represents this instance.

@@ -23,7 +23,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Constructor
         /// </summary>
         [Constructor]
-        public Postal(string code = null, int? confidence = null)
+        public Postal(string? code = null, int? confidence = null)
         {
             Code = code;
             Confidence = confidence;
@@ -35,7 +35,7 @@ namespace MaxMind.GeoIP2.Model
         ///     of the postal code.
         /// </summary>
         [JsonProperty("code")]
-        public string Code { get; internal set; }
+        public string? Code { get; internal set; }
 
         /// <summary>
         ///     A value from 0-100 indicating MaxMind's confidence that the

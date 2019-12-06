@@ -11,7 +11,7 @@
         /// <value>
         ///     The error message returned by the service.
         /// </value>
-        public string Error { get; set; }
+        public string? Error { get; set; }
 
         /// <summary>
         ///     Gets or sets the code.
@@ -19,6 +19,6 @@
         /// <value>
         ///     The error code returned by the service.
         /// </value>
-        public string Code { get; set; }
+        public string? Code { get; set; }
     }
 }

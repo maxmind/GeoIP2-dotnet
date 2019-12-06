@@ -78,7 +78,7 @@ namespace MaxMind.GeoIP2.UnitTests
         };
 
         private static WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
-            HttpStatusCode status = HttpStatusCode.OK, string contentType = null, string content = "")
+            HttpStatusCode status = HttpStatusCode.OK, string? contentType = null, string content = "")
         {
             var service = type.Replace("Async", "");
             if (contentType == null)
@@ -110,7 +110,7 @@ namespace MaxMind.GeoIP2.UnitTests
 #endif
 
             return new WebServiceClient(6, "0123456789",
-                locales: new List<string> {"en"},
+                locales: new List<string> { "en" },
                 host: "geoip.maxmind.com",
                 timeout: 3000,
                 httpMessageHandler: mockHttp
@@ -350,7 +350,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             Assert.NotNull(result);
             Assert.Equal(t, result.GetType());
-            Assert.Equal("1.2.3.0/24", result.Traits.Network.ToString());
+            Assert.Equal("1.2.3.0/24", result.Traits.Network?.ToString());
         }
 
         [Theory, MemberData(nameof(MeTestCases))]

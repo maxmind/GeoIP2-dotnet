@@ -31,13 +31,13 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [Constructor]
         public RepresentedCountry(
-            string type = null,
+            string? type = null,
             int? confidence = null,
             [Parameter("geoname_id")] long? geoNameId = null,
             [Parameter("is_in_european_union")] bool isInEuropeanUnion = false,
-            [Parameter("iso_code")] string isoCode = null,
-            IDictionary<string, string> names = null,
-            IEnumerable<string> locales = null)
+            [Parameter("iso_code")] string? isoCode = null,
+            IDictionary<string, string>? names = null,
+            IEnumerable<string>? locales = null)
             : base(confidence, geoNameId, isInEuropeanUnion, isoCode, names, locales)
         {
             Type = type;
@@ -49,6 +49,6 @@ namespace MaxMind.GeoIP2.Model
         ///     expand to include other types in the future.
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; internal set; }
+        public string? Type { get; internal set; }
     }
 }
