@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v3.0.0
+version: v3.1.0
 ---
 # GeoIP2 .NET API #
 
@@ -47,7 +47,7 @@ To use the web service API, first create a new `WebServiceClient` object
 with your account ID and license key:
 
 ```
-var client = new WebServiceClient(42, "license_key1"));
+var client = new WebServiceClient(42, "license_key1");
 ```
 
 You may also specify the fall-back locales, the host, or the timeout as
@@ -213,7 +213,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
-    var response = await client.InsightsSync("128.101.101.101");
+    var response = await client.InsightsAsync("128.101.101.101");
 
     Console.WriteLine(response.Country.IsoCode);        // 'US'
     Console.WriteLine(response.Country.Name);           // 'United States'
@@ -506,6 +506,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2013-2018 by MaxMind, Inc.
+This software is Copyright (c) 2013-2019 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.
