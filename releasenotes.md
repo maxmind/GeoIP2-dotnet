@@ -4,6 +4,8 @@ GeoIP2 .NET API Release Notes
 3.1.0
 ------------------
 
+* This library has been updated to support the nullable reference types
+  introduced in C# 8.0.
 * A `Network` property has been added to the various response models. This
   represents the largest network where all the fields besides the IP
   address are the same.
