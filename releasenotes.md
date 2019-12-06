@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-3.1.0
+3.1.0 (2019-12-06)
 ------------------
 
 * This library has been updated to support the nullable reference types
