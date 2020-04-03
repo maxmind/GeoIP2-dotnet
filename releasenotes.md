@@ -1,6 +1,13 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+3.2.0
+-----------------
+
+* The `WebServiceClient` constructor now supports an optional
+  `httpMessageHandler` parameter. This is used in creating the `HttpClient`
+  for asynchronous requests.
+
 3.1.0 (2019-12-06)
 ------------------
 
