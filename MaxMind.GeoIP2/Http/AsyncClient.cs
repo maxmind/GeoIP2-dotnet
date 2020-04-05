@@ -28,28 +28,40 @@ namespace MaxMind.GeoIP2.Http
             string auth,
             int timeout,
             ProductInfoHeaderValue userAgent,
-            HttpMessageHandler? httpMessageHandler = null
+            HttpMessageHandler? httpMessageHandler = null,
+            HttpClient? httpClient = null
             )
         {
-            _httpMessageHandler = httpMessageHandler ?? new HttpClientHandler();
-            try
+            if (httpClient == null)
             {
-                _httpClient = new HttpClient(_httpMessageHandler)
+                _httpMessageHandler = httpMessageHandler ?? new HttpClientHandler();
+                try
                 {
-                    DefaultRequestHeaders =
+                    _httpClient = new HttpClient(_httpMessageHandler)
+                    {
+                        DefaultRequestHeaders =
                     {
                         Authorization = new AuthenticationHeaderValue("Basic", auth),
                         Accept = {new MediaTypeWithQualityHeaderValue("application/json")},
                         UserAgent = {userAgent}
                     },
-                    Timeout = TimeSpan.FromMilliseconds(timeout)
-                };
+                        Timeout = TimeSpan.FromMilliseconds(timeout)
+                    };
+                }
+                catch
+                {
+                    _httpClient?.Dispose();
+                    _httpMessageHandler.Dispose();
+                    throw;
+                }
             }
-            catch
+            else
             {
-                _httpClient?.Dispose();
-                _httpMessageHandler.Dispose();
-                throw;
+                _httpClient = httpClient;
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
+                _httpClient.Timeout = TimeSpan.FromMilliseconds(timeout);
             }
         }
 
@@ -76,7 +88,7 @@ namespace MaxMind.GeoIP2.Http
             if (disposing)
             {
                 _httpClient.Dispose();
-                _httpMessageHandler.Dispose();
+                _httpMessageHandler?.Dispose();
             }
 
             _disposed = true;

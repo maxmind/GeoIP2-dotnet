@@ -15,6 +15,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using Microsoft.Extensions.Options;
+#endif
+
 #endregion
 
 namespace MaxMind.GeoIP2
@@ -85,6 +89,29 @@ namespace MaxMind.GeoIP2
 
         private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
 
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
+        /// </summary>
+        /// <param name="httpClient">Injected HttpClient.</param>
+        /// <param name="options">Injected Options.</param>
+        public WebServiceClient(
+            HttpClient httpClient, 
+            IOptionsMonitor<WebServiceClientOptions> options
+        ) : this(
+            options.CurrentValue.AccountId, 
+            options.CurrentValue.LicenseKey, 
+            options.CurrentValue.Locales, 
+            options.CurrentValue.Host, 
+            options.CurrentValue.Timeout,
+            null,
+            false,
+            null,
+            httpClient)
+        {
+        }
+#endif
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
         /// </summary>
@@ -132,6 +159,7 @@ namespace MaxMind.GeoIP2
 #if !NETSTANDARD1_4
             , ISyncClient? syncWebRequest = null
 #endif
+            , HttpClient? httpClient = null
             )
         {
             var auth = EncodedAuth(accountId, licenseKey);
@@ -139,8 +167,8 @@ namespace MaxMind.GeoIP2
             _locales = locales == null ? new List<string> { "en" } : new List<string>(locales);
 #if !NETSTANDARD1_4
             _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
-#endif
-            _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpMessageHandler);
+#endif            
+            _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpMessageHandler, httpClient);
         }
 
         /// <summary>
