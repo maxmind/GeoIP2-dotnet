@@ -37,16 +37,7 @@ namespace MaxMind.GeoIP2.Http
                 _httpMessageHandler = httpMessageHandler ?? new HttpClientHandler();
                 try
                 {
-                    _httpClient = new HttpClient(_httpMessageHandler)
-                    {
-                        DefaultRequestHeaders =
-                    {
-                        Authorization = new AuthenticationHeaderValue("Basic", auth),
-                        Accept = {new MediaTypeWithQualityHeaderValue("application/json")},
-                        UserAgent = {userAgent}
-                    },
-                        Timeout = TimeSpan.FromMilliseconds(timeout)
-                    };
+                    _httpClient = new HttpClient(_httpMessageHandler);                    
                 }
                 catch
                 {
@@ -57,12 +48,13 @@ namespace MaxMind.GeoIP2.Http
             }
             else
             {
-                _httpClient = httpClient;
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
-                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                _httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
-                _httpClient.Timeout = TimeSpan.FromMilliseconds(timeout);
+                _httpClient = httpClient;                
             }
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
+            _httpClient.Timeout = TimeSpan.FromMilliseconds(timeout);
         }
 
         public async Task<Response> Get(Uri uri)

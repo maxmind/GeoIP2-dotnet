@@ -7,6 +7,9 @@ using MaxMind.GeoIP2.Responses;
 #if !NETCOREAPP1_1
 using MaxMind.GeoIP2.UnitTests.Mock;
 #endif
+#if NETCOREAPP3_0 || NETCOREAPP2_1
+using Microsoft.Extensions.Options;
+#endif
 using RichardSzalay.MockHttp;
 using System;
 using System.Collections.Generic;
@@ -32,7 +35,7 @@ namespace MaxMind.GeoIP2.UnitTests
         // "Async" added to the name so that Nunit can tell them apart.
         public static readonly object[][] TestCases =
         {
-#if !NETCOREAPP1_1
+#if !NETCOREAPP1_1 && !NETCOREAPP2_1 && !NETCOREAPP3_0
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"country", (ClientRunner) (async (c, i) => c.Country(i)), typeof(CountryResponse)},
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -54,7 +57,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public static readonly object[][] MeTestCases =
         {
-#if !NETCOREAPP1_1
+#if !NETCOREAPP1_1 && !NETCOREAPP2_1 && !NETCOREAPP3_0
             new object[]
             {
                 "country", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Country())),
@@ -473,5 +476,294 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.NotNull(new WebServiceClient(id, key, new List<string>()));
             Assert.NotNull(new WebServiceClient(accountId: id, licenseKey: key));
         }
+
+
+
+        #region NetCoreTests
+
+#if NETCOREAPP3_0 || NETCOREAPP2_1
+
+        private static WebServiceClient CreateClientCore(string type, string ipAddress = "1.2.3.4",
+            HttpStatusCode status = HttpStatusCode.OK, string? contentType = null, string content = "")
+        {
+            var service = type.Replace("Async", "");
+            if (contentType == null)
+            {
+                contentType = $"application/vnd.maxmind.com-{service}+json";
+            }
+
+            var stringContent = new StringContent(content);
+            stringContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+            stringContent.Headers.Add("Content-Length", content.Length.ToString());
+            var message = new HttpResponseMessage(status)
+            {
+                Content = stringContent
+            };
+
+            // HttpClient mock
+            var uri = new Uri($"https://geoip.maxmind.com/geoip/v2.1/{service}/{ipAddress}");
+            var mockHttp = new MockHttpMessageHandler();
+            mockHttp.When(HttpMethod.Get, uri.ToString())
+                .WithHeaders("Accept", "application/json")
+                .Respond(message);
+
+            IOptions<WebServiceClientOptions> options = Options.Create(new WebServiceClientOptions
+            {
+                AccountId = 6,
+                LicenseKey = "0123456789",
+                Host = "geoip.maxmind.com",
+                Timeout = 3000,
+                Locales = new List<string> { "en" }
+            });
+
+            return new WebServiceClient(new HttpClient(mockHttp), options);
+        }
+
+        // See https://github.com/xunit/xunit/issues/1517
+#pragma warning disable xUnit1026
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreAddressNotFoundShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.NotFound,
+                content: ErrorJson("IP_ADDRESS_NOT_FOUND", "The value 1.2.3.16 is not in the database."));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AddressNotFoundException>(exception);
+            Assert.Contains("The value 1.2.3.16 is not in the database", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreAddressReservedShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.Forbidden,
+                content: ErrorJson("IP_ADDRESS_RESERVED",
+                    "The value 1.2.3.17 belongs to a reserved or private range."));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<AddressNotFoundException>(exception);
+            Assert.Contains("The value 1.2.3.17 belongs to a reserved or private range", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreBadCharsetRequirementShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.NotAcceptable,
+                content: "Cannot satisfy your Accept-Charset requirements",
+                contentType: "text/plain");
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("Cannot satisfy your Accept-Charset requirements", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreBadContentTypeShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.OK,
+                content: CountryJson, contentType: "bad/content-type");
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<GeoIP2Exception>(exception);
+            Assert.Contains("but it does not appear to be JSON", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreEmptyBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type);
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("message body", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreInternalServerErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.InternalServerError,
+                content: "Internal Server Error");
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("Received a server (500) error", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreIncorrectlyFormattedIPAddressShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var exception = await Record.ExceptionAsync(async () => await cr(CreateClientCore(type), "foo"));
+            Assert.NotNull(exception);
+            Assert.IsType<GeoIP2Exception>(exception);
+            Assert.Contains("The specified IP address was incorrectly formatted", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CorePermissionRequiredShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var msg = "You do not have permission to use this web service.";
+            var client = CreateClientCore(type, status: HttpStatusCode.Forbidden,
+                content:
+                ErrorJson("PERMISSION_REQUIRED", msg));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<PermissionRequiredException>(exception);
+            Assert.Contains(msg, exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreAuthenticationErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var errors = new List<string>
+            {
+                "ACCOUNT_ID_REQUIRED",
+                "ACCOUNT_ID_UNKNOWN",
+                "AUTHORIZATION_INVALID",
+                "LICENSE_KEY_REQUIRED",
+                "USER_ID_REQUIRED",
+                "USER_ID_UNKNOWN"
+            };
+            foreach (var error in errors)
+            {
+                var msg = "Appropriate user-readable error message";
+                var client = CreateClientCore(type, status: HttpStatusCode.Unauthorized,
+                    content:
+                    ErrorJson(error, msg));
+
+                var exception = await Record.ExceptionAsync(async () => await cr(client));
+                Assert.NotNull(exception);
+                Assert.IsType<AuthenticationException>(exception);
+                Assert.Contains(msg, exception.Message);
+            }
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreNoErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.Forbidden);
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("with no body", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreOutOfQueriesShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.PaymentRequired,
+                content:
+                ErrorJson("OUT_OF_QUERIES",
+                    "The license key you have provided is out of queries. Please purchase more queries to use this service."));
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<OutOfQueriesException>(exception);
+            Assert.Contains("The license key you have provided is out of queries", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreInsufficientFundsShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var msg =
+                "The license key you have provided is out of queries. Please purchase more queries to use this service.";
+            var client = CreateClientCore(type, status: HttpStatusCode.PaymentRequired,
+                content:
+                ErrorJson("INSUFFICIENT_FUNDS", msg));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<OutOfQueriesException>(exception);
+            Assert.Contains(msg, exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreSurprisingStatusShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.MultipleChoices);
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("Received an unexpected response for", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreUndeserializableJsonShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.OK,
+                content: "{\"invalid\":yes}");
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<GeoIP2Exception>(exception);
+            Assert.Contains("Received a 200 response but not decode it as JSON", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreUnexpectedErrorBodyShouldThrowExceptionAsync(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.Forbidden,
+                content: "{\"invalid\": }");
+
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("it did not include the expected JSON body", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreWebServiceErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.Forbidden,
+                content: ErrorJson("IP_ADDRESS_INVALID",
+                    "The value 1.2.3 is not a valid IP address"));
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<InvalidRequestException>(exception);
+            Assert.Contains("not a valid IP address", exception.Message);
+        }
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async void CoreWeirdErrorBodyShouldThrowExceptionAsync(string type, ClientRunner cr, Type t)
+        {
+            var client = CreateClientCore(type, status: HttpStatusCode.Forbidden,
+                content: "{\"weird\": 42}");
+            var exception = await Record.ExceptionAsync(async () => await cr(client));
+            Assert.NotNull(exception);
+            Assert.IsType<HttpException>(exception);
+            Assert.Contains("does not specify code or error keys", exception.Message);
+        }
+#pragma warning restore xUnit1026
+
+        [Theory, MemberData(nameof(TestCases))]
+        public async Task CoreCorrectlyFormattedResponseShouldDeserializeIntoResponseObject(string type, ClientRunner cr,
+            Type t)
+        {
+            var client = CreateClientCore(type, content: CountryJson);
+            var result = await cr(client);
+
+            Assert.NotNull(result);
+            Assert.Equal(t, result.GetType());
+            Assert.Equal("1.2.3.0/24", result.Traits.Network?.ToString());
+        }
+
+        [Theory, MemberData(nameof(MeTestCases))]
+        public async Task CoreMeEndpointIsCalledCorrectly(string type, MeClientRunner cr,
+            Type t)
+        {
+            var client = CreateClientCore(type, "me", content: CountryJson);
+            var result = await cr(client);
+
+            Assert.NotNull(result);
+            Assert.Equal(t, result.GetType());
+        }
+#endif
+
+        #endregion
     }
 }

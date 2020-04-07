@@ -97,13 +97,13 @@ namespace MaxMind.GeoIP2
         /// <param name="options">Injected Options.</param>
         public WebServiceClient(
             HttpClient httpClient, 
-            IOptionsMonitor<WebServiceClientOptions> options
+            IOptions<WebServiceClientOptions> options
         ) : this(
-            options.CurrentValue.AccountId, 
-            options.CurrentValue.LicenseKey, 
-            options.CurrentValue.Locales, 
-            options.CurrentValue.Host, 
-            options.CurrentValue.Timeout,
+            options.Value.AccountId, 
+            options.Value.LicenseKey, 
+            options.Value.Locales, 
+            options.Value.Host, 
+            options.Value.Timeout,
             null,
             false,
             null,
