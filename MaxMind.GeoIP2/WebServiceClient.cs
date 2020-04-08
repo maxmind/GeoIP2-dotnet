@@ -78,9 +78,7 @@ namespace MaxMind.GeoIP2
         private readonly string _host;
         private readonly IEnumerable<string> _locales;
         private readonly AsyncClient _asyncClient;
-#if !NETSTANDARD1_4
         private readonly ISyncClient _syncClient;
-#endif
         private bool _disposed;
 
         private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
@@ -101,7 +99,7 @@ namespace MaxMind.GeoIP2
             string host = "geoip.maxmind.com",
             int timeout = 3000,
             HttpMessageHandler? httpMessageHandler = null
-        ) : this(accountId, licenseKey, locales, host, timeout, null, false)
+        ) : this(accountId, licenseKey, locales, host, timeout, null, null)
         {
         }
 
@@ -125,21 +123,13 @@ namespace MaxMind.GeoIP2
             string host,
             int timeout,
             HttpMessageHandler? httpMessageHandler,
-            // This is a hack so that we can keep this internal while adding
-            // httpMessageHandler to the public constructor. We can remove
-            // this when we drop .NET 4.5 support and get rid of ISyncClient.
-            bool fakeParam = false
-#if !NETSTANDARD1_4
-            , ISyncClient? syncWebRequest = null
-#endif
+            ISyncClient? syncWebRequest = null
             )
         {
             var auth = EncodedAuth(accountId, licenseKey);
             _host = host;
             _locales = locales == null ? new List<string> { "en" } : new List<string>(locales);
-#if !NETSTANDARD1_4
             _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
-#endif
             _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpMessageHandler);
         }
 
@@ -230,8 +220,6 @@ namespace MaxMind.GeoIP2
             return await ExecuteAsync<InsightsResponse>("insights", null).ConfigureAwait(false);
         }
 
-#if !NETSTANDARD1_4
-
         /// <summary>
         ///     Returns an <see cref="CountryResponse" /> for the specified IP address.
         /// </summary>
@@ -319,8 +307,6 @@ namespace MaxMind.GeoIP2
             return Execute<InsightsResponse>("insights", null);
         }
 
-#endif
-
         private static IPAddress ParseIP(string ipAddress)
         {
             IPAddress? ip = null;
@@ -335,8 +321,6 @@ namespace MaxMind.GeoIP2
             return ip!;
         }
 
-#if !NETSTANDARD1_4
-
         private T Execute<T>(string type, IPAddress? ipAddress)
             where T : AbstractCountryResponse, new()
         {
@@ -346,8 +330,6 @@ namespace MaxMind.GeoIP2
                 return HandleResponse<T>(response);
             }
         }
-
-#endif
 
         private async Task<T> ExecuteAsync<T>(string type, IPAddress? ipAddress)
             where T : AbstractCountryResponse, new()

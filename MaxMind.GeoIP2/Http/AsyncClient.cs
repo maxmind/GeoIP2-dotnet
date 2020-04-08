@@ -5,10 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-
-#if !NETSTANDARD1_4  // Issue https://github.com/dotnet/roslyn/issues/8505
 using System.Diagnostics.CodeAnalysis;
-#endif
 
 #endregion
 
@@ -20,10 +17,8 @@ namespace MaxMind.GeoIP2.Http
         private bool _disposed;
         private readonly HttpMessageHandler _httpMessageHandler;
 
-#if !NETSTANDARD1_4  // Issue https://github.com/dotnet/roslyn/issues/8505
         // As far as I can tell, this warning is a false positive. It is for the HttpClient instance.
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-#endif
         public AsyncClient(
             string auth,
             int timeout,
