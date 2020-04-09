@@ -35,7 +35,7 @@ namespace MaxMind.GeoIP2.UnitTests
         // "Async" added to the name so that Nunit can tell them apart.
         public static readonly object[][] TestCases =
         {
-#if !NETCOREAPP1_1 && !NETCOREAPP2_1 && !NETCOREAPP3_0
+#if !NETCOREAPP1_1
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"country", (ClientRunner) (async (c, i) => c.Country(i)), typeof(CountryResponse)},
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -57,7 +57,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public static readonly object[][] MeTestCases =
         {
-#if !NETCOREAPP1_1 && !NETCOREAPP2_1 && !NETCOREAPP3_0
+#if !NETCOREAPP1_1
             new object[]
             {
                 "country", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Country())),
@@ -516,7 +516,25 @@ namespace MaxMind.GeoIP2.UnitTests
                 Locales = new List<string> { "en" }
             });
 
-            return new WebServiceClient(new HttpClient(mockHttp), options);
+            // HttpWebRequest mock
+            var contentsBytes = Encoding.UTF8.GetBytes(content);
+            var responseStream = new MemoryStream(contentsBytes);
+
+            var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, responseStream));
+
+            WebServiceClient webServiceClient = new WebServiceClient(
+                options.Value.AccountId,
+                options.Value.LicenseKey,
+                options.Value.Locales,
+                options.Value.Host,
+                options.Value.Timeout,
+                null,
+                false,
+                syncWebRequest,
+                new HttpClient(mockHttp)
+            );
+
+            return webServiceClient;
         }
 
         // See https://github.com/xunit/xunit/issues/1517
@@ -761,6 +779,97 @@ namespace MaxMind.GeoIP2.UnitTests
 
             Assert.NotNull(result);
             Assert.Equal(t, result.GetType());
+        }
+
+        [Fact]
+        public void CoreMissingKeys()
+        {
+            var insights = CreateClient("insights", content: "{}").Insights("1.2.3.4");
+
+            var city = insights.City;
+            Assert.NotNull(city);
+            Assert.Null(city.Confidence);
+
+            var continent = insights.Continent;
+            Assert.NotNull(continent);
+            Assert.Null(continent.Code);
+
+            var country = insights.Country;
+            Assert.NotNull(country);
+            Assert.False(country.IsInEuropeanUnion);
+
+            var location = insights.Location;
+            Assert.NotNull(location);
+            Assert.Null(location.AccuracyRadius);
+            Assert.Null(location.Latitude);
+            Assert.Null(location.Longitude);
+            Assert.Null(location.MetroCode);
+            Assert.Null(location.TimeZone);
+            Assert.Null(location.PopulationDensity);
+            Assert.Null(location.AverageIncome);
+
+            var maxmind = insights.MaxMind;
+            Assert.NotNull(maxmind);
+            Assert.Null(maxmind.QueriesRemaining);
+
+            Assert.NotNull(insights.Postal);
+
+            var registeredCountry = insights.RegisteredCountry;
+            Assert.NotNull(registeredCountry);
+            Assert.False(registeredCountry.IsInEuropeanUnion);
+
+            var representedCountry = insights.RepresentedCountry;
+            Assert.NotNull(representedCountry);
+            Assert.False(representedCountry.IsInEuropeanUnion);
+            Assert.Null(representedCountry.Type);
+
+            var subdivisions = insights.Subdivisions;
+            Assert.NotNull(subdivisions);
+            Assert.Empty(subdivisions);
+
+            var subdiv = insights.MostSpecificSubdivision;
+            Assert.NotNull(subdiv);
+            Assert.Null(subdiv.IsoCode);
+            Assert.Null(subdiv.Confidence);
+
+            var traits = insights.Traits;
+            Assert.NotNull(traits);
+            Assert.Null(traits.AutonomousSystemNumber);
+            Assert.Null(traits.AutonomousSystemOrganization);
+            Assert.Null(traits.Domain);
+            Assert.Null(traits.IPAddress);
+            Assert.Null(traits.Isp);
+            Assert.Null(traits.Organization);
+            Assert.Null(traits.StaticIPScore);
+            Assert.Null(traits.UserCount);
+            Assert.Null(traits.UserType);
+#pragma warning disable 0618
+            Assert.False(traits.IsAnonymousProxy);
+            Assert.False(traits.IsSatelliteProvider);
+#pragma warning restore 0618
+
+            foreach (var c in new[]
+            {
+                country, registeredCountry,
+                representedCountry
+            })
+            {
+                Assert.Null(c.Confidence);
+                Assert.Null(c.IsoCode);
+            }
+
+            foreach (var r in new NamedEntity[]
+            {
+                city,
+                continent, country, registeredCountry, representedCountry,
+                subdiv
+            })
+            {
+                Assert.Null(r.GeoNameId);
+                Assert.Null(r.Name);
+                Assert.Empty(r.Names);
+                Assert.Equal("", r.ToString());
+            }
         }
 #endif
 
