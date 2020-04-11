@@ -78,7 +78,7 @@ services.AddHttpClient<WebServiceClient>(); // Configure dependency injection fo
 
 2. Add configuration in your ```appsettings.json``` with your account ID and license key.
 
-```json
+```jsonc
 ...
   "MaxMind": {
     "AccountId": 123456,
