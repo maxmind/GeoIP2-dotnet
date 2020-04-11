@@ -481,7 +481,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         #region NetCoreTests
 
-#if NETCOREAPP3_0 || NETCOREAPP2_1
+#if !NET452
 
         private static WebServiceClient CreateClientCore(string type, string ipAddress = "1.2.3.4",
             HttpStatusCode status = HttpStatusCode.OK, string? contentType = null, string content = "")

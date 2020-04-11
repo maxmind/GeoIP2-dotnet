@@ -63,6 +63,56 @@ each of which represents part of the data returned by the web service.
 
 See the API documentation for more details.
 
+### ASP.NET Core Usage ###
+
+To use the web service API with HttpClient factory pattern as a [Typed client](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1#typed-clients)
+you need to do the following:
+
+1. Add the following lines to ```Startup.cs``` ```ConfigureServices``` method:
+
+```csharp
+services.Configure<WebServiceClientOptions>(Configuration.GetSection("MaxMind")); // Configure to read configuration options from MaxMind section
+
+services.AddHttpClient<WebServiceClient>(); // Configure dependency injection for WebServiceClient
+```
+
+2. Add configuration in your ```appsettings.json``` with your account ID and license key.
+
+```json
+...
+  "MaxMind": {
+    "AccountId": 123456,
+    "LicenseKey": "1234567890",
+    "Timeout": 3000, // optional
+    "Host": "geoip.maxmind.com" // optional
+  },
+...
+```
+
+3. Inject the ```WebServiceClient``` where you need to make the call and use it.
+
+```csharp
+[ApiController]
+[Route("[controller]")]
+public class MaxMindController : ControllerBase
+{
+    private readonly WebServiceClient _maxMindClient;
+
+    public MaxMindController(WebServiceClient maxMindClient)
+    {
+        _maxMindClient = maxMindClient;
+    }
+
+    [HttpGet]
+    public async Task<string> Get()
+    {
+        var location = await _maxMindClient.CountryAsync();
+
+        return location.Country.Name;
+    }
+}
+```
+
 ## Web Service Example ##
 
 ### Country Service (Sync) ###

@@ -89,7 +89,7 @@ namespace MaxMind.GeoIP2
 
         private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
 
-#if NETSTANDARD2_0 || NETSTANDARD2_1
+#if !NET45 && !NETSTANDARD1_4
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
         /// </summary>
