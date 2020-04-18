@@ -7,7 +7,7 @@ using MaxMind.GeoIP2.Responses;
 #if !NETCOREAPP1_1
 using MaxMind.GeoIP2.UnitTests.Mock;
 #endif
-#if NETCOREAPP3_0 || NETCOREAPP2_1
+#if !NET452
 using Microsoft.Extensions.Options;
 #endif
 using RichardSzalay.MockHttp;

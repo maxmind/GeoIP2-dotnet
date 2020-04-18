@@ -18,7 +18,7 @@ namespace MaxMind.GeoIP2.Http
     {
         private readonly HttpClient _httpClient;
         private bool _disposed;
-        private readonly HttpMessageHandler _httpMessageHandler;
+        private readonly HttpMessageHandler? _httpMessageHandler;
 
 #if !NETSTANDARD1_4  // Issue https://github.com/dotnet/roslyn/issues/8505
         // As far as I can tell, this warning is a false positive. It is for the HttpClient instance.

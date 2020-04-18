@@ -68,7 +68,7 @@ See the API documentation for more details.
 To use the web service API with HttpClient factory pattern as a [Typed client](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1#typed-clients)
 you need to do the following:
 
-1. Add the following lines to ```Startup.cs``` ```ConfigureServices``` method:
+1. Add the following lines to `Startup.cs` `ConfigureServices` method:
 
 ```csharp
 services.Configure<WebServiceClientOptions>(Configuration.GetSection("MaxMind")); // Configure to read configuration options from MaxMind section
@@ -76,7 +76,7 @@ services.Configure<WebServiceClientOptions>(Configuration.GetSection("MaxMind"))
 services.AddHttpClient<WebServiceClient>(); // Configure dependency injection for WebServiceClient
 ```
 
-2. Add configuration in your ```appsettings.json``` with your account ID and license key.
+2. Add configuration in your `appsettings.json` with your account ID and license key.
 
 ```jsonc
 ...
@@ -89,7 +89,7 @@ services.AddHttpClient<WebServiceClient>(); // Configure dependency injection fo
 ...
 ```
 
-3. Inject the ```WebServiceClient``` where you need to make the call and use it.
+3. Inject the `WebServiceClient` where you need to make the call and use it.
 
 ```csharp
 [ApiController]

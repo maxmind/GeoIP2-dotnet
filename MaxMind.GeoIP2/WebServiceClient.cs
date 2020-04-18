@@ -15,7 +15,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-#if NETSTANDARD2_0 || NETSTANDARD2_1
+#if !NET45 && !NETSTANDARD1_4
 using Microsoft.Extensions.Options;
 #endif
 
@@ -95,6 +95,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="httpClient">Injected HttpClient.</param>
         /// <param name="options">Injected Options.</param>
+        [CLSCompliant(false)]
         public WebServiceClient(
             HttpClient httpClient, 
             IOptions<WebServiceClientOptions> options
