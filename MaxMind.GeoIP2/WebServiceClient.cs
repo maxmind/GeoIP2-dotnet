@@ -15,6 +15,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+#if !NET45 && !NETSTANDARD1_4
+using Microsoft.Extensions.Options;
+#endif
+
 #endregion
 
 namespace MaxMind.GeoIP2
@@ -85,6 +89,30 @@ namespace MaxMind.GeoIP2
 
         private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
 
+#if !NET45 && !NETSTANDARD1_4
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
+        /// </summary>
+        /// <param name="httpClient">Injected HttpClient.</param>
+        /// <param name="options">Injected Options.</param>
+        [CLSCompliant(false)]
+        public WebServiceClient(
+            HttpClient httpClient, 
+            IOptions<WebServiceClientOptions> options
+        ) : this(
+            options.Value.AccountId, 
+            options.Value.LicenseKey, 
+            options.Value.Locales, 
+            options.Value.Host, 
+            options.Value.Timeout,
+            null,
+            false,
+            null,
+            httpClient)
+        {
+        }
+#endif
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
         /// </summary>
@@ -132,6 +160,7 @@ namespace MaxMind.GeoIP2
 #if !NETSTANDARD1_4
             , ISyncClient? syncWebRequest = null
 #endif
+            , HttpClient? httpClient = null
             )
         {
             var auth = EncodedAuth(accountId, licenseKey);
@@ -139,8 +168,8 @@ namespace MaxMind.GeoIP2
             _locales = locales == null ? new List<string> { "en" } : new List<string>(locales);
 #if !NETSTANDARD1_4
             _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
-#endif
-            _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpMessageHandler);
+#endif            
+            _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpMessageHandler, httpClient);
         }
 
         /// <summary>
