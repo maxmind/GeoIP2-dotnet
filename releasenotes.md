@@ -4,6 +4,9 @@ GeoIP2 .NET API Release Notes
 3.2.0
 -----------------
 
+* You may now create `WebServiceClient` as Typed Client with
+  `IHttpClientFactory` in .NET Core 2.1+. Pull Request by Bojan Nikolić.
+  GitHub #115 & #117.
 * The `WebServiceClient` constructor now supports an optional
   `httpMessageHandler` parameter. This is used in creating the `HttpClient`
   for asynchronous requests.
