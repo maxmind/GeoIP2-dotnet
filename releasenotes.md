@@ -1,8 +1,8 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-3.2.0
------------------
+3.2.0 (2020-04-28)
+------------------
 
 * You may now create `WebServiceClient` as Typed Client with
   `IHttpClientFactory` in .NET Core 2.1+. Pull Request by Bojan Nikolić.
