@@ -11,7 +11,7 @@
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>MaxMind.GeoIP2</PackageId>
     <PackageTags>maxmind;ip;geoip;geoip2;geolocation;maxmind;ipv4;ipv6</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/maxmind/GeoIP2-dotnet/master/MaxMind-logo.png</PackageIconUrl>
+    <PackageIcon>MaxMind-logo.png</PackageIcon>
     <PackageProjectUrl>https://github.com/maxmind/GeoIP2-dotnet</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
@@ -63,6 +63,13 @@
     <PackageReference Include="Microsoft.Extensions.Options">
       <Version>3.1.3</Version>
     </PackageReference>
+  </ItemGroup>
+
+    <ItemGroup>
+    <None Include="..\MaxMind-logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
