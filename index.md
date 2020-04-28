@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v3.1.0
+version: v3.2.0
 ---
 # GeoIP2 .NET API #
 
@@ -68,6 +68,59 @@ endpoint you called. This response in turn contains multiple model classes,
 each of which represents part of the data returned by the web service.
 
 See the API documentation for more details.
+
+### ASP.NET Core Usage ###
+
+To use the web service API with HttpClient factory pattern as a 
+[Typed client](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1#typed-clients)
+you need to do the following:
+
+1. Add the following lines to `Startup.cs` `ConfigureServices` method:
+
+```csharp
+// Configure to read configuration options from MaxMind section
+services.Configure<WebServiceClientOptions>(Configuration.GetSection("MaxMind"));
+
+// Configure dependency injection for WebServiceClient
+services.AddHttpClient<WebServiceClient>();
+```
+
+2. Add configuration in your `appsettings.json` with your account ID and license key.
+
+```jsonc
+...
+  "MaxMind": {
+    "AccountId": 123456,
+    "LicenseKey": "1234567890",
+    "Timeout": 3000, // optional
+    "Host": "geoip.maxmind.com" // optional
+  },
+...
+```
+
+3. Inject the `WebServiceClient` where you need to make the call and use it.
+
+```csharp
+[ApiController]
+[Route("[controller]")]
+public class MaxMindController : ControllerBase
+{
+    private readonly WebServiceClient _maxMindClient;
+
+    public MaxMindController(WebServiceClient maxMindClient)
+    {
+        _maxMindClient = maxMindClient;
+    }
+
+    [HttpGet]
+    public async Task<string> Get()
+    {
+        var location = await _maxMindClient.CountryAsync();
+
+        return location.Country.Name;
+    }
+}
+```
 
 ## Web Service Example ##
 
@@ -506,6 +559,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2013-2019 by MaxMind, Inc.
+This software is Copyright (c) 2013-2020 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.

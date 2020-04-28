@@ -1,0 +1,865 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="AbstractCityResponse class">
+    <HelpKINode Title="AbstractCityResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_AbstractCityResponse.htm" />
+    <HelpKINode Title="about AbstractCityResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AbstractCityResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_AbstractCityResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_AbstractCityResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_AbstractCityResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AbstractCityResponse.AbstractCityResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_AbstractCityResponse__ctor.htm" />
+  <HelpKINode Title="AbstractCityResponse.City property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_City.htm" />
+  <HelpKINode Title="AbstractCityResponse.Location property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_Location.htm" />
+  <HelpKINode Title="AbstractCityResponse.MostSpecificSubdivision property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_MostSpecificSubdivision.htm" />
+  <HelpKINode Title="AbstractCityResponse.Postal property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_Postal.htm" />
+  <HelpKINode Title="AbstractCityResponse.SetLocales method" Url="html/M_MaxMind_GeoIP2_Responses_AbstractCityResponse_SetLocales.htm" />
+  <HelpKINode Title="AbstractCityResponse.Subdivisions property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_Subdivisions.htm" />
+  <HelpKINode Title="AbstractCityResponse.ToString method" Url="html/M_MaxMind_GeoIP2_Responses_AbstractCityResponse_ToString.htm" />
+  <HelpKINode Title="AbstractCountryResponse class">
+    <HelpKINode Title="AbstractCountryResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_AbstractCountryResponse.htm" />
+    <HelpKINode Title="about AbstractCountryResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AbstractCountryResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_AbstractCountryResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_AbstractCountryResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_AbstractCountryResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AbstractCountryResponse.AbstractCountryResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_AbstractCountryResponse__ctor.htm" />
+  <HelpKINode Title="AbstractCountryResponse.Continent property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_Continent.htm" />
+  <HelpKINode Title="AbstractCountryResponse.Country property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_Country.htm" />
+  <HelpKINode Title="AbstractCountryResponse.MaxMind property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_MaxMind.htm" />
+  <HelpKINode Title="AbstractCountryResponse.RegisteredCountry property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_RegisteredCountry.htm" />
+  <HelpKINode Title="AbstractCountryResponse.RepresentedCountry property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_RepresentedCountry.htm" />
+  <HelpKINode Title="AbstractCountryResponse.SetLocales method" Url="html/M_MaxMind_GeoIP2_Responses_AbstractCountryResponse_SetLocales.htm" />
+  <HelpKINode Title="AbstractCountryResponse.ToString method" Url="html/M_MaxMind_GeoIP2_Responses_AbstractCountryResponse_ToString.htm" />
+  <HelpKINode Title="AbstractCountryResponse.Traits property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_Traits.htm" />
+  <HelpKINode Title="AbstractResponse class">
+    <HelpKINode Title="AbstractResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_AbstractResponse.htm" />
+    <HelpKINode Title="about AbstractResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AbstractResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_GeoIP2_Responses_AbstractResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_AbstractResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AbstractResponse.AbstractResponse constructor" Url="html/M_MaxMind_GeoIP2_Responses_AbstractResponse__ctor.htm" />
+  <HelpKINode Title="AbstractResponse.SetLocales method" Url="html/M_MaxMind_GeoIP2_Responses_AbstractResponse_SetLocales.htm" />
+  <HelpKINode Title="AccountId property" Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_AccountId.htm" />
+  <HelpKINode Title="AccuracyRadius property" Url="html/P_MaxMind_GeoIP2_Model_Location_AccuracyRadius.htm" />
+  <HelpKINode Title="AddressNotFoundException class">
+    <HelpKINode Title="AddressNotFoundException Class" Url="html/T_MaxMind_GeoIP2_Exceptions_AddressNotFoundException.htm" />
+    <HelpKINode Title="about AddressNotFoundException class" Url="html/T_MaxMind_GeoIP2_Exceptions_AddressNotFoundException.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_AddressNotFoundException__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_MaxMind_GeoIP2_Exceptions_AddressNotFoundException.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Exceptions_AddressNotFoundException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Exceptions_AddressNotFoundException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AddressNotFoundException.AddressNotFoundException constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_AddressNotFoundException__ctor.htm" />
+  <HelpKINode Title="AddValue method" Url="html/M_MaxMind_Db_InjectableValues_AddValue.htm" />
+  <HelpKINode Title="AlwaysCreate property" Url="html/P_MaxMind_Db_ParameterAttribute_AlwaysCreate.htm" />
+  <HelpKINode Title="AnonymousIP method">
+    <HelpKINode Title="DatabaseReader.AnonymousIP Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_AnonymousIP.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.AnonymousIP Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_AnonymousIP.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AnonymousIPResponse class">
+    <HelpKINode Title="AnonymousIPResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_AnonymousIPResponse.htm" />
+    <HelpKINode Title="about AnonymousIPResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AnonymousIPResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_AnonymousIPResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_AnonymousIPResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_AnonymousIPResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AnonymousIPResponse.AnonymousIPResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_AnonymousIPResponse__ctor.htm" />
+  <HelpKINode Title="AnonymousIPResponse.IPAddress property" Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IPAddress.htm" />
+  <HelpKINode Title="AnonymousIPResponse.IsAnonymous property" Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsAnonymous.htm" />
+  <HelpKINode Title="AnonymousIPResponse.IsAnonymousVpn property" Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsAnonymousVpn.htm" />
+  <HelpKINode Title="AnonymousIPResponse.IsHostingProvider property" Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsHostingProvider.htm" />
+  <HelpKINode Title="AnonymousIPResponse.IsPublicProxy property" Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsPublicProxy.htm" />
+  <HelpKINode Title="AnonymousIPResponse.IsTorExitNode property" Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsTorExitNode.htm" />
+  <HelpKINode Title="AnonymousIPResponse.Network property" Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_Network.htm" />
+  <HelpKINode Title="Asn method">
+    <HelpKINode Title="DatabaseReader.Asn Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Asn.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.Asn Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Asn.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AsnResponse class">
+    <HelpKINode Title="AsnResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_AsnResponse.htm" />
+    <HelpKINode Title="about AsnResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AsnResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_AsnResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_AsnResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_AsnResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AsnResponse.AsnResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_AsnResponse__ctor.htm" />
+  <HelpKINode Title="AsnResponse.AutonomousSystemNumber property" Url="html/P_MaxMind_GeoIP2_Responses_AsnResponse_AutonomousSystemNumber.htm" />
+  <HelpKINode Title="AsnResponse.AutonomousSystemOrganization property" Url="html/P_MaxMind_GeoIP2_Responses_AsnResponse_AutonomousSystemOrganization.htm" />
+  <HelpKINode Title="AsnResponse.IPAddress property" Url="html/P_MaxMind_GeoIP2_Responses_AsnResponse_IPAddress.htm" />
+  <HelpKINode Title="AsnResponse.Network property" Url="html/P_MaxMind_GeoIP2_Responses_AsnResponse_Network.htm" />
+  <HelpKINode Title="AuthenticationException class">
+    <HelpKINode Title="AuthenticationException Class" Url="html/T_MaxMind_GeoIP2_Exceptions_AuthenticationException.htm" />
+    <HelpKINode Title="about AuthenticationException class" Url="html/T_MaxMind_GeoIP2_Exceptions_AuthenticationException.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_AuthenticationException__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_MaxMind_GeoIP2_Exceptions_AuthenticationException.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Exceptions_AuthenticationException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Exceptions_AuthenticationException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AuthenticationException.AuthenticationException constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_AuthenticationException__ctor.htm" />
+  <HelpKINode Title="AutonomousSystemNumber property">
+    <HelpKINode Title="AsnResponse.AutonomousSystemNumber Property " Url="html/P_MaxMind_GeoIP2_Responses_AsnResponse_AutonomousSystemNumber.htm" />
+    <HelpKINode Title="IspResponse.AutonomousSystemNumber Property " Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_AutonomousSystemNumber.htm" />
+    <HelpKINode Title="Traits.AutonomousSystemNumber Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_AutonomousSystemNumber.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AutonomousSystemOrganization property">
+    <HelpKINode Title="AsnResponse.AutonomousSystemOrganization Property " Url="html/P_MaxMind_GeoIP2_Responses_AsnResponse_AutonomousSystemOrganization.htm" />
+    <HelpKINode Title="IspResponse.AutonomousSystemOrganization Property " Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_AutonomousSystemOrganization.htm" />
+    <HelpKINode Title="Traits.AutonomousSystemOrganization Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_AutonomousSystemOrganization.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AverageIncome property" Url="html/P_MaxMind_GeoIP2_Model_Location_AverageIncome.htm" />
+  <HelpKINode Title="BinaryFormatMajorVersion property" Url="html/P_MaxMind_Db_Metadata_BinaryFormatMajorVersion.htm" />
+  <HelpKINode Title="BinaryFormatMinorVersion property" Url="html/P_MaxMind_Db_Metadata_BinaryFormatMinorVersion.htm" />
+  <HelpKINode Title="BuildDate property" Url="html/P_MaxMind_Db_Metadata_BuildDate.htm" />
+  <HelpKINode Title="City class">
+    <HelpKINode Title="City Class" Url="html/T_MaxMind_GeoIP2_Model_City.htm" />
+    <HelpKINode Title="about City class" Url="html/T_MaxMind_GeoIP2_Model_City.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Model_City__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_City.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_City.htm" />
+  </HelpKINode>
+  <HelpKINode Title="City method">
+    <HelpKINode Title="DatabaseReader.City Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_City.htm" />
+    <HelpKINode Title="IGeoIP2Provider.City Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2Provider_City.htm" />
+    <HelpKINode Title="IGeoIP2WebServicesClient.City Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_City.htm" />
+    <HelpKINode Title="WebServiceClient.City Method " Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_City.htm" />
+  </HelpKINode>
+  <HelpKINode Title="City property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_City.htm" />
+  <HelpKINode Title="City.City constructor" Url="html/Overload_MaxMind_GeoIP2_Model_City__ctor.htm" />
+  <HelpKINode Title="City.Confidence property" Url="html/P_MaxMind_GeoIP2_Model_City_Confidence.htm" />
+  <HelpKINode Title="CityAsync method">
+    <HelpKINode Title="IGeoIP2WebServicesClient.CityAsync Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_CityAsync.htm" />
+    <HelpKINode Title="WebServiceClient.CityAsync Method " Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_CityAsync.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CityResponse class">
+    <HelpKINode Title="CityResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_CityResponse.htm" />
+    <HelpKINode Title="about CityResponse class" Url="html/T_MaxMind_GeoIP2_Responses_CityResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_CityResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_CityResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_CityResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CityResponse.CityResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_CityResponse__ctor.htm" />
+  <HelpKINode Title="Code property">
+    <HelpKINode Title="Continent.Code Property " Url="html/P_MaxMind_GeoIP2_Model_Continent_Code.htm" />
+    <HelpKINode Title="InvalidRequestException.Code Property " Url="html/P_MaxMind_GeoIP2_Exceptions_InvalidRequestException_Code.htm" />
+    <HelpKINode Title="Postal.Code Property " Url="html/P_MaxMind_GeoIP2_Model_Postal_Code.htm" />
+    <HelpKINode Title="WebServiceError.Code Property " Url="html/P_MaxMind_GeoIP2_Model_WebServiceError_Code.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Confidence property">
+    <HelpKINode Title="City.Confidence Property " Url="html/P_MaxMind_GeoIP2_Model_City_Confidence.htm" />
+    <HelpKINode Title="Country.Confidence Property " Url="html/P_MaxMind_GeoIP2_Model_Country_Confidence.htm" />
+    <HelpKINode Title="Postal.Confidence Property " Url="html/P_MaxMind_GeoIP2_Model_Postal_Confidence.htm" />
+    <HelpKINode Title="Subdivision.Confidence Property " Url="html/P_MaxMind_GeoIP2_Model_Subdivision_Confidence.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConnectionType method">
+    <HelpKINode Title="DatabaseReader.ConnectionType Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_ConnectionType.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.ConnectionType Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_ConnectionType.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConnectionType property">
+    <HelpKINode Title="ConnectionTypeResponse.ConnectionType Property " Url="html/P_MaxMind_GeoIP2_Responses_ConnectionTypeResponse_ConnectionType.htm" />
+    <HelpKINode Title="Traits.ConnectionType Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_ConnectionType.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConnectionTypeResponse class">
+    <HelpKINode Title="ConnectionTypeResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_ConnectionTypeResponse.htm" />
+    <HelpKINode Title="about ConnectionTypeResponse class" Url="html/T_MaxMind_GeoIP2_Responses_ConnectionTypeResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_ConnectionTypeResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_ConnectionTypeResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_ConnectionTypeResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConnectionTypeResponse.ConnectionType property" Url="html/P_MaxMind_GeoIP2_Responses_ConnectionTypeResponse_ConnectionType.htm" />
+  <HelpKINode Title="ConnectionTypeResponse.ConnectionTypeResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_ConnectionTypeResponse__ctor.htm" />
+  <HelpKINode Title="ConnectionTypeResponse.IPAddress property" Url="html/P_MaxMind_GeoIP2_Responses_ConnectionTypeResponse_IPAddress.htm" />
+  <HelpKINode Title="ConnectionTypeResponse.Network property" Url="html/P_MaxMind_GeoIP2_Responses_ConnectionTypeResponse_Network.htm" />
+  <HelpKINode Title="ConstructorAttribute class">
+    <HelpKINode Title="ConstructorAttribute Class" Url="html/T_MaxMind_Db_ConstructorAttribute.htm" />
+    <HelpKINode Title="about ConstructorAttribute class" Url="html/T_MaxMind_Db_ConstructorAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_Db_ConstructorAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_ConstructorAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_ConstructorAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConstructorAttribute.ConstructorAttribute constructor" Url="html/M_MaxMind_Db_ConstructorAttribute__ctor.htm" />
+  <HelpKINode Title="Continent class">
+    <HelpKINode Title="Continent Class" Url="html/T_MaxMind_GeoIP2_Model_Continent.htm" />
+    <HelpKINode Title="about Continent class" Url="html/T_MaxMind_GeoIP2_Model_Continent.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Continent__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_Continent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_Continent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Continent property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_Continent.htm" />
+  <HelpKINode Title="Continent.Code property" Url="html/P_MaxMind_GeoIP2_Model_Continent_Code.htm" />
+  <HelpKINode Title="Continent.Continent constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Continent__ctor.htm" />
+  <HelpKINode Title="Country class">
+    <HelpKINode Title="Country Class" Url="html/T_MaxMind_GeoIP2_Model_Country.htm" />
+    <HelpKINode Title="about Country class" Url="html/T_MaxMind_GeoIP2_Model_Country.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Country__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_Country.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_Country.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Country method">
+    <HelpKINode Title="DatabaseReader.Country Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Country.htm" />
+    <HelpKINode Title="IGeoIP2Provider.Country Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2Provider_Country.htm" />
+    <HelpKINode Title="IGeoIP2WebServicesClient.Country Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_Country.htm" />
+    <HelpKINode Title="WebServiceClient.Country Method " Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_Country.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Country property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_Country.htm" />
+  <HelpKINode Title="Country.Confidence property" Url="html/P_MaxMind_GeoIP2_Model_Country_Confidence.htm" />
+  <HelpKINode Title="Country.Country constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Country__ctor.htm" />
+  <HelpKINode Title="Country.IsInEuropeanUnion property" Url="html/P_MaxMind_GeoIP2_Model_Country_IsInEuropeanUnion.htm" />
+  <HelpKINode Title="Country.IsoCode property" Url="html/P_MaxMind_GeoIP2_Model_Country_IsoCode.htm" />
+  <HelpKINode Title="CountryAsync method">
+    <HelpKINode Title="IGeoIP2WebServicesClient.CountryAsync Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_CountryAsync.htm" />
+    <HelpKINode Title="WebServiceClient.CountryAsync Method " Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_CountryAsync.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CountryResponse class">
+    <HelpKINode Title="CountryResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_CountryResponse.htm" />
+    <HelpKINode Title="about CountryResponse class" Url="html/T_MaxMind_GeoIP2_Responses_CountryResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_CountryResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_CountryResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_CountryResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CountryResponse.CountryResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_CountryResponse__ctor.htm" />
+  <HelpKINode Title="CreateAsync method" Url="html/Overload_MaxMind_Db_Reader_CreateAsync.htm" />
+  <HelpKINode Title="Data property" Url="html/P_MaxMind_Db_Reader_ReaderIteratorNode_1_Data.htm" />
+  <HelpKINode Title="DatabaseReader class">
+    <HelpKINode Title="DatabaseReader Class" Url="html/T_MaxMind_GeoIP2_DatabaseReader.htm" />
+    <HelpKINode Title="about DatabaseReader class" Url="html/T_MaxMind_GeoIP2_DatabaseReader.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_DatabaseReader.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_DatabaseReader.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DatabaseReader.AnonymousIP method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_AnonymousIP.htm" />
+  <HelpKINode Title="DatabaseReader.Asn method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Asn.htm" />
+  <HelpKINode Title="DatabaseReader.City method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_City.htm" />
+  <HelpKINode Title="DatabaseReader.ConnectionType method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_ConnectionType.htm" />
+  <HelpKINode Title="DatabaseReader.Country method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Country.htm" />
+  <HelpKINode Title="DatabaseReader.DatabaseReader constructor" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader__ctor.htm" />
+  <HelpKINode Title="DatabaseReader.Dispose method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Dispose.htm" />
+  <HelpKINode Title="DatabaseReader.Domain method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Domain.htm" />
+  <HelpKINode Title="DatabaseReader.Enterprise method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Enterprise.htm" />
+  <HelpKINode Title="DatabaseReader.Isp method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Isp.htm" />
+  <HelpKINode Title="DatabaseReader.Metadata property" Url="html/P_MaxMind_GeoIP2_DatabaseReader_Metadata.htm" />
+  <HelpKINode Title="DatabaseReader.TryAnonymousIP method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryAnonymousIP.htm" />
+  <HelpKINode Title="DatabaseReader.TryAsn method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryAsn.htm" />
+  <HelpKINode Title="DatabaseReader.TryCity method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryCity.htm" />
+  <HelpKINode Title="DatabaseReader.TryConnectionType method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryConnectionType.htm" />
+  <HelpKINode Title="DatabaseReader.TryCountry method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryCountry.htm" />
+  <HelpKINode Title="DatabaseReader.TryDomain method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryDomain.htm" />
+  <HelpKINode Title="DatabaseReader.TryEnterprise method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryEnterprise.htm" />
+  <HelpKINode Title="DatabaseReader.TryIsp method" Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryIsp.htm" />
+  <HelpKINode Title="DatabaseType property" Url="html/P_MaxMind_Db_Metadata_DatabaseType.htm" />
+  <HelpKINode Title="Description property" Url="html/P_MaxMind_Db_Metadata_Description.htm" />
+  <HelpKINode Title="DeserializationException class">
+    <HelpKINode Title="DeserializationException Class" Url="html/T_MaxMind_Db_DeserializationException.htm" />
+    <HelpKINode Title="about DeserializationException class" Url="html/T_MaxMind_Db_DeserializationException.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_Db_DeserializationException__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_DeserializationException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_DeserializationException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DeserializationException.DeserializationException constructor" Url="html/Overload_MaxMind_Db_DeserializationException__ctor.htm" />
+  <HelpKINode Title="Dispose method">
+    <HelpKINode Title="DatabaseReader.Dispose Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Dispose.htm" />
+    <HelpKINode Title="Reader.Dispose Method " Url="html/M_MaxMind_Db_Reader_Dispose.htm" />
+    <HelpKINode Title="WebServiceClient.Dispose Method " Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_Dispose.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Domain method">
+    <HelpKINode Title="DatabaseReader.Domain Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Domain.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.Domain Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Domain.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Domain property">
+    <HelpKINode Title="DomainResponse.Domain Property " Url="html/P_MaxMind_GeoIP2_Responses_DomainResponse_Domain.htm" />
+    <HelpKINode Title="Traits.Domain Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_Domain.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DomainResponse class">
+    <HelpKINode Title="DomainResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_DomainResponse.htm" />
+    <HelpKINode Title="about DomainResponse class" Url="html/T_MaxMind_GeoIP2_Responses_DomainResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_DomainResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_DomainResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_DomainResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DomainResponse.Domain property" Url="html/P_MaxMind_GeoIP2_Responses_DomainResponse_Domain.htm" />
+  <HelpKINode Title="DomainResponse.DomainResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_DomainResponse__ctor.htm" />
+  <HelpKINode Title="DomainResponse.IPAddress property" Url="html/P_MaxMind_GeoIP2_Responses_DomainResponse_IPAddress.htm" />
+  <HelpKINode Title="DomainResponse.Network property" Url="html/P_MaxMind_GeoIP2_Responses_DomainResponse_Network.htm" />
+  <HelpKINode Title="Enterprise method">
+    <HelpKINode Title="DatabaseReader.Enterprise Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Enterprise.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.Enterprise Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Enterprise.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnterpriseResponse class">
+    <HelpKINode Title="EnterpriseResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_EnterpriseResponse.htm" />
+    <HelpKINode Title="about EnterpriseResponse class" Url="html/T_MaxMind_GeoIP2_Responses_EnterpriseResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_GeoIP2_Responses_EnterpriseResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_EnterpriseResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_EnterpriseResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnterpriseResponse.EnterpriseResponse constructor" Url="html/M_MaxMind_GeoIP2_Responses_EnterpriseResponse__ctor.htm" />
+  <HelpKINode Title="Error property" Url="html/P_MaxMind_GeoIP2_Model_WebServiceError_Error.htm" />
+  <HelpKINode Title="FileAccessMode enumeration" Url="html/T_MaxMind_Db_FileAccessMode.htm" />
+  <HelpKINode Title="Find method" Url="html/Overload_MaxMind_Db_Reader_Find.htm" />
+  <HelpKINode Title="FindAll(Of T) method" Url="html/M_MaxMind_Db_Reader_FindAll__1.htm" />
+  <HelpKINode Title="FindAll&lt;T&gt; method" Url="html/M_MaxMind_Db_Reader_FindAll__1.htm" />
+  <HelpKINode Title="GeoIP2Exception class">
+    <HelpKINode Title="GeoIP2Exception Class" Url="html/T_MaxMind_GeoIP2_Exceptions_GeoIP2Exception.htm" />
+    <HelpKINode Title="about GeoIP2Exception class" Url="html/T_MaxMind_GeoIP2_Exceptions_GeoIP2Exception.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_GeoIP2Exception__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_MaxMind_GeoIP2_Exceptions_GeoIP2Exception.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Exceptions_GeoIP2Exception.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Exceptions_GeoIP2Exception.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GeoIP2Exception.GeoIP2Exception constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_GeoIP2Exception__ctor.htm" />
+  <HelpKINode Title="GeoNameId property" Url="html/P_MaxMind_GeoIP2_Model_NamedEntity_GeoNameId.htm" />
+  <HelpKINode Title="HasCoordinates property" Url="html/P_MaxMind_GeoIP2_Model_Location_HasCoordinates.htm" />
+  <HelpKINode Title="Host property" Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_Host.htm" />
+  <HelpKINode Title="HttpException class">
+    <HelpKINode Title="HttpException Class" Url="html/T_MaxMind_GeoIP2_Exceptions_HttpException.htm" />
+    <HelpKINode Title="about HttpException class" Url="html/T_MaxMind_GeoIP2_Exceptions_HttpException.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_HttpException__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_MaxMind_GeoIP2_Exceptions_HttpException.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Exceptions_HttpException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Exceptions_HttpException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HttpException.HttpException constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_HttpException__ctor.htm" />
+  <HelpKINode Title="HttpException.HttpStatus property" Url="html/P_MaxMind_GeoIP2_Exceptions_HttpException_HttpStatus.htm" />
+  <HelpKINode Title="HttpException.Uri property" Url="html/P_MaxMind_GeoIP2_Exceptions_HttpException_Uri.htm" />
+  <HelpKINode Title="HttpStatus property" Url="html/P_MaxMind_GeoIP2_Exceptions_HttpException_HttpStatus.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader interface">
+    <HelpKINode Title="IGeoIP2DatabaseReader Interface" Url="html/T_MaxMind_GeoIP2_IGeoIP2DatabaseReader.htm" />
+    <HelpKINode Title="about IGeoIP2DatabaseReader interface" Url="html/T_MaxMind_GeoIP2_IGeoIP2DatabaseReader.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_IGeoIP2DatabaseReader.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IGeoIP2DatabaseReader.AnonymousIP method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_AnonymousIP.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.Asn method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Asn.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.ConnectionType method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_ConnectionType.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.Domain method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Domain.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.Enterprise method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Enterprise.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.Isp method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Isp.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.TryAnonymousIP method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryAnonymousIP.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.TryAsn method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryAsn.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.TryCity method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryCity.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.TryConnectionType method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryConnectionType.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.TryCountry method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryCountry.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.TryDomain method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryDomain.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.TryEnterprise method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryEnterprise.htm" />
+  <HelpKINode Title="IGeoIP2DatabaseReader.TryIsp method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryIsp.htm" />
+  <HelpKINode Title="IGeoIP2Provider interface">
+    <HelpKINode Title="IGeoIP2Provider Interface" Url="html/T_MaxMind_GeoIP2_IGeoIP2Provider.htm" />
+    <HelpKINode Title="about IGeoIP2Provider interface" Url="html/T_MaxMind_GeoIP2_IGeoIP2Provider.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_IGeoIP2Provider.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IGeoIP2Provider.City method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2Provider_City.htm" />
+  <HelpKINode Title="IGeoIP2Provider.Country method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2Provider_Country.htm" />
+  <HelpKINode Title="IGeoIP2WebServicesClient interface">
+    <HelpKINode Title="IGeoIP2WebServicesClient Interface" Url="html/T_MaxMind_GeoIP2_IGeoIP2WebServicesClient.htm" />
+    <HelpKINode Title="about IGeoIP2WebServicesClient interface" Url="html/T_MaxMind_GeoIP2_IGeoIP2WebServicesClient.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_IGeoIP2WebServicesClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IGeoIP2WebServicesClient.City method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_City.htm" />
+  <HelpKINode Title="IGeoIP2WebServicesClient.CityAsync method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_CityAsync.htm" />
+  <HelpKINode Title="IGeoIP2WebServicesClient.Country method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_Country.htm" />
+  <HelpKINode Title="IGeoIP2WebServicesClient.CountryAsync method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_CountryAsync.htm" />
+  <HelpKINode Title="IGeoIP2WebServicesClient.Insights method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_Insights.htm" />
+  <HelpKINode Title="IGeoIP2WebServicesClient.InsightsAsync method" Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_InsightsAsync.htm" />
+  <HelpKINode Title="InjectableValues class">
+    <HelpKINode Title="InjectableValues Class" Url="html/T_MaxMind_Db_InjectableValues.htm" />
+    <HelpKINode Title="about InjectableValues class" Url="html/T_MaxMind_Db_InjectableValues.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_Db_InjectableValues__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_InjectableValues.htm" />
+  </HelpKINode>
+  <HelpKINode Title="InjectableValues.AddValue method" Url="html/M_MaxMind_Db_InjectableValues_AddValue.htm" />
+  <HelpKINode Title="InjectableValues.InjectableValues constructor" Url="html/M_MaxMind_Db_InjectableValues__ctor.htm" />
+  <HelpKINode Title="InjectAttribute class">
+    <HelpKINode Title="InjectAttribute Class" Url="html/T_MaxMind_Db_InjectAttribute.htm" />
+    <HelpKINode Title="about InjectAttribute class" Url="html/T_MaxMind_Db_InjectAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_Db_InjectAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_InjectAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_InjectAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="InjectAttribute.InjectAttribute constructor" Url="html/M_MaxMind_Db_InjectAttribute__ctor.htm" />
+  <HelpKINode Title="InjectAttribute.ParameterName property" Url="html/P_MaxMind_Db_InjectAttribute_ParameterName.htm" />
+  <HelpKINode Title="Insights method">
+    <HelpKINode Title="IGeoIP2WebServicesClient.Insights Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_Insights.htm" />
+    <HelpKINode Title="WebServiceClient.Insights Method " Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_Insights.htm" />
+  </HelpKINode>
+  <HelpKINode Title="InsightsAsync method">
+    <HelpKINode Title="IGeoIP2WebServicesClient.InsightsAsync Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2WebServicesClient_InsightsAsync.htm" />
+    <HelpKINode Title="WebServiceClient.InsightsAsync Method " Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_InsightsAsync.htm" />
+  </HelpKINode>
+  <HelpKINode Title="InsightsResponse class">
+    <HelpKINode Title="InsightsResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_InsightsResponse.htm" />
+    <HelpKINode Title="about InsightsResponse class" Url="html/T_MaxMind_GeoIP2_Responses_InsightsResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_InsightsResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_InsightsResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_InsightsResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="InsightsResponse.InsightsResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_InsightsResponse__ctor.htm" />
+  <HelpKINode Title="InvalidDatabaseException class">
+    <HelpKINode Title="InvalidDatabaseException Class" Url="html/T_MaxMind_Db_InvalidDatabaseException.htm" />
+    <HelpKINode Title="about InvalidDatabaseException class" Url="html/T_MaxMind_Db_InvalidDatabaseException.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_Db_InvalidDatabaseException__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_InvalidDatabaseException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_InvalidDatabaseException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="InvalidDatabaseException.InvalidDatabaseException constructor" Url="html/Overload_MaxMind_Db_InvalidDatabaseException__ctor.htm" />
+  <HelpKINode Title="InvalidRequestException class">
+    <HelpKINode Title="InvalidRequestException Class" Url="html/T_MaxMind_GeoIP2_Exceptions_InvalidRequestException.htm" />
+    <HelpKINode Title="about InvalidRequestException class" Url="html/T_MaxMind_GeoIP2_Exceptions_InvalidRequestException.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_GeoIP2_Exceptions_InvalidRequestException__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_MaxMind_GeoIP2_Exceptions_InvalidRequestException.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Exceptions_InvalidRequestException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Exceptions_InvalidRequestException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="InvalidRequestException.Code property" Url="html/P_MaxMind_GeoIP2_Exceptions_InvalidRequestException_Code.htm" />
+  <HelpKINode Title="InvalidRequestException.InvalidRequestException constructor" Url="html/M_MaxMind_GeoIP2_Exceptions_InvalidRequestException__ctor.htm" />
+  <HelpKINode Title="InvalidRequestException.Uri property" Url="html/P_MaxMind_GeoIP2_Exceptions_InvalidRequestException_Uri.htm" />
+  <HelpKINode Title="IPAddress property">
+    <HelpKINode Title="AnonymousIPResponse.IPAddress Property " Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IPAddress.htm" />
+    <HelpKINode Title="AsnResponse.IPAddress Property " Url="html/P_MaxMind_GeoIP2_Responses_AsnResponse_IPAddress.htm" />
+    <HelpKINode Title="ConnectionTypeResponse.IPAddress Property " Url="html/P_MaxMind_GeoIP2_Responses_ConnectionTypeResponse_IPAddress.htm" />
+    <HelpKINode Title="DomainResponse.IPAddress Property " Url="html/P_MaxMind_GeoIP2_Responses_DomainResponse_IPAddress.htm" />
+    <HelpKINode Title="IspResponse.IPAddress Property " Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_IPAddress.htm" />
+    <HelpKINode Title="Traits.IPAddress Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_IPAddress.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPVersion property" Url="html/P_MaxMind_Db_Metadata_IPVersion.htm" />
+  <HelpKINode Title="IsAnonymous property">
+    <HelpKINode Title="AnonymousIPResponse.IsAnonymous Property " Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsAnonymous.htm" />
+    <HelpKINode Title="Traits.IsAnonymous Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_IsAnonymous.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsAnonymousProxy property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsAnonymousProxy.htm" />
+  <HelpKINode Title="IsAnonymousVpn property">
+    <HelpKINode Title="AnonymousIPResponse.IsAnonymousVpn Property " Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsAnonymousVpn.htm" />
+    <HelpKINode Title="Traits.IsAnonymousVpn Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_IsAnonymousVpn.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsHostingProvider property">
+    <HelpKINode Title="AnonymousIPResponse.IsHostingProvider Property " Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsHostingProvider.htm" />
+    <HelpKINode Title="Traits.IsHostingProvider Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_IsHostingProvider.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsInEuropeanUnion property" Url="html/P_MaxMind_GeoIP2_Model_Country_IsInEuropeanUnion.htm" />
+  <HelpKINode Title="IsLegitimateProxy property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsLegitimateProxy.htm" />
+  <HelpKINode Title="IsoCode property">
+    <HelpKINode Title="Country.IsoCode Property " Url="html/P_MaxMind_GeoIP2_Model_Country_IsoCode.htm" />
+    <HelpKINode Title="Subdivision.IsoCode Property " Url="html/P_MaxMind_GeoIP2_Model_Subdivision_IsoCode.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Isp method">
+    <HelpKINode Title="DatabaseReader.Isp Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_Isp.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.Isp Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_Isp.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Isp property">
+    <HelpKINode Title="IspResponse.Isp Property " Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_Isp.htm" />
+    <HelpKINode Title="Traits.Isp Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_Isp.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IspResponse class">
+    <HelpKINode Title="IspResponse Class" Url="html/T_MaxMind_GeoIP2_Responses_IspResponse.htm" />
+    <HelpKINode Title="about IspResponse class" Url="html/T_MaxMind_GeoIP2_Responses_IspResponse.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_IspResponse__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Responses_IspResponse.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Responses_IspResponse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IspResponse.AutonomousSystemNumber property" Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_AutonomousSystemNumber.htm" />
+  <HelpKINode Title="IspResponse.AutonomousSystemOrganization property" Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_AutonomousSystemOrganization.htm" />
+  <HelpKINode Title="IspResponse.IPAddress property" Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_IPAddress.htm" />
+  <HelpKINode Title="IspResponse.Isp property" Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_Isp.htm" />
+  <HelpKINode Title="IspResponse.IspResponse constructor" Url="html/Overload_MaxMind_GeoIP2_Responses_IspResponse__ctor.htm" />
+  <HelpKINode Title="IspResponse.Network property" Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_Network.htm" />
+  <HelpKINode Title="IspResponse.Organization property" Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_Organization.htm" />
+  <HelpKINode Title="IsPublicProxy property">
+    <HelpKINode Title="AnonymousIPResponse.IsPublicProxy Property " Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsPublicProxy.htm" />
+    <HelpKINode Title="Traits.IsPublicProxy Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_IsPublicProxy.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsSatelliteProvider property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsSatelliteProvider.htm" />
+  <HelpKINode Title="IsTorExitNode property">
+    <HelpKINode Title="AnonymousIPResponse.IsTorExitNode Property " Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_IsTorExitNode.htm" />
+    <HelpKINode Title="Traits.IsTorExitNode Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_IsTorExitNode.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Languages property" Url="html/P_MaxMind_Db_Metadata_Languages.htm" />
+  <HelpKINode Title="Latitude property" Url="html/P_MaxMind_GeoIP2_Model_Location_Latitude.htm" />
+  <HelpKINode Title="LicenseKey property" Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_LicenseKey.htm" />
+  <HelpKINode Title="Locales property">
+    <HelpKINode Title="NamedEntity.Locales Property " Url="html/P_MaxMind_GeoIP2_Model_NamedEntity_Locales.htm" />
+    <HelpKINode Title="WebServiceClientOptions.Locales Property " Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_Locales.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Location class">
+    <HelpKINode Title="Location Class" Url="html/T_MaxMind_GeoIP2_Model_Location.htm" />
+    <HelpKINode Title="about Location class" Url="html/T_MaxMind_GeoIP2_Model_Location.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Location__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_Location.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_Location.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Location property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_Location.htm" />
+  <HelpKINode Title="Location.AccuracyRadius property" Url="html/P_MaxMind_GeoIP2_Model_Location_AccuracyRadius.htm" />
+  <HelpKINode Title="Location.AverageIncome property" Url="html/P_MaxMind_GeoIP2_Model_Location_AverageIncome.htm" />
+  <HelpKINode Title="Location.HasCoordinates property" Url="html/P_MaxMind_GeoIP2_Model_Location_HasCoordinates.htm" />
+  <HelpKINode Title="Location.Latitude property" Url="html/P_MaxMind_GeoIP2_Model_Location_Latitude.htm" />
+  <HelpKINode Title="Location.Location constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Location__ctor.htm" />
+  <HelpKINode Title="Location.Longitude property" Url="html/P_MaxMind_GeoIP2_Model_Location_Longitude.htm" />
+  <HelpKINode Title="Location.MetroCode property" Url="html/P_MaxMind_GeoIP2_Model_Location_MetroCode.htm" />
+  <HelpKINode Title="Location.PopulationDensity property" Url="html/P_MaxMind_GeoIP2_Model_Location_PopulationDensity.htm" />
+  <HelpKINode Title="Location.TimeZone property" Url="html/P_MaxMind_GeoIP2_Model_Location_TimeZone.htm" />
+  <HelpKINode Title="Location.ToString method" Url="html/M_MaxMind_GeoIP2_Model_Location_ToString.htm" />
+  <HelpKINode Title="Longitude property" Url="html/P_MaxMind_GeoIP2_Model_Location_Longitude.htm" />
+  <HelpKINode Title="MaxMind class">
+    <HelpKINode Title="MaxMind Class" Url="html/T_MaxMind_GeoIP2_Model_MaxMind.htm" />
+    <HelpKINode Title="about MaxMind class" Url="html/T_MaxMind_GeoIP2_Model_MaxMind.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Model_MaxMind__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_MaxMind.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_MaxMind.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MaxMind property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_MaxMind.htm" />
+  <HelpKINode Title="MaxMind.Db namespace" Url="html/N_MaxMind_Db.htm" />
+  <HelpKINode Title="MaxMind.Db.ConstructorAttribute class" Url="html/T_MaxMind_Db_ConstructorAttribute.htm" />
+  <HelpKINode Title="MaxMind.Db.DeserializationException class" Url="html/T_MaxMind_Db_DeserializationException.htm" />
+  <HelpKINode Title="MaxMind.Db.FileAccessMode enumeration" Url="html/T_MaxMind_Db_FileAccessMode.htm" />
+  <HelpKINode Title="MaxMind.Db.InjectableValues class" Url="html/T_MaxMind_Db_InjectableValues.htm" />
+  <HelpKINode Title="MaxMind.Db.InjectAttribute class" Url="html/T_MaxMind_Db_InjectAttribute.htm" />
+  <HelpKINode Title="MaxMind.Db.InvalidDatabaseException class" Url="html/T_MaxMind_Db_InvalidDatabaseException.htm" />
+  <HelpKINode Title="MaxMind.Db.Metadata class" Url="html/T_MaxMind_Db_Metadata.htm" />
+  <HelpKINode Title="MaxMind.Db.Network class" Url="html/T_MaxMind_Db_Network.htm" />
+  <HelpKINode Title="MaxMind.Db.NetworkAttribute class" Url="html/T_MaxMind_Db_NetworkAttribute.htm" />
+  <HelpKINode Title="MaxMind.Db.ParameterAttribute class" Url="html/T_MaxMind_Db_ParameterAttribute.htm" />
+  <HelpKINode Title="MaxMind.Db.Reader class" Url="html/T_MaxMind_Db_Reader.htm" />
+  <HelpKINode Title="MaxMind.Db.Reader.ReaderIteratorNode(Of T) structure" Url="html/T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+  <HelpKINode Title="MaxMind.Db.Reader.ReaderIteratorNode&lt;T&gt; structure" Url="html/T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2 namespace" Url="html/N_MaxMind_GeoIP2.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.DatabaseReader class" Url="html/T_MaxMind_GeoIP2_DatabaseReader.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Exceptions namespace" Url="html/N_MaxMind_GeoIP2_Exceptions.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Exceptions.AddressNotFoundException class" Url="html/T_MaxMind_GeoIP2_Exceptions_AddressNotFoundException.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Exceptions.AuthenticationException class" Url="html/T_MaxMind_GeoIP2_Exceptions_AuthenticationException.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Exceptions.GeoIP2Exception class" Url="html/T_MaxMind_GeoIP2_Exceptions_GeoIP2Exception.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Exceptions.HttpException class" Url="html/T_MaxMind_GeoIP2_Exceptions_HttpException.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Exceptions.InvalidRequestException class" Url="html/T_MaxMind_GeoIP2_Exceptions_InvalidRequestException.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Exceptions.OutOfQueriesException class" Url="html/T_MaxMind_GeoIP2_Exceptions_OutOfQueriesException.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Exceptions.PermissionRequiredException class" Url="html/T_MaxMind_GeoIP2_Exceptions_PermissionRequiredException.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.IGeoIP2DatabaseReader interface" Url="html/T_MaxMind_GeoIP2_IGeoIP2DatabaseReader.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.IGeoIP2Provider interface" Url="html/T_MaxMind_GeoIP2_IGeoIP2Provider.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.IGeoIP2WebServicesClient interface" Url="html/T_MaxMind_GeoIP2_IGeoIP2WebServicesClient.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model namespace" Url="html/N_MaxMind_GeoIP2_Model.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.City class" Url="html/T_MaxMind_GeoIP2_Model_City.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.Continent class" Url="html/T_MaxMind_GeoIP2_Model_Continent.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.Country class" Url="html/T_MaxMind_GeoIP2_Model_Country.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.Location class" Url="html/T_MaxMind_GeoIP2_Model_Location.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.MaxMind class" Url="html/T_MaxMind_GeoIP2_Model_MaxMind.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.NamedEntity class" Url="html/T_MaxMind_GeoIP2_Model_NamedEntity.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.Postal class" Url="html/T_MaxMind_GeoIP2_Model_Postal.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.RepresentedCountry class" Url="html/T_MaxMind_GeoIP2_Model_RepresentedCountry.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.Subdivision class" Url="html/T_MaxMind_GeoIP2_Model_Subdivision.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.Traits class" Url="html/T_MaxMind_GeoIP2_Model_Traits.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Model.WebServiceError class" Url="html/T_MaxMind_GeoIP2_Model_WebServiceError.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses namespace" Url="html/N_MaxMind_GeoIP2_Responses.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.AbstractCityResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AbstractCityResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.AbstractCountryResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AbstractCountryResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.AbstractResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AbstractResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.AnonymousIPResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AnonymousIPResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.AsnResponse class" Url="html/T_MaxMind_GeoIP2_Responses_AsnResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.CityResponse class" Url="html/T_MaxMind_GeoIP2_Responses_CityResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.ConnectionTypeResponse class" Url="html/T_MaxMind_GeoIP2_Responses_ConnectionTypeResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.CountryResponse class" Url="html/T_MaxMind_GeoIP2_Responses_CountryResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.DomainResponse class" Url="html/T_MaxMind_GeoIP2_Responses_DomainResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.EnterpriseResponse class" Url="html/T_MaxMind_GeoIP2_Responses_EnterpriseResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.InsightsResponse class" Url="html/T_MaxMind_GeoIP2_Responses_InsightsResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.Responses.IspResponse class" Url="html/T_MaxMind_GeoIP2_Responses_IspResponse.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.WebServiceClient class" Url="html/T_MaxMind_GeoIP2_WebServiceClient.htm" />
+  <HelpKINode Title="MaxMind.GeoIP2.WebServiceClientOptions class" Url="html/T_MaxMind_GeoIP2_WebServiceClientOptions.htm" />
+  <HelpKINode Title="MaxMind.MaxMind constructor" Url="html/Overload_MaxMind_GeoIP2_Model_MaxMind__ctor.htm" />
+  <HelpKINode Title="MaxMind.QueriesRemaining property" Url="html/P_MaxMind_GeoIP2_Model_MaxMind_QueriesRemaining.htm" />
+  <HelpKINode Title="MaxMind.ToString method" Url="html/M_MaxMind_GeoIP2_Model_MaxMind_ToString.htm" />
+  <HelpKINode Title="Memory enumeration member" Url="html/T_MaxMind_Db_FileAccessMode.htm" />
+  <HelpKINode Title="MemoryMapped enumeration member" Url="html/T_MaxMind_Db_FileAccessMode.htm" />
+  <HelpKINode Title="MemoryMappedGlobal enumeration member" Url="html/T_MaxMind_Db_FileAccessMode.htm" />
+  <HelpKINode Title="Metadata class">
+    <HelpKINode Title="Metadata Class" Url="html/T_MaxMind_Db_Metadata.htm" />
+    <HelpKINode Title="about Metadata class" Url="html/T_MaxMind_Db_Metadata.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_Db_Metadata__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_Metadata.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_Metadata.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Metadata property">
+    <HelpKINode Title="DatabaseReader.Metadata Property " Url="html/P_MaxMind_GeoIP2_DatabaseReader_Metadata.htm" />
+    <HelpKINode Title="Reader.Metadata Property " Url="html/P_MaxMind_Db_Reader_Metadata.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Metadata.BinaryFormatMajorVersion property" Url="html/P_MaxMind_Db_Metadata_BinaryFormatMajorVersion.htm" />
+  <HelpKINode Title="Metadata.BinaryFormatMinorVersion property" Url="html/P_MaxMind_Db_Metadata_BinaryFormatMinorVersion.htm" />
+  <HelpKINode Title="Metadata.BuildDate property" Url="html/P_MaxMind_Db_Metadata_BuildDate.htm" />
+  <HelpKINode Title="Metadata.DatabaseType property" Url="html/P_MaxMind_Db_Metadata_DatabaseType.htm" />
+  <HelpKINode Title="Metadata.Description property" Url="html/P_MaxMind_Db_Metadata_Description.htm" />
+  <HelpKINode Title="Metadata.IPVersion property" Url="html/P_MaxMind_Db_Metadata_IPVersion.htm" />
+  <HelpKINode Title="Metadata.Languages property" Url="html/P_MaxMind_Db_Metadata_Languages.htm" />
+  <HelpKINode Title="Metadata.Metadata constructor" Url="html/M_MaxMind_Db_Metadata__ctor.htm" />
+  <HelpKINode Title="MetroCode property" Url="html/P_MaxMind_GeoIP2_Model_Location_MetroCode.htm" />
+  <HelpKINode Title="MostSpecificSubdivision property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_MostSpecificSubdivision.htm" />
+  <HelpKINode Title="Name property" Url="html/P_MaxMind_GeoIP2_Model_NamedEntity_Name.htm" />
+  <HelpKINode Title="NamedEntity class">
+    <HelpKINode Title="NamedEntity Class" Url="html/T_MaxMind_GeoIP2_Model_NamedEntity.htm" />
+    <HelpKINode Title="about NamedEntity class" Url="html/T_MaxMind_GeoIP2_Model_NamedEntity.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_GeoIP2_Model_NamedEntity__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_NamedEntity.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_NamedEntity.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NamedEntity.GeoNameId property" Url="html/P_MaxMind_GeoIP2_Model_NamedEntity_GeoNameId.htm" />
+  <HelpKINode Title="NamedEntity.Locales property" Url="html/P_MaxMind_GeoIP2_Model_NamedEntity_Locales.htm" />
+  <HelpKINode Title="NamedEntity.Name property" Url="html/P_MaxMind_GeoIP2_Model_NamedEntity_Name.htm" />
+  <HelpKINode Title="NamedEntity.NamedEntity constructor" Url="html/M_MaxMind_GeoIP2_Model_NamedEntity__ctor.htm" />
+  <HelpKINode Title="NamedEntity.Names property" Url="html/P_MaxMind_GeoIP2_Model_NamedEntity_Names.htm" />
+  <HelpKINode Title="NamedEntity.ToString method" Url="html/M_MaxMind_GeoIP2_Model_NamedEntity_ToString.htm" />
+  <HelpKINode Title="Names property" Url="html/P_MaxMind_GeoIP2_Model_NamedEntity_Names.htm" />
+  <HelpKINode Title="Network class">
+    <HelpKINode Title="Network Class" Url="html/T_MaxMind_Db_Network.htm" />
+    <HelpKINode Title="about Network class" Url="html/T_MaxMind_Db_Network.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_Db_Network__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_Network.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_Network.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Network property">
+    <HelpKINode Title="AnonymousIPResponse.Network Property " Url="html/P_MaxMind_GeoIP2_Responses_AnonymousIPResponse_Network.htm" />
+    <HelpKINode Title="AsnResponse.Network Property " Url="html/P_MaxMind_GeoIP2_Responses_AsnResponse_Network.htm" />
+    <HelpKINode Title="ConnectionTypeResponse.Network Property " Url="html/P_MaxMind_GeoIP2_Responses_ConnectionTypeResponse_Network.htm" />
+    <HelpKINode Title="DomainResponse.Network Property " Url="html/P_MaxMind_GeoIP2_Responses_DomainResponse_Network.htm" />
+    <HelpKINode Title="IspResponse.Network Property " Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_Network.htm" />
+    <HelpKINode Title="Traits.Network Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_Network.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Network.Network constructor" Url="html/M_MaxMind_Db_Network__ctor.htm" />
+  <HelpKINode Title="Network.NetworkAddress property" Url="html/P_MaxMind_Db_Network_NetworkAddress.htm" />
+  <HelpKINode Title="Network.PrefixLength property" Url="html/P_MaxMind_Db_Network_PrefixLength.htm" />
+  <HelpKINode Title="Network.ToString method" Url="html/M_MaxMind_Db_Network_ToString.htm" />
+  <HelpKINode Title="NetworkAddress property" Url="html/P_MaxMind_Db_Network_NetworkAddress.htm" />
+  <HelpKINode Title="NetworkAttribute class">
+    <HelpKINode Title="NetworkAttribute Class" Url="html/T_MaxMind_Db_NetworkAttribute.htm" />
+    <HelpKINode Title="about NetworkAttribute class" Url="html/T_MaxMind_Db_NetworkAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_Db_NetworkAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_NetworkAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_NetworkAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NetworkAttribute.NetworkAttribute constructor" Url="html/M_MaxMind_Db_NetworkAttribute__ctor.htm" />
+  <HelpKINode Title="Organization property">
+    <HelpKINode Title="IspResponse.Organization Property " Url="html/P_MaxMind_GeoIP2_Responses_IspResponse_Organization.htm" />
+    <HelpKINode Title="Traits.Organization Property " Url="html/P_MaxMind_GeoIP2_Model_Traits_Organization.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OutOfQueriesException class">
+    <HelpKINode Title="OutOfQueriesException Class" Url="html/T_MaxMind_GeoIP2_Exceptions_OutOfQueriesException.htm" />
+    <HelpKINode Title="about OutOfQueriesException class" Url="html/T_MaxMind_GeoIP2_Exceptions_OutOfQueriesException.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_OutOfQueriesException__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_MaxMind_GeoIP2_Exceptions_OutOfQueriesException.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Exceptions_OutOfQueriesException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Exceptions_OutOfQueriesException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OutOfQueriesException.OutOfQueriesException constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_OutOfQueriesException__ctor.htm" />
+  <HelpKINode Title="ParameterAttribute class">
+    <HelpKINode Title="ParameterAttribute Class" Url="html/T_MaxMind_Db_ParameterAttribute.htm" />
+    <HelpKINode Title="about ParameterAttribute class" Url="html/T_MaxMind_Db_ParameterAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_Db_ParameterAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_ParameterAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_ParameterAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ParameterAttribute.AlwaysCreate property" Url="html/P_MaxMind_Db_ParameterAttribute_AlwaysCreate.htm" />
+  <HelpKINode Title="ParameterAttribute.ParameterAttribute constructor" Url="html/M_MaxMind_Db_ParameterAttribute__ctor.htm" />
+  <HelpKINode Title="ParameterAttribute.ParameterName property" Url="html/P_MaxMind_Db_ParameterAttribute_ParameterName.htm" />
+  <HelpKINode Title="ParameterName property">
+    <HelpKINode Title="InjectAttribute.ParameterName Property " Url="html/P_MaxMind_Db_InjectAttribute_ParameterName.htm" />
+    <HelpKINode Title="ParameterAttribute.ParameterName Property " Url="html/P_MaxMind_Db_ParameterAttribute_ParameterName.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PermissionRequiredException class">
+    <HelpKINode Title="PermissionRequiredException Class" Url="html/T_MaxMind_GeoIP2_Exceptions_PermissionRequiredException.htm" />
+    <HelpKINode Title="about PermissionRequiredException class" Url="html/T_MaxMind_GeoIP2_Exceptions_PermissionRequiredException.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_PermissionRequiredException__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_MaxMind_GeoIP2_Exceptions_PermissionRequiredException.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Exceptions_PermissionRequiredException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Exceptions_PermissionRequiredException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PermissionRequiredException.PermissionRequiredException constructor" Url="html/Overload_MaxMind_GeoIP2_Exceptions_PermissionRequiredException__ctor.htm" />
+  <HelpKINode Title="PopulationDensity property" Url="html/P_MaxMind_GeoIP2_Model_Location_PopulationDensity.htm" />
+  <HelpKINode Title="Postal class">
+    <HelpKINode Title="Postal Class" Url="html/T_MaxMind_GeoIP2_Model_Postal.htm" />
+    <HelpKINode Title="about Postal class" Url="html/T_MaxMind_GeoIP2_Model_Postal.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Postal__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_Postal.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_Postal.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Postal property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_Postal.htm" />
+  <HelpKINode Title="Postal.Code property" Url="html/P_MaxMind_GeoIP2_Model_Postal_Code.htm" />
+  <HelpKINode Title="Postal.Confidence property" Url="html/P_MaxMind_GeoIP2_Model_Postal_Confidence.htm" />
+  <HelpKINode Title="Postal.Postal constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Postal__ctor.htm" />
+  <HelpKINode Title="Postal.ToString method" Url="html/M_MaxMind_GeoIP2_Model_Postal_ToString.htm" />
+  <HelpKINode Title="PrefixLength property">
+    <HelpKINode Title="Network.PrefixLength Property " Url="html/P_MaxMind_Db_Network_PrefixLength.htm" />
+    <HelpKINode Title="Reader.ReaderIteratorNode(T).PrefixLength Property " Url="html/P_MaxMind_Db_Reader_ReaderIteratorNode_1_PrefixLength.htm" />
+  </HelpKINode>
+  <HelpKINode Title="QueriesRemaining property" Url="html/P_MaxMind_GeoIP2_Model_MaxMind_QueriesRemaining.htm" />
+  <HelpKINode Title="Reader class">
+    <HelpKINode Title="Reader Class" Url="html/T_MaxMind_Db_Reader.htm" />
+    <HelpKINode Title="about Reader class" Url="html/T_MaxMind_Db_Reader.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_Db_Reader__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_Reader.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_Reader.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Reader.CreateAsync method" Url="html/Overload_MaxMind_Db_Reader_CreateAsync.htm" />
+  <HelpKINode Title="Reader.Dispose method" Url="html/M_MaxMind_Db_Reader_Dispose.htm" />
+  <HelpKINode Title="Reader.Find method" Url="html/Overload_MaxMind_Db_Reader_Find.htm" />
+  <HelpKINode Title="Reader.FindAll(Of T) method" Url="html/M_MaxMind_Db_Reader_FindAll__1.htm" />
+  <HelpKINode Title="Reader.FindAll&lt;T&gt; method" Url="html/M_MaxMind_Db_Reader_FindAll__1.htm" />
+  <HelpKINode Title="Reader.Metadata property" Url="html/P_MaxMind_Db_Reader_Metadata.htm" />
+  <HelpKINode Title="Reader.Reader constructor" Url="html/Overload_MaxMind_Db_Reader__ctor.htm" />
+  <HelpKINode Title="Reader.ReaderIteratorNode(Of T) structure">
+    <HelpKINode Title="Reader.ReaderIteratorNode(T) Structure" Url="html/T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+    <HelpKINode Title="about Reader.ReaderIteratorNode(Of T) structure" Url="html/T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Reader.ReaderIteratorNode(Of T).Data property" Url="html/P_MaxMind_Db_Reader_ReaderIteratorNode_1_Data.htm" />
+  <HelpKINode Title="Reader.ReaderIteratorNode(Of T).PrefixLength property" Url="html/P_MaxMind_Db_Reader_ReaderIteratorNode_1_PrefixLength.htm" />
+  <HelpKINode Title="Reader.ReaderIteratorNode(Of T).Start property" Url="html/P_MaxMind_Db_Reader_ReaderIteratorNode_1_Start.htm" />
+  <HelpKINode Title="Reader.ReaderIteratorNode&lt;T&gt; structure">
+    <HelpKINode Title="Reader.ReaderIteratorNode(T) Structure" Url="html/T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+    <HelpKINode Title="about Reader.ReaderIteratorNode&lt;T&gt; structure" Url="html/T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Reader.ReaderIteratorNode&lt;T&gt;.Data property" Url="html/P_MaxMind_Db_Reader_ReaderIteratorNode_1_Data.htm" />
+  <HelpKINode Title="Reader.ReaderIteratorNode&lt;T&gt;.PrefixLength property" Url="html/P_MaxMind_Db_Reader_ReaderIteratorNode_1_PrefixLength.htm" />
+  <HelpKINode Title="Reader.ReaderIteratorNode&lt;T&gt;.Start property" Url="html/P_MaxMind_Db_Reader_ReaderIteratorNode_1_Start.htm" />
+  <HelpKINode Title="ReaderIteratorNode(Of T) structure">
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ReaderIteratorNode&lt;T&gt; structure">
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_Db_Reader_ReaderIteratorNode_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RegisteredCountry property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_RegisteredCountry.htm" />
+  <HelpKINode Title="RepresentedCountry class">
+    <HelpKINode Title="RepresentedCountry Class" Url="html/T_MaxMind_GeoIP2_Model_RepresentedCountry.htm" />
+    <HelpKINode Title="about RepresentedCountry class" Url="html/T_MaxMind_GeoIP2_Model_RepresentedCountry.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Model_RepresentedCountry__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_RepresentedCountry.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_RepresentedCountry.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RepresentedCountry property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_RepresentedCountry.htm" />
+  <HelpKINode Title="RepresentedCountry.RepresentedCountry constructor" Url="html/Overload_MaxMind_GeoIP2_Model_RepresentedCountry__ctor.htm" />
+  <HelpKINode Title="RepresentedCountry.Type property" Url="html/P_MaxMind_GeoIP2_Model_RepresentedCountry_Type.htm" />
+  <HelpKINode Title="SetLocales method">
+    <HelpKINode Title="AbstractCityResponse.SetLocales Method " Url="html/M_MaxMind_GeoIP2_Responses_AbstractCityResponse_SetLocales.htm" />
+    <HelpKINode Title="AbstractCountryResponse.SetLocales Method " Url="html/M_MaxMind_GeoIP2_Responses_AbstractCountryResponse_SetLocales.htm" />
+    <HelpKINode Title="AbstractResponse.SetLocales Method " Url="html/M_MaxMind_GeoIP2_Responses_AbstractResponse_SetLocales.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Start property" Url="html/P_MaxMind_Db_Reader_ReaderIteratorNode_1_Start.htm" />
+  <HelpKINode Title="StaticIPScore property" Url="html/P_MaxMind_GeoIP2_Model_Traits_StaticIPScore.htm" />
+  <HelpKINode Title="Subdivision class">
+    <HelpKINode Title="Subdivision Class" Url="html/T_MaxMind_GeoIP2_Model_Subdivision.htm" />
+    <HelpKINode Title="about Subdivision class" Url="html/T_MaxMind_GeoIP2_Model_Subdivision.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Subdivision__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_Subdivision.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_Subdivision.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Subdivision.Confidence property" Url="html/P_MaxMind_GeoIP2_Model_Subdivision_Confidence.htm" />
+  <HelpKINode Title="Subdivision.IsoCode property" Url="html/P_MaxMind_GeoIP2_Model_Subdivision_IsoCode.htm" />
+  <HelpKINode Title="Subdivision.Subdivision constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Subdivision__ctor.htm" />
+  <HelpKINode Title="Subdivisions property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCityResponse_Subdivisions.htm" />
+  <HelpKINode Title="Timeout property" Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_Timeout.htm" />
+  <HelpKINode Title="TimeZone property" Url="html/P_MaxMind_GeoIP2_Model_Location_TimeZone.htm" />
+  <HelpKINode Title="ToString method">
+    <HelpKINode Title="AbstractCityResponse.ToString Method " Url="html/M_MaxMind_GeoIP2_Responses_AbstractCityResponse_ToString.htm" />
+    <HelpKINode Title="AbstractCountryResponse.ToString Method " Url="html/M_MaxMind_GeoIP2_Responses_AbstractCountryResponse_ToString.htm" />
+    <HelpKINode Title="Location.ToString Method " Url="html/M_MaxMind_GeoIP2_Model_Location_ToString.htm" />
+    <HelpKINode Title="MaxMind.ToString Method " Url="html/M_MaxMind_GeoIP2_Model_MaxMind_ToString.htm" />
+    <HelpKINode Title="NamedEntity.ToString Method " Url="html/M_MaxMind_GeoIP2_Model_NamedEntity_ToString.htm" />
+    <HelpKINode Title="Network.ToString Method " Url="html/M_MaxMind_Db_Network_ToString.htm" />
+    <HelpKINode Title="Postal.ToString Method " Url="html/M_MaxMind_GeoIP2_Model_Postal_ToString.htm" />
+    <HelpKINode Title="Traits.ToString Method " Url="html/M_MaxMind_GeoIP2_Model_Traits_ToString.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Traits class">
+    <HelpKINode Title="Traits Class" Url="html/T_MaxMind_GeoIP2_Model_Traits.htm" />
+    <HelpKINode Title="about Traits class" Url="html/T_MaxMind_GeoIP2_Model_Traits.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Traits__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_Traits.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_Traits.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Traits property" Url="html/P_MaxMind_GeoIP2_Responses_AbstractCountryResponse_Traits.htm" />
+  <HelpKINode Title="Traits.AutonomousSystemNumber property" Url="html/P_MaxMind_GeoIP2_Model_Traits_AutonomousSystemNumber.htm" />
+  <HelpKINode Title="Traits.AutonomousSystemOrganization property" Url="html/P_MaxMind_GeoIP2_Model_Traits_AutonomousSystemOrganization.htm" />
+  <HelpKINode Title="Traits.ConnectionType property" Url="html/P_MaxMind_GeoIP2_Model_Traits_ConnectionType.htm" />
+  <HelpKINode Title="Traits.Domain property" Url="html/P_MaxMind_GeoIP2_Model_Traits_Domain.htm" />
+  <HelpKINode Title="Traits.IPAddress property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IPAddress.htm" />
+  <HelpKINode Title="Traits.IsAnonymous property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsAnonymous.htm" />
+  <HelpKINode Title="Traits.IsAnonymousProxy property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsAnonymousProxy.htm" />
+  <HelpKINode Title="Traits.IsAnonymousVpn property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsAnonymousVpn.htm" />
+  <HelpKINode Title="Traits.IsHostingProvider property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsHostingProvider.htm" />
+  <HelpKINode Title="Traits.IsLegitimateProxy property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsLegitimateProxy.htm" />
+  <HelpKINode Title="Traits.Isp property" Url="html/P_MaxMind_GeoIP2_Model_Traits_Isp.htm" />
+  <HelpKINode Title="Traits.IsPublicProxy property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsPublicProxy.htm" />
+  <HelpKINode Title="Traits.IsSatelliteProvider property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsSatelliteProvider.htm" />
+  <HelpKINode Title="Traits.IsTorExitNode property" Url="html/P_MaxMind_GeoIP2_Model_Traits_IsTorExitNode.htm" />
+  <HelpKINode Title="Traits.Network property" Url="html/P_MaxMind_GeoIP2_Model_Traits_Network.htm" />
+  <HelpKINode Title="Traits.Organization property" Url="html/P_MaxMind_GeoIP2_Model_Traits_Organization.htm" />
+  <HelpKINode Title="Traits.StaticIPScore property" Url="html/P_MaxMind_GeoIP2_Model_Traits_StaticIPScore.htm" />
+  <HelpKINode Title="Traits.ToString method" Url="html/M_MaxMind_GeoIP2_Model_Traits_ToString.htm" />
+  <HelpKINode Title="Traits.Traits constructor" Url="html/Overload_MaxMind_GeoIP2_Model_Traits__ctor.htm" />
+  <HelpKINode Title="Traits.UserCount property" Url="html/P_MaxMind_GeoIP2_Model_Traits_UserCount.htm" />
+  <HelpKINode Title="Traits.UserType property" Url="html/P_MaxMind_GeoIP2_Model_Traits_UserType.htm" />
+  <HelpKINode Title="TryAnonymousIP method">
+    <HelpKINode Title="DatabaseReader.TryAnonymousIP Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryAnonymousIP.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.TryAnonymousIP Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryAnonymousIP.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TryAsn method">
+    <HelpKINode Title="DatabaseReader.TryAsn Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryAsn.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.TryAsn Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryAsn.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TryCity method">
+    <HelpKINode Title="DatabaseReader.TryCity Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryCity.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.TryCity Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryCity.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TryConnectionType method">
+    <HelpKINode Title="DatabaseReader.TryConnectionType Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryConnectionType.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.TryConnectionType Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryConnectionType.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TryCountry method">
+    <HelpKINode Title="DatabaseReader.TryCountry Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryCountry.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.TryCountry Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryCountry.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TryDomain method">
+    <HelpKINode Title="DatabaseReader.TryDomain Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryDomain.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.TryDomain Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryDomain.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TryEnterprise method">
+    <HelpKINode Title="DatabaseReader.TryEnterprise Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryEnterprise.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.TryEnterprise Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryEnterprise.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TryIsp method">
+    <HelpKINode Title="DatabaseReader.TryIsp Method " Url="html/Overload_MaxMind_GeoIP2_DatabaseReader_TryIsp.htm" />
+    <HelpKINode Title="IGeoIP2DatabaseReader.TryIsp Method " Url="html/Overload_MaxMind_GeoIP2_IGeoIP2DatabaseReader_TryIsp.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Type property" Url="html/P_MaxMind_GeoIP2_Model_RepresentedCountry_Type.htm" />
+  <HelpKINode Title="Uri property">
+    <HelpKINode Title="HttpException.Uri Property " Url="html/P_MaxMind_GeoIP2_Exceptions_HttpException_Uri.htm" />
+    <HelpKINode Title="InvalidRequestException.Uri Property " Url="html/P_MaxMind_GeoIP2_Exceptions_InvalidRequestException_Uri.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UserCount property" Url="html/P_MaxMind_GeoIP2_Model_Traits_UserCount.htm" />
+  <HelpKINode Title="UserType property" Url="html/P_MaxMind_GeoIP2_Model_Traits_UserType.htm" />
+  <HelpKINode Title="WebServiceClient class">
+    <HelpKINode Title="WebServiceClient Class" Url="html/T_MaxMind_GeoIP2_WebServiceClient.htm" />
+    <HelpKINode Title="about WebServiceClient class" Url="html/T_MaxMind_GeoIP2_WebServiceClient.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_MaxMind_GeoIP2_WebServiceClient__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_WebServiceClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WebServiceClient.City method" Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_City.htm" />
+  <HelpKINode Title="WebServiceClient.CityAsync method" Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_CityAsync.htm" />
+  <HelpKINode Title="WebServiceClient.Country method" Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_Country.htm" />
+  <HelpKINode Title="WebServiceClient.CountryAsync method" Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_CountryAsync.htm" />
+  <HelpKINode Title="WebServiceClient.Dispose method" Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_Dispose.htm" />
+  <HelpKINode Title="WebServiceClient.Insights method" Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_Insights.htm" />
+  <HelpKINode Title="WebServiceClient.InsightsAsync method" Url="html/Overload_MaxMind_GeoIP2_WebServiceClient_InsightsAsync.htm" />
+  <HelpKINode Title="WebServiceClient.WebServiceClient constructor" Url="html/Overload_MaxMind_GeoIP2_WebServiceClient__ctor.htm" />
+  <HelpKINode Title="WebServiceClientOptions class">
+    <HelpKINode Title="WebServiceClientOptions Class" Url="html/T_MaxMind_GeoIP2_WebServiceClientOptions.htm" />
+    <HelpKINode Title="about WebServiceClientOptions class" Url="html/T_MaxMind_GeoIP2_WebServiceClientOptions.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_GeoIP2_WebServiceClientOptions__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_WebServiceClientOptions.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_WebServiceClientOptions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WebServiceClientOptions.AccountId property" Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_AccountId.htm" />
+  <HelpKINode Title="WebServiceClientOptions.Host property" Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_Host.htm" />
+  <HelpKINode Title="WebServiceClientOptions.LicenseKey property" Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_LicenseKey.htm" />
+  <HelpKINode Title="WebServiceClientOptions.Locales property" Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_Locales.htm" />
+  <HelpKINode Title="WebServiceClientOptions.Timeout property" Url="html/P_MaxMind_GeoIP2_WebServiceClientOptions_Timeout.htm" />
+  <HelpKINode Title="WebServiceClientOptions.WebServiceClientOptions constructor" Url="html/M_MaxMind_GeoIP2_WebServiceClientOptions__ctor.htm" />
+  <HelpKINode Title="WebServiceError class">
+    <HelpKINode Title="WebServiceError Class" Url="html/T_MaxMind_GeoIP2_Model_WebServiceError.htm" />
+    <HelpKINode Title="about WebServiceError class" Url="html/T_MaxMind_GeoIP2_Model_WebServiceError.htm" />
+    <HelpKINode Title="constructor" Url="html/M_MaxMind_GeoIP2_Model_WebServiceError__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_MaxMind_GeoIP2_Model_WebServiceError.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_MaxMind_GeoIP2_Model_WebServiceError.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WebServiceError.Code property" Url="html/P_MaxMind_GeoIP2_Model_WebServiceError_Code.htm" />
+  <HelpKINode Title="WebServiceError.Error property" Url="html/P_MaxMind_GeoIP2_Model_WebServiceError_Error.htm" />
+  <HelpKINode Title="WebServiceError.WebServiceError constructor" Url="html/M_MaxMind_GeoIP2_Model_WebServiceError__ctor.htm" />
+</HelpKI>
