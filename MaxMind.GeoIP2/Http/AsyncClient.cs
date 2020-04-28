@@ -37,7 +37,7 @@ namespace MaxMind.GeoIP2.Http
                 _httpMessageHandler = httpMessageHandler ?? new HttpClientHandler();
                 try
                 {
-                    _httpClient = new HttpClient(_httpMessageHandler);                    
+                    _httpClient = new HttpClient(_httpMessageHandler);
                 }
                 catch
                 {
@@ -48,7 +48,7 @@ namespace MaxMind.GeoIP2.Http
             }
             else
             {
-                _httpClient = httpClient;                
+                _httpClient = httpClient;
             }
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);

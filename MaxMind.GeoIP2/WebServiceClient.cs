@@ -64,12 +64,8 @@ namespace MaxMind.GeoIP2
     ///     </para>
     ///     <para>
     ///         For details on the possible errors returned by the web service itself, see
-    ///         <a
-    ///             href="https://dev.maxmind.com/geoip/geoip2/web-services">
-    ///             the GeoIP2 web
-    ///             service documentation
-    ///         </a>
-    ///         .
+    ///         <a href="https://dev.maxmind.com/geoip/geoip2/web-services">the GeoIP2 web
+    ///         service documentation</a>.
     ///     </para>
     /// </summary>
     public class WebServiceClient : IGeoIP2WebServicesClient, IDisposable
@@ -97,13 +93,13 @@ namespace MaxMind.GeoIP2
         /// <param name="options">Injected Options.</param>
         [CLSCompliant(false)]
         public WebServiceClient(
-            HttpClient httpClient, 
+            HttpClient httpClient,
             IOptions<WebServiceClientOptions> options
         ) : this(
-            options.Value.AccountId, 
-            options.Value.LicenseKey, 
-            options.Value.Locales, 
-            options.Value.Host, 
+            options.Value.AccountId,
+            options.Value.LicenseKey,
+            options.Value.Locales,
+            options.Value.Host,
             options.Value.Timeout,
             null,
             false,

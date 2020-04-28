@@ -507,7 +507,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 .WithHeaders("Accept", "application/json")
                 .Respond(message);
 
-            IOptions<WebServiceClientOptions> options = Options.Create(new WebServiceClientOptions
+            var options = Options.Create(new WebServiceClientOptions
             {
                 AccountId = 6,
                 LicenseKey = "0123456789",
@@ -522,7 +522,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, responseStream));
 
-            WebServiceClient webServiceClient = new WebServiceClient(
+            var webServiceClient = new WebServiceClient(
                 options.Value.AccountId,
                 options.Value.LicenseKey,
                 options.Value.Locales,
