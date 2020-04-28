@@ -29,7 +29,7 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     The number of remaining queried in your account for the web
+        ///     The number of remaining queries in your account for the web
         ///     service end point. This will be null when using a local
         ///     database.
         /// </summary>
