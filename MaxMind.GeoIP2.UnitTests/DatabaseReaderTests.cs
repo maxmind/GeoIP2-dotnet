@@ -93,9 +93,27 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.True(response.IsAnonymousVpn);
                 Assert.False(response.IsHostingProvider);
                 Assert.False(response.IsPublicProxy);
+                Assert.False(response.IsResidentialProxy);
                 Assert.False(response.IsTorExitNode);
                 Assert.Equal(ipAddress, response.IPAddress);
                 Assert.Equal("1.2.0.0/16", response.Network?.ToString());
+            }
+        }
+
+        public void AnonymousIP_ValidResponseWithAllTrue()
+        {
+            using (var reader = new DatabaseReader(_anonymousIpDatabaseFile))
+            {
+                var ipAddress = "81.2.69.1";
+                var response = reader.AnonymousIP(ipAddress);
+                Assert.True(response.IsAnonymous);
+                Assert.True(response.IsAnonymousVpn);
+                Assert.True(response.IsHostingProvider);
+                Assert.True(response.IsPublicProxy);
+                Assert.True(response.IsResidentialProxy);
+                Assert.True(response.IsTorExitNode);
+                Assert.Equal(ipAddress, response.IPAddress);
+                Assert.Equal("81.2.69.0/24", response.Network?.ToString());
             }
         }
 

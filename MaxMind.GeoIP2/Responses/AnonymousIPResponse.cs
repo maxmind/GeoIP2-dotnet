@@ -2,6 +2,7 @@
 
 using MaxMind.Db;
 using Newtonsoft.Json;
+using System;
 
 #endregion
 
@@ -26,6 +27,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <param name="isAnonymousVpn"></param>
         /// <param name="isHostingProvider"></param>
         /// <param name="isPublicProxy"></param>
+        /// <param name="isResidentialProxy"></param>
         /// <param name="isTorExitNode"></param>
         /// <param name="ipAddress"></param>
         /// <param name="network"></param>
@@ -35,6 +37,7 @@ namespace MaxMind.GeoIP2.Responses
             [Parameter("is_anonymous_vpn")] bool isAnonymousVpn,
             [Parameter("is_hosting_provider")] bool isHostingProvider,
             [Parameter("is_public_proxy")] bool isPublicProxy,
+            [Parameter("is_residential_proxy")] bool isResidentialProxy,
             [Parameter("is_tor_exit_node")] bool isTorExitNode,
             [Inject("ip_address")] string? ipAddress,
             [Network] Network? network = null
@@ -44,9 +47,27 @@ namespace MaxMind.GeoIP2.Responses
             IsAnonymousVpn = isAnonymousVpn;
             IsHostingProvider = isHostingProvider;
             IsPublicProxy = isPublicProxy;
+            IsResidentialProxy = isResidentialProxy;
             IsTorExitNode = isTorExitNode;
             IPAddress = ipAddress;
             Network = network;
+        }
+
+        /// <summary>
+        ///     Constructor for binary compatibility.
+        /// </summary>
+        [Obsolete]
+        public AnonymousIPResponse(
+            bool isAnonymous,
+            bool isAnonymousVpn,
+            bool isHostingProvider,
+            bool isPublicProxy,
+            bool isTorExitNode,
+            string? ipAddress,
+            Network? network
+        ) : this(isAnonymous, isAnonymousVpn, isHostingProvider, isPublicProxy, false,
+                 isTorExitNode, ipAddress,  network)
+        {
         }
 
         /// <summary>
@@ -79,6 +100,13 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonProperty("is_public_proxy")]
         public bool IsPublicProxy { get; internal set; }
+
+        /// <summary>
+        ///     This is true if the IP address is on a suspected anonymizing
+        ///     network and belongs to a residential ISP.
+        /// </summary>
+        [JsonProperty("is_residential_proxy")]
+        public bool IsResidentialProxy { get; internal set; }
 
         /// <summary>
         ///     Returns true if IP is a Tor exit node.

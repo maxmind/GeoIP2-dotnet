@@ -36,6 +36,7 @@ namespace MaxMind.GeoIP2.Model
             [Parameter("is_hosting_provider")] bool isHostingProvider = false,
             [Parameter("is_legitimate_proxy")] bool isLegitimateProxy = false,
             [Parameter("is_public_proxy")] bool isPublicProxy = false,
+            [Parameter("is_residential_proxy")] bool isResidentialProxy = false,
             [Parameter("is_satellite_provider")] bool isSatelliteProvider = false,
             [Parameter("is_tor_exit_node")] bool isTorExitNode = false,
             string? isp = null,
@@ -59,6 +60,7 @@ namespace MaxMind.GeoIP2.Model
             IsHostingProvider = isHostingProvider;
             IsLegitimateProxy = isLegitimateProxy;
             IsPublicProxy = isPublicProxy;
+            IsResidentialProxy = isResidentialProxy;
 #pragma warning disable 618
             IsSatelliteProvider = isSatelliteProvider;
 #pragma warning restore 618
@@ -69,6 +71,37 @@ namespace MaxMind.GeoIP2.Model
             StaticIPScore = staticIPScore;
             UserCount = userCount;
             UserType = userType;
+        }
+
+        /// <summary>
+        ///     Constructor for binary compatibility.
+        /// </summary>
+        [Obsolete]
+        public Traits(
+            long? autonomousSystemNumber,
+            string? autonomousSystemOrganization,
+            string? connectionType,
+            string? domain,
+            string? ipAddress,
+            bool isAnonymous,
+            bool isAnonymousProxy,
+            bool isAnonymousVpn,
+            bool isHostingProvider,
+            bool isLegitimateProxy,
+            bool isPublicProxy,
+            bool isSatelliteProvider,
+            bool isTorExitNode,
+            string? isp,
+            string? organization,
+            string? userType,
+            Network? network,
+            double? staticIPScore,
+            int? userCount
+        ) : this(autonomousSystemNumber, autonomousSystemOrganization, connectionType, domain,
+                 ipAddress, isAnonymous, isAnonymousProxy, isAnonymousVpn, isHostingProvider,
+                 isLegitimateProxy, isPublicProxy, false, isSatelliteProvider, isTorExitNode,
+                 isp, organization, userType, network, staticIPScore, userCount)
+        {
         }
 
         /// <summary>
@@ -176,6 +209,14 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonProperty("is_public_proxy")]
         public bool IsPublicProxy { get; internal set; }
+
+        /// <summary>
+        ///     This is true if the IP address is on a suspected anonymizing
+        ///     network and belongs to a residential ISP. This value is
+        ///     only available from GeoIP2 Precision Insights.
+        /// </summary>
+        [JsonProperty("is_residential_proxy")]
+        public bool IsResidentialProxy { get; internal set; }
 
         /// <summary>
         ///     This is true if the IP belong to a satellite Internet provider.
