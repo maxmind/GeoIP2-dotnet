@@ -1,6 +1,13 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+3.3.0
+------------------
+
+* The `IsResidentialProxy` property has been added to
+  `MaxMind.GeoIP2.Responses.AnonymousIPResponse` and
+  `MaxMind.GeoIP2.Model.Traits`.
+
 3.2.0 (2020-04-28)
 ------------------
 
@@ -223,7 +230,7 @@ GeoIP2 .NET API Release Notes
 
 * Added support for the GeoIP2 Anonymous IP database. The `DatabaseReader`
   class now has an `AnonymousIP()` method which returns an
-  `AnonymousIpResponse` object.
+  `AnonymousIPResponse` object.
 
 2.0.0 (2014-09-29)
 ------------------

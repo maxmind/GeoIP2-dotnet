@@ -92,6 +92,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.True(insights.Traits.IsAnonymousVpn);
             Assert.True(insights.Traits.IsHostingProvider);
             Assert.True(insights.Traits.IsPublicProxy);
+            Assert.True(insights.Traits.IsResidentialProxy);
             Assert.True(insights.Traits.IsTorExitNode);
 #pragma warning disable 0618
             Assert.True(insights.Traits.IsAnonymousProxy);
