@@ -56,7 +56,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     Constructor for binary compatibility.
         /// </summary>
-        [Obsolete]
+        [Obsolete("For binary compatibility only")]
         public AnonymousIPResponse(
             bool isAnonymous,
             bool isAnonymousVpn,
