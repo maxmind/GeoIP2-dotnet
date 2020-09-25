@@ -2,7 +2,7 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v3.2.0
+version: v3.3.0
 ---
 # GeoIP2 .NET API #
 
@@ -310,12 +310,13 @@ See the API documentation for more details.
 using (var reader = new DatabaseReader("GeoIP2-Anonymous-IP.mmdb"))
 {
     var response = reader.AnonymousIP("85.25.43.84");
-    Console.WriteLine(response.IsAnonymous);       // true
-    Console.WriteLine(response.IsAnonymousVpn);    // false
-    Console.WriteLine(response.IsHostingProvider); // false
+    Console.WriteLine(response.IsAnonymous);        // true
+    Console.WriteLine(response.IsAnonymousVpn);     // false
+    Console.WriteLine(response.IsHostingProvider);  // false
     Console.WriteLine(response.IsPublicProxy);      // false
-    Console.WriteLine(response.IsTorExitNode);     // true
-    Console.WriteLine(response.IPAddress);         // '85.25.43.84'
+    Console.WriteLine(response.IsResidentialProxy); // false
+    Console.WriteLine(response.IsTorExitNode);      // true
+    Console.WriteLine(response.IPAddress);          // '85.25.43.84'
 }
 ```
 
@@ -498,9 +499,6 @@ data each end point may return.
 
 The only piece of data which is always returned is the `ipAddress` attribute
 in the `MaxMind.GeoIP2.Traits` record.
-
-Every record class attribute has a corresponding predicate method so you can
-check to see if the attribute is set.
 
 ## Integration with GeoNames ##
 
