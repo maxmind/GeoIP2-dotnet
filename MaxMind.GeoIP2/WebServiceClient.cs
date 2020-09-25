@@ -366,10 +366,8 @@ namespace MaxMind.GeoIP2
             where T : AbstractCountryResponse, new()
         {
             var uri = BuildUri(type, ipAddress);
-            using (var response = _syncClient.Get(uri))
-            {
-                return HandleResponse<T>(response);
-            }
+            using var response = _syncClient.Get(uri);
+            return HandleResponse<T>(response);
         }
 
 #endif
@@ -378,10 +376,8 @@ namespace MaxMind.GeoIP2
             where T : AbstractCountryResponse, new()
         {
             var uri = BuildUri(type, ipAddress);
-            using (var response = await _asyncClient.Get(uri).ConfigureAwait(false))
-            {
-                return HandleResponse<T>(response);
-            }
+            using var response = await _asyncClient.Get(uri).ConfigureAwait(false);
+            return HandleResponse<T>(response);
         }
 
         private Uri BuildUri(string type, IPAddress? ipAddress)
@@ -424,21 +420,19 @@ namespace MaxMind.GeoIP2
             using var sr = new StreamReader(response.Stream);
             try
             {
-                using (JsonReader reader = new JsonTextReader(sr))
+                using JsonReader reader = new JsonTextReader(sr);
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new NetworkConverter());
+                var serializer = JsonSerializer.Create(settings);
+                var model = serializer.Deserialize<T>(reader);
+                if (model == null)
                 {
-                    var settings = new JsonSerializerSettings();
-                    settings.Converters.Add(new NetworkConverter());
-                    var serializer = JsonSerializer.Create(settings);
-                    var model = serializer.Deserialize<T>(reader);
-                    if (model == null)
-                    {
-                        throw new HttpException(
-                            $"Received a 200 response for {response.RequestUri} but there was no message body.",
-                            HttpStatusCode.OK, response.RequestUri);
-                    }
-                    model.SetLocales(_locales);
-                    return model;
+                    throw new HttpException(
+                        $"Received a 200 response for {response.RequestUri} but there was no message body.",
+                        HttpStatusCode.OK, response.RequestUri);
                 }
+                model.SetLocales(_locales);
+                return model;
             }
             catch (JsonReaderException ex)
             {
