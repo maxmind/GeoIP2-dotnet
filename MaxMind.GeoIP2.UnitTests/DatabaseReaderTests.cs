@@ -88,6 +88,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("1.2.0.0/16", response.Network?.ToString());
         }
 
+        [Fact]
         public void AnonymousIP_ValidResponseWithAllTrue()
         {
             using var reader = new DatabaseReader(_anonymousIpDatabaseFile);
