@@ -76,7 +76,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     Constructor for binary compatibility.
         /// </summary>
-        [Obsolete]
+        [Obsolete("For binary compatibility only")]
         public Traits(
             long? autonomousSystemNumber,
             string? autonomousSystemOrganization,

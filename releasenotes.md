@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-3.3.0
+3.3.0 (2020-09-25)
 ------------------
 
 * The `IsResidentialProxy` property has been added to

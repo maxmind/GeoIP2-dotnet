@@ -7,7 +7,7 @@ using System.Net;
 
 namespace MaxMind.GeoIP2.Benchmark
 {
-    public class Program
+    public static class Program
     {
         private const int Count = 200000;
 
@@ -52,11 +52,11 @@ namespace MaxMind.GeoIP2.Benchmark
                 Bench("Memory mode", reader);
             }
 
-            //            using (var reader = new DatabaseReader("GeoLite2-City.mmdb", FileAccessMode.MemoryMapped))
-            //            {
-            //                Bench("Warm-up for MMAP mode", reader);
-            //                Bench("MMAP mode", reader);
-            //            }
+            using (var reader = new DatabaseReader(dbPath, FileAccessMode.MemoryMapped))
+            {
+                Bench("Warm-up for MMAP mode", reader);
+                Bench("MMAP mode", reader);
+            }
         }
 
         private static void Bench(string name, DatabaseReader reader)
