@@ -1,5 +1,4 @@
-﻿// In .NET Core, the HttpWebRequest does not offer synchronous Send/Get mehtods.
-#region
+﻿#region
 
 using System;
 
