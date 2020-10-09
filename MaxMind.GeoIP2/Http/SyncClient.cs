@@ -1,5 +1,4 @@
-﻿#if !NETSTANDARD1_4
-// In .NET Core, the HttpWebRequest does not offer synchronous Send/Get mehtods.
+﻿// In .NET Core, the HttpWebRequest does not offer synchronous Send/Get mehtods.
 #region
 
 using MaxMind.GeoIP2.Exceptions;
@@ -55,4 +54,3 @@ namespace MaxMind.GeoIP2.Http
         }
     }
 }
-#endif

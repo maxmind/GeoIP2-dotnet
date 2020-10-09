@@ -1,5 +1,4 @@
-﻿#if !NETSTANDARD1_4
-#region
+﻿#region
 
 using MaxMind.GeoIP2.Responses;
 using System.Net;
@@ -43,4 +42,3 @@ namespace MaxMind.GeoIP2
         CityResponse City(IPAddress ipAddress);
     }
 }
-#endif

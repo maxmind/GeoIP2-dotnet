@@ -11,13 +11,8 @@ namespace MaxMind.GeoIP2
     /// <summary>
     ///     Interface for web-service client
     /// </summary>
-#if !NETSTANDARD1_4
     public interface IGeoIP2WebServicesClient : IGeoIP2Provider
-#else
-    public interface IGeoIP2WebServicesClient
-#endif
     {
-#if !NETSTANDARD1_4
         /// <summary>
         ///     Returns an <see cref="CountryResponse" /> for the requesting IP address.
         /// </summary>
@@ -49,7 +44,6 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <returns>An <see cref="InsightsResponse" /></returns>
         InsightsResponse Insights();
-#endif
 
         /// <summary>
         ///     Asynchronously query the GeoIP2 Precision: Country web service for the specified IP address.

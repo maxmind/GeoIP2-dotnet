@@ -4,10 +4,8 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
-#if !NETCOREAPP1_1
 using MaxMind.GeoIP2.UnitTests.Mock;
-#endif
-#if !NET452
+#if !NET452 && !NET46
 using Microsoft.Extensions.Options;
 #endif
 using RichardSzalay.MockHttp;
@@ -35,14 +33,12 @@ namespace MaxMind.GeoIP2.UnitTests
         // "Async" added to the name so that Nunit can tell them apart.
         public static readonly object[][] TestCases =
         {
-#if !NETCOREAPP1_1
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"country", (ClientRunner) (async (c, i) => c.Country(i)), typeof(CountryResponse)},
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"city", (ClientRunner) (async (c, i) => c.City(i)), typeof(CityResponse)},
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"insights", (ClientRunner) (async (c, i) => c.Insights(i)), typeof(InsightsResponse)},
-#endif
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[]
                 {"countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof(CountryResponse)},
@@ -57,7 +53,6 @@ namespace MaxMind.GeoIP2.UnitTests
 
         public static readonly object[][] MeTestCases =
         {
-#if !NETCOREAPP1_1
             new object[]
             {
                 "country", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Country())),
@@ -72,7 +67,6 @@ namespace MaxMind.GeoIP2.UnitTests
                 "insights", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Insights())),
                 typeof(InsightsResponse)
             },
-#endif
             new object[]
                 {"countryAsync", (MeClientRunner) (async c => await c.CountryAsync()), typeof(CountryResponse)},
             new object[] {"cityAsync", (MeClientRunner) (async c => await c.CityAsync()), typeof(CityResponse)},
@@ -104,22 +98,18 @@ namespace MaxMind.GeoIP2.UnitTests
                 .WithHeaders("Accept", "application/json")
                 .Respond(message);
 
-#if !NETCOREAPP1_1
             // HttpWebRequest mock
             var contentsBytes = Encoding.UTF8.GetBytes(content);
             var responseStream = new MemoryStream(contentsBytes);
 
             var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, responseStream));
-#endif
 
             return new WebServiceClient(6, "0123456789",
                 locales: new List<string> { "en" },
                 host: "geoip.maxmind.com",
                 timeout: 3000,
-                httpMessageHandler: mockHttp
-#if !NETCOREAPP1_1
-                , syncWebRequest: syncWebRequest
-#endif
+                httpMessageHandler: mockHttp,
+                syncWebRequest: syncWebRequest
             );
         }
 
@@ -367,8 +357,6 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal(t, result.GetType());
         }
 
-#if !NETCOREAPP1_1
-
         [Fact]
         public void MissingKeys()
         {
@@ -460,8 +448,6 @@ namespace MaxMind.GeoIP2.UnitTests
             }
         }
 
-#endif
-
         [Fact]
         public void Constructors()
         {
@@ -481,7 +467,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
         #region NetCoreTests
 
-#if !NET452
+#if !NET452 && !NET46
 
         private static WebServiceClient CreateClientCore(string type, string ipAddress = "1.2.3.4",
             HttpStatusCode status = HttpStatusCode.OK, string? contentType = null, string content = "")
