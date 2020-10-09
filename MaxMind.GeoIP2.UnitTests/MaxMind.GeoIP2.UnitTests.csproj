@@ -3,8 +3,8 @@
   <PropertyGroup>
     <Description>Test project to validate MaxMind GeoIP2 Database Reader and Web Service Client</Description>
     <VersionPrefix>2.7.0</VersionPrefix>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net452;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net452;net46;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>MaxMind.GeoIP2.UnitTests</AssemblyName>
     <AssemblyOriginatorKeyFile>../MaxMind.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>

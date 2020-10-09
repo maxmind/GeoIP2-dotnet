@@ -1,6 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+3.4.0
+------------------
+
+* This library now requires .NET Framework 4.5 or greater or .NET Standard
+  2.0 or greater.
+
 3.3.0 (2020-09-25)
 ------------------
 
