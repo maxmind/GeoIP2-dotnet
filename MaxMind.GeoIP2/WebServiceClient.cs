@@ -15,7 +15,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-#if !NET45 && !NETSTANDARD1_4
+#if  !NET45 && !NET46 && !NETSTANDARD1_4
 using Microsoft.Extensions.Options;
 #endif
 
@@ -85,7 +85,7 @@ namespace MaxMind.GeoIP2
 
         private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
 
-#if !NET45 && !NETSTANDARD1_4
+#if !NET45 && !NET46 && !NETSTANDARD1_4
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
         /// </summary>
