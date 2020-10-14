@@ -44,13 +44,13 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Extensions.Options">
-      <Version>3.1.8</Version>
+      <Version>3.1.9</Version>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
     <PackageReference Include="Microsoft.Extensions.Options">
-      <Version>3.1.8</Version>
+      <Version>3.1.9</Version>
     </PackageReference>
   </ItemGroup>
 
