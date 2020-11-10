@@ -46,13 +46,13 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
     <PackageReference Include="Microsoft.Extensions.Options">
-      <Version>3.1.9</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <PackageReference Include="Microsoft.Extensions.Options">
-      <Version>3.1.9</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
 
