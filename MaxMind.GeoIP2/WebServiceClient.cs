@@ -125,7 +125,7 @@ namespace MaxMind.GeoIP2
             string host = "geoip.maxmind.com",
             int timeout = 3000,
             HttpMessageHandler? httpMessageHandler = null
-        ) : this(accountId, licenseKey, locales, host, timeout, null, false)
+        ) : this(accountId, licenseKey, locales, host, timeout, httpMessageHandler, false)
         {
         }
 
