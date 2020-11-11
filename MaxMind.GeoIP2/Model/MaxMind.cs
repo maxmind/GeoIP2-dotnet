@@ -23,7 +23,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Constructor
         /// </summary>
         [Constructor]
-        public MaxMind([Parameter("queries_remaining")] int? queriesRemaining = null)
+        public MaxMind([Parameter("queries_remaining")] int queriesRemaining)
         {
             QueriesRemaining = queriesRemaining;
         }
