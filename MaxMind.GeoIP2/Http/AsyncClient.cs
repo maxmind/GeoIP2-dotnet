@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
 
 #endregion
 
@@ -15,41 +14,20 @@ namespace MaxMind.GeoIP2.Http
     {
         private readonly HttpClient _httpClient;
         private bool _disposed;
-        private readonly HttpMessageHandler? _httpMessageHandler;
 
-        // As far as I can tell, this warning is a false positive. It is for the HttpClient instance.
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public AsyncClient(
             string auth,
             int timeout,
             ProductInfoHeaderValue userAgent,
-            HttpMessageHandler? httpMessageHandler = null,
-            HttpClient? httpClient = null
+            HttpClient httpClient
             )
         {
-            if (httpClient == null)
-            {
-                _httpMessageHandler = httpMessageHandler ?? new HttpClientHandler();
-                try
-                {
-                    _httpClient = new HttpClient(_httpMessageHandler);
-                }
-                catch
-                {
-                    _httpClient?.Dispose();
-                    _httpMessageHandler.Dispose();
-                    throw;
-                }
-            }
-            else
-            {
-                _httpClient = httpClient;
-            }
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
+            httpClient.Timeout = TimeSpan.FromMilliseconds(timeout);
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
-            _httpClient.Timeout = TimeSpan.FromMilliseconds(timeout);
+            _httpClient = httpClient;
         }
 
         public async Task<Response> Get(Uri uri)
@@ -75,7 +53,6 @@ namespace MaxMind.GeoIP2.Http
             if (disposing)
             {
                 _httpClient.Dispose();
-                _httpMessageHandler?.Dispose();
             }
 
             _disposed = true;

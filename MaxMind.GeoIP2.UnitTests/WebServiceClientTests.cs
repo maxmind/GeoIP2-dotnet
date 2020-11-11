@@ -42,9 +42,7 @@ namespace MaxMind.GeoIP2.UnitTests
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[]
                 {"countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof(CountryResponse)},
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[] {"cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof(CityResponse)},
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             new object[]
                 {"insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof(InsightsResponse)}
         };
@@ -108,7 +106,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 locales: new List<string> { "en" },
                 host: "geoip.maxmind.com",
                 timeout: 3000,
-                httpMessageHandler: mockHttp,
+                httpClient: new HttpClient(mockHttp),
                 syncWebRequest: syncWebRequest
             );
         }

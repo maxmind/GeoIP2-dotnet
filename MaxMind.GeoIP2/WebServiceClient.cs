@@ -98,9 +98,6 @@ namespace MaxMind.GeoIP2
             options.Value.Locales,
             options.Value.Host,
             options.Value.Timeout,
-            null,
-            false,
-            null,
             httpClient)
         {
         }
@@ -111,10 +108,14 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="accountId">Your MaxMind account ID.</param>
         /// <param name="licenseKey">Your MaxMind license key.</param>
-        /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
+        /// <param name="locales">List of locale codes to use in name 
+        ///     property from most preferred to least preferred.</param>
         /// <param name="host">The host to use when accessing the service</param>
-        /// <param name="timeout">Timeout in milliseconds for connection to web service. The default is 3000.</param>
-        /// <param name="httpMessageHandler">The <c>HttpMessageHandler</c> to use when creating the <c>HttpClient</c>.</param>
+        /// <param name="timeout">Timeout in milliseconds for connection to 
+        ///     web service. The default is 3000.</param>
+        /// <param name="httpMessageHandler">The <c>HttpMessageHandler</c> to
+        ///     use when creating the <c>HttpClient</c>. The handler will be 
+        ///     disposed.</param>
         public WebServiceClient(
             int accountId,
             string licenseKey,
@@ -122,7 +123,13 @@ namespace MaxMind.GeoIP2
             string host = "geoip.maxmind.com",
             int timeout = 3000,
             HttpMessageHandler? httpMessageHandler = null
-        ) : this(accountId, licenseKey, locales, host, timeout, httpMessageHandler, false)
+        ) : this(
+            accountId, 
+            licenseKey, 
+            locales,
+            host, 
+            timeout,
+            new HttpClient(httpMessageHandler ?? new HttpClientHandler(), true))
         {
         }
 
@@ -145,20 +152,15 @@ namespace MaxMind.GeoIP2
             IEnumerable<string>? locales,
             string host,
             int timeout,
-            HttpMessageHandler? httpMessageHandler,
-            // This is a hack so that we can keep this internal while adding
-            // httpMessageHandler to the public constructor. We can remove
-            // this when we drop .NET 4.5 support and get rid of ISyncClient.
-            bool fakeParam = false,
-            ISyncClient? syncWebRequest = null,
-            HttpClient? httpClient = null
+            HttpClient httpClient,
+            ISyncClient? syncWebRequest = null
             )
         {
             var auth = EncodedAuth(accountId, licenseKey);
             _host = host;
             _locales = locales == null ? new List<string> { "en" } : new List<string>(locales);
             _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
-            _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpMessageHandler, httpClient);
+            _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpClient);
         }
 
         /// <summary>
