@@ -6,6 +6,7 @@ GeoIP2 .NET API Release Notes
 
 * This library now requires .NET Framework 4.5 or greater or .NET Standard
   2.0 or greater.
+* .NET 5.0 was added as a target framework.
 * The `httpMessageHandler` argument is now correctly initialized by the
   `WebServiceClient` constructor.
 
