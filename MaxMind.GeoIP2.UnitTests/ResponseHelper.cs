@@ -1,6 +1,6 @@
 ﻿namespace MaxMind.GeoIP2.UnitTests
 {
-    internal class ResponseHelper
+    internal static class ResponseHelper
     {
         public static string InsightsJson = @"
             {
