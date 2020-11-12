@@ -218,8 +218,6 @@ namespace MaxMind.GeoIP2.UnitTests
                 "ACCOUNT_ID_UNKNOWN",
                 "AUTHORIZATION_INVALID",
                 "LICENSE_KEY_REQUIRED",
-                "USER_ID_REQUIRED",
-                "USER_ID_UNKNOWN"
             };
             foreach (var error in errors)
             {
