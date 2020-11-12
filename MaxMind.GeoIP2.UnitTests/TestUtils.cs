@@ -40,7 +40,7 @@ namespace MaxMind.GeoIP2.UnitTests
                     return currentDirectoryInfo.FullName;
                 }
                 currentDirectoryInfo = currentDirectoryInfo.Parent;
-            } while (currentDirectoryInfo.Parent != null);
+            } while (currentDirectoryInfo?.Parent != null);
 
             return currentDirectory;
         }

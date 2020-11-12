@@ -471,7 +471,7 @@ namespace MaxMind.GeoIP2
             {
                 var frame = new StackFrame(2, true);
                 throw new InvalidOperationException(
-                    $"A {Metadata.DatabaseType} database cannot be opened with the {frame.GetMethod().Name} method");
+                    $"A {Metadata.DatabaseType} database cannot be opened with the {frame.GetMethod()?.Name} method");
             }
 
             var injectables = new InjectableValues();

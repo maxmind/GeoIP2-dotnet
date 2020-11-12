@@ -40,7 +40,7 @@ namespace MaxMind.GeoIP2.Http
             }
             catch (WebException e)
             {
-                if (e.Status != WebExceptionStatus.ProtocolError)
+                if (e.Status != WebExceptionStatus.ProtocolError || e.Response == null)
                 {
                     throw new HttpException(
                         $"Error received while making request: {e.Message}",
