@@ -54,23 +54,6 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        ///     Constructor for binary compatibility.
-        /// </summary>
-        [Obsolete("For binary compatibility only")]
-        public AnonymousIPResponse(
-            bool isAnonymous,
-            bool isAnonymousVpn,
-            bool isHostingProvider,
-            bool isPublicProxy,
-            bool isTorExitNode,
-            string? ipAddress,
-            Network? network
-        ) : this(isAnonymous, isAnonymousVpn, isHostingProvider, isPublicProxy, false,
-                 isTorExitNode, ipAddress,  network)
-        {
-        }
-
-        /// <summary>
         ///     Returns true if the IP address belongs to any sort of anonymous network.
         /// </summary>
         [JsonInclude]

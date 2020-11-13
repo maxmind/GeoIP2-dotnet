@@ -132,19 +132,6 @@ namespace MaxMind.GeoIP2
         {
         }
 
-        /// <summary>
-        ///     Constructor for binary compatibility.
-        /// </summary>
-        public WebServiceClient(
-            int accountId,
-            string licenseKey,
-            IEnumerable<string>? locales,
-            string host,
-            int timeout
-        ) : this(accountId, licenseKey, locales, host, timeout, null)
-        {
-        }
-
         internal WebServiceClient(
             int accountId,
             string licenseKey,

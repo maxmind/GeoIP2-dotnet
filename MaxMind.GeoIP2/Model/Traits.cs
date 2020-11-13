@@ -74,37 +74,6 @@ namespace MaxMind.GeoIP2.Model
         }
 
         /// <summary>
-        ///     Constructor for binary compatibility.
-        /// </summary>
-        [Obsolete("For binary compatibility only")]
-        public Traits(
-            long? autonomousSystemNumber,
-            string? autonomousSystemOrganization,
-            string? connectionType,
-            string? domain,
-            string? ipAddress,
-            bool isAnonymous,
-            bool isAnonymousProxy,
-            bool isAnonymousVpn,
-            bool isHostingProvider,
-            bool isLegitimateProxy,
-            bool isPublicProxy,
-            bool isSatelliteProvider,
-            bool isTorExitNode,
-            string? isp,
-            string? organization,
-            string? userType,
-            Network? network,
-            double? staticIPScore,
-            int? userCount
-        ) : this(autonomousSystemNumber, autonomousSystemOrganization, connectionType, domain,
-                 ipAddress, isAnonymous, isAnonymousProxy, isAnonymousVpn, isHostingProvider,
-                 isLegitimateProxy, isPublicProxy, false, isSatelliteProvider, isTorExitNode,
-                 isp, organization, userType, network, staticIPScore, userCount)
-        {
-        }
-
-        /// <summary>
         ///     The
         ///     <a
         ///         href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
