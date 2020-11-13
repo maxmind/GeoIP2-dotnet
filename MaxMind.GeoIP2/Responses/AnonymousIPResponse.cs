@@ -1,7 +1,6 @@
 ﻿#region
 
 using MaxMind.Db;
-using System;
 using System.Text.Json.Serialization;
 
 #endregion
