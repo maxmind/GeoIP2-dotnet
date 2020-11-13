@@ -70,9 +70,9 @@ namespace MaxMind.GeoIP2
     public class WebServiceClient : IGeoIP2WebServicesClient, IDisposable
     {
         private static readonly string Version =
-            ((AssemblyInformationalVersionAttribute)
+            ((AssemblyInformationalVersionAttribute?)
                 typeof(WebServiceClient).GetTypeInfo().Assembly.GetCustomAttribute(
-                    typeof(AssemblyInformationalVersionAttribute))).InformationalVersion;
+                    typeof(AssemblyInformationalVersionAttribute)))?.InformationalVersion ?? "unknown";
 
         private readonly string _host;
         private readonly IEnumerable<string> _locales;
@@ -486,30 +486,15 @@ namespace MaxMind.GeoIP2
                     $"Response contains JSON but does not specify code or error keys: {content}",
                     response.StatusCode,
                     response.RequestUri);
-            switch (webServiceError.Code)
+            return webServiceError.Code switch
             {
-                case "IP_ADDRESS_NOT_FOUND":
-                case "IP_ADDRESS_RESERVED":
-                    return new AddressNotFoundException(webServiceError.Error);
-
-                case "ACCOUNT_ID_REQUIRED":
-                case "ACCOUNT_ID_UNKNOWN":
-                case "AUTHORIZATION_INVALID":
-                case "LICENSE_KEY_REQUIRED":
-                case "USER_ID_REQUIRED":
-                case "USER_ID_UNKNOWN":
-                    return new AuthenticationException(webServiceError.Error);
-
-                case "INSUFFICIENT_FUNDS":
-                case "OUT_OF_QUERIES":
-                    return new OutOfQueriesException(webServiceError.Error);
-
-                case "PERMISSION_REQUIRED":
-                    return new PermissionRequiredException(webServiceError.Error);
-
-                default:
-                    return new InvalidRequestException(webServiceError.Error, webServiceError.Code, response.RequestUri);
-            }
+                "IP_ADDRESS_NOT_FOUND" or "IP_ADDRESS_RESERVED" => new AddressNotFoundException(webServiceError.Error),
+                "ACCOUNT_ID_REQUIRED" or "ACCOUNT_ID_UNKNOWN" or "AUTHORIZATION_INVALID" or "LICENSE_KEY_REQUIRED"
+                    => new AuthenticationException(webServiceError.Error),
+                "INSUFFICIENT_FUNDS" or "OUT_OF_QUERIES" => new OutOfQueriesException(webServiceError.Error),
+                "PERMISSION_REQUIRED" => new PermissionRequiredException(webServiceError.Error),
+                _ => new InvalidRequestException(webServiceError.Error, webServiceError.Code, response.RequestUri),
+            };
         }
 
         /// <summary>
