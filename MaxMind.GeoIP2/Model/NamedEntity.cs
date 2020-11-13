@@ -19,13 +19,12 @@ namespace MaxMind.GeoIP2.Model
         ///     Constructor
         /// </summary>
         [Constructor]
-        protected NamedEntity(long? geoNameId = null, IDictionary<string, string>? names = null,
-            IEnumerable<string>? locales = null)
+        protected NamedEntity(long? geoNameId = null, IReadOnlyDictionary<string, string>? names = null,
+            IReadOnlyList<string>? locales = null)
         {
-            Names = new ReadOnlyDictionary<string, string>( 
-                names != null ? new Dictionary<string, string>(names) : new Dictionary<string, string>());
+            Names = names ?? new ReadOnlyDictionary<string, string>(new Dictionary<string, string>());
             GeoNameId = geoNameId;
-            Locales = locales != null ? new List<string>(locales) : new List<string> { "en" };
+            Locales = locales ?? new List<string> { "en" }.AsReadOnly();
         }
 
         /// <summary>
@@ -51,7 +50,7 @@ namespace MaxMind.GeoIP2.Model
         ///     Gets or sets the locales specified by the user.
         /// </summary>
         [JsonIgnore]
-        protected internal IEnumerable<string> Locales { get; set; }
+        protected internal IReadOnlyList<string> Locales { get; set; }
 
         /// <summary>
         ///     The name of the city based on the locales list passed to the

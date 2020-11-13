@@ -74,7 +74,7 @@ namespace MaxMind.GeoIP2
                     typeof(AssemblyInformationalVersionAttribute)))?.InformationalVersion ?? "unknown";
 
         private readonly string _host;
-        private readonly IEnumerable<string> _locales;
+        private readonly IReadOnlyList<string> _locales;
         private readonly AsyncClient _asyncClient;
         private readonly ISyncClient _syncClient;
         private bool _disposed;
@@ -144,7 +144,7 @@ namespace MaxMind.GeoIP2
         {
             var auth = EncodedAuth(accountId, licenseKey);
             _host = host;
-            _locales = locales == null ? new List<string> { "en" } : new List<string>(locales);
+            _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
             _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
             _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpClient);
         }

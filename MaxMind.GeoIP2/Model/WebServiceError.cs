@@ -5,7 +5,7 @@ namespace MaxMind.GeoIP2.Model
     /// <summary>
     ///     Contains data about an error that occurred while calling the web service
     /// </summary>
-    public class WebServiceError
+    internal class WebServiceError
     {
         /// <summary>
         ///     Gets or sets the error.

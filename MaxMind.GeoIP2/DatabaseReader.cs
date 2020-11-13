@@ -19,7 +19,7 @@ namespace MaxMind.GeoIP2
     public class DatabaseReader : IGeoIP2DatabaseReader, IDisposable
     {
         private bool _disposed;
-        private readonly IEnumerable<string> _locales;
+        private readonly IReadOnlyList<string> _locales;
         private readonly Reader _reader;
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace MaxMind.GeoIP2
         public DatabaseReader(string file, IEnumerable<string> locales,
             FileAccessMode mode = FileAccessMode.MemoryMapped)
         {
-            _locales = new List<string>(locales);
+            _locales = new List<string>(locales).AsReadOnly();
             _reader = new Reader(file, mode);
         }
 

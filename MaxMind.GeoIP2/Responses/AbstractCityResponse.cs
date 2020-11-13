@@ -37,15 +37,14 @@ namespace MaxMind.GeoIP2.Responses
             Postal? postal = null,
             Country? registeredCountry = null,
             RepresentedCountry? representedCountry = null,
-            IEnumerable<Subdivision>? subdivisions = null,
+            IReadOnlyList<Subdivision>? subdivisions = null,
             Traits? traits = null)
             : base(continent, country, maxMind, registeredCountry, representedCountry, traits)
         {
             City = city ?? new City();
             Location = location ?? new Location();
             Postal = postal ?? new Postal();
-            Subdivisions = subdivisions != null ? 
-                new List<Subdivision>(subdivisions).AsReadOnly() : new List<Subdivision>().AsReadOnly();
+            Subdivisions = subdivisions ?? new List<Subdivision>().AsReadOnly();
         }
 
         /// <summary>
@@ -127,7 +126,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     Sets the locales on all the NamedEntity properties.
         /// </summary>
         /// <param name="locales">The locales specified by the user.</param>
-        protected internal override void SetLocales(IEnumerable<string> locales)
+        protected internal override void SetLocales(IReadOnlyList<string> locales)
         {
             locales = locales.ToList();
             base.SetLocales(locales);

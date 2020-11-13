@@ -32,8 +32,8 @@ namespace MaxMind.GeoIP2.Model
             [Parameter("geoname_id")] long? geoNameId = null,
             [Parameter("is_in_european_union")] bool isInEuropeanUnion = false,
             [Parameter("iso_code")] string? isoCode = null,
-            IDictionary<string, string>? names = null,
-            IEnumerable<string>? locales = null)
+            IReadOnlyDictionary<string, string>? names = null,
+            IReadOnlyList<string>? locales = null)
             : base(geoNameId, names, locales)
         {
             Confidence = confidence;
