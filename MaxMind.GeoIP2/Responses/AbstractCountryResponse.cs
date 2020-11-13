@@ -1,9 +1,9 @@
 ﻿#region
 
 using MaxMind.GeoIP2.Model;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -49,7 +49,8 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     Gets the continent for the requested IP address.
         /// </summary>
-        [JsonProperty("continent")]
+        [JsonInclude]
+        [JsonPropertyName("continent")]
         public Continent Continent { get; internal set; }
 
         /// <summary>
@@ -57,13 +58,15 @@ namespace MaxMind.GeoIP2.Responses
         ///     object represents the country where MaxMind believes
         ///     the end user is located
         /// </summary>
-        [JsonProperty("country")]
+        [JsonInclude]
+        [JsonPropertyName("country")]
         public Country Country { get; internal set; }
 
         /// <summary>
         ///     Gets the MaxMind record containing data related to your account
         /// </summary>
-        [JsonProperty("maxmind")]
+        [JsonInclude]
+        [JsonPropertyName("maxmind")]
         public Model.MaxMind MaxMind { get; internal set; }
 
         /// <summary>
@@ -71,7 +74,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     record represents the country where the ISP has registered a
         ///     given IP block and may differ from the user's country.
         /// </summary>
-        [JsonProperty("registered_country")]
+        [JsonInclude]
+        [JsonPropertyName("registered_country")]
         public Country RegisteredCountry { get; internal set; }
 
         /// <summary>
@@ -80,13 +84,15 @@ namespace MaxMind.GeoIP2.Responses
         ///     embassies. It is only present when the represented country
         ///     differs from the country.
         /// </summary>
-        [JsonProperty("represented_country")]
+        [JsonInclude]
+        [JsonPropertyName("represented_country")]
         public RepresentedCountry RepresentedCountry { get; internal set; }
 
         /// <summary>
         ///     Gets the traits for the requested IP address.
         /// </summary>
-        [JsonProperty("traits")]
+        [JsonInclude]
+        [JsonPropertyName("traits")]
         public Traits Traits { get; internal set; }
 
         /// <summary>

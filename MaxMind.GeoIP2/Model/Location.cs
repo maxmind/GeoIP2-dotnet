@@ -1,7 +1,7 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -44,13 +44,15 @@ namespace MaxMind.GeoIP2.Model
         ///     address resides within the circle centered at the latitude and
         ///     longitude with the provided radius.
         /// </summary>
-        [JsonProperty("accuracy_radius")]
+        [JsonInclude]
+        [JsonPropertyName("accuracy_radius")]
         public int? AccuracyRadius { get; internal set; }
 
         /// <summary>
         ///     The average income in US dollars associated with the IP address.
         /// </summary>
-        [JsonProperty("average_income")]
+        [JsonInclude]
+        [JsonPropertyName("average_income")]
         public int? AverageIncome { get; internal set; }
 
         /// <summary>
@@ -65,7 +67,8 @@ namespace MaxMind.GeoIP2.Model
         ///     IP address. This value is not precise and should not be used
         ///     to identify a particular address or household.
         /// </summary>
-        [JsonProperty("latitude")]
+        [JsonInclude]
+        [JsonPropertyName("latitude")]
         public double? Latitude { get; internal set; }
 
         /// <summary>
@@ -73,7 +76,8 @@ namespace MaxMind.GeoIP2.Model
         ///     IP address. This value is not precise and should not be used
         ///     to identify a particular address or household.
         /// </summary>
-        [JsonProperty("longitude")]
+        [JsonInclude]
+        [JsonPropertyName("longitude")]
         public double? Longitude { get; internal set; }
 
         /// <summary>
@@ -81,13 +85,15 @@ namespace MaxMind.GeoIP2.Model
         ///     MaxMind returns the same metro codes as the
         ///     <a href="https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions">Google AdWords API</a>.
         /// </summary>
-        [JsonProperty("metro_code")]
+        [JsonInclude]
+        [JsonPropertyName("metro_code")]
         public int? MetroCode { get; internal set; }
 
         /// <summary>
         ///     The estimated number of people per square kilometer.
         /// </summary>
-        [JsonProperty("population_density")]
+        [JsonInclude]
+        [JsonPropertyName("population_density")]
         public int? PopulationDensity { get; internal set; }
 
         /// <summary>
@@ -99,7 +105,8 @@ namespace MaxMind.GeoIP2.Model
         ///     </a>
         ///     , e.g., "America/New_York".
         /// </summary>
-        [JsonProperty("time_zone")]
+        [JsonInclude]
+        [JsonPropertyName("time_zone")]
         public string? TimeZone { get; internal set; }
 
         /// <summary>

@@ -1,9 +1,9 @@
 ﻿#region
 
 using MaxMind.GeoIP2.Model;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -14,9 +14,6 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public abstract class AbstractCityResponse : AbstractCountryResponse
     {
-        [JsonProperty("subdivisions")]
-        private readonly IList<Subdivision> _subdivisions;
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.
         /// </summary>
@@ -25,7 +22,7 @@ namespace MaxMind.GeoIP2.Responses
             City = new City();
             Location = new Location();
             Postal = new Postal();
-            _subdivisions = new List<Subdivision>();
+            Subdivisions = new List<Subdivision>().AsReadOnly();
         }
 
         /// <summary>
@@ -47,25 +44,29 @@ namespace MaxMind.GeoIP2.Responses
             City = city ?? new City();
             Location = location ?? new Location();
             Postal = postal ?? new Postal();
-            _subdivisions = subdivisions != null ? new List<Subdivision>(subdivisions) : new List<Subdivision>();
+            Subdivisions = subdivisions != null ? 
+                new List<Subdivision>(subdivisions).AsReadOnly() : new List<Subdivision>().AsReadOnly();
         }
 
         /// <summary>
         ///     Gets the city for the requested IP address.
         /// </summary>
-        [JsonProperty("city")]
+        [JsonInclude]
+        [JsonPropertyName("city")]
         public City City { get; internal set; }
 
         /// <summary>
         ///     Gets the location for the requested IP address.
         /// </summary>
-        [JsonProperty("location")]
+        [JsonInclude]
+        [JsonPropertyName("location")]
         public Location Location { get; internal set; }
 
         /// <summary>
         ///     Gets the postal object for the requested IP address.
         /// </summary>
-        [JsonProperty("postal")]
+        [JsonInclude]
+        [JsonPropertyName("postal")]
         public Postal Postal { get; internal set; }
 
         /// <summary>
@@ -77,8 +78,9 @@ namespace MaxMind.GeoIP2.Responses
         ///     If the response did not contain any subdivisions, this method
         ///     returns an empty array.
         /// </summary>
-        [JsonIgnore]
-        public List<Subdivision> Subdivisions => new List<Subdivision>(_subdivisions);
+        [JsonInclude]
+        [JsonPropertyName("subdivisions")]
+        public IReadOnlyList<Subdivision> Subdivisions { get; internal set; }
 
         /// <summary>
         ///     An object representing the most specific subdivision returned. If
@@ -93,7 +95,7 @@ namespace MaxMind.GeoIP2.Responses
                 if (Subdivisions == null || Subdivisions.Count == 0)
                     return new Subdivision();
 
-                return Subdivisions.Last();
+                return Subdivisions[Subdivisions.Count - 1];
             }
         }
 

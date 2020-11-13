@@ -1,12 +1,19 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-3.4.0
+4.0.0
 ------------------
 
-* This library now requires .NET Framework 4.5 or greater or .NET Standard
+* This library now requires .NET Framework 4.6.1 or greater or .NET Standard
   2.0 or greater.
 * .NET 5.0 was added as a target framework.
+* `System.Text.Json` is now used for deserialization of web service requests.
+  `Newtonsoft.Json` is no longer supported for serialization or
+  deserialization.
+* The `Names` property on `NamedEntity` modules is now an
+  `IReadOnlyDictionary<string, string>`.
+* The `Subdivisions` property on `CityResponse` and `InsightsResponse` is now
+  an `IReadOnlyList<Subdivision>`.
 * The `httpMessageHandler` argument is now correctly initialized by the
   `WebServiceClient` constructor.
 

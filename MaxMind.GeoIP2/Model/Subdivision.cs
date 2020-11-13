@@ -1,8 +1,8 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -44,8 +44,9 @@ namespace MaxMind.GeoIP2.Model
         ///     the subdivision is correct. This value is only set when using the
         ///     Insights web service or the Enterprise database.
         /// </summary>
-        [JsonProperty("confidence")]
-        public int? Confidence { get; set; }
+        [JsonInclude]
+        [JsonPropertyName("confidence")]
+        public int? Confidence { get; internal set; }
 
         /// <summary>
         ///     This is a string up to three characters long contain the
@@ -56,7 +57,8 @@ namespace MaxMind.GeoIP2.Model
         ///     </a>
         ///     .
         /// </summary>
-        [JsonProperty("iso_code")]
-        public string? IsoCode { get; set; }
+        [JsonInclude]
+        [JsonPropertyName("iso_code")]
+        public string? IsoCode { get; internal set; }
     }
 }

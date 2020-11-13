@@ -4,17 +4,16 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-#if !NET45 && !NET46
+#if !NET461
 using Microsoft.Extensions.Options;
 #endif
 
@@ -82,7 +81,7 @@ namespace MaxMind.GeoIP2
 
         private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
 
-#if !NET45 && !NET46
+#if !NET461
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
         /// </summary>
@@ -352,18 +351,18 @@ namespace MaxMind.GeoIP2
         }
 
         private T Execute<T>(string type, IPAddress? ipAddress)
-            where T : AbstractCountryResponse, new()
+            where T : AbstractCountryResponse
         {
             var uri = BuildUri(type, ipAddress);
-            using var response = _syncClient.Get(uri);
+            var response = _syncClient.Get(uri);
             return HandleResponse<T>(response);
         }
 
         private async Task<T> ExecuteAsync<T>(string type, IPAddress? ipAddress)
-            where T : AbstractCountryResponse, new()
+            where T : AbstractCountryResponse
         {
             var uri = BuildUri(type, ipAddress);
-            using var response = await _asyncClient.Get(uri).ConfigureAwait(false);
+            var response = await _asyncClient.Get(uri).ConfigureAwait(false);
             return HandleResponse<T>(response);
         }
 
@@ -379,7 +378,7 @@ namespace MaxMind.GeoIP2
         }
 
         private T HandleResponse<T>(Response response)
-            where T : AbstractCountryResponse, new()
+            where T : AbstractCountryResponse
         {
             if (response.StatusCode != HttpStatusCode.OK)
             {
@@ -389,7 +388,7 @@ namespace MaxMind.GeoIP2
         }
 
         private T CreateModel<T>(Response response)
-            where T : AbstractCountryResponse, new()
+            where T : AbstractCountryResponse
         {
             if (response.ContentType == null || !response.ContentType.Contains("json"))
             {
@@ -397,21 +396,18 @@ namespace MaxMind.GeoIP2
                     $"Received a 200 response for {response.ContentType} but it does not appear to be JSON:\n");
             }
 
-            if (response.Stream == null)
+            if (response.Content == null || response.Content.Length == 0)
             {
                 throw new HttpException(
                     $"Received a 200 response for {response.RequestUri} but there was no message body.",
                     HttpStatusCode.OK, response.RequestUri);
             }
 
-            using var sr = new StreamReader(response.Stream);
             try
             {
-                using JsonReader reader = new JsonTextReader(sr);
-                var settings = new JsonSerializerSettings();
-                settings.Converters.Add(new NetworkConverter());
-                var serializer = JsonSerializer.Create(settings);
-                var model = serializer.Deserialize<T>(reader);
+                var options = new JsonSerializerOptions();
+                options.Converters.Add(new NetworkConverter());
+                var model = JsonSerializer.Deserialize<T>(response.Content, options);
                 if (model == null)
                 {
                     throw new HttpException(
@@ -421,7 +417,7 @@ namespace MaxMind.GeoIP2
                 model.SetLocales(_locales);
                 return model;
             }
-            catch (JsonReaderException ex)
+            catch (JsonException ex)
             {
                 throw new GeoIP2Exception(
                     "Received a 200 response but not decode it as JSON", ex);
@@ -449,43 +445,44 @@ namespace MaxMind.GeoIP2
 
         private static Exception Create4xxException(Response response)
         {
-            string? content = null;
-
-            if (response.Stream != null)
-            {
-                var reader = new StreamReader(response.Stream, Encoding.UTF8);
-                content = reader.ReadToEnd();
-            }
-
-            if (string.IsNullOrEmpty(content))
+            if (response.Content == null || response.Content.Length == 0)
             {
                 return new HttpException(
                     $"Received a {response.StatusCode} error for {response.RequestUri} with no body",
                     response.StatusCode, response.RequestUri);
             }
 
+            Exception? e = null;
             try
             {
-                var webServiceError = JsonConvert.DeserializeObject<WebServiceError>(content!);
-
-                return CreateExceptionFromJson(response, webServiceError, content!);
+                var webServiceError = JsonSerializer.Deserialize<WebServiceError>(response.Content);
+                if (webServiceError != null)
+                {
+                    return CreateExceptionFromJson(response, webServiceError);
+                }
             }
-            catch (JsonReaderException e)
+            catch (JsonException je)
             {
-                return new HttpException(
-                    $"Received a {response.StatusCode} error for {response.RequestUri} but it did not include the expected JSON body: {content}",
-                    response.StatusCode, response.RequestUri, e);
+                e = je;
             }
+            var content = Encoding.UTF8.GetString(response.Content);
+
+            return new HttpException(
+                $"Received a {response.StatusCode} error for {response.RequestUri} but it did not include the expected JSON body: {content}",
+                response.StatusCode, response.RequestUri, e);
         }
 
-        private static Exception CreateExceptionFromJson(Response response, WebServiceError webServiceError,
-            string content)
+        private static Exception CreateExceptionFromJson(Response response, WebServiceError webServiceError)
         {
             if (webServiceError.Code == null || webServiceError.Error == null)
+            {
+                var content = Encoding.UTF8.GetString(response.Content);
+
                 return new HttpException(
                     $"Response contains JSON but does not specify code or error keys: {content}",
                     response.StatusCode,
                     response.RequestUri);
+            }
             return webServiceError.Code switch
             {
                 "IP_ADDRESS_NOT_FOUND" or "IP_ADDRESS_RESERVED" => new AddressNotFoundException(webServiceError.Error),

@@ -8,43 +8,21 @@ using System.Net;
 
 namespace MaxMind.GeoIP2.Http
 {
-    internal class Response : IDisposable
+    internal class Response
     {
-        private bool _disposed;
         internal HttpStatusCode StatusCode { get; }
         internal Uri RequestUri { get; }
-        internal Stream Stream { get; }
+        internal byte[] Content { get; }
         internal string? ContentType { get; }
 
-        public Response(Uri requestUri, HttpStatusCode statusCode, string? contentType, Stream stream)
+        public Response(Uri requestUri, HttpStatusCode statusCode, string? contentType, byte[] content)
         {
             RequestUri = requestUri;
             StatusCode = statusCode;
             ContentType = contentType;
 #pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
-            this.Stream = stream;
+            this.Content = content;
 #pragma warning restore IDE0003
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_disposed)
-                return;
-
-            if (disposing)
-            {
-#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
-                this.Stream.Dispose();
-#pragma warning restore IDE0003
-            }
-
-            _disposed = true;
         }
     }
 }

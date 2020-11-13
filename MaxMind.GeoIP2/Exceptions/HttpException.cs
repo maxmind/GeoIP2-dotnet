@@ -36,7 +36,7 @@ namespace MaxMind.GeoIP2.Exceptions
         /// <param name="httpStatus">The HTTP status of the response that caused the exception.</param>
         /// <param name="uri">The URL queried.</param>
         /// <param name="innerException">The underlying exception that caused this one.</param>
-        public HttpException(string message, HttpStatusCode httpStatus, Uri uri, Exception innerException)
+        public HttpException(string message, HttpStatusCode httpStatus, Uri uri, Exception? innerException)
             : base(message, innerException)
         {
             HttpStatus = httpStatus;

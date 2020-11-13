@@ -1,20 +1,21 @@
 ﻿using MaxMind.Db;
-using Newtonsoft.Json;
 using System;
 using System.Net;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MaxMind.GeoIP2
 {
     internal class NetworkConverter : JsonConverter<Network?>
     {
-        public override void WriteJson(JsonWriter writer, Network? value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, Network? value, JsonSerializerOptions options)
         {
-            writer.WriteValue(value?.ToString());
+            writer.WriteStringValue(value?.ToString());
         }
 
-        public override Network? ReadJson(JsonReader reader, Type objectType, Network? existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override Network? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            var value = (string?)reader.Value;
+            var value = reader.GetString();
             if (value == null)
             {
                 return null;
@@ -24,7 +25,7 @@ namespace MaxMind.GeoIP2
             var parts = value.Split('/');
             if (parts.Length != 2 || !int.TryParse(parts[1], out var prefixLength))
             {
-                throw new JsonSerializationException("Network not in CIDR format: " + reader.Value);
+                throw new JsonException("Network not in CIDR format: " + value);
             }
 
             return new Network(IPAddress.Parse(parts[0]), prefixLength);

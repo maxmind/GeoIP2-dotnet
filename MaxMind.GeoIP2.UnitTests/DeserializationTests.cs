@@ -1,7 +1,8 @@
 ﻿#region
 
 using MaxMind.GeoIP2.Responses;
-using Newtonsoft.Json;
+using System.Text;
+using System.Text.Json;
 using Xunit;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
@@ -113,13 +114,21 @@ namespace MaxMind.GeoIP2.UnitTests
         [Fact]
         public void CanDeserializeCountryResponseNewtonsoftJson()
         {
-            CanDeserializeCountryResponse(JsonConvert.DeserializeObject<CountryResponse>(CountryJson, new NetworkConverter())!);
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new NetworkConverter());
+
+            CanDeserializeCountryResponse(JsonSerializer.Deserialize<CountryResponse>(
+                Encoding.UTF8.GetBytes(CountryJson), options)!);
         }
 
         [Fact]
         public void CanDeserializeInsightsResponseNewtonsoftJson()
         {
-            CanDeserializeInsightsResponse(JsonConvert.DeserializeObject<InsightsResponse>(InsightsJson, new NetworkConverter())!);
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new NetworkConverter());
+
+            CanDeserializeInsightsResponse(JsonSerializer.Deserialize<InsightsResponse>(
+                Encoding.UTF8.GetBytes(InsightsJson), options)!);
         }
     }
 }

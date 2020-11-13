@@ -1,5 +1,5 @@
 ﻿using MaxMind.Db;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace MaxMind.GeoIP2.Responses
 {
@@ -40,7 +40,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     </a>
         ///     associated with the IP address.
         /// </summary>
-        [JsonProperty("autonomous_system_number")]
+        [JsonInclude]
+        [JsonPropertyName("autonomous_system_number")]
         public long? AutonomousSystemNumber { get; internal set; }
 
         /// <summary>
@@ -51,7 +52,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     </a>
         ///     for the IP address.
         /// </summary>
-        [JsonProperty("autonomous_system_organization")]
+        [JsonInclude]
+        [JsonPropertyName("autonomous_system_organization")]
         public string? AutonomousSystemOrganization { get; internal set; }
 
         /// <summary>
@@ -61,7 +63,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     on. If the system is behind a NAT, this may differ from the IP
         ///     address locally assigned to it.
         /// </summary>
-        [JsonProperty("ip_address")]
+        [JsonInclude]
+        [JsonPropertyName("ip_address")]
         public string? IPAddress { get; internal set; }
 
         /// <summary>
@@ -69,7 +72,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     the largest network where all of the fields besides
         ///     <c>IPAddress</c> have the same value.
         /// </summary>
-        [JsonProperty("network")]
+        [JsonInclude]
+        [JsonPropertyName("network")]
         public Network? Network { get; internal set; }
     }
 }

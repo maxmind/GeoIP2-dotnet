@@ -33,10 +33,15 @@ namespace MaxMind.GeoIP2.Http
         public async Task<Response> Get(Uri uri)
         {
             var response = await _httpClient.GetAsync(uri).ConfigureAwait(false);
-            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            // Reading to a byte array isn't ideal, but changing this would require
+            // more refactoring and probably introducing completely separate code
+            // paths for async vs sync. Hopefully we can get rid of the sync code at
+            // some point instead.
+            var content = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
             var contentType = response.Content.Headers.GetValues("Content-Type")?.FirstOrDefault();
 
-            return new Response(uri, response.StatusCode, contentType, stream);
+            return new Response(uri, response.StatusCode, contentType, content);
         }
 
         public void Dispose()

@@ -1,8 +1,8 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -48,7 +48,8 @@ namespace MaxMind.GeoIP2.Model
         ///     country. Currently we only return <c>military</c> but this could
         ///     expand to include other types in the future.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonInclude]
+        [JsonPropertyName("type")]
         public string? Type { get; internal set; }
     }
 }

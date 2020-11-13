@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Benchmark project to validate MaxMind GeoIP2 Database Reader and Web Service Client</Description>
     <VersionPrefix>2.7.0</VersionPrefix>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net452;net46;net5.0;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net461;net5.0;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">net5.0;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>MaxMind.GeoIP2.Benchmark</AssemblyName>
     <OutputType>Exe</OutputType>
@@ -25,11 +25,6 @@
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MaxMind.GeoIP2\MaxMind.GeoIP2.csproj" />
