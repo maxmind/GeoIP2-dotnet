@@ -10,10 +10,12 @@ GeoIP2 .NET API Release Notes
 * `System.Text.Json` is now used for deserialization of web service requests.
   `Newtonsoft.Json` is no longer supported for serialization or
   deserialization.
-* The `Names` property on `NamedEntity` modules is now an
+* The `Names` properties on `NamedEntity` models are now
   `IReadOnlyDictionary<string, string>`.
 * The `Subdivisions` property on `CityResponse` and `InsightsResponse` is now
   an `IReadOnlyList<Subdivision>`.
+* `GeoNameId` properties on `NamedEntity` models are now `long?` rather than
+  `int?` to match the underlying database.
 * The `httpMessageHandler` argument is now correctly initialized by the
   `WebServiceClient` constructor.
 

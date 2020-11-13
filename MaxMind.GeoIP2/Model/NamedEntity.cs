@@ -24,11 +24,7 @@ namespace MaxMind.GeoIP2.Model
         {
             Names = new ReadOnlyDictionary<string, string>( 
                 names != null ? new Dictionary<string, string>(names) : new Dictionary<string, string>());
-            // Unfortunately the existing models incorrectly use an int rather
-            // than a long for the geoname_id. This should be corrected if we
-            // ever do a major version bump.
-            // XXX - don't merge without fixing
-            GeoNameId = (int?)geoNameId;
+            GeoNameId = geoNameId;
             Locales = locales != null ? new List<string>(locales) : new List<string> { "en" };
         }
 
@@ -49,7 +45,7 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("geoname_id")]
-        public int? GeoNameId { get; internal set; }
+        public long? GeoNameId { get; internal set; }
 
         /// <summary>
         ///     Gets or sets the locales specified by the user.
