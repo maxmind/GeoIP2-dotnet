@@ -1,8 +1,5 @@
 # GeoIP2 .NET API #
 
-[![Windows CI](https://ci.appveyor.com/api/projects/status/github/maxmind/GeoIP2-dotnet?svg=true)](https://ci.appveyor.com/project/maxmind/GeoIP2-dotnet/branch/master "Appveyor CI")
-[![Unix CI](https://travis-ci.org/maxmind/GeoIP2-dotnet.svg?branch=master)](https://travis-ci.org/maxmind/GeoIP2-dotnet "Travis CI")
-
 ## Description ##
 
 This distribution provides an API for the GeoIP2
@@ -12,8 +9,8 @@ works with the free [GeoLite2 databases](https://dev.maxmind.com/geoip/geoip2/ge
 
 ## Requirements ##
 
-This library works with .NET Framework version 4.5 and above and .NET Standard
-2.0 or above.
+This library works with .NET Framework version 4.6.1 and above and .NET
+Standard 2.0 or above.
 
 This library depends on
 [MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet).

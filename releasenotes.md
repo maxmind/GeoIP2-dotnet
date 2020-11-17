@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-4.0.0
+4.0.0 (2020-11-17)
 ------------------
 
 * This library now requires .NET Framework 4.6.1 or greater or .NET Standard
@@ -18,6 +18,8 @@ GeoIP2 .NET API Release Notes
   `int?` to match the underlying database.
 * The `httpMessageHandler` argument is now correctly initialized by the
   `WebServiceClient` constructor.
+* The `Metadata` property was added to `IGeoIP2DatabaseReader`. Pull request
+  by Mihai Valentin Caracostea. GitHub #134 & #135.
 
 3.3.0 (2020-09-25)
 ------------------
