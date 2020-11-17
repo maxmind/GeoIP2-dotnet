@@ -2,12 +2,9 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v3.3.0
+version: v4.0.0
 ---
 # GeoIP2 .NET API #
-
-[![Windows CI](https://ci.appveyor.com/api/projects/status/github/maxmind/GeoIP2-dotnet?svg=true)](https://ci.appveyor.com/project/maxmind/GeoIP2-dotnet/branch/master "Appveyor CI")
-[![Unix CI](https://travis-ci.org/maxmind/GeoIP2-dotnet.svg?branch=master)](https://travis-ci.org/maxmind/GeoIP2-dotnet "Travis CI")
 
 ## Description ##
 
@@ -18,8 +15,8 @@ works with the free [GeoLite2 databases](https://dev.maxmind.com/geoip/geoip2/ge
 
 ## Requirements ##
 
-This library works with .NET Framework version 4.5 and above and .NET Standard 1.4 or
-above. If you are using Mono, 3.2 or greater is required.
+This library works with .NET Framework version 4.6.1 and above and .NET
+Standard 2.0 or above.
 
 This library depends on
 [MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet).
