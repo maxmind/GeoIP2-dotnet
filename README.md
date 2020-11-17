@@ -1,8 +1,5 @@
 # GeoIP2 .NET API #
 
-[![Windows CI](https://ci.appveyor.com/api/projects/status/github/maxmind/GeoIP2-dotnet?svg=true)](https://ci.appveyor.com/project/maxmind/GeoIP2-dotnet/branch/master "Appveyor CI")
-[![Unix CI](https://travis-ci.org/maxmind/GeoIP2-dotnet.svg?branch=master)](https://travis-ci.org/maxmind/GeoIP2-dotnet "Travis CI")
-
 ## Description ##
 
 This distribution provides an API for the GeoIP2
