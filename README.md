@@ -12,8 +12,8 @@ works with the free [GeoLite2 databases](https://dev.maxmind.com/geoip/geoip2/ge
 
 ## Requirements ##
 
-This library works with .NET Framework version 4.5 and above and .NET Standard
-2.0 or above.
+This library works with .NET Framework version 4.6.1 and above and .NET
+Standard 2.0 or above.
 
 This library depends on
 [MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet).
