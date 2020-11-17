@@ -1,8 +1,7 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
-using System;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -54,26 +53,10 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        ///     Constructor for binary compatibility.
-        /// </summary>
-        [Obsolete("For binary compatibility only")]
-        public AnonymousIPResponse(
-            bool isAnonymous,
-            bool isAnonymousVpn,
-            bool isHostingProvider,
-            bool isPublicProxy,
-            bool isTorExitNode,
-            string? ipAddress,
-            Network? network
-        ) : this(isAnonymous, isAnonymousVpn, isHostingProvider, isPublicProxy, false,
-                 isTorExitNode, ipAddress,  network)
-        {
-        }
-
-        /// <summary>
         ///     Returns true if the IP address belongs to any sort of anonymous network.
         /// </summary>
-        [JsonProperty("is_anonymous")]
+        [JsonInclude]
+        [JsonPropertyName("is_anonymous")]
         public bool IsAnonymous { get; internal set; }
 
         /// <summary>
@@ -85,33 +68,38 @@ namespace MaxMind.GeoIP2.Responses
         ///     associated with them, we will likely only flag their IP ranges
         ///     using the IsHostingProvider property.
         /// </remarks>
-        [JsonProperty("is_anonymous_vpn")]
+        [JsonInclude]
+        [JsonPropertyName("is_anonymous_vpn")]
         public bool IsAnonymousVpn { get; internal set; }
 
         /// <summary>
         ///     Returns true if the IP address belongs to a hosting or
         ///     VPN provider (see description of IsAnonymousVpn property).
         /// </summary>
-        [JsonProperty("is_hosting_provider")]
+        [JsonInclude]
+        [JsonPropertyName("is_hosting_provider")]
         public bool IsHostingProvider { get; internal set; }
 
         /// <summary>
         ///     Returns true if the IP address belongs to a public proxy.
         /// </summary>
-        [JsonProperty("is_public_proxy")]
+        [JsonInclude]
+        [JsonPropertyName("is_public_proxy")]
         public bool IsPublicProxy { get; internal set; }
 
         /// <summary>
         ///     This is true if the IP address is on a suspected anonymizing
         ///     network and belongs to a residential ISP.
         /// </summary>
-        [JsonProperty("is_residential_proxy")]
+        [JsonInclude]
+        [JsonPropertyName("is_residential_proxy")]
         public bool IsResidentialProxy { get; internal set; }
 
         /// <summary>
         ///     Returns true if IP is a Tor exit node.
         /// </summary>
-        [JsonProperty("is_tor_exit_node")]
+        [JsonInclude]
+        [JsonPropertyName("is_tor_exit_node")]
         public bool IsTorExitNode { get; internal set; }
 
         /// <summary>
@@ -121,7 +109,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     on. If the system is behind a NAT, this may differ from the IP
         ///     address locally assigned to it.
         /// </summary>
-        [JsonProperty("ip_address")]
+        [JsonInclude]
+        [JsonPropertyName("ip_address")]
         public string? IPAddress { get; internal set; }
 
         /// <summary>
@@ -129,7 +118,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     the largest network where all of the fields besides
         ///     <c>IPAddress</c> have the same value.
         /// </summary>
-        [JsonProperty("network")]
+        [JsonInclude]
+        [JsonPropertyName("network")]
         public Network? Network { get; internal set; }
     }
 }

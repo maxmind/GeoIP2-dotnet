@@ -1,8 +1,8 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -32,8 +32,8 @@ namespace MaxMind.GeoIP2.Model
             [Parameter("geoname_id")] long? geoNameId = null,
             [Parameter("is_in_european_union")] bool isInEuropeanUnion = false,
             [Parameter("iso_code")] string? isoCode = null,
-            IDictionary<string, string>? names = null,
-            IEnumerable<string>? locales = null)
+            IReadOnlyDictionary<string, string>? names = null,
+            IReadOnlyList<string>? locales = null)
             : base(geoNameId, names, locales)
         {
             Confidence = confidence;
@@ -46,7 +46,8 @@ namespace MaxMind.GeoIP2.Model
         ///     is correct. This value is only set when using the Insights
         ///     web service or the Enterprise database.
         /// </summary>
-        [JsonProperty("confidence")]
+        [JsonInclude]
+        [JsonPropertyName("confidence")]
         public int? Confidence { get; internal set; }
 
         /// <summary>
@@ -54,7 +55,8 @@ namespace MaxMind.GeoIP2.Model
         ///     European Union. This is available from  all location
         ///     services and databases.
         /// </summary>
-        [JsonProperty("is_in_european_union")]
+        [JsonInclude]
+        [JsonPropertyName("is_in_european_union")]
         public bool IsInEuropeanUnion { get; internal set; }
 
         /// <summary>
@@ -66,7 +68,8 @@ namespace MaxMind.GeoIP2.Model
         ///     </a>
         ///     for the country.
         /// </summary>
-        [JsonProperty("iso_code")]
+        [JsonInclude]
+        [JsonPropertyName("iso_code")]
         public string? IsoCode { get; internal set; }
     }
 }

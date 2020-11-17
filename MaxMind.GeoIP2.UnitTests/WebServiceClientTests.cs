@@ -5,13 +5,12 @@ using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
 using MaxMind.GeoIP2.UnitTests.Mock;
-#if !NET452 && !NET46
+#if !NET461
 using Microsoft.Extensions.Options;
 #endif
 using RichardSzalay.MockHttp;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -98,9 +97,8 @@ namespace MaxMind.GeoIP2.UnitTests
 
             // HttpWebRequest mock
             var contentsBytes = Encoding.UTF8.GetBytes(content);
-            var responseStream = new MemoryStream(contentsBytes);
 
-            var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, responseStream));
+            var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, contentsBytes));
 
             return new WebServiceClient(6, "0123456789",
                 locales: new List<string> { "en" },
@@ -462,10 +460,10 @@ namespace MaxMind.GeoIP2.UnitTests
 
         #region NetCoreTests
 
-#if !NET452 && !NET46
+#if !NET461
 
         [Fact]
-        public async Task TestWebServiceOptionsConstructor()
+        public async Task WebServiceOptionsConstructor()
         {
             var stringContent = new StringContent(CountryJson);
             stringContent.Headers.ContentType = new MediaTypeHeaderValue(

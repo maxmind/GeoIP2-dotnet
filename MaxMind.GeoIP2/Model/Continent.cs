@@ -1,8 +1,8 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -30,8 +30,8 @@ namespace MaxMind.GeoIP2.Model
         public Continent(
             string? code = null,
             [Parameter("geoname_id")] long? geoNameId = null,
-            IDictionary<string, string>? names = null,
-            IEnumerable<string>? locales = null)
+            IReadOnlyDictionary<string, string>? names = null,
+            IReadOnlyList<string>? locales = null)
             : base(geoNameId, names, locales)
         {
             Code = code;
@@ -41,7 +41,8 @@ namespace MaxMind.GeoIP2.Model
         ///     A two character continent code like "NA" (North America) or "OC"
         ///     (Oceania).
         /// </summary>
-        [JsonProperty("code")]
+        [JsonInclude]
+        [JsonPropertyName("code")]
         public string? Code { get; internal set; }
     }
 }

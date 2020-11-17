@@ -1,6 +1,8 @@
 ﻿#region
 
 using System;
+using System.Runtime.Serialization;
+
 #endregion
 
 namespace MaxMind.GeoIP2.Exceptions
@@ -10,6 +12,7 @@ namespace MaxMind.GeoIP2.Exceptions
     ///     service. This occurs when the web service is up and responding to requests,
     ///     but the request sent was invalid in some way.
     /// </summary>
+    [Serializable]
     public class InvalidRequestException : GeoIP2Exception
     {
         /// <summary>
@@ -25,6 +28,33 @@ namespace MaxMind.GeoIP2.Exceptions
 #pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
             this.Uri = uri;
 #pragma warning restore IDE0003
+        }
+
+
+        /// <summary>
+        ///     Constructor for deserialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected InvalidRequestException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            Code = info.GetString("MaxMind.GeoIP2.Exceptions.InvalidRequestException.Code") 
+                ?? throw new SerializationException("Unexcepted null Code value");
+            Uri = (Uri)(info.GetValue("MaxMind.GeoIP2.Exceptions.InvalidRequestException.Uri", typeof(Uri))
+                ?? throw new SerializationException("Unexcepted null Uri value"));
+        }
+
+        /// <summary>
+        ///     Method to serialize data.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            info.AddValue("MaxMind.GeoIP2.Exceptions.InvalidRequestException.Code", Code);
+            info.AddValue("MaxMind.GeoIP2.Exceptions.InvalidRequestException.Uri", Uri, typeof(Uri));
         }
 
         /// <summary>

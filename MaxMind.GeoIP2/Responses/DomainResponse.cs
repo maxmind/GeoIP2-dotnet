@@ -1,7 +1,7 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -42,7 +42,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     be something like "example.com" or "example.co.uk", not
         ///     "foo.example.com".
         /// </summary>
-        [JsonProperty("domain")]
+        [JsonInclude]
+        [JsonPropertyName("domain")]
         public string? Domain { get; internal set; }
 
         /// <summary>
@@ -52,7 +53,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     on. If the system is behind a NAT, this may differ from the IP
         ///     address locally assigned to it.
         /// </summary>
-        [JsonProperty("ip_address")]
+        [JsonInclude]
+        [JsonPropertyName("ip_address")]
         public string? IPAddress { get; internal set; }
 
         /// <summary>
@@ -60,7 +62,8 @@ namespace MaxMind.GeoIP2.Responses
         ///     the largest network where all of the fields besides
         ///     <c>IPAddress</c> have the same value.
         /// </summary>
-        [JsonProperty("network")]
+        [JsonInclude]
+        [JsonPropertyName("network")]
         public Network? Network { get; internal set; }
     }
 }

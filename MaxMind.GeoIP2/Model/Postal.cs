@@ -1,7 +1,7 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -34,7 +34,8 @@ namespace MaxMind.GeoIP2.Model
         ///     for all countries. In some countries, this will only contain part
         ///     of the postal code.
         /// </summary>
-        [JsonProperty("code")]
+        [JsonInclude]
+        [JsonPropertyName("code")]
         public string? Code { get; internal set; }
 
         /// <summary>
@@ -42,7 +43,8 @@ namespace MaxMind.GeoIP2.Model
         ///     postal code is correct. This value is only set when using the
         ///     Insights web service or the Enterprise database.
         /// </summary>
-        [JsonProperty("confidence")]
+        [JsonInclude]
+        [JsonPropertyName("confidence")]
         public int? Confidence { get; internal set; }
 
         /// <summary>

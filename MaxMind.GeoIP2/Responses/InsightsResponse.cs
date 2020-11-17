@@ -38,7 +38,7 @@ namespace MaxMind.GeoIP2.Responses
             Postal? postal = null,
             Country? registeredCountry = null,
             RepresentedCountry? representedCountry = null,
-            IEnumerable<Subdivision>? subdivisions = null,
+            IReadOnlyList<Subdivision>? subdivisions = null,
             Traits? traits = null)
             : base(
                 city, continent, country, location, maxMind, postal, registeredCountry, representedCountry, subdivisions,

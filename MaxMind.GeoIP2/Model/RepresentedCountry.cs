@@ -1,8 +1,8 @@
 ﻿#region
 
 using MaxMind.Db;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #endregion
 
@@ -36,8 +36,8 @@ namespace MaxMind.GeoIP2.Model
             [Parameter("geoname_id")] long? geoNameId = null,
             [Parameter("is_in_european_union")] bool isInEuropeanUnion = false,
             [Parameter("iso_code")] string? isoCode = null,
-            IDictionary<string, string>? names = null,
-            IEnumerable<string>? locales = null)
+            IReadOnlyDictionary<string, string>? names = null,
+            IReadOnlyList<string>? locales = null)
             : base(confidence, geoNameId, isInEuropeanUnion, isoCode, names, locales)
         {
             Type = type;
@@ -48,7 +48,8 @@ namespace MaxMind.GeoIP2.Model
         ///     country. Currently we only return <c>military</c> but this could
         ///     expand to include other types in the future.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonInclude]
+        [JsonPropertyName("type")]
         public string? Type { get; internal set; }
     }
 }

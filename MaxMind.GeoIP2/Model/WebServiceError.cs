@@ -1,9 +1,11 @@
-﻿namespace MaxMind.GeoIP2.Model
+﻿using System.Text.Json.Serialization;
+
+namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     ///     Contains data about an error that occurred while calling the web service
     /// </summary>
-    public class WebServiceError
+    internal class WebServiceError
     {
         /// <summary>
         ///     Gets or sets the error.
@@ -11,6 +13,7 @@
         /// <value>
         ///     The error message returned by the service.
         /// </value>
+        [JsonPropertyName("error")]
         public string? Error { get; set; }
 
         /// <summary>
@@ -19,6 +22,7 @@
         /// <value>
         ///     The error code returned by the service.
         /// </value>
+        [JsonPropertyName("code")]
         public string? Code { get; set; }
     }
 }

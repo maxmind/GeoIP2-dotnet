@@ -48,8 +48,12 @@ namespace MaxMind.GeoIP2.Http
                 }
                 response = (HttpWebResponse)e.Response;
             }
+
+            using var stream = new System.IO.MemoryStream();
+            response.GetResponseStream().CopyTo(stream);
+
             return new Response(uri, response.StatusCode, response.ContentType,
-                response.GetResponseStream());
+                stream.GetBuffer());
         }
     }
 }
