@@ -1,5 +1,6 @@
 ﻿#region
 
+using MaxMind.Db;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Responses;
 using System.Net;
@@ -13,6 +14,11 @@ namespace MaxMind.GeoIP2
     /// </summary>
     public interface IGeoIP2DatabaseReader : IGeoIP2Provider
     {
+        /// <summary>
+        ///     The metadata for the open MaxMind DB file.
+        /// </summary>
+        Metadata Metadata { get; }
+
         /// <summary>
         ///     Look up an IP address in a GeoIP2 Anonymous IP.
         /// </summary>
