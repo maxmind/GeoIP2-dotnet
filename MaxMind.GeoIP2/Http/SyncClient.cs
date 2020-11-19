@@ -49,11 +49,17 @@ namespace MaxMind.GeoIP2.Http
                 response = (HttpWebResponse)e.Response;
             }
 
+            using var responseStream = response.GetResponseStream();
             using var stream = new System.IO.MemoryStream();
-            response.GetResponseStream().CopyTo(stream);
+            responseStream.CopyTo(stream);
 
+            // The creation of an additional array with ToArray() isn't ideal,
+            // but presumably most people who care about performance are using
+            // the Async methods anyway. We can't use the underlying buffer as
+            // that has null bytes at the end. Potentially we could refactor
+            // the code to use spans.
             return new Response(uri, response.StatusCode, response.ContentType,
-                stream.GetBuffer());
+                stream.ToArray());
         }
     }
 }
