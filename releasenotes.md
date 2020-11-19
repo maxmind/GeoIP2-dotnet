@@ -1,6 +1,14 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+4.0.1 (2020-11-19)
+------------------
+
+* This release fixes an issue with 4.0.0 where the synchronous web service
+  methods could cause an unexpected JSON decoding error. There are no other
+  changes. The async `WebServiceClient` methods and the `DatabaseReader` were
+  not affected by the issue.
+
 4.0.0 (2020-11-17)
 ------------------
 
