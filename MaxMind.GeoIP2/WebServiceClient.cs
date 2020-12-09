@@ -107,13 +107,14 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="accountId">Your MaxMind account ID.</param>
         /// <param name="licenseKey">Your MaxMind license key.</param>
-        /// <param name="locales">List of locale codes to use in name 
+        /// <param name="locales">List of locale codes to use in name
         ///     property from most preferred to least preferred.</param>
-        /// <param name="host">The host to use when accessing the service</param>
-        /// <param name="timeout">Timeout in milliseconds for connection to 
+        /// <param name="host">The host to use when accessing the service. Set this to
+        ///     "geolite.info" to use the GeoLite2 web service instead of GeoIP2.</param>
+        /// <param name="timeout">Timeout in milliseconds for connection to
         ///     web service. The default is 3000.</param>
         /// <param name="httpMessageHandler">The <c>HttpMessageHandler</c> to
-        ///     use when creating the <c>HttpClient</c>. The handler will be 
+        ///     use when creating the <c>HttpClient</c>. The handler will be
         ///     disposed.</param>
         public WebServiceClient(
             int accountId,
@@ -123,10 +124,10 @@ namespace MaxMind.GeoIP2
             int timeout = 3000,
             HttpMessageHandler? httpMessageHandler = null
         ) : this(
-            accountId, 
-            licenseKey, 
+            accountId,
+            licenseKey,
             locales,
-            host, 
+            host,
             timeout,
             new HttpClient(httpMessageHandler ?? new HttpClientHandler(), true))
         {
@@ -150,7 +151,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Country web service for the specified IP address.
+        ///     Asynchronously query the Country web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Country response</returns>
@@ -160,7 +161,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Country web service for the specified IP address.
+        ///     Asynchronously query the Country web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Country response</returns>
@@ -170,7 +171,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Country web service for the requesting IP address.
+        ///     Asynchronously query the Country web service for the requesting IP address.
         /// </summary>
         /// <returns>Task that produces an object modeling the Country response</returns>
         public async Task<CountryResponse> CountryAsync()
@@ -179,7 +180,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: City web service for the specified IP address.
+        ///     Asynchronously query the City web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the City response</returns>
@@ -189,7 +190,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: City web service for the specified IP address.
+        ///     Asynchronously query the City web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the City response</returns>
@@ -199,7 +200,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: City web service for the requesting IP address.
+        ///     Asynchronously query the City web service for the requesting IP address.
         /// </summary>
         /// <returns>Task that produces an object modeling the City response</returns>
         public async Task<CityResponse> CityAsync()
@@ -208,7 +209,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Insights web service for the specified IP address.
+        ///     Asynchronously query the Insights web service for the specified IP address.
+        ///     Please note that only the GeoIP2 Precision web service supports Insights.
+        ///     The GeoLite2 web service does not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Insights response</returns>
@@ -218,7 +221,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Insights web service for the specified IP address.
+        ///     Asynchronously query the Insights web service for the specified IP address.
+        ///     Please note that only the GeoIP2 Precision web service supports Insights.
+        ///     The GeoLite2 web service does not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Insights response</returns>
@@ -228,7 +233,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Insights web service for the requesting IP address.
+        ///     Asynchronously query the Insights web service for the requesting IP address.
+        ///     Please note that only the GeoIP2 Precision web service supports Insights.
+        ///     The GeoLite2 web service does not support it.
         /// </summary>
         /// <returns>Task that produces an object modeling the Insights response</returns>
         public async Task<InsightsResponse> InsightsAsync()
@@ -296,6 +303,8 @@ namespace MaxMind.GeoIP2
 
         /// <summary>
         ///     Returns an <see cref="InsightsResponse" /> for the specified IP address.
+        ///     Please note that only the GeoIP2 Precision web service supports Insights.
+        ///     The GeoLite2 web service does not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="InsightsResponse" /></returns>
@@ -306,6 +315,8 @@ namespace MaxMind.GeoIP2
 
         /// <summary>
         ///     Returns an <see cref="InsightsResponse" /> for the specified IP address.
+        ///     Please note that only the GeoIP2 Precision web service supports Insights.
+        ///     The GeoLite2 web service does not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="InsightsResponse" /></returns>
@@ -316,6 +327,8 @@ namespace MaxMind.GeoIP2
 
         /// <summary>
         ///     Returns an <see cref="InsightsResponse" /> for the requesting IP address.
+        ///     Please note that only the GeoIP2 Precision web service supports Insights.
+        ///     The GeoLite2 web service does not support it.
         /// </summary>
         /// <returns>An <see cref="InsightsResponse" /></returns>
         public InsightsResponse Insights()
