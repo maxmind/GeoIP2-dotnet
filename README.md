@@ -41,6 +41,12 @@ with your account ID and license key:
 var client = new WebServiceClient(42, "license_key1");
 ```
 
+To query the GeoLite2 web service, you must set the host to `geolite.info`:
+
+```
+var client = new WebServiceClient(42, "license_key1", host: "geolite.info"))
+```
+
 You may also specify the fall-back locales, the host, or the timeout as
 optional parameters. See the API docs for more information.
 
@@ -62,7 +68,7 @@ See the API documentation for more details.
 
 ### ASP.NET Core Usage ###
 
-To use the web service API with HttpClient factory pattern as a 
+To use the web service API with HttpClient factory pattern as a
 [Typed client](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1#typed-clients)
 you need to do the following:
 
@@ -83,8 +89,14 @@ services.AddHttpClient<WebServiceClient>();
   "MaxMind": {
     "AccountId": 123456,
     "LicenseKey": "1234567890",
-    "Timeout": 3000, // optional
-    "Host": "geoip.maxmind.com" // optional
+
+    // Optionally set a timeout. The default is 3000 ms.
+    // "Timeout": 3000,
+
+    // Optionally set host. "geolite.info" will use the GeoLite2
+    // web service instead of GeoIP2.
+    //
+    // "Host": "geolite.info"
   },
 ...
 ```
@@ -123,7 +135,8 @@ public class MaxMindController : ControllerBase
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. Set the named host argument to "geolite.info" to use the GeoLite2
+// web service instead of GeoIP2.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -143,7 +156,8 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. Set the named host argument to "geolite.info" to use the GeoLite2
+// web service instead of GeoIP2.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -163,7 +177,8 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. Set the named host argument to "geolite.info" to use the GeoLite2
+// web service instead of GeoIP2.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -193,7 +208,8 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. Set the named host argument to "geolite.info" to use the GeoLite2
+// web service instead of GeoIP2.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -223,7 +239,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. The GeoLite2 web service does not support Insights.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -253,7 +269,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. The GeoLite2 web service does not support Insights.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
