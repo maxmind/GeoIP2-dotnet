@@ -2,10 +2,9 @@
 
 ## Description ##
 
-This distribution provides an API for the GeoIP2
-[web services](https://dev.maxmind.com/geoip/geoip2/web-services) and
-[databases](https://dev.maxmind.com/geoip/geoip2/downloadable). The API also
-works with the free [GeoLite2 databases](https://dev.maxmind.com/geoip/geoip2/geolite2/).
+This distribution provides an API for the GeoIP2 and GeoLite2
+[web services](https://dev.maxmind.com/geoip/docs/web-services?lang=en) and
+[databases](https://dev.maxmind.com/geoip/docs/databases?lang=en).
 
 ## Requirements ##
 
@@ -453,7 +452,7 @@ If an address is not available in the database, a
 ### Web Service ###
 
 For details on the possible errors returned by the web service itself, [see
-the GeoIP2 web service documentation](https://dev.maxmind.com/geoip/geoip2/web-services).
+the GeoIP2 web service documentation](https://dev.maxmind.com/geoip/docs/web-services?lang=en).
 
 If the web service returns an explicit error document, this is thrown as a
 `AddressNotFoundException`, a `AuthenticationException`, a
@@ -501,7 +500,7 @@ Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.
 
 See the [GeoIP2 Precision web service
-docs](https://dev.maxmind.com/geoip/geoip2/web-services) for details on what
+docs](https://dev.maxmind.com/geoip/docs/web-services?lang=en) for details on what
 data each end point may return.
 
 The only piece of data which is always returned is the `ipAddress` attribute

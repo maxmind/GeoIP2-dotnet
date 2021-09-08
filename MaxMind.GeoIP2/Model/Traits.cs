@@ -139,11 +139,7 @@ namespace MaxMind.GeoIP2.Model
         public bool IsAnonymous { get; internal set; }
 
         /// <summary>
-        ///     This is true if the IP is an anonymous proxy. See
-        ///     <a href="https://dev.maxmind.com/faq/geoip#anonproxy">
-        ///         MaxMind's GeoIP
-        ///         FAQ
-        ///     </a>
+        ///     This is true if the IP is an anonymous proxy.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_anonymous_proxy")]
