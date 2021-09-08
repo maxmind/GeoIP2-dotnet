@@ -13,7 +13,7 @@ namespace MaxMind.GeoIP2.Responses
     ///     Insights end point.
     ///     The only difference between the City and Insights response classes is
     ///     which fields in each record may be populated.
-    ///     <a href="https://dev.maxmind.com/geoip/geoip2/web-services">
+    ///     <a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">
     ///         GeoIP2 Web
     ///         Services
     ///     </a>
