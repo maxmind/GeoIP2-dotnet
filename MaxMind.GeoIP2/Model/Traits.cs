@@ -341,11 +341,16 @@ namespace MaxMind.GeoIP2.Model
                 $"{nameof(IsHostingProvider)}: {IsHostingProvider}, " +
                 $"{nameof(IsLegitimateProxy)}: {IsLegitimateProxy}, " +
                 $"{nameof(IsPublicProxy)}: {IsPublicProxy}, " +
+                $"{nameof(IsResidentialProxy)}: {IsResidentialProxy}, " +
 #pragma warning disable 618
                 $"{nameof(IsSatelliteProvider)}: {IsSatelliteProvider}, " +
 #pragma warning restore 618
+                $"{nameof(IsTorExitNode)}: {IsTorExitNode}, " +
                 $"{nameof(Isp)}: {Isp}, " +
+                $"{nameof(Network)}: {Network}, " +
                 $"{nameof(Organization)}: {Organization}, " +
+                $"{nameof(StaticIPScore)}: {StaticIPScore}, " +
+                $"{nameof(UserCount)}: {UserCount}, " +
                 $"{nameof(UserType)}: {UserType}";
         }
     }
