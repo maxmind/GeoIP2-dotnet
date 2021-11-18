@@ -40,6 +40,8 @@ namespace MaxMind.GeoIP2.Model
             [Parameter("is_satellite_provider")] bool isSatelliteProvider = false,
             [Parameter("is_tor_exit_node")] bool isTorExitNode = false,
             string? isp = null,
+            [Parameter("mobile_country_code")] string? mobileCountryCode = null,
+            [Parameter("mobile_network_code")] string? mobileNetworkCode = null,
             string? organization = null,
             [Parameter("user_type")] string? userType = null,
             [Network] Network? network = null,
@@ -66,11 +68,43 @@ namespace MaxMind.GeoIP2.Model
 #pragma warning restore 618
             IsTorExitNode = isTorExitNode;
             Isp = isp;
+            MobileCountryCode = mobileCountryCode;
+            MobileNetworkCode = mobileNetworkCode;
             Network = network;
             Organization = organization;
             StaticIPScore = staticIPScore;
             UserCount = userCount;
             UserType = userType;
+        }
+
+        [Obsolete("For backwards compatibility. Will be removed in next major release.")]
+        public Traits(
+            long? autonomousSystemNumber,
+            string? autonomousSystemOrganization,
+            string? connectionType,
+            string? domain,
+            string? ipAddress,
+            bool isAnonymous,
+            bool isAnonymousProxy,
+            bool isAnonymousVpn,
+            bool isHostingProvider,
+            bool isLegitimateProxy,
+            bool isPublicProxy,
+            bool isResidentialProxy,
+            bool isSatelliteProvider,
+             bool isTorExitNode,
+            string? isp,
+            string? organization,
+            string? userType,
+            Network? network,
+            double? staticIPScore,
+            int? userCount
+        ) : this(autonomousSystemNumber, autonomousSystemOrganization, connectionType, domain,
+                ipAddress, isAnonymous, isAnonymousProxy, isAnonymousVpn, isHostingProvider,
+                isLegitimateProxy, isPublicProxy, isResidentialProxy, isSatelliteProvider,
+                isTorExitNode, isp, null, null, organization, userType, network, staticIPScore,
+                userCount)
+        {
         }
 
         /// <summary>
@@ -221,6 +255,26 @@ namespace MaxMind.GeoIP2.Model
         public string? Isp { get; internal set; }
 
         /// <summary>
+        ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
+        ///     mobile country code (MCC)</a> associated with the IP address and ISP.
+        ///     This property is available from the City and Insights web services and
+        ///     the GeoIP2 Enterprise database.
+        /// </summary>
+        [JsonInclude]
+        [JsonPropertyName("mobile_country_code")]
+        public string? MobileCountryCode { get; internal set; }
+
+        /// <summary>
+        ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
+        ///     mobile network code (MNC)</a> associated with the IP address and ISP.
+        ///     This property is available from the City and Insights web services and
+        ///     the GeoIP2 Enterprise database.
+        /// </summary>
+        [JsonInclude]
+        [JsonPropertyName("mobile_network_code")]
+        public string? MobileNetworkCode { get; internal set; }
+
+        /// <summary>
         ///     The network associated with the record. In particular, this is
         ///     the largest network where all of the fields besides
         ///     <c>IPAddress</c> have the same value.
@@ -347,6 +401,8 @@ namespace MaxMind.GeoIP2.Model
 #pragma warning restore 618
                 $"{nameof(IsTorExitNode)}: {IsTorExitNode}, " +
                 $"{nameof(Isp)}: {Isp}, " +
+                $"{nameof(MobileCountryCode)}: {MobileCountryCode}, " +
+                $"{nameof(MobileNetworkCode)}: {MobileNetworkCode}, " +
                 $"{nameof(Network)}: {Network}, " +
                 $"{nameof(Organization)}: {Organization}, " +
                 $"{nameof(StaticIPScore)}: {StaticIPScore}, " +

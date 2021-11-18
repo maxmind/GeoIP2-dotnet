@@ -1,6 +1,17 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+4.1.0
+------------------
+
+* Support for mobile country code (MCC) and mobile network codes (MNC) was
+  added for the GeoIP2 ISP and Enterprise databases as well as the GeoIP2
+  City and Insights web services. The `MobileCountryCode` and
+  `MobileNetworkCode` properties were added to `MaxMind.GeoIP2.Responses.IspResponse`
+  for the GeoIP2 ISP database and `MaxMind.GeoIP2.Model.Traits` for the
+  Enterprise database and the GeoIP2 City and Insights web services. We expect
+  this data to be available by late January, 2022.
+
 4.0.1 (2020-11-19)
 ------------------
 

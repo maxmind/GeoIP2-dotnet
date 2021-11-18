@@ -100,6 +100,8 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.True(insights.Traits.IsSatelliteProvider);
 #pragma warning restore 0618
             Assert.Equal("Comcast", insights.Traits.Isp);
+            Assert.Equal("310", insights.Traits.MobileCountryCode);
+            Assert.Equal("004", insights.Traits.MobileNetworkCode);
 
             var network = insights.Traits.Network!;
             Assert.Equal("1.2.3.0", network.NetworkAddress?.ToString());

@@ -171,6 +171,10 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.True(response.Traits.IsLegitimateProxy);
             Assert.Equal(ipAddress, response.Traits.IPAddress);
             Assert.Equal("74.209.16.0/20", response.Traits.Network?.ToString());
+
+            response = reader.Enterprise("149.101.100.0");
+            Assert.Equal("310", response.Traits.MobileCountryCode);
+            Assert.Equal("004", response.Traits.MobileNetworkCode);
         }
 
         [Fact]
@@ -185,6 +189,10 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("Telstra Internet", response.Organization);
             Assert.Equal(ipAddress, response.IPAddress);
             Assert.Equal("1.128.0.0/11", response.Network?.ToString());
+
+            response = reader.Isp("149.101.100.0");
+            Assert.Equal("310", response.MobileCountryCode);
+            Assert.Equal("004", response.MobileNetworkCode);
         }
 
         [Fact]
