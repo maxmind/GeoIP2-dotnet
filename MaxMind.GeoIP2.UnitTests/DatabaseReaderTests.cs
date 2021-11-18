@@ -193,7 +193,7 @@ namespace MaxMind.GeoIP2.UnitTests
             using var reader = new DatabaseReader(_countryDatabaseFile);
             var response = reader.Country("81.2.69.160");
             Assert.Equal("GB", response.Country.IsoCode);
-            Assert.True(response.Country.IsInEuropeanUnion);
+            Assert.False(response.Country.IsInEuropeanUnion);
             Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
             Assert.Equal("81.2.69.160/27", response.Traits.Network?.ToString());
@@ -205,7 +205,7 @@ namespace MaxMind.GeoIP2.UnitTests
             using var reader = new DatabaseReader(_countryDatabaseFile);
             var response = reader.Country(IPAddress.Parse("81.2.69.160"));
             Assert.Equal("GB", response.Country.IsoCode);
-            Assert.True(response.Country.IsInEuropeanUnion);
+            Assert.False(response.Country.IsInEuropeanUnion);
             Assert.Equal("US", response.RegisteredCountry.IsoCode);
             Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
@@ -218,7 +218,7 @@ namespace MaxMind.GeoIP2.UnitTests
             using var reader = new DatabaseReader(_cityDatabaseFile);
             var response = reader.City("81.2.69.160");
             Assert.Equal("London", response.City.Name);
-            Assert.True(response.Country.IsInEuropeanUnion);
+            Assert.False(response.Country.IsInEuropeanUnion);
             Assert.Equal(100, response.Location.AccuracyRadius);
             Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
@@ -231,7 +231,7 @@ namespace MaxMind.GeoIP2.UnitTests
             using var reader = new DatabaseReader(_cityDatabaseFile);
             var lookupSuccess = reader.TryCity("81.2.69.160", out var response);
             Assert.True(lookupSuccess);
-            Assert.True(response?.Country.IsInEuropeanUnion);
+            Assert.False(response?.Country.IsInEuropeanUnion);
             Assert.Equal("London", response?.City.Name);
             Assert.False(response?.RegisteredCountry.IsInEuropeanUnion);
             Assert.False(response?.RepresentedCountry.IsInEuropeanUnion);
@@ -272,7 +272,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("98354", response.Postal.Code);
 
             Assert.Equal(2635167, response.RegisteredCountry.GeoNameId);
-            Assert.True(response.RegisteredCountry.IsInEuropeanUnion);
+            Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             Assert.Equal("GB", response.RegisteredCountry.IsoCode);
             Assert.Equal("United Kingdom", response.RegisteredCountry.Name);
 
