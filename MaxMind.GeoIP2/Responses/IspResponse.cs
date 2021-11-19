@@ -1,6 +1,7 @@
 ﻿#region
 
 using MaxMind.Db;
+using System;
 using System.Text.Json.Serialization;
 
 #endregion
@@ -15,7 +16,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     Construct an IspResponse model.
         /// </summary>
-        public IspResponse() : this(null, null, null, null, null)
+        public IspResponse() : this(null, null, null, null, null, null, null)
         {
         }
 
@@ -27,6 +28,8 @@ namespace MaxMind.GeoIP2.Responses
             [Parameter("autonomous_system_number")] long? autonomousSystemNumber,
             [Parameter("autonomous_system_organization")] string? autonomousSystemOrganization,
             string? isp,
+            [Parameter("mobile_country_code")] string? mobileCountryCode,
+            [Parameter("mobile_network_code")] string? mobileNetworkCode,
             string? organization,
             [Inject("ip_address")] string? ipAddress,
             [Network] Network? network = null
@@ -35,9 +38,24 @@ namespace MaxMind.GeoIP2.Responses
             AutonomousSystemNumber = autonomousSystemNumber;
             AutonomousSystemOrganization = autonomousSystemOrganization;
             Isp = isp;
+            MobileCountryCode = mobileCountryCode;
+            MobileNetworkCode = mobileNetworkCode;
             Organization = organization;
             IPAddress = ipAddress;
             Network = network;
+        }
+
+        [Obsolete("For backwards compatibility. Will be removed in next major release.")]
+        public IspResponse(
+            long? autonomousSystemNumber,
+            string? autonomousSystemOrganization,
+            string? isp,
+            string? organization,
+            string? ipAddress,
+            Network? network = null
+        ) : this(autonomousSystemNumber, autonomousSystemOrganization, isp,
+                 null, null, organization, ipAddress, network)
+        {
         }
 
         /// <summary>
@@ -70,6 +88,22 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("isp")]
         public string? Isp { get; internal set; }
+
+        /// <summary>
+        ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
+        ///     mobile country code (MCC)</a> associated with the IP address and ISP.
+        /// </summary>
+        [JsonInclude]
+        [JsonPropertyName("mobile_country_code")]
+        public string? MobileCountryCode { get; internal set; }
+
+        /// <summary>
+        ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
+        ///     mobile network code (MNC)</a> associated with the IP address and ISP.
+        /// </summary>
+        [JsonInclude]
+        [JsonPropertyName("mobile_network_code")]
+        public string? MobileNetworkCode { get; internal set; }
 
         /// <summary>
         ///     The name of the organization associated with the IP address.

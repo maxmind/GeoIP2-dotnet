@@ -69,6 +69,8 @@
                     ""is_satellite_provider"": true,
                     ""is_tor_exit_node"": true,
                     ""isp"": ""Comcast"",
+                    ""mobile_country_code"": ""310"",
+                    ""mobile_network_code"": ""004"",
                     ""network"": ""1.2.3.0/24"",
                     ""organization"": ""Blorg"",
                     ""static_ip_score"": 1.5,
