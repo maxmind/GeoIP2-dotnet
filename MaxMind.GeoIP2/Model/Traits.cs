@@ -92,7 +92,7 @@ namespace MaxMind.GeoIP2.Model
             bool isPublicProxy,
             bool isResidentialProxy,
             bool isSatelliteProvider,
-             bool isTorExitNode,
+            bool isTorExitNode,
             string? isp,
             string? organization,
             string? userType,
