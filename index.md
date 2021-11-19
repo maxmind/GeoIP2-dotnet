@@ -2,16 +2,15 @@
 layout: default
 title: MaxMind GeoIP2 .NET API
 language: dotnet
-version: v4.0.1
+version: v4.1.0
 ---
 # GeoIP2 .NET API #
 
 ## Description ##
 
-This distribution provides an API for the GeoIP2
-[web services](https://dev.maxmind.com/geoip/geoip2/web-services) and
-[databases](https://dev.maxmind.com/geoip/geoip2/downloadable). The API also
-works with the free [GeoLite2 databases](https://dev.maxmind.com/geoip/geoip2/geolite2/).
+This distribution provides an API for the GeoIP2 and GeoLite2
+[web services](https://dev.maxmind.com/geoip/docs/web-services?lang=en) and
+[databases](https://dev.maxmind.com/geoip/docs/databases?lang=en).
 
 ## Requirements ##
 
@@ -47,6 +46,12 @@ with your account ID and license key:
 var client = new WebServiceClient(42, "license_key1");
 ```
 
+To query the GeoLite2 web service, you must set the host to `geolite.info`:
+
+```
+var client = new WebServiceClient(42, "license_key1", host: "geolite.info"))
+```
+
 You may also specify the fall-back locales, the host, or the timeout as
 optional parameters. See the API docs for more information.
 
@@ -68,7 +73,7 @@ See the API documentation for more details.
 
 ### ASP.NET Core Usage ###
 
-To use the web service API with HttpClient factory pattern as a 
+To use the web service API with HttpClient factory pattern as a
 [Typed client](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1#typed-clients)
 you need to do the following:
 
@@ -89,8 +94,14 @@ services.AddHttpClient<WebServiceClient>();
   "MaxMind": {
     "AccountId": 123456,
     "LicenseKey": "1234567890",
-    "Timeout": 3000, // optional
-    "Host": "geoip.maxmind.com" // optional
+
+    // Optionally set a timeout. The default is 3000 ms.
+    // "Timeout": 3000,
+
+    // Optionally set host. "geolite.info" will use the GeoLite2
+    // web service instead of GeoIP2.
+    //
+    // "Host": "geolite.info"
   },
 ...
 ```
@@ -129,7 +140,8 @@ public class MaxMindController : ControllerBase
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. Set the named host argument to "geolite.info" to use the GeoLite2
+// web service instead of GeoIP2.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -149,7 +161,8 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. Set the named host argument to "geolite.info" to use the GeoLite2
+// web service instead of GeoIP2.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -169,7 +182,8 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. Set the named host argument to "geolite.info" to use the GeoLite2
+// web service instead of GeoIP2.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -199,7 +213,8 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. Set the named host argument to "geolite.info" to use the GeoLite2
+// web service instead of GeoIP2.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -229,7 +244,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. The GeoLite2 web service does not support Insights.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -259,7 +274,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key.
+// key. The GeoLite2 web service does not support Insights.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -443,7 +458,7 @@ If an address is not available in the database, a
 ### Web Service ###
 
 For details on the possible errors returned by the web service itself, [see
-the GeoIP2 web service documentation](https://dev.maxmind.com/geoip/geoip2/web-services).
+the GeoIP2 web service documentation](https://dev.maxmind.com/geoip/docs/web-services?lang=en).
 
 If the web service returns an explicit error document, this is thrown as a
 `AddressNotFoundException`, a `AuthenticationException`, a
@@ -491,7 +506,7 @@ Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.
 
 See the [GeoIP2 Precision web service
-docs](https://dev.maxmind.com/geoip/geoip2/web-services) for details on what
+docs](https://dev.maxmind.com/geoip/docs/web-services?lang=en) for details on what
 data each end point may return.
 
 The only piece of data which is always returned is the `ipAddress` attribute
@@ -554,6 +569,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2013-2020 by MaxMind, Inc.
+This software is Copyright (c) 2013-2021 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.
