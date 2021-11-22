@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-4.1.0
+4.1.0 (2021-11-19)
 ------------------
 
 * Support for mobile country code (MCC) and mobile network codes (MNC) was
