@@ -46,61 +46,61 @@ namespace MaxMind.GeoIP2
         InsightsResponse Insights();
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Country web service for the specified IP address.
+        ///     Asynchronously query the GeoIP2 Country web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Country response</returns>
         Task<CountryResponse> CountryAsync(string ipAddress);
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Country web service for the specified IP address.
+        ///     Asynchronously query the GeoIP2 Country web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Country response</returns>
         Task<CountryResponse> CountryAsync(IPAddress ipAddress);
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Country web service for the requesting IP address.
+        ///     Asynchronously query the GeoIP2 Country web service for the requesting IP address.
         /// </summary>
         /// <returns>Task that produces an object modeling the Country response</returns>
         Task<CountryResponse> CountryAsync();
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: City web service for the specified IP address.
+        ///     Asynchronously query the GeoIP2 City Plus web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the City response</returns>
         Task<CityResponse> CityAsync(string ipAddress);
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: City web service for the specified IP address.
+        ///     Asynchronously query the GeoIP2 City Plus web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the City response</returns>
         Task<CityResponse> CityAsync(IPAddress ipAddress);
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: City web service for the requesting IP address.
+        ///     Asynchronously query the GeoIP2 City Plus web service for the requesting IP address.
         /// </summary>
         /// <returns>Task that produces an object modeling the City response</returns>
         Task<CityResponse> CityAsync();
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Insights web service for the specified IP address.
+        ///     Asynchronously query the GeoIP2 Insights web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Insights response</returns>
         Task<InsightsResponse> InsightsAsync(string ipAddress);
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Insights web service for the specified IP address.
+        ///     Asynchronously query the GeoIP2 Insights web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Insights response</returns>
         Task<InsightsResponse> InsightsAsync(IPAddress ipAddress);
 
         /// <summary>
-        ///     Asynchronously query the GeoIP2 Precision: Insights web service for the requesting IP address.
+        ///     Asynchronously query the GeoIP2 Insights web service for the requesting IP address.
         /// </summary>
         /// <returns>Task that produces an object modeling the Insights response</returns>
         Task<InsightsResponse> InsightsAsync();

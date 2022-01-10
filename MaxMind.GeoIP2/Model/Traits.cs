@@ -114,8 +114,8 @@ namespace MaxMind.GeoIP2.Model
         ///         autonomous system number
         ///     </a>
         ///     associated with the IP address.
-        ///     This value is only set when using the City or Insights web
-        ///     service or the Enterprise database.
+        ///     This value is only available from the City Plus and Insights web
+        ///     services and the Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_number")]
@@ -127,16 +127,16 @@ namespace MaxMind.GeoIP2.Model
         ///         href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
         ///         autonomous system number
         ///     </a>
-        ///     for the IP address. This value is only set when using the City or
-        ///     Insights web service or the Enterprise database.
+        ///     for the IP address. This value is only available from the City
+        ///     Plus and Insights web services and the Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_organization")]
         public string? AutonomousSystemOrganization { get; internal set; }
 
         /// <summary>
-        ///     The connection type of the IP address. This value is only set when
-        ///     using the Enterprise database.
+        ///     The connection type of the IP address. This value is only
+        ///     available from the Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("connection_type")]
@@ -145,8 +145,8 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The second level domain associated with the IP address. This will
         ///     be something like "example.com" or "example.co.uk", not
-        ///     "foo.example.com". This value is only set when using the City or
-        ///     Insights web service or the Enterprise database.
+        ///     "foo.example.com". This value is only available from the City
+        ///     Plus and Insights web services and the Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("domain")]
@@ -165,8 +165,8 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to any sort of anonymous
-        ///     network. This value is only available from GeoIP2 Precision
-        ///     Insights.
+        ///     network. This value is only available from the GeoIP2 Insights
+        ///     web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_anonymous")]
@@ -183,7 +183,8 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     This is true if the IP address is registered to an anonymous
         ///     VPN provider.
-        ///     This value is only available from GeoIP2 Precision Insights.
+        ///     This value is only available from the GeoIP2 Insights web
+        ///     service.
         /// </summary>
         /// <remarks>
         ///     If a VPN provider does not register subnets under names
@@ -197,7 +198,8 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     This is true if the IP address belongs to a hosting or VPN
         ///     provider (see description of IsAnonymousVpn property).
-        ///     This value is only available from GeoIP2 Precision Insights.
+        ///     This value is only available from the GeoIP2 Insights web
+        ///     service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_hosting_provider")]
@@ -214,7 +216,8 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to a public proxy.
-        ///     This value is only available from GeoIP2 Precision Insights.
+        ///     This value is only available from the GeoIP2 Insights web
+        ///     service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_public_proxy")]
@@ -223,7 +226,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     This is true if the IP address is on a suspected anonymizing
         ///     network and belongs to a residential ISP. This value is
-        ///     only available from GeoIP2 Precision Insights.
+        ///     only available from the GeoIP2 Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_residential_proxy")]
@@ -239,7 +242,8 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to a Tor exit node.
-        ///     This value is only available from GeoIP2 Precision Insights.
+        ///     This properly is only available from the GeoIP2 Insights web
+        ///     service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_tor_exit_node")]
@@ -247,7 +251,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     The name of the ISP associated with the IP address. This value
-        ///     is only set when using the City or Insights web service or the
+        ///     is available from the City Plus and Insights web services and the
         ///     Enterprise database.
         /// </summary>
         [JsonInclude]
@@ -257,8 +261,8 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
         ///     mobile country code (MCC)</a> associated with the IP address and ISP.
-        ///     This property is available from the City and Insights web services and
-        ///     the GeoIP2 Enterprise database.
+        ///     This value is available from the City Plus and Insights web services
+        ///     and the GeoIP2 Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("mobile_country_code")]
@@ -267,8 +271,8 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
         ///     mobile network code (MNC)</a> associated with the IP address and ISP.
-        ///     This property is available from the City and Insights web services and
-        ///     the GeoIP2 Enterprise database.
+        ///     This value is available from the City Plus and Insights web services
+        ///     and the GeoIP2 Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("mobile_network_code")]
@@ -285,8 +289,8 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     The name of the organization associated with the IP address. This
-        ///     value is only set when using the City or Insights web service or the
-        ///     Enterprise database.
+        ///     value is only available from the City Plus and Insights web services
+        ///     and the Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("organization")]
@@ -311,7 +315,7 @@ namespace MaxMind.GeoIP2.Model
         ///     The estimated number of users sharing the IP/network during the past
         ///     24 hours. For IPv4, the count is for the individual IP. For IPv6, the
         ///     count is for the /64 network. This value is only available from
-        ///     GeoIP2 Precision Insights.
+        ///     the GeoIP2 Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("user_count")]
@@ -367,8 +371,8 @@ namespace MaxMind.GeoIP2.Model
         ///             <description>traveler</description>
         ///         </item>
         ///     </list>
-        ///     This value is only set when using the City or Insights web service
-        ///     or the Enterprise database.
+        ///     This value is only available from the City Plus and Insights web
+        ///     services and the Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("user_type")]
