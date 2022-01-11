@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MaxMind.GeoIP2.Benchmark")]
-[assembly: AssemblyCopyright("Copyright © 2013-2021")]
+[assembly: AssemblyCopyright("Copyright © 2013-2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
