@@ -45,6 +45,9 @@ namespace MaxMind.GeoIP2.Responses
             Network = network;
         }
 
+        /// <summary>
+        ///     Constructor
+        /// </summary>
         [Obsolete("For backwards compatibility. Will be removed in next major release.")]
         public IspResponse(
             long? autonomousSystemNumber,

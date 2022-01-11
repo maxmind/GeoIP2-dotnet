@@ -77,6 +77,9 @@ namespace MaxMind.GeoIP2.Model
             UserType = userType;
         }
 
+        /// <summary>
+        ///     Constructor
+        /// </summary>
         [Obsolete("For backwards compatibility. Will be removed in next major release.")]
         public Traits(
             long? autonomousSystemNumber,
