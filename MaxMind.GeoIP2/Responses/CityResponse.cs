@@ -9,13 +9,8 @@ using System.Collections.Generic;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     This class provides a model for the data returned by GeoIP2 Precision: City and GeoIP2 City.
-    ///     The only difference between the City and Insights response classes is
-    ///     which fields in each record may be populated.
-    ///     <a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">
-    ///         GeoIP2 Web
-    ///         Services
-    ///     </a>
+    ///     This class provides a model for data returned from the GeoIP2 City
+    ///     database and the GeoIP2 City Plus web services.
     /// </summary>
     public class CityResponse : AbstractCityResponse
     {

@@ -8,14 +8,8 @@ using MaxMind.GeoIP2.Model;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     This class provides a model for the data returned by the GeoIP2 Precision: Country and GeoIP2 Country.
-    ///     The only difference between the City and Insights response classes is
-    ///     which fields in each record may be populated.
-    ///     See
-    ///     <a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">
-    ///         GeoIP2 Web
-    ///         Services
-    ///     </a>
+    ///     This class provides a model for the data returned from the GeoIP2
+    ///     Country database and the GeoIP2 Country web service.
     /// </summary>
     public class CountryResponse : AbstractCountryResponse
     {

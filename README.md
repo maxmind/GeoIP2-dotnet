@@ -168,7 +168,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 }
 ```
 
-### City Service (Sync) ###
+### City Plus Service (Sync) ###
 
 ```csharp
 // If you are making multiple requests, a single WebServiceClient
@@ -199,7 +199,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 }
 ```
 
-### City Service (Async) ###
+### City Plus Service (Async) ###
 
 ```csharp
 // If you are making multiple requests, a single WebServiceClient
@@ -499,9 +499,9 @@ piece of data for any given IP address.
 Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.
 
-See the [GeoIP2 Precision web service
-docs](https://dev.maxmind.com/geoip/docs/web-services?lang=en) for details on what
-data each end point may return.
+See the [GeoIP2 web services
+documentations](https://dev.maxmind.com/geoip/docs/web-services?lang=en) for
+details on what data each end point may return.
 
 The only piece of data which is always returned is the `ipAddress` attribute
 in the `MaxMind.GeoIP2.Traits` record.
@@ -563,6 +563,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2013-2021 by MaxMind, Inc.
+This software is Copyright (c) 2013-2022 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.

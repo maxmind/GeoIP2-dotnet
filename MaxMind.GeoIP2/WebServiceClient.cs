@@ -23,36 +23,37 @@ namespace MaxMind.GeoIP2
 {
     /// <summary>
     ///     <para>
-    ///         This class provides a client API for all the GeoIP2 Precision web service
-    ///         end points. The end points are Country, City, and Insights. Each end point
-    ///         returns a different set of data about an IP address, with Country returning
-    ///         the least data and Insights the most.
+    ///         This class provides a client API for all the GeoIP2 web services. The
+    ///         services are Country, City Plus, and Insights. Each service returns a
+    ///         different set of data about an IP address, with Country returning the
+    ///         least data and Insights the most.
     ///     </para>
     ///     <para>
-    ///         Each web service end point is represented by a different model class
-    ///         which contains data about the IP address.
+    ///         Each service is represented by a different model class which contains
+    ///         data about the IP address.
     ///     </para>
     ///     <para>
-    ///         If the web service does not return a particular piece of data for an IP
+    ///         If the service does not return a particular piece of data for an IP
     ///         address, the associated property is not populated.
     ///     </para>
     ///     <para>
-    ///         The web service may not return any information for an entire record, in which
-    ///         case all of the properties for that model class will be empty.
+    ///         The service may not return any information for an entire record, in
+    ///         which case all of the properties for that model class will be empty.
     ///     </para>
     ///     <para>
     ///         Usage
     ///     </para>
     ///     <para>
-    ///         The basic API for this class is the same for all of the web service end
-    ///         points. First you create a web service object with your MaxMind
-    ///         <c>accountId</c> and <c>licenseKey</c>, then you call the method corresponding
-    ///         to a specific end point, passing it the IP address you want to look up.
+    ///         The basic API for this class is the same for all of the services.
+    ///         First you create a <c>WebServiceClient</c> with your MaxMind
+    ///         <c>accountId</c> and <c>licenseKey</c>, then you call the method
+    ///         corresponding to a specific service, passing it the IP address you want
+    ///         to look up.
     ///     </para>
     ///     <para>
-    ///         If the request succeeds, the method call will return a model class for the
-    ///         end point you called. This model in turn contains multiple record classes,
-    ///         each of which represents part of the data returned by the web service.
+    ///         If the request succeeds, the method call will return a model class for
+    ///         the service you called. This model in turn contains multiple record
+    ///         classes, each of which represents part of the data returned.
     ///     </para>
     ///     <para>
     ///         If the request fails, the client class throws an exception.
@@ -61,9 +62,9 @@ namespace MaxMind.GeoIP2
     ///         Exceptions
     ///     </para>
     ///     <para>
-    ///         For details on the possible errors returned by the web service itself, see
-    ///         <a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">the GeoIP2 web
-    ///         service documentation</a>.
+    ///         For details on the possible errors returned by the web service itself,
+    ///         see <a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">the
+    ///         GeoIP2 web service documentation</a>.
     ///     </para>
     /// </summary>
     public class WebServiceClient : IGeoIP2WebServicesClient, IDisposable
@@ -180,38 +181,38 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the City web service for the specified IP address.
+        ///     Asynchronously query the City Plus web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
-        /// <returns>Task that produces an object modeling the City response</returns>
+        /// <returns>Task that produces an object modeling the City Plus response</returns>
         public async Task<CityResponse> CityAsync(string ipAddress)
         {
             return await CityAsync(ParseIP(ipAddress)).ConfigureAwait(false);
         }
 
         /// <summary>
-        ///     Asynchronously query the City web service for the specified IP address.
+        ///     Asynchronously query the City Plus web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
-        /// <returns>Task that produces an object modeling the City response</returns>
+        /// <returns>Task that produces an object modeling the City Plus response</returns>
         public async Task<CityResponse> CityAsync(IPAddress ipAddress)
         {
             return await ExecuteAsync<CityResponse>("city", ipAddress).ConfigureAwait(false);
         }
 
         /// <summary>
-        ///     Asynchronously query the City web service for the requesting IP address.
+        ///     Asynchronously query the City Plus web service for the requesting IP address.
         /// </summary>
-        /// <returns>Task that produces an object modeling the City response</returns>
+        /// <returns>Task that produces an object modeling the City Plus response</returns>
         public async Task<CityResponse> CityAsync()
         {
             return await ExecuteAsync<CityResponse>("city", null).ConfigureAwait(false);
         }
 
         /// <summary>
-        ///     Asynchronously query the Insights web service for the specified IP address.
-        ///     Please note that only the GeoIP2 Precision web service supports Insights.
-        ///     The GeoLite2 web service does not support it.
+        ///     Asynchronously query the Insights web service for the specified IP
+        ///     address. Please note that only the GeoIP2 web services support
+        ///     Insights. The GeoLite2 web services do not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Insights response</returns>
@@ -221,9 +222,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the Insights web service for the specified IP address.
-        ///     Please note that only the GeoIP2 Precision web service supports Insights.
-        ///     The GeoLite2 web service does not support it.
+        ///     Asynchronously query the Insights web service for the specified IP
+        ///     address. Please note that only the GeoIP2 web services support
+        ///     Insights. The GeoLite2 web services do not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Insights response</returns>
@@ -233,9 +234,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the Insights web service for the requesting IP address.
-        ///     Please note that only the GeoIP2 Precision web service supports Insights.
-        ///     The GeoLite2 web service does not support it.
+        ///     Asynchronously query the Insights web service for the requesting IP
+        ///     address. Please note that only the GeoIP2 web services support
+        ///     Insights. The GeoLite2 web services do not support it.
         /// </summary>
         /// <returns>Task that produces an object modeling the Insights response</returns>
         public async Task<InsightsResponse> InsightsAsync()
@@ -302,9 +303,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Returns an <see cref="InsightsResponse" /> for the specified IP address.
-        ///     Please note that only the GeoIP2 Precision web service supports Insights.
-        ///     The GeoLite2 web service does not support it.
+        ///     Returns an <see cref="InsightsResponse" /> for the specified IP
+        ///     address. Please note that only the GeoIP2 web services support
+        ///     Insights. The GeoLite2 web services do not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="InsightsResponse" /></returns>
@@ -314,9 +315,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Returns an <see cref="InsightsResponse" /> for the specified IP address.
-        ///     Please note that only the GeoIP2 Precision web service supports Insights.
-        ///     The GeoLite2 web service does not support it.
+        ///     Returns an <see cref="InsightsResponse" /> for the specified IP
+        ///     address. Please note that only the GeoIP2 web services support
+        ///     Insights. The GeoLite2 web services do not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="InsightsResponse" /></returns>
@@ -326,9 +327,9 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Returns an <see cref="InsightsResponse" /> for the requesting IP address.
-        ///     Please note that only the GeoIP2 Precision web service supports Insights.
-        ///     The GeoLite2 web service does not support it.
+        ///     Returns an <see cref="InsightsResponse" /> for the requesting IP
+        ///     address. Please note that only the GeoIP2 web services support
+        ///     Insights. The GeoLite2 web services do not support it.
         /// </summary>
         /// <returns>An <see cref="InsightsResponse" /></returns>
         public InsightsResponse Insights()
