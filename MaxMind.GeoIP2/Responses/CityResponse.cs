@@ -11,9 +11,6 @@ namespace MaxMind.GeoIP2.Responses
     /// <summary>
     ///     This class provides a model for data returned from the GeoIP2 City
     ///     database and the GeoIP2 City Plus web services.
-    ///     <a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">
-    ///         GeoIP2 Web Services
-    ///     </a>
     /// </summary>
     public class CityResponse : AbstractCityResponse
     {

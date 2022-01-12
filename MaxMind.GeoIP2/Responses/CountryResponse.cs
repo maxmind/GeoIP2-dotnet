@@ -10,10 +10,6 @@ namespace MaxMind.GeoIP2.Responses
     /// <summary>
     ///     This class provides a model for the data returned from the GeoIP2
     ///     Country database and the GeoIP2 Country web service.
-    ///     See
-    ///     <a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">
-    ///         GeoIP2 Web Services
-    ///     </a>
     /// </summary>
     public class CountryResponse : AbstractCountryResponse
     {
