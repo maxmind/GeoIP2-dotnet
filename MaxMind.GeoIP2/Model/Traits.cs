@@ -245,7 +245,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to a Tor exit node.
-        ///     This properly is only available from the GeoIP2 Insights web
+        ///     This value is only available from the GeoIP2 Insights web
         ///     service.
         /// </summary>
         [JsonInclude]
