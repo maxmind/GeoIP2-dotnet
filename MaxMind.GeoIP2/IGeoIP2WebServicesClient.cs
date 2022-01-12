@@ -69,20 +69,20 @@ namespace MaxMind.GeoIP2
         ///     Asynchronously query the GeoIP2 City Plus web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
-        /// <returns>Task that produces an object modeling the City response</returns>
+        /// <returns>Task that produces an object modeling the City Plus response</returns>
         Task<CityResponse> CityAsync(string ipAddress);
 
         /// <summary>
         ///     Asynchronously query the GeoIP2 City Plus web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
-        /// <returns>Task that produces an object modeling the City response</returns>
+        /// <returns>Task that produces an object modeling the City Plus response</returns>
         Task<CityResponse> CityAsync(IPAddress ipAddress);
 
         /// <summary>
         ///     Asynchronously query the GeoIP2 City Plus web service for the requesting IP address.
         /// </summary>
-        /// <returns>Task that produces an object modeling the City response</returns>
+        /// <returns>Task that produces an object modeling the City Plus response</returns>
         Task<CityResponse> CityAsync();
 
         /// <summary>

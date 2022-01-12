@@ -181,29 +181,29 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Asynchronously query the City web service for the specified IP address.
+        ///     Asynchronously query the City Plus web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
-        /// <returns>Task that produces an object modeling the City response</returns>
+        /// <returns>Task that produces an object modeling the City Plus response</returns>
         public async Task<CityResponse> CityAsync(string ipAddress)
         {
             return await CityAsync(ParseIP(ipAddress)).ConfigureAwait(false);
         }
 
         /// <summary>
-        ///     Asynchronously query the City web service for the specified IP address.
+        ///     Asynchronously query the City Plus web service for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
-        /// <returns>Task that produces an object modeling the City response</returns>
+        /// <returns>Task that produces an object modeling the City Plus response</returns>
         public async Task<CityResponse> CityAsync(IPAddress ipAddress)
         {
             return await ExecuteAsync<CityResponse>("city", ipAddress).ConfigureAwait(false);
         }
 
         /// <summary>
-        ///     Asynchronously query the City web service for the requesting IP address.
+        ///     Asynchronously query the City Plus web service for the requesting IP address.
         /// </summary>
-        /// <returns>Task that produces an object modeling the City response</returns>
+        /// <returns>Task that produces an object modeling the City Plus response</returns>
         public async Task<CityResponse> CityAsync()
         {
             return await ExecuteAsync<CityResponse>("city", null).ConfigureAwait(false);
