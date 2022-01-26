@@ -52,8 +52,8 @@ namespace MaxMind.GeoIP2.Model
         ///     This is a string up to three characters long contain the
         ///     subdivision portion of the
         ///     <a
-        ///         href="http://en.wikipedia.org/wiki/ISO_3166-2 ISO 3166-2">
-        ///         code
+        ///         href="http://en.wikipedia.org/wiki/ISO_3166-2">
+        ///         ISO 3166-2 code
         ///     </a>
         ///     .
         /// </summary>
