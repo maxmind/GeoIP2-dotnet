@@ -4,6 +4,7 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -13,9 +14,6 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-#if !NET461
-using Microsoft.Extensions.Options;
-#endif
 
 #endregion
 
@@ -82,7 +80,6 @@ namespace MaxMind.GeoIP2
 
         private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
 
-#if !NET461
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
         /// </summary>
@@ -101,7 +98,6 @@ namespace MaxMind.GeoIP2
             httpClient)
         {
         }
-#endif
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
