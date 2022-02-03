@@ -112,7 +112,7 @@ namespace MaxMind.GeoIP2.UnitTests
         // See https://github.com/xunit/xunit/issues/1517
 #pragma warning disable xUnit1026
         [Theory, MemberData(nameof(TestCases))]
-        public async Task AddressNotFoundShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task AddressNotFoundShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.NotFound,
                 content: ErrorJson("IP_ADDRESS_NOT_FOUND", "The value 1.2.3.16 is not in the database."));
@@ -124,7 +124,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task AddressReservedShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task AddressReservedShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: ErrorJson("IP_ADDRESS_RESERVED",
@@ -137,7 +137,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task BadCharsetRequirementShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task BadCharsetRequirementShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.NotAcceptable,
                 content: "Cannot satisfy your Accept-Charset requirements",
@@ -150,7 +150,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task BadContentTypeShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task BadContentTypeShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.OK,
                 content: CountryJson, contentType: "bad/content-type");
@@ -162,7 +162,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task EmptyBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task EmptyBodyShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type);
 
@@ -173,7 +173,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task InternalServerErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task InternalServerErrorShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.InternalServerError,
                 content: "Internal Server Error");
@@ -185,7 +185,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task IncorrectlyFormattedIPAddressShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task IncorrectlyFormattedIPAddressShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var exception = await Record.ExceptionAsync(async () => await cr(CreateClient(type), "foo"));
             Assert.NotNull(exception);
@@ -194,7 +194,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task PermissionRequiredShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task PermissionRequiredShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var msg = "You do not have permission to use this web service.";
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
@@ -208,7 +208,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task AuthenticationErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task AuthenticationErrorShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var errors = new List<string>
             {
@@ -232,7 +232,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task NoErrorBodyShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task NoErrorBodyShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden);
 
@@ -243,7 +243,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task OutOfQueriesShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task OutOfQueriesShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.PaymentRequired,
                 content:
@@ -257,7 +257,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task InsufficientFundsShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task InsufficientFundsShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var msg =
                 "The license key you have provided is out of queries. Please purchase more queries to use this service.";
@@ -271,7 +271,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task SurprisingStatusShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task SurprisingStatusShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.MultipleChoices);
             var exception = await Record.ExceptionAsync(async () => await cr(client));
@@ -281,7 +281,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task UndeserializableJsonShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task UndeserializableJsonShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.OK,
                 content: "{\"invalid\":yes}");
@@ -293,7 +293,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task UnexpectedErrorBodyShouldThrowExceptionAsync(string type, ClientRunner cr, Type t)
+        public async Task UnexpectedErrorBodyShouldThrowExceptionAsync(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: "{\"invalid\": }");
@@ -305,7 +305,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task WebServiceErrorShouldThrowException(string type, ClientRunner cr, Type t)
+        public async Task WebServiceErrorShouldThrowException(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: ErrorJson("IP_ADDRESS_INVALID",
@@ -317,7 +317,7 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Theory, MemberData(nameof(TestCases))]
-        public async Task WeirdErrorBodyShouldThrowExceptionAsync(string type, ClientRunner cr, Type t)
+        public async Task WeirdErrorBodyShouldThrowExceptionAsync(string type, ClientRunner cr, Type _)
         {
             var client = CreateClient(type, status: HttpStatusCode.Forbidden,
                 content: "{\"weird\": 42}");
