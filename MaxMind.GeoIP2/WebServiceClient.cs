@@ -78,7 +78,7 @@ namespace MaxMind.GeoIP2
         private readonly ISyncClient _syncClient;
         private bool _disposed;
 
-        private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
+        private static ProductInfoHeaderValue UserAgent => new("GeoIP2-dotnet", Version);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
