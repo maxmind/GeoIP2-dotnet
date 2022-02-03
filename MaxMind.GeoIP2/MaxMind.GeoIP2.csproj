@@ -12,6 +12,7 @@
     <PackageId>MaxMind.GeoIP2</PackageId>
     <PackageTags>maxmind;ip;geoip;geoip2;geolocation;maxmind;ipv4;ipv6</PackageTags>
     <PackageIcon>MaxMind-logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/maxmind/GeoIP2-dotnet</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <EnablePackageValidation>true</EnablePackageValidation>
