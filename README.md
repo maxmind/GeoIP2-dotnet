@@ -6,14 +6,6 @@ This distribution provides an API for the GeoIP2 and GeoLite2
 [web services](https://dev.maxmind.com/geoip/docs/web-services?lang=en) and
 [databases](https://dev.maxmind.com/geoip/docs/databases?lang=en).
 
-## Requirements ##
-
-This library works with .NET Framework version 4.6.1 and above and .NET
-Standard 2.0 or above.
-
-This library depends on
-[MaxMind DB Reader](https://github.com/maxmind/MaxMind-DB-Reader-dotnet).
-
 ## Installation ##
 
 ### NuGet ###
