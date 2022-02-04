@@ -474,7 +474,7 @@ namespace MaxMind.GeoIP2.UnitTests
             };
 
             // HttpClient mock
-            var uri = new Uri($"https://test.maxmind.com/geoip/v2.1/country/me");
+            var uri = new Uri("https://test.maxmind.com/geoip/v2.1/country/me");
             var mockHttp = new MockHttpMessageHandler();
             mockHttp.When(HttpMethod.Get, uri.ToString())
                 .WithHeaders("Accept", "application/json")
