@@ -457,7 +457,6 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.NotNull(new WebServiceClient(accountId: id, licenseKey: key));
         }
 
-
         #region NetCoreTests
 
 #if !NET461

@@ -131,7 +131,6 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("1.128.0.0/11", response.Network?.ToString());
         }
 
-
         [Fact]
         public void ConnectionType_ValidResponse()
         {
