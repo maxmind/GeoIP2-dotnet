@@ -38,7 +38,7 @@ namespace MaxMind.GeoIP2.Exceptions
         /// <param name="context"></param>
         protected InvalidRequestException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Code = info.GetString("MaxMind.GeoIP2.Exceptions.InvalidRequestException.Code") 
+            Code = info.GetString("MaxMind.GeoIP2.Exceptions.InvalidRequestException.Code")
                 ?? throw new SerializationException("Unexcepted null Code value");
             Uri = (Uri)(info.GetValue("MaxMind.GeoIP2.Exceptions.InvalidRequestException.Uri", typeof(Uri))
                 ?? throw new SerializationException("Unexcepted null Uri value"));
