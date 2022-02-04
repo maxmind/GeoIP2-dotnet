@@ -220,6 +220,15 @@ dotnet_naming_style.begins_with_i.capitalization = pascal_case
 
 # Options
 
+# RCS1118: Mark local variable as const. Although this sounds OK,
+# it tends to lead to verbose code, is "const string ip" instead
+# of "var ip".
+dotnet_diagnostic.RCS1118.severity = silent
+
+# RSC1146: Use conditional access. I find the resulting code somewhat more
+# confusing to read, e.g., "response.ContentType?.Contains("json") != true"
+dotnet_diagnostic.RCS1146.severity = silent
+
 roslynator_accessibility_modifiers = explicit
 # Applicable to: rcs1018
 
