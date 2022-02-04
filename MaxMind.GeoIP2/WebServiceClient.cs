@@ -79,6 +79,7 @@ namespace MaxMind.GeoIP2
         private readonly ISyncClient _syncClient;
 #endif
         private bool _disposed;
+        private readonly bool _disableHttps;
 
         private static ProductInfoHeaderValue UserAgent => new("GeoIP2-dotnet", Version);
 
@@ -97,6 +98,7 @@ namespace MaxMind.GeoIP2
             options.Value.Locales,
             options.Value.Host,
             options.Value.Timeout,
+            options.Value.DisableHttps,
             httpClient)
         {
         }
@@ -112,6 +114,8 @@ namespace MaxMind.GeoIP2
         ///     "geolite.info" to use the GeoLite2 web service instead of GeoIP2.</param>
         /// <param name="timeout">Timeout in milliseconds for connection to
         ///     web service. The default is 3000.</param>
+        /// <param name="disableHttps">Use HTTP instead of HTTPS. Note that MaxMind
+        ///     servers require HTTPS.</param>
         /// <param name="httpMessageHandler">The <c>HttpMessageHandler</c> to
         ///     use when creating the <c>HttpClient</c>. The handler will be
         ///     disposed.</param>
@@ -121,6 +125,7 @@ namespace MaxMind.GeoIP2
             IEnumerable<string>? locales = null,
             string host = "geoip.maxmind.com",
             int timeout = 3000,
+            bool disableHttps = false,
             HttpMessageHandler? httpMessageHandler = null
         ) : this(
             accountId,
@@ -128,6 +133,7 @@ namespace MaxMind.GeoIP2
             locales,
             host,
             timeout,
+            disableHttps,
             new HttpClient(httpMessageHandler ?? new HttpClientHandler(), true))
         {
         }
@@ -138,6 +144,7 @@ namespace MaxMind.GeoIP2
              IEnumerable<string>? locales,
              string host,
              int timeout,
+             bool disableHttps,
              HttpClient httpClient
          )
         {
@@ -145,26 +152,11 @@ namespace MaxMind.GeoIP2
             _host = host;
             _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
             _client = new Client(auth, timeout, UserAgent, httpClient);
-        }
-
+            _disableHttps = disableHttps;
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-        internal WebServiceClient(
-            int accountId,
-            string licenseKey,
-            IEnumerable<string>? locales,
-            string host,
-            int timeout,
-            HttpClient httpClient,
-            ISyncClient? syncWebRequest
-            )
-        {
-            var auth = EncodedAuth(accountId, licenseKey);
-            _host = host;
-            _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
-            _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
-            _client = new Client(auth, timeout, UserAgent, httpClient);
-        }
+            _syncClient = new SyncClient(auth, timeout, UserAgent);
 #endif
+        }
 
         /// <summary>
         ///     Asynchronously query the Country web service for the specified IP address.
@@ -389,7 +381,8 @@ namespace MaxMind.GeoIP2
         private Uri BuildUri(string type, IPAddress? ipAddress)
         {
             var endpoint = ipAddress?.ToString() ?? "me";
-            return new UriBuilder("https", _host, -1, $"/geoip/v2.1/{type}/{endpoint}").Uri;
+            var scheme = _disableHttps ? "http" : "https";
+            return new Uri($"{scheme}://{_host}/geoip/v2.1/{type}/{endpoint}");
         }
 
         private static string EncodedAuth(int accountId, string licenseKey)

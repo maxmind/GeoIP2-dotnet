@@ -1,23 +1,19 @@
 ﻿#region
 
 using MaxMind.GeoIP2.Exceptions;
-using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
-#if NET461 || NETCOREAPP3_1
-using MaxMind.GeoIP2.UnitTests.Mock;
-#endif
 #if !NET461
 using Microsoft.Extensions.Options;
 #endif
-using RichardSzalay.MockHttp;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
+using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
+using WireMock.Server;
 using Xunit;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
@@ -25,8 +21,15 @@ using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
 namespace MaxMind.GeoIP2.UnitTests
 {
-    public class WebServiceClientTests
+    public class WebServiceClientTests: IDisposable
     {
+        private readonly WireMockServer _server;
+
+        public WebServiceClientTests()
+        {
+            _server = WireMockServer.Start();
+        }
+
         public delegate Task<AbstractCountryResponse> ClientRunner(WebServiceClient c, string ip = "1.2.3.4");
 
         // I don't love running the sync tests with async, but the alternative
@@ -72,46 +75,35 @@ namespace MaxMind.GeoIP2.UnitTests
             new object[]
                 {"insightsAsync", (MeClientRunner) (async c => await c.InsightsAsync()), typeof(InsightsResponse)}
         };
+        private bool _disposed;
 
-        private static WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
+        private WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
             HttpStatusCode status = HttpStatusCode.OK, string? contentType = null, string content = "")
         {
             var service = type.Replace("Async", "");
-            if (contentType == null)
-            {
-                contentType = $"application/vnd.maxmind.com-{service}+json";
-            }
 
-            var stringContent = new StringContent(content);
-            stringContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-            stringContent.Headers.Add("Content-Length", content.Length.ToString());
-            var message = new HttpResponseMessage(status)
-            {
-                Content = stringContent
-            };
+            contentType ??= $"application/vnd.maxmind.com-{service}+json";
 
-            // HttpClient mock
-            var uri = new Uri($"https://geoip.maxmind.com/geoip/v2.1/{service}/{ipAddress}");
-            var mockHttp = new MockHttpMessageHandler();
-            mockHttp.When(HttpMethod.Get, uri.ToString())
-                .WithHeaders("Accept", "application/json")
-                .Respond(message);
+            _server
+              .Given(
+                Request.Create()
+                .WithPath($"/geoip/v2.1/{service}/{ipAddress}")
+                .UsingGet()
+                )
+              .RespondWith(
+                Response.Create()
+                  .WithStatusCode(status)
+                  .WithHeader("Content-Type", contentType)
+                  .WithBody(content)
+              );
 
-            // HttpWebRequest mock
-            var contentsBytes = Encoding.UTF8.GetBytes(content);
-
-#if NET461 || NETCOREAPP3_1
-            var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, contentsBytes));
-#endif
+            var host = _server.Urls[0].Replace("http://", "");
 
             return new WebServiceClient(6, "0123456789",
                 locales: new List<string> { "en" },
-                host: "geoip.maxmind.com",
+                host: host,
                 timeout: 3000,
-                httpClient: new HttpClient(mockHttp)
-#if NET461 || NETCOREAPP3_1
-                , syncWebRequest: syncWebRequest
-#endif
+                disableHttps: true
             );
         }
 
@@ -470,33 +462,31 @@ namespace MaxMind.GeoIP2.UnitTests
         [Fact]
         public async Task WebServiceOptionsConstructor()
         {
-            var stringContent = new StringContent(CountryJson);
-            stringContent.Headers.ContentType = new MediaTypeHeaderValue(
-                "application/vnd.maxmind.com-country+json");
-            stringContent.Headers.Add("Content-Length", CountryJson.Length.ToString());
-            var message = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = stringContent
-            };
-
-            // HttpClient mock
-            var uri = new Uri("https://test.maxmind.com/geoip/v2.1/country/me");
-            var mockHttp = new MockHttpMessageHandler();
-            mockHttp.When(HttpMethod.Get, uri.ToString())
-                .WithHeaders("Accept", "application/json")
-                .Respond(message);
+            _server
+              .Given(
+                Request.Create()
+                .WithPath("/geoip/v2.1/country/me")
+                .UsingGet()
+                )
+              .RespondWith(
+                Response.Create()
+                  .WithStatusCode(HttpStatusCode.OK)
+                  .WithHeader("Content-Type", "application/vnd.maxmind.com-country+json")
+                  .WithBody(CountryJson)
+              );
 
             var options = Options.Create(new WebServiceClientOptions
             {
                 AccountId = 6,
                 LicenseKey = "0123456789",
-                Host = "test.maxmind.com",
+                Host = _server.Urls[0].Replace("http://", ""),
+                DisableHttps = true,
                 Timeout = 3000,
                 Locales = new List<string> { "en" }
             });
 
             var client = new WebServiceClient(
-                new HttpClient(mockHttp),
+                new HttpClient(),
                 options
             );
 
@@ -508,5 +498,28 @@ namespace MaxMind.GeoIP2.UnitTests
 #endif
 
         #endregion
+
+        public void Dispose()
+        {
+            // Dispose of unmanaged resources.
+            Dispose(true);
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _server.Stop();
+            }
+
+            _disposed = true;
+        }
     }
 }
