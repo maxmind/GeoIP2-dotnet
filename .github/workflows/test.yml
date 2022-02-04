@@ -17,11 +17,6 @@ jobs:
         with:
           submodules: true
 
-      - name: Setup dotnet 2.2
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 2.2
-
       - name: Setup dotnet 3.1
         uses: actions/setup-dotnet@v1
         with:
@@ -31,6 +26,11 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.*
+
+      - name: Setup .NET 6.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.*
 
       - name: Build
         run: |
