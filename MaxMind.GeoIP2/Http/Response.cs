@@ -23,5 +23,10 @@ namespace MaxMind.GeoIP2.Http
             this.Content = content;
 #pragma warning restore IDE0003
         }
+
+        internal static object Create()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

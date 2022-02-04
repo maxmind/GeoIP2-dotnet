@@ -31,5 +31,11 @@ namespace MaxMind.GeoIP2
         /// The host to use when accessing the service.
         /// </summary>
         public string Host { get; set; } = "geoip.maxmind.com";
+
+        /// <summary>
+        /// If set, the client will use HTTP instead of HTTPS. Please note
+        /// that MaxMind servers require HTTPS.
+        /// </summary>
+        public bool DisableHttps { get; set; } = false;
     }
 }

@@ -1,6 +1,14 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+5.0.0
+------------------
+
+* This library no longer targets .NET 4.6.1.
+* .NET 6.0 was added as a target.
+* On .NET 5.0+, HttpClient is now used for synchronous requests instead of
+  WebRequest.
+
 4.1.0 (2021-11-19)
 ------------------
 

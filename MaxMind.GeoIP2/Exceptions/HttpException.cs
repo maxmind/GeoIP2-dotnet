@@ -54,9 +54,9 @@ namespace MaxMind.GeoIP2.Exceptions
         /// <param name="context"></param>
         protected HttpException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            HttpStatus = (HttpStatusCode) (info.GetValue("MaxMind.GeoIP2.Exceptions.HttpException.HttpStatus", typeof(HttpStatusCode))
+            HttpStatus = (HttpStatusCode)(info.GetValue("MaxMind.GeoIP2.Exceptions.HttpException.HttpStatus", typeof(HttpStatusCode))
                 ?? throw new SerializationException("Unexcepted null HttpStatus value"));
-            Uri = (Uri) (info.GetValue("MaxMind.GeoIP2.Exceptions.HttpException.Uri", typeof(Uri))
+            Uri = (Uri)(info.GetValue("MaxMind.GeoIP2.Exceptions.HttpException.Uri", typeof(Uri))
                 ?? throw new SerializationException("Unexcepted null Uri value"));
         }
 

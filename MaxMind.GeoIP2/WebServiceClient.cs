@@ -4,6 +4,7 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -13,9 +14,6 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-#if !NET461
-using Microsoft.Extensions.Options;
-#endif
 
 #endregion
 
@@ -76,13 +74,15 @@ namespace MaxMind.GeoIP2
 
         private readonly string _host;
         private readonly IReadOnlyList<string> _locales;
-        private readonly AsyncClient _asyncClient;
+        private readonly Client _client;
+#if NETSTANDARD2_0 || NETSTANDARD2_1
         private readonly ISyncClient _syncClient;
+#endif
         private bool _disposed;
+        private readonly bool _disableHttps;
 
-        private static ProductInfoHeaderValue UserAgent => new ProductInfoHeaderValue("GeoIP2-dotnet", Version);
+        private static ProductInfoHeaderValue UserAgent => new("GeoIP2-dotnet", Version);
 
-#if !NET461
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
         /// </summary>
@@ -98,10 +98,10 @@ namespace MaxMind.GeoIP2
             options.Value.Locales,
             options.Value.Host,
             options.Value.Timeout,
+            options.Value.DisableHttps,
             httpClient)
         {
         }
-#endif
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="WebServiceClient" /> class.
@@ -114,6 +114,8 @@ namespace MaxMind.GeoIP2
         ///     "geolite.info" to use the GeoLite2 web service instead of GeoIP2.</param>
         /// <param name="timeout">Timeout in milliseconds for connection to
         ///     web service. The default is 3000.</param>
+        /// <param name="disableHttps">Use HTTP instead of HTTPS. Note that MaxMind
+        ///     servers require HTTPS.</param>
         /// <param name="httpMessageHandler">The <c>HttpMessageHandler</c> to
         ///     use when creating the <c>HttpClient</c>. The handler will be
         ///     disposed.</param>
@@ -123,6 +125,7 @@ namespace MaxMind.GeoIP2
             IEnumerable<string>? locales = null,
             string host = "geoip.maxmind.com",
             int timeout = 3000,
+            bool disableHttps = false,
             HttpMessageHandler? httpMessageHandler = null
         ) : this(
             accountId,
@@ -130,25 +133,29 @@ namespace MaxMind.GeoIP2
             locales,
             host,
             timeout,
+            disableHttps,
             new HttpClient(httpMessageHandler ?? new HttpClientHandler(), true))
         {
         }
 
         internal WebServiceClient(
-            int accountId,
-            string licenseKey,
-            IEnumerable<string>? locales,
-            string host,
-            int timeout,
-            HttpClient httpClient,
-            ISyncClient? syncWebRequest = null
-            )
+             int accountId,
+             string licenseKey,
+             IEnumerable<string>? locales,
+             string host,
+             int timeout,
+             bool disableHttps,
+             HttpClient httpClient
+         )
         {
             var auth = EncodedAuth(accountId, licenseKey);
             _host = host;
             _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
-            _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
-            _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpClient);
+            _client = new Client(auth, timeout, UserAgent, httpClient);
+            _disableHttps = disableHttps;
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+            _syncClient = new SyncClient(auth, timeout, UserAgent);
+#endif
         }
 
         /// <summary>
@@ -355,7 +362,11 @@ namespace MaxMind.GeoIP2
             where T : AbstractCountryResponse
         {
             var uri = BuildUri(type, ipAddress);
+#if NETSTANDARD2_0 || NETSTANDARD2_1
             var response = _syncClient.Get(uri);
+#else
+            var response = _client.Get(uri);
+#endif
             return HandleResponse<T>(response);
         }
 
@@ -363,14 +374,15 @@ namespace MaxMind.GeoIP2
             where T : AbstractCountryResponse
         {
             var uri = BuildUri(type, ipAddress);
-            var response = await _asyncClient.Get(uri).ConfigureAwait(false);
+            var response = await _client.GetAsync(uri).ConfigureAwait(false);
             return HandleResponse<T>(response);
         }
 
         private Uri BuildUri(string type, IPAddress? ipAddress)
         {
             var endpoint = ipAddress?.ToString() ?? "me";
-            return new UriBuilder("https", _host, -1, $"/geoip/v2.1/{type}/{endpoint}").Uri;
+            var scheme = _disableHttps ? "http" : "https";
+            return new Uri($"{scheme}://{_host}/geoip/v2.1/{type}/{endpoint}");
         }
 
         private static string EncodedAuth(int accountId, string licenseKey)
@@ -515,7 +527,7 @@ namespace MaxMind.GeoIP2
 
             if (disposing)
             {
-                _asyncClient.Dispose();
+                _client.Dispose();
             }
 
             _disposed = true;
