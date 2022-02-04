@@ -46,22 +46,6 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        ///     Constructor
-        /// </summary>
-        [Obsolete("For backwards compatibility. Will be removed in next major release.")]
-        public IspResponse(
-            long? autonomousSystemNumber,
-            string? autonomousSystemOrganization,
-            string? isp,
-            string? organization,
-            string? ipAddress,
-            Network? network = null
-        ) : this(autonomousSystemNumber, autonomousSystemOrganization, isp,
-                 null, null, organization, ipAddress, network)
-        {
-        }
-
-        /// <summary>
         ///     The
         ///     <a
         ///         href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
