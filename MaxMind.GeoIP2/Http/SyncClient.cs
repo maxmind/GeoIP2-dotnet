@@ -7,6 +7,8 @@ using System.Net.Http.Headers;
 
 #endregion
 
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+
 namespace MaxMind.GeoIP2.Http
 {
     internal class SyncClient : ISyncClient
@@ -63,3 +65,5 @@ namespace MaxMind.GeoIP2.Http
         }
     }
 }
+
+#endif

@@ -74,8 +74,10 @@ namespace MaxMind.GeoIP2
 
         private readonly string _host;
         private readonly IReadOnlyList<string> _locales;
-        private readonly AsyncClient _asyncClient;
+        private readonly Client _client;
+#if NETSTANDARD2_0 || NETSTANDARD2_1
         private readonly ISyncClient _syncClient;
+#endif
         private bool _disposed;
 
         private static ProductInfoHeaderValue UserAgent => new("GeoIP2-dotnet", Version);
@@ -131,21 +133,38 @@ namespace MaxMind.GeoIP2
         }
 
         internal WebServiceClient(
+             int accountId,
+             string licenseKey,
+             IEnumerable<string>? locales,
+             string host,
+             int timeout,
+             HttpClient httpClient
+         )
+        {
+            var auth = EncodedAuth(accountId, licenseKey);
+            _host = host;
+            _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
+            _client = new Client(auth, timeout, UserAgent, httpClient);
+        }
+
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+        internal WebServiceClient(
             int accountId,
             string licenseKey,
             IEnumerable<string>? locales,
             string host,
             int timeout,
             HttpClient httpClient,
-            ISyncClient? syncWebRequest = null
+            ISyncClient? syncWebRequest
             )
         {
             var auth = EncodedAuth(accountId, licenseKey);
             _host = host;
             _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
             _syncClient = syncWebRequest ?? new SyncClient(auth, timeout, UserAgent);
-            _asyncClient = new AsyncClient(auth, timeout, UserAgent, httpClient);
+            _client = new Client(auth, timeout, UserAgent, httpClient);
         }
+#endif
 
         /// <summary>
         ///     Asynchronously query the Country web service for the specified IP address.
@@ -351,7 +370,11 @@ namespace MaxMind.GeoIP2
             where T : AbstractCountryResponse
         {
             var uri = BuildUri(type, ipAddress);
+#if NETSTANDARD2_0 || NETSTANDARD2_1
             var response = _syncClient.Get(uri);
+#else
+            var response = _client.Get(uri);
+#endif
             return HandleResponse<T>(response);
         }
 
@@ -359,7 +382,7 @@ namespace MaxMind.GeoIP2
             where T : AbstractCountryResponse
         {
             var uri = BuildUri(type, ipAddress);
-            var response = await _asyncClient.Get(uri).ConfigureAwait(false);
+            var response = await _client.GetAsync(uri).ConfigureAwait(false);
             return HandleResponse<T>(response);
         }
 
@@ -511,7 +534,7 @@ namespace MaxMind.GeoIP2
 
             if (disposing)
             {
-                _asyncClient.Dispose();
+                _client.Dispose();
             }
 
             _disposed = true;

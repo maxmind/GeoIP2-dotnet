@@ -4,7 +4,7 @@ using MaxMind.GeoIP2.Http;
 using System;
 
 #endregion
-
+#if NET461 || NETCOREAPP3_1
 namespace MaxMind.GeoIP2.UnitTests.Mock
 {
     internal class MockSyncClient : ISyncClient
@@ -22,3 +22,4 @@ namespace MaxMind.GeoIP2.UnitTests.Mock
         }
     }
 }
+#endif

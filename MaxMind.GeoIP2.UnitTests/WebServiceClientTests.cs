@@ -4,7 +4,9 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Http;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
+#if NET461 || NETCOREAPP3_1
 using MaxMind.GeoIP2.UnitTests.Mock;
+#endif
 #if !NET461
 using Microsoft.Extensions.Options;
 #endif
@@ -98,14 +100,18 @@ namespace MaxMind.GeoIP2.UnitTests
             // HttpWebRequest mock
             var contentsBytes = Encoding.UTF8.GetBytes(content);
 
+#if NET461 || NETCOREAPP3_1
             var syncWebRequest = new MockSyncClient(new Response(uri, status, contentType, contentsBytes));
+#endif
 
             return new WebServiceClient(6, "0123456789",
                 locales: new List<string> { "en" },
                 host: "geoip.maxmind.com",
                 timeout: 3000,
-                httpClient: new HttpClient(mockHttp),
-                syncWebRequest: syncWebRequest
+                httpClient: new HttpClient(mockHttp)
+#if NET461 || NETCOREAPP3_1
+                , syncWebRequest: syncWebRequest
+#endif
             );
         }
 
@@ -457,7 +463,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.NotNull(new WebServiceClient(accountId: id, licenseKey: key));
         }
 
-        #region NetCoreTests
+#region NetCoreTests
 
 #if !NET461
 
@@ -501,6 +507,6 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 #endif
 
-        #endregion
+#endregion
     }
 }
