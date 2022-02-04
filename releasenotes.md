@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-5.0.0
+5.0.0 (2022-02-04)
 ------------------
 
 * This library no longer targets .NET 4.6.1.
