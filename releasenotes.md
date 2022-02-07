@@ -1,7 +1,12 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-5.0.0
+5.1.0 (2022-02-04)
+------------------
+
+* Update System.Text.Json to 6.0.1 for .NET Standard 2.0 and 2.1.
+
+5.0.0 (2022-02-04)
 ------------------
 
 * This library no longer targets .NET 4.6.1.

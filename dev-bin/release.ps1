@@ -93,10 +93,10 @@ if ((Read-Host -Prompt 'Should push? (y/n)') -ne 'y') {
     Write-Error 'Aborting'
 }
 
-& git push
+& git push -u origin HEAD
 
 Pop-Location
-& git push
+& git push -u origin HEAD
 
 if ((Read-Host -Prompt 'Should release? (y/n)') -ne 'y') {
     Write-Error 'Aborting'
