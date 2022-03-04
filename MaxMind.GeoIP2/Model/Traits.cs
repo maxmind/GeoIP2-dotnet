@@ -308,6 +308,9 @@ namespace MaxMind.GeoIP2.Model
         ///             <description>college</description>
         ///         </item>
         ///         <item>
+        ///             <description>consumer_privacy_network</description>
+        ///         </item>
+        ///         <item>
         ///             <description>content_delivery_network</description>
         ///         </item>
         ///         <item>
