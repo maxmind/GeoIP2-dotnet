@@ -49,53 +49,6 @@ if ((Read-Host -Prompt 'Continue given tests? (y/n)') -ne 'y') {
     Write-Error 'Aborting'
 }
 
-if (Test-Path .gh-pages ) {
-    Write-Debug "Updating .gh-pages"
-    Push-Location .gh-pages
-    & git pull
-} else {
-    Write-Debug "Checking out gh-pages in .gh-pages"
-    & git clone -b gh-pages https://github.com/maxmind/GeoIP2-dotnet.git .gh-pages
-    Push-Location .gh-pages
-}
-
-if (& git status --porcelain) {
-    Write-Error '.gh-pages is not clean'
-}
-Pop-Location
-
-$page = (Get-Item '.gh-pages\index.md').FullName
-
-$pageHeader = @"
----
-layout: default
-title: MaxMind GeoIP2 .NET API
-language: dotnet
-version: $tag
----
-"@
-
-Remove-Item $page
-
-# PowerShell write a BOM by default. GitHub Pages can't handle this.
-$utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($False)
-[IO.File]::WriteAllLines($page, $pageHeader, $utf8NoBomEncoding)
-
-Get-Content -Encoding UTF8 'README.md' | Out-File -Encoding UTF8 -Append $page
-& MSBuild.exe .\geoip2.shfbproj /p:OutputPath=.gh-pages\doc\$tag
-
-Push-Location .gh-pages
-
-& git add doc/
-& git commit -m "Updated for $tag" -a
-
-if ((Read-Host -Prompt 'Should push? (y/n)') -ne 'y') {
-    Write-Error 'Aborting'
-}
-
-& git push -u origin HEAD
-
-Pop-Location
 & git push -u origin HEAD
 
 if ((Read-Host -Prompt 'Should release? (y/n)') -ne 'y') {

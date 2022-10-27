@@ -1,5 +1,8 @@
 # GeoIP2 .NET API #
 
+[![NuGet](https://img.shields.io/nuget/v/MaxMind.GeoIP2)](https://www.nuget.org/packages/MaxMind.GeoIP2)
+[![API Docs](https://www.fuget.org/packages/MaxMind.GeoIP2/badge.svg)](https://www.fuget.org/packages/MaxMind.GeoIP2)
+
 ## Description ##
 
 This distribution provides an API for the GeoIP2 and GeoLite2
