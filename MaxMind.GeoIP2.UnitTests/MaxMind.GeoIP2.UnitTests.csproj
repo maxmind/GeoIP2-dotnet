@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>Test project to validate MaxMind GeoIP2 Database Reader and Web Service Client</Description>
@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-    <PackageReference Include="WireMock.Net" Version="1.5.21" />
+    <PackageReference Include="WireMock.Net" Version="1.5.22" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.core" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
