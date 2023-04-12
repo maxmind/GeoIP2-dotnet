@@ -38,7 +38,7 @@ var client = new WebServiceClient(42, "license_key1");
 To query the GeoLite2 web service, you must set the host to `geolite.info`:
 
 ```
-var client = new WebServiceClient(42, "license_key1", host: "geolite.info"))
+var client = new WebServiceClient(42, "license_key1", host: "geolite.info");
 ```
 
 You may also specify the fall-back locales, the host, or the timeout as
