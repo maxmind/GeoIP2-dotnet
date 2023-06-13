@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>MaxMind GeoIP2 Database Reader and Web Service Client</Description>
@@ -41,7 +41,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netstandard2.1' ">
     <PackageReference Include="System.Text.Json">
-      <Version>7.0.2</Version>
+      <Version>7.0.3</Version>
     </PackageReference>
   </ItemGroup>
 
