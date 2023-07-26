@@ -105,8 +105,10 @@ namespace MaxMind.GeoIP2.Model
         public string? AutonomousSystemOrganization { get; internal set; }
 
         /// <summary>
-        ///     The connection type of the IP address. This value is only
-        ///     available from the Enterprise database.
+        ///     The connection type may take the following values: "Dialup",
+        ///     "Cable/DSL", "Corporate", "Cellular", and "Satellite".
+        ///     Additional values may be added in the future. This value is
+        ///     only available from the Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("connection_type")]
