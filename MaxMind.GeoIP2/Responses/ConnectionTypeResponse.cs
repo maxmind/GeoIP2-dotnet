@@ -35,7 +35,9 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        ///     The connection type of the IP address.
+        ///     The connection type may take the following values: "Dialup",
+        ///     "Cable/DSL", "Corporate", "Cellular", and "Satellite". Additional
+        ///     values may be added in the future.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("connection_type")]
