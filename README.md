@@ -41,6 +41,13 @@ To query the GeoLite2 web service, you must set the host to `geolite.info`:
 var client = new WebServiceClient(42, "license_key1", host: "geolite.info");
 ```
 
+To query the Sandbox GeoIP2 web service, you must set the host to
+`sandbox.maxmind.com`:
+
+```
+var client = new WebServiceClient(42, "license_key1", host: "sandbox.maxmind.com");
+```
+
 You may also specify the fall-back locales, the host, or the timeout as
 optional parameters. See the API docs for more information.
 
@@ -88,7 +95,9 @@ services.AddHttpClient<WebServiceClient>();
     // "Timeout": 3000,
 
     // Optionally set host. "geolite.info" will use the GeoLite2
-    // web service instead of GeoIP2.
+    // web service instead of GeoIP2. "sandbox.maxmind.com" will use the
+    // Sandbox GeoIP2 web service instead of the production GeoIP2 web
+    // service.
     //
     // "Host": "geolite.info"
   },
@@ -130,7 +139,9 @@ public class MaxMindController : ControllerBase
 //
 // Replace "42" with your account ID and "license_key" with your license
 // key. Set the named host argument to "geolite.info" to use the GeoLite2
-// web service instead of GeoIP2.
+// web service instead of GeoIP2. Set the named host argument to
+// "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service instead of
+// the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -151,7 +162,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 //
 // Replace "42" with your account ID and "license_key" with your license
 // key. Set the named host argument to "geolite.info" to use the GeoLite2
-// web service instead of GeoIP2.
+// web service instead of GeoIP2. Set the named host argument to
+// "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service instead of
+// the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -172,7 +185,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 //
 // Replace "42" with your account ID and "license_key" with your license
 // key. Set the named host argument to "geolite.info" to use the GeoLite2
-// web service instead of GeoIP2.
+// web service instead of GeoIP2. Set the named host argument to
+// "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service instead of
+// the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -203,7 +218,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 //
 // Replace "42" with your account ID and "license_key" with your license
 // key. Set the named host argument to "geolite.info" to use the GeoLite2
-// web service instead of GeoIP2.
+// web service instead of GeoIP2. Set the named host argument to
+// "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service instead of
+// the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -233,7 +250,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key. The GeoLite2 web service does not support Insights.
+// key. The GeoLite2 web service does not support Insights. Set the named
+// host argument to "sandbox.maxmind.com" to use the Sandbox GeoIP2 web
+// service instead of the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -263,7 +282,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key. The GeoLite2 web service does not support Insights.
+// key. The GeoLite2 web service does not support Insights. Set the named
+// host argument to "sandbox.maxmind.com" to use the Sandbox GeoIP2 web
+// service instead of the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup

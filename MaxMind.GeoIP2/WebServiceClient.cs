@@ -111,7 +111,10 @@ namespace MaxMind.GeoIP2
         /// <param name="locales">List of locale codes to use in name
         ///     property from most preferred to least preferred.</param>
         /// <param name="host">The host to use when accessing the service. Set this to
-        ///     "geolite.info" to use the GeoLite2 web service instead of GeoIP2.</param>
+        ///     "geolite.info" to use the GeoLite2 web service instead of GeoIP2.
+        ///     Set this to "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service
+        ///     instead of the production GeoIP2 web service. The sandbox allows you to
+        ///     experiment with the API without affecting your production data.</param>
         /// <param name="timeout">Timeout in milliseconds for connection to
         ///     web service. The default is 3000.</param>
         /// <param name="disableHttps">Use HTTP instead of HTTPS. Note that MaxMind
