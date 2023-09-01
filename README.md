@@ -503,7 +503,7 @@ in the `MaxMind.GeoIP2.Traits` record.
 
 ## Integration with GeoNames ##
 
-[GeoNames](http://www.geonames.org/) offers web services and downloadable
+[GeoNames](https://www.geonames.org/) offers web services and downloadable
 databases with data on geographical features around the world, including
 populated places. They offer both free and paid premium data. Each feature is
 unique identified by a `geonameId`, which is an integer.
@@ -520,18 +520,18 @@ GeoNames premium data set.
 
 If the problem you find is that an IP address is incorrectly mapped,
 please
-[submit your correction to MaxMind](http://www.maxmind.com/en/correction).
+[submit your correction to MaxMind](https://www.maxmind.com/en/correction).
 
 If you find some other sort of mistake, like an incorrect spelling, please
-check the [GeoNames site](http://www.geonames.org/) first. Once you've
+check the [GeoNames site](https://www.geonames.org/) first. Once you've
 searched for a place and found it on the GeoNames map view, there are a number
 of links you can use to correct data ("move", "edit", "alternate names",
 etc.). Once the correction is part of the GeoNames data set, it will be
 automatically incorporated into future MaxMind releases.
 
 If you are a paying MaxMind customer and you're not sure where to submit a
-correction, please [contact MaxMind support
-](http://www.maxmind.com/en/support) for help.
+correction, please [contact MaxMind
+support](https://www.maxmind.com/en/support) for help.
 
 ## Other Support ##
 
@@ -539,7 +539,7 @@ Please report all issues with this code using the
 [GitHub issue tracker](https://github.com/maxmind/GeoIP2-dotnet/issues).
 
 If you are having an issue with a MaxMind service that is not specific to the
-client API, please see [our support page](http://www.maxmind.com/en/support).
+client API, please see [our support page](https://www.maxmind.com/en/support).
 
 ## Contributing ##
 
@@ -548,7 +548,7 @@ possible.
 
 ## Versioning ##
 
-The API uses [Semantic Versioning](http://semver.org/). However, adding new
+The API uses [Semantic Versioning](https://semver.org/). However, adding new
 methods to `IGeoIP2Provider`, `IGeoIP2DatabaseReader`, and
 `IGeoIP2WebServicesClient` will not be considered a breaking change. These
 interfaces only exist to facilitate unit testing and dependency injection.

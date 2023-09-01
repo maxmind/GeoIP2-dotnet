@@ -62,7 +62,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The
         ///     <a
-        ///         href="http://en.wikipedia.org/wiki/ISO_3166-1">
+        ///         href="https://en.wikipedia.org/wiki/ISO_3166-1">
         ///         two-character ISO
         ///         3166-1 alpha code
         ///     </a>

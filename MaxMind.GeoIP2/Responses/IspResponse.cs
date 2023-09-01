@@ -48,7 +48,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     The
         ///     <a
-        ///         href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
+        ///         href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
         ///         autonomous system number
         ///     </a>
         ///     associated with the IP address.
@@ -60,7 +60,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <summary>
         ///     The organization associated with the registered
         ///     <a
-        ///         href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
+        ///         href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
         ///         autonomous system number
         ///     </a>
         ///     for the IP address.
