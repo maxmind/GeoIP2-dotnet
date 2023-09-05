@@ -80,7 +80,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The
         ///     <a
-        ///         href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
+        ///         href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
         ///         autonomous system number
         ///     </a>
         ///     associated with the IP address.
@@ -94,7 +94,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The organization associated with the registered
         ///     <a
-        ///         href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
+        ///         href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
         ///         autonomous system number
         ///     </a>
         ///     for the IP address. This value is only available from the City

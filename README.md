@@ -41,6 +41,13 @@ To query the GeoLite2 web service, you must set the host to `geolite.info`:
 var client = new WebServiceClient(42, "license_key1", host: "geolite.info");
 ```
 
+To query the Sandbox GeoIP2 web service, you must set the host to
+`sandbox.maxmind.com`:
+
+```
+var client = new WebServiceClient(42, "license_key1", host: "sandbox.maxmind.com");
+```
+
 You may also specify the fall-back locales, the host, or the timeout as
 optional parameters. See the API docs for more information.
 
@@ -88,7 +95,9 @@ services.AddHttpClient<WebServiceClient>();
     // "Timeout": 3000,
 
     // Optionally set host. "geolite.info" will use the GeoLite2
-    // web service instead of GeoIP2.
+    // web service instead of GeoIP2. "sandbox.maxmind.com" will use the
+    // Sandbox GeoIP2 web service instead of the production GeoIP2 web
+    // service.
     //
     // "Host": "geolite.info"
   },
@@ -130,7 +139,9 @@ public class MaxMindController : ControllerBase
 //
 // Replace "42" with your account ID and "license_key" with your license
 // key. Set the named host argument to "geolite.info" to use the GeoLite2
-// web service instead of GeoIP2.
+// web service instead of GeoIP2. Set the named host argument to
+// "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service instead of
+// the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -151,7 +162,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 //
 // Replace "42" with your account ID and "license_key" with your license
 // key. Set the named host argument to "geolite.info" to use the GeoLite2
-// web service instead of GeoIP2.
+// web service instead of GeoIP2. Set the named host argument to
+// "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service instead of
+// the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -172,7 +185,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 //
 // Replace "42" with your account ID and "license_key" with your license
 // key. Set the named host argument to "geolite.info" to use the GeoLite2
-// web service instead of GeoIP2.
+// web service instead of GeoIP2. Set the named host argument to
+// "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service instead of
+// the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -203,7 +218,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 //
 // Replace "42" with your account ID and "license_key" with your license
 // key. Set the named host argument to "geolite.info" to use the GeoLite2
-// web service instead of GeoIP2.
+// web service instead of GeoIP2. Set the named host argument to
+// "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service instead of
+// the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -233,7 +250,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key. The GeoLite2 web service does not support Insights.
+// key. The GeoLite2 web service does not support Insights. Set the named
+// host argument to "sandbox.maxmind.com" to use the Sandbox GeoIP2 web
+// service instead of the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -263,7 +282,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 // class is thread safe.
 //
 // Replace "42" with your account ID and "license_key" with your license
-// key. The GeoLite2 web service does not support Insights.
+// key. The GeoLite2 web service does not support Insights. Set the named
+// host argument to "sandbox.maxmind.com" to use the Sandbox GeoIP2 web
+// service instead of the production GeoIP2 web service.
 using (var client = new WebServiceClient(42, "license_key"))
 {
     // Do the lookup
@@ -503,7 +524,7 @@ in the `MaxMind.GeoIP2.Traits` record.
 
 ## Integration with GeoNames ##
 
-[GeoNames](http://www.geonames.org/) offers web services and downloadable
+[GeoNames](https://www.geonames.org/) offers web services and downloadable
 databases with data on geographical features around the world, including
 populated places. They offer both free and paid premium data. Each feature is
 unique identified by a `geonameId`, which is an integer.
@@ -520,18 +541,18 @@ GeoNames premium data set.
 
 If the problem you find is that an IP address is incorrectly mapped,
 please
-[submit your correction to MaxMind](http://www.maxmind.com/en/correction).
+[submit your correction to MaxMind](https://www.maxmind.com/en/correction).
 
 If you find some other sort of mistake, like an incorrect spelling, please
-check the [GeoNames site](http://www.geonames.org/) first. Once you've
+check the [GeoNames site](https://www.geonames.org/) first. Once you've
 searched for a place and found it on the GeoNames map view, there are a number
 of links you can use to correct data ("move", "edit", "alternate names",
 etc.). Once the correction is part of the GeoNames data set, it will be
 automatically incorporated into future MaxMind releases.
 
 If you are a paying MaxMind customer and you're not sure where to submit a
-correction, please [contact MaxMind support
-](http://www.maxmind.com/en/support) for help.
+correction, please [contact MaxMind
+support](https://www.maxmind.com/en/support) for help.
 
 ## Other Support ##
 
@@ -539,7 +560,7 @@ Please report all issues with this code using the
 [GitHub issue tracker](https://github.com/maxmind/GeoIP2-dotnet/issues).
 
 If you are having an issue with a MaxMind service that is not specific to the
-client API, please see [our support page](http://www.maxmind.com/en/support).
+client API, please see [our support page](https://www.maxmind.com/en/support).
 
 ## Contributing ##
 
@@ -548,7 +569,7 @@ possible.
 
 ## Versioning ##
 
-The API uses [Semantic Versioning](http://semver.org/). However, adding new
+The API uses [Semantic Versioning](https://semver.org/). However, adding new
 methods to `IGeoIP2Provider`, `IGeoIP2DatabaseReader`, and
 `IGeoIP2WebServicesClient` will not be considered a breaking change. These
 interfaces only exist to facilitate unit testing and dependency injection.
@@ -558,6 +579,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2013-2022 by MaxMind, Inc.
+This software is Copyright (c) 2013-2023 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.

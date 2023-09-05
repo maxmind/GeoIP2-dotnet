@@ -99,7 +99,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The time zone associated with location, as specified by the
         ///     <a
-        ///         href="http://www.iana.org/time-zones">
+        ///         href="https://www.iana.org/time-zones">
         ///         IANA Time Zone
         ///         Database
         ///     </a>
