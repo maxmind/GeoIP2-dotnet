@@ -108,7 +108,8 @@ namespace MaxMind.GeoIP2.Model
         ///     The connection type may take the following values: "Dialup",
         ///     "Cable/DSL", "Corporate", "Cellular", and "Satellite".
         ///     Additional values may be added in the future. This value is
-        ///     only available from the Enterprise database.
+        ///     only available from the City Plus and Insights web services
+        ///     and the Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("connection_type")]

@@ -87,6 +87,7 @@ namespace MaxMind.GeoIP2.UnitTests
 
             Assert.Equal(1234, insights.Traits.AutonomousSystemNumber);
             Assert.Equal("AS Organization", insights.Traits.AutonomousSystemOrganization);
+            Assert.Equal("Cable/DSL", insights.Traits.ConnectionType);
             Assert.Equal("example.com", insights.Traits.Domain);
             Assert.Equal("1.2.3.4", insights.Traits.IPAddress);
             Assert.True(insights.Traits.IsAnonymous);
