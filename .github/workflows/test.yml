@@ -23,6 +23,7 @@ jobs:
           dotnet-version: |
             3.1.x
             6.0.x
+            7.0.x
             8.0.x
 
       - name: Build
@@ -32,7 +33,7 @@ jobs:
               dotnet build MaxMind.GeoIP2.UnitTests
 
       - name: Run benchmark
-        run: dotnet run -f net6.0 -p MaxMind.GeoIP2.Benchmark/MaxMind.GeoIP2.Benchmark.csproj
+        run: dotnet run -f net8.0 -p MaxMind.GeoIP2.Benchmark/MaxMind.GeoIP2.Benchmark.csproj
         env:
           MAXMIND_BENCHMARK_DB: ${{ github.workspace }}/MaxMind.GeoIP2.UnitTests/TestData/MaxMind-DB/test-data/GeoIP2-City-Test.mmdb
 

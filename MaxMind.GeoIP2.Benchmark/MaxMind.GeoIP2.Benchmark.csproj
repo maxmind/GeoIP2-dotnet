@@ -3,8 +3,8 @@
   <PropertyGroup>
     <Description>Benchmark project to validate MaxMind GeoIP2 Database Reader and Web Service Client</Description>
     <VersionPrefix>5.0.0</VersionPrefix>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net6.0;net472</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">net6.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net8.0;net7.0;net6.0;net472</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">net8.0;net7.0;net6.0</TargetFrameworks>
     <AssemblyName>MaxMind.GeoIP2.Benchmark</AssemblyName>
     <OutputType>Exe</OutputType>
     <AssemblyOriginatorKeyFile>../MaxMind.snk</AssemblyOriginatorKeyFile>

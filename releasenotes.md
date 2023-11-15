@@ -7,6 +7,7 @@ GeoIP2 .NET API Release Notes
 * .NET 5.0 has been removed as a target as it has reach its end of life.
   However, if you are using .NET 5.0, the .NET Standard 2.1 target should
   continue working for you.
+* .NET 7.0 and .NET 8.0 have been added as a target.
 
 5.1.0 (2022-02-04)
 ------------------
