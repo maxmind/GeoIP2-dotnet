@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>MaxMind GeoIP2 Database Reader and Web Service Client</Description>
     <VersionPrefix>5.1.0</VersionPrefix>
-    <TargetFrameworks>net6.0;net5.0;netstandard2.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;netstandard2.1;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>MaxMind.GeoIP2</AssemblyName>
     <AssemblyOriginatorKeyFile>../MaxMind.snk</AssemblyOriginatorKeyFile>

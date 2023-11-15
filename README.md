@@ -70,7 +70,7 @@ See the API documentation for more details.
 ### ASP.NET Core Usage ###
 
 To use the web service API with HttpClient factory pattern as a
-[Typed client](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1#typed-clients)
+[Typed client](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-6.0#typed-clients)
 you need to do the following:
 
 1. Add the following lines to `Startup.cs` `ConfigureServices` method:
