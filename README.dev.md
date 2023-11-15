@@ -15,23 +15,3 @@
    NuGet, and make a GitHub release.
 5. Update GitHub Release page for the release.
 6. Verify the release on [NuGet](https://www.nuget.org/packages/MaxMind.GeoIP2/).
-
-## Using Docker
-
-A Dockerfile is included to build an image that can assist in updating dependencies, running benchmarks and running tests.
-
-A `Makefile` is also included to act as a task runner for the tasks mentioned above. Below are the targets and their descriptions.
-
-```Makefile
-# Initialize the repo by installing git submodules and building the `geoip2-dotnet` Docker image
-make init
-
-# Run benchmarks
-make benchmark
-
-# Run tests
-make test
-
-# Update dependencies
-make update_dependencies
-```
