@@ -3,9 +3,7 @@
 using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
-#if !NET461
 using Microsoft.Extensions.Options;
-#endif
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -457,8 +455,6 @@ namespace MaxMind.GeoIP2.UnitTests
 
         #region NetCoreTests
 
-#if !NET461
-
         [Fact]
         public async Task WebServiceOptionsConstructor()
         {
@@ -495,7 +491,6 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.NotNull(result);
             Assert.Equal("1.2.3.0/24", result.Traits.Network?.ToString());
         }
-#endif
 
         #endregion
 

@@ -52,6 +52,9 @@ namespace MaxMind.GeoIP2.Exceptions
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>
+#if NET8_0_OR_GREATER
+        [Obsolete(DiagnosticId = "SYSLIB0051")]
+#endif
         protected HttpException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             HttpStatus = (HttpStatusCode)(info.GetValue("MaxMind.GeoIP2.Exceptions.HttpException.HttpStatus", typeof(HttpStatusCode))
@@ -65,6 +68,9 @@ namespace MaxMind.GeoIP2.Exceptions
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>
+#if NET8_0_OR_GREATER
+        [Obsolete(DiagnosticId = "SYSLIB0051")]
+#endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
