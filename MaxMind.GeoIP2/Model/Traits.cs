@@ -33,6 +33,7 @@ namespace MaxMind.GeoIP2.Model
             [Parameter("is_anonymous")] bool isAnonymous = false,
             [Parameter("is_anonymous_proxy")] bool isAnonymousProxy = false,
             [Parameter("is_anonymous_vpn")] bool isAnonymousVpn = false,
+            [Parameter("is_anycast")] bool isAnycast = false,
             [Parameter("is_hosting_provider")] bool isHostingProvider = false,
             [Parameter("is_legitimate_proxy")] bool isLegitimateProxy = false,
             [Parameter("is_public_proxy")] bool isPublicProxy = false,
@@ -59,6 +60,7 @@ namespace MaxMind.GeoIP2.Model
             IsAnonymousProxy = isAnonymousProxy;
 #pragma warning restore 618
             IsAnonymousVpn = isAnonymousVpn;
+            IsAnycast = isAnycast;
             IsHostingProvider = isHostingProvider;
             IsLegitimateProxy = isLegitimateProxy;
             IsPublicProxy = isPublicProxy;
@@ -75,6 +77,61 @@ namespace MaxMind.GeoIP2.Model
             StaticIPScore = staticIPScore;
             UserCount = userCount;
             UserType = userType;
+        }
+
+        /// <summary>
+        ///     Constructor for binary compatibility.
+        /// </summary>
+        [Obsolete]
+        public Traits(
+            long? autonomousSystemNumber,
+            string? autonomousSystemOrganization,
+            string? connectionType,
+            string? domain,
+            string? ipAddress,
+            bool isAnonymous,
+            bool isAnonymousProxy,
+            bool isAnonymousVpn,
+            bool isHostingProvider,
+            bool isLegitimateProxy,
+            bool isPublicProxy,
+            bool isResidentialProxy,
+            bool isSatelliteProvider,
+            bool isTorExitNode,
+            string? isp,
+            string? mobileCountryCode,
+            string? mobileNetworkCode,
+            string? organization,
+            string? userType,
+            Network? network,
+            double? staticIPScore,
+            int? userCount
+        ) : this(
+            autonomousSystemNumber,
+            autonomousSystemOrganization,
+            connectionType,
+            domain,
+            ipAddress,
+            isAnonymous,
+            isAnonymousProxy,
+            isAnonymousVpn,
+            false, // isAnycast
+            isHostingProvider,
+            isLegitimateProxy,
+            isPublicProxy,
+            isResidentialProxy,
+            isSatelliteProvider,
+            isTorExitNode,
+            isp,
+            mobileCountryCode,
+            mobileNetworkCode,
+            organization,
+            userType,
+            network,
+            staticIPScore,
+            userCount
+        )
+        {
         }
 
         /// <summary>
@@ -152,6 +209,15 @@ namespace MaxMind.GeoIP2.Model
         [JsonPropertyName("is_anonymous_proxy")]
         [Obsolete("Use our GeoIP2 Anonymous IP database instead.")]
         public bool IsAnonymousProxy { get; internal set; }
+
+        /// <summary>
+        ///     This is true if the IP address belongs to an <a
+        ///     href="https://en.wikipedia.org/wiki/Anycast">anycast network</a>.
+        ///     This is not aailable from GeoLite databases or web services.
+        /// </summary>
+        [JsonInclude]
+        [JsonPropertyName("is_anycast")]
+        public bool IsAnycast { get; internal set; }
 
         /// <summary>
         ///     This is true if the IP address is registered to an anonymous
@@ -372,6 +438,7 @@ namespace MaxMind.GeoIP2.Model
                 $"{nameof(IsAnonymousProxy)}: {IsAnonymousProxy}, " +
 #pragma warning restore 618
                 $"{nameof(IsAnonymousVpn)}: {IsAnonymousVpn}, " +
+                $"{nameof(IsAnycast)}: {IsAnycast}, " +
                 $"{nameof(IsHostingProvider)}: {IsHostingProvider}, " +
                 $"{nameof(IsLegitimateProxy)}: {IsLegitimateProxy}, " +
                 $"{nameof(IsPublicProxy)}: {IsPublicProxy}, " +

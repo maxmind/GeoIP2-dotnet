@@ -8,6 +8,11 @@ GeoIP2 .NET API Release Notes
   However, if you are using .NET 5.0, the .NET Standard 2.1 target should
   continue working for you.
 * .NET 7.0 and .NET 8.0 have been added as a target.
+* The `IsAnycast` property was added to `MaxMind.GeoIP2.Model.Traits`. This
+  returns `true` if the IP address belongs to an [anycast
+  network](https://en.wikipedia.org/wiki/Anycast). This is available for the
+  GeoIP2 Country, City Plus, and Insights web services and the GeoIP2 Country,
+  City, and Enterprise databases.
 
 5.1.0 (2022-02-04)
 ------------------

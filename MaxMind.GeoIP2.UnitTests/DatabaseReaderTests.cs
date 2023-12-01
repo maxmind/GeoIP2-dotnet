@@ -137,7 +137,7 @@ namespace MaxMind.GeoIP2.UnitTests
             using var reader = new DatabaseReader(_connectionTypeDatabaseFile);
             var ipAddress = "1.0.1.0";
             var response = reader.ConnectionType(ipAddress);
-            Assert.Equal("Cable/DSL", response.ConnectionType);
+            Assert.Equal("Cellular", response.ConnectionType);
             Assert.Equal(ipAddress, response.IPAddress);
             Assert.Equal("1.0.1.0/24", response.Network?.ToString());
         }
@@ -174,6 +174,9 @@ namespace MaxMind.GeoIP2.UnitTests
             response = reader.Enterprise("149.101.100.0");
             Assert.Equal("310", response.Traits.MobileCountryCode);
             Assert.Equal("004", response.Traits.MobileNetworkCode);
+
+            response = reader.Enterprise("214.1.1.0");
+            Assert.True(response.Traits.IsAnycast);
         }
 
         [Fact]
@@ -204,6 +207,9 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
             Assert.Equal("81.2.69.160/27", response.Traits.Network?.ToString());
+
+            response = reader.Country("214.1.1.0");
+            Assert.True(response.Traits.IsAnycast);
         }
 
         [Fact]
@@ -230,6 +236,9 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.False(response.RegisteredCountry.IsInEuropeanUnion);
             Assert.False(response.RepresentedCountry.IsInEuropeanUnion);
             Assert.Equal("81.2.69.160/27", response.Traits.Network?.ToString());
+
+            response = reader.City("214.1.1.0");
+            Assert.True(response.Traits.IsAnycast);
         }
 
         [Fact]

@@ -413,6 +413,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.False(traits.IsAnonymousProxy);
             Assert.False(traits.IsSatelliteProvider);
 #pragma warning restore 0618
+            Assert.False(traits.IsAnycast);
 
             foreach (var c in new[]
             {
