@@ -35,6 +35,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("United Kingdom", resp.RepresentedCountry.Name);
             Assert.Equal("military", resp.RepresentedCountry.Type);
 
+            Assert.True(resp.Traits.IsAnycast);
             Assert.Equal("1.2.3.4", resp.Traits.IPAddress);
         }
 
@@ -100,6 +101,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.True(insights.Traits.IsAnonymousProxy);
             Assert.True(insights.Traits.IsSatelliteProvider);
 #pragma warning restore 0618
+            Assert.True(insights.Traits.IsAnycast);
             Assert.Equal("Comcast", insights.Traits.Isp);
             Assert.Equal("310", insights.Traits.MobileCountryCode);
             Assert.Equal("004", insights.Traits.MobileNetworkCode);

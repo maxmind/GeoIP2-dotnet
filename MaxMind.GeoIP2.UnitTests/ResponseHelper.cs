@@ -64,6 +64,7 @@
                     ""is_anonymous"": true,
                     ""is_anonymous_proxy"": true,
                     ""is_anonymous_vpn"": true,
+                    ""is_anycast"": true,
                     ""is_hosting_provider"": true,
                     ""is_public_proxy"": true,
                     ""is_residential_proxy"": true,
@@ -109,6 +110,7 @@
                 },
                 ""traits"": {
                     ""ip_address"": ""1.2.3.4"",
+                    ""is_anycast"": true,
                     ""network"": ""1.2.3.0/24""
                 }
             }";
