@@ -213,7 +213,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     This is true if the IP address belongs to an <a
         ///     href="https://en.wikipedia.org/wiki/Anycast">anycast network</a>.
-        ///     This is not aailable from GeoLite databases or web services.
+        ///     This is not available from GeoLite databases or web services.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_anycast")]
