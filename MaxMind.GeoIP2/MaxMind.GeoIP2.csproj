@@ -35,7 +35,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaxMind.Db" Version="4.0.0" />
+    <PackageReference Include="MaxMind.Db" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
   </ItemGroup>
 
