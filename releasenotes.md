@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-5.2.0
+5.2.0 (2023-12-05)
 ------------------
 
 * .NET 5.0 has been removed as a target as it has reach its end of life.
