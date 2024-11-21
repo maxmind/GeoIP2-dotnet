@@ -461,7 +461,7 @@ namespace MaxMind.GeoIP2
 
         private static Exception Create4xxException(Response response)
         {
-            if (response.Content == null || response.Content.Length == 0)
+            if (response.Content.Length == 0)
             {
                 return new HttpException(
                     $"Received a {response.StatusCode} error for {response.RequestUri} with no body",
