@@ -80,6 +80,7 @@ namespace MaxMind.GeoIP2
 #endif
         private bool _disposed;
         private readonly bool _disableHttps;
+        private readonly JsonSerializerOptions _jsonOptions;
 
         private static ProductInfoHeaderValue UserAgent => new("GeoIP2-dotnet", Version);
 
@@ -156,6 +157,8 @@ namespace MaxMind.GeoIP2
             _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
             _client = new Client(auth, timeout, UserAgent, httpClient);
             _disableHttps = disableHttps;
+            _jsonOptions = new JsonSerializerOptions();
+            _jsonOptions.Converters.Add(new NetworkConverter());
 #if NETSTANDARD2_0 || NETSTANDARD2_1
             _syncClient = new SyncClient(auth, timeout, UserAgent);
 #endif
@@ -418,12 +421,9 @@ namespace MaxMind.GeoIP2
                     $"Received a 200 response for {response.RequestUri} but there was no message body.",
                     HttpStatusCode.OK, response.RequestUri);
             }
-
             try
             {
-                var options = new JsonSerializerOptions();
-                options.Converters.Add(new NetworkConverter());
-                var model = JsonSerializer.Deserialize<T>(response.Content, options);
+                var model = JsonSerializer.Deserialize<T>(response.Content, _jsonOptions);
                 if (model == null)
                 {
                     throw new HttpException(
