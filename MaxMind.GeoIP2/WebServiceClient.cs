@@ -352,7 +352,7 @@ namespace MaxMind.GeoIP2
             IPAddress? ip = null;
 
             // The "ipAddress != null" is here for backwards compatibility with
-            // pre-nullable-reference-types code that might possible rely on the
+            // pre-nullable-reference-types code that might possibly rely on the
             // undocumented feature of passing a null IP string.
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
             {
