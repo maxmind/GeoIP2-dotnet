@@ -443,20 +443,21 @@ namespace MaxMind.GeoIP2
         private static Exception CreateStatusException(Response response)
         {
             var status = (int)response.StatusCode;
-            if (status >= 400 && status < 500)
+            switch (status)
             {
-                return Create4xxException(response);
+                case >= 400 and < 500:
+                    return Create4xxException(response);
+                case >= 500 and < 600:
+                    return new HttpException(
+                        $"Received a server ({status}) error for {response.RequestUri}",
+                        response.StatusCode, response.RequestUri);
+                default:
+                    {
+                        var errorMessage =
+                            $"Received an unexpected response for {response.RequestUri} (status code: {status})";
+                        return new HttpException(errorMessage, response.StatusCode, response.RequestUri);
+                    }
             }
-            if (status >= 500 && status < 600)
-            {
-                return new HttpException(
-                    $"Received a server ({status}) error for {response.RequestUri}",
-                    response.StatusCode, response.RequestUri);
-            }
-
-            var errorMessage =
-                $"Received an unexpected response for {response.RequestUri} (status code: {status})";
-            return new HttpException(errorMessage, response.StatusCode, response.RequestUri);
         }
 
         private static Exception Create4xxException(Response response)

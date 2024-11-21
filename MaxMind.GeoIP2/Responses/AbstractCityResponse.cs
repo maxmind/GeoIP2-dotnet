@@ -87,18 +87,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     returns an empty <see cref="Subdivision" /> object.
         /// </summary>
         [JsonIgnore]
-        public Subdivision MostSpecificSubdivision
-        {
-            get
-            {
-                if (Subdivisions.Count == 0)
-                {
-                    return new Subdivision();
-                }
-
-                return Subdivisions[Subdivisions.Count - 1];
-            }
-        }
+        public Subdivision MostSpecificSubdivision => Subdivisions.Count == 0 ? new Subdivision() : Subdivisions[Subdivisions.Count - 1];
 
         /// <summary>
         ///     Returns a <see cref="string" /> that represents this instance.
