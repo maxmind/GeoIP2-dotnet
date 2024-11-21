@@ -26,7 +26,7 @@ namespace MaxMind.GeoIP2.Exceptions
         /// </summary>
         /// <param name="message">Exception message.</param>
         /// <param name="innerException">The underlying exception that caused this one.</param>
-        public PermissionRequiredException(string message, System.Exception innerException)
+        public PermissionRequiredException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
