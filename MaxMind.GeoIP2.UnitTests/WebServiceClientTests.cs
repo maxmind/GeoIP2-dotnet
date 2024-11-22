@@ -43,8 +43,8 @@ namespace MaxMind.GeoIP2.UnitTests
             ["insights", (ClientRunner) (async (c, i) => c.Insights(i)), typeof(InsightsResponse)],
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             ["countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof(CountryResponse)],
-            ["cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof(CityResponse)], ["insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof(InsightsResponse)
-            ]
+            ["cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof(CityResponse)],
+            ["insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof(InsightsResponse)]
         };
 
         public delegate Task<AbstractCountryResponse> MeClientRunner(WebServiceClient c);
