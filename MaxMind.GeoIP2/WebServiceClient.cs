@@ -80,6 +80,7 @@ namespace MaxMind.GeoIP2
 #endif
         private bool _disposed;
         private readonly bool _disableHttps;
+        private readonly JsonSerializerOptions _jsonOptions;
 
         private static ProductInfoHeaderValue UserAgent => new("GeoIP2-dotnet", Version);
 
@@ -156,6 +157,8 @@ namespace MaxMind.GeoIP2
             _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
             _client = new Client(auth, timeout, UserAgent, httpClient);
             _disableHttps = disableHttps;
+            _jsonOptions = new JsonSerializerOptions();
+            _jsonOptions.Converters.Add(new NetworkConverter());
 #if NETSTANDARD2_0 || NETSTANDARD2_1
             _syncClient = new SyncClient(auth, timeout, UserAgent);
 #endif
@@ -352,7 +355,7 @@ namespace MaxMind.GeoIP2
             IPAddress? ip = null;
 
             // The "ipAddress != null" is here for backwards compatibility with
-            // pre-nullable-reference-types code that might possible rely on the
+            // pre-nullable-reference-types code that might possibly rely on the
             // undocumented feature of passing a null IP string.
             if (ipAddress != null && !IPAddress.TryParse(ipAddress, out ip))
             {
@@ -418,12 +421,9 @@ namespace MaxMind.GeoIP2
                     $"Received a 200 response for {response.RequestUri} but there was no message body.",
                     HttpStatusCode.OK, response.RequestUri);
             }
-
             try
             {
-                var options = new JsonSerializerOptions();
-                options.Converters.Add(new NetworkConverter());
-                var model = JsonSerializer.Deserialize<T>(response.Content, options);
+                var model = JsonSerializer.Deserialize<T>(response.Content, _jsonOptions);
                 if (model == null)
                 {
                     throw new HttpException(
@@ -443,25 +443,26 @@ namespace MaxMind.GeoIP2
         private static Exception CreateStatusException(Response response)
         {
             var status = (int)response.StatusCode;
-            if (status >= 400 && status < 500)
+            switch (status)
             {
-                return Create4xxException(response);
+                case >= 400 and < 500:
+                    return Create4xxException(response);
+                case >= 500 and < 600:
+                    return new HttpException(
+                        $"Received a server ({status}) error for {response.RequestUri}",
+                        response.StatusCode, response.RequestUri);
+                default:
+                    {
+                        var errorMessage =
+                            $"Received an unexpected response for {response.RequestUri} (status code: {status})";
+                        return new HttpException(errorMessage, response.StatusCode, response.RequestUri);
+                    }
             }
-            if (status >= 500 && status < 600)
-            {
-                return new HttpException(
-                    $"Received a server ({status}) error for {response.RequestUri}",
-                    response.StatusCode, response.RequestUri);
-            }
-
-            var errorMessage =
-                $"Received an unexpected response for {response.RequestUri} (status code: {status})";
-            return new HttpException(errorMessage, response.StatusCode, response.RequestUri);
         }
 
         private static Exception Create4xxException(Response response)
         {
-            if (response.Content == null || response.Content.Length == 0)
+            if (response.Content.Length == 0)
             {
                 return new HttpException(
                     $"Received a {response.StatusCode} error for {response.RequestUri} with no body",

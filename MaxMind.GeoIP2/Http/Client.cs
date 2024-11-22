@@ -50,7 +50,7 @@ namespace MaxMind.GeoIP2.Http
             var ms = new MemoryStream();
             response.Content.ReadAsStream().CopyTo(ms);
             var content = ms.ToArray();
-            var contentType = response.Content.Headers.GetValues("Content-Type")?.FirstOrDefault();
+            var contentType = response.Content.Headers.GetValues("Content-Type").FirstOrDefault();
 
             return new Response(uri, response.StatusCode, contentType, content);
         }
@@ -64,7 +64,7 @@ namespace MaxMind.GeoIP2.Http
             // paths for async vs sync. Hopefully we can get rid of the sync code at
             // some point instead.
             var content = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-            var contentType = response.Content.Headers.GetValues("Content-Type")?.FirstOrDefault();
+            var contentType = response.Content.Headers.GetValues("Content-Type").FirstOrDefault();
 
             return new Response(uri, response.StatusCode, contentType, content);
         }

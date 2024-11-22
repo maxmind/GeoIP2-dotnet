@@ -87,16 +87,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     returns an empty <see cref="Subdivision" /> object.
         /// </summary>
         [JsonIgnore]
-        public Subdivision MostSpecificSubdivision
-        {
-            get
-            {
-                if (Subdivisions == null || Subdivisions.Count == 0)
-                    return new Subdivision();
-
-                return Subdivisions[Subdivisions.Count - 1];
-            }
-        }
+        public Subdivision MostSpecificSubdivision => Subdivisions.Count == 0 ? new Subdivision() : Subdivisions[Subdivisions.Count - 1];
 
         /// <summary>
         ///     Returns a <see cref="string" /> that represents this instance.
@@ -107,19 +98,17 @@ namespace MaxMind.GeoIP2.Responses
         public override string ToString()
         {
             return GetType().Name + " ["
-                   + (City != null ? "City=" + City + ", " : "")
-                   + (Location != null ? "Location=" + Location + ", " : "")
-                   + (Postal != null ? "Postal=" + Postal + ", " : "")
-                   +
-                   (Subdivisions != null
-                       ? "Subdivisions={" + string.Join(",", Subdivisions.Select(s => s.ToString()).ToArray()) + "}, "
-                       : "")
-                   + (Continent != null ? "Continent=" + Continent + ", " : "")
-                   + (Country != null ? "Country=" + Country + ", " : "")
-                   + (RegisteredCountry != null ? "RegisteredCountry=" + RegisteredCountry + ", " : "")
-                   + (RepresentedCountry != null ? "RepresentedCountry=" + RepresentedCountry + ", " : "")
-                   + (Traits != null ? "Traits=" + Traits : "")
-                   + "]";
+                  + "City=" + City + ", "
+                  + "Location=" + Location + ", "
+                  + "Postal=" + Postal + ", "
+                  + "Subdivisions={" +
+                  string.Join(",", Subdivisions.Select(s => s.ToString()).ToArray()) + "}, "
+                  + "Continent=" + Continent + ", "
+                  + "Country=" + Country + ", "
+                  + "RegisteredCountry=" + RegisteredCountry + ", "
+                  + "RepresentedCountry=" + RepresentedCountry + ", "
+                  + "Traits=" + Traits
+                  + "]";
         }
 
         /// <summary>
@@ -130,13 +119,17 @@ namespace MaxMind.GeoIP2.Responses
         {
             locales = locales.ToList();
             base.SetLocales(locales);
+            City.Locales = locales;
 
-            if (City != null)
-                City.Locales = locales;
+            if (Subdivisions.Count == 0)
+            {
+                return;
+            }
 
-            if (Subdivisions == null || Subdivisions.Count == 0) return;
             foreach (var subdivision in Subdivisions)
+            {
                 subdivision.Locales = locales;
+            }
         }
     }
 }

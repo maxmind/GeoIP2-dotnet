@@ -26,9 +26,7 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message)
         {
             HttpStatus = httpStatus;
-#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
-            this.Uri = uri;
-#pragma warning restore IDE0003
+            Uri = uri;
         }
 
         /// <summary>
@@ -42,9 +40,7 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message, innerException)
         {
             HttpStatus = httpStatus;
-#pragma warning disable IDE0003 // Mono gets confused without 'this'
-            this.Uri = uri;
-#pragma warning restore IDE0003
+            Uri = uri;
         }
 
         /// <summary>

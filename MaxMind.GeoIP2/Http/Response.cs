@@ -19,9 +19,7 @@ namespace MaxMind.GeoIP2.Http
             RequestUri = requestUri;
             StatusCode = statusCode;
             ContentType = contentType;
-#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
-            this.Content = content;
-#pragma warning restore IDE0003
+            Content = content;
         }
 
         internal static object Create()

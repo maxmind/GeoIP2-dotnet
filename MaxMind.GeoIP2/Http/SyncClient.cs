@@ -1,4 +1,6 @@
-﻿#region
+﻿#if NETSTANDARD2_0 || NETSTANDARD2_1
+
+#region
 
 using MaxMind.GeoIP2.Exceptions;
 using System;
@@ -6,8 +8,6 @@ using System.Net;
 using System.Net.Http.Headers;
 
 #endregion
-
-#if NETSTANDARD2_0 || NETSTANDARD2_1
 
 namespace MaxMind.GeoIP2.Http
 {

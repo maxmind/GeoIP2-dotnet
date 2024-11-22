@@ -36,43 +36,36 @@ namespace MaxMind.GeoIP2.UnitTests
         public static readonly object[][] TestCases =
         {
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"country", (ClientRunner) (async (c, i) => c.Country(i)), typeof(CountryResponse)},
+            ["country", (ClientRunner) (async (c, i) => c.Country(i)), typeof(CountryResponse)],
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"city", (ClientRunner) (async (c, i) => c.City(i)), typeof(CityResponse)},
+            ["city", (ClientRunner) (async (c, i) => c.City(i)), typeof(CityResponse)],
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[] {"insights", (ClientRunner) (async (c, i) => c.Insights(i)), typeof(InsightsResponse)},
+            ["insights", (ClientRunner) (async (c, i) => c.Insights(i)), typeof(InsightsResponse)],
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            new object[]
-                {"countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof(CountryResponse)},
-            new object[] {"cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof(CityResponse)},
-            new object[]
-                {"insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof(InsightsResponse)}
+            ["countryAsync", (ClientRunner) (async (c, i) => await c.CountryAsync(i)), typeof(CountryResponse)],
+            ["cityAsync", (ClientRunner) (async (c, i) => await c.CityAsync(i)), typeof(CityResponse)],
+            ["insightsAsync", (ClientRunner) (async (c, i) => await c.InsightsAsync(i)), typeof(InsightsResponse)]
         };
 
         public delegate Task<AbstractCountryResponse> MeClientRunner(WebServiceClient c);
 
         public static readonly object[][] MeTestCases =
-        {
-            new object[]
-            {
+        [
+            [
                 "country", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Country())),
                 typeof(CountryResponse)
-            },
-            new object[]
-            {
+            ],
+            [
                 "city", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.City())), typeof(CityResponse)
-            },
-            new object[]
-            {
+            ],
+            [
                 "insights", (MeClientRunner) (c => Task.FromResult<AbstractCountryResponse>(c.Insights())),
                 typeof(InsightsResponse)
-            },
-            new object[]
-                {"countryAsync", (MeClientRunner) (async c => await c.CountryAsync()), typeof(CountryResponse)},
-            new object[] {"cityAsync", (MeClientRunner) (async c => await c.CityAsync()), typeof(CityResponse)},
-            new object[]
-                {"insightsAsync", (MeClientRunner) (async c => await c.InsightsAsync()), typeof(InsightsResponse)}
-        };
+            ],
+            ["countryAsync", (MeClientRunner) (async c => await c.CountryAsync()), typeof(CountryResponse)],
+            ["cityAsync", (MeClientRunner) (async c => await c.CityAsync()), typeof(CityResponse)],
+            ["insightsAsync", (MeClientRunner) (async c => await c.InsightsAsync()), typeof(InsightsResponse)]
+        ];
         private bool _disposed;
 
         private WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",

@@ -25,9 +25,7 @@ namespace MaxMind.GeoIP2.Exceptions
             : base(message)
         {
             Code = code;
-#pragma warning disable IDE0003 // Mono gets confused if 'this' is missing
-            this.Uri = uri;
-#pragma warning restore IDE0003
+            Uri = uri;
         }
 
 

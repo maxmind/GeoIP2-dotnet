@@ -107,7 +107,7 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("004", insights.Traits.MobileNetworkCode);
 
             var network = insights.Traits.Network!;
-            Assert.Equal("1.2.3.0", network.NetworkAddress?.ToString());
+            Assert.Equal("1.2.3.0", network.NetworkAddress.ToString());
             Assert.Equal(24, network.PrefixLength);
 
             Assert.Equal("Blorg", insights.Traits.Organization);

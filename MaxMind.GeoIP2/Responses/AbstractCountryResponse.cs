@@ -104,12 +104,12 @@ namespace MaxMind.GeoIP2.Responses
         public override string ToString()
         {
             return GetType().Name + " ["
-                   + (Continent != null ? "Continent=" + Continent + ", " : "")
-                   + (Country != null ? "Country=" + Country + ", " : "")
-                   + (RegisteredCountry != null ? "RegisteredCountry=" + RegisteredCountry + ", " : "")
-                   + (RepresentedCountry != null ? "RepresentedCountry=" + RepresentedCountry + ", " : "")
-                   + (Traits != null ? "Traits=" + Traits : "")
-                   + "]";
+                  + "Continent=" + Continent + ", "
+                  + "Country=" + Country + ", "
+                  + "RegisteredCountry=" + RegisteredCountry + ", "
+                  + "RepresentedCountry=" + RepresentedCountry + ", "
+                  + "Traits=" + Traits
+                  + "]";
         }
 
         /// <summary>
@@ -119,17 +119,10 @@ namespace MaxMind.GeoIP2.Responses
         protected internal override void SetLocales(IReadOnlyList<string> locales)
         {
             locales = locales.ToList();
-            if (Continent != null)
-                Continent.Locales = locales;
-
-            if (Country != null)
-                Country.Locales = locales;
-
-            if (RegisteredCountry != null)
-                RegisteredCountry.Locales = locales;
-
-            if (RepresentedCountry != null)
-                RepresentedCountry.Locales = locales;
+            Continent.Locales = locales;
+            Country.Locales = locales;
+            RegisteredCountry.Locales = locales;
+            RepresentedCountry.Locales = locales;
         }
     }
 }
