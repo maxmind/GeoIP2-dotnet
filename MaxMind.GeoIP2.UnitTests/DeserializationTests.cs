@@ -58,7 +58,9 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal(1500, insights.Location.AccuracyRadius);
             Assert.Equal(44.979999999999997, insights.Location.Latitude);
             Assert.Equal(93.263599999999997, insights.Location.Longitude);
+#pragma warning disable 0618
             Assert.Equal(765, insights.Location.MetroCode);
+#pragma warning restore 0618
             Assert.Equal("America/Chicago", insights.Location.TimeZone);
             Assert.Equal(50000, insights.Location.AverageIncome);
             Assert.Equal(100, insights.Location.PopulationDensity);

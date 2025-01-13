@@ -8,6 +8,8 @@ GeoIP2 .NET API Release Notes
   reach their end of support from Microsoft. If you are using these versions,
   the .NET Standard 2.1 target should continue working for you.
 * .NET 9.0 has been added as a target.
+* `MetroCode` in `MaxMind.GeoIP2.Model.Location` has been marked `Obsolete`.
+  The code values are no longer being maintained.
 
 5.2.0 (2023-12-05)
 ------------------
