@@ -1,6 +1,7 @@
 ﻿#region
 
 using MaxMind.Db;
+using System;
 using System.Text.Json.Serialization;
 
 #endregion
@@ -33,7 +34,9 @@ namespace MaxMind.GeoIP2.Model
             AccuracyRadius = accuracyRadius;
             Latitude = latitude;
             Longitude = longitude;
+#pragma warning disable 618
             MetroCode = metroCode;
+#pragma warning restore 618
             TimeZone = timeZone;
         }
 
@@ -81,12 +84,12 @@ namespace MaxMind.GeoIP2.Model
         public double? Longitude { get; internal set; }
 
         /// <summary>
-        ///     The metro code of the location if the location is in the US.
-        ///     MaxMind returns the same metro codes as the
-        ///     <a href="https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions">Google AdWords API</a>.
+        ///     The metro code is a no-longer-maintained code for targeting
+        ///     advertisements in Google.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("metro_code")]
+        [Obsolete("Code values are no longer maintained.")]
         public int? MetroCode { get; internal set; }
 
         /// <summary>
@@ -121,7 +124,9 @@ namespace MaxMind.GeoIP2.Model
                    + (AccuracyRadius.HasValue ? "AccuracyRadius=" + AccuracyRadius + ", " : string.Empty)
                    + (Latitude.HasValue ? "Latitude=" + Latitude + ", " : string.Empty)
                    + (Longitude.HasValue ? "Longitude=" + Longitude + ", " : string.Empty)
+#pragma warning disable 618
                    + (MetroCode.HasValue ? "MetroCode=" + MetroCode + ", " : string.Empty)
+#pragma warning restore 618
                    + (TimeZone != null ? "TimeZone=" + TimeZone : "") + "]";
         }
     }

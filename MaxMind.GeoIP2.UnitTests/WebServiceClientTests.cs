@@ -362,7 +362,9 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Null(location.AccuracyRadius);
             Assert.Null(location.Latitude);
             Assert.Null(location.Longitude);
+#pragma warning disable 618
             Assert.Null(location.MetroCode);
+#pragma warning restore 618
             Assert.Null(location.TimeZone);
             Assert.Null(location.PopulationDensity);
             Assert.Null(location.AverageIncome);

@@ -282,7 +282,9 @@ namespace MaxMind.GeoIP2.UnitTests
 
             Assert.Equal(47.2513, response.Location.Latitude);
             Assert.Equal(-122.3149, response.Location.Longitude);
+#pragma warning disable 0618
             Assert.Equal(819, response.Location.MetroCode);
+#pragma warning restore 0618
             Assert.Equal("America/Los_Angeles", response.Location.TimeZone);
 
             Assert.Equal("98354", response.Postal.Code);
