@@ -5,6 +5,8 @@ on:
   schedule:
     - cron: '3 20 * * SUN'
 
+permissions: {}
+
 jobs:
   build:
     strategy:
