@@ -4,6 +4,9 @@ GeoIP2 .NET API Release Notes
 5.3.0
 ------------------
 
+* Support for the GeoIP Anonymous Plus database has been added. To do a
+  lookup in this database, use the `AnonymousPlus` And `TryAnonymousPlus`
+  methods on `DatabaseReader`.
 * .NET 6.0 and .NET 7.0 have been removed as targets as they have both
   reach their end of support from Microsoft. If you are using these versions,
   the .NET Standard 2.1 target should continue working for you.
