@@ -19,7 +19,7 @@ using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
 namespace MaxMind.GeoIP2.UnitTests
 {
-    public class WebServiceClientTests: IDisposable
+    public class WebServiceClientTests : IDisposable
     {
         private readonly WireMockServer _server;
 

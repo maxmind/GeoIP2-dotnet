@@ -16,6 +16,7 @@ namespace MaxMind.GeoIP2.UnitTests
     public class DatabaseReaderTests
     {
         private readonly string _anonymousIpDatabaseFile;
+        private readonly string _anonymousPlusDatabaseFile;
         private readonly string _asnDatabaseFile;
         private readonly string _cityDatabaseFile;
         private readonly string _connectionTypeDatabaseFile;
@@ -29,6 +30,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var databaseDir = Path.Combine(TestUtils.TestDirectory, "TestData", "MaxMind-DB", "test-data");
 
             _anonymousIpDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Anonymous-IP-Test.mmdb");
+            _anonymousPlusDatabaseFile = Path.Combine(databaseDir, "GeoIP-Anonymous-Plus-Test.mmdb");
             _asnDatabaseFile = Path.Combine(databaseDir, "GeoLite2-ASN-Test.mmdb");
             _cityDatabaseFile = Path.Combine(databaseDir, "GeoIP2-City-Test.mmdb");
             _connectionTypeDatabaseFile = Path.Combine(databaseDir, "GeoIP2-Connection-Type-Test.mmdb");
@@ -102,6 +104,72 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.True(response.IsTorExitNode);
             Assert.Equal(ipAddress, response.IPAddress);
             Assert.Equal("81.2.69.0/24", response.Network?.ToString());
+        }
+
+        [Fact]
+        public void AnonymousPlus_ValidResponse()
+        {
+            using var reader = new DatabaseReader(_anonymousPlusDatabaseFile);
+            var ipAddress = "1.2.0.1";
+            var response = reader.AnonymousPlus(ipAddress);
+
+            CheckAnonymousPlus(response, ipAddress);
+        }
+
+        [Fact]
+        public void TryAnonymousPlus_ValidResponse()
+        {
+            using var reader = new DatabaseReader(_anonymousPlusDatabaseFile);
+            var ipAddress = "1.2.0.1";
+
+            Assert.True(reader.TryAnonymousPlus(ipAddress, out var response));
+
+            CheckAnonymousPlus(response!, ipAddress);
+        }
+
+        private static void CheckAnonymousPlus(AnonymousPlusResponse response, string ipAddress)
+        {
+            Assert.Equal(30, response.AnonymizerConfidence);
+            Assert.True(response.IsAnonymous);
+            Assert.True(response.IsAnonymousVpn);
+            Assert.False(response.IsHostingProvider);
+            Assert.False(response.IsPublicProxy);
+            Assert.False(response.IsResidentialProxy);
+            Assert.False(response.IsTorExitNode);
+            Assert.Equal(ipAddress, response.IPAddress);
+            Assert.Equal("1.2.0.1/32", response.Network?.ToString());
+#if NET6_0_OR_GREATER
+            Assert.Equal(new DateOnly(2025, 4, 14), response.NetworkLastSeen);
+#endif
+            Assert.Equal("foo", response.ProviderName);
+        }
+
+        [Fact]
+        public void AnonymousIP_NoVpnData()
+        {
+            using var reader = new DatabaseReader(_anonymousPlusDatabaseFile);
+            var ipAddress = "1.2.0.0";
+            var response = reader.AnonymousPlus(ipAddress);
+            // It seems like there is a bug in the .NET Standard MMDB reader
+            // implementation where this ends up as 0. Given that no one has
+            // ever complained about this and we are likely dropping support
+            // anyway in the nearish future, I am just skipping this test
+            // there.
+#if NET6_0_OR_GREATER
+            Assert.Null(response.AnonymizerConfidence);
+#endif
+            Assert.True(response.IsAnonymous);
+            Assert.True(response.IsAnonymousVpn);
+            Assert.False(response.IsHostingProvider);
+            Assert.False(response.IsPublicProxy);
+            Assert.False(response.IsResidentialProxy);
+            Assert.False(response.IsTorExitNode);
+            Assert.Equal(ipAddress, response.IPAddress);
+#if NET6_0_OR_GREATER
+            Assert.Null(response.NetworkLastSeen);
+#endif
+            Assert.Null(response.ProviderName);
+            Assert.Equal("1.2.0.0/32", response.Network?.ToString());
         }
 
         [Fact]

@@ -229,6 +229,50 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
+        ///     Look up an IP address in a GeoIP Anonymous Plus.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AnonymousPlusResponse" /></returns>
+        public AnonymousPlusResponse AnonymousPlus(IPAddress ipAddress)
+        {
+            return Execute<AnonymousPlusResponse>(ipAddress, "GeoIP-Anonymous-Plus")!;
+        }
+
+        /// <summary>
+        ///     Look up an IP address in a GeoIP Anonymous Plus.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AnonymousPlusResponse" /></returns>
+        public AnonymousPlusResponse AnonymousPlus(string ipAddress)
+        {
+            return Execute<AnonymousPlusResponse>(ipAddress, "GeoIP-Anonymous-Plus")!;
+        }
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AnonymousPlusResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AnonymousPlusResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryAnonymousPlus(IPAddress ipAddress, out AnonymousPlusResponse? response)
+        {
+            response = Execute<AnonymousPlusResponse>(ipAddress, "GeoIP-Anonymous-Plus", false);
+            return response != null;
+        }
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AnonymousPlusResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AnonymousPlusResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        public bool TryAnonymousPlus(string ipAddress, out AnonymousPlusResponse? response)
+        {
+            response = Execute<AnonymousPlusResponse>(ipAddress, "GeoIP-Anonymous-Plus", false);
+            return response != null;
+        }
+
+        /// <summary>
         ///     Returns an <see cref="AsnResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>

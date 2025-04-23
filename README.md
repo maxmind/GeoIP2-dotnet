@@ -342,6 +342,26 @@ using (var reader = new DatabaseReader("GeoIP2-Anonymous-IP.mmdb"))
 }
 ```
 
+### Anonymous Plus Database ###
+
+```csharp
+
+using (var reader = new DatabaseReader("GeoIP-Anonymous-Plus.mmdb"))
+{
+    var response = reader.AnonymousPlus("85.25.43.84");
+    Console.WriteLine(response.AnonymizerConfidence); // 30
+    Console.WriteLine(response.IsAnonymous);          // true
+    Console.WriteLine(response.IsAnonymousVpn);       // false
+    Console.WriteLine(response.IsHostingProvider);    // false
+    Console.WriteLine(response.IsPublicProxy);        // false
+    Console.WriteLine(response.IsResidentialProxy);   // false
+    Console.WriteLine(response.IsTorExitNode);        // true
+    Console.WriteLine(response.IPAddress);            // '85.25.43.84'
+    Console.WriteLine(response.NetworkLastSeen);      // '4/14/2025'
+    Console.WriteLine(response.ProviderName);         // 'FooBar VPN'
+}
+```
+
 ### ASN ###
 
 ```csharp
