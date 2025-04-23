@@ -112,6 +112,23 @@ namespace MaxMind.GeoIP2.UnitTests
             using var reader = new DatabaseReader(_anonymousPlusDatabaseFile);
             var ipAddress = "1.2.0.1";
             var response = reader.AnonymousPlus(ipAddress);
+
+            CheckAnonymousPlus(response, ipAddress);
+        }
+
+        [Fact]
+        public void TryAnonymousPlus_ValidResponse()
+        {
+            using var reader = new DatabaseReader(_anonymousPlusDatabaseFile);
+            var ipAddress = "1.2.0.1";
+
+            Assert.True(reader.TryAnonymousPlus(ipAddress, out var response));
+
+            CheckAnonymousPlus(response!, ipAddress);
+        }
+
+        private static void CheckAnonymousPlus(AnonymousPlusResponse response, string ipAddress)
+        {
             Assert.Equal(30, response.AnonymizerConfidence);
             Assert.True(response.IsAnonymous);
             Assert.True(response.IsAnonymousVpn);
