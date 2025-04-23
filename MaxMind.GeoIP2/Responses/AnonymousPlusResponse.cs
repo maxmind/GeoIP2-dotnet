@@ -37,7 +37,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <param name="providerName"></param>
         [Constructor]
         public AnonymousPlusResponse(
-            [Parameter("anonymizer_confidence")] int anonymizerConfidence,
+            [Parameter("anonymizer_confidence")] int? anonymizerConfidence,
             [Parameter("is_anonymous")] bool isAnonymous,
             [Parameter("is_anonymous_vpn")] bool isAnonymousVpn,
             [Parameter("is_hosting_provider")] bool isHostingProvider,
@@ -70,7 +70,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <param name="networkLastSeen"></param>
         /// <param name="providerName"></param>
         public AnonymousPlusResponse(
-            int anonymizerConfidence,
+            int? anonymizerConfidence,
             bool isAnonymous,
             bool isAnonymousVpn,
             bool isHostingProvider,

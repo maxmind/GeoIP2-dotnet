@@ -145,6 +145,34 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Fact]
+        public void AnonymousIP_NoVpnData()
+        {
+            using var reader = new DatabaseReader(_anonymousPlusDatabaseFile);
+            var ipAddress = "1.2.0.0";
+            var response = reader.AnonymousPlus(ipAddress);
+            // It seems like there is a bug in the .NET Standard MMDB reader
+            // implementation where this ends up as 0. Given that no one has
+            // ever complained about this and we are likely dropping support
+            // anyway in the nearish future, I am just skipping this test
+            // there.
+#if NET6_0_OR_GREATER
+            Assert.Null(response.AnonymizerConfidence);
+#endif
+            Assert.True(response.IsAnonymous);
+            Assert.True(response.IsAnonymousVpn);
+            Assert.False(response.IsHostingProvider);
+            Assert.False(response.IsPublicProxy);
+            Assert.False(response.IsResidentialProxy);
+            Assert.False(response.IsTorExitNode);
+            Assert.Equal(ipAddress, response.IPAddress);
+#if NET6_0_OR_GREATER
+            Assert.Null(response.NetworkLastSeen);
+#endif
+            Assert.Null(response.ProviderName);
+            Assert.Equal("1.2.0.0/32", response.Network?.ToString());
+        }
+
+        [Fact]
         public void Asn_ValidResponse()
         {
             using var reader = new DatabaseReader(_asnDatabaseFile);
