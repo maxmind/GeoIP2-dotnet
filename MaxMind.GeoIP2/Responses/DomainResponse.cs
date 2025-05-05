@@ -10,7 +10,18 @@ namespace MaxMind.GeoIP2.Responses
     /// <summary>
     ///     This class represents the GeoIP2 Domain response.
     /// </summary>
-    public class DomainResponse : AbstractResponse
+    /// <remarks>
+    /// Construct a DomainResponse model object.
+    /// </remarks>
+    /// <param name="domain"></param>
+    /// <param name="ipAddress"></param>
+    /// <param name="network"></param>
+    [method: Constructor]
+    public class DomainResponse(
+        string? domain,
+        [Inject("ip_address")] string? ipAddress,
+        [Network] Network? network = null
+        ) : AbstractResponse
     {
         /// <summary>
         /// Construct a DomainResponse model object.
@@ -20,31 +31,13 @@ namespace MaxMind.GeoIP2.Responses
         }
 
         /// <summary>
-        /// Construct a DomainResponse model object.
-        /// </summary>
-        /// <param name="domain"></param>
-        /// <param name="ipAddress"></param>
-        /// <param name="network"></param>
-        [Constructor]
-        public DomainResponse(
-            string? domain,
-            [Inject("ip_address")] string? ipAddress,
-            [Network] Network? network = null
-        )
-        {
-            Domain = domain;
-            IPAddress = ipAddress;
-            Network = network;
-        }
-
-        /// <summary>
         ///     The second level domain associated with the IP address. This will
         ///     be something like "example.com" or "example.co.uk", not
         ///     "foo.example.com".
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("domain")]
-        public string? Domain { get; internal set; }
+        public string? Domain { get; internal set; } = domain;
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -55,7 +48,7 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("ip_address")]
-        public string? IPAddress { get; internal set; }
+        public string? IPAddress { get; internal set; } = ipAddress;
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -64,6 +57,6 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("network")]
-        public Network? Network { get; internal set; }
+        public Network? Network { get; internal set; } = network;
     }
 }

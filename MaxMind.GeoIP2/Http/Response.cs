@@ -7,20 +7,12 @@ using System.Net;
 
 namespace MaxMind.GeoIP2.Http
 {
-    internal class Response
+    internal class Response(Uri requestUri, HttpStatusCode statusCode, string? contentType, byte[] content)
     {
-        internal HttpStatusCode StatusCode { get; }
-        internal Uri RequestUri { get; }
-        internal byte[] Content { get; }
-        internal string? ContentType { get; }
-
-        public Response(Uri requestUri, HttpStatusCode statusCode, string? contentType, byte[] content)
-        {
-            RequestUri = requestUri;
-            StatusCode = statusCode;
-            ContentType = contentType;
-            Content = content;
-        }
+        internal HttpStatusCode StatusCode { get; } = statusCode;
+        internal Uri RequestUri { get; } = requestUri;
+        internal byte[] Content { get; } = content;
+        internal string? ContentType { get; } = contentType;
 
         internal static object Create()
         {

@@ -6,30 +6,22 @@ namespace MaxMind.GeoIP2.Responses
     /// <summary>
     ///     This class represents the GeoLite2 ASN response.
     /// </summary>
-    public class AsnResponse : AbstractResponse
+    /// <remarks>
+    ///     Construct an IspResponse model.
+    /// </remarks>
+    [method: Constructor]
+    public class AsnResponse(
+        [Parameter("autonomous_system_number")] long? autonomousSystemNumber,
+        [Parameter("autonomous_system_organization")] string? autonomousSystemOrganization,
+        [Inject("ip_address")] string? ipAddress,
+        [Network] Network? network = null
+        ) : AbstractResponse
     {
         /// <summary>
         ///     Construct an IspResponse model.
         /// </summary>
         public AsnResponse() : this(null, null, null)
         {
-        }
-
-        /// <summary>
-        ///     Construct an IspResponse model.
-        /// </summary>
-        [Constructor]
-        public AsnResponse(
-            [Parameter("autonomous_system_number")] long? autonomousSystemNumber,
-            [Parameter("autonomous_system_organization")] string? autonomousSystemOrganization,
-            [Inject("ip_address")] string? ipAddress,
-            [Network] Network? network = null
-        )
-        {
-            AutonomousSystemNumber = autonomousSystemNumber;
-            AutonomousSystemOrganization = autonomousSystemOrganization;
-            IPAddress = ipAddress;
-            Network = network;
         }
 
         /// <summary>
@@ -42,7 +34,7 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_number")]
-        public long? AutonomousSystemNumber { get; internal set; }
+        public long? AutonomousSystemNumber { get; internal set; } = autonomousSystemNumber;
 
         /// <summary>
         ///     The organization associated with the registered
@@ -54,7 +46,7 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_organization")]
-        public string? AutonomousSystemOrganization { get; internal set; }
+        public string? AutonomousSystemOrganization { get; internal set; } = autonomousSystemOrganization;
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -65,7 +57,7 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("ip_address")]
-        public string? IPAddress { get; internal set; }
+        public string? IPAddress { get; internal set; } = ipAddress;
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -74,6 +66,6 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("network")]
-        public Network? Network { get; internal set; }
+        public Network? Network { get; internal set; } = network;
     }
 }
