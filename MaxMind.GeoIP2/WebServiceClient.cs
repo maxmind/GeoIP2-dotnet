@@ -423,13 +423,10 @@ namespace MaxMind.GeoIP2
             }
             try
             {
-                var model = JsonSerializer.Deserialize<T>(response.Content, _jsonOptions);
-                if (model == null)
-                {
+                var model = JsonSerializer.Deserialize<T>(response.Content, _jsonOptions) ?? 
                     throw new HttpException(
                         $"Received a 200 response for {response.RequestUri} but there was no message body.",
                         HttpStatusCode.OK, response.RequestUri);
-                }
                 model.SetLocales(_locales);
                 return model;
             }
