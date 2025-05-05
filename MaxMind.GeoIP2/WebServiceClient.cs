@@ -68,9 +68,9 @@ namespace MaxMind.GeoIP2
     public class WebServiceClient : IGeoIP2WebServicesClient, IDisposable
     {
         private static readonly string Version =
-            ((AssemblyInformationalVersionAttribute?)
-                typeof(WebServiceClient).GetTypeInfo().Assembly.GetCustomAttribute(
-                    typeof(AssemblyInformationalVersionAttribute)))?.InformationalVersion ?? "unknown";
+            typeof(WebServiceClient).GetTypeInfo().Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+            .InformationalVersion ?? "unknown";
 
         private readonly string _host;
         private readonly IReadOnlyList<string> _locales;
