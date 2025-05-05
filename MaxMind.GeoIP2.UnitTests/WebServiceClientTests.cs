@@ -74,12 +74,12 @@ namespace MaxMind.GeoIP2.UnitTests
                   .WithStatusCode(status)
                   .WithHeader("Content-Type", contentType)
                   .WithBody(content)
-              );
+                );
 
             var host = _server.Urls[0].Replace("http://", "");
 
             return new WebServiceClient(6, "0123456789",
-                locales: new List<string> { "en" },
+                locales: ["en"],
                 host: host,
                 timeout: 3000,
                 disableHttps: true
@@ -463,7 +463,7 @@ namespace MaxMind.GeoIP2.UnitTests
             // compile and you aren't doing a major release, you are
             // probably doing something wrong.
             Assert.NotNull(new WebServiceClient(id, key));
-            Assert.NotNull(new WebServiceClient(id, key, new List<string>()));
+            Assert.NotNull(new WebServiceClient(id, key, []));
             Assert.NotNull(new WebServiceClient(accountId: id, licenseKey: key));
         }
 
@@ -483,7 +483,7 @@ namespace MaxMind.GeoIP2.UnitTests
                   .WithStatusCode(HttpStatusCode.OK)
                   .WithHeader("Content-Type", "application/vnd.maxmind.com-country+json")
                   .WithBody(CountryJson)
-              );
+                );
 
             var options = Options.Create(new WebServiceClientOptions
             {
@@ -492,7 +492,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 Host = _server.Urls[0].Replace("http://", ""),
                 DisableHttps = true,
                 Timeout = 3000,
-                Locales = new List<string> { "en" }
+                Locales = ["en"]
             });
 
             var client = new WebServiceClient(

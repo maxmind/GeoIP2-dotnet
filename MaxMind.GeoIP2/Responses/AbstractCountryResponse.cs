@@ -118,7 +118,7 @@ namespace MaxMind.GeoIP2.Responses
         /// <param name="locales">The locales specified by the user.</param>
         protected internal override void SetLocales(IReadOnlyList<string> locales)
         {
-            locales = locales.ToList();
+            locales = [.. locales];
             Continent.Locales = locales;
             Country.Locales = locales;
             RegisteredCountry.Locales = locales;

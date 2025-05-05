@@ -154,7 +154,7 @@ namespace MaxMind.GeoIP2
         {
             var auth = EncodedAuth(accountId, licenseKey);
             _host = host;
-            _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
+            _locales = (locales == null ? new List<string> { "en" } : [.. locales]).AsReadOnly();
             _client = new Client(auth, timeout, UserAgent, httpClient);
             _disableHttps = disableHttps;
             _jsonOptions = new JsonSerializerOptions();

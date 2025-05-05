@@ -28,7 +28,7 @@ namespace MaxMind.GeoIP2
         /// <param name="file">The MaxMind DB file.</param>
         /// <param name="mode">The mode by which to access the DB file.</param>
         public DatabaseReader(string file, FileAccessMode mode = FileAccessMode.MemoryMapped)
-            : this(file, new List<string> { "en" }, mode)
+            : this(file, ["en"], mode)
         {
         }
 
@@ -50,7 +50,7 @@ namespace MaxMind.GeoIP2
         /// </summary>
         /// <param name="stream">A stream of the MaxMind DB file.</param>
         public DatabaseReader(Stream stream)
-            : this(stream, new List<string> { "en" })
+            : this(stream, ["en"])
         {
         }
 
@@ -61,7 +61,7 @@ namespace MaxMind.GeoIP2
         /// <param name="locales">List of locale codes to use in name property from most preferred to least preferred.</param>
         public DatabaseReader(Stream stream, IEnumerable<string> locales)
         {
-            _locales = new List<string>(locales);
+            _locales = [.. locales];
             _reader = new Reader(stream);
         }
 
