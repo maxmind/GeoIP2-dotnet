@@ -7,7 +7,7 @@ namespace MaxMind.GeoIP2.Responses
     ///     This class represents the GeoLite2 ASN response.
     /// </summary>
     /// <remarks>
-    ///     Construct an IspResponse model.
+    ///     Construct an AsnResponse model.
     /// </remarks>
     [method: Constructor]
     public class AsnResponse(
@@ -18,7 +18,7 @@ namespace MaxMind.GeoIP2.Responses
         ) : AbstractResponse
     {
         /// <summary>
-        ///     Construct an IspResponse model.
+        ///     Construct an AsnResponse model.
         /// </summary>
         public AsnResponse() : this(null, null, null)
         {
