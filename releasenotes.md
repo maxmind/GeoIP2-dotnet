@@ -1,7 +1,7 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-5.3.0
+5.3.0 (2025-05-05)
 ------------------
 
 * Support for the GeoIP Anonymous Plus database has been added. To do a

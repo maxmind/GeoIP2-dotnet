@@ -68,9 +68,9 @@ namespace MaxMind.GeoIP2
     public class WebServiceClient : IGeoIP2WebServicesClient, IDisposable
     {
         private static readonly string Version =
-            ((AssemblyInformationalVersionAttribute?)
-                typeof(WebServiceClient).GetTypeInfo().Assembly.GetCustomAttribute(
-                    typeof(AssemblyInformationalVersionAttribute)))?.InformationalVersion ?? "unknown";
+            typeof(WebServiceClient).GetTypeInfo().Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+            .InformationalVersion ?? "unknown";
 
         private readonly string _host;
         private readonly IReadOnlyList<string> _locales;
@@ -154,7 +154,7 @@ namespace MaxMind.GeoIP2
         {
             var auth = EncodedAuth(accountId, licenseKey);
             _host = host;
-            _locales = (locales == null ? new List<string> { "en" } : new List<string>(locales)).AsReadOnly();
+            _locales = (locales == null ? new List<string> { "en" } : [.. locales]).AsReadOnly();
             _client = new Client(auth, timeout, UserAgent, httpClient);
             _disableHttps = disableHttps;
             _jsonOptions = new JsonSerializerOptions();
@@ -423,13 +423,10 @@ namespace MaxMind.GeoIP2
             }
             try
             {
-                var model = JsonSerializer.Deserialize<T>(response.Content, _jsonOptions);
-                if (model == null)
-                {
+                var model = JsonSerializer.Deserialize<T>(response.Content, _jsonOptions) ?? 
                     throw new HttpException(
                         $"Received a 200 response for {response.RequestUri} but there was no message body.",
                         HttpStatusCode.OK, response.RequestUri);
-                }
                 model.SetLocales(_locales);
                 return model;
             }

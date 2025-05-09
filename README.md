@@ -1,7 +1,6 @@
 # GeoIP2 .NET API #
 
 [![NuGet](https://img.shields.io/nuget/v/MaxMind.GeoIP2)](https://www.nuget.org/packages/MaxMind.GeoIP2)
-[![API Docs](https://www.fuget.org/packages/MaxMind.GeoIP2/badge.svg)](https://www.fuget.org/packages/MaxMind.GeoIP2)
 
 ## Description ##
 
@@ -599,6 +598,6 @@ bump (e.g., 1.2.x to 1.3.0).
 
 ## Copyright and License ##
 
-This software is Copyright (c) 2013-2023 by MaxMind, Inc.
+This software is Copyright (c) 2013-2025 by MaxMind, Inc.
 
 This is free software, licensed under the Apache License, Version 2.0.
