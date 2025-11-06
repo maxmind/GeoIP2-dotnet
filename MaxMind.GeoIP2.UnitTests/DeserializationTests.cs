@@ -93,13 +93,13 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("Cable/DSL", insights.Traits.ConnectionType);
             Assert.Equal("example.com", insights.Traits.Domain);
             Assert.Equal("1.2.3.4", insights.Traits.IPAddress);
+#pragma warning disable 0618
             Assert.True(insights.Traits.IsAnonymous);
             Assert.True(insights.Traits.IsAnonymousVpn);
             Assert.True(insights.Traits.IsHostingProvider);
             Assert.True(insights.Traits.IsPublicProxy);
             Assert.True(insights.Traits.IsResidentialProxy);
             Assert.True(insights.Traits.IsTorExitNode);
-#pragma warning disable 0618
             Assert.True(insights.Traits.IsAnonymousProxy);
             Assert.True(insights.Traits.IsSatelliteProvider);
 #pragma warning restore 0618
