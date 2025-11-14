@@ -30,6 +30,7 @@ namespace MaxMind.GeoIP2.Model
             [Parameter("connection_type")] string? connectionType = null,
             string? domain = null,
             [Inject("ip_address")] string? ipAddress = null,
+            [Parameter("ip_risk_snapshot")] double? ipRiskSnapshot = null,
             [Parameter("is_anonymous")] bool isAnonymous = false,
             [Parameter("is_anonymous_proxy")] bool isAnonymousProxy = false,
             [Parameter("is_anonymous_vpn")] bool isAnonymousVpn = false,
@@ -55,20 +56,23 @@ namespace MaxMind.GeoIP2.Model
             ConnectionType = connectionType;
             Domain = domain;
             IPAddress = ipAddress;
-            IsAnonymous = isAnonymous;
+            IpRiskSnapshot = ipRiskSnapshot;
 #pragma warning disable 618
+            IsAnonymous = isAnonymous;
             IsAnonymousProxy = isAnonymousProxy;
-#pragma warning restore 618
             IsAnonymousVpn = isAnonymousVpn;
+#pragma warning restore 618
             IsAnycast = isAnycast;
+#pragma warning disable 618
             IsHostingProvider = isHostingProvider;
+#pragma warning restore 618
             IsLegitimateProxy = isLegitimateProxy;
+#pragma warning disable 618
             IsPublicProxy = isPublicProxy;
             IsResidentialProxy = isResidentialProxy;
-#pragma warning disable 618
             IsSatelliteProvider = isSatelliteProvider;
-#pragma warning restore 618
             IsTorExitNode = isTorExitNode;
+#pragma warning restore 618
             Isp = isp;
             MobileCountryCode = mobileCountryCode;
             MobileNetworkCode = mobileNetworkCode;
@@ -77,6 +81,63 @@ namespace MaxMind.GeoIP2.Model
             StaticIPScore = staticIPScore;
             UserCount = userCount;
             UserType = userType;
+        }
+
+        /// <summary>
+        ///     Constructor for binary compatibility.
+        /// </summary>
+        [Obsolete("Use constructor with ipRiskSnapshot parameter")]
+        public Traits(
+            long? autonomousSystemNumber,
+            string? autonomousSystemOrganization,
+            string? connectionType,
+            string? domain,
+            string? ipAddress,
+            bool isAnonymous,
+            bool isAnonymousProxy,
+            bool isAnonymousVpn,
+            bool isAnycast,
+            bool isHostingProvider,
+            bool isLegitimateProxy,
+            bool isPublicProxy,
+            bool isResidentialProxy,
+            bool isSatelliteProvider,
+            bool isTorExitNode,
+            string? isp,
+            string? mobileCountryCode,
+            string? mobileNetworkCode,
+            string? organization,
+            string? userType,
+            Network? network,
+            double? staticIPScore,
+            int? userCount
+        ) : this(
+            autonomousSystemNumber,
+            autonomousSystemOrganization,
+            connectionType,
+            domain,
+            ipAddress,
+            null, // ipRiskSnapshot
+            isAnonymous,
+            isAnonymousProxy,
+            isAnonymousVpn,
+            isAnycast,
+            isHostingProvider,
+            isLegitimateProxy,
+            isPublicProxy,
+            isResidentialProxy,
+            isSatelliteProvider,
+            isTorExitNode,
+            isp,
+            mobileCountryCode,
+            mobileNetworkCode,
+            organization,
+            userType,
+            network,
+            staticIPScore,
+            userCount
+        )
+        {
         }
 
         /// <summary>
@@ -112,6 +173,7 @@ namespace MaxMind.GeoIP2.Model
             connectionType,
             domain,
             ipAddress,
+            null, // ipRiskSnapshot
             isAnonymous,
             isAnonymousProxy,
             isAnonymousVpn,
@@ -194,10 +256,24 @@ namespace MaxMind.GeoIP2.Model
         public string? IPAddress { get; internal set; }
 
         /// <summary>
+        ///     A risk score associated with the IP address, ranging from 0.01 to 99.
+        ///     A higher score indicates a higher risk. Please note that the IP risk
+        ///     score provided in GeoIP products and services is more static than the
+        ///     IP risk score provided in minFraud and is not responsive to traffic on
+        ///     your network. If you need realtime IP risk scoring based on behavioral
+        ///     signals on your own network, please use minFraud. This is available
+        ///     from the GeoIP2 Insights web service.
+        /// </summary>
+        [JsonInclude]
+        [JsonPropertyName("ip_risk_snapshot")]
+        public double? IpRiskSnapshot { get; internal set; }
+
+        /// <summary>
         ///     This is true if the IP address belongs to any sort of anonymous
         ///     network. This value is only available from the GeoIP2 Insights
         ///     web service.
         /// </summary>
+        [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_anonymous")]
         public bool IsAnonymous { get; internal set; }
@@ -230,6 +306,7 @@ namespace MaxMind.GeoIP2.Model
         ///     associated with them, we will likely only flag their IP ranges
         ///     using the IsHostingProvider property.
         /// </remarks>
+        [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_anonymous_vpn")]
         public bool IsAnonymousVpn { get; internal set; }
@@ -240,6 +317,7 @@ namespace MaxMind.GeoIP2.Model
         ///     This value is only available from the GeoIP2 Insights web
         ///     service.
         /// </summary>
+        [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_hosting_provider")]
         public bool IsHostingProvider { get; internal set; }
@@ -258,6 +336,7 @@ namespace MaxMind.GeoIP2.Model
         ///     This value is only available from the GeoIP2 Insights web
         ///     service.
         /// </summary>
+        [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_public_proxy")]
         public bool IsPublicProxy { get; internal set; }
@@ -267,6 +346,7 @@ namespace MaxMind.GeoIP2.Model
         ///     network and belongs to a residential ISP. This value is
         ///     only available from the GeoIP2 Insights web service.
         /// </summary>
+        [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_residential_proxy")]
         public bool IsResidentialProxy { get; internal set; }
@@ -284,6 +364,7 @@ namespace MaxMind.GeoIP2.Model
         ///     This value is only available from the GeoIP2 Insights web
         ///     service.
         /// </summary>
+        [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_tor_exit_node")]
         public bool IsTorExitNode { get; internal set; }
@@ -433,20 +514,23 @@ namespace MaxMind.GeoIP2.Model
                 $"{nameof(ConnectionType)}: {ConnectionType}, " +
                 $"{nameof(Domain)}: {Domain}, " +
                 $"{nameof(IPAddress)}: {IPAddress}, " +
-                $"{nameof(IsAnonymous)}: {IsAnonymous}, " +
+                $"{nameof(IpRiskSnapshot)}: {IpRiskSnapshot}, " +
 #pragma warning disable 618
+                $"{nameof(IsAnonymous)}: {IsAnonymous}, " +
                 $"{nameof(IsAnonymousProxy)}: {IsAnonymousProxy}, " +
-#pragma warning restore 618
                 $"{nameof(IsAnonymousVpn)}: {IsAnonymousVpn}, " +
+#pragma warning restore 618
                 $"{nameof(IsAnycast)}: {IsAnycast}, " +
+#pragma warning disable 618
                 $"{nameof(IsHostingProvider)}: {IsHostingProvider}, " +
+#pragma warning restore 618
                 $"{nameof(IsLegitimateProxy)}: {IsLegitimateProxy}, " +
+#pragma warning disable 618
                 $"{nameof(IsPublicProxy)}: {IsPublicProxy}, " +
                 $"{nameof(IsResidentialProxy)}: {IsResidentialProxy}, " +
-#pragma warning disable 618
                 $"{nameof(IsSatelliteProvider)}: {IsSatelliteProvider}, " +
-#pragma warning restore 618
                 $"{nameof(IsTorExitNode)}: {IsTorExitNode}, " +
+#pragma warning restore 618
                 $"{nameof(Isp)}: {Isp}, " +
                 $"{nameof(MobileCountryCode)}: {MobileCountryCode}, " +
                 $"{nameof(MobileNetworkCode)}: {MobileNetworkCode}, " +

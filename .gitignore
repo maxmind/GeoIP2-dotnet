@@ -103,6 +103,9 @@ AppPackages/
 .idea
 *.iml
 
+# Claude
+.claude
+
 # Others
 [Bb]in
 [Oo]bj

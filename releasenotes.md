@@ -1,6 +1,39 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+5.4.0 (TBD)
+-----------
+
+* A new `Anonymizer` object has been added to `InsightsResponse`. This object
+  provides anonymizer-related data including VPN confidence scoring, provider
+  name detection, and network last seen date. This data is available from the
+  GeoIP2 Insights web service.
+* A new `IpRiskSnapshot` property has been added to `MaxMind.GeoIP2.Model.Traits`.
+  This provides a risk score associated with the IP address, ranging from 0.01
+  to 99. Higher scores indicate greater risk. This is available from the GeoIP2
+  Insights web service.
+* The following properties in `MaxMind.GeoIP2.Model.Traits` have been marked
+  `Obsolete` and users should migrate to using the `Anonymizer` object on the
+  response instead: `IsAnonymous`, `IsAnonymousVpn`, `IsHostingProvider`,
+  `IsPublicProxy`, `IsResidentialProxy`, and `IsTorExitNode`. These properties
+  will continue to work but are deprecated in favor of the new `Anonymizer`
+  object.
+* A new `MaxMind.GeoIP2.Model.Anonymizer` class has been added with the
+  following properties:
+  * `Confidence` - A score ranging from 1 to 99 representing percent confidence
+    that the network is currently part of an actively used VPN service.
+  * `IsAnonymous` - Indicates whether the IP belongs to any sort of anonymous
+    network.
+  * `IsAnonymousVpn` - True if the IP is registered to an anonymous VPN provider.
+  * `IsHostingProvider` - True if the IP belongs to a hosting or VPN provider.
+  * `IsPublicProxy` - True if the IP belongs to a public proxy.
+  * `IsResidentialProxy` - True if the IP is on a suspected anonymizing network
+    and belongs to a residential ISP.
+  * `IsTorExitNode` - True if the IP belongs to a Tor exit node.
+  * `NetworkLastSeen` - The last day the network was sighted in analysis of
+    anonymized networks (available on .NET 6.0+ as `DateOnly`).
+  * `ProviderName` - The name of the VPN provider associated with the network.
+
 5.3.0 (2025-05-05)
 ------------------
 

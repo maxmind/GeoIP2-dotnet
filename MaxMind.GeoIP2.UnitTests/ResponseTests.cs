@@ -14,7 +14,7 @@ namespace MaxMind.GeoIP2.UnitTests
         public void InsightsConstruction()
         {
             var city = new City();
-            var insightsReponse = new InsightsResponse(city);
+            var insightsReponse = new InsightsResponse(city: city);
 
             Assert.Equal(insightsReponse.City, city);
         }
