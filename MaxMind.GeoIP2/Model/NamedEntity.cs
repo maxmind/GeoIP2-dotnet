@@ -24,7 +24,7 @@ namespace MaxMind.GeoIP2.Model
         {
             Names = names ?? new ReadOnlyDictionary<string, string>(new Dictionary<string, string>());
             GeoNameId = geoNameId;
-            Locales = locales ?? new List<string> { "en" }.AsReadOnly();
+            Locales = locales ?? ["en"];
         }
 
         /// <summary>

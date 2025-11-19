@@ -19,10 +19,10 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         protected AbstractCityResponse()
         {
-            City = new City();
-            Location = new Location();
-            Postal = new Postal();
-            Subdivisions = new List<Subdivision>().AsReadOnly();
+            City = new();
+            Location = new();
+            Postal = new();
+            Subdivisions = [];
         }
 
         /// <summary>
@@ -41,10 +41,10 @@ namespace MaxMind.GeoIP2.Responses
             Traits? traits = null)
             : base(continent, country, maxMind, registeredCountry, representedCountry, traits)
         {
-            City = city ?? new City();
-            Location = location ?? new Location();
-            Postal = postal ?? new Postal();
-            Subdivisions = subdivisions ?? new List<Subdivision>().AsReadOnly();
+            City = city ?? new();
+            Location = location ?? new();
+            Postal = postal ?? new();
+            Subdivisions = subdivisions ?? [];
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     returns an empty <see cref="Subdivision" /> object.
         /// </summary>
         [JsonIgnore]
-        public Subdivision MostSpecificSubdivision => Subdivisions.Count == 0 ? new Subdivision() : Subdivisions[Subdivisions.Count - 1];
+        public Subdivision MostSpecificSubdivision => Subdivisions.Count == 0 ? new() : Subdivisions[Subdivisions.Count - 1];
 
         /// <summary>
         ///     Returns a <see cref="string" /> that represents this instance.
