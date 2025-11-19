@@ -25,7 +25,7 @@ namespace MaxMind.GeoIP2
             var parts = value.Split('/');
             if (parts.Length != 2 || !int.TryParse(parts[1], out var prefixLength))
             {
-                throw new JsonException("Network not in CIDR format: " + value);
+                throw new JsonException($"Network not in CIDR format: {value}");
             }
 
             return new Network(IPAddress.Parse(parts[0]), prefixLength);
