@@ -41,7 +41,7 @@ namespace MaxMind.GeoIP2
         public DatabaseReader(string file, IEnumerable<string> locales,
             FileAccessMode mode = FileAccessMode.MemoryMapped)
         {
-            _locales = new List<string>(locales).AsReadOnly();
+            _locales = [.. locales];
             _reader = new Reader(file, mode);
         }
 

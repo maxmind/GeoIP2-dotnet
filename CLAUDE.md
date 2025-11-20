@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 The library provides both web service clients and database readers that return strongly-typed model objects containing geographic, ISP, anonymizer, and other IP-related data.
 
 **Key Technologies:**
-- .NET 9.0, .NET 8.0, .NET Standard 2.1, and .NET Standard 2.0
+- .NET 10.0, .NET 9.0, .NET 8.0, .NET Standard 2.1, and .NET Standard 2.0
 - System.Text.Json for JSON serialization/deserialization
 - MaxMind.Db library for binary database file reading
 - xUnit for testing
@@ -338,8 +338,8 @@ The project enforces strict code quality standards:
 
 ## Version Requirements
 
-- **Target Frameworks**: net9.0, net8.0, netstandard2.1, netstandard2.0
-- **Language Version**: C# 13.0
+- **Target Frameworks**: net10.0, net9.0, net8.0, netstandard2.1, netstandard2.0
+- **Language Version**: C# 14.0
 - **Key Dependencies**:
   - `MaxMind.Db`: 4.2.0+ (MMDB database reader)
   - `Microsoft.Extensions.Options`: 9.0.4+ (DI configuration)

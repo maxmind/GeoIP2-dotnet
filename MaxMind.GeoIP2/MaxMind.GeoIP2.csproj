@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>MaxMind GeoIP2 Database Reader and Web Service Client</Description>
     <VersionPrefix>5.3.0</VersionPrefix>
-    <TargetFrameworks>net9.0;net8.0;netstandard2.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net9.0;net8.0;netstandard2.1;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>MaxMind.GeoIP2</AssemblyName>
     <AssemblyOriginatorKeyFile>../MaxMind.snk</AssemblyOriginatorKeyFile>
@@ -27,7 +27,7 @@
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
-    <LangVersion>13.0</LangVersion>
+    <LangVersion>14.0</LangVersion>
     <Nullable>enable</Nullable>
     <AnalysisLevel>latest</AnalysisLevel>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -35,22 +35,22 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0|AnyCPU'">
     <WarningLevel>9999</WarningLevel>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0|AnyCPU'">
     <WarningLevel>9999</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MaxMind.Db" Version="4.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netstandard2.1' ">
     <PackageReference Include="System.Text.Json">
-      <Version>9.0.0</Version>
+      <Version>10.0.0</Version>
     </PackageReference>
   </ItemGroup>
 

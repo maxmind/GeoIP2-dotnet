@@ -4,6 +4,7 @@ GeoIP2 .NET API Release Notes
 5.4.0 (TBD)
 -----------
 
+* .NET 10.0 has been added as a target.
 * A new `Anonymizer` object has been added to `InsightsResponse`. This object
   provides anonymizer-related data including VPN confidence scoring, provider
   name detection, and network last seen date. This data is available from the
