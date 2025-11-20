@@ -47,6 +47,11 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <!-- Suppress false positive vulnerability warning for WireMock.Net transitive dependency -->
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-5rrx-jjjq-q2r5" />
+  </ItemGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\MaxMind.GeoIP2\MaxMind.GeoIP2.csproj" />
