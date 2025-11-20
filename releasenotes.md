@@ -1,8 +1,8 @@
 GeoIP2 .NET API Release Notes
 =============================
 
-5.4.0 (TBD)
------------
+5.4.0 (2025-11-20)
+------------------
 
 * .NET 10.0 has been added as a target.
 * A new `Anonymizer` object has been added to `InsightsResponse`. This object
