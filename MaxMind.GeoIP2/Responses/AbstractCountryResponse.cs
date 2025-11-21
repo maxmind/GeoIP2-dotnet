@@ -2,7 +2,6 @@
 
 using MaxMind.GeoIP2.Model;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 #endregion
