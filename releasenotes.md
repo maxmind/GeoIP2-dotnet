@@ -1,6 +1,11 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+5.4.1 (2025-11-24)
+------------------
+
+* First release via Trusted Publishing.
+
 5.4.0 (2025-11-20)
 ------------------
 
