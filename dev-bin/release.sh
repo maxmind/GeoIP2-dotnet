@@ -6,26 +6,26 @@ set -eu -o pipefail
 # before making any changes to the repository
 
 check_command() {
-    if ! command -v "$1" &> /dev/null; then
+    if ! command -v "$1" &>/dev/null; then
         echo "Error: $1 is not installed or not in PATH"
         exit 1
     fi
 }
 
 # Verify gh CLI is authenticated
-if ! gh auth status &> /dev/null; then
+if ! gh auth status &>/dev/null; then
     echo "Error: gh CLI is not authenticated. Run 'gh auth login' first."
     exit 1
 fi
 
 # Verify we can access this repository via gh
-if ! gh repo view --json name &> /dev/null; then
+if ! gh repo view --json name &>/dev/null; then
     echo "Error: Cannot access repository via gh. Check your authentication and repository access."
     exit 1
 fi
 
 # Verify git can connect to the remote (catches SSH key issues, etc.)
-if ! git ls-remote origin &> /dev/null; then
+if ! git ls-remote origin &>/dev/null; then
     echo "Error: Cannot connect to git remote. Check your git credentials/SSH keys."
     exit 1
 fi
@@ -96,7 +96,7 @@ git diff
 echo $'\nRelease notes:'
 echo "$notes"
 
-read -e -p "Commit changes and create release? (y/n) " should_continue
+read -r -e -p "Commit changes and create release? (y/n) " should_continue
 
 if [ "$should_continue" != "y" ]; then
     echo "Aborting"
