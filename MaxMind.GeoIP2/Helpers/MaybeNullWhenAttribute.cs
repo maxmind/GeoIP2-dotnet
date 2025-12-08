@@ -1,4 +1,4 @@
-﻿#if !SYSTEM_PRIVATE_CORELIB
+﻿#if NETSTANDARD2_0
 namespace System.Diagnostics.CodeAnalysis
 {
     /// <summary>
