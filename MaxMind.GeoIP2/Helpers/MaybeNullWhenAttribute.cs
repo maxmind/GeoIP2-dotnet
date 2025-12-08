@@ -1,4 +1,4 @@
-﻿#if !NET5_0_OR_GREATER
+﻿#if !SYSTEM_PRIVATE_CORELIB
 namespace System.Diagnostics.CodeAnalysis
 {
     /// <summary>
