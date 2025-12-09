@@ -1,6 +1,16 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+5.5.0
+------------------
+
+* The `TryXxx` methods on `DatabaseReader` and `IGeoIP2DatabaseReader` now
+  use the `[MaybeNullWhen(false)]` attribute instead of nullable `out`
+  parameters. This enables the compiler to understand that the `out`
+  parameter is non-null when the method returns `true`, eliminating the
+  need for redundant null checks or null-forgiving operators after a
+  successful lookup. Pull request by Dmitry Solovev. GitHub #387.
+
 5.4.1 (2025-11-24)
 ------------------
 
