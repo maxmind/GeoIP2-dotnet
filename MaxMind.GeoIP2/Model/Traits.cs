@@ -263,6 +263,13 @@ namespace MaxMind.GeoIP2.Model
         ///     your network. If you need realtime IP risk scoring based on behavioral
         ///     signals on your own network, please use minFraud. This is available
         ///     from the GeoIP2 Insights web service.
+        ///     <para>
+        ///     We do not provide an IP risk snapshot for low-risk networks. If this
+        ///     field is not populated, we either do not have signals for the network
+        ///     or the signals we have show that the network is low-risk. If you would
+        ///     like to get signals for low-risk networks, please use the minFraud web
+        ///     services.
+        ///     </para>
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("ip_risk_snapshot")]
