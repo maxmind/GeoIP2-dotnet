@@ -51,6 +51,36 @@ namespace MaxMind.GeoIP2
         bool TryAnonymousIP(string ipAddress, [MaybeNullWhen(false)] out AnonymousIPResponse response);
 
         /// <summary>
+        ///     Look up an IP address in a GeoIP Anonymous Plus.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AnonymousPlusResponse" /></returns>
+        AnonymousPlusResponse AnonymousPlus(IPAddress ipAddress);
+
+        /// <summary>
+        ///     Look up an IP address in a GeoIP Anonymous Plus.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <returns>An <see cref="AnonymousPlusResponse" /></returns>
+        AnonymousPlusResponse AnonymousPlus(string ipAddress);
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AnonymousPlusResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AnonymousPlusResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        bool TryAnonymousPlus(IPAddress ipAddress, [MaybeNullWhen(false)] out AnonymousPlusResponse response);
+
+        /// <summary>
+        ///     Tries to lookup an <see cref="AnonymousPlusResponse" /> for the specified IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address.</param>
+        /// <param name="response">The <see cref="AnonymousPlusResponse" />.</param>
+        /// <returns>A <see cref="bool" /> describing whether the IP address was found.</returns>
+        bool TryAnonymousPlus(string ipAddress, [MaybeNullWhen(false)] out AnonymousPlusResponse response);
+
+        /// <summary>
         ///     Returns an <see cref="AsnResponse" /> for the specified IP address.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
