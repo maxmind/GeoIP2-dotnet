@@ -51,7 +51,7 @@ You may also specify the fall-back locales, the host, or the timeout as
 optional parameters. See the API docs for more information.
 
 This object is safe to share across threads. If you are making multiple
-requests, the object should be reused to so that new connections are not
+requests, the object should be reused so that new connections are not
 created for each request. Once you have finished making requests, you
 should dispose of the object to ensure the connections are closed and any
 resources are promptly returned to the system.
@@ -69,17 +69,17 @@ See the API documentation for more details.
 ### ASP.NET Core Usage ###
 
 To use the web service API with HttpClient factory pattern as a
-[Typed client](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-6.0#typed-clients)
+[Typed client](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests#typed-clients)
 you need to do the following:
 
-1. Add the following lines to `Startup.cs` `ConfigureServices` method:
+1. Add the following lines to `Program.cs`:
 
 ```csharp
 // Configure to read configuration options from MaxMind section
-services.Configure<WebServiceClientOptions>(Configuration.GetSection("MaxMind"));
+builder.Services.Configure<WebServiceClientOptions>(builder.Configuration.GetSection("MaxMind"));
 
 // Configure dependency injection for WebServiceClient
-services.AddHttpClient<WebServiceClient>();
+builder.Services.AddHttpClient<WebServiceClient>();
 ```
 
 2. Add configuration in your `appsettings.json` with your account ID and license key.
@@ -431,7 +431,7 @@ using (var reader = new DatabaseReader("GeoIP2-Domain.mmdb"))
 using (var reader = new DatabaseReader("/path/to/GeoIP2-Enterprise.mmdb"))
 {
     //  Use the Enterprise(ip) method to do a lookup in the Enterprise database
-    var response = reader.enterprise("128.101.101.101");
+    var response = reader.Enterprise("128.101.101.101");
 
     var country = response.Country;
     Console.WriteLine(country.IsoCode);            // 'US'
@@ -535,7 +535,7 @@ Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.
 
 See the [GeoIP2 web services
-documentations](https://dev.maxmind.com/geoip/docs/web-services?lang=en) for
+documentation](https://dev.maxmind.com/geoip/docs/web-services?lang=en) for
 details on what data each end point may return.
 
 The only piece of data which is always returned is the `ipAddress` attribute
@@ -546,7 +546,7 @@ in the `MaxMind.GeoIP2.Traits` record.
 [GeoNames](https://www.geonames.org/) offers web services and downloadable
 databases with data on geographical features around the world, including
 populated places. They offer both free and paid premium data. Each feature is
-unique identified by a `geonameId`, which is an integer.
+uniquely identified by a `geonameId`, which is an integer.
 
 Many of the records returned by the GeoIP2 web services and databases include
 a `geonameId` property. This is the ID of a geographical feature (city,

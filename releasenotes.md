@@ -4,6 +4,9 @@ GeoIP2 .NET API Release Notes
 5.5.0
 ------------------
 
+* `AnonymousPlus` and `TryAnonymousPlus` methods have been added to
+  `IGeoIP2DatabaseReader`. These methods were previously only available
+  on `DatabaseReader`.
 * The `TryXxx` methods on `DatabaseReader` and `IGeoIP2DatabaseReader` now
   use the `[MaybeNullWhen(false)]` attribute instead of nullable `out`
   parameters. This enables the compiler to understand that the `out`
