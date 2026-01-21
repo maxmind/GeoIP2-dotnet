@@ -50,7 +50,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netstandard2.1' ">
     <PackageReference Include="System.Text.Json">
-      <Version>10.0.1</Version>
+      <Version>10.0.2</Version>
     </PackageReference>
   </ItemGroup>
 
