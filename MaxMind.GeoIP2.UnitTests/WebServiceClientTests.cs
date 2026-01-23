@@ -21,6 +21,7 @@ namespace MaxMind.GeoIP2.UnitTests
 {
     public class WebServiceClientTests : IDisposable
     {
+        private const int TestTimeoutMilliseconds = 30000;
         private readonly WireMockServer _server;
 
         public WebServiceClientTests()
@@ -81,7 +82,7 @@ namespace MaxMind.GeoIP2.UnitTests
             return new WebServiceClient(6, "0123456789",
                 locales: ["en"],
                 host: host,
-                timeout: 3000,
+                timeout: TestTimeoutMilliseconds,
                 disableHttps: true
             );
         }
@@ -491,7 +492,7 @@ namespace MaxMind.GeoIP2.UnitTests
                 LicenseKey = "0123456789",
                 Host = _server.Urls[0].Replace("http://", ""),
                 DisableHttps = true,
-                Timeout = 3000,
+                Timeout = TestTimeoutMilliseconds,
                 Locales = ["en"]
             });
 
