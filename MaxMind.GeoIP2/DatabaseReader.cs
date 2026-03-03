@@ -525,14 +525,8 @@ namespace MaxMind.GeoIP2
 
             var injectables = new InjectableValues();
             injectables.AddValue("ip_address", ipStr);
+            injectables.AddValue("locales", _locales);
             var response = _reader.Find<T>(ipAddress, injectables);
-
-            if (response == null)
-            {
-                return null;
-            }
-
-            response.SetLocales(_locales);
 
             return response;
         }

@@ -16,7 +16,10 @@ namespace MaxMind.GeoIP2.UnitTests.Model
         public void HasCoordinatesFailure(double? latitude, double? longitude)
         {
             var location = new Location
-                (latitude: latitude, longitude: longitude);
+            {
+                Latitude = latitude,
+                Longitude = longitude
+            };
 
             Assert.False(location.HasCoordinates);
         }
@@ -24,7 +27,7 @@ namespace MaxMind.GeoIP2.UnitTests.Model
         [Fact]
         public void HasCoordinatesSuccess()
         {
-            var location = new Location(latitude: 50.0, longitude: 0.0);
+            var location = new Location { Latitude = 50.0, Longitude = 0.0 };
             Assert.True(location.HasCoordinates);
         }
     }

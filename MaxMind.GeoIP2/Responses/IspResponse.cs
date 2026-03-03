@@ -1,37 +1,13 @@
-﻿#region
-
 using MaxMind.Db;
 using System.Text.Json.Serialization;
-
-#endregion
 
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     This class represents the GeoIP2 ISP response.
+    ///     This record represents the GeoIP2 ISP response.
     /// </summary>
-    /// <remarks>
-    ///     Construct an IspResponse model.
-    /// </remarks>
-    [method: Constructor]
-    public class IspResponse(
-        [Parameter("autonomous_system_number")] long? autonomousSystemNumber,
-        [Parameter("autonomous_system_organization")] string? autonomousSystemOrganization,
-        string? isp,
-        [Parameter("mobile_country_code")] string? mobileCountryCode,
-        [Parameter("mobile_network_code")] string? mobileNetworkCode,
-        string? organization,
-        [Inject("ip_address")] string? ipAddress,
-        [Network] Network? network = null
-        ) : AbstractResponse
+    public record IspResponse : AbstractResponse
     {
-        /// <summary>
-        ///     Construct an IspResponse model.
-        /// </summary>
-        public IspResponse() : this(null, null, null, null, null, null, null)
-        {
-        }
-
         /// <summary>
         ///     The
         ///     <a
@@ -42,7 +18,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_number")]
-        public long? AutonomousSystemNumber { get; internal set; } = autonomousSystemNumber;
+        [MapKey("autonomous_system_number")]
+        public long? AutonomousSystemNumber { get; init; }
 
         /// <summary>
         ///     The organization associated with the registered
@@ -54,14 +31,16 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_organization")]
-        public string? AutonomousSystemOrganization { get; internal set; } = autonomousSystemOrganization;
+        [MapKey("autonomous_system_organization")]
+        public string? AutonomousSystemOrganization { get; init; }
 
         /// <summary>
         ///     The name of the ISP associated with the IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("isp")]
-        public string? Isp { get; internal set; } = isp;
+        [MapKey("isp")]
+        public string? Isp { get; init; }
 
         /// <summary>
         ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
@@ -69,7 +48,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("mobile_country_code")]
-        public string? MobileCountryCode { get; internal set; } = mobileCountryCode;
+        [MapKey("mobile_country_code")]
+        public string? MobileCountryCode { get; init; }
 
         /// <summary>
         ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
@@ -77,14 +57,16 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("mobile_network_code")]
-        public string? MobileNetworkCode { get; internal set; } = mobileNetworkCode;
+        [MapKey("mobile_network_code")]
+        public string? MobileNetworkCode { get; init; }
 
         /// <summary>
         ///     The name of the organization associated with the IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("organization")]
-        public string? Organization { get; internal set; } = organization;
+        [MapKey("organization")]
+        public string? Organization { get; init; }
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -95,7 +77,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("ip_address")]
-        public string? IPAddress { get; internal set; } = ipAddress;
+        [Inject("ip_address")]
+        public string? IPAddress { get; init; }
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -104,6 +87,7 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("network")]
-        public Network? Network { get; internal set; } = network;
+        [Network]
+        public Network? Network { get; init; }
     }
 }

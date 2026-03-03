@@ -1,72 +1,39 @@
-﻿#region
-
+using MaxMind.Db;
 using MaxMind.GeoIP2.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-#endregion
-
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     Abstract class that city-level response.
+    ///     Abstract record for city-level responses.
     /// </summary>
-    public abstract class AbstractCityResponse : AbstractCountryResponse
+    public abstract record AbstractCityResponse : AbstractCountryResponse
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.
-        /// </summary>
-        protected AbstractCityResponse()
-        {
-            City = new();
-            Location = new();
-            Postal = new();
-            Subdivisions = [];
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="AbstractCityResponse" /> class.
-        /// </summary>
-        protected AbstractCityResponse(
-            City? city = null,
-            Continent? continent = null,
-            Country? country = null,
-            Location? location = null,
-            Model.MaxMind? maxMind = null,
-            Postal? postal = null,
-            Country? registeredCountry = null,
-            RepresentedCountry? representedCountry = null,
-            IReadOnlyList<Subdivision>? subdivisions = null,
-            Traits? traits = null)
-            : base(continent, country, maxMind, registeredCountry, representedCountry, traits)
-        {
-            City = city ?? new();
-            Location = location ?? new();
-            Postal = postal ?? new();
-            Subdivisions = subdivisions ?? [];
-        }
-
         /// <summary>
         ///     Gets the city for the requested IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("city")]
-        public City City { get; internal set; }
+        [MapKey("city", true)]
+        public City City { get; init; } = new();
 
         /// <summary>
         ///     Gets the location for the requested IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("location")]
-        public Location Location { get; internal set; }
+        [MapKey("location", true)]
+        public Location Location { get; init; } = new();
 
         /// <summary>
         ///     Gets the postal object for the requested IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("postal")]
-        public Postal Postal { get; internal set; }
+        [MapKey("postal", true)]
+        public Postal Postal { get; init; } = new();
 
         /// <summary>
         ///     An <see cref="System.Collections.Generic.List{T}" /> of <see cref="Subdivision" /> objects representing
@@ -79,7 +46,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("subdivisions")]
-        public IReadOnlyList<Subdivision> Subdivisions { get; internal set; }
+        [MapKey("subdivisions")]
+        public IReadOnlyList<Subdivision> Subdivisions { get; init; } = [];
 
         /// <summary>
         ///     An object representing the most specific subdivision returned. If
@@ -89,47 +57,15 @@ namespace MaxMind.GeoIP2.Responses
         [JsonIgnore]
         public Subdivision MostSpecificSubdivision => Subdivisions.Count == 0 ? new() : Subdivisions[Subdivisions.Count - 1];
 
-        /// <summary>
-        ///     Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="string" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
+        /// <inheritdoc/>
+        internal override AbstractResponse WithLocales(IReadOnlyList<string> locales)
         {
-            return GetType().Name + " ["
-                  + "City=" + City + ", "
-                  + "Location=" + Location + ", "
-                  + "Postal=" + Postal + ", "
-                  + "Subdivisions={" +
-                  string.Join(",", Subdivisions.Select(s => s.ToString()).ToArray()) + "}, "
-                  + "Continent=" + Continent + ", "
-                  + "Country=" + Country + ", "
-                  + "RegisteredCountry=" + RegisteredCountry + ", "
-                  + "RepresentedCountry=" + RepresentedCountry + ", "
-                  + "Traits=" + Traits
-                  + "]";
-        }
-
-        /// <summary>
-        ///     Sets the locales on all the NamedEntity properties.
-        /// </summary>
-        /// <param name="locales">The locales specified by the user.</param>
-        protected internal override void SetLocales(IReadOnlyList<string> locales)
-        {
-            locales = [.. locales];
-            base.SetLocales(locales);
-            City.Locales = locales;
-
-            if (Subdivisions.Count == 0)
+            var baseResult = (AbstractCityResponse)base.WithLocales(locales);
+            return baseResult with
             {
-                return;
-            }
-
-            foreach (var subdivision in Subdivisions)
-            {
-                subdivision.Locales = locales;
-            }
+                City = baseResult.City with { Locales = locales },
+                Subdivisions = [.. baseResult.Subdivisions.Select(s => s with { Locales = locales })],
+            };
         }
     }
 }

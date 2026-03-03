@@ -1,6 +1,32 @@
 GeoIP2 .NET API Release Notes
 =============================
 
+6.0.0
+------------------
+
+* **BREAKING:** All model and response classes have been converted from
+  classes to C# records.
+* **BREAKING:** Constructor-based deserialization replaced with
+  property-based initialization using `[MapKey]` attributes. The
+  `[Constructor]` and `[Parameter]` attributes are no longer used on
+  GeoIP2 model classes.
+* **BREAKING:** `SetLocales()` replaced with `WithLocales()` which returns
+  a new instance via record `with` expressions instead of mutating in
+  place.
+* **BREAKING:** Properties now use `init` setters instead of
+  `internal set`.
+* **BREAKING:** The `Locales` property on `NamedEntity` (and all subclasses)
+  is now `public` (previously `protected internal`). This is required for
+  the record `with` expression pattern.
+* **BREAKING:** Code that constructs model objects using constructor
+  parameters (e.g., `new Traits(domain: "example.com")`) must switch to
+  object initializer syntax (e.g., `new Traits { Domain = "example.com" }`).
+* **BREAKING:** The custom `ToString()` on `NamedEntity` (and all
+  subclasses: City, Country, Continent, Subdivision, RepresentedCountry)
+  has been removed. Records provide a compiler-generated `ToString()` that
+  outputs all property values. Use the `Name` property directly instead.
+* Added `InternalsVisibleTo` for `MaxMind.MinFraud` assembly.
+
 5.5.0
 ------------------
 
