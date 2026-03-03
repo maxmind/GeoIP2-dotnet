@@ -44,13 +44,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaxMind.Db" Version="4.3.4" />
+    <ProjectReference Include="../../../../../MaxMind-DB-Reader-dotnet/.worktrees/greg/eng-3437/MaxMind.Db/MaxMind.Db.csproj" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.3" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netstandard2.1' ">
     <PackageReference Include="System.Text.Json">
       <Version>10.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="IsExternalInit" Version="1.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
 

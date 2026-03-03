@@ -1,10 +1,5 @@
-﻿#region
-
 using MaxMind.Db;
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
-
-#endregion
 
 namespace MaxMind.GeoIP2.Model
 {
@@ -14,33 +9,8 @@ namespace MaxMind.GeoIP2.Model
     ///     key. Use the <see cred="GeoNameId" /> or <see cred="IsoCode" />
     ///     instead.
     /// </summary>
-    public class Country : NamedEntity
+    public record Country : NamedEntity
     {
-        /// <summary>
-        ///     Constructor
-        /// </summary>
-        public Country()
-        {
-        }
-
-        /// <summary>
-        ///     Constructor
-        /// </summary>
-        [Constructor]
-        public Country(
-            int? confidence = null,
-            [Parameter("geoname_id")] long? geoNameId = null,
-            [Parameter("is_in_european_union")] bool isInEuropeanUnion = false,
-            [Parameter("iso_code")] string? isoCode = null,
-            IReadOnlyDictionary<string, string>? names = null,
-            IReadOnlyList<string>? locales = null)
-            : base(geoNameId, names, locales)
-        {
-            Confidence = confidence;
-            IsoCode = isoCode;
-            IsInEuropeanUnion = isInEuropeanUnion;
-        }
-
         /// <summary>
         ///     A value from 0-100 indicating MaxMind's confidence that the country
         ///     is correct. This value is only set when using the Insights
@@ -48,7 +18,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("confidence")]
-        public int? Confidence { get; internal set; }
+        [MapKey("confidence")]
+        public int? Confidence { get; init; }
 
         /// <summary>
         ///     This is true if the country is a member state of the
@@ -57,7 +28,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_in_european_union")]
-        public bool IsInEuropeanUnion { get; internal set; }
+        [MapKey("is_in_european_union")]
+        public bool IsInEuropeanUnion { get; init; }
 
         /// <summary>
         ///     The
@@ -70,6 +42,7 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("iso_code")]
-        public string? IsoCode { get; internal set; }
+        [MapKey("iso_code")]
+        public string? IsoCode { get; init; }
     }
 }

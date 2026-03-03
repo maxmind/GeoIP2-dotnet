@@ -427,8 +427,7 @@ namespace MaxMind.GeoIP2
                     throw new HttpException(
                         $"Received a 200 response for {response.RequestUri} but there was no message body.",
                         HttpStatusCode.OK, response.RequestUri);
-                model.SetLocales(_locales);
-                return model;
+                return (T)model.WithLocales(_locales);
             }
             catch (JsonException ex)
             {

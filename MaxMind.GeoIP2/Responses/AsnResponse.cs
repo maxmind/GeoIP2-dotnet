@@ -1,4 +1,4 @@
-﻿using MaxMind.Db;
+using MaxMind.Db;
 using System.Text.Json.Serialization;
 
 namespace MaxMind.GeoIP2.Responses
@@ -6,24 +6,8 @@ namespace MaxMind.GeoIP2.Responses
     /// <summary>
     ///     This class represents the GeoLite2 ASN response.
     /// </summary>
-    /// <remarks>
-    ///     Construct an AsnResponse model.
-    /// </remarks>
-    [method: Constructor]
-    public class AsnResponse(
-        [Parameter("autonomous_system_number")] long? autonomousSystemNumber,
-        [Parameter("autonomous_system_organization")] string? autonomousSystemOrganization,
-        [Inject("ip_address")] string? ipAddress,
-        [Network] Network? network = null
-        ) : AbstractResponse
+    public record AsnResponse : AbstractResponse
     {
-        /// <summary>
-        ///     Construct an AsnResponse model.
-        /// </summary>
-        public AsnResponse() : this(null, null, null)
-        {
-        }
-
         /// <summary>
         ///     The
         ///     <a
@@ -34,7 +18,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_number")]
-        public long? AutonomousSystemNumber { get; internal set; } = autonomousSystemNumber;
+        [MapKey("autonomous_system_number")]
+        public long? AutonomousSystemNumber { get; init; }
 
         /// <summary>
         ///     The organization associated with the registered
@@ -46,7 +31,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_organization")]
-        public string? AutonomousSystemOrganization { get; internal set; } = autonomousSystemOrganization;
+        [MapKey("autonomous_system_organization")]
+        public string? AutonomousSystemOrganization { get; init; }
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -57,7 +43,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("ip_address")]
-        public string? IPAddress { get; internal set; } = ipAddress;
+        [Inject("ip_address")]
+        public string? IPAddress { get; init; }
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -66,6 +53,7 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("network")]
-        public Network? Network { get; internal set; } = network;
+        [Network]
+        public Network? Network { get; init; }
     }
 }
