@@ -1,63 +1,20 @@
-﻿#region
-
 using MaxMind.Db;
 using System.Text.Json.Serialization;
-
-#endregion
 
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
     ///     This class represents the GeoIP2 Anonymous IP response.
     /// </summary>
-    public class AnonymousIPResponse : AbstractResponse
+    public record AnonymousIPResponse : AbstractResponse
     {
-        /// <summary>
-        /// Construct AnonymousIPResponse model
-        /// </summary>
-        public AnonymousIPResponse()
-        {
-        }
-
-        /// <summary>
-        /// Construct AnonymousIPResponse model
-        /// </summary>
-        /// <param name="isAnonymous"></param>
-        /// <param name="isAnonymousVpn"></param>
-        /// <param name="isHostingProvider"></param>
-        /// <param name="isPublicProxy"></param>
-        /// <param name="isResidentialProxy"></param>
-        /// <param name="isTorExitNode"></param>
-        /// <param name="ipAddress"></param>
-        /// <param name="network"></param>
-        [Constructor]
-        public AnonymousIPResponse(
-            [Parameter("is_anonymous")] bool isAnonymous,
-            [Parameter("is_anonymous_vpn")] bool isAnonymousVpn,
-            [Parameter("is_hosting_provider")] bool isHostingProvider,
-            [Parameter("is_public_proxy")] bool isPublicProxy,
-            [Parameter("is_residential_proxy")] bool isResidentialProxy,
-            [Parameter("is_tor_exit_node")] bool isTorExitNode,
-            [Inject("ip_address")] string? ipAddress,
-            [Network] Network? network = null
-        )
-        {
-            IsAnonymous = isAnonymous;
-            IsAnonymousVpn = isAnonymousVpn;
-            IsHostingProvider = isHostingProvider;
-            IsPublicProxy = isPublicProxy;
-            IsResidentialProxy = isResidentialProxy;
-            IsTorExitNode = isTorExitNode;
-            IPAddress = ipAddress;
-            Network = network;
-        }
-
         /// <summary>
         ///     Returns true if the IP address belongs to any sort of anonymous network.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_anonymous")]
-        public bool IsAnonymous { get; internal set; }
+        [MapKey("is_anonymous")]
+        public bool IsAnonymous { get; init; }
 
         /// <summary>
         ///     Returns true if the IP address is registered to an anonymous
@@ -70,7 +27,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </remarks>
         [JsonInclude]
         [JsonPropertyName("is_anonymous_vpn")]
-        public bool IsAnonymousVpn { get; internal set; }
+        [MapKey("is_anonymous_vpn")]
+        public bool IsAnonymousVpn { get; init; }
 
         /// <summary>
         ///     Returns true if the IP address belongs to a hosting or
@@ -78,14 +36,16 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_hosting_provider")]
-        public bool IsHostingProvider { get; internal set; }
+        [MapKey("is_hosting_provider")]
+        public bool IsHostingProvider { get; init; }
 
         /// <summary>
         ///     Returns true if the IP address belongs to a public proxy.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_public_proxy")]
-        public bool IsPublicProxy { get; internal set; }
+        [MapKey("is_public_proxy")]
+        public bool IsPublicProxy { get; init; }
 
         /// <summary>
         ///     This is true if the IP address is on a suspected anonymizing
@@ -93,14 +53,16 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_residential_proxy")]
-        public bool IsResidentialProxy { get; internal set; }
+        [MapKey("is_residential_proxy")]
+        public bool IsResidentialProxy { get; init; }
 
         /// <summary>
         ///     Returns true if IP is a Tor exit node.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_tor_exit_node")]
-        public bool IsTorExitNode { get; internal set; }
+        [MapKey("is_tor_exit_node")]
+        public bool IsTorExitNode { get; init; }
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -111,7 +73,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("ip_address")]
-        public string? IPAddress { get; internal set; }
+        [Inject("ip_address")]
+        public string? IPAddress { get; init; }
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -120,6 +83,7 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("network")]
-        public Network? Network { get; internal set; }
+        [Network]
+        public Network? Network { get; init; }
     }
 }

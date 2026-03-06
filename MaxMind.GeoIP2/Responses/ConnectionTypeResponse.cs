@@ -1,39 +1,13 @@
-﻿#region
-
 using MaxMind.Db;
 using System.Text.Json.Serialization;
-
-#endregion
 
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
     ///     This class represents the GeoIP2 Connection-Type response.
     /// </summary>
-    public class ConnectionTypeResponse : AbstractResponse
+    public record ConnectionTypeResponse : AbstractResponse
     {
-        /// <summary>
-        ///     Construct ConnectionTypeResponse model
-        /// </summary>
-        public ConnectionTypeResponse()
-        {
-        }
-
-        /// <summary>
-        ///     Construct ConnectionTypeResponse model
-        /// </summary>
-        [Constructor]
-        public ConnectionTypeResponse(
-            [Parameter("connection_type")] string? connectionType,
-            [Inject("ip_address")] string? ipAddress,
-            [Network] Network? network = null
-        )
-        {
-            ConnectionType = connectionType;
-            IPAddress = ipAddress;
-            Network = network;
-        }
-
         /// <summary>
         ///     The connection type may take the following values: "Dialup",
         ///     "Cable/DSL", "Corporate", "Cellular", and "Satellite". Additional
@@ -41,7 +15,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("connection_type")]
-        public string? ConnectionType { get; internal set; }
+        [MapKey("connection_type")]
+        public string? ConnectionType { get; init; }
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -52,7 +27,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("ip_address")]
-        public string? IPAddress { get; internal set; }
+        [Inject("ip_address")]
+        public string? IPAddress { get; init; }
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -61,6 +37,7 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("network")]
-        public Network? Network { get; internal set; }
+        [Network]
+        public Network? Network { get; init; }
     }
 }

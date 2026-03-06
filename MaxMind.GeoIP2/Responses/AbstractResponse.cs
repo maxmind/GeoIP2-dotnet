@@ -1,22 +1,20 @@
-﻿#region
-
 using System.Collections.Generic;
-
-#endregion
 
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     Abstract class that represents a generic response.
+    ///     Abstract base record for all responses.
     /// </summary>
-    public abstract class AbstractResponse
+    public abstract record AbstractResponse
     {
         /// <summary>
-        ///     This is simplify the database API. Also, we may need to use the locales in the future.
+        ///     Creates a copy of this response with locales set on all NamedEntity properties.
         /// </summary>
-        /// <param name="locales"></param>
-        protected internal virtual void SetLocales(IReadOnlyList<string> locales)
+        /// <param name="locales">The locales specified by the user.</param>
+        /// <returns>A new response with the locales set.</returns>
+        internal virtual AbstractResponse WithLocales(IReadOnlyList<string> locales)
         {
+            return this;
         }
     }
 }

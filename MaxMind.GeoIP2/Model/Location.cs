@@ -1,45 +1,14 @@
-﻿#region
-
-using MaxMind.Db;
 using System;
+using MaxMind.Db;
 using System.Text.Json.Serialization;
-
-#endregion
 
 namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     ///     Contains data for the location record associated with an IP address.
     /// </summary>
-    public class Location
+    public record Location
     {
-        /// <summary>
-        ///     Constructor
-        /// </summary>
-        public Location()
-        {
-        }
-
-        /// <summary>
-        ///     Constructor
-        /// </summary>
-        [Constructor]
-        public Location(
-            [Parameter("accuracy_radius")] int? accuracyRadius = null,
-            double? latitude = null,
-            double? longitude = null,
-            [Parameter("metro_code")] int? metroCode = null,
-            [Parameter("time_zone")] string? timeZone = null)
-        {
-            AccuracyRadius = accuracyRadius;
-            Latitude = latitude;
-            Longitude = longitude;
-#pragma warning disable 618
-            MetroCode = metroCode;
-#pragma warning restore 618
-            TimeZone = timeZone;
-        }
-
         /// <summary>
         ///     The approximate accuracy radius in kilometers around the
         ///     latitude and longitude for the IP address. This is the radius
@@ -49,14 +18,16 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("accuracy_radius")]
-        public int? AccuracyRadius { get; internal set; }
+        [MapKey("accuracy_radius")]
+        public int? AccuracyRadius { get; init; }
 
         /// <summary>
         ///     The average income in US dollars associated with the IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("average_income")]
-        public int? AverageIncome { get; internal set; }
+        [MapKey("average_income")]
+        public int? AverageIncome { get; init; }
 
         /// <summary>
         ///     Determines whether both the <see cref="Latitude">Latitude</see>
@@ -72,7 +43,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("latitude")]
-        public double? Latitude { get; internal set; }
+        [MapKey("latitude")]
+        public double? Latitude { get; init; }
 
         /// <summary>
         ///     The approximate longitude of the location associated with the
@@ -81,7 +53,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("longitude")]
-        public double? Longitude { get; internal set; }
+        [MapKey("longitude")]
+        public double? Longitude { get; init; }
 
         /// <summary>
         ///     The metro code is a no-longer-maintained code for targeting
@@ -89,15 +62,17 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("metro_code")]
+        [MapKey("metro_code")]
         [Obsolete("Code values are no longer maintained.")]
-        public int? MetroCode { get; internal set; }
+        public int? MetroCode { get; init; }
 
         /// <summary>
         ///     The estimated number of people per square kilometer.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("population_density")]
-        public int? PopulationDensity { get; internal set; }
+        [MapKey("population_density")]
+        public int? PopulationDensity { get; init; }
 
         /// <summary>
         ///     The time zone associated with location, as specified by the
@@ -110,24 +85,7 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("time_zone")]
-        public string? TimeZone { get; internal set; }
-
-        /// <summary>
-        ///     Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="string" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return "Location [ "
-                   + (AccuracyRadius.HasValue ? "AccuracyRadius=" + AccuracyRadius + ", " : string.Empty)
-                   + (Latitude.HasValue ? "Latitude=" + Latitude + ", " : string.Empty)
-                   + (Longitude.HasValue ? "Longitude=" + Longitude + ", " : string.Empty)
-#pragma warning disable 618
-                   + (MetroCode.HasValue ? "MetroCode=" + MetroCode + ", " : string.Empty)
-#pragma warning restore 618
-                   + (TimeZone != null ? "TimeZone=" + TimeZone : "") + "]";
-        }
+        [MapKey("time_zone")]
+        public string? TimeZone { get; init; }
     }
 }

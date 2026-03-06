@@ -1,10 +1,6 @@
-﻿#region
-
 using MaxMind.GeoIP2.Model;
 using MaxMind.GeoIP2.Responses;
 using Xunit;
-
-#endregion
 
 namespace MaxMind.GeoIP2.UnitTests
 {
@@ -14,7 +10,7 @@ namespace MaxMind.GeoIP2.UnitTests
         public void InsightsConstruction()
         {
             var city = new City();
-            var insightsReponse = new InsightsResponse(city: city);
+            var insightsReponse = new InsightsResponse { City = city };
 
             Assert.Equal(insightsReponse.City, city);
         }
