@@ -51,16 +51,5 @@ namespace MaxMind.GeoIP2.Model
         public string? Name =>
             Locales.FirstOrDefault(l => Names.ContainsKey(l)) is { } locale
                 ? Names[locale] : null;
-
-        /// <summary>
-        ///     Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="string" /> that represents this instance.
-        /// </returns>
-        public sealed override string ToString()
-        {
-            return Name ?? string.Empty;
-        }
     }
 }

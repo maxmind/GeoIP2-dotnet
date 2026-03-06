@@ -449,7 +449,6 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Null(r.GeoNameId);
                 Assert.Null(r.Name);
                 Assert.Empty(r.Names);
-                Assert.Equal("", r.ToString());
             }
         }
 
