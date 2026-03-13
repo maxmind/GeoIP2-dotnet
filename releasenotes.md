@@ -1,453 +1,401 @@
-GeoIP2 .NET API Release Notes
-=============================
+# GeoIP2 .NET API Release Notes
 
-6.0.0
-------------------
+## 6.0.0
 
-* **BREAKING:** All model and response classes have been converted from
-  classes to C# records.
-* **BREAKING:** Constructor-based deserialization replaced with
-  property-based initialization using `[MapKey]` attributes. The
-  `[Constructor]` and `[Parameter]` attributes are no longer used on
-  GeoIP2 model classes.
-* **BREAKING:** `SetLocales()` replaced with `WithLocales()` which returns
-  a new instance via record `with` expressions instead of mutating in
-  place.
-* **BREAKING:** Properties now use `init` setters instead of
-  `internal set`.
-* **BREAKING:** The `Locales` property on `NamedEntity` (and all subclasses)
-  is now `public` (previously `protected internal`). This is required for
-  the record `with` expression pattern.
-* **BREAKING:** Code that constructs model objects using constructor
-  parameters (e.g., `new Traits(domain: "example.com")`) must switch to
-  object initializer syntax (e.g., `new Traits { Domain = "example.com" }`).
-* **BREAKING:** The custom `ToString()` on `NamedEntity` (and all
-  subclasses: City, Country, Continent, Subdivision, RepresentedCountry)
-  has been removed. Records provide a compiler-generated `ToString()` that
-  outputs all property values. Use the `Name` property directly instead.
-* Added `InternalsVisibleTo` for `MaxMind.MinFraud` assembly.
+- **BREAKING:** All model and response classes have been converted from classes
+  to C# records.
+- **BREAKING:** Constructor-based deserialization replaced with property-based
+  initialization using `[MapKey]` attributes. The `[Constructor]` and
+  `[Parameter]` attributes are no longer used on GeoIP2 model classes.
+- **BREAKING:** `SetLocales()` replaced with `WithLocales()` which returns a new
+  instance via record `with` expressions instead of mutating in place.
+- **BREAKING:** Properties now use `init` setters instead of `internal set`.
+- **BREAKING:** The `Locales` property on `NamedEntity` (and all subclasses) is
+  now `public` (previously `protected internal`). This is required for the
+  record `with` expression pattern.
+- **BREAKING:** Code that constructs model objects using constructor parameters
+  (e.g., `new Traits(domain: "example.com")`) must switch to object initializer
+  syntax (e.g., `new Traits { Domain = "example.com" }`).
+- **BREAKING:** The custom `ToString()` on `NamedEntity` (and all subclasses:
+  City, Country, Continent, Subdivision, RepresentedCountry) has been removed.
+  Records provide a compiler-generated `ToString()` that outputs all property
+  values. Use the `Name` property directly instead.
+- Added `InternalsVisibleTo` for `MaxMind.MinFraud` assembly.
 
-5.5.0
-------------------
+## 5.5.0
 
-* `AnonymousPlus` and `TryAnonymousPlus` methods have been added to
-  `IGeoIP2DatabaseReader`. These methods were previously only available
-  on `DatabaseReader`.
-* The `TryXxx` methods on `DatabaseReader` and `IGeoIP2DatabaseReader` now
-  use the `[MaybeNullWhen(false)]` attribute instead of nullable `out`
-  parameters. This enables the compiler to understand that the `out`
-  parameter is non-null when the method returns `true`, eliminating the
-  need for redundant null checks or null-forgiving operators after a
-  successful lookup. Pull request by Dmitry Solovev. GitHub #387.
+- `AnonymousPlus` and `TryAnonymousPlus` methods have been added to
+  `IGeoIP2DatabaseReader`. These methods were previously only available on
+  `DatabaseReader`.
+- The `TryXxx` methods on `DatabaseReader` and `IGeoIP2DatabaseReader` now use
+  the `[MaybeNullWhen(false)]` attribute instead of nullable `out` parameters.
+  This enables the compiler to understand that the `out` parameter is non-null
+  when the method returns `true`, eliminating the need for redundant null checks
+  or null-forgiving operators after a successful lookup. Pull request by Dmitry
+  Solovev. GitHub #387.
 
-5.4.1 (2025-11-24)
-------------------
+## 5.4.1 (2025-11-24)
 
-* First release via Trusted Publishing.
+- First release via Trusted Publishing.
 
-5.4.0 (2025-11-20)
-------------------
+## 5.4.0 (2025-11-20)
 
-* .NET 10.0 has been added as a target.
-* A new `Anonymizer` object has been added to `InsightsResponse`. This object
+- .NET 10.0 has been added as a target.
+- A new `Anonymizer` object has been added to `InsightsResponse`. This object
   provides anonymizer-related data including VPN confidence scoring, provider
   name detection, and network last seen date. This data is available from the
   GeoIP2 Insights web service.
-* A new `IpRiskSnapshot` property has been added to `MaxMind.GeoIP2.Model.Traits`.
-  This provides a risk score associated with the IP address, ranging from 0.01
-  to 99. Higher scores indicate greater risk. This is available from the GeoIP2
-  Insights web service.
-* The following properties in `MaxMind.GeoIP2.Model.Traits` have been marked
+- A new `IpRiskSnapshot` property has been added to
+  `MaxMind.GeoIP2.Model.Traits`. This provides a risk score associated with the
+  IP address, ranging from 0.01 to 99. Higher scores indicate greater risk. This
+  is available from the GeoIP2 Insights web service.
+- The following properties in `MaxMind.GeoIP2.Model.Traits` have been marked
   `Obsolete` and users should migrate to using the `Anonymizer` object on the
   response instead: `IsAnonymous`, `IsAnonymousVpn`, `IsHostingProvider`,
   `IsPublicProxy`, `IsResidentialProxy`, and `IsTorExitNode`. These properties
   will continue to work but are deprecated in favor of the new `Anonymizer`
   object.
-* A new `MaxMind.GeoIP2.Model.Anonymizer` class has been added with the
+- A new `MaxMind.GeoIP2.Model.Anonymizer` class has been added with the
   following properties:
-  * `Confidence` - A score ranging from 1 to 99 representing percent confidence
+  - `Confidence` - A score ranging from 1 to 99 representing percent confidence
     that the network is currently part of an actively used VPN service.
-  * `IsAnonymous` - Indicates whether the IP belongs to any sort of anonymous
+  - `IsAnonymous` - Indicates whether the IP belongs to any sort of anonymous
     network.
-  * `IsAnonymousVpn` - True if the IP is registered to an anonymous VPN provider.
-  * `IsHostingProvider` - True if the IP belongs to a hosting or VPN provider.
-  * `IsPublicProxy` - True if the IP belongs to a public proxy.
-  * `IsResidentialProxy` - True if the IP is on a suspected anonymizing network
+  - `IsAnonymousVpn` - True if the IP is registered to an anonymous VPN
+    provider.
+  - `IsHostingProvider` - True if the IP belongs to a hosting or VPN provider.
+  - `IsPublicProxy` - True if the IP belongs to a public proxy.
+  - `IsResidentialProxy` - True if the IP is on a suspected anonymizing network
     and belongs to a residential ISP.
-  * `IsTorExitNode` - True if the IP belongs to a Tor exit node.
-  * `NetworkLastSeen` - The last day the network was sighted in analysis of
+  - `IsTorExitNode` - True if the IP belongs to a Tor exit node.
+  - `NetworkLastSeen` - The last day the network was sighted in analysis of
     anonymized networks (available on .NET 6.0+ as `DateOnly`).
-  * `ProviderName` - The name of the VPN provider associated with the network.
+  - `ProviderName` - The name of the VPN provider associated with the network.
 
-5.3.0 (2025-05-05)
-------------------
+## 5.3.0 (2025-05-05)
 
-* Support for the GeoIP Anonymous Plus database has been added. To do a
-  lookup in this database, use the `AnonymousPlus` And `TryAnonymousPlus`
-  methods on `DatabaseReader`.
-* .NET 6.0 and .NET 7.0 have been removed as targets as they have both
-  reach their end of support from Microsoft. If you are using these versions,
-  the .NET Standard 2.1 target should continue working for you.
-* .NET 9.0 has been added as a target.
-* `MetroCode` in `MaxMind.GeoIP2.Model.Location` has been marked `Obsolete`.
-  The code values are no longer being maintained.
+- Support for the GeoIP Anonymous Plus database has been added. To do a lookup
+  in this database, use the `AnonymousPlus` And `TryAnonymousPlus` methods on
+  `DatabaseReader`.
+- .NET 6.0 and .NET 7.0 have been removed as targets as they have both reach
+  their end of support from Microsoft. If you are using these versions, the .NET
+  Standard 2.1 target should continue working for you.
+- .NET 9.0 has been added as a target.
+- `MetroCode` in `MaxMind.GeoIP2.Model.Location` has been marked `Obsolete`. The
+  code values are no longer being maintained.
 
-5.2.0 (2023-12-05)
-------------------
+## 5.2.0 (2023-12-05)
 
-* .NET 5.0 has been removed as a target as it has reach its end of life.
+- .NET 5.0 has been removed as a target as it has reach its end of life.
   However, if you are using .NET 5.0, the .NET Standard 2.1 target should
   continue working for you.
-* .NET 7.0 and .NET 8.0 have been added as a target.
-* The `IsAnycast` property was added to `MaxMind.GeoIP2.Model.Traits`. This
-  returns `true` if the IP address belongs to an [anycast
-  network](https://en.wikipedia.org/wiki/Anycast). This is available for the
-  GeoIP2 Country, City Plus, and Insights web services and the GeoIP2 Country,
-  City, and Enterprise databases.
+- .NET 7.0 and .NET 8.0 have been added as a target.
+- The `IsAnycast` property was added to `MaxMind.GeoIP2.Model.Traits`. This
+  returns `true` if the IP address belongs to an
+  [anycast network](https://en.wikipedia.org/wiki/Anycast). This is available
+  for the GeoIP2 Country, City Plus, and Insights web services and the GeoIP2
+  Country, City, and Enterprise databases.
 
-5.1.0 (2022-02-04)
-------------------
+## 5.1.0 (2022-02-04)
 
-* Update System.Text.Json to 6.0.1 for .NET Standard 2.0 and 2.1.
+- Update System.Text.Json to 6.0.1 for .NET Standard 2.0 and 2.1.
 
-5.0.0 (2022-02-04)
-------------------
+## 5.0.0 (2022-02-04)
 
-* This library no longer targets .NET 4.6.1.
-* .NET 6.0 was added as a target.
-* On .NET 5.0+, HttpClient is now used for synchronous requests instead of
+- This library no longer targets .NET 4.6.1.
+- .NET 6.0 was added as a target.
+- On .NET 5.0+, HttpClient is now used for synchronous requests instead of
   WebRequest.
 
-4.1.0 (2021-11-19)
-------------------
+## 4.1.0 (2021-11-19)
 
-* Support for mobile country code (MCC) and mobile network codes (MNC) was
-  added for the GeoIP2 ISP and Enterprise databases as well as the GeoIP2
-  City and Insights web services. The `MobileCountryCode` and
-  `MobileNetworkCode` properties were added to `MaxMind.GeoIP2.Responses.IspResponse`
-  for the GeoIP2 ISP database and `MaxMind.GeoIP2.Model.Traits` for the
-  Enterprise database and the GeoIP2 City and Insights web services. We expect
-  this data to be available by late January, 2022.
+- Support for mobile country code (MCC) and mobile network codes (MNC) was added
+  for the GeoIP2 ISP and Enterprise databases as well as the GeoIP2 City and
+  Insights web services. The `MobileCountryCode` and `MobileNetworkCode`
+  properties were added to `MaxMind.GeoIP2.Responses.IspResponse` for the GeoIP2
+  ISP database and `MaxMind.GeoIP2.Model.Traits` for the Enterprise database and
+  the GeoIP2 City and Insights web services. We expect this data to be available
+  by late January, 2022.
 
-4.0.1 (2020-11-19)
-------------------
+## 4.0.1 (2020-11-19)
 
-* This release fixes an issue with 4.0.0 where the synchronous web service
+- This release fixes an issue with 4.0.0 where the synchronous web service
   methods could cause an unexpected JSON decoding error. There are no other
   changes. The async `WebServiceClient` methods and the `DatabaseReader` were
   not affected by the issue.
 
-4.0.0 (2020-11-17)
-------------------
+## 4.0.0 (2020-11-17)
 
-* This library now requires .NET Framework 4.6.1 or greater or .NET Standard
-  2.0 or greater.
-* .NET 5.0 was added as a target framework.
-* `System.Text.Json` is now used for deserialization of web service requests.
-  `Newtonsoft.Json` is no longer supported for serialization or
-  deserialization.
-* The `Names` properties on `NamedEntity` models are now
+- This library now requires .NET Framework 4.6.1 or greater or .NET Standard 2.0
+  or greater.
+- .NET 5.0 was added as a target framework.
+- `System.Text.Json` is now used for deserialization of web service requests.
+  `Newtonsoft.Json` is no longer supported for serialization or deserialization.
+- The `Names` properties on `NamedEntity` models are now
   `IReadOnlyDictionary<string, string>`.
-* The `Subdivisions` property on `CityResponse` and `InsightsResponse` is now
-  an `IReadOnlyList<Subdivision>`.
-* `GeoNameId` properties on `NamedEntity` models are now `long?` rather than
+- The `Subdivisions` property on `CityResponse` and `InsightsResponse` is now an
+  `IReadOnlyList<Subdivision>`.
+- `GeoNameId` properties on `NamedEntity` models are now `long?` rather than
   `int?` to match the underlying database.
-* The `httpMessageHandler` argument is now correctly initialized by the
+- The `httpMessageHandler` argument is now correctly initialized by the
   `WebServiceClient` constructor.
-* The `Metadata` property was added to `IGeoIP2DatabaseReader`. Pull request
-  by Mihai Valentin Caracostea. GitHub #134 & #135.
+- The `Metadata` property was added to `IGeoIP2DatabaseReader`. Pull request by
+  Mihai Valentin Caracostea. GitHub #134 & #135.
 
-3.3.0 (2020-09-25)
-------------------
+## 3.3.0 (2020-09-25)
 
-* The `IsResidentialProxy` property has been added to
+- The `IsResidentialProxy` property has been added to
   `MaxMind.GeoIP2.Responses.AnonymousIPResponse` and
   `MaxMind.GeoIP2.Model.Traits`.
 
-3.2.0 (2020-04-28)
-------------------
+## 3.2.0 (2020-04-28)
 
-* You may now create `WebServiceClient` as Typed Client with
-  `IHttpClientFactory` in .NET Core 2.1+. Pull Request by Bojan Nikolić.
-  GitHub #115 & #117.
-* The `WebServiceClient` constructor now supports an optional
-  `httpMessageHandler` parameter. This is used in creating the `HttpClient`
-  for asynchronous requests.
+- You may now create `WebServiceClient` as Typed Client with
+  `IHttpClientFactory` in .NET Core 2.1+. Pull Request by Bojan Nikolić. GitHub
+  #115 & #117.
+- The `WebServiceClient` constructor now supports an optional
+  `httpMessageHandler` parameter. This is used in creating the `HttpClient` for
+  asynchronous requests.
 
-3.1.0 (2019-12-06)
-------------------
+## 3.1.0 (2019-12-06)
 
-* This library has been updated to support the nullable reference types
+- This library has been updated to support the nullable reference types
   introduced in C# 8.0.
-* A `Network` property has been added to the various response models. This
-  represents the largest network where all the fields besides the IP
-  address are the same.
-* The `StaticIPScore` property has been added to `MaxMind.GeoIP2.Model.Traits`.
-  This output is available from GeoIP2 Precision Insights. It is an indicator
-  of how static or dynamic an IP address is.
-* The `UserCount` property has been added to `MaxMind.GeoIP2.Model.Traits`.
-  This output is available from GeoIP2 Precision Insights. It is an
-  estimate of the number of users sharing the IP/network over the past
-  24 hours.
-* Updated documentation of anonymizer properties - `IsAnonymousVpn` and
+- A `Network` property has been added to the various response models. This
+  represents the largest network where all the fields besides the IP address are
+  the same.
+- The `StaticIPScore` property has been added to `MaxMind.GeoIP2.Model.Traits`.
+  This output is available from GeoIP2 Precision Insights. It is an indicator of
+  how static or dynamic an IP address is.
+- The `UserCount` property has been added to `MaxMind.GeoIP2.Model.Traits`. This
+  output is available from GeoIP2 Precision Insights. It is an estimate of the
+  number of users sharing the IP/network over the past 24 hours.
+- Updated documentation of anonymizer properties - `IsAnonymousVpn` and
   `IsHostingProvider` - to be more descriptive.
-* `netstandard2.1` was added as a target framework.
+- `netstandard2.1` was added as a target framework.
 
-3.0.0 (2018-04-11)
-------------------
+## 3.0.0 (2018-04-11)
 
-* The `userId` constructor parameter for `WebServiceClient` was renamed to
+- The `userId` constructor parameter for `WebServiceClient` was renamed to
   `accountId` and support was added for the error codes `ACCOUNT_ID_REQUIRED`
   and `ACCOUNT_ID_UNKNOWN`.
-* The exception classes are no longer serializable when using the .NET
-  Framework. This eliminates a difference between the .NET Framework
-  assemblies and the .NET Standard ones.
-* The `AutonomousSystemNumber` properties on `MaxMind.GeoIP2.Model.Traits`,
+- The exception classes are no longer serializable when using the .NET
+  Framework. This eliminates a difference between the .NET Framework assemblies
+  and the .NET Standard ones.
+- The `AutonomousSystemNumber` properties on `MaxMind.GeoIP2.Model.Traits`,
   `MaxMind.GeoIP2.Responses.AsnResponse`, and
   `MaxMind.GeoIP2.Responses.IspResponse` are now `long?` to match the underlying
   types in the databases.
-* `MaxMind.Db` was upgraded to 2.4.0. This adds a new file mode enum value for
+- `MaxMind.Db` was upgraded to 2.4.0. This adds a new file mode enum value for
   the database reader, `FileAccessMode.MemoryMappedGlobal`. When used, this will
   open the file in global memory map mode. This requires the "create global
   objects" right.
 
-2.10.0 (2018-01-19)
--------------------
+## 2.10.0 (2018-01-19)
 
-* The `IsInEuropeanUnion` property was added to `MaxMind.GeoIP2.Model.Country`
+- The `IsInEuropeanUnion` property was added to `MaxMind.GeoIP2.Model.Country`
   and `MaxMind.GeoIP2.Model.RepresentedCountry`. This property is `true` if the
   country is a member state of the European Union.
 
-2.9.0 (2017-10-27)
-------------------
+## 2.9.0 (2017-10-27)
 
-* The following new anonymizer properties were added to
+- The following new anonymizer properties were added to
   `MaxMind.GeoIP2.Model.Traits` for use with GeoIP2 Precision Insights:
-  `IsAnonymous`, `IsAnonymousVpn`, `IsHostingProvider`, `IsPublicProxy`,
-  and `IsTorExitNode`.
-* Deserialization of the registered country when reading a GeoLite2 Country or
+  `IsAnonymous`, `IsAnonymousVpn`, `IsHostingProvider`, `IsPublicProxy`, and
+  `IsTorExitNode`.
+- Deserialization of the registered country when reading a GeoLite2 Country or
   GeoIP2 Country database now works. Previously, it was deserialized to the
   wrong name. Reported by oliverherdener.
-* A `netstandard2.0` target was added to eliminate additional dependencies
-  required by the `netstandard1.4` target. Pull request by Adeel Mujahid.
-  GitHub #81.
-* As part of the above work, the separate Mono build files were dropped. As
-  of Mono 5.0.0, `msbuild` is supported.
+- A `netstandard2.0` target was added to eliminate additional dependencies
+  required by the `netstandard1.4` target. Pull request by Adeel Mujahid. GitHub
+  #81.
+- As part of the above work, the separate Mono build files were dropped. As of
+  Mono 5.0.0, `msbuild` is supported.
 
-2.8.0 (2017-05-08)
-------------------
+## 2.8.0 (2017-05-08)
 
-* Add support for GeoLite2 ASN.
-* Switch to the updated MSBuild .NET Core build system.
-* Move tests from  NUnit to xUnit.net.
-* Upgrade to `MaxMind.Db` 2.2.0.
+- Add support for GeoLite2 ASN.
+- Switch to the updated MSBuild .NET Core build system.
+- Move tests from NUnit to xUnit.net.
+- Upgrade to `MaxMind.Db` 2.2.0.
 
-2.7.2 (2016-11-22)
-------------------
+## 2.7.2 (2016-11-22)
 
-* Use framework assembly for `System.Net.Http` on .NET 4.5.
-* Update for .NET Core 1.1.
+- Use framework assembly for `System.Net.Http` on .NET 4.5.
+- Update for .NET Core 1.1.
 
-2.7.1 (2016-08-08)
-------------------
+## 2.7.1 (2016-08-08)
 
-* Re-release of 2.7.0 to fix strong name issue. No code changes.
+- Re-release of 2.7.0 to fix strong name issue. No code changes.
 
-2.7.0 (2016-08-01)
-------------------
+## 2.7.0 (2016-08-01)
 
-* First non-beta release with .NET Core support.
-* The tests now use the .NET Core NUnit runner. Pull request by Adeel Mujahid.
+- First non-beta release with .NET Core support.
+- The tests now use the .NET Core NUnit runner. Pull request by Adeel Mujahid.
   GitHub #68.
-* Updated documentation to clarify what the accuracy radius refers to.
+- Updated documentation to clarify what the accuracy radius refers to.
 
-2.7.0-beta2 (2016-06-02)
-------------------------
+## 2.7.0-beta2 (2016-06-02)
 
-* Added handling of additional error codes that the web service may return.
-* Update for .NET Core RC2. Pull request by Adeel Mujahid. GitHub #64.
+- Added handling of additional error codes that the web service may return.
+- Update for .NET Core RC2. Pull request by Adeel Mujahid. GitHub #64.
 
-2.7.0-beta1 (2016-05-15)
-------------------------
+## 2.7.0-beta1 (2016-05-15)
 
-* .NET Core support. Switched to `dotnet/cli` for building. Pull request by
+- .NET Core support. Switched to `dotnet/cli` for building. Pull request by
   Adeel Mujahid. GitHub #60.
-* Updated documentation to reflect that the accuracy radius is now included
-  in City.
+- Updated documentation to reflect that the accuracy radius is now included in
+  City.
 
-2.6.0 (2016-04-15)
-------------------
+## 2.6.0 (2016-04-15)
 
-* Added support for the GeoIP2 Enterprise database.
+- Added support for the GeoIP2 Enterprise database.
 
-2.6.0-beta3 (2016-02-10)
-------------------------
+## 2.6.0-beta3 (2016-02-10)
 
-* Try-based lookup methods were added to `DatabaseReader` as an alternative to
+- Try-based lookup methods were added to `DatabaseReader` as an alternative to
   the existing methods. These methods return a boolean indicating whether the
-  record was found rather than throwing an exception when it is not found.
-  Pull request by Mani Gandham. GitHub #31, #50.
+  record was found rather than throwing an exception when it is not found. Pull
+  request by Mani Gandham. GitHub #31, #50.
 
-2.6.0-beta2 (2016-01-18)
-------------------------
+## 2.6.0-beta2 (2016-01-18)
 
-* Parameterless endpoint methods were added to `WebServiceClient`. These
-  return the record for the requesting IP address using the `me` endpoint as
-  documented in the web services API documentation.
-* The target framework is now .NET 4.5 rather than 4.5.2 in order to work
-  better with Mono. GitHub #44.
+- Parameterless endpoint methods were added to `WebServiceClient`. These return
+  the record for the requesting IP address using the `me` endpoint as documented
+  in the web services API documentation.
+- The target framework is now .NET 4.5 rather than 4.5.2 in order to work better
+  with Mono. GitHub #44.
 
-2.6.0-beta1 (2016-01-18)
-------------------------
+## 2.6.0-beta1 (2016-01-18)
 
-* Upgrade MaxMindb.Db reader to 2.0.0-beta1. This includes significant
+- Upgrade MaxMindb.Db reader to 2.0.0-beta1. This includes significant
   performance increases.
 
-2.5.0 (2015-12-04)
-------------------
+## 2.5.0 (2015-12-04)
 
-* IMPORTANT: The target framework is now 4.5.2. Microsoft is ending support
-  for 4.0, 4.5, and 4.5.1 on January 12, 2016. Removing support for these
-  frameworks allows us to remove the dependency on the BCL libraries and fixes
-  several outstanding issues. Closes #38, #39, #40, and #42.
-* The assembly version was bumped to 2.5.0.
-* Classes subclassing `NamedEntity` now have a default locale of `en`. This
+- IMPORTANT: The target framework is now 4.5.2. Microsoft is ending support for
+  4.0, 4.5, and 4.5.1 on January 12, 2016. Removing support for these frameworks
+  allows us to remove the dependency on the BCL libraries and fixes several
+  outstanding issues. Closes #38, #39, #40, and #42.
+- The assembly version was bumped to 2.5.0.
+- Classes subclassing `NamedEntity` now have a default locale of `en`. This
   allows the `Name` property to be used (for English names) when the object is
   deserialized from JSON. Closes #41.
-* The `locale` parameter for the `DatabaseReader` and `WebServiceClient`
+- The `locale` parameter for the `DatabaseReader` and `WebServiceClient`
   constructors is now an `IEnumerable<string>` rather than a `List<string>`.
-* The tests now use NUnit 3.
+- The tests now use NUnit 3.
 
-2.4.0 (2015-09-23)
-------------------
+## 2.4.0 (2015-09-23)
 
-* Updated MaxMind.Db to 1.2.0.
+- Updated MaxMind.Db to 1.2.0.
 
-2.4.0-beta1 (2015-09-10)
-------------------------
+## 2.4.0-beta1 (2015-09-10)
 
-* Async support was added to the `WebServiceClient`. Each web-service end
-  point now has a corresponding `*Async(ip)` method. GitHub #1.
-* Use of RestSharp was replaced by `HttpWebRequest` for synchronous HTTP
+- Async support was added to the `WebServiceClient`. Each web-service end point
+  now has a corresponding `*Async(ip)` method. GitHub #1.
+- Use of RestSharp was replaced by `HttpWebRequest` for synchronous HTTP
   requests and `HttpClient` for asynchronous requests. Microsoft BCL libraries
   and `System.Net.Http` are used to provide `async`/`await` and `HttpClient`
   support on .NET 4.0. GitHub #33.
-* The library now has a strong name.
+- The library now has a strong name.
 
-2.3.1 (2015-07-21)
-------------------
+## 2.3.1 (2015-07-21)
 
-* Upgrade to MaxMind.Db 1.1.0.
-* Fix serialization on exceptions.
+- Upgrade to MaxMind.Db 1.1.0.
+- Fix serialization on exceptions.
 
-2.3.1-beta1 (2015-06-30)
-------------------------
+## 2.3.1-beta1 (2015-06-30)
 
-* Upgrade to Json.NET 7.0.1.
-* Upgrade to MaxMind.Db 1.1.0-beta1. This release includes a number of
+- Upgrade to Json.NET 7.0.1.
+- Upgrade to MaxMind.Db 1.1.0-beta1. This release includes a number of
   significant improvements for the memory-mapped file mode.
 
-2.3.0 (2015-06-29)
-------------------
+## 2.3.0 (2015-06-29)
 
-* `AverageIncome` and `PopulationDensity` were added to the `Location`
-  model for use with the new fields in GeoIP2 Insights.
-* `IsAnonymousProxy` and `IsSatelliteProvider` in `MaxMind.GeoIP2.Model.Traits`
-  have been deprecated. Please use our [GeoIP2 Anonymous IP
-  database](https://www.maxmind.com/en/geoip2-anonymous-ip-database) to
-  determine whether an IP address is used by an anonymizing service.
+- `AverageIncome` and `PopulationDensity` were added to the `Location` model for
+  use with the new fields in GeoIP2 Insights.
+- `IsAnonymousProxy` and `IsSatelliteProvider` in `MaxMind.GeoIP2.Model.Traits`
+  have been deprecated. Please use our
+  [GeoIP2 Anonymous IP database](https://www.maxmind.com/en/geoip2-anonymous-ip-database)
+  to determine whether an IP address is used by an anonymizing service.
 
-2.2.0 (2015-05-19)
-------------------
+## 2.2.0 (2015-05-19)
 
-* All of the database methods in `DatabaseReader` and all of the web service
-  methods in `WebServiceClient` now have a counterpart that takes an
-  `IPAddress` instead of a `string`. Pull request by Guillaume Turri. GitHub
-  #24.
-* The `JsonIgnore` attribute was added to `Names` in `NamedEntity` and
-  `Subdivisions` in `AbstractCityResponse` as  these were already exposed to
+- All of the database methods in `DatabaseReader` and all of the web service
+  methods in `WebServiceClient` now have a counterpart that takes an `IPAddress`
+  instead of a `string`. Pull request by Guillaume Turri. GitHub #24.
+- The `JsonIgnore` attribute was added to `Names` in `NamedEntity` and
+  `Subdivisions` in `AbstractCityResponse` as these were already exposed to
   JSON.NET through the private field backing them. Pull request by Dan Byrne
   GitHub #21.
-* The interfaces `IGeoIP2DatabaseReader` and `IGeoIP2WebServicesClient` were
+- The interfaces `IGeoIP2DatabaseReader` and `IGeoIP2WebServicesClient` were
   added to facilitate dependency injection and mocking. Pull request by Naz
   Soogund. GitHub #22.
-* A `HasCoordinates` getter was added to the `Location` class. This will
-  return true if both the `Latitude` and `Longitude` have values. Pull request
-  by Darren Hickling. GitHub #23.
-* All of the response and model properties now set the appropriate
+- A `HasCoordinates` getter was added to the `Location` class. This will return
+  true if both the `Latitude` and `Longitude` have values. Pull request by
+  Darren Hickling. GitHub #23.
+- All of the response and model properties now set the appropriate
   `JsonProperty` rather than relying an JSON.NET's automatic matching.
   Serializing these objects should now product JSON much more similar to the
   JSON returned by the web service and internal structure of the data in
   database files.
-* Dependencies were updated to most recent versions.
+- Dependencies were updated to most recent versions.
 
-2.1.0 (2014-11-06)
-------------------
+## 2.1.0 (2014-11-06)
 
-* Added support for the GeoIP2 Anonymous IP database. The `DatabaseReader`
-  class now has an `AnonymousIP()` method which returns an
-  `AnonymousIPResponse` object.
+- Added support for the GeoIP2 Anonymous IP database. The `DatabaseReader` class
+  now has an `AnonymousIP()` method which returns an `AnonymousIPResponse`
+  object.
 
-2.0.0 (2014-09-29)
-------------------
+## 2.0.0 (2014-09-29)
 
-* First production release.
+- First production release.
 
-0.5.0 (2014-09-24)
-------------------
+## 0.5.0 (2014-09-24)
 
-* The deprecated `CityIspOrg` and `Omni` methods were removed.
-* `DatabaseReader` methods will now throw an `InvalidOperationException` when
+- The deprecated `CityIspOrg` and `Omni` methods were removed.
+- `DatabaseReader` methods will now throw an `InvalidOperationException` when
   called for the wrong database type.
-* `DatabaseReader` now has a `Metadata` property that provides an object
-   containing the metadata for the open database.
+- `DatabaseReader` now has a `Metadata` property that provides an object
+  containing the metadata for the open database.
 
-0.4.0 (2014-07-22)
-------------------
+## 0.4.0 (2014-07-22)
 
-* The web service client API has been updated for the v2.1 release of the web
+- The web service client API has been updated for the v2.1 release of the web
   service. In particular, the `CityIspOrg` and `Omni` methods on
-  `WebServiceClient` have been deprecated. The `City` method now provides all
-  of the data formerly provided by `CityIspOrg`, and the `Omni` method has
-  been replaced by the `Insights` method.
-* Support was added for the GeoIP2 Connection Type, Domain, and ISP databases.
+  `WebServiceClient` have been deprecated. The `City` method now provides all of
+  the data formerly provided by `CityIspOrg`, and the `Omni` method has been
+  replaced by the `Insights` method.
+- Support was added for the GeoIP2 Connection Type, Domain, and ISP databases.
 
+## 0.3.3 (2014-06-02)
 
-0.3.3 (2014-06-02)
-------------------
-
-* Constructors with named parameters were added to the model and response
+- Constructors with named parameters were added to the model and response
   classes. (Jon Wynveen)
 
-0.3.2 (2014-04-09)
-------------------
+## 0.3.2 (2014-04-09)
 
-* A constructor taking a `Stream` was added to `DatabaseReader`.
-* Fixed dependency on wrong version of `Newtonsoft.Json`.
+- A constructor taking a `Stream` was added to `DatabaseReader`.
+- Fixed dependency on wrong version of `Newtonsoft.Json`.
 
-0.3.1 (2014-02-13)
-------------------
+## 0.3.1 (2014-02-13)
 
-* Fixed broken error handling. Previously the wrong exceptions and error
+- Fixed broken error handling. Previously the wrong exceptions and error
   messages were returned for some web service errors.
 
-0.3.0 (2013-11-15)
-------------------
+## 0.3.0 (2013-11-15)
 
-* API CHANGE: Renamed exceptions to remove GeoIP2 prefixes.
-* Improved error messages when RestSharp does not return an HTTP status code.
+- API CHANGE: Renamed exceptions to remove GeoIP2 prefixes.
+- Improved error messages when RestSharp does not return an HTTP status code.
 
-0.2.0 (2013-10-25)
-------------------
+## 0.2.0 (2013-10-25)
 
-* First release with GeoIP2 database support. See `DatabaseReader` class.
+- First release with GeoIP2 database support. See `DatabaseReader` class.
 
-0.1.1 (2013-10-04)
-------------------
+## 0.1.1 (2013-10-04)
 
-* Build documentation.
+- Build documentation.
 
-0.1.0 (2013-09-20)
-------------------
+## 0.1.0 (2013-09-20)
 
-* Initial release.
+- Initial release.
