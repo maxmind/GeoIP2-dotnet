@@ -1,4 +1,5 @@
 using MaxMind.Db;
+using MaxMind.GeoIP2.Exceptions;
 using System;
 using System.Text.Json.Serialization;
 
@@ -43,7 +44,9 @@ namespace MaxMind.GeoIP2.Responses
         internal string? NetworkLastSeenString
         {
             get => _networkLastSeen?.ToString("o");
-            init => _networkLastSeen = value == null ? null : DateOnly.Parse(value);
+            init => _networkLastSeen = value == null ? null
+                : DateOnly.TryParse(value, out var result) ? result
+                : throw new GeoIP2Exception($"Could not parse 'network_last_seen' value '{value}' as a valid date.");
         }
 #endif
 
