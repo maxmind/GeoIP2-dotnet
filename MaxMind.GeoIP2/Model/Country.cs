@@ -6,7 +6,7 @@ namespace MaxMind.GeoIP2.Model
     /// <summary>
     ///     Contains data for the country record associated with an IP address.
     ///     Do not use any of the country names as a database or dictionary
-    ///     key. Use the <see cred="GeoNameId" /> or <see cred="IsoCode" />
+    ///     key. Use the <see cref="NamedEntity.GeoNameId" /> or <see cref="IsoCode" />
     ///     instead.
     /// </summary>
     public record Country : NamedEntity

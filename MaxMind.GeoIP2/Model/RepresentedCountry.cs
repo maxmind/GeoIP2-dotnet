@@ -9,7 +9,7 @@ namespace MaxMind.GeoIP2.Model
     ///     the IP's represented country. The represented country is the country
     ///     represented by something like a military base.
     ///     Do not use any of the country names as a database or dictionary
-    ///     key. Use the <see cred="GeoNameId" /> or <see cred="IsoCode" />
+    ///     key. Use the <see cref="NamedEntity.GeoNameId" /> or <see cref="Country.IsoCode" />
     ///     instead.
     /// </summary>
     public record RepresentedCountry : Country

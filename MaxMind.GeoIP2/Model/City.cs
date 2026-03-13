@@ -8,7 +8,7 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     /// <remarks>
     ///     Do not use any of the city names as a database or dictionary
-    ///     key. Use the <see cred="GeoNameId" /> instead.
+    ///     key. Use the <see cref="NamedEntity.GeoNameId" /> instead.
     /// </remarks>
     public record City : NamedEntity
     {
