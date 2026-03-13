@@ -1,0 +1,32 @@
+exclude = [
+    ".git",
+    "MaxMind.GeoIP2.UnitTests/TestData/MaxMind-DB/**",
+    "BenchmarkDotNet.Artifacts/**",
+]
+
+[commands.prettier-markdown]
+type = "both"
+cmd = ["prettier", "--prose-wrap", "always"]
+lint-flags = ["--check"]
+tidy-flags = ["--write"]
+path-args = "absolute-file"
+include = "**/*.md"
+ok-exit-codes = 0
+
+[commands.prettier-json]
+type = "both"
+cmd = ["prettier"]
+lint-flags = ["--check"]
+tidy-flags = ["--write"]
+path-args = "absolute-file"
+include = "**/*.json"
+ok-exit-codes = 0
+
+[commands.prettier-yaml]
+type = "both"
+cmd = ["prettier"]
+lint-flags = ["--check"]
+tidy-flags = ["--write"]
+path-args = "absolute-file"
+include = ["**/*.yml", "**/*.yaml"]
+ok-exit-codes = 0
