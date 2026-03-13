@@ -46,39 +46,33 @@ MaxMind.GeoIP2.UnitTests/
 
 ### Key Design Patterns
 
-#### 1. **Immutable Model Classes with Optional Parameters**
+#### 1. **Immutable Model Records with Init Properties**
 
-Model and response classes use C# classes (not records) with properties and
-constructors that accept optional parameters with defaults:
+Model and response classes use C# records with `init` properties:
 
 ```csharp
-public class Traits
+public record Traits
 {
-    public Traits(
-        [Parameter("autonomous_system_number")] long? autonomousSystemNumber = null,
-        [Parameter("autonomous_system_organization")] string? autonomousSystemOrganization = null,
-        // ... more parameters with defaults
-    )
-    {
-        AutonomousSystemNumber = autonomousSystemNumber;
-        AutonomousSystemOrganization = autonomousSystemOrganization;
-        // ...
-    }
-
     [JsonInclude]
     [JsonPropertyName("autonomous_system_number")]
-    public long? AutonomousSystemNumber { get; internal set; }
+    [MapKey("autonomous_system_number")]
+    public long? AutonomousSystemNumber { get; init; }
+
+    [JsonInclude]
+    [JsonPropertyName("autonomous_system_organization")]
+    [MapKey("autonomous_system_organization")]
+    public string? AutonomousSystemOrganization { get; init; }
 }
 ```
 
 **Key Points:**
 
 - Use `[JsonPropertyName]` for JSON field mapping (System.Text.Json)
-- Use `[Parameter]` for MaxMind DB field mapping
-- Use `[Constructor]` attribute for MaxMind DB deserialization
-- Properties use `internal set` to prevent external modification while allowing
-  deserialization
-- Default parameters in constructors avoid breaking changes
+- Use `[MapKey("field_name")]` for MaxMind DB field mapping (replaces
+  `[Parameter]`)
+- Properties use `init` setters for immutability
+- No constructors needed — deserialization uses property initialization
+- Records provide built-in equality, `with` expressions, and `ToString()`
 
 #### 2. **Conditional Compilation for .NET Version Differences**
 
@@ -89,7 +83,7 @@ Some features are only available in newer .NET versions (e.g., `DateOnly` in
 #if NET6_0_OR_GREATER
     [JsonInclude]
     [JsonPropertyName("network_last_seen")]
-    public DateOnly? NetworkLastSeen { get; internal set; }
+    public DateOnly? NetworkLastSeen { get; init; }
 #endif
 ```
 
@@ -102,7 +96,7 @@ When deprecating properties, mark them with `[Obsolete]` and provide guidance:
 
 ```csharp
 [Obsolete("The metro code is no longer being maintained and should not be used.")]
-public int? MetroCode { get; internal set; }
+public int? MetroCode { get; init; }
 ```
 
 For backward compatibility during minor version updates, add deprecated
@@ -130,10 +124,13 @@ Versions").
 
 #### 5. **MaxMind DB Attributes**
 
-Classes that are deserialized from MMDB databases use special attributes:
+Records that are deserialized from MMDB databases use special attributes on
+properties:
 
-- `[Constructor]`: Marks the constructor used for database deserialization
-- `[Parameter("field_name")]`: Maps constructor parameter to database field
+- `[MapKey("field_name")]`: Maps a property to a database field (replaces
+  `[Parameter]`)
+- `[MapKey("field_name", true)]`: Maps a nested object, passing constructor arg
+  `true` to indicate sub-object construction
 - `[Inject("field_name")]`: Injects metadata like IP address
 - `[Network]`: Injects the network information for the IP
 
@@ -189,66 +186,28 @@ When adding new fields to responses:
    ```csharp
    [JsonInclude]
    [JsonPropertyName("field_name")]
-   [Parameter("field_name")]  // If supported by database
-   public TypeName? FieldName { get; internal set; }
+   [MapKey("field_name")]  // If supported by database
+   public TypeName? FieldName { get; init; }
    ```
 
-2. **Update constructor(s)** to include the new parameter with a default value:
+2. **No constructor changes needed** — records use property initialization, so
+   adding a new `init` property with a default value is not a breaking change.
 
-   ```csharp
-   public ModelClass(
-       // ... existing parameters ...
-       TypeName? fieldName = null  // New parameter
-   )
-   {
-       // ... existing assignments ...
-       FieldName = fieldName;
-   }
-   ```
+3. **Update tests** with assertions for the new field
 
-3. **For minor version releases**: Add a deprecated constructor matching the old
-   signature to avoid breaking changes (see next section)
-
-4. **Update tests** with assertions for the new field
-
-5. **Update `releasenotes.md`** with the change
+4. **Update `releasenotes.md`** with the change
 
 ### Avoiding Breaking Changes in Minor Versions
 
-When adding a new field to an existing model class during a **minor version
-release** (e.g., 5.x.0 → 5.y.0), maintain backward compatibility for users
-constructing these models directly.
+With records using `init` properties and object initializer syntax, adding new
+properties is inherently non-breaking — consumers using
+`new Traits { Domain = "example.com" }` are unaffected by new properties.
 
-**The Solution:** Add a deprecated constructor that matches the old signature:
+**What IS breaking in minor versions:**
 
-```csharp
-public class Traits
-{
-    // New constructor with added parameter
-    public Traits(
-        string? domain = null,
-        double? ipRiskSnapshot = null,  // NEW FIELD
-        string? organization = null
-    )
-    {
-        Domain = domain;
-        IpRiskSnapshot = ipRiskSnapshot;
-        Organization = organization;
-    }
-
-    // Deprecated constructor for backward compatibility
-    [Obsolete("Use constructor with ipRiskSnapshot parameter")]
-    public Traits(
-        string? domain = null,
-        string? organization = null
-    ) : this(domain, null, organization)  // Call new constructor with null for new field
-    {
-    }
-}
-```
-
-**For Major Versions:** You do NOT need to add the deprecated constructor -
-breaking changes are expected in major version bumps (e.g., 5.x.0 → 6.0.0).
+- Removing or renaming existing properties
+- Changing the type of existing properties
+- Changing default values of existing properties
 
 ### Adding New Response Types
 
@@ -333,23 +292,31 @@ Different target frameworks may require different approaches:
 #endif
 ```
 
-### Pattern: MaxMind DB Constructor Date Parsing
+### Pattern: MaxMind DB Date Parsing with Backing Fields
 
-For date fields in MMDB databases, provide two constructors:
+For date fields stored as strings in MMDB databases, use a backing field with an
+internal string property for deserialization:
 
 ```csharp
-// Constructor for database deserialization (string)
-[Constructor]
-public Response(
-    [Parameter("date_field")] string? dateField = null
-) : this(dateField == null ? null : DateOnly.Parse(dateField))
-{ }
+#if NET6_0_OR_GREATER
+private DateOnly? _networkLastSeen;
 
-// Primary constructor (parsed date)
-public Response(DateOnly? dateField = null)
+[JsonInclude]
+[JsonPropertyName("network_last_seen")]
+public DateOnly? NetworkLastSeen
 {
-    DateField = dateField;
+    get => _networkLastSeen;
+    init => _networkLastSeen = value;
 }
+
+[JsonIgnore]
+[MapKey("network_last_seen")]
+internal string? NetworkLastSeenString
+{
+    get => _networkLastSeen?.ToString("o");
+    init => _networkLastSeen = value == null ? null : DateOnly.Parse(value);
+}
+#endif
 ```
 
 ## Code Quality
@@ -369,7 +336,8 @@ The project enforces strict code quality standards:
 - Follow C# naming conventions (PascalCase for public members, camelCase for
   parameters)
 - Use XML documentation for all public types and members
-- Keep constructors organized with optional parameters and defaults
+- Prefer alphabetical ordering for `init` properties unless there is a
+  preexisting logical grouping
 
 ## Version Requirements
 
@@ -390,4 +358,4 @@ The project enforces strict code quality standards:
 
 ---
 
-_Last Updated: 2025-11-06_
+_Last Updated: 2026-03-13_
