@@ -52,8 +52,12 @@ fi
 
 changelog=$(cat releasenotes.md)
 
-# GeoIP2-dotnet format: "5.4.0 (2025-11-20)" followed by "---"
-regex='([0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9]+)?) \(([0-9]{4}-[0-9]{2}-[0-9]{2})\)'
+regex='
+## ([0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9]+)?) \(([0-9]{4}-[0-9]{2}-[0-9]{2})\)
+
+((.|
+)*)
+'
 
 if [[ ! $changelog =~ $regex ]]; then
     echo "Could not find version/date in releasenotes.md!"
@@ -62,14 +66,7 @@ fi
 
 version="${BASH_REMATCH[1]}"
 date="${BASH_REMATCH[3]}"
-
-# Extract release notes: everything after "---" line until next version header
-notes=$(awk -v ver="$version" '
-    $0 ~ "^" ver " \\(" { found=1; next }
-    found && /^-+$/ { in_notes=1; next }
-    in_notes && /^[0-9]+\.[0-9]+\.[0-9]+.* \([0-9]{4}-[0-9]{2}-[0-9]{2}\)/ { exit }
-    in_notes { print }
-' releasenotes.md | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}')
+notes="$(echo "${BASH_REMATCH[4]}" | sed -n -e '/^## [0-9]\+\.[0-9]\+\.[0-9]\+/,$!p')"
 
 if [[ "$date" != "$(date +"%Y-%m-%d")" ]]; then
     echo "$date is not today!"
