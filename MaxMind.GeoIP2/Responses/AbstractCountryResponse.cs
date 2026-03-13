@@ -1,56 +1,22 @@
-﻿#region
-
+using MaxMind.Db;
 using MaxMind.GeoIP2.Model;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#endregion
-
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     Abstract class for country-level response.
+    ///     Abstract record for country-level responses.
     /// </summary>
-    public abstract class AbstractCountryResponse : AbstractResponse
+    public abstract record AbstractCountryResponse : AbstractResponse
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="AbstractCountryResponse" /> class.
-        /// </summary>
-        protected AbstractCountryResponse()
-        {
-            Continent = new Continent();
-            Country = new Country();
-            MaxMind = new Model.MaxMind();
-            RegisteredCountry = new Country();
-            RepresentedCountry = new RepresentedCountry();
-            Traits = new Traits();
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="AbstractCountryResponse" /> class.
-        /// </summary>
-        protected AbstractCountryResponse(
-            Continent? continent = null,
-            Country? country = null,
-            Model.MaxMind? maxMind = null,
-            Country? registeredCountry = null,
-            RepresentedCountry? representedCountry = null,
-            Traits? traits = null)
-        {
-            Continent = continent ?? new Continent();
-            Country = country ?? new Country();
-            MaxMind = maxMind ?? new Model.MaxMind();
-            RegisteredCountry = registeredCountry ?? new Country();
-            RepresentedCountry = representedCountry ?? new RepresentedCountry();
-            Traits = traits ?? new Traits();
-        }
-
         /// <summary>
         ///     Gets the continent for the requested IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("continent")]
-        public Continent Continent { get; internal set; }
+        [MapKey("continent", true)]
+        public Continent Continent { get; init; } = new();
 
         /// <summary>
         ///     Gets the country for the requested IP address. This
@@ -59,14 +25,15 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("country")]
-        public Country Country { get; internal set; }
+        [MapKey("country", true)]
+        public Country Country { get; init; } = new();
 
         /// <summary>
         ///     Gets the MaxMind record containing data related to your account
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("maxmind")]
-        public Model.MaxMind MaxMind { get; internal set; }
+        public Model.MaxMind MaxMind { get; init; } = new();
 
         /// <summary>
         ///     Registered country record for the requested IP address. This
@@ -75,7 +42,8 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("registered_country")]
-        public Country RegisteredCountry { get; internal set; }
+        [MapKey("registered_country", true)]
+        public Country RegisteredCountry { get; init; } = new();
 
         /// <summary>
         ///     Represented country record for the requested IP address. The
@@ -85,43 +53,27 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("represented_country")]
-        public RepresentedCountry RepresentedCountry { get; internal set; }
+        [MapKey("represented_country", true)]
+        public RepresentedCountry RepresentedCountry { get; init; } = new();
 
         /// <summary>
         ///     Gets the traits for the requested IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("traits")]
-        public Traits Traits { get; internal set; }
+        [MapKey("traits", true)]
+        public Traits Traits { get; init; } = new();
 
-        /// <summary>
-        ///     Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="string" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
+        /// <inheritdoc/>
+        internal override AbstractResponse WithLocales(IReadOnlyList<string> locales)
         {
-            return GetType().Name + " ["
-                  + "Continent=" + Continent + ", "
-                  + "Country=" + Country + ", "
-                  + "RegisteredCountry=" + RegisteredCountry + ", "
-                  + "RepresentedCountry=" + RepresentedCountry + ", "
-                  + "Traits=" + Traits
-                  + "]";
-        }
-
-        /// <summary>
-        ///     Sets the locales on all the NamedEntity properties.
-        /// </summary>
-        /// <param name="locales">The locales specified by the user.</param>
-        protected internal override void SetLocales(IReadOnlyList<string> locales)
-        {
-            locales = [.. locales];
-            Continent.Locales = locales;
-            Country.Locales = locales;
-            RegisteredCountry.Locales = locales;
-            RepresentedCountry.Locales = locales;
+            return this with
+            {
+                Continent = Continent with { Locales = locales },
+                Country = Country with { Locales = locales },
+                RegisteredCountry = RegisteredCountry with { Locales = locales },
+                RepresentedCountry = RepresentedCountry with { Locales = locales },
+            };
         }
     }
 }

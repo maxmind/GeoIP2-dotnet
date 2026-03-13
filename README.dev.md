@@ -14,4 +14,5 @@
 4. Run dev-bin/release.sh. This will build the project, generate docs, upload to
    NuGet, and make a GitHub release.
 5. Update GitHub Release page for the release.
-6. Verify the release on [NuGet](https://www.nuget.org/packages/MaxMind.GeoIP2/).
+6. Verify the release on
+   [NuGet](https://www.nuget.org/packages/MaxMind.GeoIP2/).

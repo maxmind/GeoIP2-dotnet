@@ -1,16 +1,22 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with
+code in this repository.
 
 ## Project Overview
 
 **GeoIP2-dotnet** is MaxMind's official .NET client library for:
-- **GeoIP2/GeoLite2 Web Services**: Country, City, and Insights endpoints
-- **GeoIP2/GeoLite2 Databases**: Local MMDB file reading for various database types (City, Country, ASN, Anonymous IP, Anonymous Plus, ISP, etc.)
 
-The library provides both web service clients and database readers that return strongly-typed model objects containing geographic, ISP, anonymizer, and other IP-related data.
+- **GeoIP2/GeoLite2 Web Services**: Country, City, and Insights endpoints
+- **GeoIP2/GeoLite2 Databases**: Local MMDB file reading for various database
+  types (City, Country, ASN, Anonymous IP, Anonymous Plus, ISP, etc.)
+
+The library provides both web service clients and database readers that return
+strongly-typed model objects containing geographic, ISP, anonymizer, and other
+IP-related data.
 
 **Key Technologies:**
+
 - .NET 10.0, .NET 9.0, .NET 8.0, .NET Standard 2.1, and .NET Standard 2.0
 - System.Text.Json for JSON serialization/deserialization
 - MaxMind.Db library for binary database file reading
@@ -40,50 +46,49 @@ MaxMind.GeoIP2.UnitTests/
 
 ### Key Design Patterns
 
-#### 1. **Immutable Model Classes with Optional Parameters**
+#### 1. **Immutable Model Records with Init Properties**
 
-Model and response classes use C# classes (not records) with properties and constructors that accept optional parameters with defaults:
+Model and response classes use C# records with `init` properties:
 
 ```csharp
-public class Traits
+public record Traits
 {
-    public Traits(
-        [Parameter("autonomous_system_number")] long? autonomousSystemNumber = null,
-        [Parameter("autonomous_system_organization")] string? autonomousSystemOrganization = null,
-        // ... more parameters with defaults
-    )
-    {
-        AutonomousSystemNumber = autonomousSystemNumber;
-        AutonomousSystemOrganization = autonomousSystemOrganization;
-        // ...
-    }
-
     [JsonInclude]
     [JsonPropertyName("autonomous_system_number")]
-    public long? AutonomousSystemNumber { get; internal set; }
+    [MapKey("autonomous_system_number")]
+    public long? AutonomousSystemNumber { get; init; }
+
+    [JsonInclude]
+    [JsonPropertyName("autonomous_system_organization")]
+    [MapKey("autonomous_system_organization")]
+    public string? AutonomousSystemOrganization { get; init; }
 }
 ```
 
 **Key Points:**
+
 - Use `[JsonPropertyName]` for JSON field mapping (System.Text.Json)
-- Use `[Parameter]` for MaxMind DB field mapping
-- Use `[Constructor]` attribute for MaxMind DB deserialization
-- Properties use `internal set` to prevent external modification while allowing deserialization
-- Default parameters in constructors avoid breaking changes
+- Use `[MapKey("field_name")]` for MaxMind DB field mapping (replaces
+  `[Parameter]`)
+- Properties use `init` setters for immutability
+- No constructors needed — deserialization uses property initialization
+- Records provide built-in equality, `with` expressions, and `ToString()`
 
 #### 2. **Conditional Compilation for .NET Version Differences**
 
-Some features are only available in newer .NET versions (e.g., `DateOnly` in .NET 6+):
+Some features are only available in newer .NET versions (e.g., `DateOnly` in
+.NET 6+):
 
 ```csharp
 #if NET6_0_OR_GREATER
     [JsonInclude]
     [JsonPropertyName("network_last_seen")]
-    public DateOnly? NetworkLastSeen { get; internal set; }
+    public DateOnly? NetworkLastSeen { get; init; }
 #endif
 ```
 
-When adding features that use newer .NET types, ensure backward compatibility with .NET Standard 2.0/2.1.
+When adding features that use newer .NET types, ensure backward compatibility
+with .NET Standard 2.0/2.1.
 
 #### 3. **Deprecation Strategy**
 
@@ -91,46 +96,56 @@ When deprecating properties, mark them with `[Obsolete]` and provide guidance:
 
 ```csharp
 [Obsolete("The metro code is no longer being maintained and should not be used.")]
-public int? MetroCode { get; internal set; }
+public int? MetroCode { get; init; }
 ```
-
-For backward compatibility during minor version updates, add deprecated constructors that match old signatures (see "Avoiding Breaking Changes in Minor Versions").
 
 #### 4. **Database vs Web Service Architecture**
 
 **Database Reader:**
+
 - Reads binary MMDB files using `MaxMind.Db` library
 - Methods may throw `AddressNotFoundException` or `InvalidOperationException`
-- Support for multiple database types via specific methods (`City()`, `Country()`, `AnonymousIP()`, etc.)
+- Support for multiple database types via specific methods (`City()`,
+  `Country()`, `AnonymousIP()`, etc.)
 - Thread-safe, should be reused across lookups
 
 **Web Service Client:**
+
 - Uses `HttpClient` for HTTP requests
 - Methods throw `GeoIP2Exception` or subclasses on errors
-- Supports custom timeouts, locales, host configuration, and dependency injection
+- Supports custom timeouts, locales, host configuration, and dependency
+  injection
 - Thread-safe, connection pooling via client reuse
 - Supports both sync and async methods
 
 #### 5. **MaxMind DB Attributes**
 
-Classes that are deserialized from MMDB databases use special attributes:
+Records that are deserialized from MMDB databases use special attributes on
+properties:
 
-- `[Constructor]`: Marks the constructor used for database deserialization
-- `[Parameter("field_name")]`: Maps constructor parameter to database field
+- `[MapKey("field_name")]`: Maps a property to a database field (replaces
+  `[Parameter]`)
+- `[MapKey("field_name", true)]`: Maps a single nested sub-object. The `true`
+  flag tells the deserializer to construct the nested object from a sub-map
+  rather than a scalar field
 - `[Inject("field_name")]`: Injects metadata like IP address
 - `[Network]`: Injects the network information for the IP
 
 #### 6. **ASP.NET Core Integration**
 
-The library supports dependency injection via `IOptions<WebServiceClientOptions>` and `IHttpClientFactory` pattern for typed clients. Configuration is done via `appsettings.json`.
+The library supports dependency injection via
+`IOptions<WebServiceClientOptions>` and `IHttpClientFactory` pattern for typed
+clients. Configuration is done via `appsettings.json`.
 
 ## Testing Conventions
 
 ### Test Structure
 
 - Tests use xUnit framework
-- Test databases are in `MaxMind.GeoIP2.UnitTests/TestData/MaxMind-DB/` (git submodule)
-- Environment variable `MAXMIND_TEST_BASE_DIR` must point to the test project directory
+- Test databases are in `MaxMind.GeoIP2.UnitTests/TestData/MaxMind-DB/` (git
+  submodule)
+- Environment variable `MAXMIND_TEST_BASE_DIR` must point to the test project
+  directory
 
 ### Running Tests
 
@@ -153,7 +168,9 @@ dotnet run -f net8.0 -p MaxMind.GeoIP2.Benchmark/MaxMind.GeoIP2.Benchmark.csproj
 ### Test Fixtures
 
 When adding new fields to responses:
-1. Verify test databases in `TestData/MaxMind-DB/test-data/` include the new fields
+
+1. Verify test databases in `TestData/MaxMind-DB/test-data/` include the new
+   fields
 2. Update test assertions in corresponding test classes
 3. Test both database reader and web service client paths
 
@@ -162,73 +179,44 @@ When adding new fields to responses:
 ### Adding New Fields to Existing Models
 
 1. **Add the property** with appropriate attributes:
+
    ```csharp
    [JsonInclude]
    [JsonPropertyName("field_name")]
-   [Parameter("field_name")]  // If supported by database
-   public TypeName? FieldName { get; internal set; }
+   [MapKey("field_name")]  // If supported by database
+   public TypeName? FieldName { get; init; }
    ```
 
-2. **Update constructor(s)** to include the new parameter with a default value:
-   ```csharp
-   public ModelClass(
-       // ... existing parameters ...
-       TypeName? fieldName = null  // New parameter
-   )
-   {
-       // ... existing assignments ...
-       FieldName = fieldName;
-   }
-   ```
+2. **No constructor changes needed** — records use property initialization, so
+   adding a new `init` property with a default value is not a breaking change.
 
-3. **For minor version releases**: Add a deprecated constructor matching the old signature to avoid breaking changes (see next section)
+3. **Update tests** with assertions for the new field
 
-4. **Update tests** with assertions for the new field
-
-5. **Update `releasenotes.md`** with the change
+4. **Update `releasenotes.md`** with the change
 
 ### Avoiding Breaking Changes in Minor Versions
 
-When adding a new field to an existing model class during a **minor version release** (e.g., 5.x.0 → 5.y.0), maintain backward compatibility for users constructing these models directly.
+With records using `init` properties and object initializer syntax, adding new
+properties is inherently non-breaking — consumers using
+`new Traits { Domain = "example.com" }` are unaffected by new properties.
 
-**The Solution:** Add a deprecated constructor that matches the old signature:
+**What IS breaking in minor versions:**
 
-```csharp
-public class Traits
-{
-    // New constructor with added parameter
-    public Traits(
-        string? domain = null,
-        double? ipRiskSnapshot = null,  // NEW FIELD
-        string? organization = null
-    )
-    {
-        Domain = domain;
-        IpRiskSnapshot = ipRiskSnapshot;
-        Organization = organization;
-    }
-
-    // Deprecated constructor for backward compatibility
-    [Obsolete("Use constructor with ipRiskSnapshot parameter")]
-    public Traits(
-        string? domain = null,
-        string? organization = null
-    ) : this(domain, null, organization)  // Call new constructor with null for new field
-    {
-    }
-}
-```
-
-**For Major Versions:** You do NOT need to add the deprecated constructor - breaking changes are expected in major version bumps (e.g., 5.x.0 → 6.0.0).
+- Removing or renaming existing properties
+- Changing the type of existing properties
+- Changing default values of existing properties
 
 ### Adding New Response Types
 
 When creating a new response class (e.g., for a new database type):
 
-1. **Determine if it extends existing response** (e.g., `AbstractCityResponse`, `AbstractCountryResponse`, `AbstractResponse`)
+1. **Determine if it extends existing response** (e.g., `AbstractCityResponse`,
+   `AbstractCountryResponse`, `AbstractResponse`)
 2. **Follow patterns** from similar responses
-3. **Add corresponding database reader method** in `DatabaseReader.cs` and `IGeoIP2DatabaseReader.cs`
-4. **Add corresponding web service method** (if applicable) in `WebServiceClient.cs` and `IGeoIP2WebServicesClient.cs`
+3. **Add corresponding database reader method** in `DatabaseReader.cs` and
+   `IGeoIP2DatabaseReader.cs`
+4. **Add corresponding web service method** (if applicable) in
+   `WebServiceClient.cs` and `IGeoIP2WebServicesClient.cs`
 5. **Provide comprehensive XML documentation** for all public members
 6. **Add unit tests** in `DatabaseReaderTests.cs` or `WebServiceClientTests.cs`
 
@@ -246,21 +234,23 @@ When deprecating fields or methods:
 Always update `releasenotes.md` for user-facing changes:
 
 ```markdown
-5.4.0 (YYYY-MM-DD)
-------------------
+## 5.4.0 (YYYY-MM-DD)
 
-* A new `PropertyName` property has been added to `MaxMind.GeoIP2.Model.ModelClass`.
-  This provides information about...
-* The `OldProperty` property in `MaxMind.GeoIP2.Model.ModelClass` has been marked
-  `Obsolete`. Please use `NewProperty` instead.
-* **BREAKING:** Description of any breaking changes (major versions only).
+- A new `PropertyName` property has been added to
+  `MaxMind.GeoIP2.Model.ModelClass`. This provides information about...
+- The `OldProperty` property in `MaxMind.GeoIP2.Model.ModelClass` has been
+  marked `Obsolete`. Please use `NewProperty` instead.
+- **BREAKING:** Description of any breaking changes (major versions only).
 ```
 
 ### Multi-threaded Safety
 
-Both `DatabaseReader` and `WebServiceClient` are **thread-safe** and should be reused:
+Both `DatabaseReader` and `WebServiceClient` are **thread-safe** and should be
+reused:
+
 - Create once, share across threads
-- Reusing clients improves performance (connection pooling for web service client)
+- Reusing clients improves performance (connection pooling for web service
+  client)
 - Document thread-safety in XML documentation for all client classes
 
 ## Common Patterns
@@ -299,23 +289,35 @@ Different target frameworks may require different approaches:
 #endif
 ```
 
-### Pattern: MaxMind DB Constructor Date Parsing
+### Pattern: MaxMind DB Date Parsing with Backing Fields
 
-For date fields in MMDB databases, provide two constructors:
+For date fields stored as strings in MMDB databases, use a backing field with an
+internal string property for deserialization. Invalid values should throw a
+`GeoIP2Exception` with enough context to identify the field and bad value:
 
 ```csharp
-// Constructor for database deserialization (string)
-[Constructor]
-public Response(
-    [Parameter("date_field")] string? dateField = null
-) : this(dateField == null ? null : DateOnly.Parse(dateField))
-{ }
+#if NET6_0_OR_GREATER
+private DateOnly? _networkLastSeen;
 
-// Primary constructor (parsed date)
-public Response(DateOnly? dateField = null)
+[JsonInclude]
+[JsonPropertyName("network_last_seen")]
+public DateOnly? NetworkLastSeen
 {
-    DateField = dateField;
+    get => _networkLastSeen;
+    init => _networkLastSeen = value;
 }
+
+[JsonIgnore]
+[MapKey("network_last_seen")]
+internal string? NetworkLastSeenString
+{
+    get => _networkLastSeen?.ToString("o");
+    init => _networkLastSeen = value == null ? null
+        : DateOnly.TryParse(value, out var result) ? result
+        : throw new GeoIP2Exception(
+            $"Could not parse 'network_last_seen' value '{value}' as a valid date.");
+}
+#endif
 ```
 
 ## Code Quality
@@ -332,9 +334,11 @@ The project enforces strict code quality standards:
 ### Code Style
 
 - Use the `.editorconfig` settings for consistent formatting
-- Follow C# naming conventions (PascalCase for public members, camelCase for parameters)
+- Follow C# naming conventions (PascalCase for public members, camelCase for
+  parameters)
 - Use XML documentation for all public types and members
-- Keep constructors organized with optional parameters and defaults
+- Prefer alphabetical ordering for `init` properties unless there is a
+  preexisting logical grouping
 
 ## Version Requirements
 
@@ -355,4 +359,4 @@ The project enforces strict code quality standards:
 
 ---
 
-*Last Updated: 2025-11-06*
+_Last Updated: 2026-03-13_

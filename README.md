@@ -1,34 +1,34 @@
-# GeoIP2 .NET API #
+# GeoIP2 .NET API
 
 [![NuGet](https://img.shields.io/nuget/v/MaxMind.GeoIP2)](https://www.nuget.org/packages/MaxMind.GeoIP2)
 
-## Description ##
+## Description
 
 This distribution provides an API for the GeoIP2 and GeoLite2
 [web services](https://dev.maxmind.com/geoip/docs/web-services?lang=en) and
 [databases](https://dev.maxmind.com/geoip/docs/databases?lang=en).
 
-## Installation ##
+## Installation
 
-### NuGet ###
+### NuGet
 
-We recommend installing this library with NuGet. To do this, type the
-following into the Visual Studio Package Manager Console:
+We recommend installing this library with NuGet. To do this, type the following
+into the Visual Studio Package Manager Console:
 
 ```
 install-package MaxMind.GeoIP2
 ```
 
-## IP Geolocation Usage ##
+## IP Geolocation Usage
 
 IP geolocation is inherently imprecise. Locations are often near the center of
-the population. Any location provided by a GeoIP2 database or web service
-should not be used to identify a particular address or household.
+the population. Any location provided by a GeoIP2 database or web service should
+not be used to identify a particular address or household.
 
-## Web Service Usage ##
+## Web Service Usage
 
-To use the web service API, first create a new `WebServiceClient` object
-with your account ID and license key:
+To use the web service API, first create a new `WebServiceClient` object with
+your account ID and license key:
 
 ```
 var client = new WebServiceClient(42, "license_key1");
@@ -47,26 +47,26 @@ To query the Sandbox GeoIP2 web service, you must set the host to
 var client = new WebServiceClient(42, "license_key1", host: "sandbox.maxmind.com");
 ```
 
-You may also specify the fall-back locales, the host, or the timeout as
-optional parameters. See the API docs for more information.
+You may also specify the fall-back locales, the host, or the timeout as optional
+parameters. See the API docs for more information.
 
 This object is safe to share across threads. If you are making multiple
-requests, the object should be reused so that new connections are not
-created for each request. Once you have finished making requests, you
-should dispose of the object to ensure the connections are closed and any
-resources are promptly returned to the system.
+requests, the object should be reused so that new connections are not created
+for each request. Once you have finished making requests, you should dispose of
+the object to ensure the connections are closed and any resources are promptly
+returned to the system.
 
 You may then call the sync or async method corresponding to the specific end
 point, passing it the IP address you want to look up or no parameters if you
 want to look up the current device.
 
 If the request succeeds, the method call will return a response class for the
-endpoint you called. This response in turn contains multiple model classes,
-each of which represents part of the data returned by the web service.
+endpoint you called. This response in turn contains multiple model classes, each
+of which represents part of the data returned by the web service.
 
 See the API documentation for more details.
 
-### ASP.NET Core Usage ###
+### ASP.NET Core Usage
 
 To use the web service API with HttpClient factory pattern as a
 [Typed client](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests#typed-clients)
@@ -82,7 +82,8 @@ builder.Services.Configure<WebServiceClientOptions>(builder.Configuration.GetSec
 builder.Services.AddHttpClient<WebServiceClient>();
 ```
 
-2. Add configuration in your `appsettings.json` with your account ID and license key.
+2. Add configuration in your `appsettings.json` with your account ID and license
+   key.
 
 ```jsonc
 ...
@@ -127,9 +128,9 @@ public class MaxMindController : ControllerBase
 }
 ```
 
-## Web Service Example ##
+## Web Service Example
 
-### Country Service (Sync) ###
+### Country Service (Sync)
 
 ```csharp
 // If you are making multiple requests, a single WebServiceClient
@@ -152,7 +153,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 }
 ```
 
-### Country Service (Async) ###
+### Country Service (Async)
 
 ```csharp
 // If you are making multiple requests, a single WebServiceClient
@@ -175,7 +176,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 }
 ```
 
-### City Plus Service (Sync) ###
+### City Plus Service (Sync)
 
 ```csharp
 // If you are making multiple requests, a single WebServiceClient
@@ -208,7 +209,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 }
 ```
 
-### City Plus Service (Async) ###
+### City Plus Service (Async)
 
 ```csharp
 // If you are making multiple requests, a single WebServiceClient
@@ -241,7 +242,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 }
 ```
 
-### Insights Service (Sync) ###
+### Insights Service (Sync)
 
 ```csharp
 // If you are making multiple requests, a single WebServiceClient
@@ -273,7 +274,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 }
 ```
 
-### Insights Service (Async) ###
+### Insights Service (Async)
 
 ```csharp
 // If you are making multiple requests, a single WebServiceClient
@@ -305,7 +306,7 @@ using (var client = new WebServiceClient(42, "license_key"))
 }
 ```
 
-## Database Usage ##
+## Database Usage
 
 To use the database API, you must create a new `DatabaseReader` with a string
 representation of the path to your GeoIP2 database. You may also specify the
@@ -313,18 +314,18 @@ file access mode. You may then call the appropriate method (e.g., `city`) for
 your database, passing it the IP address you want to look up.
 
 If the lookup succeeds, the method call will return a response class for the
-GeoIP2 lookup. This class in turn contains multiple model classes, each of
-which represents part of the data returned by the database.
+GeoIP2 lookup. This class in turn contains multiple model classes, each of which
+represents part of the data returned by the database.
 
-We recommend reusing the `DatabaseReader` object rather than creating a new
-one for each lookup. The creation of this object is relatively expensive as it
-must read in metadata for the file.
+We recommend reusing the `DatabaseReader` object rather than creating a new one
+for each lookup. The creation of this object is relatively expensive as it must
+read in metadata for the file.
 
 See the API documentation for more details.
 
-## Database Examples ##
+## Database Examples
 
-### Anonymous IP Database ###
+### Anonymous IP Database
 
 ```csharp
 
@@ -341,7 +342,7 @@ using (var reader = new DatabaseReader("GeoIP2-Anonymous-IP.mmdb"))
 }
 ```
 
-### Anonymous Plus Database ###
+### Anonymous Plus Database
 
 ```csharp
 
@@ -361,7 +362,7 @@ using (var reader = new DatabaseReader("GeoIP-Anonymous-Plus.mmdb"))
 }
 ```
 
-### ASN ###
+### ASN
 
 ```csharp
 
@@ -374,7 +375,7 @@ using (var reader = new DatabaseReader("GeoLite2-ASN.mmdb"))
 }
 ```
 
-### City Database ###
+### City Database
 
 ```csharp
 // This creates the DatabaseReader object, which should be reused across
@@ -401,7 +402,7 @@ using (var reader = new DatabaseReader("GeoIP2-City.mmdb"))
 }
 ```
 
-### Connection-Type Database ###
+### Connection-Type Database
 
 ```csharp
 
@@ -413,7 +414,7 @@ using (var reader = new DatabaseReader("GeoIP2-Connection-Type.mmdb"))
 }
 ```
 
-### Domain Database ###
+### Domain Database
 
 ```csharp
 
@@ -425,7 +426,7 @@ using (var reader = new DatabaseReader("GeoIP2-Domain.mmdb"))
 }
 ```
 
-### Enterprise Database ###
+### Enterprise Database
 
 ```csharp
 using (var reader = new DatabaseReader("/path/to/GeoIP2-Enterprise.mmdb"))
@@ -459,7 +460,7 @@ using (var reader = new DatabaseReader("/path/to/GeoIP2-Enterprise.mmdb"))
 }
 ```
 
-### ISP Database ###
+### ISP Database
 
 ```csharp
 
@@ -474,20 +475,20 @@ using (var reader = new DatabaseReader("GeoIP2-ISP.mmdb"))
 }
 ```
 
-## Exceptions ##
+## Exceptions
 
-### Database ###
+### Database
 
 If the database is corrupt or otherwise invalid, a
 `MaxMind.Db.InvalidDatabaseException` will be thrown.
 
-If an address is not available in the database, a
-`AddressNotFoundException` will be thrown.
+If an address is not available in the database, a `AddressNotFoundException`
+will be thrown.
 
-### Web Service ###
+### Web Service
 
-For details on the possible errors returned by the web service itself, [see
-the GeoIP2 web service documentation](https://dev.maxmind.com/geoip/docs/web-services?lang=en).
+For details on the possible errors returned by the web service itself,
+[see the GeoIP2 web service documentation](https://dev.maxmind.com/geoip/docs/web-services?lang=en).
 
 If the web service returns an explicit error document, this is thrown as a
 `AddressNotFoundException`, a `AuthenticationException`, a
@@ -495,85 +496,83 @@ If the web service returns an explicit error document, this is thrown as a
 
 If some sort of transport error occurs, an `HttpException` is thrown. This is
 thrown when some sort of unanticipated error occurs, such as the web service
-returning a 500 or an invalid error document. If the web service request
-returns any status code besides 200, 4xx, or 5xx, this also becomes a
-`HttpException`.
+returning a 500 or an invalid error document. If the web service request returns
+any status code besides 200, 4xx, or 5xx, this also becomes a `HttpException`.
 
 Finally, if the web service returns a 200 but the body is invalid, the client
 throws a `GeoIP2Exception`. This exception also is the parent exception to the
 above exceptions.
 
-## Values to use for Database or Dictionary Keys ##
+## Values to use for Database or Dictionary Keys
 
-**We strongly discourage you from using a value from any `Names` property as
-a key in a database or dictionary.**
+**We strongly discourage you from using a value from any `Names` property as a
+key in a database or dictionary.**
 
 These names may change between releases. Instead we recommend using one of the
 following:
 
-* `MaxMind.GeoIP2.Model.City` - `City.GeoNameId`
-* `MaxMind.GeoIP2.Model.Continent` - `Continent.Code` or `Continent.GeoNameId`
-* `MaxMind.GeoIP2.Model.Country` and `MaxMind.GeoIP2.Model.RepresentedCountry`
+- `MaxMind.GeoIP2.Model.City` - `City.GeoNameId`
+- `MaxMind.GeoIP2.Model.Continent` - `Continent.Code` or `Continent.GeoNameId`
+- `MaxMind.GeoIP2.Model.Country` and `MaxMind.GeoIP2.Model.RepresentedCountry`
   - `Country.IsoCode` or `Country.GeoNameId`
-* `MaxMind.GeoIP2.Model.Subdivision` - `Subdivision.IsoCode` or
+- `MaxMind.GeoIP2.Model.Subdivision` - `Subdivision.IsoCode` or
   `Subdivision.GeoNameId`
 
-## Multi-Threaded Use ##
+## Multi-Threaded Use
 
 This API fully supports use in multi-threaded applications. When using the
-`DatabaseReader` in a multi-threaded application, we suggest creating one
-object and sharing that among threads.
+`DatabaseReader` in a multi-threaded application, we suggest creating one object
+and sharing that among threads.
 
-## What data is returned? ##
+## What data is returned?
 
-While many of the end points return the same basic records, the attributes
-which can be populated vary between end points. In addition, while an end
-point may offer a particular piece of data, MaxMind does not always have every
-piece of data for any given IP address.
+While many of the end points return the same basic records, the attributes which
+can be populated vary between end points. In addition, while an end point may
+offer a particular piece of data, MaxMind does not always have every piece of
+data for any given IP address.
 
 Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.
 
-See the [GeoIP2 web services
-documentation](https://dev.maxmind.com/geoip/docs/web-services?lang=en) for
-details on what data each end point may return.
+See the
+[GeoIP2 web services documentation](https://dev.maxmind.com/geoip/docs/web-services?lang=en)
+for details on what data each end point may return.
 
-The only piece of data which is always returned is the `ipAddress` attribute
-in the `MaxMind.GeoIP2.Traits` record.
+The only piece of data which is always returned is the `ipAddress` attribute in
+the `MaxMind.GeoIP2.Traits` record.
 
-## Integration with GeoNames ##
+## Integration with GeoNames
 
 [GeoNames](https://www.geonames.org/) offers web services and downloadable
 databases with data on geographical features around the world, including
 populated places. They offer both free and paid premium data. Each feature is
 uniquely identified by a `geonameId`, which is an integer.
 
-Many of the records returned by the GeoIP2 web services and databases include
-a `geonameId` property. This is the ID of a geographical feature (city,
-region, country, etc.) in the GeoNames database.
+Many of the records returned by the GeoIP2 web services and databases include a
+`geonameId` property. This is the ID of a geographical feature (city, region,
+country, etc.) in the GeoNames database.
 
-Some of the data that MaxMind provides is also sourced from GeoNames. We
-source things like place names, ISO codes, and other similar data from the
-GeoNames premium data set.
+Some of the data that MaxMind provides is also sourced from GeoNames. We source
+things like place names, ISO codes, and other similar data from the GeoNames
+premium data set.
 
-## Reporting data problems ##
+## Reporting data problems
 
-If the problem you find is that an IP address is incorrectly mapped,
-please
+If the problem you find is that an IP address is incorrectly mapped, please
 [submit your correction to MaxMind](https://www.maxmind.com/en/correction).
 
-If you find some other sort of mistake, like an incorrect spelling, please
-check the [GeoNames site](https://www.geonames.org/) first. Once you've
-searched for a place and found it on the GeoNames map view, there are a number
-of links you can use to correct data ("move", "edit", "alternate names",
-etc.). Once the correction is part of the GeoNames data set, it will be
-automatically incorporated into future MaxMind releases.
+If you find some other sort of mistake, like an incorrect spelling, please check
+the [GeoNames site](https://www.geonames.org/) first. Once you've searched for a
+place and found it on the GeoNames map view, there are a number of links you can
+use to correct data ("move", "edit", "alternate names", etc.). Once the
+correction is part of the GeoNames data set, it will be automatically
+incorporated into future MaxMind releases.
 
 If you are a paying MaxMind customer and you're not sure where to submit a
-correction, please [contact MaxMind
-support](https://www.maxmind.com/en/support) for help.
+correction, please [contact MaxMind support](https://www.maxmind.com/en/support)
+for help.
 
-## Other Support ##
+## Other Support
 
 Please report all issues with this code using the
 [GitHub issue tracker](https://github.com/maxmind/GeoIP2-dotnet/issues).
@@ -581,22 +580,22 @@ Please report all issues with this code using the
 If you are having an issue with a MaxMind service that is not specific to the
 client API, please see [our support page](https://www.maxmind.com/en/support).
 
-## Contributing ##
+## Contributing
 
 Patches and pull requests are encouraged. Please include unit tests whenever
 possible.
 
-## Versioning ##
+## Versioning
 
 The API uses [Semantic Versioning](https://semver.org/). However, adding new
 methods to `IGeoIP2Provider`, `IGeoIP2DatabaseReader`, and
 `IGeoIP2WebServicesClient` will not be considered a breaking change. These
-interfaces only exist to facilitate unit testing and dependency injection.
-They will be updated to match additional methods added to the `DatabaseReader`
-and `WebServiceClient`. Such additions will be accompanied by a minor version
-bump (e.g., 1.2.x to 1.3.0).
+interfaces only exist to facilitate unit testing and dependency injection. They
+will be updated to match additional methods added to the `DatabaseReader` and
+`WebServiceClient`. Such additions will be accompanied by a minor version bump
+(e.g., 1.2.x to 1.3.0).
 
-## Copyright and License ##
+## Copyright and License
 
 This software is Copyright (c) 2013-2025 by MaxMind, Inc.
 

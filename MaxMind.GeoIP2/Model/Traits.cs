@@ -1,201 +1,14 @@
-﻿#region
-
 using MaxMind.Db;
 using System;
 using System.Text.Json.Serialization;
-
-#endregion
 
 namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     ///     Contains data for the traits record associated with an IP address.
     /// </summary>
-    public class Traits
+    public record Traits
     {
-        /// <summary>
-        ///     Constructor
-        /// </summary>
-        public Traits()
-        {
-        }
-
-        /// <summary>
-        ///     Constructor
-        /// </summary>
-        [Constructor]
-        public Traits(
-            [Parameter("autonomous_system_number")] long? autonomousSystemNumber = null,
-            [Parameter("autonomous_system_organization")] string? autonomousSystemOrganization = null,
-            [Parameter("connection_type")] string? connectionType = null,
-            string? domain = null,
-            [Inject("ip_address")] string? ipAddress = null,
-            [Parameter("ip_risk_snapshot")] double? ipRiskSnapshot = null,
-            [Parameter("is_anonymous")] bool isAnonymous = false,
-            [Parameter("is_anonymous_proxy")] bool isAnonymousProxy = false,
-            [Parameter("is_anonymous_vpn")] bool isAnonymousVpn = false,
-            [Parameter("is_anycast")] bool isAnycast = false,
-            [Parameter("is_hosting_provider")] bool isHostingProvider = false,
-            [Parameter("is_legitimate_proxy")] bool isLegitimateProxy = false,
-            [Parameter("is_public_proxy")] bool isPublicProxy = false,
-            [Parameter("is_residential_proxy")] bool isResidentialProxy = false,
-            [Parameter("is_satellite_provider")] bool isSatelliteProvider = false,
-            [Parameter("is_tor_exit_node")] bool isTorExitNode = false,
-            string? isp = null,
-            [Parameter("mobile_country_code")] string? mobileCountryCode = null,
-            [Parameter("mobile_network_code")] string? mobileNetworkCode = null,
-            string? organization = null,
-            [Parameter("user_type")] string? userType = null,
-            [Network] Network? network = null,
-            [Parameter("static_ip_score")] double? staticIPScore = null,
-            [Parameter("user_count")] int? userCount = null
-        )
-        {
-            AutonomousSystemNumber = autonomousSystemNumber;
-            AutonomousSystemOrganization = autonomousSystemOrganization;
-            ConnectionType = connectionType;
-            Domain = domain;
-            IPAddress = ipAddress;
-            IpRiskSnapshot = ipRiskSnapshot;
-#pragma warning disable 618
-            IsAnonymous = isAnonymous;
-            IsAnonymousProxy = isAnonymousProxy;
-            IsAnonymousVpn = isAnonymousVpn;
-#pragma warning restore 618
-            IsAnycast = isAnycast;
-#pragma warning disable 618
-            IsHostingProvider = isHostingProvider;
-#pragma warning restore 618
-            IsLegitimateProxy = isLegitimateProxy;
-#pragma warning disable 618
-            IsPublicProxy = isPublicProxy;
-            IsResidentialProxy = isResidentialProxy;
-            IsSatelliteProvider = isSatelliteProvider;
-            IsTorExitNode = isTorExitNode;
-#pragma warning restore 618
-            Isp = isp;
-            MobileCountryCode = mobileCountryCode;
-            MobileNetworkCode = mobileNetworkCode;
-            Network = network;
-            Organization = organization;
-            StaticIPScore = staticIPScore;
-            UserCount = userCount;
-            UserType = userType;
-        }
-
-        /// <summary>
-        ///     Constructor for binary compatibility.
-        /// </summary>
-        [Obsolete("Use constructor with ipRiskSnapshot parameter")]
-        public Traits(
-            long? autonomousSystemNumber,
-            string? autonomousSystemOrganization,
-            string? connectionType,
-            string? domain,
-            string? ipAddress,
-            bool isAnonymous,
-            bool isAnonymousProxy,
-            bool isAnonymousVpn,
-            bool isAnycast,
-            bool isHostingProvider,
-            bool isLegitimateProxy,
-            bool isPublicProxy,
-            bool isResidentialProxy,
-            bool isSatelliteProvider,
-            bool isTorExitNode,
-            string? isp,
-            string? mobileCountryCode,
-            string? mobileNetworkCode,
-            string? organization,
-            string? userType,
-            Network? network,
-            double? staticIPScore,
-            int? userCount
-        ) : this(
-            autonomousSystemNumber,
-            autonomousSystemOrganization,
-            connectionType,
-            domain,
-            ipAddress,
-            null, // ipRiskSnapshot
-            isAnonymous,
-            isAnonymousProxy,
-            isAnonymousVpn,
-            isAnycast,
-            isHostingProvider,
-            isLegitimateProxy,
-            isPublicProxy,
-            isResidentialProxy,
-            isSatelliteProvider,
-            isTorExitNode,
-            isp,
-            mobileCountryCode,
-            mobileNetworkCode,
-            organization,
-            userType,
-            network,
-            staticIPScore,
-            userCount
-        )
-        {
-        }
-
-        /// <summary>
-        ///     Constructor for binary compatibility.
-        /// </summary>
-        [Obsolete]
-        public Traits(
-            long? autonomousSystemNumber,
-            string? autonomousSystemOrganization,
-            string? connectionType,
-            string? domain,
-            string? ipAddress,
-            bool isAnonymous,
-            bool isAnonymousProxy,
-            bool isAnonymousVpn,
-            bool isHostingProvider,
-            bool isLegitimateProxy,
-            bool isPublicProxy,
-            bool isResidentialProxy,
-            bool isSatelliteProvider,
-            bool isTorExitNode,
-            string? isp,
-            string? mobileCountryCode,
-            string? mobileNetworkCode,
-            string? organization,
-            string? userType,
-            Network? network,
-            double? staticIPScore,
-            int? userCount
-        ) : this(
-            autonomousSystemNumber,
-            autonomousSystemOrganization,
-            connectionType,
-            domain,
-            ipAddress,
-            null, // ipRiskSnapshot
-            isAnonymous,
-            isAnonymousProxy,
-            isAnonymousVpn,
-            false, // isAnycast
-            isHostingProvider,
-            isLegitimateProxy,
-            isPublicProxy,
-            isResidentialProxy,
-            isSatelliteProvider,
-            isTorExitNode,
-            isp,
-            mobileCountryCode,
-            mobileNetworkCode,
-            organization,
-            userType,
-            network,
-            staticIPScore,
-            userCount
-        )
-        {
-        }
-
         /// <summary>
         ///     The
         ///     <a
@@ -208,7 +21,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_number")]
-        public long? AutonomousSystemNumber { get; internal set; }
+        [MapKey("autonomous_system_number")]
+        public long? AutonomousSystemNumber { get; init; }
 
         /// <summary>
         ///     The organization associated with the registered
@@ -221,7 +35,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("autonomous_system_organization")]
-        public string? AutonomousSystemOrganization { get; internal set; }
+        [MapKey("autonomous_system_organization")]
+        public string? AutonomousSystemOrganization { get; init; }
 
         /// <summary>
         ///     The connection type may take the following values: "Dialup",
@@ -232,7 +47,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("connection_type")]
-        public string? ConnectionType { get; internal set; }
+        [MapKey("connection_type")]
+        public string? ConnectionType { get; init; }
 
         /// <summary>
         ///     The second level domain associated with the IP address. This will
@@ -242,7 +58,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("domain")]
-        public string? Domain { get; internal set; }
+        [MapKey("domain")]
+        public string? Domain { get; init; }
 
         /// <summary>
         ///     The IP address that the data in the model is for. If you
@@ -253,7 +70,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("ip_address")]
-        public string? IPAddress { get; internal set; }
+        [Inject("ip_address")]
+        public string? IPAddress { get; init; }
 
         /// <summary>
         ///     A risk score associated with the IP address, ranging from 0.01 to 99.
@@ -273,7 +91,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("ip_risk_snapshot")]
-        public double? IpRiskSnapshot { get; internal set; }
+        [MapKey("ip_risk_snapshot")]
+        public double? IpRiskSnapshot { get; init; }
 
         /// <summary>
         ///     This is true if the IP address belongs to any sort of anonymous
@@ -283,7 +102,8 @@ namespace MaxMind.GeoIP2.Model
         [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_anonymous")]
-        public bool IsAnonymous { get; internal set; }
+        [MapKey("is_anonymous")]
+        public bool IsAnonymous { get; init; }
 
         /// <summary>
         ///     This is true if the IP is an anonymous proxy.
@@ -291,7 +111,8 @@ namespace MaxMind.GeoIP2.Model
         [JsonInclude]
         [JsonPropertyName("is_anonymous_proxy")]
         [Obsolete("Use our GeoIP2 Anonymous IP database instead.")]
-        public bool IsAnonymousProxy { get; internal set; }
+        [MapKey("is_anonymous_proxy")]
+        public bool IsAnonymousProxy { get; init; }
 
         /// <summary>
         ///     This is true if the IP address belongs to an <a
@@ -300,7 +121,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_anycast")]
-        public bool IsAnycast { get; internal set; }
+        [MapKey("is_anycast")]
+        public bool IsAnycast { get; init; }
 
         /// <summary>
         ///     This is true if the IP address is registered to an anonymous
@@ -316,7 +138,8 @@ namespace MaxMind.GeoIP2.Model
         [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_anonymous_vpn")]
-        public bool IsAnonymousVpn { get; internal set; }
+        [MapKey("is_anonymous_vpn")]
+        public bool IsAnonymousVpn { get; init; }
 
         /// <summary>
         ///     This is true if the IP address belongs to a hosting or VPN
@@ -327,7 +150,8 @@ namespace MaxMind.GeoIP2.Model
         [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_hosting_provider")]
-        public bool IsHostingProvider { get; internal set; }
+        [MapKey("is_hosting_provider")]
+        public bool IsHostingProvider { get; init; }
 
         /// <summary>
         ///     True if MaxMind believes this IP address to be a legitimate
@@ -336,7 +160,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_legitimate_proxy")]
-        public bool IsLegitimateProxy { get; internal set; }
+        [MapKey("is_legitimate_proxy")]
+        public bool IsLegitimateProxy { get; init; }
 
         /// <summary>
         ///     This is true if the IP address belongs to a public proxy.
@@ -346,7 +171,8 @@ namespace MaxMind.GeoIP2.Model
         [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_public_proxy")]
-        public bool IsPublicProxy { get; internal set; }
+        [MapKey("is_public_proxy")]
+        public bool IsPublicProxy { get; init; }
 
         /// <summary>
         ///     This is true if the IP address is on a suspected anonymizing
@@ -356,7 +182,8 @@ namespace MaxMind.GeoIP2.Model
         [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_residential_proxy")]
-        public bool IsResidentialProxy { get; internal set; }
+        [MapKey("is_residential_proxy")]
+        public bool IsResidentialProxy { get; init; }
 
         /// <summary>
         ///     This is true if the IP belong to a satellite Internet provider.
@@ -364,7 +191,8 @@ namespace MaxMind.GeoIP2.Model
         [JsonInclude]
         [JsonPropertyName("is_satellite_provider")]
         [Obsolete("Due to increased mobile usage, we have insufficient data to maintain this field.")]
-        public bool IsSatelliteProvider { get; internal set; }
+        [MapKey("is_satellite_provider")]
+        public bool IsSatelliteProvider { get; init; }
 
         /// <summary>
         ///     This is true if the IP address belongs to a Tor exit node.
@@ -374,7 +202,8 @@ namespace MaxMind.GeoIP2.Model
         [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
         [JsonPropertyName("is_tor_exit_node")]
-        public bool IsTorExitNode { get; internal set; }
+        [MapKey("is_tor_exit_node")]
+        public bool IsTorExitNode { get; init; }
 
         /// <summary>
         ///     The name of the ISP associated with the IP address. This value
@@ -383,7 +212,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("isp")]
-        public string? Isp { get; internal set; }
+        [MapKey("isp")]
+        public string? Isp { get; init; }
 
         /// <summary>
         ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
@@ -393,7 +223,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("mobile_country_code")]
-        public string? MobileCountryCode { get; internal set; }
+        [MapKey("mobile_country_code")]
+        public string? MobileCountryCode { get; init; }
 
         /// <summary>
         ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
@@ -403,7 +234,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("mobile_network_code")]
-        public string? MobileNetworkCode { get; internal set; }
+        [MapKey("mobile_network_code")]
+        public string? MobileNetworkCode { get; init; }
 
         /// <summary>
         ///     The network associated with the record. In particular, this is
@@ -412,7 +244,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("network")]
-        public Network? Network { get; internal set; }
+        [Network]
+        public Network? Network { get; init; }
 
         /// <summary>
         ///     The name of the organization associated with the IP address. This
@@ -421,7 +254,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("organization")]
-        public string? Organization { get; internal set; }
+        [MapKey("organization")]
+        public string? Organization { get; init; }
 
         /// <summary>
         ///     An indicator of how static or dynamic an IP address is. The value
@@ -436,7 +270,8 @@ namespace MaxMind.GeoIP2.Model
         /// </remark>
         [JsonInclude]
         [JsonPropertyName("static_ip_score")]
-        public double? StaticIPScore { get; internal set; }
+        [MapKey("static_ip_score")]
+        public double? StaticIPScore { get; init; }
 
         /// <summary>
         ///     The estimated number of users sharing the IP/network during the past
@@ -446,7 +281,8 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("user_count")]
-        public int? UserCount { get; internal set; }
+        [MapKey("user_count")]
+        public int? UserCount { get; init; }
 
         /// <summary>
         ///     The user type associated with the IP address. This can be one of
@@ -506,46 +342,7 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("user_type")]
-        public string? UserType { get; internal set; }
-
-        /// <summary>
-        ///     Returns a <see cref="string" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="string" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return $"{nameof(AutonomousSystemNumber)}: {AutonomousSystemNumber}, " +
-                $"{nameof(AutonomousSystemOrganization)}: {AutonomousSystemOrganization}, " +
-                $"{nameof(ConnectionType)}: {ConnectionType}, " +
-                $"{nameof(Domain)}: {Domain}, " +
-                $"{nameof(IPAddress)}: {IPAddress}, " +
-                $"{nameof(IpRiskSnapshot)}: {IpRiskSnapshot}, " +
-#pragma warning disable 618
-                $"{nameof(IsAnonymous)}: {IsAnonymous}, " +
-                $"{nameof(IsAnonymousProxy)}: {IsAnonymousProxy}, " +
-                $"{nameof(IsAnonymousVpn)}: {IsAnonymousVpn}, " +
-#pragma warning restore 618
-                $"{nameof(IsAnycast)}: {IsAnycast}, " +
-#pragma warning disable 618
-                $"{nameof(IsHostingProvider)}: {IsHostingProvider}, " +
-#pragma warning restore 618
-                $"{nameof(IsLegitimateProxy)}: {IsLegitimateProxy}, " +
-#pragma warning disable 618
-                $"{nameof(IsPublicProxy)}: {IsPublicProxy}, " +
-                $"{nameof(IsResidentialProxy)}: {IsResidentialProxy}, " +
-                $"{nameof(IsSatelliteProvider)}: {IsSatelliteProvider}, " +
-                $"{nameof(IsTorExitNode)}: {IsTorExitNode}, " +
-#pragma warning restore 618
-                $"{nameof(Isp)}: {Isp}, " +
-                $"{nameof(MobileCountryCode)}: {MobileCountryCode}, " +
-                $"{nameof(MobileNetworkCode)}: {MobileNetworkCode}, " +
-                $"{nameof(Network)}: {Network}, " +
-                $"{nameof(Organization)}: {Organization}, " +
-                $"{nameof(StaticIPScore)}: {StaticIPScore}, " +
-                $"{nameof(UserCount)}: {UserCount}, " +
-                $"{nameof(UserType)}: {UserType}";
-        }
+        [MapKey("user_type")]
+        public string? UserType { get; init; }
     }
 }

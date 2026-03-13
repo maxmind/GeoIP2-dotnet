@@ -58,7 +58,8 @@ namespace MaxMind.GeoIP2.UnitTests
         private bool _disposed;
 
         private WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
-            HttpStatusCode status = HttpStatusCode.OK, string? contentType = null, string content = "")
+            HttpStatusCode status = HttpStatusCode.OK, string? contentType = null, string content = "",
+            List<string>? locales = null)
         {
             var service = type.Replace("Async", "");
 
@@ -80,7 +81,7 @@ namespace MaxMind.GeoIP2.UnitTests
             var host = _server.Urls[0].Replace("http://", "");
 
             return new WebServiceClient(6, "0123456789",
-                locales: ["en"],
+                locales: locales ?? ["en"],
                 host: host,
                 timeout: TestTimeoutMilliseconds,
                 disableHttps: true
@@ -449,7 +450,6 @@ namespace MaxMind.GeoIP2.UnitTests
                 Assert.Null(r.GeoNameId);
                 Assert.Null(r.Name);
                 Assert.Empty(r.Names);
-                Assert.Equal("", r.ToString());
             }
         }
 
@@ -466,6 +466,36 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.NotNull(new WebServiceClient(id, key));
             Assert.NotNull(new WebServiceClient(id, key, []));
             Assert.NotNull(new WebServiceClient(accountId: id, licenseKey: key));
+        }
+
+        [Fact]
+        public void WithLocalesPopulatesNames()
+        {
+            var client = CreateClient("insights", content: InsightsJson);
+            var result = client.Insights("1.2.3.4");
+
+            Assert.Equal("Minneapolis", result.City.Name);
+            Assert.Equal("North America", result.Continent.Name);
+            Assert.Equal("United States of America", result.Country.Name);
+            Assert.Equal("Germany", result.RegisteredCountry.Name);
+            Assert.Equal("United Kingdom", result.RepresentedCountry.Name);
+            Assert.Equal("Minnesota", result.Subdivisions[0].Name);
+        }
+
+        [Fact]
+        public void WithLocalesNonEnglish()
+        {
+            var client = CreateClient("insights", content: InsightsJson,
+                locales: ["ja"]);
+            var result = client.Insights("1.2.3.4");
+
+            Assert.IsType<InsightsResponse>(result);
+            Assert.Equal("\u30df\u30cd\u30a2\u30dd\u30ea\u30b9", result.City.Name);
+            Assert.Equal("\u5317\u30a2\u30e1\u30ea\u30ab", result.Continent.Name);
+            Assert.Equal("\u30a2\u30e1\u30ea\u30ab", result.Country.Name);
+            Assert.Equal("\u30c9\u30a4\u30c4", result.RegisteredCountry.Name);
+            Assert.Equal("\u30a4\u30ae\u30ea\u30b9", result.RepresentedCountry.Name);
+            Assert.Equal("\u30df\u30cd\u30bd\u30bf", result.Subdivisions[0].Name);
         }
 
         #region NetCoreTests

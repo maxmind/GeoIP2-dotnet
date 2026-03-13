@@ -1,12 +1,8 @@
-﻿#region
-
 using MaxMind.GeoIP2.Responses;
 using System.Text;
 using System.Text.Json;
 using Xunit;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
-
-#endregion
 
 namespace MaxMind.GeoIP2.UnitTests
 {

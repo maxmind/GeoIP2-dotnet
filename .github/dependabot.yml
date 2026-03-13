@@ -2,10 +2,10 @@ version: 2
 updates:
   - package-ecosystem: nuget
     directories:
-      - '**/*'
+      - "**/*"
     schedule:
       interval: daily
-      time: '14:00'
+      time: "14:00"
     open-pull-requests-limit: 10
     cooldown:
       default-days: 7
@@ -13,6 +13,6 @@ updates:
     directory: /
     schedule:
       interval: daily
-      time: '14:00'
+      time: "14:00"
     cooldown:
       default-days: 7
