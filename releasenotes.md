@@ -20,10 +20,14 @@
   City, Country, Continent, Subdivision, RepresentedCountry) has been removed.
   Records provide a compiler-generated `ToString()` that outputs all property
   values. Use the `Name` property directly instead.
+- **BREAKING:** `FileAccessMode.Memory` and the `DatabaseReader(Stream)`
+  constructor now use anonymous memory-mapped files internally instead of
+  `byte[]`. This removes the previous ~2.1 GiB size limitation but may break
+  environments where memory-mapped files are not supported, such as WASM/browser
+  runtimes, some mobile/sandboxed runtimes, or hardened containers with
+  restricted shared-memory syscalls. Non-seekable streams also now require a
+  writable temp directory.
 - Added `InternalsVisibleTo` for `MaxMind.MinFraud` assembly.
-
-## 5.5.0
-
 - `AnonymousPlus` and `TryAnonymousPlus` methods have been added to
   `IGeoIP2DatabaseReader`. These methods were previously only available on
   `DatabaseReader`.
