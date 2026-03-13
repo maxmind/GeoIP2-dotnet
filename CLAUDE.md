@@ -99,10 +99,6 @@ When deprecating properties, mark them with `[Obsolete]` and provide guidance:
 public int? MetroCode { get; init; }
 ```
 
-For backward compatibility during minor version updates, add deprecated
-constructors that match old signatures (see "Avoiding Breaking Changes in Minor
-Versions").
-
 #### 4. **Database vs Web Service Architecture**
 
 **Database Reader:**
@@ -129,8 +125,9 @@ properties:
 
 - `[MapKey("field_name")]`: Maps a property to a database field (replaces
   `[Parameter]`)
-- `[MapKey("field_name", true)]`: Maps a nested object, passing constructor arg
-  `true` to indicate sub-object construction
+- `[MapKey("field_name", true)]`: Maps a single nested sub-object. The `true`
+  flag tells the deserializer to construct the nested object from a sub-map
+  rather than a scalar field
 - `[Inject("field_name")]`: Injects metadata like IP address
 - `[Network]`: Injects the network information for the IP
 
@@ -295,7 +292,8 @@ Different target frameworks may require different approaches:
 ### Pattern: MaxMind DB Date Parsing with Backing Fields
 
 For date fields stored as strings in MMDB databases, use a backing field with an
-internal string property for deserialization:
+internal string property for deserialization. Invalid values should throw a
+`GeoIP2Exception` with enough context to identify the field and bad value:
 
 ```csharp
 #if NET6_0_OR_GREATER
@@ -314,7 +312,10 @@ public DateOnly? NetworkLastSeen
 internal string? NetworkLastSeenString
 {
     get => _networkLastSeen?.ToString("o");
-    init => _networkLastSeen = value == null ? null : DateOnly.Parse(value);
+    init => _networkLastSeen = value == null ? null
+        : DateOnly.TryParse(value, out var result) ? result
+        : throw new GeoIP2Exception(
+            $"Could not parse 'network_last_seen' value '{value}' as a valid date.");
 }
 #endif
 ```
