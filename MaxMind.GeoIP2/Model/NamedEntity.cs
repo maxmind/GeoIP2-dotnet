@@ -15,7 +15,7 @@ namespace MaxMind.GeoIP2.Model
         ///     from locale codes to the name in that locale. Don't use any of
         ///     these names as a database or dictionary key. Use the
         ///     <see
-        ///         cred="GeoNameId" />
+        ///         cref="GeoNameId" />
         ///     or relevant code instead.
         /// </summary>
         [JsonInclude]
@@ -25,7 +25,7 @@ namespace MaxMind.GeoIP2.Model
             = new Dictionary<string, string>();
 
         /// <summary>
-        ///     The GeoName ID for the city.
+        ///     The GeoName ID for the entity.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("geoname_id")]
@@ -44,7 +44,7 @@ namespace MaxMind.GeoIP2.Model
         ///     <see cref="WebServiceClient" /> or <c>DatabaseReader</c>. Don't use any of
         ///     these names as a database or dictionary key. Use the
         ///     <see
-        ///         cred="GeoNameId" />
+        ///         cref="GeoNameId" />
         ///     or relevant code instead.
         /// </summary>
         [JsonIgnore]
