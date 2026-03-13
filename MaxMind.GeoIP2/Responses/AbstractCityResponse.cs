@@ -55,7 +55,7 @@ namespace MaxMind.GeoIP2.Responses
         ///     returns an empty <see cref="Subdivision" /> object.
         /// </summary>
         [JsonIgnore]
-        public Subdivision MostSpecificSubdivision => Subdivisions.Count == 0 ? new() : Subdivisions[Subdivisions.Count - 1];
+        public Subdivision MostSpecificSubdivision => Subdivisions.Count == 0 ? new() { Locales = City.Locales } : Subdivisions[Subdivisions.Count - 1];
 
         /// <inheritdoc/>
         internal override AbstractResponse WithLocales(IReadOnlyList<string> locales)
