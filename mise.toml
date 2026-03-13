@@ -1,0 +1,20 @@
+[settings]
+experimental = true
+lockfile = true
+disable_backends = [
+    "asdf",
+    "vfox",
+]
+
+[tools]
+dotnet = ["latest", "9", "8"]
+"github:houseabsolute/precious" = "latest"
+node = "latest"
+"npm:prettier" = "latest"
+
+[hooks]
+enter = "mise install --quiet --locked"
+
+[[watch_files]]
+patterns = ["mise.toml", "mise.lock"]
+run = "mise install --quiet --locked"
