@@ -7,18 +7,18 @@
                     "city": {
                         "confidence": 76,
                         "geoname_id": 9876,
-                        "names": {"en": "Minneapolis"}
+                        "names": {"en": "Minneapolis", "ja": "\u30df\u30cd\u30a2\u30dd\u30ea\u30b9"}
                     },
                     "continent": {
                         "code": "NA",
                         "geoname_id": 42,
-                        "names": {"en": "North America"}
+                        "names": {"en": "North America", "ja": "\u5317\u30a2\u30e1\u30ea\u30ab"}
                     },
                     "country": {
                         "confidence": 99,
                         "iso_code": "US",
                         "geoname_id": 1,
-                        "names": {"en": "United States of America"}
+                        "names": {"en": "United States of America", "ja": "\u30a2\u30e1\u30ea\u30ab"}
                     },
                     "location": {
                         "accuracy_radius": 1500,
@@ -37,13 +37,13 @@
                         "geoname_id": 2,
                         "is_in_european_union": true,
                         "iso_code": "DE",
-                        "names": {"en": "Germany"}
+                        "names": {"en": "Germany", "ja": "\u30c9\u30a4\u30c4"}
                     },
                     "represented_country": {
                         "geoname_id": 3,
                         "is_in_european_union": true,
                         "iso_code": "GB",
-                        "names": {"en": "United Kingdom"},
+                        "names": {"en": "United Kingdom", "ja": "\u30a4\u30ae\u30ea\u30b9"},
                         "type": "military"
                     },
                     "subdivisions": [
@@ -51,7 +51,7 @@
                             "confidence": 88,
                             "geoname_id": 574635,
                             "iso_code": "MN",
-                            "names": {"en": "Minnesota"}
+                            "names": {"en": "Minnesota", "ja": "\u30df\u30cd\u30bd\u30bf"}
                         },
                         {"iso_code": "TT"}
                     ],
