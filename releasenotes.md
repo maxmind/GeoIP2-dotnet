@@ -1,6 +1,6 @@
 # GeoIP2 .NET API Release Notes
 
-## 6.0.0
+## 6.0.0-beta1 (2026-03-20)
 
 - **BREAKING:** All model and response classes have been converted from classes
   to C# records.
