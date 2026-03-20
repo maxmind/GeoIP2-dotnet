@@ -104,4 +104,13 @@ git commit -m "Prepare for $version" -a
 
 git push
 
-gh release create --target "$(git branch --show-current)" -t "$version" -n "$notes" "$tag"
+release_args=(
+    --target "$(git branch --show-current)"
+    -t "$version"
+    -n "$notes"
+)
+if [[ "$version" == *-* ]]; then
+    release_args+=(--prerelease)
+fi
+
+gh release create "$tag" "${release_args[@]}"
