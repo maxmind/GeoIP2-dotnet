@@ -1,6 +1,6 @@
 # GeoIP2 .NET API Release Notes
 
-## 6.0.0
+## 6.0.0-beta1 (2026-03-20)
 
 - **BREAKING:** All model and response classes have been converted from classes
   to C# records.
@@ -22,11 +22,11 @@
   values. Use the `Name` property directly instead.
 - **BREAKING:** `FileAccessMode.Memory` and the `DatabaseReader(Stream)`
   constructor now use anonymous memory-mapped files internally instead of
-  `byte[]`. This removes the previous ~2.1 GiB size limitation but may break
-  environments where memory-mapped files are not supported, such as WASM/browser
-  runtimes, some mobile/sandboxed runtimes, or hardened containers with
-  restricted shared-memory syscalls. Non-seekable streams also now require a
-  writable temp directory.
+  `byte[]`, via `MaxMind.Db` 5.0.0. This removes the previous ~2.1 GiB size
+  limitation but may break environments where memory-mapped files are not
+  supported, such as WASM/browser runtimes, some mobile/sandboxed runtimes, or
+  hardened containers with restricted shared-memory syscalls. Non-seekable
+  streams also now require a writable temp directory.
 - Added `InternalsVisibleTo` for `MaxMind.MinFraud` assembly.
 - `AnonymousPlus` and `TryAnonymousPlus` methods have been added to
   `IGeoIP2DatabaseReader`. These methods were previously only available on
