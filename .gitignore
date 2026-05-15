@@ -136,3 +136,7 @@ UpgradeLog*.XML
 
 # Worktrees
 .worktrees
+
+# Hugo docs build output
+docs/.hugo_build.lock
+docs/public/
