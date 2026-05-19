@@ -5,11 +5,11 @@ version = "10.0.201"
 backend = "core:dotnet"
 
 [[tools.dotnet]]
-version = "8.0.419"
+version = "9.0.312"
 backend = "core:dotnet"
 
 [[tools.dotnet]]
-version = "9.0.312"
+version = "8.0.419"
 backend = "core:dotnet"
 
 [[tools."github:houseabsolute/precious"]]
@@ -51,38 +51,70 @@ checksum = "sha256:9d683d1730e302c646ccb90a23d313e7a548c8b23b5abf7d24e19ff6befe7
 url = "https://github.com/houseabsolute/precious/releases/download/v0.10.2/precious-Windows-msvc-x86_64.zip"
 url_api = "https://api.github.com/repos/houseabsolute/precious/releases/assets/345520544"
 
+[[tools.hugo]]
+version = "0.161.1"
+backend = "aqua:gohugoio/hugo"
+
+[tools.hugo."platforms.linux-arm64"]
+checksum = "sha256:382371ec3208236fb854ced51781f859b6c27a7d066b8fe90594eba14ba76d00"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_linux-arm64.tar.gz"
+
+[tools.hugo."platforms.linux-arm64-musl"]
+checksum = "sha256:382371ec3208236fb854ced51781f859b6c27a7d066b8fe90594eba14ba76d00"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_linux-arm64.tar.gz"
+
+[tools.hugo."platforms.linux-x64"]
+checksum = "sha256:fae28bf7909c1a42d1365b89d2e9e3d4194fbe5968ae0dd5504f562381018a1d"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_linux-amd64.tar.gz"
+
+[tools.hugo."platforms.linux-x64-musl"]
+checksum = "sha256:fae28bf7909c1a42d1365b89d2e9e3d4194fbe5968ae0dd5504f562381018a1d"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_linux-amd64.tar.gz"
+
+[tools.hugo."platforms.macos-arm64"]
+checksum = "sha256:b12e1cbebacf61f9cf67e0046c835142e70c829da7c16b05c1ec64a68885ee80"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_darwin-universal.pkg"
+
+[tools.hugo."platforms.macos-x64"]
+checksum = "sha256:b12e1cbebacf61f9cf67e0046c835142e70c829da7c16b05c1ec64a68885ee80"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_darwin-universal.pkg"
+
+[tools.hugo."platforms.windows-x64"]
+checksum = "sha256:7f8d030b37600c60bf2a782611257e6a768934fbe7724c1f3a1a501e6724cf0d"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip"
+
 [[tools.node]]
-version = "25.8.0"
+version = "26.1.0"
 backend = "core:node"
 
 [tools.node."platforms.linux-arm64"]
-checksum = "sha256:54c128f5286a4392a1fd1c765729b074a6873abff8a4f9bb3d63d571c2855e41"
-url = "https://nodejs.org/dist/v25.8.0/node-v25.8.0-linux-arm64.tar.gz"
+checksum = "sha256:fcb4c339eef70c909cae72091008a6497278e2d0fcd221c0653068cf4ea4f0c7"
+url = "https://nodejs.org/dist/v26.1.0/node-v26.1.0-linux-arm64.tar.gz"
 
 [tools.node."platforms.linux-arm64-musl"]
-checksum = "sha256:54c128f5286a4392a1fd1c765729b074a6873abff8a4f9bb3d63d571c2855e41"
-url = "https://nodejs.org/dist/v25.8.0/node-v25.8.0-linux-arm64.tar.gz"
+checksum = "sha256:fcb4c339eef70c909cae72091008a6497278e2d0fcd221c0653068cf4ea4f0c7"
+url = "https://nodejs.org/dist/v26.1.0/node-v26.1.0-linux-arm64.tar.gz"
 
 [tools.node."platforms.linux-x64"]
-checksum = "sha256:2ae6f70d74a459c0a96456e486dc60f3e7e65d7752ad302771834e58b27500af"
-url = "https://nodejs.org/dist/v25.8.0/node-v25.8.0-linux-x64.tar.gz"
+checksum = "sha256:62d555c329e05e3625109f2e3a8b5195b368d5ef38266292469d32f63cd98ffd"
+url = "https://nodejs.org/dist/v26.1.0/node-v26.1.0-linux-x64.tar.gz"
 
 [tools.node."platforms.linux-x64-musl"]
-checksum = "sha256:2ae6f70d74a459c0a96456e486dc60f3e7e65d7752ad302771834e58b27500af"
-url = "https://nodejs.org/dist/v25.8.0/node-v25.8.0-linux-x64.tar.gz"
+checksum = "sha256:62d555c329e05e3625109f2e3a8b5195b368d5ef38266292469d32f63cd98ffd"
+url = "https://nodejs.org/dist/v26.1.0/node-v26.1.0-linux-x64.tar.gz"
 
 [tools.node."platforms.macos-arm64"]
-checksum = "sha256:75ff6fd07e0a85fb4d2529f6189c996014b1d3d83180c31e65feb2b3eaeec5d9"
-url = "https://nodejs.org/dist/v25.8.0/node-v25.8.0-darwin-arm64.tar.gz"
+checksum = "sha256:91063f665c2f5d6e69e4f8fcb66d3d476bc2785ace82267274bf4da789985ceb"
+url = "https://nodejs.org/dist/v26.1.0/node-v26.1.0-darwin-arm64.tar.gz"
 
 [tools.node."platforms.macos-x64"]
-checksum = "sha256:03fb559600c3ede0228d8b588ac6ad8b7b2cd0bac9422b56e7e2ef7f5c11b67c"
-url = "https://nodejs.org/dist/v25.8.0/node-v25.8.0-darwin-x64.tar.gz"
+checksum = "sha256:33519b28a352de668ab0a2a64366db032a45cb629d5353f86e4576e2780f4fcf"
+url = "https://nodejs.org/dist/v26.1.0/node-v26.1.0-darwin-x64.tar.gz"
 
 [tools.node."platforms.windows-x64"]
-checksum = "sha256:5744746371a417179a701044739b5fa2b3164e943aa57f86059fb312f8032e86"
-url = "https://nodejs.org/dist/v25.8.0/node-v25.8.0-win-x64.zip"
+checksum = "sha256:089a02c4c687451c9f0b7f1bfd252dae85a7ba27df0295a14096bdcc956fdc92"
+url = "https://nodejs.org/dist/v26.1.0/node-v26.1.0-win-x64.zip"
 
 [[tools."npm:prettier"]]
-version = "3.8.1"
+version = "3.8.3"
 backend = "npm:prettier"
