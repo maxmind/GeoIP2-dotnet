@@ -1,5 +1,5 @@
 title = "MaxMind GeoIP2 .NET API"
-disableKinds = ["taxonomy"]
+disableKinds = ["taxonomy", "term", "RSS"]
 
 [[cascade]]
   layout = "default"
