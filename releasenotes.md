@@ -1,5 +1,20 @@
 # GeoIP2 .NET API Release Notes
 
+## 6.0.0 (2026-05-22)
+
+- First non-beta 6.0.0 release. See the `6.0.0-beta1` notes below for the
+  breaking changes introduced in the 6.0 line.
+- `MaxMind.Db` has been updated to 5.1.0. Highlights:
+  - `FileAccessMode.MemoryMapped` now uses an unnamed file-backed memory-mapped
+    region instead of a named `Local\<sha>` section. This fixes an
+    `UnauthorizedAccessException` when processes running under different
+    identities open the same database.
+  - `FileAccessMode.MemoryMappedGlobal` has been deprecated. Existing usages
+    transparently route to the new unnamed file-backed path, so the 'create
+    global objects' right is no longer required. Code passing
+    `FileAccessMode.MemoryMappedGlobal` to a `DatabaseReader` constructor will
+    see an `[Obsolete]` warning.
+
 ## 6.0.0-beta1 (2026-03-20)
 
 - **BREAKING:** All model and response classes have been converted from classes
