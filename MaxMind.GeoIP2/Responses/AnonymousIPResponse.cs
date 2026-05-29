@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     This record represents the GeoIP2 Anonymous IP response.
+    ///     This record represents the GeoIP Anonymous IP response.
     /// </summary>
     public record AnonymousIPResponse : AbstractResponse
     {

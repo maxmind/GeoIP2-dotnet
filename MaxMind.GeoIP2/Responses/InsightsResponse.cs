@@ -11,7 +11,7 @@ namespace MaxMind.GeoIP2.Responses
     {
         /// <summary>
         ///     Gets anonymizer-related data for the requested IP address.
-        ///     This is available from the GeoIP2 Insights web service.
+        ///     This is available from the GeoIP Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("anonymizer")]

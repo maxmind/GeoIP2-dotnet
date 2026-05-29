@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>MaxMind GeoIP2 Database Reader and Web Service Client</Description>
+    <Description>MaxMind GeoIP Database Reader and Web Service Client</Description>
     <VersionPrefix>6.0.0</VersionPrefix>
     <TargetFrameworks>net10.0;net9.0;net8.0;netstandard2.1;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

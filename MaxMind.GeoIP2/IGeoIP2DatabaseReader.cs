@@ -21,14 +21,14 @@ namespace MaxMind.GeoIP2
         Metadata Metadata { get; }
 
         /// <summary>
-        ///     Look up an IP address in a GeoIP2 Anonymous IP.
+        ///     Look up an IP address in a GeoIP Anonymous IP.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="AnonymousIPResponse" /></returns>
         AnonymousIPResponse AnonymousIP(IPAddress ipAddress);
 
         /// <summary>
-        ///     Look up an IP address in a GeoIP2 Anonymous IP.
+        ///     Look up an IP address in a GeoIP Anonymous IP.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="AnonymousIPResponse" /></returns>

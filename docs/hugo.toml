@@ -1,4 +1,4 @@
-title = "MaxMind GeoIP2 .NET API"
+title = "MaxMind GeoIP .NET API"
 disableKinds = ["taxonomy", "term", "RSS"]
 
 [[cascade]]

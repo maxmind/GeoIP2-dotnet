@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     This record represents the GeoLite2 ASN response.
+    ///     This record represents the GeoLite ASN response.
     /// </summary>
     public record AsnResponse : AbstractResponse
     {

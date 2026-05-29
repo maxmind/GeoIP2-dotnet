@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     This record represents the GeoIP2 Domain response.
+    ///     This record represents the GeoIP Domain response.
     /// </summary>
     public record DomainResponse : AbstractResponse
     {
