@@ -309,9 +309,9 @@ using (var client = new WebServiceClient(42, "license_key"))
 ## Database Usage
 
 To use the database API, you must create a new `DatabaseReader` with a string
-representation of the path to your GeoIP database. You may also specify the
-file access mode. You may then call the appropriate method (e.g., `city`) for
-your database, passing it the IP address you want to look up.
+representation of the path to your GeoIP database. You may also specify the file
+access mode. You may then call the appropriate method (e.g., `city`) for your
+database, passing it the IP address you want to look up.
 
 If the lookup succeeds, the method call will return a response class for the
 GeoIP lookup. This class in turn contains multiple model classes, each of which
