@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace MaxMind.GeoIP2.Exceptions
 {
     /// <summary>
-    ///     This class represents a non-specific error returned by MaxMind's GeoIP2 web
+    ///     This class represents a non-specific error returned by MaxMind's GeoIP web
     ///     service. This occurs when the web service is up and responding to requests,
     ///     but the request sent was invalid in some way.
     /// </summary>

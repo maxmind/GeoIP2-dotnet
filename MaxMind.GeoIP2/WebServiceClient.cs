@@ -21,7 +21,7 @@ namespace MaxMind.GeoIP2
 {
     /// <summary>
     ///     <para>
-    ///         This class provides a client API for all the GeoIP2 web services. The
+    ///         This class provides a client API for all the GeoIP web services. The
     ///         services are Country, City Plus, and Insights. Each service returns a
     ///         different set of data about an IP address, with Country returning the
     ///         least data and Insights the most.
@@ -62,7 +62,7 @@ namespace MaxMind.GeoIP2
     ///     <para>
     ///         For details on the possible errors returned by the web service itself,
     ///         see <a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">the
-    ///         GeoIP2 web service documentation</a>.
+    ///         GeoIP web service documentation</a>.
     ///     </para>
     /// </summary>
     public class WebServiceClient : IGeoIP2WebServicesClient, IDisposable
@@ -112,9 +112,9 @@ namespace MaxMind.GeoIP2
         /// <param name="locales">List of locale codes to use in name
         ///     property from most preferred to least preferred.</param>
         /// <param name="host">The host to use when accessing the service. Set this to
-        ///     "geolite.info" to use the GeoLite2 web service instead of GeoIP2.
-        ///     Set this to "sandbox.maxmind.com" to use the Sandbox GeoIP2 web service
-        ///     instead of the production GeoIP2 web service. The sandbox allows you to
+        ///     "geolite.info" to use the GeoLite web service instead of GeoIP.
+        ///     Set this to "sandbox.maxmind.com" to use the Sandbox GeoIP web service
+        ///     instead of the production GeoIP web service. The sandbox allows you to
         ///     experiment with the API without affecting your production data.</param>
         /// <param name="timeout">Timeout in milliseconds for connection to
         ///     web service. The default is 3000.</param>
@@ -224,8 +224,8 @@ namespace MaxMind.GeoIP2
 
         /// <summary>
         ///     Asynchronously query the Insights web service for the specified IP
-        ///     address. Please note that only the GeoIP2 web services support
-        ///     Insights. The GeoLite2 web services do not support it.
+        ///     address. Please note that only the GeoIP web services support
+        ///     Insights. The GeoLite web services do not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Insights response</returns>
@@ -236,8 +236,8 @@ namespace MaxMind.GeoIP2
 
         /// <summary>
         ///     Asynchronously query the Insights web service for the specified IP
-        ///     address. Please note that only the GeoIP2 web services support
-        ///     Insights. The GeoLite2 web services do not support it.
+        ///     address. Please note that only the GeoIP web services support
+        ///     Insights. The GeoLite web services do not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>Task that produces an object modeling the Insights response</returns>
@@ -248,8 +248,8 @@ namespace MaxMind.GeoIP2
 
         /// <summary>
         ///     Asynchronously query the Insights web service for the requesting IP
-        ///     address. Please note that only the GeoIP2 web services support
-        ///     Insights. The GeoLite2 web services do not support it.
+        ///     address. Please note that only the GeoIP web services support
+        ///     Insights. The GeoLite web services do not support it.
         /// </summary>
         /// <returns>Task that produces an object modeling the Insights response</returns>
         public async Task<InsightsResponse> InsightsAsync()
@@ -317,8 +317,8 @@ namespace MaxMind.GeoIP2
 
         /// <summary>
         ///     Returns an <see cref="InsightsResponse" /> for the specified IP
-        ///     address. Please note that only the GeoIP2 web services support
-        ///     Insights. The GeoLite2 web services do not support it.
+        ///     address. Please note that only the GeoIP web services support
+        ///     Insights. The GeoLite web services do not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="InsightsResponse" /></returns>
@@ -329,8 +329,8 @@ namespace MaxMind.GeoIP2
 
         /// <summary>
         ///     Returns an <see cref="InsightsResponse" /> for the specified IP
-        ///     address. Please note that only the GeoIP2 web services support
-        ///     Insights. The GeoLite2 web services do not support it.
+        ///     address. Please note that only the GeoIP web services support
+        ///     Insights. The GeoLite web services do not support it.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="InsightsResponse" /></returns>
@@ -341,8 +341,8 @@ namespace MaxMind.GeoIP2
 
         /// <summary>
         ///     Returns an <see cref="InsightsResponse" /> for the requesting IP
-        ///     address. Please note that only the GeoIP2 web services support
-        ///     Insights. The GeoLite2 web services do not support it.
+        ///     address. Please note that only the GeoIP web services support
+        ///     Insights. The GeoLite web services do not support it.
         /// </summary>
         /// <returns>An <see cref="InsightsResponse" /></returns>
         public InsightsResponse Insights()

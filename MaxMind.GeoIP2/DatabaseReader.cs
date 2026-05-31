@@ -15,7 +15,7 @@ using System.Net;
 namespace MaxMind.GeoIP2
 {
     /// <summary>
-    ///     Instances of this class provide a reader for the GeoIP2 database format
+    ///     Instances of this class provide a reader for the GeoIP database format
     /// </summary>
     public class DatabaseReader : IGeoIP2DatabaseReader, IDisposable
     {
@@ -182,7 +182,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Look up an IP address in a GeoIP2 Anonymous IP.
+        ///     Look up an IP address in a GeoIP Anonymous IP database.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="AnonymousIPResponse" /></returns>
@@ -192,7 +192,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Look up an IP address in a GeoIP2 Anonymous IP.
+        ///     Look up an IP address in a GeoIP Anonymous IP database.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="AnonymousIPResponse" /></returns>
@@ -224,7 +224,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Look up an IP address in a GeoIP Anonymous Plus.
+        ///     Look up an IP address in a GeoIP Anonymous Plus database.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="AnonymousPlusResponse" /></returns>
@@ -234,7 +234,7 @@ namespace MaxMind.GeoIP2
         }
 
         /// <summary>
-        ///     Look up an IP address in a GeoIP Anonymous Plus.
+        ///     Look up an IP address in a GeoIP Anonymous Plus database.
         /// </summary>
         /// <param name="ipAddress">The IP address.</param>
         /// <returns>An <see cref="AnonymousPlusResponse" /></returns>

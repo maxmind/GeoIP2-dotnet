@@ -7,8 +7,8 @@ code in this repository.
 
 **GeoIP2-dotnet** is MaxMind's official .NET client library for:
 
-- **GeoIP2/GeoLite2 Web Services**: Country, City, and Insights endpoints
-- **GeoIP2/GeoLite2 Databases**: Local MMDB file reading for various database
+- **GeoIP/GeoLite Web Services**: Country, City Plus, and Insights endpoints
+- **GeoIP/GeoLite Databases**: Local MMDB file reading for various database
   types (City, Country, ASN, Anonymous IP, Anonymous Plus, ISP, etc.)
 
 The library provides both web service clients and database readers that return
@@ -210,8 +210,8 @@ Always update `releasenotes.md` for user-facing changes:
 ## Additional Resources
 
 - [API Documentation](https://maxmind.github.io/GeoIP2-dotnet/)
-- [GeoIP2 Web Services Docs](https://dev.maxmind.com/geoip/docs/web-services?lang=en)
-- [GeoIP2 Database Docs](https://dev.maxmind.com/geoip/docs/databases?lang=en)
+- [GeoIP Web Services Docs](https://dev.maxmind.com/geoip/docs/web-services?lang=en)
+- [GeoIP Database Docs](https://dev.maxmind.com/geoip/docs/databases?lang=en)
 - [MaxMind DB Format](https://maxmind.github.io/MaxMind-DB/)
 - GitHub Issues: https://github.com/maxmind/GeoIP2-dotnet/issues
 

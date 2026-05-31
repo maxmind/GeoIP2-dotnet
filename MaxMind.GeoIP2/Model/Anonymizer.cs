@@ -5,14 +5,14 @@ namespace MaxMind.GeoIP2.Model
 {
     /// <summary>
     ///     Contains anonymizer-related data associated with an IP address.
-    ///     This data is available from the GeoIP2 Insights web service.
+    ///     This data is available from the GeoIP Insights web service.
     /// </summary>
     public record Anonymizer
     {
         /// <summary>
         ///     A score ranging from 1 to 99 that represents our percent confidence
         ///     that the network is currently part of an actively used VPN service.
-        ///     This is available from the GeoIP2 Insights web service.
+        ///     This is available from the GeoIP Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("confidence")]
@@ -20,7 +20,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to any sort of anonymous
-        ///     network. This is available from the GeoIP2 Insights web service.
+        ///     network. This is available from the GeoIP Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_anonymous")]
@@ -28,7 +28,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address is registered to an anonymous
-        ///     VPN provider. This is available from the GeoIP2 Insights web
+        ///     VPN provider. This is available from the GeoIP Insights web
         ///     service.
         /// </summary>
         /// <remarks>
@@ -43,7 +43,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     This is true if the IP address belongs to a hosting or VPN
         ///     provider (see description of IsAnonymousVpn property).
-        ///     This is available from the GeoIP2 Insights web service.
+        ///     This is available from the GeoIP Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_hosting_provider")]
@@ -51,7 +51,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to a public proxy.
-        ///     This is available from the GeoIP2 Insights web service.
+        ///     This is available from the GeoIP Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_public_proxy")]
@@ -60,7 +60,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     This is true if the IP address is on a suspected anonymizing
         ///     network and belongs to a residential ISP. This is available
-        ///     from the GeoIP2 Insights web service.
+        ///     from the GeoIP Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_residential_proxy")]
@@ -68,7 +68,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to a Tor exit node.
-        ///     This is available from the GeoIP2 Insights web service.
+        ///     This is available from the GeoIP Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_tor_exit_node")]
@@ -77,7 +77,7 @@ namespace MaxMind.GeoIP2.Model
 #if NET6_0_OR_GREATER
         /// <summary>
         ///     The last day that the network was sighted in our analysis of
-        ///     anonymized networks. This is available from the GeoIP2 Insights
+        ///     anonymized networks. This is available from the GeoIP Insights
         ///     web service.
         /// </summary>
         [JsonInclude]
@@ -88,7 +88,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     The name of the VPN provider (e.g., NordVPN, SurfShark)
         ///     associated with the network. This is available from the
-        ///     GeoIP2 Insights web service.
+        ///     GeoIP Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("provider_name")]

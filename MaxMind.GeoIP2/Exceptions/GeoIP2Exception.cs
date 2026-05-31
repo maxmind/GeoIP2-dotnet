@@ -7,8 +7,8 @@ using System.Runtime.Serialization;
 namespace MaxMind.GeoIP2.Exceptions
 {
     /// <summary>
-    ///     This class represents a generic GeoIP2 error. All other exceptions thrown by
-    ///     the GeoIP2 API subclass this exception
+    ///     This class represents a generic GeoIP error. All other exceptions thrown by
+    ///     the GeoIP API subclass this exception
     /// </summary>
     [Serializable]
     public class GeoIP2Exception : Exception

@@ -80,7 +80,7 @@ namespace MaxMind.GeoIP2.Model
         ///     IP risk score provided in minFraud and is not responsive to traffic on
         ///     your network. If you need realtime IP risk scoring based on behavioral
         ///     signals on your own network, please use minFraud. This is available
-        ///     from the GeoIP2 Insights web service.
+        ///     from the GeoIP Insights web service.
         ///     <para>
         ///     We do not provide an IP risk snapshot for low-risk networks. If this
         ///     field is not populated, we either do not have signals for the network
@@ -96,7 +96,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to any sort of anonymous
-        ///     network. This value is only available from the GeoIP2 Insights
+        ///     network. This value is only available from the GeoIP Insights
         ///     web service.
         /// </summary>
         [Obsolete("Please use the Anonymizer object on the response instead.")]
@@ -110,7 +110,7 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_anonymous_proxy")]
-        [Obsolete("Use our GeoIP2 Anonymous IP database instead.")]
+        [Obsolete("Use our GeoIP Anonymous IP database instead.")]
         [MapKey("is_anonymous_proxy")]
         public bool IsAnonymousProxy { get; init; }
 
@@ -127,7 +127,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     This is true if the IP address is registered to an anonymous
         ///     VPN provider.
-        ///     This value is only available from the GeoIP2 Insights web
+        ///     This value is only available from the GeoIP Insights web
         ///     service.
         /// </summary>
         /// <remarks>
@@ -144,7 +144,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     This is true if the IP address belongs to a hosting or VPN
         ///     provider (see description of IsAnonymousVpn property).
-        ///     This value is only available from the GeoIP2 Insights web
+        ///     This value is only available from the GeoIP Insights web
         ///     service.
         /// </summary>
         [Obsolete("Please use the Anonymizer object on the response instead.")]
@@ -156,7 +156,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     True if MaxMind believes this IP address to be a legitimate
         ///     proxy, such as an internal VPN used by a corporation. This is
-        ///     only available in the GeoIP2 Enterprise database.
+        ///     only available in the GeoIP Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("is_legitimate_proxy")]
@@ -165,7 +165,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to a public proxy.
-        ///     This value is only available from the GeoIP2 Insights web
+        ///     This value is only available from the GeoIP Insights web
         ///     service.
         /// </summary>
         [Obsolete("Please use the Anonymizer object on the response instead.")]
@@ -177,7 +177,7 @@ namespace MaxMind.GeoIP2.Model
         /// <summary>
         ///     This is true if the IP address is on a suspected anonymizing
         ///     network and belongs to a residential ISP. This value is
-        ///     only available from the GeoIP2 Insights web service.
+        ///     only available from the GeoIP Insights web service.
         /// </summary>
         [Obsolete("Please use the Anonymizer object on the response instead.")]
         [JsonInclude]
@@ -196,7 +196,7 @@ namespace MaxMind.GeoIP2.Model
 
         /// <summary>
         ///     This is true if the IP address belongs to a Tor exit node.
-        ///     This value is only available from the GeoIP2 Insights web
+        ///     This value is only available from the GeoIP Insights web
         ///     service.
         /// </summary>
         [Obsolete("Please use the Anonymizer object on the response instead.")]
@@ -219,7 +219,7 @@ namespace MaxMind.GeoIP2.Model
         ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
         ///     mobile country code (MCC)</a> associated with the IP address and ISP.
         ///     This value is available from the City Plus and Insights web services
-        ///     and the GeoIP2 Enterprise database.
+        ///     and the GeoIP Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("mobile_country_code")]
@@ -230,7 +230,7 @@ namespace MaxMind.GeoIP2.Model
         ///     The <a href="https://en.wikipedia.org/wiki/Mobile_country_code">
         ///     mobile network code (MNC)</a> associated with the IP address and ISP.
         ///     This value is available from the City Plus and Insights web services
-        ///     and the GeoIP2 Enterprise database.
+        ///     and the GeoIP Enterprise database.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("mobile_network_code")]
@@ -277,7 +277,7 @@ namespace MaxMind.GeoIP2.Model
         ///     The estimated number of users sharing the IP/network during the past
         ///     24 hours. For IPv4, the count is for the individual IP. For IPv6, the
         ///     count is for the /64 network. This value is only available from
-        ///     the GeoIP2 Insights web service.
+        ///     the GeoIP Insights web service.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("user_count")]

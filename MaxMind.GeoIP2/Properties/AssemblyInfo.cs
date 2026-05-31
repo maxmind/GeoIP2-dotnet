@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("MaxMind.GeoIP2")]
-[assembly: AssemblyDescription("MaxMind GeoIP2 Database Reader and Web Service Client")]
+[assembly: AssemblyDescription("MaxMind GeoIP Database Reader and Web Service Client")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MaxMind, Inc.")]
 [assembly: AssemblyProduct("MaxMind.GeoIP2")]

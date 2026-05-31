@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     This record represents the GeoIP2 ISP response.
+    ///     This record represents the GeoIP ISP response.
     /// </summary>
     public record IspResponse : AbstractResponse
     {

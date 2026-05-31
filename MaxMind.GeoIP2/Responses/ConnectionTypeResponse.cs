@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace MaxMind.GeoIP2.Responses
 {
     /// <summary>
-    ///     This record represents the GeoIP2 Connection-Type response.
+    ///     This record represents the GeoIP Connection-Type response.
     /// </summary>
     public record ConnectionTypeResponse : AbstractResponse
     {
