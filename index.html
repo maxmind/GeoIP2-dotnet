@@ -1,14 +1,14 @@
-<!doctype html><html lang=en><head><meta name=generator content="Hugo 0.161.1"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>MaxMind GeoIP2 .NET API</title><link rel=stylesheet href=/GeoIP2-dotnet/css/main.281d4a083c59f78015bdb60748317bf7d39ad62d8c9c6cead28bce0cc0794b5e.css integrity="sha256-KB1KCDxZ94AVvbYHSDF799Oa1i2MnGzq0ovODMB5S14=" crossorigin=anonymous></head><body><nav class=page-nav><a href=/GeoIP2-dotnet/ class=active aria-current=page>Overview</a>
-<a href=/GeoIP2-dotnet/doc/latest/>API documentation</a></nav><main><h1 id=geoip2-net-api>GeoIP2 .NET API<a class=heading-anchor href=#geoip2-net-api aria-label="Link to GeoIP2 .NET API">#</a></h1><p><a href=https://www.nuget.org/packages/MaxMind.GeoIP2><img src=https://img.shields.io/nuget/v/MaxMind.GeoIP2 alt=NuGet></a></p><h2 id=description>Description<a class=heading-anchor href=#description aria-label="Link to Description">#</a></h2><p>This distribution provides an API for the GeoIP2 and GeoLite2
+<!doctype html><html lang=en><head><meta name=generator content="Hugo 0.161.1"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>MaxMind GeoIP .NET API</title><link rel=stylesheet href=/GeoIP2-dotnet/css/main.281d4a083c59f78015bdb60748317bf7d39ad62d8c9c6cead28bce0cc0794b5e.css integrity="sha256-KB1KCDxZ94AVvbYHSDF799Oa1i2MnGzq0ovODMB5S14=" crossorigin=anonymous></head><body><nav class=page-nav><a href=/GeoIP2-dotnet/ class=active aria-current=page>Overview</a>
+<a href=/GeoIP2-dotnet/doc/latest/>API documentation</a></nav><main><h1 id=geoip-net-api>GeoIP .NET API<a class=heading-anchor href=#geoip-net-api aria-label="Link to GeoIP .NET API">#</a></h1><p><a href=https://www.nuget.org/packages/MaxMind.GeoIP2><img src=https://img.shields.io/nuget/v/MaxMind.GeoIP2 alt=NuGet></a></p><h2 id=description>Description<a class=heading-anchor href=#description aria-label="Link to Description">#</a></h2><p>This distribution provides an API for the GeoIP and GeoLite
 <a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">web services</a> and
 <a href="https://dev.maxmind.com/geoip/docs/databases?lang=en">databases</a>.</p><h2 id=installation>Installation<a class=heading-anchor href=#installation aria-label="Link to Installation">#</a></h2><h3 id=nuget>NuGet<a class=heading-anchor href=#nuget aria-label="Link to NuGet">#</a></h3><p>We recommend installing this library with NuGet. To do this, type the following
 into the Visual Studio Package Manager Console:</p><pre tabindex=0><code>install-package MaxMind.GeoIP2
 </code></pre><h2 id=ip-geolocation-usage>IP Geolocation Usage<a class=heading-anchor href=#ip-geolocation-usage aria-label="Link to IP Geolocation Usage">#</a></h2><p>IP geolocation is inherently imprecise. Locations are often near the center of
-the population. Any location provided by a GeoIP2 database or web service should
+the population. Any location provided by a GeoIP database or web service should
 not be used to identify a particular address or household.</p><h2 id=web-service-usage>Web Service Usage<a class=heading-anchor href=#web-service-usage aria-label="Link to Web Service Usage">#</a></h2><p>To use the web service API, first create a new <code>WebServiceClient</code> object with
 your account ID and license key:</p><pre tabindex=0><code>var client = new WebServiceClient(42, &#34;license_key1&#34;);
-</code></pre><p>To query the GeoLite2 web service, you must set the host to <code>geolite.info</code>:</p><pre tabindex=0><code>var client = new WebServiceClient(42, &#34;license_key1&#34;, host: &#34;geolite.info&#34;);
-</code></pre><p>To query the Sandbox GeoIP2 web service, you must set the host to
+</code></pre><p>To query the GeoLite web service, you must set the host to <code>geolite.info</code>:</p><pre tabindex=0><code>var client = new WebServiceClient(42, &#34;license_key1&#34;, host: &#34;geolite.info&#34;);
+</code></pre><p>To query the Sandbox GeoIP web service, you must set the host to
 <code>sandbox.maxmind.com</code>:</p><pre tabindex=0><code>var client = new WebServiceClient(42, &#34;license_key1&#34;, host: &#34;sandbox.maxmind.com&#34;);
 </code></pre><p>You may also specify the fall-back locales, the host, or the timeout as optional
 parameters. See the API docs for more information.</p><p>This object is safe to share across threads. If you are making multiple
@@ -35,9 +35,9 @@ key.</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f7f7f
 </span></span><span style=display:flex><span>    <span style=color:#57606a>// Optionally set a timeout. The default is 3000 ms.
 </span></span></span><span style=display:flex><span>    <span style=color:#57606a>// &#34;Timeout&#34;: 3000,
 </span></span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#57606a>// Optionally set host. &#34;geolite.info&#34; will use the GeoLite2
-</span></span></span><span style=display:flex><span>    <span style=color:#57606a>// web service instead of GeoIP2. &#34;sandbox.maxmind.com&#34; will use the
-</span></span></span><span style=display:flex><span>    <span style=color:#57606a>// Sandbox GeoIP2 web service instead of the production GeoIP2 web
+</span></span><span style=display:flex><span>    <span style=color:#57606a>// Optionally set host. &#34;geolite.info&#34; will use the GeoLite
+</span></span></span><span style=display:flex><span>    <span style=color:#57606a>// web service instead of GeoIP. &#34;sandbox.maxmind.com&#34; will use the
+</span></span></span><span style=display:flex><span>    <span style=color:#57606a>// Sandbox GeoIP web service instead of the production GeoIP web
 </span></span></span><span style=display:flex><span>    <span style=color:#57606a>// service.
 </span></span></span><span style=display:flex><span>    <span style=color:#57606a>//
 </span></span></span><span style=display:flex><span>    <span style=color:#57606a>// &#34;Host&#34;: &#34;geolite.info&#34;
@@ -67,10 +67,10 @@ key.</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f7f7f
 </span></span><span style=display:flex><span><span style=color:#57606a>// class is thread safe.</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>//</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>// Replace &#34;42&#34; with your account ID and &#34;license_key&#34; with your license</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// key. Set the named host argument to &#34;geolite.info&#34; to use the GeoLite2</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// web service instead of GeoIP2. Set the named host argument to</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP2 web service instead of</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// the production GeoIP2 web service.</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// key. Set the named host argument to &#34;geolite.info&#34; to use the GeoLite</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// web service instead of GeoIP. Set the named host argument to</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP web service instead of</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// the production GeoIP web service.</span>
 </span></span><span style=display:flex><span><span style=color:#cf222e>using</span> <span style=color:#1f2328>(</span><span style=color:#cf222e>var</span> client <span style=color:#1f2328>=</span> <span style=color:#cf222e>new</span> WebServiceClient<span style=color:#1f2328>(</span><span style=color:#0550ae>42</span><span style=color:#1f2328>,</span> <span style=color:#0a3069>&#34;license_key&#34;</span><span style=color:#1f2328>))</span>
 </span></span><span style=display:flex><span><span style=color:#1f2328>{</span>
 </span></span><span style=display:flex><span>    <span style=color:#57606a>// Do the lookup</span>
@@ -85,10 +85,10 @@ key.</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f7f7f
 </span></span><span style=display:flex><span><span style=color:#57606a>// class is thread safe.</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>//</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>// Replace &#34;42&#34; with your account ID and &#34;license_key&#34; with your license</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// key. Set the named host argument to &#34;geolite.info&#34; to use the GeoLite2</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// web service instead of GeoIP2. Set the named host argument to</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP2 web service instead of</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// the production GeoIP2 web service.</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// key. Set the named host argument to &#34;geolite.info&#34; to use the GeoLite</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// web service instead of GeoIP. Set the named host argument to</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP web service instead of</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// the production GeoIP web service.</span>
 </span></span><span style=display:flex><span><span style=color:#cf222e>using</span> <span style=color:#1f2328>(</span><span style=color:#cf222e>var</span> client <span style=color:#1f2328>=</span> <span style=color:#cf222e>new</span> WebServiceClient<span style=color:#1f2328>(</span><span style=color:#0550ae>42</span><span style=color:#1f2328>,</span> <span style=color:#0a3069>&#34;license_key&#34;</span><span style=color:#1f2328>))</span>
 </span></span><span style=display:flex><span><span style=color:#1f2328>{</span>
 </span></span><span style=display:flex><span>    <span style=color:#57606a>// Do the lookup</span>
@@ -103,10 +103,10 @@ key.</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f7f7f
 </span></span><span style=display:flex><span><span style=color:#57606a>// class is thread safe.</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>//</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>// Replace &#34;42&#34; with your account ID and &#34;license_key&#34; with your license</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// key. Set the named host argument to &#34;geolite.info&#34; to use the GeoLite2</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// web service instead of GeoIP2. Set the named host argument to</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP2 web service instead of</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// the production GeoIP2 web service.</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// key. Set the named host argument to &#34;geolite.info&#34; to use the GeoLite</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// web service instead of GeoIP. Set the named host argument to</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP web service instead of</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// the production GeoIP web service.</span>
 </span></span><span style=display:flex><span><span style=color:#cf222e>using</span> <span style=color:#1f2328>(</span><span style=color:#cf222e>var</span> client <span style=color:#1f2328>=</span> <span style=color:#cf222e>new</span> WebServiceClient<span style=color:#1f2328>(</span><span style=color:#0550ae>42</span><span style=color:#1f2328>,</span> <span style=color:#0a3069>&#34;license_key&#34;</span><span style=color:#1f2328>))</span>
 </span></span><span style=display:flex><span><span style=color:#1f2328>{</span>
 </span></span><span style=display:flex><span>    <span style=color:#57606a>// Do the lookup</span>
@@ -131,10 +131,10 @@ key.</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f7f7f
 </span></span><span style=display:flex><span><span style=color:#57606a>// class is thread safe.</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>//</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>// Replace &#34;42&#34; with your account ID and &#34;license_key&#34; with your license</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// key. Set the named host argument to &#34;geolite.info&#34; to use the GeoLite2</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// web service instead of GeoIP2. Set the named host argument to</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP2 web service instead of</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// the production GeoIP2 web service.</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// key. Set the named host argument to &#34;geolite.info&#34; to use the GeoLite</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// web service instead of GeoIP. Set the named host argument to</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP web service instead of</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// the production GeoIP web service.</span>
 </span></span><span style=display:flex><span><span style=color:#cf222e>using</span> <span style=color:#1f2328>(</span><span style=color:#cf222e>var</span> client <span style=color:#1f2328>=</span> <span style=color:#cf222e>new</span> WebServiceClient<span style=color:#1f2328>(</span><span style=color:#0550ae>42</span><span style=color:#1f2328>,</span> <span style=color:#0a3069>&#34;license_key&#34;</span><span style=color:#1f2328>))</span>
 </span></span><span style=display:flex><span><span style=color:#1f2328>{</span>
 </span></span><span style=display:flex><span>    <span style=color:#57606a>// Do the lookup</span>
@@ -159,9 +159,9 @@ key.</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f7f7f
 </span></span><span style=display:flex><span><span style=color:#57606a>// class is thread safe.</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>//</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>// Replace &#34;42&#34; with your account ID and &#34;license_key&#34; with your license</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// key. The GeoLite2 web service does not support Insights. Set the named</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// host argument to &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP2 web</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// service instead of the production GeoIP2 web service.</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// key. The GeoLite web service does not support Insights. Set the named</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// host argument to &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP web</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// service instead of the production GeoIP web service.</span>
 </span></span><span style=display:flex><span><span style=color:#cf222e>using</span> <span style=color:#1f2328>(</span><span style=color:#cf222e>var</span> client <span style=color:#1f2328>=</span> <span style=color:#cf222e>new</span> WebServiceClient<span style=color:#1f2328>(</span><span style=color:#0550ae>42</span><span style=color:#1f2328>,</span> <span style=color:#0a3069>&#34;license_key&#34;</span><span style=color:#1f2328>))</span>
 </span></span><span style=display:flex><span><span style=color:#1f2328>{</span>
 </span></span><span style=display:flex><span>    <span style=color:#57606a>// Do the lookup</span>
@@ -186,9 +186,9 @@ key.</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f7f7f
 </span></span><span style=display:flex><span><span style=color:#57606a>// class is thread safe.</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>//</span>
 </span></span><span style=display:flex><span><span style=color:#57606a>// Replace &#34;42&#34; with your account ID and &#34;license_key&#34; with your license</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// key. The GeoLite2 web service does not support Insights. Set the named</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// host argument to &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP2 web</span>
-</span></span><span style=display:flex><span><span style=color:#57606a>// service instead of the production GeoIP2 web service.</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// key. The GeoLite web service does not support Insights. Set the named</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// host argument to &#34;sandbox.maxmind.com&#34; to use the Sandbox GeoIP web</span>
+</span></span><span style=display:flex><span><span style=color:#57606a>// service instead of the production GeoIP web service.</span>
 </span></span><span style=display:flex><span><span style=color:#cf222e>using</span> <span style=color:#1f2328>(</span><span style=color:#cf222e>var</span> client <span style=color:#1f2328>=</span> <span style=color:#cf222e>new</span> WebServiceClient<span style=color:#1f2328>(</span><span style=color:#0550ae>42</span><span style=color:#1f2328>,</span> <span style=color:#0a3069>&#34;license_key&#34;</span><span style=color:#1f2328>))</span>
 </span></span><span style=display:flex><span><span style=color:#1f2328>{</span>
 </span></span><span style=display:flex><span>    <span style=color:#57606a>// Do the lookup</span>
@@ -209,10 +209,10 @@ key.</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f7f7f
 </span></span><span style=display:flex><span>    Console<span style=color:#1f2328>.</span>WriteLine<span style=color:#1f2328>(</span>response<span style=color:#1f2328>.</span>Location<span style=color:#1f2328>.</span>Longitude<span style=color:#1f2328>);</span> <span style=color:#57606a>// -93.2323</span>
 </span></span><span style=display:flex><span><span style=color:#1f2328>}</span>
 </span></span></code></pre></div><h2 id=database-usage>Database Usage<a class=heading-anchor href=#database-usage aria-label="Link to Database Usage">#</a></h2><p>To use the database API, you must create a new <code>DatabaseReader</code> with a string
-representation of the path to your GeoIP2 database. You may also specify the
-file access mode. You may then call the appropriate method (e.g., <code>city</code>) for
-your database, passing it the IP address you want to look up.</p><p>If the lookup succeeds, the method call will return a response class for the
-GeoIP2 lookup. This class in turn contains multiple model classes, each of which
+representation of the path to your GeoIP database. You may also specify the file
+access mode. You may then call the appropriate method (e.g., <code>city</code>) for your
+database, passing it the IP address you want to look up.</p><p>If the lookup succeeds, the method call will return a response class for the
+GeoIP lookup. This class in turn contains multiple model classes, each of which
 represents part of the data returned by the database.</p><p>We recommend reusing the <code>DatabaseReader</code> object rather than creating a new one
 for each lookup. The creation of this object is relatively expensive as it must
 read in metadata for the file.</p><p>See the API documentation for more details.</p><h2 id=database-examples>Database Examples<a class=heading-anchor href=#database-examples aria-label="Link to Database Examples">#</a></h2><h3 id=anonymous-ip-database>Anonymous IP Database<a class=heading-anchor href=#anonymous-ip-database aria-label="Link to Anonymous IP Database">#</a></h3><div class=highlight><pre tabindex=0 style=background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span>
@@ -328,7 +328,7 @@ read in metadata for the file.</p><p>See the API documentation for more details.
 </span></span></code></pre></div><h2 id=exceptions>Exceptions<a class=heading-anchor href=#exceptions aria-label="Link to Exceptions">#</a></h2><h3 id=database>Database<a class=heading-anchor href=#database aria-label="Link to Database">#</a></h3><p>If the database is corrupt or otherwise invalid, a
 <code>MaxMind.Db.InvalidDatabaseException</code> will be thrown.</p><p>If an address is not available in the database, a <code>AddressNotFoundException</code>
 will be thrown.</p><h3 id=web-service>Web Service<a class=heading-anchor href=#web-service aria-label="Link to Web Service">#</a></h3><p>For details on the possible errors returned by the web service itself,
-<a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">see the GeoIP2 web service documentation</a>.</p><p>If the web service returns an explicit error document, this is thrown as a
+<a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">see the GeoIP web service documentation</a>.</p><p>If the web service returns an explicit error document, this is thrown as a
 <code>AddressNotFoundException</code>, a <code>AuthenticationException</code>, a
 <code>InvalidRequestException</code>, or a <code>OutOfQueriesException</code>.</p><p>If some sort of transport error occurs, an <code>HttpException</code> is thrown. This is
 thrown when some sort of unanticipated error occurs, such as the web service
@@ -345,12 +345,12 @@ can be populated vary between end points. In addition, while an end point may
 offer a particular piece of data, MaxMind does not always have every piece of
 data for any given IP address.</p><p>Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.</p><p>See the
-<a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">GeoIP2 web services documentation</a>
+<a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">GeoIP web services documentation</a>
 for details on what data each end point may return.</p><p>The only piece of data which is always returned is the <code>ipAddress</code> attribute in
 the <code>MaxMind.GeoIP2.Traits</code> record.</p><h2 id=integration-with-geonames>Integration with GeoNames<a class=heading-anchor href=#integration-with-geonames aria-label="Link to Integration with GeoNames">#</a></h2><p><a href=https://www.geonames.org/>GeoNames</a> offers web services and downloadable
 databases with data on geographical features around the world, including
 populated places. They offer both free and paid premium data. Each feature is
-uniquely identified by a <code>geonameId</code>, which is an integer.</p><p>Many of the records returned by the GeoIP2 web services and databases include a
+uniquely identified by a <code>geonameId</code>, which is an integer.</p><p>Many of the records returned by the GeoIP web services and databases include a
 <code>geonameId</code> property. This is the ID of a geographical feature (city, region,
 country, etc.) in the GeoNames database.</p><p>Some of the data that MaxMind provides is also sourced from GeoNames. We source
 things like place names, ISO codes, and other similar data from the GeoNames
