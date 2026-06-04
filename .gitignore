@@ -140,3 +140,6 @@ UpgradeLog*.XML
 # Hugo docs build output
 docs/.hugo_build.lock
 docs/public/
+
+# lychee link checker cache
+.lycheecache
