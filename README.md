@@ -5,8 +5,8 @@
 ## Description
 
 This distribution provides an API for the GeoIP and GeoLite
-[web services](https://dev.maxmind.com/geoip/docs/web-services?lang=en) and
-[databases](https://dev.maxmind.com/geoip/docs/databases?lang=en).
+[web services](https://dev.maxmind.com/geoip/docs/web-services/?lang=en) and
+[databases](https://dev.maxmind.com/geoip/docs/databases/?lang=en).
 
 ## Installation
 
@@ -69,7 +69,7 @@ See the API documentation for more details.
 ### ASP.NET Core Usage
 
 To use the web service API with HttpClient factory pattern as a
-[Typed client](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests#typed-clients)
+[Typed client](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-10.0#typed-clients)
 you need to do the following:
 
 1. Add the following lines to `Program.cs`:
@@ -488,7 +488,7 @@ will be thrown.
 ### Web Service
 
 For details on the possible errors returned by the web service itself,
-[see the GeoIP web service documentation](https://dev.maxmind.com/geoip/docs/web-services?lang=en).
+[see the GeoIP web service documentation](https://dev.maxmind.com/geoip/docs/web-services/?lang=en).
 
 If the web service returns an explicit error document, this is thrown as a
 `AddressNotFoundException`, a `AuthenticationException`, a
@@ -535,7 +535,7 @@ Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.
 
 See the
-[GeoIP web services documentation](https://dev.maxmind.com/geoip/docs/web-services?lang=en)
+[GeoIP web services documentation](https://dev.maxmind.com/geoip/docs/web-services/?lang=en)
 for details on what data each end point may return.
 
 The only piece of data which is always returned is the `ipAddress` attribute in
@@ -559,7 +559,7 @@ premium data set.
 ## Reporting data problems
 
 If the problem you find is that an IP address is incorrectly mapped, please
-[submit your correction to MaxMind](https://www.maxmind.com/en/correction).
+[submit your correction to MaxMind](https://www.maxmind.com/en/geoip-data-correction-request).
 
 If you find some other sort of mistake, like an incorrect spelling, please check
 the [GeoNames site](https://www.geonames.org/) first. Once you've searched for a
@@ -569,8 +569,8 @@ correction is part of the GeoNames data set, it will be automatically
 incorporated into future MaxMind releases.
 
 If you are a paying MaxMind customer and you're not sure where to submit a
-correction, please [contact MaxMind support](https://www.maxmind.com/en/support)
-for help.
+correction, please
+[contact MaxMind support](https://support.maxmind.com/knowledge-base) for help.
 
 ## Other Support
 
@@ -578,7 +578,8 @@ Please report all issues with this code using the
 [GitHub issue tracker](https://github.com/maxmind/GeoIP2-dotnet/issues).
 
 If you are having an issue with a MaxMind service that is not specific to the
-client API, please see [our support page](https://www.maxmind.com/en/support).
+client API, please see
+[our support page](https://support.maxmind.com/knowledge-base).
 
 ## Contributing
 

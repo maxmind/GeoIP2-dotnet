@@ -210,8 +210,8 @@ Always update `releasenotes.md` for user-facing changes:
 ## Additional Resources
 
 - [API Documentation](https://maxmind.github.io/GeoIP2-dotnet/)
-- [GeoIP Web Services Docs](https://dev.maxmind.com/geoip/docs/web-services?lang=en)
-- [GeoIP Database Docs](https://dev.maxmind.com/geoip/docs/databases?lang=en)
+- [GeoIP Web Services Docs](https://dev.maxmind.com/geoip/docs/web-services/?lang=en)
+- [GeoIP Database Docs](https://dev.maxmind.com/geoip/docs/databases/?lang=en)
 - [MaxMind DB Format](https://maxmind.github.io/MaxMind-DB/)
 - GitHub Issues: https://github.com/maxmind/GeoIP2-dotnet/issues
 
