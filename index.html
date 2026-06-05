@@ -1,7 +1,7 @@
 <!doctype html><html lang=en><head><meta name=generator content="Hugo 0.161.1"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>MaxMind GeoIP .NET API</title><link rel=stylesheet href=/GeoIP2-dotnet/css/main.281d4a083c59f78015bdb60748317bf7d39ad62d8c9c6cead28bce0cc0794b5e.css integrity="sha256-KB1KCDxZ94AVvbYHSDF799Oa1i2MnGzq0ovODMB5S14=" crossorigin=anonymous></head><body><nav class=page-nav><a href=/GeoIP2-dotnet/ class=active aria-current=page>Overview</a>
 <a href=/GeoIP2-dotnet/doc/latest/>API documentation</a></nav><main><h1 id=geoip-net-api>GeoIP .NET API<a class=heading-anchor href=#geoip-net-api aria-label="Link to GeoIP .NET API">#</a></h1><p><a href=https://www.nuget.org/packages/MaxMind.GeoIP2><img src=https://img.shields.io/nuget/v/MaxMind.GeoIP2 alt=NuGet></a></p><h2 id=description>Description<a class=heading-anchor href=#description aria-label="Link to Description">#</a></h2><p>This distribution provides an API for the GeoIP and GeoLite
-<a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">web services</a> and
-<a href="https://dev.maxmind.com/geoip/docs/databases?lang=en">databases</a>.</p><h2 id=installation>Installation<a class=heading-anchor href=#installation aria-label="Link to Installation">#</a></h2><h3 id=nuget>NuGet<a class=heading-anchor href=#nuget aria-label="Link to NuGet">#</a></h3><p>We recommend installing this library with NuGet. To do this, type the following
+<a href="https://dev.maxmind.com/geoip/docs/web-services/?lang=en">web services</a> and
+<a href="https://dev.maxmind.com/geoip/docs/databases/?lang=en">databases</a>.</p><h2 id=installation>Installation<a class=heading-anchor href=#installation aria-label="Link to Installation">#</a></h2><h3 id=nuget>NuGet<a class=heading-anchor href=#nuget aria-label="Link to NuGet">#</a></h3><p>We recommend installing this library with NuGet. To do this, type the following
 into the Visual Studio Package Manager Console:</p><pre tabindex=0><code>install-package MaxMind.GeoIP2
 </code></pre><h2 id=ip-geolocation-usage>IP Geolocation Usage<a class=heading-anchor href=#ip-geolocation-usage aria-label="Link to IP Geolocation Usage">#</a></h2><p>IP geolocation is inherently imprecise. Locations are often near the center of
 the population. Any location provided by a GeoIP database or web service should
@@ -20,7 +20,7 @@ point, passing it the IP address you want to look up or no parameters if you
 want to look up the current device.</p><p>If the request succeeds, the method call will return a response class for the
 endpoint you called. This response in turn contains multiple model classes, each
 of which represents part of the data returned by the web service.</p><p>See the API documentation for more details.</p><h3 id=aspnet-core-usage>ASP.NET Core Usage<a class=heading-anchor href=#aspnet-core-usage aria-label="Link to ASP.NET Core Usage">#</a></h3><p>To use the web service API with HttpClient factory pattern as a
-<a href=https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests#typed-clients>Typed client</a>
+<a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-10.0#typed-clients">Typed client</a>
 you need to do the following:</p><ol><li>Add the following lines to <code>Program.cs</code>:</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#57606a>// Configure to read configuration options from MaxMind section</span>
 </span></span><span style=display:flex><span>builder<span style=color:#1f2328>.</span>Services<span style=color:#1f2328>.</span>Configure<span style=color:#1f2328>&lt;</span>WebServiceClientOptions<span style=color:#1f2328>&gt;(</span>builder<span style=color:#1f2328>.</span>Configuration<span style=color:#1f2328>.</span>GetSection<span style=color:#1f2328>(</span><span style=color:#0a3069>&#34;MaxMind&#34;</span><span style=color:#1f2328>));</span>
 </span></span><span style=display:flex><span>
@@ -328,7 +328,7 @@ read in metadata for the file.</p><p>See the API documentation for more details.
 </span></span></code></pre></div><h2 id=exceptions>Exceptions<a class=heading-anchor href=#exceptions aria-label="Link to Exceptions">#</a></h2><h3 id=database>Database<a class=heading-anchor href=#database aria-label="Link to Database">#</a></h3><p>If the database is corrupt or otherwise invalid, a
 <code>MaxMind.Db.InvalidDatabaseException</code> will be thrown.</p><p>If an address is not available in the database, a <code>AddressNotFoundException</code>
 will be thrown.</p><h3 id=web-service>Web Service<a class=heading-anchor href=#web-service aria-label="Link to Web Service">#</a></h3><p>For details on the possible errors returned by the web service itself,
-<a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">see the GeoIP web service documentation</a>.</p><p>If the web service returns an explicit error document, this is thrown as a
+<a href="https://dev.maxmind.com/geoip/docs/web-services/?lang=en">see the GeoIP web service documentation</a>.</p><p>If the web service returns an explicit error document, this is thrown as a
 <code>AddressNotFoundException</code>, a <code>AuthenticationException</code>, a
 <code>InvalidRequestException</code>, or a <code>OutOfQueriesException</code>.</p><p>If some sort of transport error occurs, an <code>HttpException</code> is thrown. This is
 thrown when some sort of unanticipated error occurs, such as the web service
@@ -345,7 +345,7 @@ can be populated vary between end points. In addition, while an end point may
 offer a particular piece of data, MaxMind does not always have every piece of
 data for any given IP address.</p><p>Because of these factors, it is possible for any end point to return a record
 where some or all of the attributes are unpopulated.</p><p>See the
-<a href="https://dev.maxmind.com/geoip/docs/web-services?lang=en">GeoIP web services documentation</a>
+<a href="https://dev.maxmind.com/geoip/docs/web-services/?lang=en">GeoIP web services documentation</a>
 for details on what data each end point may return.</p><p>The only piece of data which is always returned is the <code>ipAddress</code> attribute in
 the <code>MaxMind.GeoIP2.Traits</code> record.</p><h2 id=integration-with-geonames>Integration with GeoNames<a class=heading-anchor href=#integration-with-geonames aria-label="Link to Integration with GeoNames">#</a></h2><p><a href=https://www.geonames.org/>GeoNames</a> offers web services and downloadable
 databases with data on geographical features around the world, including
@@ -355,16 +355,17 @@ uniquely identified by a <code>geonameId</code>, which is an integer.</p><p>Many
 country, etc.) in the GeoNames database.</p><p>Some of the data that MaxMind provides is also sourced from GeoNames. We source
 things like place names, ISO codes, and other similar data from the GeoNames
 premium data set.</p><h2 id=reporting-data-problems>Reporting data problems<a class=heading-anchor href=#reporting-data-problems aria-label="Link to Reporting data problems">#</a></h2><p>If the problem you find is that an IP address is incorrectly mapped, please
-<a href=https://www.maxmind.com/en/correction>submit your correction to MaxMind</a>.</p><p>If you find some other sort of mistake, like an incorrect spelling, please check
+<a href=https://www.maxmind.com/en/geoip-data-correction-request>submit your correction to MaxMind</a>.</p><p>If you find some other sort of mistake, like an incorrect spelling, please check
 the <a href=https://www.geonames.org/>GeoNames site</a> first. Once you&rsquo;ve searched for a
 place and found it on the GeoNames map view, there are a number of links you can
 use to correct data (&ldquo;move&rdquo;, &ldquo;edit&rdquo;, &ldquo;alternate names&rdquo;, etc.). Once the
 correction is part of the GeoNames data set, it will be automatically
 incorporated into future MaxMind releases.</p><p>If you are a paying MaxMind customer and you&rsquo;re not sure where to submit a
-correction, please <a href=https://www.maxmind.com/en/support>contact MaxMind support</a>
-for help.</p><h2 id=other-support>Other Support<a class=heading-anchor href=#other-support aria-label="Link to Other Support">#</a></h2><p>Please report all issues with this code using the
+correction, please
+<a href=https://support.maxmind.com/knowledge-base>contact MaxMind support</a> for help.</p><h2 id=other-support>Other Support<a class=heading-anchor href=#other-support aria-label="Link to Other Support">#</a></h2><p>Please report all issues with this code using the
 <a href=https://github.com/maxmind/GeoIP2-dotnet/issues>GitHub issue tracker</a>.</p><p>If you are having an issue with a MaxMind service that is not specific to the
-client API, please see <a href=https://www.maxmind.com/en/support>our support page</a>.</p><h2 id=contributing>Contributing<a class=heading-anchor href=#contributing aria-label="Link to Contributing">#</a></h2><p>Patches and pull requests are encouraged. Please include unit tests whenever
+client API, please see
+<a href=https://support.maxmind.com/knowledge-base>our support page</a>.</p><h2 id=contributing>Contributing<a class=heading-anchor href=#contributing aria-label="Link to Contributing">#</a></h2><p>Patches and pull requests are encouraged. Please include unit tests whenever
 possible.</p><h2 id=versioning>Versioning<a class=heading-anchor href=#versioning aria-label="Link to Versioning">#</a></h2><p>The API uses <a href=https://semver.org/>Semantic Versioning</a>. However, adding new
 methods to <code>IGeoIP2Provider</code>, <code>IGeoIP2DatabaseReader</code>, and
 <code>IGeoIP2WebServicesClient</code> will not be considered a breaking change. These
