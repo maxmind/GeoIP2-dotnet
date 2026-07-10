@@ -1,4 +1,5 @@
 using MaxMind.GeoIP2.Responses;
+using System;
 using System.Text;
 using System.Text.Json;
 using Xunit;
@@ -37,6 +38,12 @@ namespace MaxMind.GeoIP2.UnitTests
 
         private static void CanDeserializeInsightsResponse(InsightsResponse insights)
         {
+            Assert.Equal(82, insights.Anonymizer.Residential.Confidence);
+#if NET6_0_OR_GREATER
+            Assert.Equal(new DateOnly(2026, 5, 11), insights.Anonymizer.Residential.NetworkLastSeen);
+#endif
+            Assert.Equal("quickshift", insights.Anonymizer.Residential.ProviderName);
+
             Assert.Equal(76, insights.City.Confidence);
             Assert.Equal(9876, insights.City.GeoNameId);
             Assert.Equal("Minneapolis", insights.City.Name);

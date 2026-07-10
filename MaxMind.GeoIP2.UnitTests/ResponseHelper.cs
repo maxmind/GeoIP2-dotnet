@@ -4,6 +4,13 @@
     {
         public static string InsightsJson = """
                 {
+                    "anonymizer": {
+                        "residential": {
+                            "confidence": 82,
+                            "network_last_seen": "2026-05-11",
+                            "provider_name": "quickshift"
+                        }
+                    },
                     "city": {
                         "confidence": 76,
                         "geoname_id": 9876,

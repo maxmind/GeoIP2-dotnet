@@ -93,5 +93,16 @@ namespace MaxMind.GeoIP2.Model
         [JsonInclude]
         [JsonPropertyName("provider_name")]
         public string? ProviderName { get; init; }
+
+        /// <summary>
+        ///     Residential proxy data for the network. This may be populated
+        ///     even when none of the other properties are set. If there is
+        ///     no residential proxy data for the network, this will be an
+        ///     empty object. This is available from the GeoIP Insights web
+        ///     service.
+        /// </summary>
+        [JsonInclude]
+        [JsonPropertyName("residential")]
+        public AnonymizerFeed Residential { get; init; } = new();
     }
 }
