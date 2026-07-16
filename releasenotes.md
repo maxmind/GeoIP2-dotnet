@@ -1,5 +1,16 @@
 # GeoIP2 .NET API Release Notes
 
+## 6.1.0 (TBD)
+
+- A new `Residential` property has been added to
+  `MaxMind.GeoIP2.Model.Anonymizer`. This is of the new
+  `MaxMind.GeoIP2.Model.AnonymizerFeed` record type and provides residential
+  proxy data for the network: `Confidence`, `NetworkLastSeen` (`DateOnly` on
+  .NET 6.0+), and `ProviderName`. `Anonymizer.Residential` may be populated even
+  when none of the other `Anonymizer` properties are set. If there is no
+  residential proxy data for the network, this will be an empty object. This is
+  available from the GeoIP Insights web service.
+
 ## 6.0.0 (2026-05-22)
 
 - First non-beta 6.0.0 release. See the `6.0.0-beta1` notes below for the
