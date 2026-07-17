@@ -1,6 +1,6 @@
 # GeoIP2 .NET API Release Notes
 
-## 6.1.0 (TBD)
+## 6.1.0 (2026-07-16)
 
 - A new `Residential` property has been added to
   `MaxMind.GeoIP2.Model.Anonymizer`. This is of the new
