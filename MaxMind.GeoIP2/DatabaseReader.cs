@@ -5,7 +5,6 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
@@ -518,9 +517,8 @@ namespace MaxMind.GeoIP2
         {
             if (!Metadata.DatabaseType.Contains(type))
             {
-                var frame = new StackFrame(2, true);
                 throw new InvalidOperationException(
-                    $"A {Metadata.DatabaseType} database cannot be opened with the {frame.GetMethod()?.Name} method");
+                    $"A {Metadata.DatabaseType} database cannot be opened with the {type} lookup");
             }
 
             var injectables = new InjectableValues();
