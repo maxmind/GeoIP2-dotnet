@@ -16,6 +16,7 @@
     <PackageProjectUrl>https://github.com/maxmind/GeoIP2-dotnet</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <EnablePackageValidation>true</EnablePackageValidation>
+    <PackageValidationBaselineVersion>6.1.0</PackageValidationBaselineVersion>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/maxmind/GeoIP2-dotnet</RepositoryUrl>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
