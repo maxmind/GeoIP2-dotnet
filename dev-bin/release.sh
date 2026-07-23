@@ -114,3 +114,12 @@ if [[ "$version" == *-* ]]; then
 fi
 
 gh release create "$tag" "${release_args[@]}"
+
+# Now that the release is tagged, validate future changes against it. The
+# package may not be downloadable from NuGet until several minutes after
+# the release workflow publishes it.
+sed -i "s|<PackageValidationBaselineVersion>[^<]*</PackageValidationBaselineVersion>|<PackageValidationBaselineVersion>$version</PackageValidationBaselineVersion>|" MaxMind.GeoIP2/MaxMind.GeoIP2.csproj
+
+git commit -m "Set package validation baseline to $version" -a
+
+git push
