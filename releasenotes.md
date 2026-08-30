@@ -1,5 +1,11 @@
 # GeoIP2 .NET API Release Notes
 
+## 6.1.1 (TBD)
+
+- Database lookups no longer inspect the call stack when reporting that a
+  database does not support the requested lookup. This removes a trimming
+  warning and makes this error path compatible with Native AOT.
+
 ## 6.1.0 (2026-07-16)
 
 - A new `Residential` property has been added to
