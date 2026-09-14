@@ -49,7 +49,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaxMind.Db" Version="5.1.0" />
+    <PackageReference Include="MaxMind.Db" Version="5.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.11" />
   </ItemGroup>
 
