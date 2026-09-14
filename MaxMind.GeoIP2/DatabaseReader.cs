@@ -5,10 +5,10 @@ using MaxMind.GeoIP2.Exceptions;
 using MaxMind.GeoIP2.Responses;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
+using System.Runtime.CompilerServices;
 
 #endregion
 
@@ -475,52 +475,51 @@ namespace MaxMind.GeoIP2
             return TryExecute(ipAddress, "GeoIP2-ISP", out response);
         }
 
-        private T Execute<T>(string ipStr, string type) where T : AbstractResponse
+        private T Execute<T>(string ipStr, string type, [CallerMemberName] string methodName = "") where T : AbstractResponse
         {
             if (IPAddress.TryParse(ipStr, out var ip))
             {
-                var response = Execute<T>(ipStr, ip, type);
+                var response = Execute<T>(ipStr, ip, type, methodName);
                 return response ?? throw new AddressNotFoundException("The address " + ipStr + " is not in the database.");
             }
 
             throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipStr}");
         }
 
-        private T Execute<T>(IPAddress ipAddress, string type)
+        private T Execute<T>(IPAddress ipAddress, string type, [CallerMemberName] string methodName = "")
             where T : AbstractResponse
         {
             var ipStr = ipAddress.ToString();
-            var response = Execute<T>(ipStr, ipAddress, type);
+            var response = Execute<T>(ipStr, ipAddress, type, methodName);
             return response ?? throw new AddressNotFoundException("The address " + ipStr + " is not in the database.");
         }
 
-        private bool TryExecute<T>(string ipStr, string type, [MaybeNullWhen(false)] out T response)
+        private bool TryExecute<T>(string ipStr, string type, [MaybeNullWhen(false)] out T response, [CallerMemberName] string methodName = "")
             where T : AbstractResponse
         {
             if (IPAddress.TryParse(ipStr, out var ip))
             {
-                response = Execute<T>(ipStr, ip, type);
+                response = Execute<T>(ipStr, ip, type, methodName);
                 return response != null;
             }
 
             throw new GeoIP2Exception($"The specified IP address was incorrectly formatted: {ipStr}");
         }
 
-        private bool TryExecute<T>(IPAddress ipAddress, string type, [MaybeNullWhen(false)] out T response)
+        private bool TryExecute<T>(IPAddress ipAddress, string type, [MaybeNullWhen(false)] out T response, [CallerMemberName] string methodName = "")
             where T : AbstractResponse
         {
-            response = Execute<T>(ipAddress.ToString(), ipAddress, type);
+            response = Execute<T>(ipAddress.ToString(), ipAddress, type, methodName);
             return response != null;
         }
 
-        private T? Execute<T>(string ipStr, IPAddress ipAddress, string type)
+        private T? Execute<T>(string ipStr, IPAddress ipAddress, string type, string methodName)
             where T : AbstractResponse
         {
             if (!Metadata.DatabaseType.Contains(type))
             {
-                var frame = new StackFrame(2, true);
                 throw new InvalidOperationException(
-                    $"A {Metadata.DatabaseType} database cannot be opened with the {frame.GetMethod()?.Name} method");
+                    $"A {Metadata.DatabaseType} database cannot be opened with the {methodName} method");
             }
 
             var injectables = new InjectableValues();

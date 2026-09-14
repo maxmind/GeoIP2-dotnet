@@ -75,6 +75,20 @@ namespace MaxMind.GeoIP2.UnitTests
         }
 
         [Fact]
+        public void InvalidDatabaseMethodReportsPublicMethodName()
+        {
+            using var reader = new DatabaseReader(_cityDatabaseFile);
+            var ip = IPAddress.Parse("10.10.10.10");
+            const string countryError = "A GeoIP2-City database cannot be opened with the Country method";
+            const string tryCountryError = "A GeoIP2-City database cannot be opened with the TryCountry method";
+
+            Assert.Equal(countryError, Assert.Throws<InvalidOperationException>(() => reader.Country(ip)).Message);
+            Assert.Equal(countryError, Assert.Throws<InvalidOperationException>(() => reader.Country(ip.ToString())).Message);
+            Assert.Equal(tryCountryError, Assert.Throws<InvalidOperationException>(() => reader.TryCountry(ip, out _)).Message);
+            Assert.Equal(tryCountryError, Assert.Throws<InvalidOperationException>(() => reader.TryCountry(ip.ToString(), out _)).Message);
+        }
+
+        [Fact]
         public void AnonymousIP_ValidResponse()
         {
             using var reader = new DatabaseReader(_anonymousIpDatabaseFile);
