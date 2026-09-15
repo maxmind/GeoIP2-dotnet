@@ -45,3 +45,30 @@ jobs:
         env:
           MAXMIND_TEST_BASE_DIR:
             ${{ github.workspace }}/MaxMind.GeoIP2.UnitTests
+
+  native-aot:
+    strategy:
+      matrix:
+        include:
+          - platform: ubuntu-latest
+            rid: linux-x64
+          - platform: windows-latest
+            rid: win-x64
+          - platform: macos-latest
+            rid: osx-arm64
+    runs-on: ${{ matrix.platform }}
+    name: NativeAOT on ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish and run NativeAOT integration tests
+        shell: bash
+        run: bash ./dev-bin/test-native-aot.sh ${{ matrix.rid }}

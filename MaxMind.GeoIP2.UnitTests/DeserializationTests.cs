@@ -164,11 +164,17 @@ namespace MaxMind.GeoIP2.UnitTests
         [InlineData(null)]
         public void GeneratedMetadataUsesNetworkConverter(string? network)
         {
-            var json = "{\"traits\":{\"network\":" + JsonSerializer.Serialize(network) + "}}";
+            var networkJson = "null";
+            if (network != null)
+            {
+                networkJson = "\"" + network + "\"";
+            }
+            var json = "{\"traits\":{\"network\":" + networkJson + "}}";
             var response = JsonSerializer.Deserialize(json, GeoIP2JsonContext.Shared.CountryResponse)!;
             Assert.Equal(network, response.Traits.Network?.ToString());
         }
 
+#if !NATIVE_AOT_TESTS
         [Fact]
         public void CanDeserializeCountryResponseNewtonsoftJson()
         {
@@ -188,5 +194,6 @@ namespace MaxMind.GeoIP2.UnitTests
             CanDeserializeInsightsResponse(JsonSerializer.Deserialize<InsightsResponse>(
                 Encoding.UTF8.GetBytes(InsightsJson), options)!);
         }
+#endif
     }
 }
