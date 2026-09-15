@@ -13,6 +13,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading.Tasks;
 
 #endregion
@@ -80,7 +81,6 @@ namespace MaxMind.GeoIP2
 #endif
         private bool _disposed;
         private readonly bool _disableHttps;
-        private readonly JsonSerializerOptions _jsonOptions;
 
         private static ProductInfoHeaderValue UserAgent => new("GeoIP2-dotnet", Version);
 
@@ -157,8 +157,6 @@ namespace MaxMind.GeoIP2
             _locales = locales == null ? ["en"] : [.. locales];
             _client = new Client(auth, timeout, UserAgent, httpClient);
             _disableHttps = disableHttps;
-            _jsonOptions = new JsonSerializerOptions();
-            _jsonOptions.Converters.Add(new NetworkConverter());
 #if NETSTANDARD2_0 || NETSTANDARD2_1
             _syncClient = new SyncClient(auth, timeout, UserAgent);
 #endif
@@ -181,7 +179,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the Country response</returns>
         public async Task<CountryResponse> CountryAsync(IPAddress ipAddress)
         {
-            return await ExecuteAsync<CountryResponse>("country", ipAddress).ConfigureAwait(false);
+            return await ExecuteAsync<CountryResponse>("country", ipAddress, GeoIP2JsonContext.Shared.CountryResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -190,7 +188,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the Country response</returns>
         public async Task<CountryResponse> CountryAsync()
         {
-            return await ExecuteAsync<CountryResponse>("country", null).ConfigureAwait(false);
+            return await ExecuteAsync<CountryResponse>("country", null, GeoIP2JsonContext.Shared.CountryResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -210,7 +208,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the City Plus response</returns>
         public async Task<CityResponse> CityAsync(IPAddress ipAddress)
         {
-            return await ExecuteAsync<CityResponse>("city", ipAddress).ConfigureAwait(false);
+            return await ExecuteAsync<CityResponse>("city", ipAddress, GeoIP2JsonContext.Shared.CityResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -219,7 +217,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the City Plus response</returns>
         public async Task<CityResponse> CityAsync()
         {
-            return await ExecuteAsync<CityResponse>("city", null).ConfigureAwait(false);
+            return await ExecuteAsync<CityResponse>("city", null, GeoIP2JsonContext.Shared.CityResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -243,7 +241,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the Insights response</returns>
         public async Task<InsightsResponse> InsightsAsync(IPAddress ipAddress)
         {
-            return await ExecuteAsync<InsightsResponse>("insights", ipAddress).ConfigureAwait(false);
+            return await ExecuteAsync<InsightsResponse>("insights", ipAddress, GeoIP2JsonContext.Shared.InsightsResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -254,7 +252,7 @@ namespace MaxMind.GeoIP2
         /// <returns>Task that produces an object modeling the Insights response</returns>
         public async Task<InsightsResponse> InsightsAsync()
         {
-            return await ExecuteAsync<InsightsResponse>("insights", null).ConfigureAwait(false);
+            return await ExecuteAsync<InsightsResponse>("insights", null, GeoIP2JsonContext.Shared.InsightsResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -264,7 +262,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CountryResponse" /></returns>
         public CountryResponse Country(IPAddress ipAddress)
         {
-            return Execute<CountryResponse>("country", ipAddress);
+            return Execute<CountryResponse>("country", ipAddress, GeoIP2JsonContext.Shared.CountryResponse);
         }
 
         /// <summary>
@@ -283,7 +281,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CountryResponse" /></returns>
         public CountryResponse Country()
         {
-            return Execute<CountryResponse>("country", null);
+            return Execute<CountryResponse>("country", null, GeoIP2JsonContext.Shared.CountryResponse);
         }
 
         /// <summary>
@@ -293,7 +291,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CityResponse" /></returns>
         public CityResponse City(IPAddress ipAddress)
         {
-            return Execute<CityResponse>("city", ipAddress);
+            return Execute<CityResponse>("city", ipAddress, GeoIP2JsonContext.Shared.CityResponse);
         }
 
         /// <summary>
@@ -312,7 +310,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="CityResponse" /></returns>
         public CityResponse City()
         {
-            return Execute<CityResponse>("city", null);
+            return Execute<CityResponse>("city", null, GeoIP2JsonContext.Shared.CityResponse);
         }
 
         /// <summary>
@@ -324,7 +322,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="InsightsResponse" /></returns>
         public InsightsResponse Insights(IPAddress ipAddress)
         {
-            return Execute<InsightsResponse>("insights", ipAddress);
+            return Execute<InsightsResponse>("insights", ipAddress, GeoIP2JsonContext.Shared.InsightsResponse);
         }
 
         /// <summary>
@@ -347,7 +345,7 @@ namespace MaxMind.GeoIP2
         /// <returns>An <see cref="InsightsResponse" /></returns>
         public InsightsResponse Insights()
         {
-            return Execute<InsightsResponse>("insights", null);
+            return Execute<InsightsResponse>("insights", null, GeoIP2JsonContext.Shared.InsightsResponse);
         }
 
         private static IPAddress ParseIP(string ipAddress)
@@ -364,7 +362,7 @@ namespace MaxMind.GeoIP2
             return ip!;
         }
 
-        private T Execute<T>(string type, IPAddress? ipAddress)
+        private T Execute<T>(string type, IPAddress? ipAddress, JsonTypeInfo<T> typeInfo)
             where T : AbstractCountryResponse
         {
             var uri = BuildUri(type, ipAddress);
@@ -373,15 +371,15 @@ namespace MaxMind.GeoIP2
 #else
             var response = _client.Get(uri);
 #endif
-            return HandleResponse<T>(response);
+            return HandleResponse(response, typeInfo);
         }
 
-        private async Task<T> ExecuteAsync<T>(string type, IPAddress? ipAddress)
+        private async Task<T> ExecuteAsync<T>(string type, IPAddress? ipAddress, JsonTypeInfo<T> typeInfo)
             where T : AbstractCountryResponse
         {
             var uri = BuildUri(type, ipAddress);
             var response = await _client.GetAsync(uri).ConfigureAwait(false);
-            return HandleResponse<T>(response);
+            return HandleResponse(response, typeInfo);
         }
 
         private Uri BuildUri(string type, IPAddress? ipAddress)
@@ -396,17 +394,17 @@ namespace MaxMind.GeoIP2
             return Convert.ToBase64String(Encoding.ASCII.GetBytes($"{accountId}:{licenseKey}"));
         }
 
-        private T HandleResponse<T>(Response response)
+        private T HandleResponse<T>(Response response, JsonTypeInfo<T> typeInfo)
             where T : AbstractCountryResponse
         {
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 throw CreateStatusException(response);
             }
-            return CreateModel<T>(response);
+            return CreateModel(response, typeInfo);
         }
 
-        private T CreateModel<T>(Response response)
+        private T CreateModel<T>(Response response, JsonTypeInfo<T> typeInfo)
             where T : AbstractCountryResponse
         {
             if (response.ContentType == null || !response.ContentType.Contains("json"))
@@ -423,7 +421,7 @@ namespace MaxMind.GeoIP2
             }
             try
             {
-                var model = JsonSerializer.Deserialize<T>(response.Content, _jsonOptions) ??
+                var model = JsonSerializer.Deserialize(response.Content, typeInfo) ??
                     throw new HttpException(
                         $"Received a 200 response for {response.RequestUri} but there was no message body.",
                         HttpStatusCode.OK, response.RequestUri);
@@ -468,7 +466,7 @@ namespace MaxMind.GeoIP2
             Exception? e = null;
             try
             {
-                var webServiceError = JsonSerializer.Deserialize<WebServiceError>(response.Content);
+                var webServiceError = JsonSerializer.Deserialize(response.Content, GeoIP2JsonContext.Shared.WebServiceError);
                 if (webServiceError != null)
                 {
                     return CreateExceptionFromJson(response, webServiceError);

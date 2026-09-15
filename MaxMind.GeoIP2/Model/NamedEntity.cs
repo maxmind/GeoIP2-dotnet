@@ -10,6 +10,11 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public abstract record NamedEntity
     {
+        // JSON source generation assigns null to omitted init properties.
+        // Keep the defaults for non-null records and collections in their accessors.
+        private IReadOnlyDictionary<string, string> _names = new Dictionary<string, string>();
+        private IReadOnlyList<string> _locales = ["en"];
+
         /// <summary>
         ///     A <see cref="System.Collections.Generic.Dictionary{T,U}" />
         ///     from locale codes to the name in that locale. Don't use any of
@@ -21,8 +26,11 @@ namespace MaxMind.GeoIP2.Model
         [JsonInclude]
         [JsonPropertyName("names")]
         [MapKey("names")]
-        public IReadOnlyDictionary<string, string> Names { get; init; }
-            = new Dictionary<string, string>();
+        public IReadOnlyDictionary<string, string> Names
+        {
+            get => _names;
+            init => _names = value ?? new Dictionary<string, string>();
+        }
 
         /// <summary>
         ///     The GeoName ID for the entity.
@@ -37,7 +45,11 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonIgnore]
         [Inject("locales")]
-        public IReadOnlyList<string> Locales { get; init; } = ["en"];
+        public IReadOnlyList<string> Locales
+        {
+            get => _locales;
+            init => _locales = value ?? ["en"];
+        }
 
         /// <summary>
         ///     The name based on the locales list passed to the

@@ -121,6 +121,54 @@ namespace MaxMind.GeoIP2.UnitTests
             Assert.Equal("college", insights.Traits.UserType);
         }
 
+        [Theory]
+        [InlineData("{}")]
+        [InlineData("{\"city\":null,\"continent\":null,\"country\":null,\"location\":null,\"postal\":null,\"registered_country\":null,\"represented_country\":null,\"subdivisions\":null,\"traits\":null,\"maxmind\":null,\"anonymizer\":null}")]
+        [InlineData("{\"city\":{\"names\":null},\"anonymizer\":{\"residential\":null}}")]
+        public void GeneratedMetadataPreservesNonNullDefaults(string json)
+        {
+            var response = JsonSerializer.Deserialize(json, GeoIP2JsonContext.Shared.InsightsResponse)!;
+            Assert.Null(response.City.Name);
+            Assert.Empty(response.City.Names);
+            Assert.Equal(new[] { "en" }, response.City.Locales);
+            Assert.Null(response.Continent.Name);
+            Assert.Null(response.Country.Name);
+            Assert.Null(response.RegisteredCountry.Name);
+            Assert.Null(response.RepresentedCountry.Name);
+            Assert.Null(response.Location.Latitude);
+            Assert.Null(response.Postal.Code);
+            Assert.Null(response.Traits.Network);
+            Assert.Null(response.MaxMind.QueriesRemaining);
+            Assert.Empty(response.Subdivisions);
+            Assert.Null(response.MostSpecificSubdivision.Name);
+            Assert.Null(response.Anonymizer.Residential.Confidence);
+        }
+
+        [Fact]
+        public void CanDeserializeCountryWithGeneratedMetadata()
+        {
+            CanDeserializeCountryResponse(JsonSerializer.Deserialize(
+                Encoding.UTF8.GetBytes(CountryJson), GeoIP2JsonContext.Shared.CountryResponse)!);
+        }
+
+        [Fact]
+        public void CanDeserializeInsightsWithGeneratedMetadata()
+        {
+            CanDeserializeInsightsResponse(JsonSerializer.Deserialize(
+                Encoding.UTF8.GetBytes(InsightsJson), GeoIP2JsonContext.Shared.InsightsResponse)!);
+        }
+
+        [Theory]
+        [InlineData("1.2.3.0/24")]
+        [InlineData("2001:db8::/32")]
+        [InlineData(null)]
+        public void GeneratedMetadataUsesNetworkConverter(string? network)
+        {
+            var json = "{\"traits\":{\"network\":" + JsonSerializer.Serialize(network) + "}}";
+            var response = JsonSerializer.Deserialize(json, GeoIP2JsonContext.Shared.CountryResponse)!;
+            Assert.Equal(network, response.Traits.Network?.ToString());
+        }
+
         [Fact]
         public void CanDeserializeCountryResponseNewtonsoftJson()
         {

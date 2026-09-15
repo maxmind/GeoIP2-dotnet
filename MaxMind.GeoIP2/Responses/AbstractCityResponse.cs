@@ -11,13 +11,22 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public abstract record AbstractCityResponse : AbstractCountryResponse
     {
+        private City _city = new();
+        private Location _location = new();
+        private Postal _postal = new();
+        private IReadOnlyList<Subdivision> _subdivisions = [];
+
         /// <summary>
         ///     Gets the city for the requested IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("city")]
         [MapKey("city", true)]
-        public City City { get; init; } = new();
+        public City City
+        {
+            get => _city;
+            init => _city = value ?? new();
+        }
 
         /// <summary>
         ///     Gets the location for the requested IP address.
@@ -25,7 +34,11 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("location")]
         [MapKey("location", true)]
-        public Location Location { get; init; } = new();
+        public Location Location
+        {
+            get => _location;
+            init => _location = value ?? new();
+        }
 
         /// <summary>
         ///     Gets the postal object for the requested IP address.
@@ -33,7 +46,11 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("postal")]
         [MapKey("postal", true)]
-        public Postal Postal { get; init; } = new();
+        public Postal Postal
+        {
+            get => _postal;
+            init => _postal = value ?? new();
+        }
 
         /// <summary>
         ///     An <see cref="System.Collections.Generic.List{T}" /> of <see cref="Subdivision" /> objects representing
@@ -47,7 +64,11 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("subdivisions")]
         [MapKey("subdivisions")]
-        public IReadOnlyList<Subdivision> Subdivisions { get; init; } = [];
+        public IReadOnlyList<Subdivision> Subdivisions
+        {
+            get => _subdivisions;
+            init => _subdivisions = value ?? [];
+        }
 
         /// <summary>
         ///     An object representing the most specific subdivision returned. If

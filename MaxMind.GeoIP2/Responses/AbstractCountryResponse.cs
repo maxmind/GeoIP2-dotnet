@@ -10,13 +10,24 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public abstract record AbstractCountryResponse : AbstractResponse
     {
+        private Continent _continent = new();
+        private Country _country = new();
+        private Model.MaxMind _maxMind = new();
+        private Country _registeredCountry = new();
+        private RepresentedCountry _representedCountry = new();
+        private Traits _traits = new();
+
         /// <summary>
         ///     Gets the continent for the requested IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("continent")]
         [MapKey("continent", true)]
-        public Continent Continent { get; init; } = new();
+        public Continent Continent
+        {
+            get => _continent;
+            init => _continent = value ?? new();
+        }
 
         /// <summary>
         ///     Gets the country for the requested IP address. This
@@ -26,14 +37,22 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("country")]
         [MapKey("country", true)]
-        public Country Country { get; init; } = new();
+        public Country Country
+        {
+            get => _country;
+            init => _country = value ?? new();
+        }
 
         /// <summary>
         ///     Gets the MaxMind record containing data related to your account
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("maxmind")]
-        public Model.MaxMind MaxMind { get; init; } = new();
+        public Model.MaxMind MaxMind
+        {
+            get => _maxMind;
+            init => _maxMind = value ?? new();
+        }
 
         /// <summary>
         ///     Registered country record for the requested IP address. This
@@ -43,7 +62,11 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("registered_country")]
         [MapKey("registered_country", true)]
-        public Country RegisteredCountry { get; init; } = new();
+        public Country RegisteredCountry
+        {
+            get => _registeredCountry;
+            init => _registeredCountry = value ?? new();
+        }
 
         /// <summary>
         ///     Represented country record for the requested IP address. The
@@ -54,7 +77,11 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("represented_country")]
         [MapKey("represented_country", true)]
-        public RepresentedCountry RepresentedCountry { get; init; } = new();
+        public RepresentedCountry RepresentedCountry
+        {
+            get => _representedCountry;
+            init => _representedCountry = value ?? new();
+        }
 
         /// <summary>
         ///     Gets the traits for the requested IP address.
@@ -62,7 +89,11 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("traits")]
         [MapKey("traits", true)]
-        public Traits Traits { get; init; } = new();
+        public Traits Traits
+        {
+            get => _traits;
+            init => _traits = value ?? new();
+        }
 
         /// <inheritdoc/>
         internal override AbstractResponse WithLocales(IReadOnlyList<string> locales)
