@@ -24,7 +24,9 @@ namespace MaxMind.GeoIP2.Model
         public IReadOnlyDictionary<string, string> Names
         {
             get => field;
-            // JSON source generation assigns null to omitted init properties.
+            // System.Text.Json 8-10 assigns null to omitted init properties.
+            // Fixed upstream for 11: https://github.com/dotnet/runtime/pull/124650.
+            // See README.dev.md for the version constraint and removal criteria.
             init => field = value ?? new Dictionary<string, string>();
         } = new Dictionary<string, string>();
 

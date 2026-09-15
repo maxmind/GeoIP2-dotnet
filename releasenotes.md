@@ -1,5 +1,21 @@
 # GeoIP2 .NET API Release Notes
 
+## 6.2.0 (TBD)
+
+- Added NativeAOT and trimming support for the database reader and web service
+  client on .NET 8 and later. Built-in models need no caller registration.
+- Non-null model records and collections now retain their defaults when JSON
+  fields are omitted or explicitly null. This also applies when callers assign
+  null to these properties.
+- Database-type errors now report the public lookup method without inspecting
+  the stack, so the method name remains available after trimming.
+- Updated `MaxMind.Db` to 5.2.0, which includes source-generated model decoding.
+  The reader now enforces decoding limits and throws `InvalidDatabaseException`
+  for truncated or out-of-bounds data that previously could throw
+  `ArgumentOutOfRangeException`. See the
+  [reader release notes](https://github.com/maxmind/MaxMind-DB-Reader-dotnet/releases/tag/v5.2.0)
+  for details.
+
 ## 6.1.0 (2026-07-16)
 
 - A new `Residential` property has been added to
