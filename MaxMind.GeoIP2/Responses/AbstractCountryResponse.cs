@@ -98,13 +98,15 @@ namespace MaxMind.GeoIP2.Responses
         /// <inheritdoc/>
         internal override AbstractResponse WithLocales(IReadOnlyList<string> locales)
         {
-            return this with
-            {
-                Continent = Continent with { Locales = locales },
-                Country = Country with { Locales = locales },
-                RegisteredCountry = RegisteredCountry with { Locales = locales },
-                RepresentedCountry = RepresentedCountry with { Locales = locales },
-            };
+            // NativeAOT resolves covariant record clones incorrectly on .NET 8:
+            // https://github.com/dotnet/runtime/issues/96175 (fixed in .NET 9).
+            // Remove this workaround when net8.0 support is dropped.
+            var response = (AbstractCountryResponse)MemberwiseClone();
+            response._continent = Continent with { Locales = locales };
+            response._country = Country with { Locales = locales };
+            response._registeredCountry = RegisteredCountry with { Locales = locales };
+            response._representedCountry = RepresentedCountry with { Locales = locales };
+            return response;
         }
     }
 }

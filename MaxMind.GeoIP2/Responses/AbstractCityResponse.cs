@@ -81,12 +81,10 @@ namespace MaxMind.GeoIP2.Responses
         /// <inheritdoc/>
         internal override AbstractResponse WithLocales(IReadOnlyList<string> locales)
         {
-            var baseResult = (AbstractCityResponse)base.WithLocales(locales);
-            return baseResult with
-            {
-                City = baseResult.City with { Locales = locales },
-                Subdivisions = [.. baseResult.Subdivisions.Select(s => s with { Locales = locales })],
-            };
+            var response = (AbstractCityResponse)base.WithLocales(locales);
+            response._city = City with { Locales = locales };
+            response._subdivisions = [.. Subdivisions.Select(s => s with { Locales = locales })];
+            return response;
         }
     }
 }
