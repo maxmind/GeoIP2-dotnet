@@ -9,8 +9,6 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public record InsightsResponse : AbstractCityResponse
     {
-        private Anonymizer _anonymizer = new();
-
         /// <summary>
         ///     Gets anonymizer-related data for the requested IP address.
         ///     This is available from the GeoIP Insights web service.
@@ -19,8 +17,8 @@ namespace MaxMind.GeoIP2.Responses
         [JsonPropertyName("anonymizer")]
         public Anonymizer Anonymizer
         {
-            get => _anonymizer;
-            init => _anonymizer = value ?? new();
-        }
+            get => field;
+            init => field = value ?? new();
+        } = new();
     }
 }

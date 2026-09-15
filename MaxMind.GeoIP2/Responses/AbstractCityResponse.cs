@@ -12,8 +12,6 @@ namespace MaxMind.GeoIP2.Responses
     public abstract record AbstractCityResponse : AbstractCountryResponse
     {
         private City _city = new();
-        private Location _location = new();
-        private Postal _postal = new();
         private IReadOnlyList<Subdivision> _subdivisions = [];
 
         /// <summary>
@@ -36,9 +34,9 @@ namespace MaxMind.GeoIP2.Responses
         [MapKey("location", true)]
         public Location Location
         {
-            get => _location;
-            init => _location = value ?? new();
-        }
+            get => field;
+            init => field = value ?? new();
+        } = new();
 
         /// <summary>
         ///     Gets the postal object for the requested IP address.
@@ -48,9 +46,9 @@ namespace MaxMind.GeoIP2.Responses
         [MapKey("postal", true)]
         public Postal Postal
         {
-            get => _postal;
-            init => _postal = value ?? new();
-        }
+            get => field;
+            init => field = value ?? new();
+        } = new();
 
         /// <summary>
         ///     An <see cref="System.Collections.Generic.List{T}" /> of <see cref="Subdivision" /> objects representing

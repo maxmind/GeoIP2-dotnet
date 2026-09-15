@@ -12,10 +12,8 @@ namespace MaxMind.GeoIP2.Responses
     {
         private Continent _continent = new();
         private Country _country = new();
-        private Model.MaxMind _maxMind = new();
         private Country _registeredCountry = new();
         private RepresentedCountry _representedCountry = new();
-        private Traits _traits = new();
 
         /// <summary>
         ///     Gets the continent for the requested IP address.
@@ -50,9 +48,9 @@ namespace MaxMind.GeoIP2.Responses
         [JsonPropertyName("maxmind")]
         public Model.MaxMind MaxMind
         {
-            get => _maxMind;
-            init => _maxMind = value ?? new();
-        }
+            get => field;
+            init => field = value ?? new();
+        } = new();
 
         /// <summary>
         ///     Registered country record for the requested IP address. This
@@ -91,9 +89,9 @@ namespace MaxMind.GeoIP2.Responses
         [MapKey("traits", true)]
         public Traits Traits
         {
-            get => _traits;
-            init => _traits = value ?? new();
-        }
+            get => field;
+            init => field = value ?? new();
+        } = new();
 
         /// <inheritdoc/>
         internal override AbstractResponse WithLocales(IReadOnlyList<string> locales)

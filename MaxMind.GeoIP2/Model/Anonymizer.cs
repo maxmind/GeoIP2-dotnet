@@ -9,8 +9,6 @@ namespace MaxMind.GeoIP2.Model
     /// </summary>
     public record Anonymizer
     {
-        private AnonymizerFeed _residential = new();
-
         /// <summary>
         ///     A score ranging from 1 to 99 that represents our percent confidence
         ///     that the network is currently part of an actively used VPN service.
@@ -107,8 +105,8 @@ namespace MaxMind.GeoIP2.Model
         [JsonPropertyName("residential")]
         public AnonymizerFeed Residential
         {
-            get => _residential;
-            init => _residential = value ?? new();
-        }
+            get => field;
+            init => field = value ?? new();
+        } = new();
     }
 }
