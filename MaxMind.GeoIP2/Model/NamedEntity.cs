@@ -21,8 +21,14 @@ namespace MaxMind.GeoIP2.Model
         [JsonInclude]
         [JsonPropertyName("names")]
         [MapKey("names")]
-        public IReadOnlyDictionary<string, string> Names { get; init; }
-            = new Dictionary<string, string>();
+        public IReadOnlyDictionary<string, string> Names
+        {
+            get => field;
+            // System.Text.Json 8-10 assigns null to omitted init properties.
+            // Fixed upstream for 11: https://github.com/dotnet/runtime/pull/124650.
+            // See README.dev.md for the version constraint and removal criteria.
+            init => field = value ?? new Dictionary<string, string>();
+        } = new Dictionary<string, string>();
 
         /// <summary>
         ///     The GeoName ID for the entity.
@@ -37,7 +43,11 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonIgnore]
         [Inject("locales")]
-        public IReadOnlyList<string> Locales { get; init; } = ["en"];
+        public IReadOnlyList<string> Locales
+        {
+            get => field;
+            init => field = value ?? ["en"];
+        } = ["en"];
 
         /// <summary>
         ///     The name based on the locales list passed to the

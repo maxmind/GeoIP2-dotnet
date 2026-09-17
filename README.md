@@ -475,6 +475,35 @@ using (var reader = new DatabaseReader("GeoIP2-ISP.mmdb"))
 }
 ```
 
+## NativeAOT and Trimming
+
+The database reader and web service client support NativeAOT and trimming on
+.NET 8 and later. Built-in database lookups and web service requests need no
+model registration or serializer configuration. Applications that serialize
+response objects directly must provide their own JSON metadata and converters.
+
+Enable NativeAOT in your application project:
+
+```xml
+<PropertyGroup>
+  <PublishAot>true</PublishAot>
+</PropertyGroup>
+```
+
+Publish for your target platform, for example:
+
+```sh
+dotnet publish -c Release -r linux-x64
+```
+
+NativeAOT also enables trimming. To use trimming without NativeAOT, set
+`PublishTrimmed` instead and publish a self-contained application. Install the
+[NativeAOT prerequisites](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/#prerequisites)
+for your platform before publishing.
+
+The .NET Standard targets remain available for applications that do not use
+NativeAOT or trimming.
+
 ## Exceptions
 
 ### Database

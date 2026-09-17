@@ -15,6 +15,10 @@ namespace MaxMind.GeoIP2.Responses
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("anonymizer")]
-        public Anonymizer Anonymizer { get; init; } = new();
+        public Anonymizer Anonymizer
+        {
+            get => field;
+            init => field = value ?? new();
+        } = new();
     }
 }

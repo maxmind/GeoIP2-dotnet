@@ -8,10 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
+#if NETFRAMEWORK
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
+#endif
 using Xunit;
 using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
@@ -19,17 +22,16 @@ using static MaxMind.GeoIP2.UnitTests.ResponseHelper;
 
 namespace MaxMind.GeoIP2.UnitTests
 {
-    public class WebServiceClientTests : IDisposable
+    public class WebServiceClientTests
+#if NETFRAMEWORK
+        : IDisposable
+#endif
     {
         private const int TestTimeoutMilliseconds = 30000;
-        private readonly WireMockServer _server;
-
-        public WebServiceClientTests()
-        {
-            _server = WireMockServer.Start();
-        }
-
-
+#if NETFRAMEWORK
+        private readonly WireMockServer _server = WireMockServer.Start();
+        private bool _disposed;
+#endif
         // I don't love running the sync tests with async, but the alternative
         // seems to be a lot of code duplication.
         // "Async" added to the name so that Nunit can tell them apart.
@@ -55,7 +57,6 @@ namespace MaxMind.GeoIP2.UnitTests
             { "cityAsync",      "CityAsync",    nameof(CityResponse) },
             { "insightsAsync",  "InsightsAsync",nameof(InsightsResponse) }
         };
-        private bool _disposed;
 
         private WebServiceClient CreateClient(string type, string ipAddress = "1.2.3.4",
             HttpStatusCode status = HttpStatusCode.OK, string? contentType = null, string content = "",
@@ -65,27 +66,31 @@ namespace MaxMind.GeoIP2.UnitTests
 
             contentType ??= $"application/vnd.maxmind.com-{service}+json";
 
+#if NETFRAMEWORK
+            // The legacy synchronous transport bypasses HttpMessageHandler.
             _server
-              .Given(
-                Request.Create()
-                .WithPath($"/geoip/v2.1/{service}/{ipAddress}")
-                .UsingGet()
-                )
-              .RespondWith(
-                Response.Create()
-                  .WithStatusCode(status)
-                  .WithHeader("Content-Type", contentType)
-                  .WithBody(content)
-                );
-
-            var host = _server.Urls[0].Replace("http://", "");
+                .Given(Request.Create()
+                    .WithPath($"/geoip/v2.1/{service}/{ipAddress}")
+                    .UsingGet())
+                .RespondWith(Response.Create()
+                    .WithStatusCode(status)
+                    .WithHeader("Content-Type", contentType)
+                    .WithBody(content));
 
             return new WebServiceClient(6, "0123456789",
                 locales: locales ?? ["en"],
-                host: host,
+                host: _server.Urls[0].Replace("http://", ""),
                 timeout: TestTimeoutMilliseconds,
-                disableHttps: true
+                disableHttps: true);
+#else
+            return new WebServiceClient(6, "0123456789",
+                locales: locales ?? ["en"],
+                host: "example.com",
+                timeout: TestTimeoutMilliseconds,
+                disableHttps: true,
+                httpMessageHandler: new ResponseHandler(service, ipAddress, status, contentType, content)
             );
+#endif
         }
 
         // Helper to invoke the correct client method based on methodName string
@@ -503,31 +508,18 @@ namespace MaxMind.GeoIP2.UnitTests
         [Fact]
         public async Task WebServiceOptionsConstructor()
         {
-            _server
-              .Given(
-                Request.Create()
-                .WithPath("/geoip/v2.1/country/me")
-                .UsingGet()
-                )
-              .RespondWith(
-                Response.Create()
-                  .WithStatusCode(HttpStatusCode.OK)
-                  .WithHeader("Content-Type", "application/vnd.maxmind.com-country+json")
-                  .WithBody(CountryJson)
-                );
-
             var options = Options.Create(new WebServiceClientOptions
             {
                 AccountId = 6,
                 LicenseKey = "0123456789",
-                Host = _server.Urls[0].Replace("http://", ""),
+                Host = "example.com",
                 DisableHttps = true,
                 Timeout = TestTimeoutMilliseconds,
                 Locales = ["en"]
             });
 
             var client = new WebServiceClient(
-                new HttpClient(),
+                new HttpClient(new ResponseHandler("country", "me", HttpStatusCode.OK, "application/json", CountryJson)),
                 options
             );
 
@@ -539,11 +531,10 @@ namespace MaxMind.GeoIP2.UnitTests
 
         #endregion
 
+#if NETFRAMEWORK
         public void Dispose()
         {
-            // Dispose of unmanaged resources.
             Dispose(true);
-            // Suppress finalization.
             GC.SuppressFinalize(this);
         }
 
@@ -557,9 +548,46 @@ namespace MaxMind.GeoIP2.UnitTests
             if (disposing)
             {
                 _server.Stop();
+                _server.Dispose();
             }
 
             _disposed = true;
+        }
+#endif
+
+        private sealed class ResponseHandler(
+            string service,
+            string ipAddress,
+            HttpStatusCode status,
+            string contentType,
+            string content) : HttpMessageHandler
+        {
+            private HttpResponseMessage Respond(HttpRequestMessage request)
+            {
+                Assert.Equal(HttpMethod.Get, request.Method);
+                Assert.Equal("http", request.RequestUri!.Scheme);
+                Assert.Equal("example.com", request.RequestUri.Host);
+                Assert.Equal($"/geoip/v2.1/{service}/{ipAddress}", request.RequestUri!.AbsolutePath);
+                var response = new HttpResponseMessage(status)
+                {
+                    Content = new StringContent(content),
+                };
+                response.Content.Headers.Remove("Content-Type");
+                response.Content.Headers.TryAddWithoutValidation("Content-Type", contentType);
+                return response;
+            }
+
+#if NET5_0_OR_GREATER
+            protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                return Respond(request);
+            }
+#endif
+
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                return Task.FromResult(Respond(request));
+            }
         }
     }
 }

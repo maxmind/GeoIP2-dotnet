@@ -103,6 +103,10 @@ namespace MaxMind.GeoIP2.Model
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("residential")]
-        public AnonymizerFeed Residential { get; init; } = new();
+        public AnonymizerFeed Residential
+        {
+            get => field;
+            init => field = value ?? new();
+        } = new();
     }
 }

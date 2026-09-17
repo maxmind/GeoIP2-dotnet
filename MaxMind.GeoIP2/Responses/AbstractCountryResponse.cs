@@ -10,13 +10,22 @@ namespace MaxMind.GeoIP2.Responses
     /// </summary>
     public abstract record AbstractCountryResponse : AbstractResponse
     {
+        private Continent _continent = new();
+        private Country _country = new();
+        private Country _registeredCountry = new();
+        private RepresentedCountry _representedCountry = new();
+
         /// <summary>
         ///     Gets the continent for the requested IP address.
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("continent")]
         [MapKey("continent", true)]
-        public Continent Continent { get; init; } = new();
+        public Continent Continent
+        {
+            get => _continent;
+            init => _continent = value ?? new();
+        }
 
         /// <summary>
         ///     Gets the country for the requested IP address. This
@@ -26,14 +35,22 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("country")]
         [MapKey("country", true)]
-        public Country Country { get; init; } = new();
+        public Country Country
+        {
+            get => _country;
+            init => _country = value ?? new();
+        }
 
         /// <summary>
         ///     Gets the MaxMind record containing data related to your account
         /// </summary>
         [JsonInclude]
         [JsonPropertyName("maxmind")]
-        public Model.MaxMind MaxMind { get; init; } = new();
+        public Model.MaxMind MaxMind
+        {
+            get => field;
+            init => field = value ?? new();
+        } = new();
 
         /// <summary>
         ///     Registered country record for the requested IP address. This
@@ -43,7 +60,11 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("registered_country")]
         [MapKey("registered_country", true)]
-        public Country RegisteredCountry { get; init; } = new();
+        public Country RegisteredCountry
+        {
+            get => _registeredCountry;
+            init => _registeredCountry = value ?? new();
+        }
 
         /// <summary>
         ///     Represented country record for the requested IP address. The
@@ -54,7 +75,11 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("represented_country")]
         [MapKey("represented_country", true)]
-        public RepresentedCountry RepresentedCountry { get; init; } = new();
+        public RepresentedCountry RepresentedCountry
+        {
+            get => _representedCountry;
+            init => _representedCountry = value ?? new();
+        }
 
         /// <summary>
         ///     Gets the traits for the requested IP address.
@@ -62,18 +87,24 @@ namespace MaxMind.GeoIP2.Responses
         [JsonInclude]
         [JsonPropertyName("traits")]
         [MapKey("traits", true)]
-        public Traits Traits { get; init; } = new();
+        public Traits Traits
+        {
+            get => field;
+            init => field = value ?? new();
+        } = new();
 
         /// <inheritdoc/>
         internal override AbstractResponse WithLocales(IReadOnlyList<string> locales)
         {
-            return this with
-            {
-                Continent = Continent with { Locales = locales },
-                Country = Country with { Locales = locales },
-                RegisteredCountry = RegisteredCountry with { Locales = locales },
-                RepresentedCountry = RepresentedCountry with { Locales = locales },
-            };
+            // NativeAOT resolves covariant record clones incorrectly on .NET 8:
+            // https://github.com/dotnet/runtime/issues/96175 (fixed in .NET 9).
+            // Remove this workaround when net8.0 support is dropped.
+            var response = (AbstractCountryResponse)MemberwiseClone();
+            response._continent = Continent with { Locales = locales };
+            response._country = Country with { Locales = locales };
+            response._registeredCountry = RegisteredCountry with { Locales = locales };
+            response._representedCountry = RepresentedCountry with { Locales = locales };
+            return response;
         }
     }
 }
