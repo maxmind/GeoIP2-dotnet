@@ -7,7 +7,7 @@ namespace MaxMind.GeoIP2.UnitTests
     public class RuntimeTests
     {
         [Fact]
-        public void RunsAsNativeAotWithoutJsonReflection()
+        public void JsonReflectionAndDynamicCodeAreDisabled()
         {
             Assert.False(RuntimeFeature.IsDynamicCodeSupported);
             Assert.False(JsonSerializer.IsReflectionEnabledByDefault);
