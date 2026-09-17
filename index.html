@@ -325,7 +325,18 @@ read in metadata for the file.</p><p>See the API documentation for more details.
 </span></span><span style=display:flex><span>    Console<span style=color:#1f2328>.</span>WriteLine<span style=color:#1f2328>(</span>response<span style=color:#1f2328>.</span>Organization<span style=color:#1f2328>);</span> <span style=color:#57606a>// &#39;University of Minnesota&#39;</span>
 </span></span><span style=display:flex><span>    Console<span style=color:#1f2328>.</span>WriteLine<span style=color:#1f2328>(</span>response<span style=color:#1f2328>.</span>IPAddress<span style=color:#1f2328>);</span> <span style=color:#57606a>// &#39;128.101.101.101&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#1f2328>}</span>
-</span></span></code></pre></div><h2 id=exceptions>Exceptions<a class=heading-anchor href=#exceptions aria-label="Link to Exceptions">#</a></h2><h3 id=database>Database<a class=heading-anchor href=#database aria-label="Link to Database">#</a></h3><p>If the database is corrupt or otherwise invalid, a
+</span></span></code></pre></div><h2 id=nativeaot-and-trimming>NativeAOT and Trimming<a class=heading-anchor href=#nativeaot-and-trimming aria-label="Link to NativeAOT and Trimming">#</a></h2><p>The database reader and web service client support NativeAOT and trimming on
+.NET 8 and later. Built-in database lookups and web service requests need no
+model registration or serializer configuration. Applications that serialize
+response objects directly must provide their own JSON metadata and converters.</p><p>Enable NativeAOT in your application project:</p><div class=highlight><pre tabindex=0 style=background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#0550ae>&lt;PropertyGroup&gt;</span>
+</span></span><span style=display:flex><span>  <span style=color:#0550ae>&lt;PublishAot&gt;</span>true<span style=color:#0550ae>&lt;/PublishAot&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#0550ae>&lt;/PropertyGroup&gt;</span>
+</span></span></code></pre></div><p>Publish for your target platform, for example:</p><div class=highlight><pre tabindex=0 style=background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>dotnet publish -c Release -r linux-x64
+</span></span></code></pre></div><p>NativeAOT also enables trimming. To use trimming without NativeAOT, set
+<code>PublishTrimmed</code> instead and publish a self-contained application. Install the
+<a href=https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/#prerequisites>NativeAOT prerequisites</a>
+for your platform before publishing.</p><p>The .NET Standard targets remain available for applications that do not use
+NativeAOT or trimming.</p><h2 id=exceptions>Exceptions<a class=heading-anchor href=#exceptions aria-label="Link to Exceptions">#</a></h2><h3 id=database>Database<a class=heading-anchor href=#database aria-label="Link to Database">#</a></h3><p>If the database is corrupt or otherwise invalid, a
 <code>MaxMind.Db.InvalidDatabaseException</code> will be thrown.</p><p>If an address is not available in the database, a <code>AddressNotFoundException</code>
 will be thrown.</p><h3 id=web-service>Web Service<a class=heading-anchor href=#web-service aria-label="Link to Web Service">#</a></h3><p>For details on the possible errors returned by the web service itself,
 <a href="https://dev.maxmind.com/geoip/docs/web-services/?lang=en">see the GeoIP web service documentation</a>.</p><p>If the web service returns an explicit error document, this is thrown as a
