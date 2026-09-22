@@ -30,7 +30,7 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="xunit.v3.aot.mtp-v2" Version="4.0.0" />
+    <PackageReference Include="xunit.v3.aot.mtp-v2" Version="4.0.1" />
     <ProjectReference Include="../MaxMind.GeoIP2/MaxMind.GeoIP2.csproj"
                       Condition="'$(GeoIP2PackageVersion)' == ''" />
     <PackageReference Include="MaxMind.GeoIP2" Version="$(GeoIP2PackageVersion)"
