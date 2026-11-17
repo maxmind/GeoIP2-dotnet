@@ -1,6 +1,6 @@
 # GeoIP2 .NET API Release Notes
 
-## 6.2.0 (TBD)
+## 6.2.0 (2026-11-17)
 
 - Added NativeAOT and trimming support for the database reader and web service
   client on .NET 8 and later. Built-in models need no caller registration.
