@@ -9,12 +9,14 @@
   null to these properties.
 - Database-type errors now report the public lookup method without inspecting
   the stack, so the method name remains available after trimming.
-- Updated `MaxMind.Db` to 5.2.0, which includes source-generated model decoding.
-  The reader now enforces decoding limits and throws `InvalidDatabaseException`
-  for truncated or out-of-bounds data that previously could throw
-  `ArgumentOutOfRangeException`. See the
-  [reader release notes](https://github.com/maxmind/MaxMind-DB-Reader-dotnet/releases/tag/v5.2.0)
-  for details.
+- Updated `MaxMind.Db` to 5.3.0. Version 5.2.0 added source-generated model
+  decoding and decoding limits, and it throws `InvalidDatabaseException` for
+  truncated or out-of-bounds data that previously could throw
+  `ArgumentOutOfRangeException`. Version 5.3.0 makes NativeAOT lookups faster.
+  See the release notes for
+  [5.2.0](https://github.com/maxmind/MaxMind-DB-Reader-dotnet/releases/tag/v5.2.0)
+  and
+  [5.3.0](https://github.com/maxmind/MaxMind-DB-Reader-dotnet/releases/tag/v5.3.0).
 
 ## 6.1.0 (2026-07-16)
 
