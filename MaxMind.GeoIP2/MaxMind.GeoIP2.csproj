@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>MaxMind GeoIP Database Reader and Web Service Client</Description>
-    <VersionPrefix>6.1.0</VersionPrefix>
+    <VersionPrefix>6.2.0</VersionPrefix>
     <TargetFrameworks>net10.0;net9.0;net8.0;netstandard2.1;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>MaxMind.GeoIP2</AssemblyName>
@@ -16,7 +16,7 @@
     <PackageProjectUrl>https://github.com/maxmind/GeoIP2-dotnet</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion>6.1.0</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>6.2.0</PackageValidationBaselineVersion>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/maxmind/GeoIP2-dotnet</RepositoryUrl>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
@@ -50,7 +50,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaxMind.Db" Version="5.2.0" />
+    <PackageReference Include="MaxMind.Db" Version="5.3.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.14" />
   </ItemGroup>
 
