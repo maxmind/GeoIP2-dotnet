@@ -1,5 +1,9 @@
 # GeoIP2 .NET API Release Notes
 
+## 6.3.0 (TBD)
+
+- Added .NET 11 as a target framework.
+
 ## 6.2.0 (2026-11-17)
 
 - Added NativeAOT and trimming support for the database reader and web service
