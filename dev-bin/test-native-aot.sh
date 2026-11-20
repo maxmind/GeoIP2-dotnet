@@ -46,7 +46,7 @@ fi
 readonly tests_project="$repository_root/MaxMind.GeoIP2.UnitTests.NativeAot/MaxMind.GeoIP2.UnitTests.NativeAot.csproj"
 export MAXMIND_TEST_BASE_DIR="$repository_root/MaxMind.GeoIP2.UnitTests"
 
-for framework in net9.0 net10.0; do
+for framework in net9.0 net10.0 net11.0; do
     dotnet publish "$tests_project" \
         --configuration Release \
         --framework "$framework" \

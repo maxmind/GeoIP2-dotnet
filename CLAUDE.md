@@ -203,8 +203,9 @@ Always update `releasenotes.md` for user-facing changes:
 
 ## Version Requirements
 
-- **Target Frameworks**: net10.0, net9.0, net8.0, netstandard2.1, netstandard2.0
-- **Language Version**: C# 14.0
+- **Target Frameworks**: net11.0, net10.0, net9.0, net8.0, netstandard2.1,
+  netstandard2.0
+- **Language Version**: C# 15.0
 - Key dependencies and their versions are defined in `MaxMind.GeoIP2.csproj`.
 
 ## Additional Resources

@@ -12,6 +12,10 @@ backend = "core:dotnet"
 version = "8.0.428"
 backend = "core:dotnet"
 
+[[tools.dotnet]]
+version = "11.0.100"
+backend = "core:dotnet"
+
 [[tools."github:houseabsolute/precious"]]
 version = "1.0.0"
 backend = "github:houseabsolute/precious"

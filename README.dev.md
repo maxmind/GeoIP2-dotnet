@@ -21,7 +21,7 @@ cache. It publishes and runs:
 
 - A small .NET 8 smoke test for database decoding, web-service JSON, and
   locales.
-- The shared xUnit suite as NativeAOT executables for .NET 9 and .NET 10.
+- The shared xUnit suite as NativeAOT executables for .NET 9, 10, and 11.
 
 The xUnit AOT runner requires .NET 9 or later. The shared suite uses the normal
 database, model, and web-service tests. Only the two tests of reflection-based
@@ -31,7 +31,7 @@ that dynamic code and default JSON reflection are disabled. These switches alone
 do not prove native execution. The script publishes and runs the native binaries
 and requires at least 162 tests per native run to catch discovery failures.
 
-The script requires the .NET 10 SDK and the platform's
+The script requires the .NET 11 SDK and the platform's
 [NativeAOT prerequisites](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/#prerequisites).
 
 Both native test projects stay outside the solution. Ordinary restore and build
